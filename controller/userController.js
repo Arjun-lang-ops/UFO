@@ -1,3 +1,18 @@
+// import { registerUserLogic,verifyUserOtp } from "../service/userService";
+// import { verifyOtp } from "../service/otpService";
+
+
+// export const registerUser=async (req,res)=>{
+//     try {
+//         await registerUserLogic(req.body);
+
+        
+//     } catch (error) {
+        
+//     }
+// }
+
+
 export const registerRender=async(req,res)=>{
     return res.render('userViews/userRegisterPage');
 }

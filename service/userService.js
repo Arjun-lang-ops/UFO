@@ -20,5 +20,23 @@ export const registerUserLogic=async (data)=>{
 
     const otp= await generateAndSaveOtp(email);
 
-    
+    await sendMail(
+        email,
+        'Verify your Account',
+        `Your otp is ${otp}. It is valid for 1 minute`
+    );
+    return user;
+
+}
+
+export const verifyUserOtp=async(email)=>{
+    const user=await User.findOne({email});
+    if(!user){
+        throw new Error('user not found')
+    }
+
+    user.isVerified=true;
+
+    await user.save();
+
 }
