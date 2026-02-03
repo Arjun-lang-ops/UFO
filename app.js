@@ -20,7 +20,7 @@ app.use(nocache());
 // Database connection
 connectDB();
 
-app.use('/',userRoutes)
+app.use('/',userRoutes);
 
 // Server
 app.listen(PORT, () => {

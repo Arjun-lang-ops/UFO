@@ -1,5 +1,5 @@
 import bcrypt from 'bcrypt';
-import Otp from '../models/otpModel';
+import Otp from '../models/otpModel.js';
 
 export const generateAndSaveOtp=async(email)=>{
     const rawOtp= Math.floor(100000 + Math.random() * 900000).toString();
