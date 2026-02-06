@@ -1,61 +1,87 @@
-import { registerUserLogic,verifyUserOtp } from "../service/userService.js";
-import { verifyOtp } from "../service/otpService.js";
+import { registerUserLogic, verifyUserOtp } from "../service/userService.js";
+import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
+import { sendMail } from "../utils/mailer.js";
 
+// REGISTER + SEND OTP
+export const registerUser = async (req, res) => {
+  try {
+    const { email } = req.body;
 
-export const registerUser=async (req,res)=>{
-    try {
-        await registerUserLogic(req.body);
+    // 1️⃣ Create user (unverified)
+    await registerUserLogic(req.body);
 
-        res.status(201).json({
-            success:true,
-            message:"OTP sent to your email"
-        })
-    } catch (error) {
-        res.status(400).json({
-            success:true,
-            message:error.message
-        })
-        
-    }
-}
+    // 2️⃣ Generate OTP
+    const otp = await generateAndSaveOtp(email);
+    console.log(otp);
 
-export const otpVerification=async (req,res)=>{
-    try {
-        const {email,otp}=req.body;
+    // 3️⃣ Send email
+    await sendMail(email, otp);
 
-        await verifyOtp(email,otp);
-        await verifyUserOtp(email);
+    res.status(201).json({
+      success: true,
+      message: "OTP sent to your email"
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
 
-        res.json({
-            success:true,
-            message:"Account verified successfully"
-        })
-        
-    } catch (error) {
-        res.status(400).json({
-            success:false,
-            message:error.message
-        })
-    }
-}
+// VERIFY OTP
+export const otpVerification = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
 
+    await verifyOtp(email, otp);
+    await verifyUserOtp(email);
 
-export const registerRender=async(req,res)=>{
-    return res.render('userViews/userRegisterPage');
-}
+    res.json({
+      success: true,
+      message: "Account verified successfully"
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
 
-export const loginRender=async(req,res)=>{
-    return res.render('userViews/userLoginPage')
-}
+// RESEND OTP
+export const resendOtp = async (req, res) => {
+  try {
+    const { email } = req.body;
 
-export const landingPageRender=async (req,res)=>{
-    return res.render('userViews/userLandingPage')
-}
+    const otp = await generateAndSaveOtp(email);
+    
+    await sendMail(email, otp);
 
-export const homePageRender= async (req,res)=>{
-    return res.render('userViews/userHomePage');
-}
+    res.json({
+      success: true,
+      message: "OTP resent successfully"
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
 
-export const registerOtp= async (req,res)=>{
-    return res.render('userViews/registerOtpPage')
-}
+// RENDER PAGES
+export const registerRender = (req, res) =>
+  res.render('userViews/userRegisterPage');
+
+export const loginRender = (req, res) =>
+  res.render('userViews/userLoginPage');
+
+export const landingPageRender = (req, res) =>
+  res.render('userViews/userLandingPage');
+
+export const homePageRender = (req, res) =>
+  res.render('userViews/userHomePage');
+
+export const registerOtp = (req, res) =>
+  res.render('userViews/registerOtpPage');

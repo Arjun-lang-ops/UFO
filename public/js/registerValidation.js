@@ -86,6 +86,33 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!isValid) return;
 
     // 🔥 Ready for AJAX / OTP redirect
-    console.log("Form is valid — send data to server");
+    // console.log("Form is valid — send data to server");
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData);
+
+    fetch('/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then(result => {
+        if (result.success) {
+          window.location.href = `/otp?email=${encodeURIComponent(data.email)}`;
+        } else {
+          // Show error (generic or specific)
+          // For simplicity, using alert or finding a place to show global error
+          // Assuming the individual field errors might be returned or just a general message
+          alert(result.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+      });
+
   });
 });

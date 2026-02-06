@@ -57,28 +57,29 @@
 </div>
 <h1 class="text-white tracking-tight text-3xl font-bold leading-tight mb-3">Verify Your Account</h1>
 <p class="text-[#9dabb9] text-base font-normal leading-relaxed max-w-xs">
-                We've sent a 6-digit verification code to <span class="text-white font-medium">user@example.com</span>
+                We've sent a 6-digit verification code to <span id="userEmail" class="text-white font-medium">user@example.com</span>
 </p>
 </div>
-<form class="px-8 pb-10 flex flex-col gap-8">
+<form id="otpForm" class="px-8 pb-10 flex flex-col gap-8">
 <div class="flex justify-between gap-2 md:gap-3">
-<input class="otp-input" maxlength="1" placeholder="" type="text"/>
-<input class="otp-input" maxlength="1" placeholder="" type="text"/>
-<input class="otp-input" maxlength="1" placeholder="" type="text"/>
-<input class="otp-input" maxlength="1" placeholder="" type="text"/>
-<input class="otp-input" maxlength="1" placeholder="" type="text"/>
-<input class="otp-input" maxlength="1" placeholder="" type="text"/>
+<input class="otp-input" maxlength="1" placeholder="" type="text" name="otp[]"/>
+<input class="otp-input" maxlength="1" placeholder="" type="text" name="otp[]"/>
+<input class="otp-input" maxlength="1" placeholder="" type="text" name="otp[]"/>
+<input class="otp-input" maxlength="1" placeholder="" type="text" name="otp[]"/>
+<input class="otp-input" maxlength="1" placeholder="" type="text" name="otp[]"/>
+<input class="otp-input" maxlength="1" placeholder="" type="text" name="otp[]"/>
 </div>
+<div id="otpError" class="text-red-500 text-sm text-center hidden"></div>
 <button class="flex w-full cursor-pointer items-center justify-center rounded-xl h-14 px-4 bg-primary hover:bg-blue-600 transition-all text-white text-base font-bold leading-normal tracking-wide shadow-lg shadow-primary/30" type="submit">
                 Verify &amp; Continue
             </button>
 <div class="flex flex-col items-center gap-2">
 <p class="text-[#637588] text-sm">Didn't receive the code?</p>
 <div class="flex items-center gap-2">
-<button class="text-primary font-semibold text-sm hover:underline disabled:opacity-50 disabled:no-underline"  type="button">
+<button id="resendBtn" class="text-primary font-semibold text-sm hover:underline disabled:opacity-50 disabled:no-underline disabled:cursor-not-allowed" type="button" disabled>
                         Resend Code
                     </button>
-<span class="text-[#9dabb9] text-sm font-mono bg-[#283039] px-2 py-0.5 rounded">00:59</span>
+<span id="timer" class="text-[#9dabb9] text-sm font-mono bg-[#283039] px-2 py-0.5 rounded">01:00</span>
 </div>
 </div>
 </form>

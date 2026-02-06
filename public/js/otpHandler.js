@@ -1,7 +1,84 @@
 document.addEventListener('DOMContentLoaded', () => {
     const inputs = document.querySelectorAll('.otp-input');
-    const form = document.querySelector('form');
+    const form = document.getElementById('otpForm');
+    const userEmailSpan = document.getElementById('userEmail');
+    const resendBtn = document.getElementById('resendBtn');
+    const timerSpan = document.getElementById('timer');
+    const otpError = document.getElementById('otpError');
 
+    // Get email from query params
+    const urlParams = new URLSearchParams(window.location.search);
+    const email = urlParams.get('email');
+
+    if (email) {
+        userEmailSpan.textContent = email;
+    } else {
+        // Fallback or redirect if no email
+        userEmailSpan.textContent = "unknown";
+        // window.location.href = '/register'; // Optional: Redirect back if accessed directly
+    }
+
+    // Timer Logic
+    let timeLeft = 60; // 1 minute
+    let timerId = null;
+
+    function formatTime(seconds) {
+        const m = Math.floor(seconds / 60);
+        const s = seconds % 60;
+        return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+        clearInterval(timerId);
+        timeLeft = 60;
+        timerSpan.textContent = formatTime(timeLeft);
+        resendBtn.disabled = true;
+
+        timerId = setInterval(() => {
+            timeLeft--;
+            timerSpan.textContent = formatTime(timeLeft);
+
+            if (timeLeft <= 0) {
+                clearInterval(timerId);
+                resendBtn.disabled = false;
+            }
+        }, 1000);
+    }
+
+    // Start timer on load
+    startTimer();
+
+    // Resend Logic
+    resendBtn.addEventListener('click', async () => {
+        if (timeLeft > 0) return;
+
+        try {
+            resendBtn.textContent = "Sending...";
+            const response = await fetch('/resend-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                startTimer();
+                otpError.classList.add('hidden');
+                alert(result.message); // Or some toast
+            } else {
+                otpError.textContent = result.message;
+                otpError.classList.remove('hidden');
+            }
+        } catch (error) {
+            console.error(error);
+            otpError.textContent = "Failed to resend OTP";
+            otpError.classList.remove('hidden');
+        } finally {
+            resendBtn.textContent = "Resend Code";
+        }
+    });
+
+    // Input Logic
     inputs.forEach((input, index) => {
         // Handle input content
         input.addEventListener('input', (e) => {
@@ -60,5 +137,46 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+    });
+
+    // Verification Logic
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        let otp = '';
+        inputs.forEach(input => {
+            otp += input.value;
+        });
+
+        if (otp.length < 6) {
+            otpError.textContent = "Please enter the complete 6-digit code";
+            otpError.classList.remove('hidden');
+            return;
+        }
+
+        try {
+            const response = await fetch('/verify-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, otp })
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                // Redirect to home or login logic
+                window.location.href = '/home';
+            } else {
+                otpError.textContent = result.message;
+                otpError.classList.remove('hidden');
+                // Clear inputs on failure? Optional
+                // inputs.forEach(input => input.value = '');
+                // inputs[0].focus();
+            }
+        } catch (error) {
+            console.error(error);
+            otpError.textContent = "An error occurred during verification";
+            otpError.classList.remove('hidden');
+        }
     });
 });
