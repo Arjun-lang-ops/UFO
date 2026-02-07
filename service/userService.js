@@ -16,7 +16,8 @@ export const registerUserLogic = async (data) => {
     const user = await User.create({
         fullname,
         email,
-        password: hashedPassword
+        password: hashedPassword,
+        isVerified:false
     });
 
     return user;
@@ -42,5 +43,6 @@ export const verifyUserOtp = async (email) => {
     user.isVerified = true;
 
     await user.save();
+    return true
 
 }

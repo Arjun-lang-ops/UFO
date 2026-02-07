@@ -74,45 +74,62 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Submit Validation ---------- */
 
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
+    // Reset general error
+    const generalError = document.getElementById("generalError");
+    if (generalError) {
+      generalError.textContent = "";
+      generalError.classList.add("hidden");
+    }
+
     const isValid =
-      validateName() &
-      validateEmail() &
-      validatePassword() &
+      validateName() &&
+      validateEmail() &&
+      validatePassword() &&
       validateConfirmPassword();
 
     if (!isValid) return;
 
-    // 🔥 Ready for AJAX / OTP redirect
-    // console.log("Form is valid — send data to server");
+    const data = {
+      fullname: fullname.value.trim(),
+      email: email.value.trim(),
+      password: password.value,
+      confirmPassword: confirmPassword.value // Include if backend expects it, though typically not needed
+    };
 
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData);
-
-    fetch('/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-      .then(response => response.json())
-      .then(result => {
-        if (result.success) {
-          window.location.href = `/otp?email=${encodeURIComponent(data.email)}`;
-        } else {
-          // Show error (generic or specific)
-          // For simplicity, using alert or finding a place to show global error
-          // Assuming the individual field errors might be returned or just a general message
-          alert(result.message);
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
+    try {
+      const response = await fetch("/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
       });
 
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Redirect to OTP page with email in query string
+        // Using encodeURIComponent to be safe
+        window.location.href = `/otp?email=${encodeURIComponent(data.email)}`;
+      } else {
+        // Show error in general error container
+        if (generalError) {
+          generalError.textContent = result.message || "Registration failed";
+          generalError.classList.remove("hidden");
+        } else {
+          // Fallback if element missing (shouldn't happen with updated HTML)
+          alert(result.message || "Registration failed");
+        }
+      }
+
+    } catch (err) {
+      console.error(err);
+      if (generalError) {
+        generalError.textContent = "Server error. Please try again.";
+        generalError.classList.remove("hidden");
+      }
+    }
   });
+
 });

@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startTimer();
 
     // Resend Logic
+    // Resend Logic
     resendBtn.addEventListener('click', async () => {
         if (timeLeft > 0) return;
 
@@ -64,16 +65,22 @@ document.addEventListener('DOMContentLoaded', () => {
             if (result.success) {
                 startTimer();
                 otpError.classList.add('hidden');
-                alert(result.message); // Or some toast
+
+                // Show success message temporarily
+                const originalText = resendBtn.textContent;
+                resendBtn.textContent = "OTP Resent!";
+                setTimeout(() => {
+                    resendBtn.textContent = "Resend Code"; // Will be overwritten by timer loop if active, but good fallback
+                }, 2000);
             } else {
                 otpError.textContent = result.message;
                 otpError.classList.remove('hidden');
+                resendBtn.textContent = "Resend Code";
             }
         } catch (error) {
             console.error(error);
             otpError.textContent = "Failed to resend OTP";
             otpError.classList.remove('hidden');
-        } finally {
             resendBtn.textContent = "Resend Code";
         }
     });
