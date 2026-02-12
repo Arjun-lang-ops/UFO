@@ -2,19 +2,16 @@ import { registerUserLogic, verifyUserOtp } from "../service/userService.js";
 import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
 import { sendMail } from "../utils/mailer.js";
 
-// REGISTER + SEND OTP
+// Register and sending otp
 export const registerUser = async (req, res) => {
   try {
     const { email } = req.body;
 
-    // 1️⃣ Create user (unverified)
     await registerUserLogic(req.body);
 
-    // 2️⃣ Generate OTP
     const otp = await generateAndSaveOtp(email);
     console.log(otp);
 
-    // 3️⃣ Send email
     await sendMail(email, otp);
 
     res.status(201).json({
@@ -29,7 +26,7 @@ export const registerUser = async (req, res) => {
   }
 };
 
-// VERIFY OTP
+// Verify otp
 export const otpVerification = async (req, res) => {
   try {
     const { email, otp } = req.body;
@@ -49,7 +46,7 @@ export const otpVerification = async (req, res) => {
   }
 };
 
-// RESEND OTP
+// Resending otp
 export const resendOtp = async (req, res) => {
   try {
     const { email } = req.body;
@@ -70,7 +67,7 @@ export const resendOtp = async (req, res) => {
   }
 };
 
-// RENDER PAGES
+// Render pages
 export const registerRender = (req, res) =>
   res.render('userViews/userRegisterPage');
 

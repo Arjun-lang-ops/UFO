@@ -6,7 +6,7 @@ console.log("EMAIL_USER:", process.env.EMAIL_USER);
 console.log("EMAIL_PASS:", process.env.EMAIL_PASS ? "LOADED" : "MISSING");
 
 
-// ✅ CREATE TRANSPORTER (THIS WAS MISSING)
+// CREATE TRANSPORTER
 const transporter = nodemailer.createTransport({
   host:"smtp.gmail.com",
   port:587,
@@ -17,16 +17,16 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// ✅ OPTIONAL BUT VERY USEFUL (debug)
+// verifying the email is ready to send
 transporter.verify((error, success) => {
   if (error) {
-    console.error("❌ Mail transporter error:", error);
+    console.error("Mail transporter error:", error);
   } else {
-    console.log("✅ Mail server is ready to send emails");
+    console.log("Mail server is ready to send emails");
   }
 });
 
-// ✅ SEND MAIL FUNCTION
+// Send mail function
 export const sendMail = async (to, otp) => {
   try {
     await transporter.sendMail({

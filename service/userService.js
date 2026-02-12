@@ -7,7 +7,7 @@ import { sendMail } from '../utils/mailer.js';
 export const registerUserLogic = async (data) => {
     const { fullname, email, password } = data;
     const existingUser = await User.findOne({ email });
-    if (existingUser) {
+    if (existingUser) { 
         throw new Error('User already Exists')
     }
 
@@ -24,14 +24,14 @@ export const registerUserLogic = async (data) => {
 
 }
 
-export const resendOtpLogic = async (email) => {
-    const user = await User.findOne({ email });
+// export const resendOtpLogic = async (email) => {
+//     const user = await User.findOne({ email });
 
-    if (!user) throw new Error('User not found');
-    if (user.isVerified) throw new Error('User already verified');
+//     if (!user) throw new Error('User not found');
+//     if (user.isVerified) throw new Error('User already verified');
 
-    return true;
-};
+//     return true;
+// };
 
 
 export const verifyUserOtp = async (email) => {
@@ -45,4 +45,4 @@ export const verifyUserOtp = async (email) => {
     await user.save();
     return true
 
-}
+};

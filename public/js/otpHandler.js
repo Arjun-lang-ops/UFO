@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (result.success) {
                 // Redirect to home or login logic
-                window.location.href = '/home';
+                window.location.href = '/login';
             } else {
                 otpError.textContent = result.message;
                 otpError.classList.remove('hidden');
