@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function validatePassword() {
-    if (password.value.length < 6) {
-      showError(passwordError, "Password must be at least 6 characters");
+    if (password.value.length < 8) {
+      showError(passwordError, "Password must be at least 8 characters");
       return false;
     }
     hideError(passwordError);
@@ -108,20 +108,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const result = await response.json();
 
-      if (response.ok && result.success) {
-        // Redirect to OTP page with email in query string
-        // Using encodeURIComponent to be safe
-        window.location.href = `/otp?email=${encodeURIComponent(data.email)}`;
-      } else {
-        // Show error in general error container
-        if (generalError) {
-          generalError.textContent = result.message || "Registration failed";
-          generalError.classList.remove("hidden");
-        } else {
-          // Fallback if element missing (shouldn't happen with updated HTML)
-          alert(result.message || "Registration failed");
-        }
-      }
+     const generalMessage = document.getElementById("generalMessage");
+
+if (response.ok && result.success) {
+
+  // Show success message
+  generalMessage.textContent = result.message || "OTP sent successfully";
+  generalMessage.classList.remove("hidden");
+  generalMessage.classList.remove("error-message");
+  generalMessage.classList.add("success-message");
+
+  // Redirect after 2 seconds
+  setTimeout(() => {
+    window.location.href = `/otp?email=${encodeURIComponent(data.email)}`;
+  }, 2000);
+
+} else {
+  if (generalMessage) {
+    generalMessage.textContent = result.message || "Registration failed";
+    generalMessage.classList.remove("hidden");
+    generalMessage.classList.remove("success-message");
+    generalMessage.classList.add("error-message");
+  }
+}
+
 
     } catch (err) {
       console.error(err);

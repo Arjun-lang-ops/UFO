@@ -46,3 +46,20 @@ export const verifyUserOtp = async (email) => {
     return true
 
 };
+
+
+export const userLoginLogic=async (data)=>{
+    const {email,password}=data
+    const existingUser=User.findOne({email});
+
+    if(!existingUser){
+        throw new Error('user not found');
+    }
+    const passwordMatch= await bcrypt.compare(password,User.password);
+    if(!passwordMatch){
+        throw new Error('Invalid Password');
+    }
+
+    return true;
+    
+}
