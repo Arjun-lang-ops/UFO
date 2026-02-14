@@ -1,4 +1,4 @@
-import { registerUserLogic, verifyUserOtp } from "../service/userService.js";
+import { registerUserLogic, verifyUserOtp, userLoginLogic } from "../service/userService.js";
 import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
 import { sendMail } from "../utils/mailer.js";
 
@@ -66,6 +66,33 @@ export const resendOtp = async (req, res) => {
     });
   }
 };
+
+
+export const loginUser=async (req,res)=>{
+
+  try {
+    
+    const user=await userLoginLogic(req.body);
+    req.session.user=user._id
+    res.status(200).json({
+      success:true,
+      message:"login successfully"
+    })
+  } catch (error) {
+    res.status(400).json({
+      success:false,
+      message:error.message
+    })
+
+    
+  }
+
+  
+
+
+
+
+}
 
 // Render pages
 export const registerRender = (req, res) =>

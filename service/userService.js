@@ -50,16 +50,20 @@ export const verifyUserOtp = async (email) => {
 
 export const userLoginLogic=async (data)=>{
     const {email,password}=data
-    const existingUser=User.findOne({email});
+    const existingUser=await User.findOne({email});
 
     if(!existingUser){
         throw new Error('user not found');
     }
-    const passwordMatch= await bcrypt.compare(password,User.password);
+    const passwordMatch= await bcrypt.compare(password,existingUser.password);
     if(!passwordMatch){
         throw new Error('Invalid Password');
     }
+    
+    if(!existingUser.isVerified){
+        throw new Error('User not verified with OTP');
+    }
 
-    return true;
+    return existingUser;
     
 }

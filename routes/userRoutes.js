@@ -1,4 +1,4 @@
-import { homePageRender, landingPageRender, loginRender, otpVerification, registerOtp, registerRender, registerUser, resendOtp } from "../controller/userController.js";
+import { homePageRender, landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp } from "../controller/userController.js";
 import express from "express";
 
 const router = express.Router();
@@ -13,6 +13,7 @@ router.get('/otp', registerOtp);
 router.post('/register', registerUser);
 router.post('/verify-otp', otpVerification);
 router.post('/resend-otp', resendOtp);
+router.post('login',loginUser)
 
 
 export default router;
