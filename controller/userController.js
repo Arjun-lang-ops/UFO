@@ -2,6 +2,30 @@ import { registerUserLogic, verifyUserOtp, userLoginLogic } from "../service/use
 import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
 import { sendMail } from "../utils/mailer.js";
 
+
+
+
+// Render pages
+export const registerRender = (req, res) =>
+  res.render('userViews/userRegisterPage');
+
+export const loginRender = (req, res) =>
+  res.render('userViews/userLoginPage');
+
+export const landingPageRender = (req, res) =>
+  res.render('userViews/userLandingPage');
+
+export const homePageRender = (req, res) =>{
+  if(!req.session.user){
+    res.redirect('userViews/userLoginPage')
+  }
+  res.render('userViews/userHomePage');
+}
+  
+
+export const registerOtp = (req, res) =>
+  res.render('userViews/registerOtpPage');
+
 // Register and sending otp
 export const registerUser = async (req, res) => {
   try {
@@ -67,45 +91,25 @@ export const resendOtp = async (req, res) => {
   }
 };
 
-
+//login user
 export const loginUser=async (req,res)=>{
 
   try {
     
     const user=await userLoginLogic(req.body);
-    req.session.user=user._id
+    req.session.user=user._id;
+    
     res.status(200).json({
       success:true,
-      message:"login successfully"
+      message:"login successfully",
+      redirectUrl: "/home"
     })
   } catch (error) {
     res.status(400).json({
       success:false,
       message:error.message
     })
-
-    
   }
-
-  
-
-
-
-
 }
 
-// Render pages
-export const registerRender = (req, res) =>
-  res.render('userViews/userRegisterPage');
 
-export const loginRender = (req, res) =>
-  res.render('userViews/userLoginPage');
-
-export const landingPageRender = (req, res) =>
-  res.render('userViews/userLandingPage');
-
-export const homePageRender = (req, res) =>
-  res.render('userViews/userHomePage');
-
-export const registerOtp = (req, res) =>
-  res.render('userViews/registerOtpPage');

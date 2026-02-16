@@ -47,7 +47,7 @@ export const verifyUserOtp = async (email) => {
 
 };
 
-
+//user login
 export const userLoginLogic=async (data)=>{
     const {email,password}=data
     const existingUser=await User.findOne({email});
