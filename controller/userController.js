@@ -17,7 +17,7 @@ export const landingPageRender = (req, res) =>
 
 export const homePageRender = (req, res) =>{
   if(!req.session.user){
-    res.redirect('userViews/userLoginPage')
+   return res.redirect('/login')
   }
   res.render('userViews/userHomePage');
 }
@@ -25,6 +25,9 @@ export const homePageRender = (req, res) =>{
 
 export const registerOtp = (req, res) =>
   res.render('userViews/registerOtpPage');
+
+export const googleRender=(req,res)=>
+  res.render('userViews/googleAuthPage')
 
 // Register and sending otp
 export const registerUser = async (req, res) => {
@@ -112,4 +115,22 @@ export const loginUser=async (req,res)=>{
   }
 }
 
+export const userProfileRender=(req,res)=>
+  res.render('userViews/userProfile')
 
+export const userAddressRender=(req,res)=>
+  res.render('userViews/userAddress')
+
+
+export const userChangePasswordRender=(req,res)=>
+  res.render('userViews/userChangePassword')
+
+
+export const userLogout=(req,res)=>{
+  req.session.destroy((err)=>{
+    if(err){
+      return res.redirect('/')
+    }
+    res.redirect('/login')
+  })
+}

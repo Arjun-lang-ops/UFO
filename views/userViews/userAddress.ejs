@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Edit Shipping Address - KickOff Gear</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101922; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #283039; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b4754; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display min-h-screen flex flex-col overflow-x-hidden">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#111418] px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#111418] dark:text-white">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
+</div>
+<div class="hidden lg:flex items-center gap-9">
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Teams</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sale</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">New Arrivals</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-[#d1d5db] dark:border-[#3b4754] bg-white dark:bg-[#283039] overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all">
+<div class="text-[#6b7280] dark:text-[#9dabb9] flex items-center justify-center pl-4 bg-transparent">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-none text-base font-normal leading-normal placeholder:text-[#6b7280] dark:placeholder:text-[#9dabb9] px-4 py-2 border-none bg-transparent focus:outline-none focus:ring-0 text-[#111418] dark:text-white" placeholder="Search gear..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-lg hover:bg-[#f3f4f6] dark:hover:bg-[#283039] transition-colors">
+<span class="material-symbols-outlined text-[#111418] dark:text-white text-[24px]">shopping_cart</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-lg hover:bg-[#f3f4f6] dark:hover:bg-[#283039] transition-colors relative">
+<span class="material-symbols-outlined text-[#111418] dark:text-white text-[24px]">account_circle</span>
+<div class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></div>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 flex justify-center py-10 px-4 md:px-10">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 w-full gap-8">
+<nav class="flex flex-wrap gap-2 text-sm">
+<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary transition-colors font-medium" href="#">Home</a>
+<span class="text-[#6b7280] dark:text-[#9dabb9] font-medium">/</span>
+<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary transition-colors font-medium" href="#">My Account</a>
+<span class="text-[#6b7280] dark:text-[#9dabb9] font-medium">/</span>
+<span class="text-[#111418] dark:text-white font-medium">Edit Shipping Address</span>
+</nav>
+<div class="flex flex-col md:flex-row md:justify-between md:items-end gap-4 border-b border-[#e5e7eb] dark:border-[#283039] pb-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#111418] dark:text-white text-[32px] font-bold leading-tight">Edit Shipping Address</h1>
+<p class="text-[#6b7280] dark:text-[#9dabb9] text-base">Make changes to your delivery destination.</p>
+</div>
+<div class="hidden md:flex items-center gap-2 text-[#6b7280] dark:text-[#9dabb9] text-sm">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>Secure SSL Connection</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-8 flex flex-col gap-6">
+<form class="flex flex-col gap-6 bg-white dark:bg-[#1c2127] p-6 md:p-8 rounded-xl border border-[#e5e7eb] dark:border-[#283039] shadow-sm">
+<div class="flex flex-col gap-1">
+<h3 class="text-lg font-bold text-[#111418] dark:text-white">Contact Information</h3>
+<p class="text-sm text-[#6b7280] dark:text-[#9dabb9]">Who should we deliver this to?</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Full Name</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="John Doe" type="text" value="Alex Morgan"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Phone Number</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="+1 (555) 000-0000" type="tel" value="+1 (212) 555-0198"/>
+</label>
+</div>
+<div class="h-px bg-[#e5e7eb] dark:bg-[#283039] my-2"></div>
+<div class="flex flex-col gap-1">
+<h3 class="text-lg font-bold text-[#111418] dark:text-white">Address</h3>
+</div>
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Country / Region</span>
+<div class="relative">
+<select class="w-full h-12 appearance-none rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all cursor-pointer">
+<option selected="">United States</option>
+<option>Canada</option>
+<option>United Kingdom</option>
+<option>Germany</option>
+<option>France</option>
+</select>
+<div class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#6b7280] dark:text-[#9dabb9]">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</label>
+<div class="flex flex-col gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Street Address</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="123 Stadium Way" type="text" value="45 Soccer Lane"/>
+</label>
+<label class="flex flex-col gap-2">
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="Apartment, suite, unit, etc. (optional)" type="text" value="Apt 4B"/>
+</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">City</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="City" type="text" value="New York"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">State / Province</span>
+<div class="relative">
+<select class="w-full h-12 appearance-none rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all cursor-pointer">
+<option>California</option>
+<option selected="">New York</option>
+<option>Texas</option>
+<option>Florida</option>
+</select>
+<div class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#6b7280] dark:text-[#9dabb9]">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Zip / Postal Code</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="10001" type="text" value="10001"/>
+</label>
+</div>
+<label class="flex items-center gap-3 cursor-pointer mt-2 group select-none">
+<div class="relative flex items-center">
+<input checked="" class="peer h-5 w-5 cursor-pointer appearance-none rounded border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] checked:border-primary checked:bg-primary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-white opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
+</div>
+<span class="text-[#111418] dark:text-white text-base font-normal group-hover:text-primary transition-colors">Set as default shipping address</span>
+</label>
+<div class="flex flex-col-reverse md:flex-row gap-4 mt-4 pt-4 border-t border-[#e5e7eb] dark:border-[#283039]">
+<button class="flex-1 h-12 flex items-center justify-center rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-transparent hover:bg-[#f3f4f6] dark:hover:bg-[#283039] text-[#111418] dark:text-white text-base font-bold transition-all" type="button">
+                                Cancel
+                            </button>
+<button class="flex-1 h-12 flex items-center justify-center rounded-lg bg-primary hover:bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-500/30 transition-all" type="submit">
+                                Save Address
+                            </button>
+</div>
+</form>
+</div>
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="bg-white dark:bg-[#1c2127] rounded-xl overflow-hidden border border-[#e5e7eb] dark:border-[#283039] shadow-sm">
+<div class="relative h-48 w-full bg-[#283039] overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-[#1c2127] to-[#283039] flex items-center justify-center" data-alt="Abstract map representation showing location pin on a dark grid" data-location="New York, NY" style="https://lh3.googleusercontent.com/aida-public/AB6AXuCeSWTg5RA0k0J0zvYZ77iK_uAcnromkTKyvA8_8vh0z6YLyhnhjPYobAh1R4gbMP8zHhe059_wOMHVBaAJez0NT-WivzYkwmwTUcr0gH4HEBz8WBi7AbQKNp9t4vPAn3tbsTiBS0KuniEoP1VEWMqCnM0ZRMDtTCp5GinQ3K3Awm-i1PqRY5xmS_3_sICfQ5xBrrHHwuCMz_kuynC6pKyNw_2EJSO7eY6dz-2eyHNc8O72SLOhbQVvZd8j1gZR8_4tsYGyyrfUcD8">
+<div class="relative flex items-center justify-center">
+<div class="absolute w-24 h-24 bg-primary/20 rounded-full animate-ping"></div>
+<span class="material-symbols-outlined text-primary text-[48px] drop-shadow-lg z-10">location_on</span>
+</div>
+</div>
+</div>
+<div class="p-5 flex flex-col gap-3">
+<div class="flex items-start gap-3">
+<div class="bg-primary/10 p-2 rounded-lg text-primary mt-1">
+<span class="material-symbols-outlined text-[20px]">local_shipping</span>
+</div>
+<div>
+<h4 class="text-[#111418] dark:text-white font-bold text-sm">Fast Shipping Available</h4>
+<p class="text-[#6b7280] dark:text-[#9dabb9] text-xs mt-1">Most locations in this region qualify for 2-day delivery.</p>
+</div>
+</div>
+<div class="h-px bg-[#e5e7eb] dark:bg-[#283039] w-full"></div>
+<div class="flex items-start gap-3">
+<div class="bg-primary/10 p-2 rounded-lg text-primary mt-1">
+<span class="material-symbols-outlined text-[20px]">verified_user</span>
+</div>
+<div>
+<h4 class="text-[#111418] dark:text-white font-bold text-sm">Secure Data</h4>
+<p class="text-[#6b7280] dark:text-[#9dabb9] text-xs mt-1">Your address details are encrypted and stored securely.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<h3 class="text-[#111418] dark:text-white font-bold text-lg px-1">Your Saved Addresses</h3>
+<div class="group flex items-center justify-between p-4 rounded-xl border border-primary/50 bg-primary/5 dark:bg-primary/10 transition-all cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="bg-primary h-10 w-10 rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined">home</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[#111418] dark:text-white text-sm font-bold">Home (Current)</span>
+<span class="text-[#6b7280] dark:text-[#9dabb9] text-xs">45 Soccer Ln, New York...</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+</div>
+<div class="group flex items-center justify-between p-4 rounded-xl border border-transparent hover:border-[#e5e7eb] dark:hover:border-[#3b4754] hover:bg-white dark:hover:bg-[#1c2127] transition-all cursor-pointer">
+<div class="flex items-center gap-3">
+<div class="bg-[#e5e7eb] dark:bg-[#283039] h-10 w-10 rounded-full flex items-center justify-center text-[#6b7280] dark:text-[#9dabb9] group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined">work</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[#111418] dark:text-white text-sm font-bold">Office</span>
+<span class="text-[#6b7280] dark:text-[#9dabb9] text-xs">88 League Blvd, London...</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#6b7280] dark:text-[#9dabb9] text-[20px]">edit</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="border-t border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#111418] py-8 mt-auto">
+<div class="layout-content-container max-w-[960px] mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[#6b7280] dark:text-[#9dabb9] text-sm">© 2023 KickOff Gear. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary text-sm transition-colors" href="#">Privacy Policy</a>
+<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary text-sm transition-colors" href="#">Terms of Service</a>
+<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary text-sm transition-colors" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+
+</body></html>

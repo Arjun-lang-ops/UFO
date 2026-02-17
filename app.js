@@ -18,7 +18,7 @@ import passport from "./config/passport.js";
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Database connection
+// Database connection  
 connectDB();
 
 // Middleware
@@ -29,7 +29,7 @@ app.use(express.json());
 app.set("view engine", "ejs");
 
 app.use(passport.initialize());
-app.use(passport.session());
+
 
 
 
@@ -43,6 +43,8 @@ app.use(session({
     maxAge: 1000 * 60 * 60
   }
 }));
+
+app.use(passport.session());
 
 
 app.use('/',userRoutes);
