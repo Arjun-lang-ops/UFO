@@ -1,4 +1,4 @@
-import { registerUserLogic, verifyUserOtp, userLoginLogic } from "../service/userService.js";
+import { registerUserLogic, verifyUserOtp, userLoginLogic, changePasswordService } from "../service/userService.js";
 import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
 import { sendMail } from "../utils/mailer.js";
 
@@ -100,7 +100,8 @@ export const loginUser=async (req,res)=>{
   try {
     
     const user=await userLoginLogic(req.body);
-    req.session.user=user._id;
+    req.session.userId=user._id;
+    req.session.user=true
     
     res.status(200).json({
       success:true,
@@ -133,4 +134,27 @@ export const userLogout=(req,res)=>{
     }
     res.redirect('/login')
   })
+}
+
+export const updatePassword=async (req,res)=>{
+  try {
+    const userId=req.session.userId;
+    console.log('session: ' ,req.session)
+    const {currentPassword,newPassword,confirmNewPassword}=req.body;
+
+    const message= await changePasswordService(userId,currentPassword,newPassword,confirmNewPassword);
+
+    res.status(200).json({
+      success:true,
+      message
+
+    })
+
+  } catch (error) {
+    return res.status(400).json({
+      success:false,
+      message:error.message
+    })
+    
+  }
 }

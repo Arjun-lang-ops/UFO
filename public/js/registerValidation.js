@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (fullname.value.trim().length < 3) {
       showError(nameError, "Full name must be at least 3 characters");
       return false;
+      
     }
     hideError(nameError);
     return true;

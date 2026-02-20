@@ -67,3 +67,31 @@ export const userLoginLogic=async (data)=>{
     return existingUser;
     
 }
+
+
+export const changePasswordService=async (userId,currentPassword,newPassword)=>{
+    if(!userId){
+        throw new Error ('Unauthorized Access')
+    }
+
+    const user=await User.findById(userId);
+    if(!user){
+        throw new Error('user not found')
+    }
+
+    const isMatch=await bcrypt.compare(currentPassword,user.password);
+    if(!isMatch){
+        throw new Error ('Current password is incorrect')
+    }
+
+    const isSamePassword=await bcrypt.compare(newPassword,user.password);
+    if(isSamePassword){
+        throw new Error('New password cannot be same as old password')
+    }
+    const hashedPassword=await bcrypt.hash(newPassword,10);
+    user.password=hashedPassword;
+    await user.save();
+
+    return 'password updated successfully'
+
+}

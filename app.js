@@ -13,6 +13,7 @@ import nocache from "nocache";
 import connectDB from "./config/db.js";
 import userRoutes from './routes/userRoutes.js'
 import passport from "./config/passport.js";
+import cors from 'cors'
 
 
 const app = express();
@@ -22,16 +23,15 @@ const PORT = process.env.PORT || 3000;
 connectDB();
 
 // Middleware
+app.use(cors({
+  origin:'http://localhost:3000',
+  credentials:true
+}))
 app.use(nocache());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set("view engine", "ejs");
-
-app.use(passport.initialize());
-
-
-
 
 
 app.use(session({
@@ -44,10 +44,15 @@ app.use(session({
   }
 }));
 
+
+app.use(passport.initialize());
 app.use(passport.session());
 
 
+
 app.use('/',userRoutes);
+
+
 
 //error handling middleware
 app.use((err, req, res, next) => {

@@ -1,4 +1,4 @@
-import { googleRender, homePageRender, landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp, userAddressRender, userChangePasswordRender, userLogout, userProfileRender } from "../controller/userController.js";
+import { googleRender, homePageRender, landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp, updatePassword, userAddressRender, userChangePasswordRender, userLogout, userProfileRender } from "../controller/userController.js";
 import express from "express";
 import { isLoggedIn } from "../middlewares/userAuth.js";
 
@@ -21,6 +21,9 @@ router.post('/register', registerUser);
 router.post('/verify-otp', otpVerification);
 router.post('/resend-otp', resendOtp);
 router.post('/login',loginUser)
+
+
+router.put('/profile/update-password',updatePassword)
 
 
 
