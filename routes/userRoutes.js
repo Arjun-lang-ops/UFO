@@ -1,6 +1,7 @@
-import { googleRender, homePageRender, landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp, updatePassword, userAddressRender, userChangePasswordRender, userLogout, userProfileRender } from "../controller/userController.js";
+import { homePageRender, landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp, updatePassword, userAddressRender, userChangePasswordRender, userLogout, userProfileRender } from "../controller/userController.js";
 import express from "express";
 import { isLoggedIn } from "../middlewares/userAuth.js";
+import passport from "passport";
 
 const router = express.Router();
 
@@ -8,14 +9,22 @@ const router = express.Router();
 router.get('/', landingPageRender)
 router.get('/register', registerRender);
 router.get('/login', loginRender);
-router.get('/home', homePageRender,isLoggedIn);
+router.get('/home',isLoggedIn, homePageRender);
 router.get('/otp', registerOtp);
-router.get('/google',googleRender)
-router.get('/profile',userProfileRender)
-router.get('/profile/address',userAddressRender);
-router.get('/profile/changePassword',userChangePasswordRender)
+
+router.get('/profile',isLoggedIn,userProfileRender)
+router.get('/profile/address',isLoggedIn,userAddressRender);
+router.get('/profile/changePassword',isLoggedIn,userChangePasswordRender)
 router.get('/logout',userLogout)
 // router.get('/home',userHomeAuth)
+
+router.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+    prompt: "select_account" // optional
+  })
+);
 
 router.post('/register', registerUser);
 router.post('/verify-otp', otpVerification);

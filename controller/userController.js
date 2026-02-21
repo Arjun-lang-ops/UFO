@@ -26,8 +26,7 @@ export const homePageRender = (req, res) =>{
 export const registerOtp = (req, res) =>
   res.render('userViews/registerOtpPage');
 
-export const googleRender=(req,res)=>
-  res.render('userViews/googleAuthPage')
+
 
 // Register and sending otp
 export const registerUser = async (req, res) => {
@@ -127,14 +126,7 @@ export const userChangePasswordRender=(req,res)=>
   res.render('userViews/userChangePassword')
 
 
-export const userLogout=(req,res)=>{
-  req.session.destroy((err)=>{
-    if(err){
-      return res.redirect('/')
-    }
-    res.redirect('/login')
-  })
-}
+
 
 export const updatePassword=async (req,res)=>{
   try {
@@ -157,4 +149,13 @@ export const updatePassword=async (req,res)=>{
     })
     
   }
+}
+
+export const userLogout=(req,res)=>{
+  req.session.destroy((err)=>{
+    if(err){
+      return res.redirect('/')
+    }
+    res.redirect('/login')
+  })
 }
