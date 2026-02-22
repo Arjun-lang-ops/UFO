@@ -1,6 +1,7 @@
 import { registerUserLogic, verifyUserOtp, userLoginLogic, changePasswordService } from "../service/userService.js";
 import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
 import { sendMail } from "../utils/mailer.js";
+import User from "../models/userModel.js";
 
 
 
@@ -15,13 +16,13 @@ export const loginRender = (req, res) =>
 export const landingPageRender = (req, res) =>
   res.render('userViews/userLandingPage');
 
-export const homePageRender = (req, res) =>{
-  if(!req.session.user){
-   return res.redirect('/login')
+export const homePageRender = (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/login')
   }
   res.render('userViews/userHomePage');
 }
-  
+
 
 export const registerOtp = (req, res) =>
   res.render('userViews/registerOtpPage');
@@ -78,7 +79,7 @@ export const resendOtp = async (req, res) => {
     const { email } = req.body;
 
     const otp = await generateAndSaveOtp(email);
-    
+
     await sendMail(email, otp);
 
     res.json({
@@ -94,66 +95,83 @@ export const resendOtp = async (req, res) => {
 };
 
 //login user
-export const loginUser=async (req,res)=>{
+export const loginUser = async (req, res) => {
 
   try {
-    
-    const user=await userLoginLogic(req.body);
-    req.session.userId=user._id;
-    req.session.user=true
-    
+
+    const user = await userLoginLogic(req.body);
+    req.session.userId = user._id;
+    req.session.user = true
+
     res.status(200).json({
-      success:true,
-      message:"login successfully",
+      success: true,
+      message: "login successfully",
       redirectUrl: "/home"
     })
   } catch (error) {
     res.status(400).json({
-      success:false,
-      message:error.message
+      success: false,
+      message: error.message
     })
   }
 }
 
-export const userProfileRender=(req,res)=>
+export const userProfileRender = (req, res) =>
   res.render('userViews/userProfile')
 
-export const userAddressRender=(req,res)=>
+// GET /api/me — returns logged-in user's fullname and email
+export const getMe = async (req, res) => {
+  try {
+    const userId = req.session.userId;
+    if (!userId) {
+      return res.status(401).json({ success: false, message: 'Not authenticated' });
+    }
+    const user = await User.findById(userId).select('fullname email');
+    if (!user) {
+      return res.status(401).json({ success: false, message: 'User not found' });
+    }
+    res.status(200).json({ success: true, user: { fullname: user.fullname, email: user.email } });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+export const userAddressRender = (req, res) =>
   res.render('userViews/userAddress')
 
 
-export const userChangePasswordRender=(req,res)=>
+export const userChangePasswordRender = (req, res) =>
   res.render('userViews/userChangePassword')
 
 
 
 
-export const updatePassword=async (req,res)=>{
+export const updatePassword = async (req, res) => {
   try {
-    const userId=req.session.userId;
-    console.log('session: ' ,req.session)
-    const {currentPassword,newPassword,confirmNewPassword}=req.body;
+    const userId = req.session.userId;
+    console.log('session: ', req.session)
+    const { currentPassword, newPassword, confirmNewPassword } = req.body;
 
-    const message= await changePasswordService(userId,currentPassword,newPassword,confirmNewPassword);
+    const message = await changePasswordService(userId, currentPassword, newPassword, confirmNewPassword);
 
     res.status(200).json({
-      success:true,
+      success: true,
       message
 
     })
 
   } catch (error) {
     return res.status(400).json({
-      success:false,
-      message:error.message
+      success: false,
+      message: error.message
     })
-    
+
   }
 }
 
-export const userLogout=(req,res)=>{
-  req.session.destroy((err)=>{
-    if(err){
+export const userLogout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
       return res.redirect('/')
     }
     res.redirect('/login')
