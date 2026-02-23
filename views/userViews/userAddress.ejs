@@ -110,71 +110,60 @@
 <h3 class="text-lg font-bold text-[#111418] dark:text-white">Contact Information</h3>
 <p class="text-sm text-[#6b7280] dark:text-[#9dabb9]">Who should we deliver this to?</p>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="grid grid-cols-1 gap-4">
 <label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Full Name</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="John Doe" type="text" value="Alex Morgan"/>
-</label>
-<label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Phone Number</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="+1 (555) 000-0000" type="tel" value="+1 (212) 555-0198"/>
+<span class="text-[#111418] dark:text-white text-sm font-medium">Full Name <span class="text-red-500">*</span></span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="fullName" placeholder="e.g. Alex Morgan" type="text" required/>
 </label>
 </div>
 <div class="h-px bg-[#e5e7eb] dark:bg-[#283039] my-2"></div>
 <div class="flex flex-col gap-1">
 <h3 class="text-lg font-bold text-[#111418] dark:text-white">Address</h3>
+<p class="text-sm text-[#6b7280] dark:text-[#9dabb9]">Enter your full delivery address.</p>
 </div>
+
+<!-- Phone Number (moved from Contact Info) -->
 <label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Country / Region</span>
-<div class="relative">
-<select class="w-full h-12 appearance-none rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all cursor-pointer">
-<option selected="">United States</option>
-<option>Canada</option>
-<option>United Kingdom</option>
-<option>Germany</option>
-<option>France</option>
-</select>
-<div class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#6b7280] dark:text-[#9dabb9]">
-<span class="material-symbols-outlined">expand_more</span>
-</div>
-</div>
+<span class="text-[#111418] dark:text-white text-sm font-medium">Phone Number <span class="text-red-500">*</span></span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="phone" placeholder="e.g. +91 98765 43210" type="tel" required/>
 </label>
+
+<!-- Country -->
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Country <span class="text-red-500">*</span></span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="country" placeholder="e.g. India" type="text" required/>
+</label>
+
+<!-- Street Address & Apartment -->
 <div class="flex flex-col gap-4">
 <label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Street Address</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="123 Stadium Way" type="text" value="45 Soccer Lane"/>
+<span class="text-[#111418] dark:text-white text-sm font-medium">Street Address <span class="text-red-500">*</span></span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="street" placeholder="e.g. 45 MG Road, Sector 12" type="text" required/>
 </label>
 <label class="flex flex-col gap-2">
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="Apartment, suite, unit, etc. (optional)" type="text" value="Apt 4B"/>
+<span class="text-[#111418] dark:text-white text-sm font-medium">Apartment / Suite <span class="text-[#9ca3af] font-normal text-xs">(optional)</span></span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="apartment" placeholder="e.g. Apt 4B, Tower C (optional)" type="text"/>
 </label>
 </div>
+
+<!-- City, State, Pincode -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">City</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="City" type="text" value="New York"/>
+<span class="text-[#111418] dark:text-white text-sm font-medium">City <span class="text-red-500">*</span></span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="city" placeholder="e.g. Mumbai" type="text" required/>
 </label>
 <label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">State / Province</span>
-<div class="relative">
-<select class="w-full h-12 appearance-none rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all cursor-pointer">
-<option>California</option>
-<option selected="">New York</option>
-<option>Texas</option>
-<option>Florida</option>
-</select>
-<div class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-[#6b7280] dark:text-[#9dabb9]">
-<span class="material-symbols-outlined">expand_more</span>
-</div>
-</div>
+<span class="text-[#111418] dark:text-white text-sm font-medium">State / Province <span class="text-red-500">*</span></span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="state" placeholder="e.g. Maharashtra" type="text" required/>
 </label>
 <label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Zip / Postal Code</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="10001" type="text" value="10001"/>
+<span class="text-[#111418] dark:text-white text-sm font-medium">Zip / Postal Code <span class="text-red-500">*</span></span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="pincode" placeholder="e.g. 400001" type="text" required/>
 </label>
 </div>
 <label class="flex items-center gap-3 cursor-pointer mt-2 group select-none">
 <div class="relative flex items-center">
-<input checked="" class="peer h-5 w-5 cursor-pointer appearance-none rounded border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] checked:border-primary checked:bg-primary transition-all" type="checkbox"/>
+<input checked="" class="peer h-5 w-5 cursor-pointer appearance-none rounded border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] checked:border-primary checked:bg-primary transition-all" type="checkbox" name="isDefault" value="true"/>
 <span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-white opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
 </div>
 <span class="text-[#111418] dark:text-white text-base font-normal group-hover:text-primary transition-colors">Set as default shipping address</span>

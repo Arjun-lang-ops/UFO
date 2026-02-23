@@ -267,6 +267,38 @@
 </label>
 </div>
 </section>
+
+        <!-- ==================== MY ADDRESSES SECTION ==================== -->
+        <section id="addresses-section" class="bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#283039] shadow-sm mb-10">
+          <!-- Section Header -->
+          <div class="px-6 py-4 border-b border-slate-100 dark:border-[#283039] flex justify-between items-center">
+            <h3 class="text-slate-900 dark:text-white text-lg font-bold">My Addresses</h3>
+            <button id="open-add-modal-btn" onclick="openAddressModal()" class="flex items-center gap-1.5 bg-primary hover:bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors shadow shadow-blue-500/20">
+              <span class="material-symbols-outlined text-[18px]">add</span>
+              Add New Address
+            </button>
+          </div>
+
+          <!-- Address Cards Grid -->
+          <div class="p-6">
+            <!-- Empty State -->
+            <div id="addresses-empty" class="hidden flex-col items-center justify-center py-12 gap-4 text-center">
+              <div class="w-16 h-16 rounded-full bg-slate-100 dark:bg-[#283039] flex items-center justify-center">
+                <span class="material-symbols-outlined text-slate-400 dark:text-[#9dabb9] text-[36px]">location_off</span>
+              </div>
+              <p class="text-slate-500 dark:text-[#9dabb9] text-sm">You have no saved addresses.</p>
+              <button onclick="openAddressModal()" class="flex items-center gap-1.5 bg-primary hover:bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
+                <span class="material-symbols-outlined text-[18px]">add</span>
+                Add New Address
+              </button>
+            </div>
+
+            <!-- Cards Grid -->
+            <div id="addresses-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- JS will render cards here -->
+            </div>
+          </div>
+        </section>
 </div>
 </div>
 </div>
@@ -274,18 +306,129 @@
 </main>
 </div>
 
+<!-- ==================== ADD / EDIT ADDRESS MODAL ==================== -->
+<div id="address-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+  <!-- Backdrop -->
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeAddressModal()"></div>
+  <!-- Panel -->
+  <div class="relative z-10 w-full max-w-2xl bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#283039] shadow-2xl flex flex-col max-h-[90vh] overflow-y-auto">
+    <div class="px-6 py-4 border-b border-slate-100 dark:border-[#283039] flex items-center justify-between sticky top-0 bg-white dark:bg-[#111418] z-10">
+      <h3 id="modal-title" class="text-slate-900 dark:text-white font-bold text-lg">Add New Address</h3>
+      <button onclick="closeAddressModal()" class="text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+    </div>
+    <form id="address-form" class="p-6 flex flex-col gap-5" onsubmit="handleAddressSubmit(event)">
+      <input type="hidden" id="addr-id" name="_id" value=""/>
+
+      <!-- Full Name -->
+      <label class="flex flex-col gap-1.5">
+        <span class="text-slate-700 dark:text-[#9dabb9] text-sm font-medium">Full Name <span class="text-red-500">*</span></span>
+        <input type="text" name="fullname" id="addr-fullname" required placeholder="e.g. Alex Morgan"
+          class="w-full h-11 rounded-lg border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1e293b] px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"/>
+      </label>
+
+      <!-- Phone -->
+      <label class="flex flex-col gap-1.5">
+        <span class="text-slate-700 dark:text-[#9dabb9] text-sm font-medium">Phone Number <span class="text-red-500">*</span></span>
+        <input type="tel" name="phone" id="addr-phone" required placeholder="e.g. +91 98765 43210"
+          class="w-full h-11 rounded-lg border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1e293b] px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"/>
+      </label>
+
+      <!-- Country -->
+      <label class="flex flex-col gap-1.5">
+        <span class="text-slate-700 dark:text-[#9dabb9] text-sm font-medium">Country <span class="text-red-500">*</span></span>
+        <input type="text" name="country" id="addr-country" required placeholder="e.g. India"
+          class="w-full h-11 rounded-lg border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1e293b] px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"/>
+      </label>
+
+      <!-- Street -->
+      <label class="flex flex-col gap-1.5">
+        <span class="text-slate-700 dark:text-[#9dabb9] text-sm font-medium">Street Address <span class="text-red-500">*</span></span>
+        <input type="text" name="street" id="addr-street" required placeholder="e.g. 45 MG Road, Sector 12"
+          class="w-full h-11 rounded-lg border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1e293b] px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"/>
+      </label>
+
+      <!-- Apartment -->
+      <label class="flex flex-col gap-1.5">
+        <span class="text-slate-700 dark:text-[#9dabb9] text-sm font-medium">Apartment / Suite <span class="text-slate-400 font-normal text-xs">(optional)</span></span>
+        <input type="text" name="apartment" id="addr-apartment" placeholder="e.g. Apt 4B, Tower C"
+          class="w-full h-11 rounded-lg border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1e293b] px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"/>
+      </label>
+
+      <!-- City / State / Pincode -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <label class="flex flex-col gap-1.5">
+          <span class="text-slate-700 dark:text-[#9dabb9] text-sm font-medium">City <span class="text-red-500">*</span></span>
+          <input type="text" name="city" id="addr-city" required placeholder="e.g. Mumbai"
+            class="w-full h-11 rounded-lg border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1e293b] px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"/>
+        </label>
+        <label class="flex flex-col gap-1.5">
+          <span class="text-slate-700 dark:text-[#9dabb9] text-sm font-medium">State / Province <span class="text-red-500">*</span></span>
+          <input type="text" name="state" id="addr-state" required placeholder="e.g. Maharashtra"
+            class="w-full h-11 rounded-lg border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1e293b] px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"/>
+        </label>
+        <label class="flex flex-col gap-1.5">
+          <span class="text-slate-700 dark:text-[#9dabb9] text-sm font-medium">Zip / Postal Code <span class="text-red-500">*</span></span>
+          <input type="text" name="pincode" id="addr-pincode" required placeholder="e.g. 400001"
+            class="w-full h-11 rounded-lg border border-slate-200 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1e293b] px-4 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#64748b] focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"/>
+        </label>
+      </div>
+
+      <!-- Default Checkbox -->
+      <label class="flex items-center gap-3 cursor-pointer group select-none">
+        <div class="relative flex items-center">
+          <input type="checkbox" name="isDefault" id="addr-isDefault"
+            class="peer h-5 w-5 cursor-pointer appearance-none rounded border border-slate-300 dark:border-[#3b4754] bg-slate-50 dark:bg-[#1e293b] checked:border-primary checked:bg-primary transition-all"/>
+          <span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-white opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
+        </div>
+        <span class="text-slate-700 dark:text-white text-sm font-normal group-hover:text-primary transition-colors">Set as default shipping address</span>
+      </label>
+
+      <!-- Error msg -->
+      <p id="addr-error" class="hidden text-red-500 text-sm"></p>
+
+      <!-- Actions -->
+      <div class="flex flex-col-reverse sm:flex-row gap-3 pt-2 border-t border-slate-100 dark:border-[#283039]">
+        <button type="button" onclick="closeAddressModal()" class="flex-1 h-11 rounded-lg border border-slate-200 dark:border-[#3b4754] bg-transparent hover:bg-slate-50 dark:hover:bg-[#283039] text-slate-700 dark:text-white text-sm font-semibold transition-all">Cancel</button>
+        <button type="submit" id="addr-submit-btn" class="flex-1 h-11 rounded-lg bg-primary hover:bg-blue-600 text-white text-sm font-semibold shadow shadow-blue-500/30 transition-all flex items-center justify-center gap-2">
+          <span id="addr-submit-label">Save Address</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== DELETE CONFIRMATION MODAL ==================== -->
+<div id="delete-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeDeleteModal()"></div>
+  <div class="relative z-10 w-full max-w-sm bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#283039] shadow-2xl p-6 flex flex-col gap-5">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center shrink-0">
+        <span class="material-symbols-outlined text-red-500 text-[22px]">delete_forever</span>
+      </div>
+      <div>
+        <h4 class="text-slate-900 dark:text-white font-bold text-base">Delete Address</h4>
+        <p class="text-slate-500 dark:text-[#9dabb9] text-sm mt-0.5">Are you sure you want to delete this address?</p>
+      </div>
+    </div>
+    <p class="text-slate-500 dark:text-[#9dabb9] text-xs">This action cannot be undone.</p>
+    <div class="flex gap-3">
+      <button onclick="closeDeleteModal()" class="flex-1 h-10 rounded-lg border border-slate-200 dark:border-[#3b4754] bg-transparent hover:bg-slate-50 dark:hover:bg-[#283039] text-slate-700 dark:text-white text-sm font-semibold transition-all">Cancel</button>
+      <button onclick="confirmDeleteAddress()" class="flex-1 h-10 rounded-lg bg-red-500 hover:bg-red-600 text-white text-sm font-semibold transition-all">Delete</button>
+    </div>
+  </div>
+</div>
+
 <script>
+  // ─── User profile loader ───────────────────────────────────────────────────
   (async () => {
     try {
       const res = await fetch('/api/me', { credentials: 'same-origin' });
-      if (res.status === 401) {
-        window.location.href = '/login';
-        return;
-      }
+      if (res.status === 401) { window.location.href = '/login'; return; }
       if (!res.ok) throw new Error('Failed to load user data');
       const data = await res.json();
       const { fullname, email } = data.user;
-
       document.getElementById('sidebar-fullname').textContent = fullname;
       document.getElementById('header-fullname').textContent = fullname;
       document.getElementById('full-name').value = fullname;
@@ -294,5 +437,185 @@
       console.error('Profile load error:', err);
     }
   })();
+
+  // ─── State ────────────────────────────────────────────────────────────────
+  let _pendingDeleteId = null;
+  let _editingId = null;
+
+  // ─── Helpers ──────────────────────────────────────────────────────────────
+  function showModal(id) {
+    const el = document.getElementById(id);
+    el.classList.remove('hidden');
+    el.classList.add('flex');
+    document.body.classList.add('overflow-hidden');
+  }
+  function hideModal(id) {
+    const el = document.getElementById(id);
+    el.classList.add('hidden');
+    el.classList.remove('flex');
+    document.body.classList.remove('overflow-hidden');
+  }
+
+  // ─── Add/Edit Modal ───────────────────────────────────────────────────────
+  function openAddressModal(addr = null) {
+    _editingId = addr ? addr._id : null;
+    document.getElementById('modal-title').textContent = addr ? 'Edit Address' : 'Add New Address';
+    document.getElementById('addr-submit-label').textContent = addr ? 'Update Address' : 'Save Address';
+    document.getElementById('addr-id').value = addr ? addr._id : '';
+    document.getElementById('addr-fullname').value  = addr ? addr.fullname  : '';
+    document.getElementById('addr-phone').value     = addr ? addr.phone     : '';
+    document.getElementById('addr-country').value   = addr ? addr.country   : '';
+    document.getElementById('addr-street').value    = addr ? addr.street    : '';
+    document.getElementById('addr-apartment').value = addr ? (addr.apartment || '') : '';
+    document.getElementById('addr-city').value      = addr ? addr.city      : '';
+    document.getElementById('addr-state').value     = addr ? addr.state     : '';
+    document.getElementById('addr-pincode').value   = addr ? addr.pincode   : '';
+    document.getElementById('addr-isDefault').checked = addr ? !!addr.isDefault : false;
+    document.getElementById('addr-error').classList.add('hidden');
+    showModal('address-modal');
+  }
+  function closeAddressModal() { hideModal('address-modal'); }
+
+  // ─── Delete Modal ─────────────────────────────────────────────────────────
+  function openDeleteModal(id) {
+    _pendingDeleteId = id;
+    showModal('delete-modal');
+  }
+  function closeDeleteModal() {
+    _pendingDeleteId = null;
+    hideModal('delete-modal');
+  }
+  async function confirmDeleteAddress() {
+    if (!_pendingDeleteId) return;
+    try {
+      const res = await fetch(`/api/addresses/${_pendingDeleteId}`, {
+        method: 'DELETE',
+        credentials: 'same-origin'
+      });
+      if (!res.ok) throw new Error('Failed to delete address');
+      closeDeleteModal();
+      loadAddresses();
+    } catch (err) {
+      console.error(err);
+      closeDeleteModal();
+    }
+  }
+
+  // ─── Form Submit (Add / Edit) ─────────────────────────────────────────────
+  async function handleAddressSubmit(e) {
+    e.preventDefault();
+    const errEl = document.getElementById('addr-error');
+    errEl.classList.add('hidden');
+    const btn = document.getElementById('addr-submit-btn');
+    btn.disabled = true;
+    btn.innerHTML = `<svg class="animate-spin w-4 h-4" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" stroke-dasharray="60" stroke-dashoffset="20"/></svg> Saving...`;
+
+    const body = {
+      fullname:  document.getElementById('addr-fullname').value.trim(),
+      phone:     document.getElementById('addr-phone').value.trim(),
+      country:   document.getElementById('addr-country').value.trim(),
+      street:    document.getElementById('addr-street').value.trim(),
+      apartment: document.getElementById('addr-apartment').value.trim(),
+      city:      document.getElementById('addr-city').value.trim(),
+      state:     document.getElementById('addr-state').value.trim(),
+      pincode:   document.getElementById('addr-pincode').value.trim(),
+      isDefault: document.getElementById('addr-isDefault').checked
+    };
+
+    try {
+      const url    = _editingId ? `/api/addresses/${_editingId}` : '/api/addresses';
+      const method = _editingId ? 'PUT' : 'POST';
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify(body)
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.message || 'Something went wrong');
+      closeAddressModal();
+      loadAddresses();
+    } catch (err) {
+      errEl.textContent = err.message;
+      errEl.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = `<span id="addr-submit-label">${_editingId ? 'Update Address' : 'Save Address'}</span>`;
+    }
+  }
+
+  // ─── Render Cards ─────────────────────────────────────────────────────────
+  function renderAddresses(addresses) {
+    const grid  = document.getElementById('addresses-grid');
+    const empty = document.getElementById('addresses-empty');
+    grid.innerHTML = '';
+
+    if (!addresses || addresses.length === 0) {
+      empty.classList.remove('hidden');
+      empty.classList.add('flex');
+      grid.classList.add('hidden');
+      return;
+    }
+
+    empty.classList.add('hidden');
+    empty.classList.remove('flex');
+    grid.classList.remove('hidden');
+
+    addresses.forEach(addr => {
+      const apt = addr.apartment ? `, ${addr.apartment}` : '';
+      const card = document.createElement('div');
+      card.className = 'relative flex flex-col gap-3 p-5 rounded-xl border ' +
+        (addr.isDefault
+          ? 'border-primary/50 bg-primary/5 dark:bg-primary/10'
+          : 'border-slate-200 dark:border-[#283039] bg-white dark:bg-[#1c2127]');
+      card.innerHTML = `
+        ${addr.isDefault ? `<span class="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary text-white">Default</span>` : ''}
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-full ${ addr.isDefault ? 'bg-primary' : 'bg-slate-100 dark:bg-[#283039]'} flex items-center justify-center shrink-0">
+            <span class="material-symbols-outlined text-[18px] ${ addr.isDefault ? 'text-white' : 'text-slate-500 dark:text-[#9dabb9]'}">${addr.isDefault ? 'home' : 'location_on'}</span>
+          </div>
+          <div class="flex flex-col gap-0.5 flex-1 min-w-0 pr-10">
+            <p class="text-slate-900 dark:text-white font-semibold text-sm truncate">${addr.fullname}</p>
+            <p class="text-slate-500 dark:text-[#9dabb9] text-xs">${addr.phone}</p>
+          </div>
+        </div>
+        <div class="text-slate-600 dark:text-[#9dabb9] text-xs leading-relaxed pl-12">
+          ${addr.street}${apt}<br/>
+          ${addr.city}, ${addr.state} – ${addr.pincode}<br/>
+          ${addr.country}
+        </div>
+        <div class="flex gap-2 pl-12">
+          <button onclick='openAddressModal(${JSON.stringify(addr)})'
+            class="flex items-center gap-1 text-primary hover:text-blue-400 text-xs font-medium transition-colors">
+            <span class="material-symbols-outlined text-[14px]">edit</span> Edit
+          </button>
+          <span class="text-slate-300 dark:text-[#283039]">|</span>
+          <button onclick="openDeleteModal('${addr._id}')"
+            class="flex items-center gap-1 text-red-500 hover:text-red-400 text-xs font-medium transition-colors">
+            <span class="material-symbols-outlined text-[14px]">delete</span> Delete
+          </button>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+
+  // ─── Load Addresses from API ──────────────────────────────────────────────
+  async function loadAddresses() {
+    try {
+      const res = await fetch('/api/addresses', { credentials: 'same-origin' });
+      if (res.status === 401) return; // not logged in
+      if (!res.ok) throw new Error('Failed to load addresses');
+      const data = await res.json();
+      renderAddresses(data.addresses || []);
+    } catch (err) {
+      console.error('Address load error:', err);
+      renderAddresses([]);
+    }
+  }
+
+  // ─── Init ─────────────────────────────────────────────────────────────────
+  loadAddresses();
 </script>
 </body></html>
