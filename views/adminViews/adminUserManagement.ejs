@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin User Management - GoalGear</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Side Navigation Bar -->
+<aside class="w-64 flex flex-col bg-white dark:bg-[#111418] border-r border-slate-200 dark:border-slate-800">
+<div class="flex flex-col h-full p-4">
+<div class="flex items-center gap-3 mb-8 px-2">
+<div class="bg-primary rounded-lg flex items-center justify-center p-2 text-white">
+<span class="material-symbols-outlined">sports_soccer</span>
+</div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-none">GoalGear Admin</h1>
+<p class="text-slate-500 dark:text-[#9dabb9] text-[10px] uppercase tracking-wider font-semibold mt-1">Management Portal</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-medium">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors" href="#">
+<span class="material-symbols-outlined">shopping_cart</span>
+<p class="text-sm font-medium">Orders</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<p class="text-sm font-medium">Products</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary dark:bg-primary/20 dark:text-primary" href="#">
+<span class="material-symbols-outlined fill-current">group</span>
+<p class="text-sm font-bold">Users</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</a>
+</nav>
+<div class="mt-auto pt-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 px-2">
+<div class="h-9 w-9 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover" data-alt="Admin user profile picture profile circle" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDO6my1XVaQw5_cf-J5iDETNNqDVQG9km6csDjoh7EnJVhTpSxfwCNq8uzIY9tJq6LJZgaFvKJY8VPGFLqlCNxa8XkEgYlzN3YsPP6MnXfhDxOOMbFpxa0dEQ9LrMwtcrqf8kHT1XJTdQnw2ZW4aRk06ORywG2V2e2MqDDq6NLplKKAyRP4oeWFNeRtQKpvV-ZeSLi0CI_juqRifm8u0sCc7cmubM_EyMxRosHHLdUpcp2tsGVj-2Xnth0YWSnCHpAywUr6TyJAQhM")'></div>
+<div class="flex flex-col overflow-hidden">
+<p class="text-sm font-bold truncate">Alex Smith</p>
+<p class="text-xs text-slate-500 truncate">Store Manager</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+<div class="max-w-7xl mx-auto p-8">
+<!-- Page Heading -->
+<div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+<div class="flex flex-col gap-1">
+<h2 class="text-slate-900 dark:text-white text-4xl font-black tracking-tight">User Management</h2>
+<p class="text-slate-500 dark:text-[#9dabb9] text-base font-normal">Manage registered customers and their account status.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white rounded-lg h-11 px-6 text-sm font-bold transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+<span>Export User Data</span>
+</button>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754]">
+<p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Total Users</p>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">12,840</p>
+<p class="text-emerald-500 text-sm font-bold leading-normal">+12%</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754]">
+<p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Active Users</p>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">8,420</p>
+<p class="text-emerald-500 text-sm font-bold leading-normal">+5%</p>
+</div>
+</div>
+<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754]">
+<p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">New This Week</p>
+<div class="flex items-baseline gap-2">
+<p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">+156</p>
+<p class="text-emerald-500 text-sm font-bold leading-normal">+8%</p>
+</div>
+</div>
+</div>
+<!-- Action Bar & Search -->
+<div class="bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754] rounded-t-xl overflow-hidden">
+<div class="flex flex-col md:flex-row md:items-center justify-between p-4 gap-4">
+<div class="flex-1 max-w-md">
+<label class="relative flex items-center w-full">
+<div class="absolute left-3 text-slate-400 dark:text-[#9dabb9]">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="w-full bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white border-none rounded-lg h-11 pl-11 pr-4 focus:ring-2 focus:ring-primary placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm font-normal" placeholder="Search users by name or email..."/>
+</label>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 bg-slate-100 dark:bg-[#283039] hover:bg-slate-200 dark:hover:bg-[#323c47] text-slate-700 dark:text-white rounded-lg h-11 px-4 text-sm font-bold transition-all">
+<span class="material-symbols-outlined text-[20px]">block</span>
+<span>Suspend Selected</span>
+</button>
+<button class="flex items-center gap-2 bg-transparent hover:bg-red-500/10 text-red-500 rounded-lg h-11 px-4 text-sm font-bold transition-all border border-red-500/20">
+<span class="material-symbols-outlined text-[20px]">delete</span>
+<span>Delete</span>
+</button>
+</div>
+</div>
+<!-- User Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-[#111418] border-y border-slate-200 dark:border-[#3b4754]">
+<th class="p-4 w-12 text-center">
+<input class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#9dabb9]">User</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#9dabb9]">Email</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#9dabb9]">Status</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#9dabb9]">Total Orders</th>
+<th class="p-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-[#9dabb9] text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-200 dark:divide-[#3b4754]">
+<!-- Table Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-[#1a2027] transition-colors group">
+<td class="p-4 text-center">
+<input class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="Customer user avatar photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb_-B_fmqTfcudaHFkSbmWVHDGkxEz-q2eIy1RLyla4cUDs6g349DTV1mIeFUejK1OYCL6wnrdRt7CqO2aKX1I7U9doHL3MeBjWRXG9MKpQSZQqikv4B7FnpvfXr6iA4xU8b3GtO-tJH237uferVzyRZUrwqF90BjMae2hpA9mKctZxlNSDeR4olouarOMJQRGr3477eRsb4WcHQTbjsuYlSHcoPohe5Y8AKbw_A9kVHUZIhfd0T_W97USrdoDfQt6ex77TOd6UWw"/>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">Marcus Rashford</span>
+</div>
+</td>
+<td class="p-4 text-sm text-slate-600 dark:text-[#9dabb9]">rashy.10@example.com</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500">Active</span>
+</td>
+<td class="p-4 text-sm font-medium">12 Orders</td>
+<td class="p-4 text-right">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-[#1a2027] transition-colors group">
+<td class="p-4 text-center">
+<input class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="Female customer profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlgJ1EzxZ42e2VPl1JgKZYdn9904C8Ll3WFrBpRAbkpraRjRidYjVuHc9USPcJeLdQOMbS7klDhRCLY9hhhIGN7nL1d6D3OtbOMnTg5OEtsOfvOi2eiQ2uJfgovuJr0_PUU3k9dHmp_siXOizinXwmbTdUDhJoUhbXOBNudMbgk1ek4guTGr4ESu6auJ7RaXoqDl3K-97bZwPSqIBWsqhbn8Yrf6lJrdI-_MjpsZxQL50wuiF7bT91ugQB9VQ6IH0qsG-MBs__O0A"/>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">Lucy Bronze</span>
+</div>
+</td>
+<td class="p-4 text-sm text-slate-600 dark:text-[#9dabb9]">lucy.bronze@outlook.com</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-500">Suspended</span>
+</td>
+<td class="p-4 text-sm font-medium">4 Orders</td>
+<td class="p-4 text-right">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-[#1a2027] transition-colors group">
+<td class="p-4 text-center">
+<input class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold">
+                                                BH
+                                            </div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">Bukayo Henderson</span>
+</div>
+</td>
+<td class="p-4 text-sm text-slate-600 dark:text-[#9dabb9]">b.hendo@gmail.com</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500">Active</span>
+</td>
+<td class="p-4 text-sm font-medium">21 Orders</td>
+<td class="p-4 text-right">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-[#1a2027] transition-colors group border-b border-slate-200 dark:border-[#3b4754]">
+<td class="p-4 text-center">
+<input checked="" class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
+</td>
+<td class="p-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="Male professional headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMWA0ISKuyKT4OGaVQuX7R7fH-5lFa_Q0xS5QzsdjQxU9R9ugAf8aa0KVGB92Wtrzi1iTG814zNsH_s8AXv3YUvBQVWfwmIL-X9Yqw3Glgqo4UD5Cfkqmq7cXIVRLAvMompnCCsZzQiaNGghzeGB37Y2G_oWlx9hIDnILEjyux5SB1lZ1Cp1fF1Ia9rSGA6IrP1ou1rZe007jOUiMtvmYUnyOeyJedfZ_AnryJx7_NSr2jmdif3Sz9r9w22WQ44j7mkWdHO2XtYo4"/>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">Harry Kane</span>
+</div>
+</td>
+<td class="p-4 text-sm text-slate-600 dark:text-[#9dabb9]">h.kane9@spurs.co.uk</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500">Active</span>
+</td>
+<td class="p-4 text-sm font-medium">0 Orders</td>
+<td class="p-4 text-right">
+<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-[#111418] rounded-b-xl">
+<p class="text-sm text-slate-500 dark:text-[#9dabb9]">Showing 1-10 of 12,840 users</p>
+<div class="flex gap-1">
+<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-slate-400 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="h-8 w-8 rounded bg-primary text-white text-sm font-bold">1</button>
+<button class="h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-medium">2</button>
+<button class="h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-medium">3</button>
+<span class="px-2 text-slate-400">...</span>
+<button class="h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-medium">1284</button>
+<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-slate-400 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

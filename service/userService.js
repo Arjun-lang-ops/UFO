@@ -1,5 +1,6 @@
 import bcrypt from 'bcrypt';
 import User from '../models/userModel.js';
+import Address from '../models/userAddressModel.js';
 import { generateAndSaveOtp } from './otpService.js';
 import { sendMail } from '../utils/mailer.js';
 
@@ -95,3 +96,57 @@ export const changePasswordService=async (userId,currentPassword,newPassword)=>{
     return 'password updated successfully'
 
 }
+
+
+export const addAddressService=async (userId,data)=>{
+    if(data.isDefault){
+        await Address.updateMany(
+            {user:userId},{$set:{isDefault:true}})
+    }
+    const address= new Address({...data,user:userId});
+    return await Address.save()
+}
+
+export const editAddressLogic = async (userId, addressId, data) => {
+
+  const address = await Address.findOne({
+    _id: addressId,
+    user: userId
+  });
+
+  if (!address) {
+    throw new Error("Address not found");
+  }
+
+  if (data.isDefault) {
+    await Address.updateMany(
+      { user: userId },
+      { $set: { isDefault: false } }
+    );
+  }
+
+  Object.assign(address, data);
+
+  return await address.save();
+};
+
+
+export const deleteAddressLogic = async (userId, addressId) => {
+
+  const address = await Address.findOneAndDelete({
+    _id: addressId,
+    user: userId
+  });
+
+  if (!address) {
+    throw new Error("Address not found");
+  }
+
+  return address;
+};
+
+
+export const getUserAddressesLogic = async (userId) => {
+  return await Address.find({ user: userId })
+    .sort({ isDefault: -1, createdAt: -1 });
+};

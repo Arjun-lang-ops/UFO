@@ -12,6 +12,7 @@ import session from "express-session";
 import nocache from "nocache";
 import connectDB from "./config/db.js";
 import userRoutes from './routes/userRoutes.js'
+import adminRoutes from './routes/adminRoutes.js'
 import passport from "./config/passport.js";
 import cors from 'cors'
 
@@ -51,6 +52,7 @@ app.use(passport.session());
 
 
 app.use('/',userRoutes);
+app.use('/admin',adminRoutes)
 
 
 

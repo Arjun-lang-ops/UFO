@@ -1,4 +1,4 @@
-import { registerUserLogic, verifyUserOtp, userLoginLogic, changePasswordService } from "../service/userService.js";
+import { registerUserLogic, verifyUserOtp, userLoginLogic, changePasswordService, addAddressService, editAddressLogic, deleteAddressLogic } from "../service/userService.js";
 import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
 import { sendMail } from "../utils/mailer.js";
 import User from "../models/userModel.js";
@@ -116,6 +116,13 @@ export const loginUser = async (req, res) => {
   }
 }
 
+
+//forgot password
+
+export const forgotpasswordRender=(req,res)=>{
+  return res.render('userViews/userForgotPassword')
+}
+
 export const userProfileRender = (req, res) =>
   res.render('userViews/userProfile')
 
@@ -168,6 +175,77 @@ export const updatePassword = async (req, res) => {
 
   }
 }
+
+
+export const addAddress = async (req, res) => {
+  try {
+    await addAddressService(req.session.userId, req.body);
+    res.json({
+      success: true,
+      message: "Address added successfully"
+    })
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    })
+  }
+}
+
+export const editAddress = async (req, res) => {
+  try {
+    const userId = req.session.userId;
+    const addressId = req.params.id;
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized"
+      });
+    }
+
+    await editAddressLogic(userId, addressId, req.body);
+
+    res.status(200).json({
+      success: true,
+      message: "Address updated successfully"
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
+
+export const deleteAddress = async (req, res) => {
+  try {
+    const userId = req.session.userId;
+    const addressId = req.params.id;
+
+    if (!userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized"
+      });
+    }
+
+    await deleteAddressLogic(userId, addressId);
+
+    res.status(200).json({
+      success: true,
+      message: "Address deleted successfully"
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
 
 export const userLogout = (req, res) => {
   req.session.destroy((err) => {
