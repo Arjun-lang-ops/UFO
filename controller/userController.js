@@ -123,6 +123,17 @@ export const forgotpasswordRender=(req,res)=>{
   return res.render('userViews/userForgotPassword')
 }
 
+//forgot password otp page
+export const forgotOtpRender=(req,res)=>{
+  return res.render('userViews/userForgotPasswordOtp')
+}
+
+//reset password page
+
+export const resetPassword=(req,res)=>{
+  return res.render('userViews/userResetPassword')
+}
+
 export const userProfileRender = (req, res) =>
   res.render('userViews/userProfile')
 

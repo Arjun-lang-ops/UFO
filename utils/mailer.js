@@ -58,3 +58,37 @@ Urban Football Team
     throw error;
   }
 };
+
+
+export const sendForgotPasswordMail = async (to, otp) => {
+  try {
+    await transporter.sendMail({
+      from: `"Urban Football" <${process.env.EMAIL_USER}>`,
+      to,
+      subject: "Reset Your Urban Football Password",
+      text: `
+Hi there,
+
+We received a request to reset your Urban Football account password.
+
+Your One-Time Password (OTP) to reset your password is:
+
+${otp}
+
+This OTP is valid for 1 minute.
+Please do not share this code with anyone for security reasons.
+
+If you did not request a password reset, you can safely ignore this email. 
+Your account will remain secure.
+
+Thanks & regards,
+Urban Football Team
+`,
+    });
+
+    console.log(" Forgot password OTP sent to:", to);
+  } catch (error) {
+    console.error(" Error sending forgot password OTP:", error.message);
+    throw error;
+  }
+};
