@@ -69,6 +69,17 @@ export const userLoginLogic=async (data)=>{
     
 }
 
+export const forgotUserService=async(data)=>{
+    const {email}=data;
+    const existingUser=await User.findOne({email});
+
+    if(!existingUser){
+        throw new Error('Invalid Email Address');
+    };
+
+    return existingUser
+}
+
 
 export const changePasswordService=async (userId,currentPassword,newPassword)=>{
     if(!userId){

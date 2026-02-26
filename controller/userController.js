@@ -1,6 +1,6 @@
-import { registerUserLogic, verifyUserOtp, userLoginLogic, changePasswordService, addAddressService, editAddressLogic, deleteAddressLogic } from "../service/userService.js";
+import { registerUserLogic, verifyUserOtp, userLoginLogic, changePasswordService, addAddressService, editAddressLogic, deleteAddressLogic, forgotUserService } from "../service/userService.js";
 import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
-import { sendMail } from "../utils/mailer.js";
+import { sendForgotPasswordMail, sendMail } from "../utils/mailer.js";
 import User from "../models/userModel.js";
 
 
@@ -121,6 +121,46 @@ export const loginUser = async (req, res) => {
 
 export const forgotpasswordRender=(req,res)=>{
   return res.render('userViews/userForgotPassword')
+}
+
+
+//sending otp for forgot password
+export const resetSendMail=async (req,res)=>{
+  try {
+    const {email}=req.body;
+    await forgotUserService(req.body);
+   const otp = await generateAndSaveOtp(email);
+   console.log(otp);
+  await sendForgotPasswordMail(email,otp);
+
+  res.status(201).json({
+    success:true,
+    message:"Otp send to your mail"
+  })
+  } catch (error) {
+    res.status(400).json({
+      success:false,
+      message:error.message
+    })
+    
+  }
+}
+
+export const resendOtpReset=async (req,res)=>{
+  try {
+    const {email}=req.body;
+    await generateAndSaveOtp({email});
+    await sendForgotPasswordMail({email,otp});
+    res.status(201).json({
+      success:true,
+      message:"Otp resend succesfully"
+    })
+  } catch (error) {
+    res.status(400).json({
+      success:false,
+      message:error.message
+    })
+  }
 }
 
 //forgot password otp page

@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.disabled = true;
       submitBtn.textContent = "Sending...";
 
-      const response = await fetch("/forgot-password", {
+      const response = await fetch("/forgotPassword", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (data.success) {
         // Redirect to OTP page
-        window.location.href = "/verify-forgot-otp";
+        window.location.href = "/forgotPassword/otp";
       } else {
         showError(data.message || "Failed to send OTP.");
       }
