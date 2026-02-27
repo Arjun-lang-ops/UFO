@@ -11,9 +11,9 @@ router.get('/register', registerRender);
 router.get('/login', loginRender);
 router.get('/home', isLoggedIn, homePageRender);
 router.get('/otp', registerOtp);
-router.get('/forgotPassword',forgotpasswordRender)
-router.get('/forgotPassword/otp',forgotOtpRender)
-router.get('/forgotPassword/otp/reset',resetPassword)
+router.get('/forgotPassword', forgotpasswordRender)
+router.get('/forgotPassword/otp', forgotOtpRender)
+router.get('/forgotPassword/otp/reset', resetPassword)
 
 router.get('/profile', isLoggedIn, userProfileRender)
 router.get('/profile/address', isLoggedIn, userAddressRender);
@@ -35,7 +35,8 @@ router.post('/register', registerUser);
 router.post('/verify-otp', otpVerification);
 router.post('/resend-otp', resendOtp);
 router.post('/login', loginUser)
-router.post('/forgotPassword',resetSendMail);
+router.post('/forgotPassword', resetSendMail);
+router.post('/resend-forgot-otp', resendOtpReset);
 
 
 

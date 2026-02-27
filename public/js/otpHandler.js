@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Get email from query params
     const urlParams = new URLSearchParams(window.location.search);
     const email = urlParams.get('email');
+    const type = urlParams.get('type');
 
     if (email) {
         userEmailSpan.textContent = email;
@@ -55,7 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             resendBtn.textContent = "Sending...";
-            const response = await fetch('/resend-otp', {
+
+            let resendUrl = '/resend-otp';
+            if (type === 'forgot') {
+                resendUrl = '/resend-forgot-otp';
+            }
+
+            const response = await fetch(resendUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
@@ -162,7 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch('/verify-otp', {
+            let verifyUrl = '/verify-otp';
+            if (type === 'forgot') {
+                verifyUrl = '/verify-forgot-otp';
+            }
+
+            const response = await fetch(verifyUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, otp })
@@ -172,7 +184,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (result.success) {
                 // Redirect to home or login logic
-                window.location.href = '/login';
+                if (type === 'forgot') {
+                    window.location.href = `/reset-password?email=${encodeURIComponent(email)}`;
+                } else {
+                    window.location.href = '/login';
+                }
             } else {
                 otpError.textContent = result.message;
                 otpError.classList.remove('hidden');

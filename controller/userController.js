@@ -119,58 +119,58 @@ export const loginUser = async (req, res) => {
 
 //forgot password
 
-export const forgotpasswordRender=(req,res)=>{
+export const forgotpasswordRender = (req, res) => {
   return res.render('userViews/userForgotPassword')
 }
 
 
 //sending otp for forgot password
-export const resetSendMail=async (req,res)=>{
+export const resetSendMail = async (req, res) => {
   try {
-    const {email}=req.body;
+    const { email } = req.body;
     await forgotUserService(req.body);
-   const otp = await generateAndSaveOtp(email);
-   console.log(otp);
-  await sendForgotPasswordMail(email,otp);
+    const otp = await generateAndSaveOtp(email);
+    console.log(otp);
+    await sendForgotPasswordMail(email, otp);
 
-  res.status(201).json({
-    success:true,
-    message:"Otp send to your mail"
-  })
+    res.status(201).json({
+      success: true,
+      message: "Otp send to your mail"
+    })
   } catch (error) {
     res.status(400).json({
-      success:false,
-      message:error.message
+      success: false,
+      message: error.message
     })
-    
+
   }
 }
 
-export const resendOtpReset=async (req,res)=>{
+export const resendOtpReset = async (req, res) => {
   try {
-    const {email}=req.body;
-    await generateAndSaveOtp({email});
-    await sendForgotPasswordMail({email,otp});
+    const { email } = req.body;
+    await generateAndSaveOtp({ email });
+    await sendForgotPasswordMail({ email, otp });
     res.status(201).json({
-      success:true,
-      message:"Otp resend succesfully"
+      success: true,
+      message: "Otp resend succesfully"
     })
   } catch (error) {
     res.status(400).json({
-      success:false,
-      message:error.message
+      success: false,
+      message: error.message
     })
   }
 }
 
 //forgot password otp page
-export const forgotOtpRender=(req,res)=>{
+export const forgotOtpRender = (req, res) => {
   return res.render('userViews/userForgotPasswordOtp')
 }
 
 //reset password page
 
-export const resetPassword=(req,res)=>{
+export const resetPassword = (req, res) => {
   return res.render('userViews/userResetPassword')
 }
 
