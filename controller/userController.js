@@ -103,6 +103,8 @@ export const loginUser = async (req, res) => {
     req.session.userId = user._id;
     req.session.user = true
 
+    
+
     res.status(200).json({
       success: true,
       message: "login successfully",
@@ -167,6 +169,9 @@ export const resendOtpReset = async (req, res) => {
 export const forgotOtpRender = (req, res) => {
   return res.render('userViews/userForgotPasswordOtp')
 }
+
+//resend otp for forgot password
+
 
 //reset password page
 

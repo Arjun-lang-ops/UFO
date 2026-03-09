@@ -47,7 +47,7 @@
 </div>
 </div>
 <nav class="flex flex-col gap-1 flex-1">
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors" href="/admin/dashboard">
 <span class="material-symbols-outlined">dashboard</span>
 <p class="text-sm font-medium">Dashboard</p>
 </a>
@@ -156,101 +156,38 @@
 </thead>
 <tbody class="divide-y divide-slate-200 dark:divide-[#3b4754]">
 <!-- Table Row 1 -->
-<tr class="hover:bg-slate-50 dark:hover:bg-[#1a2027] transition-colors group">
+<% data.forEach(user => { %>
+    <tr class="hover:bg-slate-50 dark:hover:bg-[#1a2027] transition-colors group" data-user-id="<%= user._id %>">
 <td class="p-4 text-center">
 <input class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
 </td>
 <td class="p-4">
-<div class="flex items-center gap-3">
-<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
-<img alt="Avatar" class="w-full h-full object-cover" data-alt="Customer user avatar photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDb_-B_fmqTfcudaHFkSbmWVHDGkxEz-q2eIy1RLyla4cUDs6g349DTV1mIeFUejK1OYCL6wnrdRt7CqO2aKX1I7U9doHL3MeBjWRXG9MKpQSZQqikv4B7FnpvfXr6iA4xU8b3GtO-tJH237uferVzyRZUrwqF90BjMae2hpA9mKctZxlNSDeR4olouarOMJQRGr3477eRsb4WcHQTbjsuYlSHcoPohe5Y8AKbw_A9kVHUZIhfd0T_W97USrdoDfQt6ex77TOd6UWw"/>
-</div>
-<span class="text-sm font-bold text-slate-900 dark:text-white">Marcus Rashford</span>
-</div>
+    <div class="flex items-center gap-3">
+    <div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
+    <img alt="Avatar" class="w-full h-full object-cover" data-alt="Female customer profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlgJ1EzxZ42e2VPl1JgKZYdn9904C8Ll3WFrBpRAbkpraRjRidYjVuHc9USPcJeLdQOMbS7klDhRCLY9hhhIGN7nL1d6D3OtbOMnTg5OEtsOfvOi2eiQ2uJfgovuJr0_PUU3k9dHmp_siXOizinXwmbTdUDhJoUhbXOBNudMbgk1ek4guTGr4ESu6auJ7RaXoqDl3K-97bZwPSqIBWsqhbn8Yrf6lJrdI-_MjpsZxQL50wuiF7bT91ugQB9VQ6IH0qsG-MBs__O0A"/>
+    </div>
+    <span class="text-sm font-bold text-slate-900 dark:text-white"><%= user.fullname  %></span>
+    </div>
 </td>
-<td class="p-4 text-sm text-slate-600 dark:text-[#9dabb9]">rashy.10@example.com</td>
-<td class="p-4">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500">Active</span>
+<td class="p-4 text-sm text-slate-600 dark:text-[#9dabb9]"><%= user.email  %></td>
+   <td class="p-4">
+<span class="status-badge inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold
+<%= user.isBlocked ? 'bg-amber-500/10 text-amber-500' : 'bg-emerald-500/10 text-emerald-500' %>">
+
+<%= user.isBlocked ? "Blocked" : "Active" %>
+
+</span>
 </td>
-<td class="p-4 text-sm font-medium">12 Orders</td>
-<td class="p-4 text-right">
-<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-white transition-colors">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
+    <td class="p-4 text-sm font-medium">4 Orders</td>
+    <td class="p-4 text-right">
+    <button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-white transition-colors">
+    <span class="material-symbols-outlined">more_vert</span>
+    </button>
 </td>
 </tr>
+<% }) %>
 <!-- Table Row 2 -->
-<tr class="hover:bg-slate-50 dark:hover:bg-[#1a2027] transition-colors group">
-<td class="p-4 text-center">
-<input class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
-</td>
-<td class="p-4">
-<div class="flex items-center gap-3">
-<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
-<img alt="Avatar" class="w-full h-full object-cover" data-alt="Female customer profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlgJ1EzxZ42e2VPl1JgKZYdn9904C8Ll3WFrBpRAbkpraRjRidYjVuHc9USPcJeLdQOMbS7klDhRCLY9hhhIGN7nL1d6D3OtbOMnTg5OEtsOfvOi2eiQ2uJfgovuJr0_PUU3k9dHmp_siXOizinXwmbTdUDhJoUhbXOBNudMbgk1ek4guTGr4ESu6auJ7RaXoqDl3K-97bZwPSqIBWsqhbn8Yrf6lJrdI-_MjpsZxQL50wuiF7bT91ugQB9VQ6IH0qsG-MBs__O0A"/>
-</div>
-<span class="text-sm font-bold text-slate-900 dark:text-white">Lucy Bronze</span>
-</div>
-</td>
-<td class="p-4 text-sm text-slate-600 dark:text-[#9dabb9]">lucy.bronze@outlook.com</td>
-<td class="p-4">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-500/10 text-amber-500">Suspended</span>
-</td>
-<td class="p-4 text-sm font-medium">4 Orders</td>
-<td class="p-4 text-right">
-<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-white transition-colors">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</td>
-</tr>
-<!-- Table Row 3 -->
-<tr class="hover:bg-slate-50 dark:hover:bg-[#1a2027] transition-colors group">
-<td class="p-4 text-center">
-<input class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
-</td>
-<td class="p-4">
-<div class="flex items-center gap-3">
-<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 font-bold">
-                                                BH
-                                            </div>
-<span class="text-sm font-bold text-slate-900 dark:text-white">Bukayo Henderson</span>
-</div>
-</td>
-<td class="p-4 text-sm text-slate-600 dark:text-[#9dabb9]">b.hendo@gmail.com</td>
-<td class="p-4">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500">Active</span>
-</td>
-<td class="p-4 text-sm font-medium">21 Orders</td>
-<td class="p-4 text-right">
-<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-white transition-colors">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</td>
-</tr>
-<!-- Table Row 4 -->
-<tr class="hover:bg-slate-50 dark:hover:bg-[#1a2027] transition-colors group border-b border-slate-200 dark:border-[#3b4754]">
-<td class="p-4 text-center">
-<input checked="" class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
-</td>
-<td class="p-4">
-<div class="flex items-center gap-3">
-<div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
-<img alt="Avatar" class="w-full h-full object-cover" data-alt="Male professional headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMWA0ISKuyKT4OGaVQuX7R7fH-5lFa_Q0xS5QzsdjQxU9R9ugAf8aa0KVGB92Wtrzi1iTG814zNsH_s8AXv3YUvBQVWfwmIL-X9Yqw3Glgqo4UD5Cfkqmq7cXIVRLAvMompnCCsZzQiaNGghzeGB37Y2G_oWlx9hIDnILEjyux5SB1lZ1Cp1fF1Ia9rSGA6IrP1ou1rZe007jOUiMtvmYUnyOeyJedfZ_AnryJx7_NSr2jmdif3Sz9r9w22WQ44j7mkWdHO2XtYo4"/>
-</div>
-<span class="text-sm font-bold text-slate-900 dark:text-white">Harry Kane</span>
-</div>
-</td>
-<td class="p-4 text-sm text-slate-600 dark:text-[#9dabb9]">h.kane9@spurs.co.uk</td>
-<td class="p-4">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-500">Active</span>
-</td>
-<td class="p-4 text-sm font-medium">0 Orders</td>
-<td class="p-4 text-right">
-<button class="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-slate-400 group-hover:text-slate-600 dark:group-hover:text-white transition-colors">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</td>
-</tr>
+
 </tbody>
 </table>
 </div>
@@ -274,5 +211,5 @@
 </div>
 </div>
 </main>
-</div>
+<script src="/adminJs/userManagement.js"></script>
 </body></html>

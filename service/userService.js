@@ -53,8 +53,13 @@ export const userLoginLogic = async (data) => {
     const { email, password } = data
     const existingUser = await User.findOne({ email });
 
+
     if (!existingUser) {
         throw new Error('user not found');
+    }
+
+    if(existingUser.isBlocked){
+        throw new Error('Your account has been blocked by admin')
     }
     const passwordMatch = await bcrypt.compare(password, existingUser.password);
     if (!passwordMatch) {

@@ -1,18 +1,48 @@
-import bcrypt from 'bcrypt';
+// import bcrypt from 'bcrypt';
 
-export const adminLoginService=(data)=>{
+import User from "../models/userModel.js";
 
-    const adminEmail='admin@gmail.com';
-    const adminPassword='Admin@123';
+// import Admin from '../models/adminModel';
+export const userLoad = async(filter={})=>{
+    try{
 
-    const {email,password}=data;
-    if(adminEmail!==email && adminPassword!==password){
-        throw new Error('Invalid credential')
+        let user = await User.find(filter)
+            .sort({createdAt:-1})
+        
+        if(!user){
+            return{
+                success:false,
+                message:"Error"
+            }
+        }
+        return {
+            success:true,
+            data:user
+        }
+    }catch(e){
+        console.log(e)
+        return{
+            success:false,
+            message:"Server error"
+        }
     }
-
-    return {
-        success:true
-    }
-
-    
 }
+
+export const adminLoginService=async (data)=>{
+
+    const {email,password}=data
+
+    const adminEmail= process.env.ADMIN_EMAIL;
+    const adminPassword= process.env.ADMIN_PASSWORD;
+
+    if (email !== adminEmail) {
+    throw new Error("Invalid admin email");
+    }
+
+    if (password !== adminPassword) {
+        throw new Error("Invalid admin password");
+    }
+
+    return true;
+
+};
