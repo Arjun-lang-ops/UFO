@@ -92,3 +92,34 @@ Urban Football Team
     throw error;
   }
 };
+
+export const sendEmailChangeOtp = async (to, otp) => {
+  try {
+
+    await transporter.sendMail({
+      from: `"Urban Football" <${process.env.EMAIL_USER}>`,
+      to: to,
+      subject: "Email Change Verification - Urban Football",
+
+      text: `
+Hi,
+
+You requested to change the email address of your Urban Football account.
+
+Your OTP for verifying the new email address is:
+
+${otp}
+
+This OTP is valid for 1 minute.
+
+If you did not request this change, please ignore this email.
+
+Thank you,
+Urban Football Team
+`
+    });
+
+  } catch (error) {
+    throw new Error("Email sending failed");
+  }
+};

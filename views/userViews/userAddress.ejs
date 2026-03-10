@@ -1,13 +1,12 @@
 <!DOCTYPE html>
+
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Edit Shipping Address - KickOff Gear</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -19,239 +18,260 @@
                         "background-dark": "#101922",
                     },
                     fontFamily: {
-                        "display": ["Lexend", "sans-serif"]
+                        "display": ["Lexend"]
                     },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
                 },
             },
         }
     </script>
-<style>::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #101922; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #283039; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3b4754; 
+<style>
+        body {
+            font-family: 'Lexend', sans-serif;
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display min-h-screen flex flex-col overflow-x-hidden">
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#111418] px-10 py-3 sticky top-0 z-50">
-<div class="flex items-center gap-8">
-<div class="flex items-center gap-4 text-[#111418] dark:text-white">
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-slate-200 dark:border-slate-800 px-6 md:px-10 lg:px-40 py-4 bg-background-light dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-4">
 <div class="size-8 text-primary">
-<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"></path>
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill-rule="evenodd"></path>
 </svg>
 </div>
-<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
-</div>
-<div class="hidden lg:flex items-center gap-9">
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Shop</a>
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Teams</a>
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sale</a>
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">New Arrivals</a>
-</div>
+<h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-tight">Urban Football</h2>
 </div>
 <div class="flex flex-1 justify-end gap-6 items-center">
 <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
-<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-[#d1d5db] dark:border-[#3b4754] bg-white dark:bg-[#283039] overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all">
-<div class="text-[#6b7280] dark:text-[#9dabb9] flex items-center justify-center pl-4 bg-transparent">
-<span class="material-symbols-outlined text-[20px]">search</span>
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-200/50 dark:bg-slate-800">
+<div class="text-slate-500 dark:text-slate-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-xl">search</span>
 </div>
-<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-none text-base font-normal leading-normal placeholder:text-[#6b7280] dark:placeholder:text-[#9dabb9] px-4 py-2 border-none bg-transparent focus:outline-none focus:ring-0 text-[#111418] dark:text-white" placeholder="Search gear..." value=""/>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent focus:ring-0 text-sm font-normal placeholder:text-slate-500 dark:placeholder:text-slate-400" placeholder="Search gear..." value=""/>
 </div>
 </label>
-<div class="flex gap-2">
-<button class="flex size-10 items-center justify-center rounded-lg hover:bg-[#f3f4f6] dark:hover:bg-[#283039] transition-colors">
-<span class="material-symbols-outlined text-[#111418] dark:text-white text-[24px]">shopping_cart</span>
+<div class="flex gap-4">
+<button class="flex size-10 items-center justify-center rounded-lg bg-slate-200/50 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">shopping_cart</span>
 </button>
-<a href="/profile">
-    <button class="flex size-10 items-center justify-center rounded-lg hover:bg-[#f3f4f6] dark:hover:bg-[#283039] transition-colors relative">
-<span class="material-symbols-outlined text-[#111418] dark:text-white text-[24px]">account_circle</span>
-<div class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></div>
+<button class="flex size-10 items-center justify-center rounded-lg bg-slate-200/50 dark:bg-slate-800 text-slate-900 dark:text-white hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
 </button>
-</a>
+</div>
+<div class="size-10 rounded-full bg-primary/20 border-2 border-primary overflow-hidden">
+<img class="size-full object-cover" data-alt="User profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBVbYbeHgfcPaBqlryRdW-hja6wQtUzCm2n1ZTDPVUWWJquwEXJpo8cJZxcNn-p12UJjiheKFrvBgs8rujUyQnamYASWFT-H_oH_tXtzNR0iQ_gCzM3Qr4r4hVmy4NjVi93lWR_7cohOZRQ6ZnfcPBnw7soLwosKP_Wf_Bq97El45iS-gpbgT2YUtwEW0smZFkPP-RwJgUUg5gEjBy-27OeQfUBB245LYrcifYmrM3qrLtRf5NgA7gvLMwKr5yHMaUTd4rQygU8dzA"/>
 </div>
 </div>
 </header>
-<main class="flex-1 flex justify-center py-10 px-4 md:px-10">
-<div class="layout-content-container flex flex-col max-w-[960px] flex-1 w-full gap-8">
-<nav class="flex flex-wrap gap-2 text-sm">
-<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary transition-colors font-medium" href="#">Home</a>
-<span class="text-[#6b7280] dark:text-[#9dabb9] font-medium">/</span>
-<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary transition-colors font-medium" href="#">My Account</a>
-<span class="text-[#6b7280] dark:text-[#9dabb9] font-medium">/</span>
-<span class="text-[#111418] dark:text-white font-medium">Edit Shipping Address</span>
+<main class="flex-grow flex justify-center py-10 px-6 md:px-10 lg:px-40">
+<div class="layout-content-container flex flex-col md:flex-row gap-8 w-full max-w-[1200px]">
+<aside class="w-full md:w-64 flex flex-col gap-6 shrink-0">
+<div class="flex flex-col bg-slate-200/20 dark:bg-slate-800/40 rounded-xl p-2">
+<div class="px-4 py-3 mb-2">
+<h3 class="text-slate-900 dark:text-white font-bold">My Account</h3>
+<p class="text-slate-500 dark:text-slate-400 text-xs">Manage your profile</p>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="/profile">
+<span class="material-symbols-outlined">person</span>
+<span class="text-sm font-medium">Personal Info</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">package_2</span>
+<span class="text-sm font-medium">My Orders</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-white transition-all" href="#">
+<span class="material-symbols-outlined font-fill">location_on</span>
+<span class="text-sm font-medium">Addresses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="text-sm font-medium">Wallet</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="text-sm font-medium">Wishlist</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined">card_giftcard</span>
+<span class="text-sm font-medium">Refer and Earn</span>
+</a>
+<div class="border-t border-slate-200 dark:border-slate-800 my-2"></div>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500/10 transition-all" href="/logout">
+<span class="material-symbols-outlined">logout</span>
+<span class="text-sm font-medium">Sign Out</span>
+</a>
 </nav>
-<div class="flex flex-col md:flex-row md:justify-between md:items-end gap-4 border-b border-[#e5e7eb] dark:border-[#283039] pb-6">
-<div class="flex flex-col gap-2">
-<h1 class="text-[#111418] dark:text-white text-[32px] font-bold leading-tight">Edit Shipping Address</h1>
-<p class="text-[#6b7280] dark:text-[#9dabb9] text-base">Make changes to your delivery destination.</p>
 </div>
-<div class="hidden md:flex items-center gap-2 text-[#6b7280] dark:text-[#9dabb9] text-sm">
-<span class="material-symbols-outlined text-[18px]">lock</span>
-<span>Secure SSL Connection</span>
-</div>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-<div class="lg:col-span-8 flex flex-col gap-6">
-<form class="flex flex-col gap-6 bg-white dark:bg-[#1c2127] p-6 md:p-8 rounded-xl border border-[#e5e7eb] dark:border-[#283039] shadow-sm">
-<div class="flex flex-col gap-1">
-<h3 class="text-lg font-bold text-[#111418] dark:text-white">Contact Information</h3>
-<p class="text-sm text-[#6b7280] dark:text-[#9dabb9]">Who should we deliver this to?</p>
-</div>
-<div class="grid grid-cols-1 gap-4">
-<label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Full Name <span class="text-red-500">*</span></span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="fullName" placeholder="e.g. Alex Morgan" type="text" required/>
-</label>
-</div>
-<div class="h-px bg-[#e5e7eb] dark:bg-[#283039] my-2"></div>
-<div class="flex flex-col gap-1">
-<h3 class="text-lg font-bold text-[#111418] dark:text-white">Address</h3>
-<p class="text-sm text-[#6b7280] dark:text-[#9dabb9]">Enter your full delivery address.</p>
+</aside>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+
+<% if(addresses.length > 0){ %>
+
+    <% addresses.forEach(address => { %>
+
+    <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-6 flex flex-col justify-between group hover:border-primary/50 transition-all">
+        
+        <div>
+            <div class="flex items-center justify-between mb-4">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">home</span>
+                    <span class="text-slate-900 dark:text-white font-bold text-lg">
+                        Address
+                    </span>
+
+                    <% if(address.isDefault){ %>
+                        <span class="bg-primary/10 text-primary text-[10px] uppercase font-bold px-2 py-0.5 rounded ml-2">
+                            Default
+                        </span>
+                    <% } %>
+
+                </div>
+            </div>
+
+            <div class="space-y-1">
+                <p class="text-slate-900 dark:text-slate-100 font-medium">
+                    <%= address.fullname %>
+                </p>
+
+                <p class="text-slate-500 dark:text-slate-400 text-sm leading-relaxed">
+                    <%= address.street %>, <%= address.apartment %> <br>
+                    <%= address.state %> - <%= address.pincode %> <br>
+                    <%= address.country %>
+                </p>
+
+                <div class="flex items-center gap-2 mt-4 text-slate-500 dark:text-slate-400">
+                    <span class="material-symbols-outlined text-sm">call</span>
+                    <span class="text-sm"><%= address.phone %></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 mt-6 pt-4 border-t border-slate-200 dark:border-slate-800">
+
+            <a href="/profile/address/edit/<%= address._id %>">
+                <button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors text-xs font-semibold">
+                    <span class="material-symbols-outlined text-sm">edit</span>
+                    Edit
+                </button>
+            </a>
+
+            <button 
+                data-id="<%= address._id %>"
+                class="delete-address flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-red-500 hover:bg-red-500/10 transition-colors text-xs font-semibold">
+                <span class="material-symbols-outlined text-sm">delete</span>
+                Remove
+            </button>
+
+        </div>
+
+    </div>
+
+    <% }) %>
+
+<% } else { %>
+
+<div class="col-span-2 text-center py-10 text-slate-500">
+    No addresses saved yet
 </div>
 
-<!-- Phone Number (moved from Contact Info) -->
-<label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Phone Number <span class="text-red-500">*</span></span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="phone" placeholder="e.g. +91 98765 43210" type="tel" required/>
-</label>
+<% } %>
 
-<!-- Country -->
-<label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Country <span class="text-red-500">*</span></span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="country" placeholder="e.g. India" type="text" required/>
-</label>
-
-<!-- Street Address & Apartment -->
-<div class="flex flex-col gap-4">
-<label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Street Address <span class="text-red-500">*</span></span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="street" placeholder="e.g. 45 MG Road, Sector 12" type="text" required/>
-</label>
-<label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Apartment / Suite <span class="text-[#9ca3af] font-normal text-xs">(optional)</span></span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="apartment" placeholder="e.g. Apt 4B, Tower C (optional)" type="text"/>
-</label>
 </div>
 
-<!-- City, State, Pincode -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">City <span class="text-red-500">*</span></span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="city" placeholder="e.g. Mumbai" type="text" required/>
-</label>
-<label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">State / Province <span class="text-red-500">*</span></span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="state" placeholder="e.g. Maharashtra" type="text" required/>
-</label>
-<label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">Zip / Postal Code <span class="text-red-500">*</span></span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" name="pincode" placeholder="e.g. 400001" type="text" required/>
-</label>
-</div>
-<label class="flex items-center gap-3 cursor-pointer mt-2 group select-none">
-<div class="relative flex items-center">
-<input checked="" class="peer h-5 w-5 cursor-pointer appearance-none rounded border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] checked:border-primary checked:bg-primary transition-all" type="checkbox" name="isDefault" value="true"/>
-<span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-white opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
-</div>
-<span class="text-[#111418] dark:text-white text-base font-normal group-hover:text-primary transition-colors">Set as default shipping address</span>
-</label>
-<div class="flex flex-col-reverse md:flex-row gap-4 mt-4 pt-4 border-t border-[#e5e7eb] dark:border-[#283039]">
-<button class="flex-1 h-12 flex items-center justify-center rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-transparent hover:bg-[#f3f4f6] dark:hover:bg-[#283039] text-[#111418] dark:text-white text-base font-bold transition-all" type="button">
-                                Cancel
-                            </button>
-<button class="flex-1 h-12 flex items-center justify-center rounded-lg bg-primary hover:bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-500/30 transition-all" type="submit">
-                                Save Address
-                            </button>
-</div>
-</form>
-</div>
-<div class="lg:col-span-4 flex flex-col gap-6">
-<div class="bg-white dark:bg-[#1c2127] rounded-xl overflow-hidden border border-[#e5e7eb] dark:border-[#283039] shadow-sm">
-<div class="relative h-48 w-full bg-[#283039] overflow-hidden group">
-<div class="absolute inset-0 bg-gradient-to-br from-[#1c2127] to-[#283039] flex items-center justify-center" data-alt="Abstract map representation showing location pin on a dark grid" data-location="New York, NY" style="https://lh3.googleusercontent.com/aida-public/AB6AXuCeSWTg5RA0k0J0zvYZ77iK_uAcnromkTKyvA8_8vh0z6YLyhnhjPYobAh1R4gbMP8zHhe059_wOMHVBaAJez0NT-WivzYkwmwTUcr0gH4HEBz8WBi7AbQKNp9t4vPAn3tbsTiBS0KuniEoP1VEWMqCnM0ZRMDtTCp5GinQ3K3Awm-i1PqRY5xmS_3_sICfQ5xBrrHHwuCMz_kuynC6pKyNw_2EJSO7eY6dz-2eyHNc8O72SLOhbQVvZd8j1gZR8_4tsYGyyrfUcD8">
-<div class="relative flex items-center justify-center">
-<div class="absolute w-24 h-24 bg-primary/20 rounded-full animate-ping"></div>
-<span class="material-symbols-outlined text-primary text-[48px] drop-shadow-lg z-10">location_on</span>
-</div>
-</div>
-</div>
-<div class="p-5 flex flex-col gap-3">
-<div class="flex items-start gap-3">
-<div class="bg-primary/10 p-2 rounded-lg text-primary mt-1">
-<span class="material-symbols-outlined text-[20px]">local_shipping</span>
-</div>
-<div>
-<h4 class="text-[#111418] dark:text-white font-bold text-sm">Fast Shipping Available</h4>
-<p class="text-[#6b7280] dark:text-[#9dabb9] text-xs mt-1">Most locations in this region qualify for 2-day delivery.</p>
-</div>
-</div>
-<div class="h-px bg-[#e5e7eb] dark:bg-[#283039] w-full"></div>
-<div class="flex items-start gap-3">
-<div class="bg-primary/10 p-2 rounded-lg text-primary mt-1">
-<span class="material-symbols-outlined text-[20px]">verified_user</span>
-</div>
-<div>
-<h4 class="text-[#111418] dark:text-white font-bold text-sm">Secure Data</h4>
-<p class="text-[#6b7280] dark:text-[#9dabb9] text-xs mt-1">Your address details are encrypted and stored securely.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="flex flex-col gap-3">
-<h3 class="text-[#111418] dark:text-white font-bold text-lg px-1">Your Saved Addresses</h3>
-<div class="group flex items-center justify-between p-4 rounded-xl border border-primary/50 bg-primary/5 dark:bg-primary/10 transition-all cursor-pointer">
-<div class="flex items-center gap-3">
-<div class="bg-primary h-10 w-10 rounded-full flex items-center justify-center text-white">
-<span class="material-symbols-outlined">home</span>
-</div>
-<div class="flex flex-col">
-<span class="text-[#111418] dark:text-white text-sm font-bold">Home (Current)</span>
-<span class="text-[#6b7280] dark:text-[#9dabb9] text-xs">45 Soccer Ln, New York...</span>
-</div>
-</div>
-<span class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
-</div>
-<div class="group flex items-center justify-between p-4 rounded-xl border border-transparent hover:border-[#e5e7eb] dark:hover:border-[#3b4754] hover:bg-white dark:hover:bg-[#1c2127] transition-all cursor-pointer">
-<div class="flex items-center gap-3">
-<div class="bg-[#e5e7eb] dark:bg-[#283039] h-10 w-10 rounded-full flex items-center justify-center text-[#6b7280] dark:text-[#9dabb9] group-hover:text-primary transition-colors">
-<span class="material-symbols-outlined">work</span>
-</div>
-<div class="flex flex-col">
-<span class="text-[#111418] dark:text-white text-sm font-bold">Office</span>
-<span class="text-[#6b7280] dark:text-[#9dabb9] text-xs">88 League Blvd, London...</span>
-</div>
-</div>
-<span class="material-symbols-outlined text-[#6b7280] dark:text-[#9dabb9] text-[20px]">edit</span>
-</div>
-</div>
 </div>
 </div>
 </div>
 </main>
-<footer class="border-t border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#111418] py-8 mt-auto">
-<div class="layout-content-container max-w-[960px] mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="text-[#6b7280] dark:text-[#9dabb9] text-sm">© 2023 KickOff Gear. All rights reserved.</p>
-<div class="flex gap-6">
-<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary text-sm transition-colors" href="#">Privacy Policy</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary text-sm transition-colors" href="#">Terms of Service</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary text-sm transition-colors" href="#">Help Center</a>
+<footer class="flex flex-col items-center justify-center py-12 px-6 bg-slate-100 dark:bg-background-dark border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4 mb-6">
+<div class="size-6 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M39.475 21.6262C40.358 21.4363 40.6863 21.5589 40.7581 21.5934C40.7876 21.655 40.8547 21.857 40.8082 22.3336C40.7408 23.0255 40.4502 24.0046 39.8572 25.2301C38.6799 27.6631 36.5085 30.6631 33.5858 33.5858C30.6631 36.5085 27.6632 38.6799 25.2301 39.8572C24.0046 40.4502 23.0255 40.7407 22.3336 40.8082C21.8571 40.8547 21.6551 40.7875 21.5934 40.7581C21.5589 40.6863 21.4363 40.358 21.6262 39.475C21.8562 38.4054 22.4689 36.9657 23.5038 35.2817C24.7575 33.2417 26.5497 30.9744 28.7621 28.762C30.9744 26.5497 33.2417 24.7574 35.2817 23.5037C36.9657 22.4689 38.4054 21.8562 39.475 21.6262ZM4.41189 29.2403L18.7597 43.5881C19.8813 44.7097 21.4027 44.9179 22.7217 44.7893C24.0585 44.659 25.5148 44.1631 26.9723 43.4579C29.9052 42.0387 33.2618 39.5667 36.4142 36.4142C39.5667 33.2618 42.0387 29.9052 43.4579 26.9723C44.1631 25.5148 44.659 24.0585 44.7893 22.7217C44.9179 21.4027 44.7097 19.8813 43.5881 18.7597L29.2403 4.41187C27.8527 3.02428 25.8765 3.02573 24.2861 3.36776C22.6081 3.72863 20.7334 4.58419 18.8396 5.74801C16.4978 7.18716 13.9881 9.18353 11.5858 11.5858C9.18354 13.988 7.18717 16.4978 5.74802 18.8396C4.58421 20.7334 3.72865 22.6081 3.36778 24.2861C3.02574 25.8765 3.02429 27.8527 4.41189 29.2403Z" fill-rule="evenodd"></path>
+</svg>
 </div>
+<h2 class="text-slate-900 dark:text-white font-bold text-lg">Urban Football</h2>
 </div>
+<div class="flex gap-6 mb-8 text-slate-500 dark:text-slate-400">
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">social_leaderboard</span></a>
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">camera</span></a>
+<a class="hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-xs">© 2024 Urban Football Ecommerce. All rights reserved.</p>
 </footer>
+</div>
 
+    <!-- Add Address Modal -->
+    <div id="addAddressModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/50 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="bg-white dark:bg-background-dark border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95 transition-transform duration-300">
+            <div class="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md">
+                <h3 class="text-slate-900 dark:text-white text-xl font-bold tracking-tight">Add New Address</h3>
+                <button type="button" id="closeAddAddressModal" class="text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 p-2 rounded-full transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-6">
+                <form id="addAddressForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label for="fullname" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Full Name</label>
+                            <input type="text" id="fullname" name="fullname" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none dark:text-white" placeholder="John Doe">
+                            <p class="text-red-500 text-xs mt-1 hidden" id="fullnameError"></p>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="phone" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none dark:text-white" placeholder="+1 234 567 8900">
+                            <p class="text-red-500 text-xs mt-1 hidden" id="phoneError"></p>
+                        </div>
+                        <div class="space-y-2 md:col-span-2">
+                            <label for="street" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Street Address</label>
+                            <input type="text" id="street" name="street" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none dark:text-white" placeholder="123 Main St">
+                            <p class="text-red-500 text-xs mt-1 hidden" id="streetError"></p>
+                        </div>
+                        <div class="space-y-2 md:col-span-2">
+                            <label for="apartment" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Apartment, suite, etc.</label>
+                            <input type="text" id="apartment" name="apartment" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none dark:text-white" placeholder="Apt 4B ">
+                            <p class="text-red-500 text-xs mt-1 hidden" id="apartmentError"></p>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="state" class="text-sm font-semibold text-slate-700 dark:text-slate-300">State / Province</label>
+                            <input type="text" id="state" name="state" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none dark:text-white" placeholder="New York">
+                            <p class="text-red-500 text-xs mt-1 hidden" id="stateError"></p>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="country" class="text-sm font-semibold text-slate-700 dark:text-slate-300">Country</label>
+                            <input type="text" id="country" name="country" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none dark:text-white" placeholder="United States">
+                            <p class="text-red-500 text-xs mt-1 hidden" id="countryError"></p>
+                        </div>
+                        <div class="space-y-2">
+                            <label for="pincode" class="text-sm font-semibold text-slate-700 dark:text-slate-300">ZIP / Pincode</label>
+                            <input type="text" id="pincode" name="pincode" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-lg px-4 py-2.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none dark:text-white" placeholder="10001">
+                            <p class="text-red-500 text-xs mt-1 hidden" id="pincodeError"></p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 pt-4">
+                        <input type="checkbox" id="isDefault" name="isDefault" class="size-4 rounded border-slate-300 dark:border-slate-700 text-primary focus:ring-primary">
+                        <label for="isDefault" class="text-sm text-slate-700 dark:text-slate-300">Set as default address</label>
+                    </div>
+
+                    <div class="flex justify-end gap-4 pt-6 mt-4 border-t border-slate-200 dark:border-slate-800">
+                        <button type="button" id="cancelAddAddressBtn" class="px-6 py-2.5 rounded-lg font-semibold text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                            Cancel
+                        </button>
+                        <button type="submit" id="submitAddressBtn" class="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-lg shadow-primary/20 hover:-translate-y-0.5">
+                            <span class="btn-text">Save Address</span>
+                            <span class="btn-loader hidden material-symbols-outlined font-light animate-spin text-lg">progress_activity</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 (needed for notifications if the dev likes them, or we can just use normal DOM manipulation or window.alert, maybe we won't need it if we show errors inline) -->
+    <!-- SweetAlert2 is often used in this project, I will assume it is not globally present unless checked. We will use simple DOM updates or Sweet alert. We'll use SweetAlert 2 cdn just in case -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/addAddressValidation.js"></script>
 </body></html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Change Address - Urban Football</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for better integration with dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #101922; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #283039; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b4754; 
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display min-h-screen flex flex-col overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#111418] px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-[#111418] dark:text-white">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
+</div>
+<div class="hidden lg:flex items-center gap-9">
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Shop</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Teams</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sale</a>
+<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">New Arrivals</a>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-6 items-center">
+<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-[#d1d5db] dark:border-[#3b4754] bg-white dark:bg-[#283039] overflow-hidden focus-within:ring-2 focus-within:ring-primary focus-within:border-transparent transition-all">
+<div class="text-[#6b7280] dark:text-[#9dabb9] flex items-center justify-center pl-4 bg-transparent">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-none text-base font-normal leading-normal placeholder:text-[#6b7280] dark:placeholder:text-[#9dabb9] px-4 py-2 border-none bg-transparent focus:outline-none focus:ring-0 text-[#111418] dark:text-white" placeholder="Search gear..." value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-lg hover:bg-[#f3f4f6] dark:hover:bg-[#283039] transition-colors">
+<span class="material-symbols-outlined text-[#111418] dark:text-white text-[24px]">shopping_cart</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-lg hover:bg-[#f3f4f6] dark:hover:bg-[#283039] transition-colors relative">
+<span class="material-symbols-outlined text-[#111418] dark:text-white text-[24px]">account_circle</span>
+<div class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></div>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 flex justify-center py-10 px-4 md:px-10">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 w-full gap-8">
+<!-- Breadcrumbs -->
+<nav class="flex flex-wrap gap-2 text-sm">
+<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary transition-colors font-medium" href="/home">Home</a>
+<span class="text-[#6b7280] dark:text-[#9dabb9] font-medium">/</span>
+<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary transition-colors font-medium" href="/profile">My Account</a>
+<span class="text-[#6b7280] dark:text-[#9dabb9] font-medium">/</span>
+<span class="text-[#111418] dark:text-white font-medium">Shipping Details</span>
+</nav>
+<!-- Page Heading -->
+<div class="flex flex-col md:flex-row md:justify-between md:items-end gap-4 border-b border-[#e5e7eb] dark:border-[#283039] pb-6">
+<div class="flex flex-col gap-2">
+<h1 class="text-[#111418] dark:text-white text-[32px] font-bold leading-tight">Shipping Details</h1>
+<p class="text-[#6b7280] dark:text-[#9dabb9] text-base">Update where you want your football gear delivered.</p>
+</div>
+<div class="hidden md:flex items-center gap-2 text-[#6b7280] dark:text-[#9dabb9] text-sm">
+<span class="material-symbols-outlined text-[18px]">lock</span>
+<span>Secure SSL Connection</span>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Form -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<form class="flex flex-col gap-6 bg-white dark:bg-[#1c2127] p-6 md:p-8 rounded-xl border border-[#e5e7eb] dark:border-[#283039] shadow-sm">
+<div class="flex flex-col gap-1">
+<h3 class="text-lg font-bold text-[#111418] dark:text-white">Contact Information</h3>
+<p class="text-sm text-[#6b7280] dark:text-[#9dabb9]">Who should we deliver this to?</p>
+</div>
+<!-- Full Name & Phone Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Full Name</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="fullname" placeholder="John Doe" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Phone Number</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="phone" placeholder="9876543210" type="tel"/>
+</label>
+</div>
+<div class="h-px bg-[#e5e7eb] dark:bg-[#283039] my-2"></div>
+<div class="flex flex-col gap-1">
+<h3 class="text-lg font-bold text-[#111418] dark:text-white">Address</h3>
+</div>
+<!-- Country -->
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Country / Region</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="eg: India" id="country" type="text"/>
+</label>
+<!-- Street Address -->
+<div class="flex flex-col gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Street Address</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="street" placeholder="123 Stadium Way" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="apartment" placeholder="Apartment, suite, unit, etc." type="text"/>
+</label>
+</div>
+<!-- City, State, Zip Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">City</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="city" placeholder="eg: Kochi" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">State / Province</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="eg: Kerala" id="state" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-[#111418] dark:text-white text-sm font-medium">Zip / Pincode</span>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="pincode" placeholder="eg:10001" type="text"/>
+</label>
+</div>
+<!-- Checkbox -->
+<label class="flex items-center gap-3 cursor-pointer mt-2 group select-none">
+<div class="relative flex items-center">
+<input class="peer h-5 w-5 cursor-pointer appearance-none rounded border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] checked:border-primary checked:bg-primary transition-all" type="checkbox"/>
+<span class="material-symbols-outlined absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-[16px] text-white opacity-0 peer-checked:opacity-100 pointer-events-none">check</span>
+</div>
+<span class="text-[#111418] dark:text-white text-base font-normal group-hover:text-primary transition-colors">Set as default shipping address</span>
+</label>
+<!-- Action Buttons -->
+<div class="flex flex-col-reverse md:flex-row gap-4 mt-4 pt-4 border-t border-[#e5e7eb] dark:border-[#283039]">
+<button class="flex-1 h-12 flex items-center justify-center rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-transparent hover:bg-[#f3f4f6] dark:hover:bg-[#283039] text-[#111418] dark:text-white text-base font-bold transition-all" type="button">
+                                Cancel
+                            </button>
+<button class="flex-1 h-12 flex items-center justify-center rounded-lg bg-primary hover:bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-500/30 transition-all" type="submit">
+                                Save Address
+                            </button>
+</div>
+</form>
+</div>
+
+</main>
+<!-- Simple Footer -->
+<footer class="border-t border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#111418] py-8 mt-auto">
+<div class="layout-content-container max-w-[960px] mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[#6b7280] dark:text-[#9dabb9] text-sm">© 2023 KickOff Gear. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary text-sm transition-colors" href="#">Privacy Policy</a>
+<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary text-sm transition-colors" href="#">Terms of Service</a>
+<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary text-sm transition-colors" href="#">Help Center</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,7 +1,9 @@
-import { homePageRender, landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp, updatePassword, userAddressRender, userChangePasswordRender, userLogout, userProfileRender, getMe, forgotpasswordRender, forgotOtpRender, resetPassword, resetSendMail, resendOtpReset } from "../controller/userController.js";
+import { homePageRender, landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp, updatePassword, userChangePasswordRender, userLogout, userProfileRender, getMe, forgotpasswordRender, forgotOtpRender, resetPassword, resetSendMail, resendOtpReset } from "../controller/userController.js";
 import express from "express";
 import { isLoggedIn } from "../middlewares/userAuth.js";
 import passport from "passport";
+import { emailOtpRender, emailOtpSend, resendEmailOtp, verifyEmailOtp } from "../controller/userEmailChangeController.js";
+import { addAddressController, editAddressRender,userAddressRender } from "../controller/userAddressController.js";
 
 const router = express.Router();
 
@@ -17,6 +19,8 @@ router.get('/forgotPassword/otp/reset', resetPassword)
 
 router.get('/profile', isLoggedIn, userProfileRender)
 router.get('/profile/address', isLoggedIn, userAddressRender);
+router.get('/profile/address/edit/:id',editAddressRender)
+router.get('/profile/email-otp', isLoggedIn, emailOtpRender);
 router.get('/profile/changePassword', isLoggedIn, userChangePasswordRender)
 router.get('/logout', userLogout)
 
@@ -37,6 +41,10 @@ router.post('/resend-otp', resendOtp);
 router.post('/login', loginUser)
 router.post('/forgotPassword', resetSendMail);
 router.post('/resend-forgot-otp', resendOtpReset);
+router.post('/profile/change-email', emailOtpSend);
+router.post('/profile/email-otp', verifyEmailOtp);
+router.post('/profile/resend-email-otp', resendEmailOtp);
+router.post('/profile/address/add',addAddressController)
 
 
 
