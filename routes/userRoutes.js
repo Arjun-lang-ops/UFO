@@ -1,16 +1,16 @@
 import { homePageRender, landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp, updatePassword, userChangePasswordRender, userLogout, userProfileRender, getMe, forgotpasswordRender, forgotOtpRender, resetPassword, resetSendMail, resendOtpReset } from "../controller/userController.js";
 import express from "express";
-import { isLoggedIn } from "../middlewares/userAuth.js";
+import { isLoggedIn, isLoggedOut } from "../middlewares/userAuth.js";
 import passport from "passport";
 import { emailOtpRender, emailOtpSend, resendEmailOtp, verifyEmailOtp } from "../controller/userEmailChangeController.js";
-import { addAddressController, editAddressRender,userAddressRender } from "../controller/userAddressController.js";
+import { addAddressController, editAddressRender,userAddressRender,removeAddressController, updateAddressController } from "../controller/userAddressController.js";
 
 const router = express.Router();
 
 
 router.get('/', landingPageRender)
-router.get('/register', registerRender);
-router.get('/login', loginRender);
+router.get('/register',isLoggedOut, registerRender);
+router.get('/login',isLoggedOut, loginRender);
 router.get('/home', isLoggedIn, homePageRender);
 router.get('/otp', registerOtp);
 router.get('/forgotPassword', forgotpasswordRender)
@@ -19,7 +19,7 @@ router.get('/forgotPassword/otp/reset', resetPassword)
 
 router.get('/profile', isLoggedIn, userProfileRender)
 router.get('/profile/address', isLoggedIn, userAddressRender);
-router.get('/profile/address/edit/:id',editAddressRender)
+router.get('/profile/address/edit/:id',isLoggedIn,editAddressRender)
 router.get('/profile/email-otp', isLoggedIn, emailOtpRender);
 router.get('/profile/changePassword', isLoggedIn, userChangePasswordRender)
 router.get('/logout', userLogout)
@@ -47,8 +47,9 @@ router.post('/profile/resend-email-otp', resendEmailOtp);
 router.post('/profile/address/add',addAddressController)
 
 
-
-router.put('/profile/update-password', updatePassword)
+router.put('/profile/address/update/:id',updateAddressController)
+router.put('/profile/update-password', updatePassword);
+router.delete('/profile/address/remove/:id',removeAddressController)
 
 
 

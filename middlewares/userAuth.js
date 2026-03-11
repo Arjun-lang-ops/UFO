@@ -4,3 +4,10 @@ export const isLoggedIn = (req, res, next) => {
   }
   next();
 };
+
+export const isLoggedOut=(req,res,next)=>{
+  if(req.session.user){
+    return res.redirect('/home');
+  }
+  next();
+}

@@ -193,20 +193,61 @@
 </div>
 <!-- Pagination -->
 <div class="flex items-center justify-between p-4 bg-slate-50 dark:bg-[#111418] rounded-b-xl">
-<p class="text-sm text-slate-500 dark:text-[#9dabb9]">Showing 1-10 of 12,840 users</p>
-<div class="flex gap-1">
-<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-slate-400 transition-colors">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<button class="h-8 w-8 rounded bg-primary text-white text-sm font-bold">1</button>
-<button class="h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-medium">2</button>
-<button class="h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-medium">3</button>
-<span class="px-2 text-slate-400">...</span>
-<button class="h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-medium">1284</button>
-<button class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-slate-400 transition-colors">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</div>
+  <p class="text-sm text-slate-500 dark:text-[#9dabb9]">
+    Showing <%= (currentPage - 1) * limit + 1 %>–<%= Math.min(currentPage * limit, totalUsers) %> of <%= totalUsers %> users
+  </p>
+  <div class="flex gap-1 items-center">
+
+    <%# Previous button %>
+    <% if (currentPage > 1) { %>
+      <a href="/admin/userManagement?page=<%= currentPage - 1 %>" class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-slate-400 transition-colors">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </a>
+    <% } else { %>
+      <span class="flex items-center justify-center h-8 w-8 rounded text-slate-300 dark:text-slate-600 cursor-not-allowed">
+        <span class="material-symbols-outlined">chevron_left</span>
+      </span>
+    <% } %>
+
+    <%# Page number buttons with smart ellipsis %>
+    <%
+      // Build the set of page numbers to display
+      let pagesToShow = [];
+      if (totalPages <= 7) {
+        for (let i = 1; i <= totalPages; i++) pagesToShow.push(i);
+      } else {
+        pagesToShow.push(1);
+        if (currentPage > 3) pagesToShow.push('...');
+        let start = Math.max(2, currentPage - 1);
+        let end   = Math.min(totalPages - 1, currentPage + 1);
+        for (let i = start; i <= end; i++) pagesToShow.push(i);
+        if (currentPage < totalPages - 2) pagesToShow.push('...');
+        pagesToShow.push(totalPages);
+      }
+    %>
+
+    <% pagesToShow.forEach(p => { %>
+      <% if (p === '...') { %>
+        <span class="px-1 text-slate-400 dark:text-slate-500 text-sm">…</span>
+      <% } else if (p === currentPage) { %>
+        <span class="h-8 w-8 rounded bg-primary text-white text-sm font-bold flex items-center justify-center"><%= p %></span>
+      <% } else { %>
+        <a href="/admin/userManagement?page=<%= p %>" class="h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-medium flex items-center justify-center transition-colors"><%= p %></a>
+      <% } %>
+    <% }) %>
+
+    <%# Next button %>
+    <% if (currentPage < totalPages) { %>
+      <a href="/admin/userManagement?page=<%= currentPage + 1 %>" class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-slate-400 transition-colors">
+        <span class="material-symbols-outlined">chevron_right</span>
+      </a>
+    <% } else { %>
+      <span class="flex items-center justify-center h-8 w-8 rounded text-slate-300 dark:text-slate-600 cursor-not-allowed">
+        <span class="material-symbols-outlined">chevron_right</span>
+      </span>
+    <% } %>
+
+  </div>
 </div>
 </div>
 </div>

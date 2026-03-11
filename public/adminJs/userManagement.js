@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Select all 'more_vert' buttons in the user table
-   
+
     const optionsButtons = document.querySelectorAll('.material-symbols-outlined');
 
     // We only want the ones in the table rows
@@ -66,41 +66,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Handle the action click
             actionBtn.addEventListener('click', async (e) => {
-    e.stopPropagation();
+                e.stopPropagation();
 
-    const tr = button.closest('tr');
-    const userId = tr.dataset.userId;
+                const tr = button.closest('tr');
+                const userId = tr.dataset.userId;
 
-    try {
+                try {
 
-        const response = await fetch(`/admin/block-user/${userId}`, {
-            method: "PATCH",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body:JSON.stringify({
+                    const response = await fetch(`/admin/block-user/${userId}`, {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({
 
-                userId
-            })
-        });
+                            userId
+                        })
+                    });
 
-        const data = await response.json();
-console.log(data)
-        if (data.success) {
+                    const data = await response.json();
+                    console.log(data)
+                    if (data.success) {
 
-            window.location.href = data.redirect
+                        window.location.href = data.redirect
 
-        } else {
-            alert("Failed to update user status");
-        }
+                    } else {
+                        alert("Failed to update user status");
+                    }
 
-    } catch (error) {
-        console.error("Error:", error);
-    }
+                } catch (error) {
+                    console.error("Error:", error);
+                }
 
-    dropdown.remove();
-    activeDropdown = null;
-});
+                dropdown.remove();
+                activeDropdown = null;
+            });
 
             td.appendChild(dropdown);
             dropdown.sourceButton = button;

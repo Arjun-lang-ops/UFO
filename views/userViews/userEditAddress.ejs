@@ -117,7 +117,7 @@
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 <!-- Left Column: Form -->
 <div class="lg:col-span-8 flex flex-col gap-6">
-<form class="flex flex-col gap-6 bg-white dark:bg-[#1c2127] p-6 md:p-8 rounded-xl border border-[#e5e7eb] dark:border-[#283039] shadow-sm">
+<form id="editAddressForm" class="flex flex-col gap-6 bg-white dark:bg-[#1c2127] p-6 md:p-8 rounded-xl border border-[#e5e7eb] dark:border-[#283039] shadow-sm">
 <div class="flex flex-col gap-1">
 <h3 class="text-lg font-bold text-[#111418] dark:text-white">Contact Information</h3>
 <p class="text-sm text-[#6b7280] dark:text-[#9dabb9]">Who should we deliver this to?</p>
@@ -126,11 +126,11 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 <label class="flex flex-col gap-2">
 <span class="text-[#111418] dark:text-white text-sm font-medium">Full Name</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="fullname" placeholder="John Doe" type="text"/>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="fullname" name="fullname" placeholder="John Doe" type="text" value="<%=address.fullname %>"/>
 </label>
 <label class="flex flex-col gap-2">
 <span class="text-[#111418] dark:text-white text-sm font-medium">Phone Number</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="phone" placeholder="9876543210" type="tel"/>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="phone" name="phone" placeholder="9876543210" type="tel" value="<%=address.phone %>"/>
 </label>
 </div>
 <div class="h-px bg-[#e5e7eb] dark:bg-[#283039] my-2"></div>
@@ -140,31 +140,28 @@
 <!-- Country -->
 <label class="flex flex-col gap-2">
 <span class="text-[#111418] dark:text-white text-sm font-medium">Country / Region</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="eg: India" id="country" type="text"/>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="eg: India" id="country" name="country" type="text" value="<%=address.country%>"/>
 </label>
 <!-- Street Address -->
 <div class="flex flex-col gap-4">
 <label class="flex flex-col gap-2">
 <span class="text-[#111418] dark:text-white text-sm font-medium">Street Address</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="street" placeholder="123 Stadium Way" type="text"/>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="street" placeholder="123 Stadium Way" name="street" value="<%=address.street%>" type="text"/>
 </label>
 <label class="flex flex-col gap-2">
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="apartment" placeholder="Apartment, suite, unit, etc." type="text"/>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="apartment" placeholder="Apartment, suite, unit, etc." name="apartrment" value="<%=address.apartment%>" type="text"/>
 </label>
 </div>
 <!-- City, State, Zip Row -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-<label class="flex flex-col gap-2">
-<span class="text-[#111418] dark:text-white text-sm font-medium">City</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="city" placeholder="eg: Kochi" type="text"/>
-</label>
+ 
 <label class="flex flex-col gap-2">
 <span class="text-[#111418] dark:text-white text-sm font-medium">State / Province</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="eg: Kerala" id="state" type="text"/>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" placeholder="eg: Kerala" id="state" name="state" value="<%=address.state%>" type="text"/>
 </label>
 <label class="flex flex-col gap-2">
 <span class="text-[#111418] dark:text-white text-sm font-medium">Zip / Pincode</span>
-<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="pincode" placeholder="eg:10001" type="text"/>
+<input class="w-full h-12 rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-[#f9fafb] dark:bg-[#111418] px-4 text-base text-[#111418] dark:text-white placeholder:text-[#9ca3af] dark:placeholder:text-[#64748b] focus:border-primary focus:ring-1 focus:ring-primary focus:outline-none transition-all" id="pincode" placeholder="eg:10001" name="pincode" value="<%=address.pincode%>" type="text"/>
 </label>
 </div>
 <!-- Checkbox -->
@@ -177,12 +174,24 @@
 </label>
 <!-- Action Buttons -->
 <div class="flex flex-col-reverse md:flex-row gap-4 mt-4 pt-4 border-t border-[#e5e7eb] dark:border-[#283039]">
-<button class="flex-1 h-12 flex items-center justify-center rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-transparent hover:bg-[#f3f4f6] dark:hover:bg-[#283039] text-[#111418] dark:text-white text-base font-bold transition-all" type="button">
-                                Cancel
-                            </button>
-<button class="flex-1 h-12 flex items-center justify-center rounded-lg bg-primary hover:bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-500/30 transition-all" type="submit">
-                                Save Address
-                            </button>
+
+    <!-- Cancel Button -->
+    <div class="flex-1">
+        <a href="/profile/address"
+           class="w-full h-12 flex items-center justify-center rounded-lg border border-[#d1d5db] dark:border-[#3b4754] bg-transparent hover:bg-[#f3f4f6] dark:hover:bg-[#283039] text-[#111418] dark:text-white text-base font-bold transition-all">
+           Cancel
+        </a>
+    </div>
+
+    <!-- Save Button -->
+    <div class="flex-1">
+        <button
+        class="w-full h-12 flex items-center justify-center rounded-lg bg-primary hover:bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-500/30 transition-all"
+        type="submit">
+        Save Changes
+        </button>
+    </div>
+
 </div>
 </form>
 </div>
@@ -199,4 +208,33 @@
 </div>
 </div>
 </footer>
-</body></html>
+</body>
+<script>
+    document.getElementById("editAddressForm").addEventListener("submit", async function(e){
+
+    e.preventDefault();
+
+    const formData = new FormData(this);
+
+    const data = Object.fromEntries(formData);
+
+    const addressId = "<%= address._id %>";
+
+    const res = await fetch(`/profile/address/update/${addressId}`,{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if(result.success){
+        window.location.href="/profile/address";
+    }else{
+        alert(result.message);
+    }
+
+});
+</script></html>

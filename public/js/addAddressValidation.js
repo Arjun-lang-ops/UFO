@@ -244,3 +244,69 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+        // Helper to open the Add Address modal
+        function openAddAddressModal() {
+            const modal = document.getElementById('addAddressModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            // Trigger animation
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modal.querySelector('[class*="scale-95"]')?.classList.remove('scale-95');
+            }, 10);
+        }
+
+        // Permanent "Add New Address" button (top right)
+        document.getElementById('openAddAddressModal')?.addEventListener('click', openAddAddressModal);
+
+        // Empty-state "Add New Address" button
+        document.getElementById('openAddAddressModalEmpty')?.addEventListener('click', openAddAddressModal);
+
+        let addressToDelete = null;
+
+        // Open modal on Remove click
+        document.querySelectorAll('.delete-address').forEach(btn => {
+            btn.addEventListener('click', function () {
+                addressToDelete = this.dataset.id;
+                document.getElementById('deleteModal').classList.remove('hidden');
+                document.getElementById('deleteModal').classList.add('flex');
+            });
+        });
+
+        // No button — close modal
+        document.getElementById('noBtn').addEventListener('click', function () {
+            document.getElementById('deleteModal').classList.add('hidden');
+            document.getElementById('deleteModal').classList.remove('flex');
+            addressToDelete = null;
+        });
+
+        // Yes button — AJAX delete
+        document.getElementById('yesBtn').addEventListener('click', async function () {
+            if (!addressToDelete) return;
+
+            document.getElementById('deleteModal').classList.add('hidden');
+            document.getElementById('deleteModal').classList.remove('flex');
+
+            try {
+                const res = await fetch(`/profile/address/remove/${addressToDelete}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    // Remove the card from the DOM
+                    const card = document.querySelector(`button[data-id="${addressToDelete}"]`)?.closest('[class*="rounded-xl"]');
+                    if (card) card.remove();
+                    Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: 'Address removed', showConfirmButton: false, timer: 2500 });
+                } else {
+                    Swal.fire({ toast: true, position: 'top-end', icon: 'error', title: data.message || 'Failed to remove', showConfirmButton: false, timer: 2500 });
+                }
+            } catch (err) {
+                Swal.fire({ toast: true, position: 'top-end', icon: 'error', title: 'Something went wrong', showConfirmButton: false, timer: 2500 });
+            }
+
+            addressToDelete = null;
+        });
+    

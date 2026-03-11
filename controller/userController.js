@@ -215,7 +215,7 @@ export const updatePassword = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message
+      message:'Password changed successfully'
 
     })
 

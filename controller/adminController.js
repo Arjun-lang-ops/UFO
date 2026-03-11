@@ -1,5 +1,5 @@
 
-import { adminLoginService, userLoad } from "../service/adminService.js";
+import { adminLoginService, userLoad, userLoadPaginated} from "../service/adminService.js";
 import User from "../models/userModel.js";
 
 export const adminLoginRender=(req,res)=>{
@@ -11,14 +11,22 @@ export const adminHomeRender=(req,res)=>{
 }
 
 export const adminUserManagement = async(req,res)=>{
-     let user = await userLoad({})
-     console.log(user)
-     if(!user.success){
-          return res.redirect('/admin')
+     const page  = parseInt(req.query.page) || 1;
+     const limit = 4;
+
+     const result = await userLoadPaginated({ page, limit });
+
+     if(!result.success){
+          return res.redirect('/admin');
      }
+
      return res.render('adminViews/adminUserManagement',{
-          data:user.data
-     })
+          data:       result.data,
+          totalPages: result.totalPages,
+          currentPage:result.currentPage,
+          totalUsers: result.totalUsers,
+          limit
+     });
 }
 
 export const adminLogin=async(req,res)=>{
@@ -71,6 +79,20 @@ export const toggleBlockUser=async(req,res)=>{
           
      }
 }
+
+export const searchUsers = async (req, res) => {
+     try {
+          const q = req.query.q || '';
+          const result = await searchUsersService(q);
+          if (!result.success) {
+               return res.json({ success: false, data: [] });
+          }
+          return res.json({ success: true, data: result.data });
+     } catch (error) {
+          console.log(error);
+          return res.status(500).json({ success: false, data: [] });
+     }
+};
 
 export const logoutAdmin=(req,res)=>{
      req.session.destroy((err)=>{

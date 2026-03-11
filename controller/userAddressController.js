@@ -1,5 +1,5 @@
 import User from "../models/userModel.js"; 
-import { addAddressLogic } from "../service/userAddressService.js";
+import { addAddressLogic, getSingleAddressService ,updateAddressService} from "../service/userAddressService.js";
 import Address from "../models/userAddressModel.js";
 
 
@@ -18,9 +18,7 @@ export const userAddressRender = async (req, res) => {
   }
 };
 
-export const editAddressRender=(req,res)=>{
-    return res.render('userViews/userEditAddress');
-}
+
 
 export const addAddressController=async(req,res)=>{
     try {
@@ -45,3 +43,68 @@ export const addAddressController=async(req,res)=>{
     }
 }
 
+export const editAddressRender=async(req,res)=>{
+
+    try {
+        const userId=req.session.user;
+        const addressId=req.params.id;
+        const address=await getSingleAddressService(userId,addressId);
+        if(!address){
+            return res.redirect('/profile/address');
+        }
+
+        return res.render('userViews/userEditAddress',{address});
+    } catch (error) {
+        console.log(error);
+        res.redirect('/profile/address')
+    }
+    
+}
+
+export const updateAddressController=async (req,res)=>{
+    try {
+        const userId=req.session.user;
+        const addressId=req.params.id;
+
+        const result=await updateAddressService(userId,addressId,req.body);
+         if (!result) {
+            return res.status(404).json({
+                success: false,
+                message: "Address not found"
+            });
+        }
+
+        res.json({
+            success: true,
+            message: "Address updated successfully"
+        });
+
+    } catch (error) {
+        console.log(error);
+
+        res.status(500).json({
+            success: false,
+            message: "Server error"
+        });
+    }
+}
+
+
+export const removeAddressController=async(req,res)=>{
+    try {
+        const userId=req.session.user;
+        const addressId=req.params.id;
+        await Address.deleteOne({user:userId,_id:addressId});
+        res.status(200).json({
+            success:true,
+            message:"Address removed successfully",
+            redirectUrl:"/profile/address"
+        });
+    } catch (error) {
+        console.log('addrressError:',error);
+        res.status(400).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
