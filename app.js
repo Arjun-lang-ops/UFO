@@ -3,70 +3,65 @@ dotenv.config();
 
 console.log("ENV CHECK:", {
   EMAIL_USER: process.env.EMAIL_USER,
-  EMAIL_PASS: process.env.EMAIL_PASS ? "LOADED" : "MISSING"
+  EMAIL_PASS: process.env.EMAIL_PASS ? "LOADED" : "MISSING",
 });
-
 
 import express from "express";
 import session from "express-session";
 import nocache from "nocache";
 import connectDB from "./config/db.js";
-import userRoutes from './routes/userRoutes.js'
-import adminRoutes from './routes/adminRoutes.js'
+import userRoutes from "./routes/userRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import passport from "./config/passport.js";
-import cors from 'cors'
-
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Database connection  
+// Database connection
 connectDB();
 
 // Middleware
-app.use(cors({
-  origin:'http://localhost:3000',
-  credentials:true
-}))
+app.use(
+  cors({
+    origin: `http://localhost:${PORT}`,
+    credentials: true,
+  }),
+);
 app.use(nocache());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.set("view engine", "ejs");
 
-
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60
-  }
-}));
-
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60,
+    },
+  }),
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-
-app.use('/',userRoutes);
-app.use('/admin',adminRoutes)
-
-
+app.use("/", userRoutes);
+app.use("/admin", adminRoutes);
 
 //error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({
     success: false,
-    message: err.message || "Internal Server Error"
+    message: err.message || "Internal Server Error",
   });
 });
 
-
 // Server
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

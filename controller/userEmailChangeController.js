@@ -57,7 +57,7 @@ export const verifyEmailOtp = async (req, res) => {
       });
     }
 
-    // Verify OTP using the standard service method
+    // Verify OTP
     await verifyOtp(newEmail, otp);
 
     await User.findByIdAndUpdate(userId, {

@@ -28,10 +28,10 @@ export const userLoad = async (filter = {}) => {
     }
 }
 
-// Paginated version — returns users for a specific page
-export const userLoadPaginated = async ({ filter = {}, page = 1, limit = 4 } = {}) => {
+// Paginated 
+export const userLoadPaginated = async ({filter={},page=1,limit=4 }={})=> {
     try {
-        const skip = (page - 1) * limit;
+        const skip = (page-1) * limit;
 
         const [users, totalUsers] = await Promise.all([
             User.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit),

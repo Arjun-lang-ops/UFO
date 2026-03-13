@@ -98,24 +98,12 @@
 <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754]">
 <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Total Users</p>
 <div class="flex items-baseline gap-2">
-<p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">12,840</p>
+<p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight"><%=totalUsers%></p>
 <p class="text-emerald-500 text-sm font-bold leading-normal">+12%</p>
 </div>
 </div>
-<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754]">
-<p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Active Users</p>
-<div class="flex items-baseline gap-2">
-<p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">8,420</p>
-<p class="text-emerald-500 text-sm font-bold leading-normal">+5%</p>
-</div>
-</div>
-<div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754]">
-<p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">New This Week</p>
-<div class="flex items-baseline gap-2">
-<p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">+156</p>
-<p class="text-emerald-500 text-sm font-bold leading-normal">+8%</p>
-</div>
-</div>
+
+
 </div>
 <!-- Action Bar & Search -->
 <div class="bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754] rounded-t-xl overflow-hidden">
@@ -128,16 +116,7 @@
 <input class="w-full bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white border-none rounded-lg h-11 pl-11 pr-4 focus:ring-2 focus:ring-primary placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm font-normal" placeholder="Search users by name or email..."/>
 </label>
 </div>
-<div class="flex items-center gap-2">
-<button class="flex items-center gap-2 bg-slate-100 dark:bg-[#283039] hover:bg-slate-200 dark:hover:bg-[#323c47] text-slate-700 dark:text-white rounded-lg h-11 px-4 text-sm font-bold transition-all">
-<span class="material-symbols-outlined text-[20px]">block</span>
-<span>Suspend Selected</span>
-</button>
-<button class="flex items-center gap-2 bg-transparent hover:bg-red-500/10 text-red-500 rounded-lg h-11 px-4 text-sm font-bold transition-all border border-red-500/20">
-<span class="material-symbols-outlined text-[20px]">delete</span>
-<span>Delete</span>
-</button>
-</div>
+
 </div>
 <!-- User Table -->
 <div class="overflow-x-auto">

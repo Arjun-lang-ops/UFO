@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         // Fallback or redirect if no email
         userEmailSpan.textContent = "unknown";
-        // window.location.href = '/register'; // Optional: Redirect back if accessed directly
+        // window.location.href = '/register'; 
     }
 
     // Timer Logic

@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (data.success) {
         // Redirect to OTP page
-        window.location.href = "/forgotPassword/otp";
+        window.location.href = "/forgotPassword/verify";
       } else {
         showError(data.message || "Failed to send OTP.");
       }

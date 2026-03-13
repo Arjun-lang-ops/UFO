@@ -1,112 +1,205 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Verify Email - Urban Football</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#ec5b13",
-                        "background-light": "#f8f6f6",
-                        "background-dark": "#221610",
-                    },
-                    fontFamily: {
-                        "display": ["Public Sans", "sans-serif"]
-                    },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-                },
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Verify Email - Urban Football</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#ec5b13",
+              "background-light": "#f8f6f6",
+              "background-dark": "#221610",
             },
-        }
+            fontFamily: {
+              display: ["Public Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
     </script>
-<style>
-        body { font-family: 'Public Sans', sans-serif; }
-        .otp-input:focus { border-color: #ec5b13; outline: 2px; outline-color: #ec5b13/20; }
+    <style>
+      body {
+        font-family: "Public Sans", sans-serif;
+      }
+      .otp-input:focus {
+        border-color: #ec5b13;
+        outline: 2px;
+        outline-color: #ec5b13/20;
+      }
     </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display transition-colors duration-300">
-<!-- Header / Logo Area -->
-<header class="w-full py-8 px-6 flex justify-center">
-<div class="flex items-center gap-2">
-<div class="bg-primary p-2 rounded-lg">
-<span class="material-symbols-outlined text-white text-2xl">sports_soccer</span>
-</div>
-<h1 class="text-slate-900 dark:text-slate-100 text-2xl font-bold tracking-tight uppercase">Urban Football</h1>
-</div>
-</header>
-<!-- Main Content Container -->
-<main class="flex-grow flex items-center justify-center px-4 pb-12">
-<div class="max-w-md w-full bg-white dark:bg-zinc-900/50 rounded-xl shadow-xl border border-slate-200 dark:border-zinc-800 p-8">
-<!-- Heading Section -->
-<div class="text-center mb-8">
-<h2 class="text-slate-900 dark:text-slate-100 text-3xl font-bold mb-2">Verify Your New Email</h2>
-<p class="text-slate-500 dark:text-slate-400 text-sm">
-                    We've sent a 6-digit verification code to your new email address. Please enter it below to confirm the change.
-                </p>
-</div>
-<!-- OTP Inputs Form -->
-<form id="emailOtpForm" class="space-y-8" method="POST">
-<div class="flex justify-center gap-3 sm:gap-5">
-<input class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" maxlength="1" type="text"/>
-<input class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" maxlength="1" type="text"/>
-<input class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" maxlength="1" type="text"/>
-<input class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" maxlength="1" type="text"/>
-<input class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" maxlength="1" type="text"/>
-<input class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary" maxlength="1" type="text"/>
-</div>
-<p id="otpError" class="hidden text-red-500 text-sm text-center font-medium"></p>
-<!-- Action Button (Blue per request, but matching theme vibes) -->
-<button id="submitBtn" class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-600/20 active:scale-[0.98]" type="submit">
-                    Confirm Email Change
-                </button>
-</form>
-<!-- Secondary Links -->
-<div class="mt-8 space-y-4 text-center">
-<div class="flex flex-col items-center gap-1">
-<p class="text-slate-500 dark:text-slate-400 text-sm">Didn't receive the code?</p>
-<div class="flex items-center gap-2">
-<button id="resendBtn" class="text-primary font-semibold hover:underline decoration-2 underline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed">Resend OTP</button>
-<span class="text-slate-400 dark:text-slate-600">|</span>
-<div class="flex items-center gap-1 text-slate-600 dark:text-slate-400 font-mono text-sm">
-<span class="material-symbols-outlined text-sm">timer</span>
-<span id="timer">01:59</span>
-</div>
-</div>
-</div>
-<div class="pt-4 border-t border-slate-200 dark:border-zinc-800">
-<a class="inline-flex items-center gap-2 text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors text-sm font-medium" href="/profile">
-<span class="material-symbols-outlined text-base">arrow_back</span>
-                        Back to Edit Email
-                    </a>
-</div>
-</div>
-</div>
-</main>
-<!-- Footer -->
-<footer class="w-full py-10 px-6 border-t border-slate-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30">
-<div class="max-w-4xl mx-auto flex flex-col items-center gap-6">
-<div class="flex gap-6">
-<a class="text-slate-400 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined">public</span>
-</a>
-<a class="text-slate-400 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined">chat</span>
-</a>
-<a class="text-slate-400 hover:text-primary transition-colors" href="#">
-<span class="material-symbols-outlined">share</span>
-</a>
-</div>
-<p class="text-slate-400 text-xs tracking-widest uppercase">
-                © 2023 Urban Football. All rights reserved.
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark min-h-screen flex flex-col font-display transition-colors duration-300"
+  >
+    <!-- Header / Logo Area -->
+    <header class="w-full py-8 px-6 flex justify-center">
+      <div class="flex items-center gap-2">
+        <div class="bg-primary p-2 rounded-lg">
+          <span class="material-symbols-outlined text-white text-2xl"
+            >sports_soccer</span
+          >
+        </div>
+        <h1
+          class="text-slate-900 dark:text-slate-100 text-2xl font-bold tracking-tight uppercase"
+        >
+          Urban Football
+        </h1>
+      </div>
+    </header>
+    <!-- Main Content Container -->
+    <main class="flex-grow flex items-center justify-center px-4 pb-12">
+      <div
+        class="max-w-md w-full bg-white dark:bg-zinc-900/50 rounded-xl shadow-xl border border-slate-200 dark:border-zinc-800 p-8"
+      >
+        <!-- Heading Section -->
+        <div class="text-center mb-8">
+          <h2
+            class="text-slate-900 dark:text-slate-100 text-3xl font-bold mb-2"
+          >
+            Verify Your New Email
+          </h2>
+          <p class="text-slate-500 dark:text-slate-400 text-sm">
+            We've sent a 6-digit verification code to your new email address.
+            Please enter it below to confirm the change.
+          </p>
+        </div>
+        <!-- OTP Inputs Form -->
+        <form id="emailOtpForm" class="space-y-8" method="POST">
+          <div class="flex justify-center gap-3 sm:gap-5">
+            <input
+              class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+              maxlength="1"
+              type="text"
+            />
+            <input
+              class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+              maxlength="1"
+              type="text"
+            />
+            <input
+              class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+              maxlength="1"
+              type="text"
+            />
+            <input
+              class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+              maxlength="1"
+              type="text"
+            />
+            <input
+              class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+              maxlength="1"
+              type="text"
+            />
+            <input
+              class="otp-input w-11 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold rounded-lg border-slate-300 dark:border-zinc-700 bg-transparent text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+              maxlength="1"
+              type="text"
+            />
+          </div>
+          <p
+            id="otpError"
+            class="hidden text-red-500 text-sm text-center font-medium"
+          ></p>
+          <!-- Action Button (Blue per request, but matching theme vibes) -->
+          <button
+            id="submitBtn"
+            class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-600/20 active:scale-[0.98]"
+            type="submit"
+          >
+            Confirm Email Change
+          </button>
+        </form>
+        <!-- Secondary Links -->
+        <div class="mt-8 space-y-4 text-center">
+          <div class="flex flex-col items-center gap-1">
+            <p class="text-slate-500 dark:text-slate-400 text-sm">
+              Didn't receive the code?
             </p>
-</div>
-</footer>
-<script src="/js/emailOtpHandler.js"></script>
-</body></html>
+            <div class="flex items-center gap-2">
+              <button
+                id="resendBtn"
+                class="text-primary font-semibold hover:underline decoration-2 underline-offset-4 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Resend OTP
+              </button>
+              <span class="text-slate-400 dark:text-slate-600">|</span>
+              <div
+                class="flex items-center gap-1 text-slate-600 dark:text-slate-400 font-mono text-sm"
+              >
+                <span class="material-symbols-outlined text-sm">timer</span>
+                <span id="timer">01:59</span>
+              </div>
+            </div>
+          </div>
+          <div class="pt-4 border-t border-slate-200 dark:border-zinc-800">
+            <a
+              class="inline-flex items-center gap-2 text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-primary transition-colors text-sm font-medium"
+              href="/profile"
+            >
+              <span class="material-symbols-outlined text-base"
+                >arrow_back</span
+              >
+              Back to Edit Email
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Footer -->
+    <footer
+      class="w-full py-10 px-6 border-t border-slate-200 dark:border-zinc-800 bg-white/50 dark:bg-zinc-900/30"
+    >
+      <div class="max-w-4xl mx-auto flex flex-col items-center gap-6">
+        <div class="flex gap-6">
+          <a
+            class="text-slate-400 hover:text-primary transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">public</span>
+          </a>
+          <a
+            class="text-slate-400 hover:text-primary transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">chat</span>
+          </a>
+          <a
+            class="text-slate-400 hover:text-primary transition-colors"
+            href="#"
+          >
+            <span class="material-symbols-outlined">share</span>
+          </a>
+        </div>
+        <p class="text-slate-400 text-xs tracking-widest uppercase">
+          © 2023 Urban Football. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script src="/js/emailOtpHandler.js"></script>
+  </body>
+</html>

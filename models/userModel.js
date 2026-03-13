@@ -40,6 +40,10 @@ const userSchema = new mongoose.Schema(
     type: Boolean,
     default: false
   },
+  profileImage: {
+    type: String,
+    default: "/images/default-profile.png"
+  },
 
     isVerified: {
       type: Boolean,

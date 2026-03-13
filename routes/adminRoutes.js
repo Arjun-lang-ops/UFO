@@ -12,6 +12,6 @@ router.get('/userManagement',adminLoggedIn, adminUserManagement)
 router.get('/logout', logoutAdmin)
 
 router.post('/login', adminLogin)
-router.patch('/block-user/:id', toggleBlockUser)
+router.patch('/block-user/:id',adminLoggedIn, toggleBlockUser)
 
 export default router;

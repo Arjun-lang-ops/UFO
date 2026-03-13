@@ -123,49 +123,14 @@ export const forgotpasswordRender = (req, res) => {
 }
 
 
-//sending otp for forgot password
-export const resetSendMail = async (req, res) => {
-  try {
-    const { email } = req.body;
-    await forgotUserService(req.body);
-    const otp = await generateAndSaveOtp(email);
-    console.log(otp);
-    await sendForgotPasswordMail(email, otp);
 
-    res.status(201).json({
-      success: true,
-      message: "Otp send to your mail"
-    })
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message
-    })
 
-  }
-}
 
-export const resendOtpReset = async (req, res) => {
-  try {
-    const { email } = req.body;
-    await generateAndSaveOtp({ email });
-    await sendForgotPasswordMail({ email, otp });
-    res.status(201).json({
-      success: true,
-      message: "Otp resend succesfully"
-    })
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message
-    })
-  }
-}
 
 //forgot password otp page
-export const forgotOtpRender = (req, res) => {
-  return res.render('userViews/userForgotPasswordOtp')
-}
+// export const forgotOtpRender = (req, res) => {
+//   return res.render('userViews/userForgotPasswordOtp')
+// }
 
 //resend otp for forgot password
 
@@ -176,8 +141,20 @@ export const resetPassword = (req, res) => {
   return res.render('userViews/userResetPassword')
 }
 
-export const userProfileRender = (req, res) =>
-  res.render('userViews/userProfile')
+export const userProfileRender = async (req, res) => {
+
+  try {
+    const userId = req.session.user;
+    const user = await User.findById(userId);
+    res.render('userViews/userProfile', { user })
+    console.log(req.session.user);
+
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
 
 // GET /api/me — returns logged-in user's fullname and email
 export const getMe = async (req, res) => {
@@ -215,7 +192,7 @@ export const updatePassword = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      message:'Password changed successfully'
+      message: 'Password changed successfully'
 
     })
 

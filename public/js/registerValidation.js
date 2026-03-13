@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const passwordError = document.getElementById("passwordError");
   const confirmError = document.getElementById("confirmPasswordError");
 
-  /* ---------- Validation Functions ---------- */
+  // Validation Functions 
 
   function validateName() {
     if (fullname.value.trim().length < 3) {
@@ -34,13 +34,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function validatePassword() {
-    if (password.value.length < 8) {
-      showError(passwordError, "Password must be at least 8 characters");
-      return false;
-    }
-    hideError(passwordError);
-    return true;
+  const pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+
+  if (!pattern.test(password.value)) {
+    showError(
+      passwordError,
+      "Password must be at least 8 characters and include uppercase, lowercase and a number"
+    );
+    return false;
   }
+
+  hideError(passwordError);
+  return true;
+}
 
   function validateConfirmPassword() {
     if (confirmPassword.value !== password.value || confirmPassword.value === "") {
@@ -51,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
-  /* ---------- Helpers ---------- */
+ 
 
   function showError(element, message) {
     element.textContent = message;
@@ -63,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     element.classList.add("hidden");
   }
 
-  /* ---------- LIVE Validation ---------- */
+  
 
   fullname.addEventListener("input", validateName);
   email.addEventListener("input", validateEmail);
@@ -73,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   confirmPassword.addEventListener("input", validateConfirmPassword);
 
-  /* ---------- Submit Validation ---------- */
+  /*Submit Validation */
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();

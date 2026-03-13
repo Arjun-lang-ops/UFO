@@ -16,11 +16,11 @@
   }
 })();
 
-// ─── State ────────────────────────────────────────────────────────────────
+//State 
 let _pendingDeleteId = null;
 let _editingId = null;
 
-// ─── Helpers ──────────────────────────────────────────────────────────────
+//Helpers 
 function showModal(id) {
   const el = document.getElementById(id);
   el.classList.remove('hidden');
@@ -34,7 +34,7 @@ function hideModal(id) {
   document.body.classList.remove('overflow-hidden');
 }
 
-// ─── Edit Email Modal ─────────────────────────────────────────────────────
+//Edit Email Modal
 function openEmailModal() {
   const currentEmail = document.getElementById('user-email').value;
   document.getElementById('edit-email-input').value = currentEmail;
@@ -95,6 +95,34 @@ async function handleEmailSubmit(e) {
     btn.disabled = false;
     btn.innerHTML = originalText;
   }
+}
+
+async function uploadProfileImage(event) {
+
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append("profileImage", file);
+
+  const res = await fetch("/profile/upload", {
+    method: "POST",
+    body: formData
+  });
+
+  const data = await res.json();
+
+  if (data.success) {
+
+    const preview = document.getElementById("profileImagePreview");
+
+    preview.style.backgroundImage =
+      `url('${data.imageUrl}?t=${new Date().getTime()}')`;
+
+  } else {
+    alert(data.message);
+  }
+
 }
 
 
