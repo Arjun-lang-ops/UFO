@@ -13,8 +13,17 @@ export const adminHomeRender = (req, res) => {
 export const adminUserManagement = async (req, res) => {
      const page = parseInt(req.query.page) || 1;
      const limit = 4;
+     const search = req.query.search || '';
 
-     const result = await userLoadPaginated({ page, limit });
+     const filter = {};
+     if (search) {
+          filter.$or = [
+               { fullname: { $regex: search, $options: 'i' } },
+               { email: { $regex: search, $options: 'i' } }
+          ];
+     }
+
+     const result = await userLoadPaginated({ filter, page, limit });
 
      if (!result.success) {
           return res.redirect('/admin');
@@ -25,7 +34,8 @@ export const adminUserManagement = async (req, res) => {
           totalPages: result.totalPages,
           currentPage: result.currentPage,
           totalUsers: result.totalUsers,
-          limit
+          limit,
+          search
      });
 }
 

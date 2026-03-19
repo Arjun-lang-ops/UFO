@@ -3,6 +3,7 @@ import User from '../models/userModel.js';
 import Address from '../models/userAddressModel.js';
 import { generateAndSaveOtp } from './otpService.js';
 import { sendMail } from '../utils/mailer.js';
+import Otp from '../models/otpModel.js';
 
 
 export const registerUserLogic = async (data) => {
@@ -84,6 +85,35 @@ export const forgotUserService = async (data) => {
 
     return existingUser
 }
+
+export const resetPasswordService = async (email, newPassword, confirmPassword) => {
+    console.log(email)
+    console.log(newPassword,confirmPassword)
+
+  if (!newPassword || !confirmPassword) {
+    throw new Error("All fields are required");
+  }
+
+  if (newPassword !== confirmPassword) {
+    throw new Error("Passwords do not match");
+  }
+
+  const user = await User.findOne({ email });
+  console.log(user);
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+  user.password = hashedPassword;
+
+  await user.save();
+
+  return true;
+};
+
 
 
 export const changePasswordService = async (userId, currentPassword, newPassword) => {

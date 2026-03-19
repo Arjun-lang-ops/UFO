@@ -6,7 +6,7 @@ import { emailOtpRender, emailOtpSend, resendEmailOtp, verifyEmailOtp } from "..
 import { addAddressController, editAddressRender,userAddressRender,removeAddressController, updateAddressController } from "../controller/userAddressController.js";
 import { upload } from "../middlewares/upload.js";
 import { updateProfilePhotoController } from "../controller/userProfileController.js";
-import { forgotPasswordVerify,resendOtpReset,resetSendMail } from "../controller/userForgotPasswordController.js";
+import { forgotPasswordVerify,resendOtpReset,resetSendMail, setPassword, verifyForgotOtp } from "../controller/userForgotPasswordController.js";
 const router = express.Router();
 
 
@@ -59,6 +59,8 @@ router.post('/resend-otp', resendOtp);
 router.post('/login', loginUser)
 router.post('/forgotPassword', resetSendMail);
 router.post('/resend-forgot-otp', resendOtpReset);
+router.post('/verify-forgot-otp',verifyForgotOtp);
+router.post('/reset-forgot',setPassword)
 router.post('/profile/change-email', emailOtpSend);
 router.post('/profile/email-otp', verifyEmailOtp);
 router.post('/profile/resend-email-otp', resendEmailOtp);

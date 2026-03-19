@@ -108,14 +108,19 @@
 <!-- Action Bar & Search -->
 <div class="bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754] rounded-t-xl overflow-hidden">
 <div class="flex flex-col md:flex-row md:items-center justify-between p-4 gap-4">
-<div class="flex-1 max-w-md">
+<form action="/admin/userManagement" method="GET" class="flex-1 max-w-lg flex items-center gap-2">
 <label class="relative flex items-center w-full">
 <div class="absolute left-3 text-slate-400 dark:text-[#9dabb9]">
 <span class="material-symbols-outlined">search</span>
 </div>
-<input class="w-full bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white border-none rounded-lg h-11 pl-11 pr-4 focus:ring-2 focus:ring-primary placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm font-normal" placeholder="Search users by name or email..."/>
+<input name="search" id="searchInput" value="<%= typeof search !== 'undefined' ? search : '' %>" class="w-full bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white border-none rounded-lg h-11 pl-11 pr-4 focus:ring-2 focus:ring-primary placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm font-normal" placeholder="Search users by name or email..."/>
 </label>
-</div>
+<button type="submit" class="bg-primary hover:bg-primary/90 text-white rounded-lg h-11 px-4 text-sm font-bold transition-all">Search</button>
+<button type="button" onclick="document.getElementById('searchInput').value=''" class="bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg h-11 px-4 text-sm font-bold flex items-center transition-all">Cancel</button>
+<% if (typeof search !== 'undefined' && search) { %>
+    <a href="/admin/userManagement" class="bg-red-500 hover:bg-red-600 text-white rounded-lg h-11 px-4 text-sm font-bold flex items-center transition-all">Clear</a>
+<% } %>
+</form>
 
 </div>
 <!-- User Table -->
@@ -179,7 +184,7 @@
 
     <%# Previous button %>
     <% if (currentPage > 1) { %>
-      <a href="/admin/userManagement?page=<%= currentPage - 1 %>" class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-slate-400 transition-colors">
+      <a href="/admin/userManagement?page=<%= currentPage - 1 %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>" class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-slate-400 transition-colors">
         <span class="material-symbols-outlined">chevron_left</span>
       </a>
     <% } else { %>
@@ -211,13 +216,13 @@
       <% } else if (p === currentPage) { %>
         <span class="h-8 w-8 rounded bg-primary text-white text-sm font-bold flex items-center justify-center"><%= p %></span>
       <% } else { %>
-        <a href="/admin/userManagement?page=<%= p %>" class="h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-medium flex items-center justify-center transition-colors"><%= p %></a>
+        <a href="/admin/userManagement?page=<%= p %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>" class="h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-sm font-medium flex items-center justify-center transition-colors"><%= p %></a>
       <% } %>
     <% }) %>
 
     <%# Next button %>
     <% if (currentPage < totalPages) { %>
-      <a href="/admin/userManagement?page=<%= currentPage + 1 %>" class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-slate-400 transition-colors">
+      <a href="/admin/userManagement?page=<%= currentPage + 1 %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>" class="flex items-center justify-center h-8 w-8 rounded hover:bg-slate-200 dark:hover:bg-[#283039] text-slate-400 transition-colors">
         <span class="material-symbols-outlined">chevron_right</span>
       </a>
     <% } else { %>

@@ -69,6 +69,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await response.json();
 
       if (data.success) {
+        // Save email in localStorage for OTP page
+        localStorage.setItem("forgotPasswordEmail", email);
         // Redirect to OTP page
         window.location.href = "/forgotPassword/verify";
       } else {
