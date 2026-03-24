@@ -12,6 +12,7 @@ import nocache from "nocache";
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import userProductRoutes from "./routes/userProductRoutes.js" 
 import passport from "./config/passport.js";
 import cors from "cors";
 
@@ -50,6 +51,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/", userRoutes);
+app.use('/',userProductRoutes)
 app.use("/admin", adminRoutes);
 
 //error handling middleware
