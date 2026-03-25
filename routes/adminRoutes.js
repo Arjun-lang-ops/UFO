@@ -2,7 +2,8 @@ import { adminLoginRender, adminHomeRender, adminLogin, logoutAdmin, adminUserMa
 
 import express from 'express';
 import { adminLoggedIn, adminLoggedOut } from "../middlewares/adminAuth.js";
-import { addCategoryController, categoryRender } from "../controller/adminCategoryController.js";
+import { addCategoryController, categoryRender,editCategoryController } from "../controller/adminCategoryController.js";
+import { productRender } from "../controller/adminProductController.js";
 
 const router = express.Router();
 
@@ -11,10 +12,12 @@ router.get('/', adminLoggedOut, adminLoginRender)
 router.get('/dashboard',adminLoggedIn, adminHomeRender)
 router.get('/userManagement',adminLoggedIn, adminUserManagement)
 router.get('/logout', logoutAdmin)
-router.get('/categories',categoryRender)
+router.get('/categories',categoryRender);
+router.get('/products',productRender);
 
-router.post('/login', adminLogin)
-router.patch('/block-user/:id',adminLoggedIn, toggleBlockUser)
-router.post('/addCategory',addCategoryController)
+router.post('/login', adminLogin);
+router.patch('/block-user/:id',adminLoggedIn, toggleBlockUser);
+router.post('/addCategory',addCategoryController);
+router.put('/editCategory/:id',editCategoryController);
 
 export default router;
