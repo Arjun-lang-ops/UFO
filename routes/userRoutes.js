@@ -7,6 +7,7 @@ import { addAddressController, editAddressRender,userAddressRender,removeAddress
 import { upload } from "../middlewares/upload.js";
 import { updateProfilePhotoController } from "../controller/userProfileController.js";
 import { forgotPasswordVerify,resendOtpReset,resetSendMail, setPassword, verifyForgotOtp } from "../controller/userForgotPasswordController.js";
+import { googleAuthCallback } from "../controller/authController.js";
 const router = express.Router();
 
 
@@ -36,22 +37,19 @@ router.get(
   "/auth/google",
   passport.authenticate("google", {
     scope: ["profile", "email"],
-    prompt: "select_account" // optional
+    prompt: "select_account" 
   })
 );
+
+
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/login"
   }),
-  (req, res) => {
-    req.session.userId = req.user._id;
-    req.session.user = req.user._id;
-    req.session.save(()=>{
-      res.redirect('/home')
-    })
-  }
+  googleAuthCallback
 );
+
 
 router.post('/register', registerUser);
 router.post('/verify-otp', otpVerification);

@@ -6,7 +6,7 @@ export const isLoggedIn = (req, res, next) => {
 };
 
 export const isLoggedOut=(req,res,next)=>{
-  if(req.session.user){
+  if(req.session.user|| req.user){
     return res.redirect('/home');
   }
   next();

@@ -1,526 +1,1070 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Football Accessories - ProSports</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&amp;display=swap" rel="stylesheet"/>
-<!-- Material Symbols -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<!-- Tailwind CSS -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#137fec",
-                        "primary-dark": "#0f66bd",
-                        "background-light": "#f6f7f8",
-                        "background-dark": "#111418", // Matching the example's dark bg
-                        "surface-dark": "#1c2127",   // Slightly lighter for cards/inputs
-                        "border-dark": "#283039",    // Borders
-                    },
-                    fontFamily: {
-                        "display": ["Lexend", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                },
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Football Accessories - ProSports</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Material Symbols -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#137fec",
+              "primary-dark": "#0f66bd",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111418", // Matching the example's dark bg
+              "surface-dark": "#1c2127", // Slightly lighter for cards/inputs
+              "border-dark": "#283039", // Borders
             },
-        }
+            fontFamily: {
+              display: ["Lexend", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
     </script>
-<style>
-        /* Custom scrollbar for better aesthetic in dark mode */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #111418; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #283039; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3b4754; 
-        }
+    <style>
+      /* Custom scrollbar for better aesthetic in dark mode */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111418;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #283039;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #3b4754;
+      }
     </style>
-</head>
-<body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display min-h-screen flex flex-col overflow-x-hidden">
-<!-- Navbar -->
-<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-border-dark bg-background-dark px-4 lg:px-10 py-3">
-<div class="flex items-center gap-4 lg:gap-8 w-full md:w-auto">
-<div class="flex items-center gap-2 text-white cursor-pointer">
-<div class="size-8 text-primary">
-<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
-</svg>
-</div>
-<h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em] hidden sm:block">ProSports</h2>
-</div>
-<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64 lg:w-96">
-<div class="flex w-full flex-1 items-stretch rounded-lg h-full">
-<div class="text-[#9dabb9] flex border-none bg-surface-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
-<span class="material-symbols-outlined text-[24px]">search</span>
-</div>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-surface-dark focus:border-none h-full placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal" placeholder="Search accessories..." value=""/>
-</div>
-</label>
-</div>
-<div class="flex flex-1 justify-end gap-4 lg:gap-8 items-center">
-<div class="hidden lg:flex items-center gap-9">
-<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Men</a>
-<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Women</a>
-<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Kids</a>
-<a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sale</a>
-</div>
-<div class="flex gap-2">
-<button class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
-<span class="material-symbols-outlined text-[20px]">account_circle</span>
-</button>
-<button class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors relative">
-<span class="material-symbols-outlined text-[20px]">shopping_cart</span>
-<span class="absolute top-1.5 right-1.5 size-2 rounded-full bg-primary"></span>
-</button>
-<button class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
-<span class="material-symbols-outlined text-[20px]">favorite</span>
-</button>
-<!-- Mobile Menu Toggle -->
-<button class="lg:hidden flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
-<span class="material-symbols-outlined text-[20px]">menu</span>
-</button>
-</div>
-</div>
-</header>
-<!-- Main Content Layout -->
-<div class="layout-container flex flex-col flex-grow px-4 md:px-10 lg:px-20 py-6 max-w-[1440px] mx-auto w-full">
-<!-- Breadcrumbs -->
-<div class="flex flex-wrap gap-2 mb-6">
-<a class="text-[#9dabb9] text-sm font-medium leading-normal hover:text-white transition-colors" href="#">Home</a>
-<span class="text-[#9dabb9] text-sm font-medium leading-normal">/</span>
-<a class="text-[#9dabb9] text-sm font-medium leading-normal hover:text-white transition-colors" href="#">Accessories</a>
-<span class="text-[#9dabb9] text-sm font-medium leading-normal">/</span>
-<span class="text-white text-sm font-medium leading-normal">Football</span>
-</div>
-<!-- Page Heading & Top Controls -->
-<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 pb-6 border-b border-border-dark">
-<div class="flex flex-col gap-2">
-<h1 class="text-white text-3xl md:text-[32px] font-bold leading-tight tracking-tight">Football Accessories</h1>
-<p class="text-[#9dabb9] text-sm font-normal">Showing 1-12 of 128 products</p>
-</div>
-<div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
-<!-- Sort Dropdown -->
-<div class="relative min-w-[160px] flex-1 md:flex-none">
-<select class="appearance-none w-full bg-surface-dark text-white text-sm border border-border-dark rounded-lg px-4 py-2.5 pr-8 focus:outline-none focus:border-primary cursor-pointer">
-<option>Sort by: Newest</option>
-<option>Price: Low to High</option>
-<option>Price: High to Low</option>
-<option>Top Rated</option>
-</select>
-<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#9dabb9]">
-<span class="material-symbols-outlined text-[20px]">expand_more</span>
-</div>
-</div>
-<!-- View Toggle -->
-<div class="flex bg-surface-dark p-1 rounded-lg border border-border-dark">
-<button class="flex items-center justify-center size-8 rounded bg-primary text-white shadow-sm">
-<span class="material-symbols-outlined text-[20px]">grid_view</span>
-</button>
-<button class="flex items-center justify-center size-8 rounded text-[#9dabb9] hover:text-white hover:bg-[#3b4754] transition-colors">
-<span class="material-symbols-outlined text-[20px]">view_list</span>
-</button>
-</div>
-</div>
-</div>
-<div class="flex flex-col lg:flex-row gap-8">
-<!-- Sidebar Filters -->
-<aside class="w-full lg:w-64 flex-shrink-0 space-y-8 hidden lg:block">
-<!-- Filter Group: Categories -->
-<div class="flex flex-col gap-4">
-<h3 class="text-white text-base font-bold">Categories</h3>
-<div class="flex flex-col gap-3">
-<label class="flex items-center gap-3 cursor-pointer group">
-<input checked="" class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4" type="checkbox"/>
-<span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">All Accessories</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4" type="checkbox"/>
-<span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">Gloves</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4" type="checkbox"/>
-<span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">Shin Guards</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4" type="checkbox"/>
-<span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">Training Equipment</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4" type="checkbox"/>
-<span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">Bags</span>
-</label>
-</div>
-</div>
-<div class="h-px bg-border-dark w-full"></div>
-<!-- Filter Group: Price -->
-<div class="flex flex-col gap-4">
-<div class="flex items-center justify-between">
-<h3 class="text-white text-base font-bold">Price Range</h3>
-<span class="text-xs text-primary font-medium cursor-pointer">Reset</span>
-</div>
-<div class="flex items-center gap-2">
-<div class="relative w-full">
-<span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9dabb9] text-xs">$</span>
-<input class="w-full bg-surface-dark border border-border-dark rounded-lg py-2 pl-6 pr-2 text-white text-sm focus:border-primary focus:ring-0" type="number" value="0"/>
-</div>
-<span class="text-[#9dabb9]">-</span>
-<div class="relative w-full">
-<span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9dabb9] text-xs">$</span>
-<input class="w-full bg-surface-dark border border-border-dark rounded-lg py-2 pl-6 pr-2 text-white text-sm focus:border-primary focus:ring-0" type="number" value="500"/>
-</div>
-</div>
-<!-- Fake Slider Visual -->
-<div class="relative h-1 bg-[#3b4754] rounded-full mt-2">
-<div class="absolute left-0 right-1/2 h-full bg-primary rounded-full"></div>
-<div class="absolute left-0 top-1/2 -translate-y-1/2 size-3 bg-white rounded-full border-2 border-primary cursor-pointer shadow"></div>
-<div class="absolute right-1/2 top-1/2 -translate-y-1/2 size-3 bg-white rounded-full border-2 border-primary cursor-pointer shadow"></div>
-</div>
-</div>
-<div class="h-px bg-border-dark w-full"></div>
-<!-- Filter Group: Brand -->
-<div class="flex flex-col gap-4">
-<h3 class="text-white text-base font-bold">Brand</h3>
-<div class="flex flex-col gap-3">
-<label class="flex items-center gap-3 cursor-pointer group">
-<input class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4" type="checkbox"/>
-<span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">Nike</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4" type="checkbox"/>
-<span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">Adidas</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4" type="checkbox"/>
-<span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">Puma</span>
-</label>
-<label class="flex items-center gap-3 cursor-pointer group">
-<input class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4" type="checkbox"/>
-<span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">Under Armour</span>
-</label>
-</div>
-</div>
-<!-- Mobile Filter Button (Visible only on small, functionality implied) -->
-<button class="lg:hidden w-full bg-surface-dark text-white font-bold py-3 rounded-lg border border-border-dark">
-                    Show Filters
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display min-h-screen flex flex-col overflow-x-hidden"
+  >
+    <!-- Navbar -->
+    <header
+      class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-border-dark bg-background-dark px-4 lg:px-10 py-3"
+    >
+      <div class="flex items-center gap-4 lg:gap-8 w-full md:w-auto">
+        <div class="flex items-center gap-2 text-white cursor-pointer">
+          <div class="size-8 text-primary">
+            <svg
+              class="w-full h-full"
+              fill="none"
+              viewbox="0 0 48 48"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+          <a href="/home">
+            <h2
+            class="text-white text-xl font-bold leading-tight tracking-[-0.015em] hidden sm:block"
+          >
+            Urban Football
+          </h2>
+          </a>
+        </div>
+        <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64 lg:w-96">
+          <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+            <div
+              class="text-[#9dabb9] flex border-none bg-surface-dark items-center justify-center pl-4 rounded-l-lg border-r-0"
+            >
+              <span class="material-symbols-outlined text-[24px]">search</span>
+            </div>
+            <input
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-surface-dark focus:border-none h-full placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+              placeholder="Search accessories..."
+              value=""
+            />
+          </div>
+        </label>
+      </div>
+      <div class="flex flex-1 justify-end gap-4 lg:gap-8 items-center">
+        <div class="hidden lg:flex items-center gap-9">
+          <a
+            class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+            href="#"
+            >Jerseys</a
+          >
+          <a
+            class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+            href="#"
+            >Boots</a
+          >
+          <a
+            class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+            href="#"
+            >Footballs</a
+          >
+          <a
+            class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+            href="#"
+            >Sale</a
+          >
+        </div>
+        <div class="flex gap-2">
+          <a href="/profile">
+            <button
+            class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >account_circle</span
+            >
+          </button>
+          </a>
+          <button
+            class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors relative"
+          >
+            <span class="material-symbols-outlined text-[20px]"
+              >shopping_cart</span
+            >
+            <span
+              class="absolute top-1.5 right-1.5 size-2 rounded-full bg-primary"
+            ></span>
+          </button>
+          <button
+            class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors"
+          >
+            <span class="material-symbols-outlined text-[20px]">favorite</span>
+          </button>
+          <!-- Mobile Menu Toggle -->
+          <button
+            class="lg:hidden flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors"
+          >
+            <span class="material-symbols-outlined text-[20px]">menu</span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <!-- Main Content Layout -->
+    <div
+      class="layout-container flex flex-col flex-grow px-4 md:px-10 lg:px-20 py-6 max-w-[1440px] mx-auto w-full"
+    >
+      <!-- Breadcrumbs -->
+      <div class="flex flex-wrap gap-2 mb-6">
+        <a
+          class="text-[#9dabb9] text-sm font-medium leading-normal hover:text-white transition-colors"
+          href="#"
+          >Home</a
+        >
+        <span class="text-[#9dabb9] text-sm font-medium leading-normal">/</span>
+        <a
+          class="text-[#9dabb9] text-sm font-medium leading-normal hover:text-white transition-colors"
+          href="#"
+          >Accessories</a
+        >
+        <span class="text-[#9dabb9] text-sm font-medium leading-normal">/</span>
+        <span class="text-white text-sm font-medium leading-normal"
+          >Football</span
+        >
+      </div>
+      <!-- Page Heading & Top Controls -->
+      <div
+        class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 pb-6 border-b border-border-dark"
+      >
+        <div class="flex flex-col gap-2">
+          <h1
+            class="text-white text-3xl md:text-[32px] font-bold leading-tight tracking-tight"
+          >
+            Football Accessories
+          </h1>
+          <p class="text-[#9dabb9] text-sm font-normal">
+            Showing 1-12 of 128 products
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
+          <!-- Sort Dropdown -->
+          <div class="relative min-w-[160px] flex-1 md:flex-none">
+            <select
+              class="appearance-none w-full bg-surface-dark text-white text-sm border border-border-dark rounded-lg px-4 py-2.5 pr-8 focus:outline-none focus:border-primary cursor-pointer"
+            >
+              <option>Sort by: Newest</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Top Rated</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#9dabb9]"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >expand_more</span
+              >
+            </div>
+          </div>
+          <!-- View Toggle -->
+          <div
+            class="flex bg-surface-dark p-1 rounded-lg border border-border-dark"
+          >
+            <button
+              class="flex items-center justify-center size-8 rounded bg-primary text-white shadow-sm"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >grid_view</span
+              >
+            </button>
+            <button
+              class="flex items-center justify-center size-8 rounded text-[#9dabb9] hover:text-white hover:bg-[#3b4754] transition-colors"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >view_list</span
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col lg:flex-row gap-8">
+        <!-- Sidebar Filters -->
+        <aside class="w-full lg:w-64 flex-shrink-0 space-y-8 hidden lg:block">
+          <!-- Filter Group: Categories -->
+          <div class="flex flex-col gap-4">
+            <h3 class="text-white text-base font-bold">Categories</h3>
+            <div class="flex flex-col gap-3">
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  checked=""
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
+                  type="checkbox"
+                />
+                <span
+                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
+                  >All Accessories</span
+                >
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
+                  type="checkbox"
+                />
+                <span
+                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
+                  >Gloves</span
+                >
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
+                  type="checkbox"
+                />
+                <span
+                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
+                  >Shin Guards</span
+                >
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
+                  type="checkbox"
+                />
+                <span
+                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
+                  >Training Equipment</span
+                >
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
+                  type="checkbox"
+                />
+                <span
+                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
+                  >Bags</span
+                >
+              </label>
+            </div>
+          </div>
+          <div class="h-px bg-border-dark w-full"></div>
+          <!-- Filter Group: Price -->
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center justify-between">
+              <h3 class="text-white text-base font-bold">Price Range</h3>
+              <span class="text-xs text-primary font-medium cursor-pointer"
+                >Reset</span
+              >
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="relative w-full">
+                <span
+                  class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9dabb9] text-xs"
+                  >$</span
+                >
+                <input
+                  class="w-full bg-surface-dark border border-border-dark rounded-lg py-2 pl-6 pr-2 text-white text-sm focus:border-primary focus:ring-0"
+                  type="number"
+                  value="0"
+                />
+              </div>
+              <span class="text-[#9dabb9]">-</span>
+              <div class="relative w-full">
+                <span
+                  class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9dabb9] text-xs"
+                  >$</span
+                >
+                <input
+                  class="w-full bg-surface-dark border border-border-dark rounded-lg py-2 pl-6 pr-2 text-white text-sm focus:border-primary focus:ring-0"
+                  type="number"
+                  value="500"
+                />
+              </div>
+            </div>
+            <!-- Fake Slider Visual -->
+            <div class="relative h-1 bg-[#3b4754] rounded-full mt-2">
+              <div
+                class="absolute left-0 right-1/2 h-full bg-primary rounded-full"
+              ></div>
+              <div
+                class="absolute left-0 top-1/2 -translate-y-1/2 size-3 bg-white rounded-full border-2 border-primary cursor-pointer shadow"
+              ></div>
+              <div
+                class="absolute right-1/2 top-1/2 -translate-y-1/2 size-3 bg-white rounded-full border-2 border-primary cursor-pointer shadow"
+              ></div>
+            </div>
+          </div>
+          <div class="h-px bg-border-dark w-full"></div>
+          <!-- Filter Group: Brand -->
+          <div class="flex flex-col gap-4">
+            <h3 class="text-white text-base font-bold">Brand</h3>
+            <div class="flex flex-col gap-3">
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
+                  type="checkbox"
+                />
+                <span
+                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
+                  >Nike</span
+                >
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
+                  type="checkbox"
+                />
+                <span
+                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
+                  >Adidas</span
+                >
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
+                  type="checkbox"
+                />
+                <span
+                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
+                  >Puma</span
+                >
+              </label>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
+                  type="checkbox"
+                />
+                <span
+                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
+                  >Under Armour</span
+                >
+              </label>
+            </div>
+          </div>
+          <!-- Mobile Filter Button (Visible only on small, functionality implied) -->
+          <button
+            class="lg:hidden w-full bg-surface-dark text-white font-bold py-3 rounded-lg border border-border-dark"
+          >
+            Show Filters
+          </button>
+        </aside>
+        <!-- Product Grid -->
+        <main class="flex-1">
+          <!-- Mobile Filter Toggle -->
+          <div class="lg:hidden mb-4">
+            <button
+              class="flex items-center gap-2 text-white bg-surface-dark px-4 py-2 rounded-lg border border-border-dark w-full justify-center"
+            >
+              <span class="material-symbols-outlined">filter_list</span>
+              <span>Filter &amp; Sort</span>
+            </button>
+          </div>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            <!-- Product Card 1 -->
+            <div
+              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
+            >
+              <div
+                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
+              >
+                <!-- Badge -->
+                <div
+                  class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded"
+                >
+                  New
+                </div>
+                <!-- Favorite Button -->
+                <button
+                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >favorite</span
+                  >
                 </button>
-</aside>
-<!-- Product Grid -->
-<main class="flex-1">
-<!-- Mobile Filter Toggle -->
-<div class="lg:hidden mb-4">
-<button class="flex items-center gap-2 text-white bg-surface-dark px-4 py-2 rounded-lg border border-border-dark w-full justify-center">
-<span class="material-symbols-outlined">filter_list</span>
-<span>Filter &amp; Sort</span>
-</button>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-<!-- Product Card 1 -->
-<div class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark">
-<div class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]">
-<!-- Badge -->
-<div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded">New</div>
-<!-- Favorite Button -->
-<button class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<img alt="Goalkeeper Gloves" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Black goalkeeper gloves on dark background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRiptWuAsXmjamdZ8zoYRejWeqvOnuas3EUbIbxGspwPyjwgvX1fIL-a7CMDsGwrOeffoewGE1b6-Hs98XWAO1idUOH6RspFHoqqDaR_dSN2TPydjjJxDK_Kldcz6lavkExHJPUgIB41R8LJkgTInUrtgMew2F7iXZfL7LarpQ043E8l2KQb2jjsBmA0rezoA77ke9aukDQs16QsV2sk8HlOPDMZ2OgbK5syeHtUCm0Ccptq-_XSD8EVmRaxsLSxtLChOpZ2EKe0Q"/>
-<!-- Quick Add (Desktop Hover) -->
-<div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block">
-<button class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg">
-                                    Quick Add
-                                </button>
-</div>
-</div>
-<div class="p-4 flex flex-col flex-grow">
-<p class="text-[#9dabb9] text-xs font-medium mb-1">Adidas</p>
-<h3 class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer">Predator Match Goalkeeper Gloves</h3>
-<div class="flex items-center gap-1 mb-3">
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-[#3b4754] text-[16px]">star</span>
-<span class="text-[#9dabb9] text-xs ml-1">(42)</span>
-</div>
-<div class="mt-auto flex items-center justify-between">
-<span class="text-white text-lg font-bold">$35.00</span>
-<button class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">add</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Product Card 2 -->
-<div class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark">
-<div class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]">
-<div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">Sale</div>
-<button class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<img alt="Football Cleats" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Detailed shot of football cleats texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbTOFtRlvf-WBsNZRT1ccag0SWnMq3UAUMU2Zc2Pn26xjt5h_ZC4_JlyBd9W56Oza7rP-0K_rKLHjBYjlOy6tzxb0zavZtGk55_qsQYrGTJQOdN_RhHcKizDP3KszpX7Vf9IPI4yPpX5aFRoBeNtQGu5jQRxbkSetylxOLdNQAHxHgCIIJwS6MtO0-iGiu_8Vh0G93Y3nkkhqhzovas8QLYIUZCUdolVpMkSv4d_Oc7_-Z2P8ZWjOuMblCeaJ1mVRgoahjxZEPPQQ"/>
-<div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block">
-<button class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg">
-                                    Quick Add
-                                </button>
-</div>
-</div>
-<div class="p-4 flex flex-col flex-grow">
-<p class="text-[#9dabb9] text-xs font-medium mb-1">Nike</p>
-<h3 class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer">Mercurial Superfly 9 Elite</h3>
-<div class="flex items-center gap-1 mb-3">
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="text-[#9dabb9] text-xs ml-1">(128)</span>
-</div>
-<div class="mt-auto flex items-center justify-between">
-<div class="flex gap-2 items-baseline">
-<span class="text-white text-lg font-bold">$235.00</span>
-<span class="text-[#9dabb9] text-sm line-through">$275.00</span>
-</div>
-<button class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">add</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Product Card 3 -->
-<div class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark">
-<div class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]">
-<button class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<img alt="Soccer Ball" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Classic football soccer ball on grass" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-8zOTqpZbV8JdagTugoMvr9f5z1nmTUbktIpfhQ1TpmsbNNw-e9BpQY9QOejEZsLrUAXFjXyMwdR1euIs_35MiIAusoNsS-Tk8OHYsLUpozhQGiq9L0l0ZFX_2vOdNeQaNt3HyG_2eYSxWHpHPhn9HRsnha3SP6nyFXtn1a7z7xS001HQP5SUFJJpg29ImqrKHPXap44hLGvnbCGXMhGo5HzlX9WKP5g80B_OOZCusW-Um2L0Mq-5IbSHBwnt4pciVJ1-GOUWxMU"/>
-<div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block">
-<button class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg">
-                                    Quick Add
-                                </button>
-</div>
-</div>
-<div class="p-4 flex flex-col flex-grow">
-<p class="text-[#9dabb9] text-xs font-medium mb-1">Puma</p>
-<h3 class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer">Orbita 1 La Liga Match Ball</h3>
-<div class="flex items-center gap-1 mb-3">
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-[#3b4754] text-[16px] fill-current">star</span>
-<span class="text-[#9dabb9] text-xs ml-1">(15)</span>
-</div>
-<div class="mt-auto flex items-center justify-between">
-<span class="text-white text-lg font-bold">$110.00</span>
-<button class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">add</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Product Card 4 -->
-<div class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark">
-<div class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]">
-<button class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<img alt="Shin Guards" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Sports athletic training gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJQh6rFJ4DZ1EcxdfpCwS_0HcWV1Oh4IIV82OiPK9uGasZ4eHX1fOlrfUq5jetClyTcqply483Es1oN2kkIMp5tI5SWL0oT0Upw_DlAOCuOsIeBZnojfM2gRKCZ00LmFGqf4ViOQUgOKIt3MKO2Kcz5RM-iDOl-JCc5z6tHYM25uLwWiJHlFjzqzuVWkqzR3nfUUan7U_Vq0ymn4fgkhIuxWEyiPV_1aXy9et4chi2MM79wLnIb5M5v7c0ie0_Vpjq33NazCzwti0"/>
-<div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block">
-<button class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg">
-                                    Quick Add
-                                </button>
-</div>
-</div>
-<div class="p-4 flex flex-col flex-grow">
-<p class="text-[#9dabb9] text-xs font-medium mb-1">Nike</p>
-<h3 class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer">Mercurial Lite Shin Guards</h3>
-<div class="flex items-center gap-1 mb-3">
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="text-[#9dabb9] text-xs ml-1">(89)</span>
-</div>
-<div class="mt-auto flex items-center justify-between">
-<span class="text-white text-lg font-bold">$25.00</span>
-<button class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">add</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Product Card 5 -->
-<div class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark">
-<div class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]">
-<button class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<img alt="Training Bib" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Athletic clothing on hanger" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz-Mc41O_tCf7oHIzSR4-_LsadmV6nVKy2uzsteq2WlMI1-PfiqZXkPwijpnyh8kwNfsj1OCf1euO-Rfdxl9ft_J0XfK8URmatj0tE6UtOTVMoFZxeMsgch-omWmVX9TWaCS-tKBR1kKQ7l08zZMxgfp9MaeEh9j-_h_RFsxBUZwlD8Il7z33BfjbwEePeFoLcRKd1ZHtHYsODmXg93S5rRCogo2OMN6s_yZ8PQdQRDLcY6yXL4_zvrhIUQV5LKNucK7cFCbl3_j4"/>
-<div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block">
-<button class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg">
-                                    Quick Add
-                                </button>
-</div>
-</div>
-<div class="p-4 flex flex-col flex-grow">
-<p class="text-[#9dabb9] text-xs font-medium mb-1">ProSports</p>
-<h3 class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer">Mesh Training Bib (Pack of 10)</h3>
-<div class="flex items-center gap-1 mb-3">
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-[#3b4754] text-[16px] fill-current">star</span>
-<span class="text-[#9dabb9] text-xs ml-1">(5)</span>
-</div>
-<div class="mt-auto flex items-center justify-between">
-<span class="text-white text-lg font-bold">$45.00</span>
-<button class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">add</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Product Card 6 -->
-<div class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark">
-<div class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]">
-<div class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded">Best Seller</div>
-<button class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<img alt="Water Bottle" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Sports water bottle isolated on dark" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdSU1_56yPQQE5-Hs7dSgCmnHMtQf7XwpSaEHyuXuKSWZeESL4bRyHJiC4MF6I_mXNa9ZYXg8c52GDbXxuOVau5IKlY51TM_QYUNs0LucR4YwVSJ9xJi5jwHBrxQQDTLuyVKtaNLM_zWXgNeRmmJO6eTYJOChQ2Fcei340yv7piFes9-owEjOFMD9JM2GltAShxzufcYjpHYZwLX5asHsCW5PDPqcJk56UgBVWiKqQ1sJfRDTu5MyvAmvXS6Tmvpc1v70yxktg_vo"/>
-<div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block">
-<button class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg">
-                                    Quick Add
-                                </button>
-</div>
-</div>
-<div class="p-4 flex flex-col flex-grow">
-<p class="text-[#9dabb9] text-xs font-medium mb-1">Adidas</p>
-<h3 class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer">Performance Water Bottle 750ml</h3>
-<div class="flex items-center gap-1 mb-3">
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="text-[#9dabb9] text-xs ml-1">(245)</span>
-</div>
-<div class="mt-auto flex items-center justify-between">
-<span class="text-white text-lg font-bold">$12.00</span>
-<button class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">add</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Product Card 7 -->
-<div class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark">
-<div class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]">
-<button class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<img alt="Gym Bag" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Black sports backpack" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcGCqcO4eoN2IEtH0vE_XYKdnY2KdjsHVFtaMWhuy7S6V0R8jHz0ElwLccen1kC53LBA25BX6aEfSbd8KA9wDrySlPgIR7Cz2JTLGWZY9YV9o70OdXFsfT69NXR2rfs501LVjVCAOPITCvnvUqSzQcHAa3l7RAaLkCe0HSPyD4HpWflOwA0OqlkA3tcsU2rANSeG1bZlfrRfvxtnmSTJ_AvORmbcKO_XGiKJZMl-GaxSpSHF0jt7HlJKvc7gR_veZ3oEJezjMv9Eg"/>
-<div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block">
-<button class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg">
-                                    Quick Add
-                                </button>
-</div>
-</div>
-<div class="p-4 flex flex-col flex-grow">
-<p class="text-[#9dabb9] text-xs font-medium mb-1">Under Armour</p>
-<h3 class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer">Undeniable 5.0 Duffel Bag</h3>
-<div class="flex items-center gap-1 mb-3">
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-[#3b4754] text-[16px] fill-current">star</span>
-<span class="text-[#9dabb9] text-xs ml-1">(56)</span>
-</div>
-<div class="mt-auto flex items-center justify-between">
-<span class="text-white text-lg font-bold">$45.00</span>
-<button class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">add</span>
-</button>
-</div>
-</div>
-</div>
-<!-- Product Card 8 -->
-<div class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark">
-<div class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]">
-<button class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary">
-<span class="material-symbols-outlined text-[18px]">favorite</span>
-</button>
-<img alt="Captain Band" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" data-alt="Macro shot of football net" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnadW7UX2QlkfCXZInxcdUej-i0DyqDUxqn5Wqu2Rl2WA12-Y8l3FcTiYOD-nmQc7qcVuGhmWi05ZAHhSCNlSXgm1Cy5l6uIjvW8GqPn-6N4WQqcD20FgD1kRJMa4uVxDf1g6babKpko_2mUGVk2q7ld-m6fFxfAQbI_G3KoS4UCxXMAAg68sJVee0c3ry_0lfeWPAgLE5ZHZSfhKPMkgbtnCwl4TibwVsyRyTxrIBhNbnbsx-1syRnvkGVlWiPjTz3ZT4Ewpqy70"/>
-<div class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block">
-<button class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg">
-                                    Quick Add
-                                </button>
-</div>
-</div>
-<div class="p-4 flex flex-col flex-grow">
-<p class="text-[#9dabb9] text-xs font-medium mb-1">ProSports</p>
-<h3 class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer">Official Captain's Armband</h3>
-<div class="flex items-center gap-1 mb-3">
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="material-symbols-outlined text-yellow-500 text-[16px] fill-current">star</span>
-<span class="text-[#9dabb9] text-xs ml-1">(12)</span>
-</div>
-<div class="mt-auto flex items-center justify-between">
-<span class="text-white text-lg font-bold">$8.00</span>
-<button class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center">
-<span class="material-symbols-outlined text-[18px]">add</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Pagination -->
-<div class="flex items-center justify-center gap-2 mt-12">
-<button class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">
-<span class="material-symbols-outlined">chevron_left</span>
-</button>
-<button class="size-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
-<button class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">2</button>
-<button class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">3</button>
-<span class="text-[#9dabb9]">...</span>
-<button class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">8</button>
-<button class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">
-<span class="material-symbols-outlined">chevron_right</span>
-</button>
-</div>
-</main>
-</div>
-</div>
-<!-- Footer Simple -->
-<footer class="mt-auto border-t border-border-dark bg-background-dark py-8 px-4 lg:px-10">
-<div class="max-w-[1440px] mx-auto text-center text-[#9dabb9] text-sm">
-<p>© 2024 ProSports. All rights reserved.</p>
-</div>
-</footer>
-</body></html>
+                <img
+                  alt="Goalkeeper Gloves"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  data-alt="Black goalkeeper gloves on dark background"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRiptWuAsXmjamdZ8zoYRejWeqvOnuas3EUbIbxGspwPyjwgvX1fIL-a7CMDsGwrOeffoewGE1b6-Hs98XWAO1idUOH6RspFHoqqDaR_dSN2TPydjjJxDK_Kldcz6lavkExHJPUgIB41R8LJkgTInUrtgMew2F7iXZfL7LarpQ043E8l2KQb2jjsBmA0rezoA77ke9aukDQs16QsV2sk8HlOPDMZ2OgbK5syeHtUCm0Ccptq-_XSD8EVmRaxsLSxtLChOpZ2EKe0Q"
+                />
+                <!-- Quick Add (Desktop Hover) -->
+                <div
+                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
+                >
+                  <button
+                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
+                  >
+                    Quick Add
+                  </button>
+                </div>
+              </div>
+              <div class="p-4 flex flex-col flex-grow">
+                <p class="text-[#9dabb9] text-xs font-medium mb-1">Adidas</p>
+                <h3
+                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
+                >
+                  Predator Match Goalkeeper Gloves
+                </h3>
+                <div class="flex items-center gap-1 mb-3">
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[#3b4754] text-[16px]"
+                    >star</span
+                  >
+                  <span class="text-[#9dabb9] text-xs ml-1">(42)</span>
+                </div>
+                <div class="mt-auto flex items-center justify-between">
+                  <span class="text-white text-lg font-bold">$35.00</span>
+                  <button
+                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >add</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Product Card 2 -->
+            <div
+              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
+            >
+              <div
+                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
+              >
+                <div
+                  class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded"
+                >
+                  Sale
+                </div>
+                <button
+                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >favorite</span
+                  >
+                </button>
+                <img
+                  alt="Football Cleats"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  data-alt="Detailed shot of football cleats texture"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbTOFtRlvf-WBsNZRT1ccag0SWnMq3UAUMU2Zc2Pn26xjt5h_ZC4_JlyBd9W56Oza7rP-0K_rKLHjBYjlOy6tzxb0zavZtGk55_qsQYrGTJQOdN_RhHcKizDP3KszpX7Vf9IPI4yPpX5aFRoBeNtQGu5jQRxbkSetylxOLdNQAHxHgCIIJwS6MtO0-iGiu_8Vh0G93Y3nkkhqhzovas8QLYIUZCUdolVpMkSv4d_Oc7_-Z2P8ZWjOuMblCeaJ1mVRgoahjxZEPPQQ"
+                />
+                <div
+                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
+                >
+                  <button
+                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
+                  >
+                    Quick Add
+                  </button>
+                </div>
+              </div>
+              <div class="p-4 flex flex-col flex-grow">
+                <p class="text-[#9dabb9] text-xs font-medium mb-1">Nike</p>
+                <h3
+                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
+                >
+                  Mercurial Superfly 9 Elite
+                </h3>
+                <div class="flex items-center gap-1 mb-3">
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span class="text-[#9dabb9] text-xs ml-1">(128)</span>
+                </div>
+                <div class="mt-auto flex items-center justify-between">
+                  <div class="flex gap-2 items-baseline">
+                    <span class="text-white text-lg font-bold">$235.00</span>
+                    <span class="text-[#9dabb9] text-sm line-through"
+                      >$275.00</span
+                    >
+                  </div>
+                  <button
+                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >add</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Product Card 3 -->
+            <div
+              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
+            >
+              <div
+                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
+              >
+                <button
+                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >favorite</span
+                  >
+                </button>
+                <img
+                  alt="Soccer Ball"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  data-alt="Classic football soccer ball on grass"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-8zOTqpZbV8JdagTugoMvr9f5z1nmTUbktIpfhQ1TpmsbNNw-e9BpQY9QOejEZsLrUAXFjXyMwdR1euIs_35MiIAusoNsS-Tk8OHYsLUpozhQGiq9L0l0ZFX_2vOdNeQaNt3HyG_2eYSxWHpHPhn9HRsnha3SP6nyFXtn1a7z7xS001HQP5SUFJJpg29ImqrKHPXap44hLGvnbCGXMhGo5HzlX9WKP5g80B_OOZCusW-Um2L0Mq-5IbSHBwnt4pciVJ1-GOUWxMU"
+                />
+                <div
+                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
+                >
+                  <button
+                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
+                  >
+                    Quick Add
+                  </button>
+                </div>
+              </div>
+              <div class="p-4 flex flex-col flex-grow">
+                <p class="text-[#9dabb9] text-xs font-medium mb-1">Puma</p>
+                <h3
+                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
+                >
+                  Orbita 1 La Liga Match Ball
+                </h3>
+                <div class="flex items-center gap-1 mb-3">
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[#3b4754] text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span class="text-[#9dabb9] text-xs ml-1">(15)</span>
+                </div>
+                <div class="mt-auto flex items-center justify-between">
+                  <span class="text-white text-lg font-bold">$110.00</span>
+                  <button
+                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >add</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Product Card 4 -->
+            <div
+              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
+            >
+              <div
+                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
+              >
+                <button
+                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >favorite</span
+                  >
+                </button>
+                <img
+                  alt="Shin Guards"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  data-alt="Sports athletic training gear"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJQh6rFJ4DZ1EcxdfpCwS_0HcWV1Oh4IIV82OiPK9uGasZ4eHX1fOlrfUq5jetClyTcqply483Es1oN2kkIMp5tI5SWL0oT0Upw_DlAOCuOsIeBZnojfM2gRKCZ00LmFGqf4ViOQUgOKIt3MKO2Kcz5RM-iDOl-JCc5z6tHYM25uLwWiJHlFjzqzuVWkqzR3nfUUan7U_Vq0ymn4fgkhIuxWEyiPV_1aXy9et4chi2MM79wLnIb5M5v7c0ie0_Vpjq33NazCzwti0"
+                />
+                <div
+                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
+                >
+                  <button
+                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
+                  >
+                    Quick Add
+                  </button>
+                </div>
+              </div>
+              <div class="p-4 flex flex-col flex-grow">
+                <p class="text-[#9dabb9] text-xs font-medium mb-1">Nike</p>
+                <h3
+                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
+                >
+                  Mercurial Lite Shin Guards
+                </h3>
+                <div class="flex items-center gap-1 mb-3">
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span class="text-[#9dabb9] text-xs ml-1">(89)</span>
+                </div>
+                <div class="mt-auto flex items-center justify-between">
+                  <span class="text-white text-lg font-bold">$25.00</span>
+                  <button
+                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >add</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Product Card 5 -->
+            <div
+              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
+            >
+              <div
+                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
+              >
+                <button
+                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >favorite</span
+                  >
+                </button>
+                <img
+                  alt="Training Bib"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  data-alt="Athletic clothing on hanger"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz-Mc41O_tCf7oHIzSR4-_LsadmV6nVKy2uzsteq2WlMI1-PfiqZXkPwijpnyh8kwNfsj1OCf1euO-Rfdxl9ft_J0XfK8URmatj0tE6UtOTVMoFZxeMsgch-omWmVX9TWaCS-tKBR1kKQ7l08zZMxgfp9MaeEh9j-_h_RFsxBUZwlD8Il7z33BfjbwEePeFoLcRKd1ZHtHYsODmXg93S5rRCogo2OMN6s_yZ8PQdQRDLcY6yXL4_zvrhIUQV5LKNucK7cFCbl3_j4"
+                />
+                <div
+                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
+                >
+                  <button
+                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
+                  >
+                    Quick Add
+                  </button>
+                </div>
+              </div>
+              <div class="p-4 flex flex-col flex-grow">
+                <p class="text-[#9dabb9] text-xs font-medium mb-1">ProSports</p>
+                <h3
+                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
+                >
+                  Mesh Training Bib (Pack of 10)
+                </h3>
+                <div class="flex items-center gap-1 mb-3">
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[#3b4754] text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span class="text-[#9dabb9] text-xs ml-1">(5)</span>
+                </div>
+                <div class="mt-auto flex items-center justify-between">
+                  <span class="text-white text-lg font-bold">$45.00</span>
+                  <button
+                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >add</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Product Card 6 -->
+            <div
+              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
+            >
+              <div
+                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
+              >
+                <div
+                  class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded"
+                >
+                  Best Seller
+                </div>
+                <button
+                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >favorite</span
+                  >
+                </button>
+                <img
+                  alt="Water Bottle"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  data-alt="Sports water bottle isolated on dark"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdSU1_56yPQQE5-Hs7dSgCmnHMtQf7XwpSaEHyuXuKSWZeESL4bRyHJiC4MF6I_mXNa9ZYXg8c52GDbXxuOVau5IKlY51TM_QYUNs0LucR4YwVSJ9xJi5jwHBrxQQDTLuyVKtaNLM_zWXgNeRmmJO6eTYJOChQ2Fcei340yv7piFes9-owEjOFMD9JM2GltAShxzufcYjpHYZwLX5asHsCW5PDPqcJk56UgBVWiKqQ1sJfRDTu5MyvAmvXS6Tmvpc1v70yxktg_vo"
+                />
+                <div
+                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
+                >
+                  <button
+                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
+                  >
+                    Quick Add
+                  </button>
+                </div>
+              </div>
+              <div class="p-4 flex flex-col flex-grow">
+                <p class="text-[#9dabb9] text-xs font-medium mb-1">Adidas</p>
+                <h3
+                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
+                >
+                  Performance Water Bottle 750ml
+                </h3>
+                <div class="flex items-center gap-1 mb-3">
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span class="text-[#9dabb9] text-xs ml-1">(245)</span>
+                </div>
+                <div class="mt-auto flex items-center justify-between">
+                  <span class="text-white text-lg font-bold">$12.00</span>
+                  <button
+                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >add</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Product Card 7 -->
+            <div
+              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
+            >
+              <div
+                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
+              >
+                <button
+                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >favorite</span
+                  >
+                </button>
+                <img
+                  alt="Gym Bag"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  data-alt="Black sports backpack"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcGCqcO4eoN2IEtH0vE_XYKdnY2KdjsHVFtaMWhuy7S6V0R8jHz0ElwLccen1kC53LBA25BX6aEfSbd8KA9wDrySlPgIR7Cz2JTLGWZY9YV9o70OdXFsfT69NXR2rfs501LVjVCAOPITCvnvUqSzQcHAa3l7RAaLkCe0HSPyD4HpWflOwA0OqlkA3tcsU2rANSeG1bZlfrRfvxtnmSTJ_AvORmbcKO_XGiKJZMl-GaxSpSHF0jt7HlJKvc7gR_veZ3oEJezjMv9Eg"
+                />
+                <div
+                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
+                >
+                  <button
+                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
+                  >
+                    Quick Add
+                  </button>
+                </div>
+              </div>
+              <div class="p-4 flex flex-col flex-grow">
+                <p class="text-[#9dabb9] text-xs font-medium mb-1">
+                  Under Armour
+                </p>
+                <h3
+                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
+                >
+                  Undeniable 5.0 Duffel Bag
+                </h3>
+                <div class="flex items-center gap-1 mb-3">
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-[#3b4754] text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span class="text-[#9dabb9] text-xs ml-1">(56)</span>
+                </div>
+                <div class="mt-auto flex items-center justify-between">
+                  <span class="text-white text-lg font-bold">$45.00</span>
+                  <button
+                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >add</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Product Card 8 -->
+            <div
+              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
+            >
+              <div
+                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
+              >
+                <button
+                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
+                >
+                  <span class="material-symbols-outlined text-[18px]"
+                    >favorite</span
+                  >
+                </button>
+                <img
+                  alt="Captain Band"
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  data-alt="Macro shot of football net"
+                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnadW7UX2QlkfCXZInxcdUej-i0DyqDUxqn5Wqu2Rl2WA12-Y8l3FcTiYOD-nmQc7qcVuGhmWi05ZAHhSCNlSXgm1Cy5l6uIjvW8GqPn-6N4WQqcD20FgD1kRJMa4uVxDf1g6babKpko_2mUGVk2q7ld-m6fFxfAQbI_G3KoS4UCxXMAAg68sJVee0c3ry_0lfeWPAgLE5ZHZSfhKPMkgbtnCwl4TibwVsyRyTxrIBhNbnbsx-1syRnvkGVlWiPjTz3ZT4Ewpqy70"
+                />
+                <div
+                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
+                >
+                  <button
+                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
+                  >
+                    Quick Add
+                  </button>
+                </div>
+              </div>
+              <div class="p-4 flex flex-col flex-grow">
+                <p class="text-[#9dabb9] text-xs font-medium mb-1">ProSports</p>
+                <h3
+                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
+                >
+                  Official Captain's Armband
+                </h3>
+                <div class="flex items-center gap-1 mb-3">
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span
+                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
+                    >star</span
+                  >
+                  <span class="text-[#9dabb9] text-xs ml-1">(12)</span>
+                </div>
+                <div class="mt-auto flex items-center justify-between">
+                  <span class="text-white text-lg font-bold">$8.00</span>
+                  <button
+                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
+                  >
+                    <span class="material-symbols-outlined text-[18px]"
+                      >add</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Pagination -->
+          <div class="flex items-center justify-center gap-2 mt-12">
+            <button
+              class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors"
+            >
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button
+              class="size-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold"
+            >
+              1
+            </button>
+            <button
+              class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors"
+            >
+              2
+            </button>
+            <button
+              class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors"
+            >
+              3
+            </button>
+            <span class="text-[#9dabb9]">...</span>
+            <button
+              class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors"
+            >
+              8
+            </button>
+            <button
+              class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors"
+            >
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </main>
+      </div>
+    </div>
+    <!-- Footer Simple -->
+    <footer
+      class="mt-auto border-t border-border-dark bg-background-dark py-8 px-4 lg:px-10"
+    >
+      <div class="max-w-[1440px] mx-auto text-center text-[#9dabb9] text-sm">
+        <p>© 2024 ProSports. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

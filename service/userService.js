@@ -1,30 +1,28 @@
-import bcrypt from 'bcrypt';
-import User from '../models/userModel.js';
-import Address from '../models/userAddressModel.js';
-import { generateAndSaveOtp } from './otpService.js';
-import { sendMail } from '../utils/mailer.js';
-import Otp from '../models/otpModel.js';
-
+import bcrypt from "bcrypt";
+import User from "../models/userModel.js";
+import Address from "../models/userAddressModel.js";
+import { generateAndSaveOtp } from "./otpService.js";
+import { sendMail } from "../utils/mailer.js";
+import Otp from "../models/otpModel.js";
 
 export const registerUserLogic = async (data) => {
-    const { fullname, email, password } = data;
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-        throw new Error('User already Exists')
-    }
+  const { fullname, email, password } = data;
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    throw new Error("User already Exists");
+  }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = await User.create({
-        fullname,
-        email,
-        password: hashedPassword,
-        isVerified: false
-    });
+  const user = await User.create({
+    fullname,
+    email,
+    password: hashedPassword,
+    isVerified: false,
+  });
 
-    return user;
-
-}
+  return user;
+};
 
 // export const resendOtpLogic = async (email) => {
 //     const user = await User.findOne({ email });
@@ -35,60 +33,63 @@ export const registerUserLogic = async (data) => {
 //     return true;
 // };
 
-
 export const verifyUserOtp = async (email) => {
-    const user = await User.findOne({ email });
-    if (!user) {
-        throw new Error('user not found')
-    }
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new Error("user not found");
+  }
 
-    user.isVerified = true;
+  user.isVerified = true;
 
-    await user.save();
-    return true
-
+  await user.save();
+  return true;
 };
 
 //user login
 export const userLoginLogic = async (data) => {
-    const { email, password } = data
-    const existingUser = await User.findOne({ email });
+  const { email, password } = data;
+  const existingUser = await User.findOne({ email });
 
+  if (!existingUser) {
+    throw new Error("user not found");
+  }
 
-    if (!existingUser) {
-        throw new Error('user not found');
-    }
+  if (existingUser.isBlocked) {
+    throw new Error("Your account has been blocked by admin");
+  }
+  if (!existingUser.password) {
+    throw new Error("Please login using Google");
+  }
+  const passwordMatch = await bcrypt.compare(password, existingUser.password);
+  if (!passwordMatch) {
+    throw new Error("Invalid Password");
+  }
 
-    if(existingUser.isBlocked){
-        throw new Error('Your account has been blocked by admin')
-    }
-    const passwordMatch = await bcrypt.compare(password, existingUser.password);
-    if (!passwordMatch) {
-        throw new Error('Invalid Password');
-    }
+  if (!existingUser.isVerified) {
+    throw new Error("User not verified with OTP");
+  }
 
-    if (!existingUser.isVerified) {
-        throw new Error('User not verified with OTP');
-    }
-
-    return existingUser;
-
-}
+  return existingUser;
+};
 
 export const forgotUserService = async (data) => {
-    const { email } = data;
-    const existingUser = await User.findOne({ email });
+  const { email } = data;
+  const existingUser = await User.findOne({ email });
 
-    if (!existingUser) {
-        throw new Error('Invalid Email Address');
-    };
+  if (!existingUser) {
+    throw new Error("Invalid Email Address");
+  }
 
-    return existingUser
-}
+  return existingUser;
+};
 
-export const resetPasswordService = async (email, newPassword, confirmPassword) => {
-    console.log(email)
-    console.log(newPassword,confirmPassword)
+export const resetPasswordService = async (
+  email,
+  newPassword,
+  confirmPassword,
+) => {
+  console.log(email);
+  console.log(newPassword, confirmPassword);
 
   if (!newPassword || !confirmPassword) {
     throw new Error("All fields are required");
@@ -114,33 +115,32 @@ export const resetPasswordService = async (email, newPassword, confirmPassword) 
   return true;
 };
 
+export const changePasswordService = async (
+  userId,
+  currentPassword,
+  newPassword,
+) => {
+  if (!userId) {
+    throw new Error("Unauthorized Access");
+  }
 
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new Error("user not found");
+  }
 
-export const changePasswordService = async (userId, currentPassword, newPassword) => {
-    if (!userId) {
-        throw new Error('Unauthorized Access')
-    }
+  const isMatch = await bcrypt.compare(currentPassword, user.password);
+  if (!isMatch) {
+    throw new Error("Current password is incorrect");
+  }
 
-    const user = await User.findById(userId);
-    if (!user) {
-        throw new Error('user not found')
-    }
+  const isSamePassword = await bcrypt.compare(newPassword, user.password);
+  if (isSamePassword) {
+    throw new Error("New password cannot be same as old password");
+  }
+  const hashedPassword = await bcrypt.hash(newPassword, 10);
+  user.password = hashedPassword;
+  await user.save();
 
-    const isMatch = await bcrypt.compare(currentPassword, user.password);
-    if (!isMatch) {
-        throw new Error('Current password is incorrect')
-    }
-
-    const isSamePassword = await bcrypt.compare(newPassword, user.password);
-    if (isSamePassword) {
-        throw new Error('New password cannot be same as old password')
-    }
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
-    user.password = hashedPassword;
-    await user.save();
-
-    return 'password updated successfully'
-
-}
-
-
+  return "password updated successfully";
+};

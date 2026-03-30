@@ -76,8 +76,6 @@ export const setPassword=async (req,res)=>{
       success:true,
       message:'Password reset succesfully'
     })
-
-    
     
   } catch (error) {
     res.json({

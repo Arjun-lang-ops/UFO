@@ -45,6 +45,9 @@ export const editCategoryService=async(id,name,description,isListed)=>{
     }
 
     const updated= await Category.findByIdAndUpdate(id,{name,description,isListed},{new:true});
+    if(updated.name===name){
+      throw new Error('category already exists')
+    }
 
     if(!updated){
         throw new Error('Category not found')
