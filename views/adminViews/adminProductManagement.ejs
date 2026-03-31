@@ -142,11 +142,13 @@
                         <span class="material-symbols-outlined text-lg">file_download</span>
                         Export CSV
                     </button>
-                    <button
+                    <a href="/admin/product-add">
+                        <button
                         class="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
                         <span class="material-symbols-outlined text-lg">add</span>
                         Add New Product
                     </button>
+                    </a>
                 </div>
             </div>
             <!-- Stats Overview -->
@@ -203,10 +205,10 @@
                     <thead>
                         <tr
                             class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-                            <th class="px-6 py-4 w-16">Item</th>
+                            
                             <th class="px-6 py-4">Product Name &amp; SKU</th>
                             <th class="px-6 py-4">Category</th>
-                            <th class="px-6 py-4">Stock Level</th>
+                            
                             <th class="px-6 py-4">Price</th>
                             <th class="px-6 py-4">Status</th>
                             <th class="px-6 py-4 text-right">Actions</th>
@@ -215,12 +217,7 @@
                     <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
                         <!-- Row 1 -->
                         <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
-                            <td class="px-6 py-4">
-                                <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 bg-cover bg-center border border-slate-200 dark:border-slate-700"
-                                    data-alt="Black and gold professional football boots"
-                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBM5HMc52M9eWgwIeK3GfVpEMExLFuQKzxrhxa7SWlg1Adpd9pQB0NSpXf-vyggwJui6Gvrb_GX_kGqWjjqXUuumNg4Rts_qDPgoshdlav393C0uUJV2PJRsZTC3lSTmk6h1Lp4WelU_RsmnBbD1PtgxFzBBIqOPtkYyBbxvuHSgjE-h3-6W18351M9a7nR-VGF0KFJhhhtVNgxBa4bgxtLoN1vHuldLU9pnJUS24XXqyHxkO5QQLSVapaLPzZzzi8OXWZLb7R_JLU')">
-                                </div>
-                            </td>
+                            
                             <td class="px-6 py-4">
                                 <div class="flex flex-col">
                                     <span class="text-sm font-bold">Elite FG Pro Boots</span>
@@ -230,15 +227,7 @@
                             <td class="px-6 py-4">
                                 <span class="text-xs font-medium text-slate-600 dark:text-slate-400">Footwear</span>
                             </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <span class="text-sm font-bold">128</span>
-                                    <div
-                                        class="flex-1 h-1.5 w-16 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-emerald-500 w-[80%]"></div>
-                                    </div>
-                                </div>
-                            </td>
+                            
                             <td class="px-6 py-4">
                                 <span class="text-sm font-bold">$189.99</span>
                             </td>
@@ -249,9 +238,11 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
+                                    <a href="/admin/product-edit">
+                                        <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
                                         <span class="material-symbols-outlined text-lg">edit</span>
                                     </button>
+                                    </a>
                                     <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
                                         <span class="material-symbols-outlined text-lg">delete</span>
                                     </button>
@@ -259,184 +250,7 @@
                             </td>
                         </tr>
                         <!-- Row 2 -->
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
-                            <td class="px-6 py-4">
-                                <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 bg-cover bg-center border border-slate-200 dark:border-slate-700"
-                                    data-alt="Official match football with modern graphics"
-                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBq2AoVUvwky1iTnk2Qr_VKntn4l-qVWEk3JDMCDc0UTtJeh0fAa3xfv4fyPKfgLSCXLenmsgu_pEv_8VdTwOCatvhKopRm-Dd2C_mPlYGxi6TYvCUB5tOGr8HLruXQJ9gEW9jcChAa6ySZ-BmL98VR5TRKQZg-qwNSVm1w36dQiz01eLdR1GIFhl_xgozWRwC6-H_zjq8Yj1Xz92vAkiwx5DoTBDZsRHkNPWe_blGBPX--2iNrvy1QhGTFBAJqy9gKC1e7LcdXeL4')">
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex flex-col">
-                                    <span class="text-sm font-bold">Pro Match Ball v5</span>
-                                    <span class="text-xs text-slate-500">SKU: BAL-042-WH</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-xs font-medium text-slate-600 dark:text-slate-400">Equipment</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <span class="text-sm font-bold">15</span>
-                                    <div
-                                        class="flex-1 h-1.5 w-16 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-orange-500 w-[15%]"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-sm font-bold">$45.00</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-orange-100 text-orange-700 dark:bg-orange-500/10 dark:text-orange-500 uppercase">Low
-                                    Stock</span>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex items-center justify-end gap-2">
-                                    <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
-                                        <span class="material-symbols-outlined text-lg">edit</span>
-                                    </button>
-                                    <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
-                                        <span class="material-symbols-outlined text-lg">delete</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 3 -->
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
-                            <td class="px-6 py-4">
-                                <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 bg-cover bg-center border border-slate-200 dark:border-slate-700"
-                                    data-alt="Pair of professional goalkeeper gloves"
-                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD-jtTMn3tfsHaknQAk-hhBvo5BMmQwXktFpiNPPyYHvP6BprC3uvJ4jQ9FRi-gNNBmExLjSOAIBYd-afOpcJAoY4lDVph-LjjegZNjsFl9HPFaJq_16ZophyChP7Crd17g8sTge1AcAuOoYFpPZmm91SidpKqolyCJz4KnnLV-MkYdYkRdLvYvbgLjanFOBYRm7UJoApiZIgaSHFsc4DI7u2UNFTyojqNnejjBm7f2MZvs2EAdLr7-vrc32k6JYoRnOASlSq9iYx0')">
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex flex-col">
-                                    <span class="text-sm font-bold">Grip GK Gloves</span>
-                                    <span class="text-xs text-slate-500">SKU: GLV-089-RD</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-xs font-medium text-slate-600 dark:text-slate-400">Equipment</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <span class="text-sm font-bold">0</span>
-                                    <div
-                                        class="flex-1 h-1.5 w-16 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-red-500 w-0"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-sm font-bold">$35.00</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-500 uppercase">Sold
-                                    Out</span>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex items-center justify-end gap-2">
-                                    <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
-                                        <span class="material-symbols-outlined text-lg">edit</span>
-                                    </button>
-                                    <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
-                                        <span class="material-symbols-outlined text-lg">delete</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 4 -->
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
-                            <td class="px-6 py-4">
-                                <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 bg-cover bg-center border border-slate-200 dark:border-slate-700"
-                                    data-alt="Lightweight blue team training jersey"
-                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCycBeuhHiWTkjRkDLMssBqKl4pV9PW0mp1QTCdjuypvybtgFY_hI4TNpsrDlb9px44DqEXusdlCrO_paY6ReDBYitHRthmFEDWdP0uxfIBkW9ajdgUJXh1B3UWI2v_GoOPBSKYn8Q8X34cGTS-vblVuufeYfrLkNYiPUEd4zg8dGD9yyy74K9Cqdp2c2wolYuPErjF-vDPthjGZtq-gcbSWNbu9mARyM9xDIk9JvDodkE9Pqti1cwmnKfgUYj-DRROBn-rsAb-V30')">
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex flex-col">
-                                    <span class="text-sm font-bold">Home Training Jersey</span>
-                                    <span class="text-xs text-slate-500">SKU: JER-012-BY</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-xs font-medium text-slate-600 dark:text-slate-400">Apparel</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <span class="text-sm font-bold">250</span>
-                                    <div
-                                        class="flex-1 h-1.5 w-16 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-emerald-500 w-[100%]"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-sm font-bold">$75.00</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-500 uppercase">In
-                                    Stock</span>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex items-center justify-end gap-2">
-                                    <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
-                                        <span class="material-symbols-outlined text-lg">edit</span>
-                                    </button>
-                                    <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
-                                        <span class="material-symbols-outlined text-lg">delete</span>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 5 -->
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
-                            <td class="px-6 py-4">
-                                <div class="w-12 h-12 rounded-lg bg-slate-100 dark:bg-slate-800 bg-cover bg-center border border-slate-200 dark:border-slate-700"
-                                    data-alt="Carbon fiber lightweight shinguards"
-                                    style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCHOQAzQpEOLO4bAnlIIsgLb9EWNIfp8NQcCszhuGGlvk0VxmqUlsJ7SW4B26iZW3vLw3y4YHtMcT1M2Meq4cGvw-5Uy-61NMlPJk7RCVl7VdNe-LhedaDHrun5Z_bmeg927ZorKjMDUwYQ8l9hkDnv7WBib6LyijmRn8adbwTMJ4CeFgSPCHSFm99oxGOdyBg47_JpG86Mmlw0acz2WsmLqtsTLk_zwPniZGPTxDhiQvDZK2aKru3_e0FH8OxgK-wo1G7fck8OeIs')">
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex flex-col">
-                                    <span class="text-sm font-bold">Carbon Lite Guards</span>
-                                    <span class="text-xs text-slate-500">SKU: SNG-033-CB</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-xs font-medium text-slate-600 dark:text-slate-400">Equipment</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex items-center gap-3">
-                                    <span class="text-sm font-bold">45</span>
-                                    <div
-                                        class="flex-1 h-1.5 w-16 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-emerald-500 w-[45%]"></div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-sm font-bold">$25.00</span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-500 uppercase">In
-                                    Stock</span>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex items-center justify-end gap-2">
-                                    <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
-                                        <span class="material-symbols-outlined text-lg">edit</span>
-                                    </button>
-                                    <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
-                                        <span class="material-symbols-outlined text-lg">delete</span>
-                                    </button>
-                                </div>
-                            </td>
+                        
                         </tr>
                     </tbody>
                 </table>

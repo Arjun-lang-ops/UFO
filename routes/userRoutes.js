@@ -8,6 +8,7 @@ import { upload } from "../middlewares/upload.js";
 import { updateProfilePhotoController } from "../controller/userProfileController.js";
 import { forgotPasswordVerify,resendOtpReset,resetSendMail, setPassword, verifyForgotOtp } from "../controller/userForgotPasswordController.js";
 import { googleAuthCallback } from "../controller/authController.js";
+import { loadHomePage } from "../controller/userCategoryController.js";
 const router = express.Router();
 
 

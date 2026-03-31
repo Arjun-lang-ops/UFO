@@ -11,16 +11,24 @@ const productSchema = new mongoose.Schema({
   },
 
   brand: {
-    type: String
+    type: String,
+    required:true
   },
 
   team: {
-    type: String // only for jerseys
+    type: String ,
+    default:null// only for jerseys
   },
+  price:Number,
+  description:String,
 
   stock: Number,
-  images: [String]
-});
+  images: [String],
+  isActive:{
+    type:Boolean,
+    default:true
+  }
+},{timestamps:true});
 
 const Product= mongoose.model('Product',productSchema)
 export default Product;

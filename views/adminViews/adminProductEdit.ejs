@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Add New Product | Football Pro Admin</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&amp;family=Noto+Sans:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "surface-dark": "#1c2632",
+            },
+            fontFamily: {
+              display: ["Lexend", "sans-serif"],
+              body: ["Noto Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      body {
+        font-family: "Noto Sans", sans-serif;
+      }
+      h1,
+      h2,
+      h3,
+      h4,
+      .font-display {
+        font-family: "Lexend", sans-serif;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen"
+  >
+    <div class="flex">
+      <!-- Sidebar Navigation -->
+      <aside
+        class="fixed left-0 top-0 h-full w-64 bg-[#101922] border-r border-[#1c2632]/50 flex flex-col py-6 px-4 hidden lg:flex z-50"
+      >
+        <div class="flex flex-col gap-8 flex-1">
+          <div class="flex gap-3 items-center px-2">
+            <div
+              class="text-2xl font-black text-white tracking-tighter flex items-center gap-2"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >sports_soccer</span
+              >
+              Urban Football
+            </div>
+          </div>
+          <nav class="flex flex-col gap-1">
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2632] transition-all duration-200"
+              href="/admin/dashboard"
+            >
+              <span class="material-symbols-outlined">dashboard</span>
+              <span class="text-sm font-medium">Dashboard</span>
+            </a>
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#137fec] font-bold border-r-4 border-[#137fec] bg-[#1c2632] transition-all duration-200"
+              href="#"
+            >
+              <span
+                class="material-symbols-outlined"
+                style="font-variation-settings: &quot;FILL&quot; 1"
+                >inventory_2</span
+              >
+              <span class="text-sm">Products</span>
+            </a>
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2632] transition-all duration-200"
+              href="#"
+            >
+              <span class="material-symbols-outlined">shopping_cart</span>
+              <span class="text-sm font-medium">Orders</span>
+            </a>
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2632] transition-all duration-200"
+              href="/admin/userManagement"
+            >
+              <span class="material-symbols-outlined">group</span>
+              <span class="text-sm font-medium">Users</span>
+            </a>
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2632] transition-all duration-200"
+              href="#"
+            >
+              <span class="material-symbols-outlined">analytics</span>
+              <span class="text-sm font-medium">Analytics</span>
+            </a>
+            <a
+              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2632] transition-all duration-200"
+              href="#"
+            >
+              <span class="material-symbols-outlined">category</span>
+              <span class="text-sm font-medium">Categories</span>
+            </a>
+          </nav>
+        </div>
+        <!-- Profile section removed as per request -->
+      </aside>
+      <!-- Main Content -->
+      <main
+        class="flex-1 lg:ml-64 min-h-screen bg-background-dark flex flex-col"
+      >
+        <!-- Top Bar -->
+        <header
+          class="sticky top-0 z-40 bg-[#101922]/95 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-8 h-16 w-full"
+        >
+          <h2 class="text-xl font-bold text-white tracking-tight font-display">
+            Edit New Product
+          </h2>
+          <div class="flex items-center gap-4">
+            <button
+              class="material-symbols-outlined text-slate-400 hover:text-white"
+            >
+              notifications
+            </button>
+            <button
+              class="material-symbols-outlined text-slate-400 hover:text-white"
+            >
+              settings
+            </button>
+          </div>
+        </header>
+        <div class="flex-1 overflow-y-auto">
+          <div class="max-w-5xl mx-auto p-6 md:p-10 space-y-8 pb-10">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <!-- Left Column (Main Form Content) -->
+              <div class="lg:col-span-2 space-y-8">
+                <!-- General Information Section -->
+                <section
+                  class="bg-[#111418] border border-[#1c2632] rounded-xl overflow-hidden"
+                >
+                  <div class="p-6 border-b border-[#1c2632]">
+                    <h3
+                      class="text-lg font-bold text-white flex items-center gap-2 font-display"
+                    >
+                      <span class="material-symbols-outlined text-primary"
+                        >info</span
+                      >
+                      General Information
+                    </h3>
+                  </div>
+                  <div class="p-6 space-y-6">
+                    <div class="space-y-2">
+                      <label class="text-sm font-bold text-slate-300"
+                        >Product Name</label
+                      >
+                      <input
+                        class="w-full bg-[#101922] border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white"
+                        placeholder="e.g. Pro Grip Goalkeeper Gloves"
+                        type="text"
+                      />
+                    </div>
+                    <div class="space-y-2">
+                      <label class="text-sm font-bold text-slate-300"
+                        >Category</label
+                      >
+                      <select
+                        class="w-full bg-[#101922] border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white"
+                      >
+                        <option>Select Category</option>
+                        <option>Goalkeeper Gloves</option>
+                        <option>Football Boots</option>
+                        <option>Apparel</option>
+                        <option>Accessories</option>
+                      </select>
+                    </div>
+                    <div class="space-y-2">
+                      <label class="text-sm font-bold text-slate-300"
+                        >Description (Rich Text)</label
+                      >
+                      <div
+                        class="border border-[#1c2632] rounded-lg overflow-hidden"
+                      >
+                        <div
+                          class="flex gap-2 p-2 bg-[#1c2632] border-b border-[#1c2632]"
+                        >
+                          <button
+                            class="p-1 hover:bg-[#283039] rounded transition-colors text-slate-300"
+                          >
+                            <span class="material-symbols-outlined text-lg"
+                              >format_bold</span
+                            >
+                          </button>
+                          <button
+                            class="p-1 hover:bg-[#283039] rounded transition-colors text-slate-300"
+                          >
+                            <span class="material-symbols-outlined text-lg"
+                              >format_italic</span
+                            >
+                          </button>
+                          <button
+                            class="p-1 hover:bg-[#283039] rounded transition-colors text-slate-300"
+                          >
+                            <span class="material-symbols-outlined text-lg"
+                              >format_list_bulleted</span
+                            >
+                          </button>
+                          <button
+                            class="p-1 hover:bg-[#283039] rounded transition-colors text-slate-300"
+                          >
+                            <span class="material-symbols-outlined text-lg"
+                              >link</span
+                            >
+                          </button>
+                        </div>
+                        <textarea
+                          class="w-full bg-[#101922] border-none focus:ring-0 text-white p-3 font-body"
+                          placeholder="Describe the material, fit, and features..."
+                          rows="6"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <!-- Product Variants Section -->
+                <section class="space-y-4">
+                  <div class="flex justify-between items-center px-2">
+                    <h3
+                      class="text-lg font-bold text-white flex items-center gap-2 font-display"
+                    >
+                      <span class="material-symbols-outlined text-primary"
+                        >layers</span
+                      >
+                      Product Variants
+                    </h3>
+                  </div>
+                  <!-- Variant 1 Box -->
+                  <div
+                    class="bg-[#1c2632]/30 border border-[#1c2632] rounded-xl overflow-hidden p-6 space-y-8"
+                  >
+                    <div class="flex justify-between items-center">
+                      <span
+                        class="text-xs font-black uppercase tracking-widest text-primary"
+                        >Variant 1</span
+                      >
+                      <button class="text-slate-500 hover:text-red-500">
+                        <span class="material-symbols-outlined">delete</span>
+                      </button>
+                    </div>
+                    <!-- Variant Details -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div class="space-y-2">
+                        <label
+                          class="text-xs font-bold text-slate-400 uppercase tracking-wider"
+                          >SKU</label
+                        >
+                        <input
+                          class="w-full bg-[#101922] border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm"
+                          placeholder="FB-GLV-001"
+                          type="text"
+                        />
+                      </div>
+                      <div class="space-y-2">
+                        <label
+                          class="text-xs font-bold text-slate-400 uppercase tracking-wider"
+                          >Stock Quantity</label
+                        >
+                        <input
+                          class="w-full bg-[#101922] border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm"
+                          placeholder="100"
+                          type="number"
+                        />
+                      </div>
+                      <div class="space-y-2">
+                        <label
+                          class="text-xs font-bold text-slate-400 uppercase tracking-wider"
+                          >Color</label
+                        >
+                        <input
+                          class="w-full bg-[#101922] border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm"
+                          placeholder="e.g. Neon Green"
+                          type="text"
+                        />
+                      </div>
+                      <div class="space-y-2">
+                        <label
+                          class="text-xs font-bold text-slate-400 uppercase tracking-wider"
+                          >Size</label
+                        >
+                        <input
+                          class="w-full bg-[#101922] border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm"
+                          placeholder="e.g. 9"
+                          type="text"
+                        />
+                      </div>
+                      <div class="space-y-2">
+                        <label
+                          class="text-xs font-bold text-slate-400 uppercase tracking-wider"
+                          >Price ($)</label
+                        >
+                        <input
+                          class="w-full bg-[#101922] border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm"
+                          placeholder="49.99"
+                          type="number"
+                        />
+                      </div>
+                      <div class="space-y-2">
+                        <label
+                          class="text-xs font-bold text-slate-400 uppercase tracking-wider"
+                          >Discounted Price ($)</label
+                        >
+                        <input
+                          class="w-full bg-[#101922] border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm"
+                          placeholder="39.99"
+                          type="number"
+                        />
+                      </div>
+                    </div>
+                    <!-- Dedicated Image Upload for this Variant -->
+                    <div class="space-y-4 pt-6 border-t border-[#1c2632]">
+                      <div class="flex flex-col gap-1">
+                        <label
+                          class="text-xs font-bold text-slate-400 uppercase tracking-wider"
+                          >Variant Images</label
+                        >
+                        <p
+                          class="text-[10px] text-slate-500 uppercase tracking-widest font-black"
+                        >
+                          Max 3 images for this variant
+                        </p>
+                      </div>
+                      <div class="grid grid-cols-4 gap-3">
+                        <!-- Upload Button -->
+                        <div
+                          class="aspect-square rounded-lg border-2 border-dashed border-[#1c2632] flex flex-col items-center justify-center bg-[#101922] cursor-pointer hover:bg-[#1c2632] transition-colors group"
+                        >
+                          <span
+                            class="material-symbols-outlined text-slate-500 group-hover:text-primary"
+                            >add_a_photo</span
+                          >
+                          <span
+                            class="text-[8px] font-bold text-slate-500 group-hover:text-primary mt-1"
+                            >UPLOAD</span
+                          >
+                        </div>
+                        <!-- Thumbnails -->
+                        <div
+                          class="aspect-square rounded-lg bg-cover bg-center border border-[#1c2632] relative group"
+                          style="
+                            background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAeOig8QXnK7ep9fg81XeD2Qc3BU7dMPmj5sScPr7vIxFkXL0_thdcGy1NvCq0nDYsFklk_0TmT7d3JpJaOtsVXXPA5JAy-EuUjfJ3fPKKHRr9QbKmXJYL6bPYwM9PboT2xsaYl7Z9l09lMlamEoK0mXqRiqUqYw3iJ-m79cCUcY9dRR4KpOBmneFFQuoOyFZpnaUDqW3oqPI5IsScYYVC8IaERjtRLtyQKsHhL8enote0cFkiz8SpYEiJ0Tzbhpp27k-B7H2irp5k&quot;);
+                          "
+                        >
+                          <button
+                            class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full size-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <span class="material-symbols-outlined text-[10px]"
+                              >close</span
+                            >
+                          </button>
+                        </div>
+                        <div
+                          class="aspect-square rounded-lg bg-cover bg-center border border-[#1c2632] relative group"
+                          style="
+                            background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDRvaEzoN4qqJGVxpeQ5iu8_C07DsIPcFlToRoICo09Q-DVQauWrZLFwzHsGD8E_lKYuMqIj0UH9B9MKysyBFKacPO0zHB-uwZzRIvUEhm0n3Ch3JI0Dl8FBjyEuWC_F1DHu8-rwJw9CeRtaWWukQPNQSQO_ZobxaVd99Ys4kFoE6Se3gq9jSUMSeNh-XgLsFT_u78rt8k4Z3McFVS8akuO-jkk8FqfL4d0rThXuSUhZN6KGsWlUNCfPgVmJqOBK6YAmY8YH3lqdvI&quot;);
+                          "
+                        >
+                          <button
+                            class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full size-4 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <span class="material-symbols-outlined text-[10px]"
+                              >close</span
+                            >
+                          </button>
+                        </div>
+                        <div
+                          class="aspect-square rounded-lg border-2 border-dashed border-[#1c2632] flex items-center justify-center bg-[#101922]/50 text-slate-700"
+                        >
+                          <span class="material-symbols-outlined">image</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Add Another Variant Action -->
+                  <button
+                    class="w-full py-4 border-2 border-dashed border-[#1c2632] rounded-xl flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-[#1c2632]/30 transition-all font-bold text-sm"
+                  >
+                    <span class="material-symbols-outlined">add_circle</span>
+                    Add Another Variant
+                  </button>
+                </section>
+                <!-- Actions moved from sticky footer to end of content as per request -->
+                <div class="flex items-center justify-end gap-3 pt-12">
+                  <a href="/admin/products">
+                    <button
+                    class="px-6 py-2.5 rounded text-slate-300 font-bold hover:text-white transition-colors text-sm"
+                  >
+                    Cancel
+                  </button>
+                  </a>
+                  <button
+                    class="px-8 py-2.5 rounded bg-primary text-white text-sm font-black shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2"
+                  >
+                    <span class="material-symbols-outlined text-sm font-bold"
+                      >save</span
+                    >
+                    SAVE PRODUCT
+                  </button>
+                </div>
+              </div>
+              <!-- Right Column (Sidebar form items) -->
+              <div class="space-y-8">
+                <!-- Hero Gallery removed as per request -->
+                <!-- Organization Info -->
+                <section
+                  class="bg-[#111418] border border-[#1c2632] rounded-xl p-6 space-y-6"
+                >
+                  <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                      <span class="text-xs font-bold text-slate-300"
+                        >Status</span
+                      >
+                      <span
+                        class="px-2 py-0.5 bg-green-500/10 text-green-500 text-[10px] font-bold rounded uppercase"
+                        >Draft</span
+                      >
+                    </div>
+                    <label
+                      class="relative inline-flex items-center cursor-pointer"
+                    >
+                      <input
+                        checked=""
+                        class="sr-only peer"
+                        type="checkbox"
+                        value=""
+                      />
+                      <div
+                        class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"
+                      ></div>
+                      <span class="ml-3 text-xs font-medium text-slate-400"
+                        >Published to store</span
+                      >
+                    </label>
+                  </div>
+                  <div class="space-y-2 pt-4 border-t border-[#1c2632]">
+                    <label
+                      class="text-xs font-bold text-slate-400 uppercase tracking-wider"
+                      >Tags</label
+                    >
+                    <input
+                      class="w-full bg-[#101922] border-[#1c2632] rounded-lg text-sm text-white"
+                      placeholder="Add tag..."
+                      type="text"
+                    />
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

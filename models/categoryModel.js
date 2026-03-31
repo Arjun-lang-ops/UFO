@@ -13,6 +13,7 @@ const categorySchema = new mongoose.Schema(
       type: String,
       default: ""
     },
+  
 
     isListed: {
       type: Boolean,
