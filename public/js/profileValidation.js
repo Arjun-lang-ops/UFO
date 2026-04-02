@@ -121,6 +121,7 @@ async function uploadProfileImage(event) {
 
   } else {
     alert(data.message);
+    window.location.reload()
   }
 
 }

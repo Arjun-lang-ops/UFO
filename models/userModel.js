@@ -41,9 +41,15 @@ const userSchema = new mongoose.Schema(
     default: false
   },
   profileImage: {
+  url: {
     type: String,
-    default: "/images/default-profile.png"
+    default: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg"
   },
+  public_id: {
+    type: String,
+    default: null
+  }
+},
 
     isVerified: {
       type: Boolean,

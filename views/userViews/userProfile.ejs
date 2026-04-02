@@ -308,7 +308,7 @@
     onclick="document.getElementById('profileImageInput').click()"
     id="profileImagePreview"
     class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-24 border-4 border-slate-50 dark:border-[#1e293b] shadow-md"
-    style="background-image: url('<%= user.profileImage || "/uploads/profile/default.png" %>');"
+    style="background-image: url('<%= user.profileImage?.url || "/uploads/profile/default.png" %>');"
   ></div>
 
   <!-- Edit Icon -->
