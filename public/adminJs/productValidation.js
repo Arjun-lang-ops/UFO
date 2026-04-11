@@ -274,7 +274,18 @@ document.addEventListener("DOMContentLoaded", () => {
       variantImageStore[idx] = [];
     }
 
-    const newFiles = Array.from(input.files);
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp","image/avif",'image/jpg'];
+
+const newFiles = Array.from(input.files);
+
+// validate file types
+for (let file of newFiles) {
+  if (!allowedTypes.includes(file.type)) {
+    showError(`imagesError_${idx}`, "Only JPG, PNG, JPG, AVIF and WEBP images are allowed");
+    input.value = ""; // reset input
+    return;
+  }
+}
 
     // merge old + new files
     let totalFiles = [...variantImageStore[idx], ...newFiles];
@@ -396,7 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.innerHTML = `<span class="material-symbols-outlined text-sm animate-spin">autorenew</span> Saving...`;
 
       try {
-        const response = await fetch("/admin/addProduct", {
+        const response = await fetch("/admin/product-added", {
           method: "POST",
           body: formData, // multipart/form-data (no Content-Type header needed)
         });

@@ -155,24 +155,10 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
                 <div
                     class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Total Items</p>
-                    <h3 class="text-2xl font-bold">1,284</h3>
+                    <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Total Products</p>
+                    <h3 class="text-2xl font-bold"><%=totalProducts%></h3>
                 </div>
-                <div
-                    class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Out of Stock</p>
-                    <h3 class="text-2xl font-bold text-red-500">12</h3>
-                </div>
-                <div
-                    class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Low Stock</p>
-                    <h3 class="text-2xl font-bold text-orange-500">24</h3>
-                </div>
-                <div
-                    class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                    <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Inventory Value</p>
-                    <h3 class="text-2xl font-bold">$142,500</h3>
-                </div>
+                
             </div>
             <!-- Filter Controls -->
             <div class="flex flex-wrap items-center gap-3 mb-6">
@@ -215,21 +201,29 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                         <% if(!product||product.length === 0) { %>
+    <tr>
+      <td colspan="4" class="text-center py-6 text-slate-500">
+        No Product found
+      </td>
+    </tr>
+  <% } %>
+  <% product.forEach(item=>{%>
                         <!-- Row 1 -->
                         <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
                             
                             <td class="px-6 py-4">
                                 <div class="flex flex-col">
-                                    <span class="text-sm font-bold">Elite FG Pro Boots</span>
-                                    <span class="text-xs text-slate-500">SKU: FTB-001-BL</span>
+                                    <span class="text-sm font-bold"><%=item.name%></span>
+                                    <span class="text-xs text-slate-500"><%=item.variants[0]?.sku%></span>
                                 </div>
                             </td>
                             <td class="px-6 py-4">
-                                <span class="text-xs font-medium text-slate-600 dark:text-slate-400">Footwear</span>
+                                <span class="text-xs font-medium text-slate-600 dark:text-slate-400"><%=item.category?.name%></span>
                             </td>
                             
                             <td class="px-6 py-4">
-                                <span class="text-sm font-bold">$189.99</span>
+                                <span class="text-sm font-bold"><%=item.variants[0]?.price%></span>
                             </td>
                             <td class="px-6 py-4">
                                 <span
@@ -238,7 +232,7 @@
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <a href="/admin/product-edit">
+                                    <a href="/admin/product-edit/<%= item._id %>">
                                         <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
                                         <span class="material-symbols-outlined text-lg">edit</span>
                                     </button>
@@ -252,6 +246,7 @@
                         <!-- Row 2 -->
                         
                         </tr>
+                    <%})%>
                     </tbody>
                 </table>
                 <!-- Pagination -->

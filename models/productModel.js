@@ -1,34 +1,63 @@
 import mongoose from "mongoose";
 
+const variantSchema = new mongoose.Schema({
+  sku: {
+    type: String,
+    required: true
+  },
+
+  color: {
+    type: String,
+    required: true
+  },
+
+  size: {
+    type: String,
+    required: true
+  },
+
+  price: {
+    type: Number,
+    required: true
+  },
+
+  discountedPrice: {
+    type: Number
+  },
+
+  stock: {
+    type: Number,
+    required: true
+  },
+
+  images: [String] 
+});
 
 const productSchema = new mongoose.Schema({
-  name: String,
-  price: Number,
+  name: {
+    type: String,
+    required: true
+  },
 
   category: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category'
+    ref: "Category",
+    required: true
   },
 
-  brand: {
+  description: {
     type: String,
-    required:true
+    required: true
   },
 
-  team: {
-    type: String ,
-    default:null// only for jerseys
-  },
-  price:Number,
-  description:String,
+  variants: [variantSchema], 
 
-  stock: Number,
-  images: [String],
-  isActive:{
-    type:Boolean,
-    default:true
+  isActive: {
+    type: Boolean,
+    default: true
   }
-},{timestamps:true});
 
-const Product= mongoose.model('Product',productSchema)
+}, { timestamps: true });
+
+const Product = mongoose.model("Product", productSchema);
 export default Product;

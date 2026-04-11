@@ -15,7 +15,7 @@ export const addAddressLogic=(userId,data)=>{
         country:data.country,
         street:data.street,
         apartment:data.apartment
-    })
+    });
     console.log('newAddress:',newAddress)
     return newAddress.save()
 
