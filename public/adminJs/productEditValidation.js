@@ -1,0 +1,501 @@
+// productEditValidation.js
+// Handles frontend validation and AJAX for admin product edit form
+
+document.addEventListener("DOMContentLoaded", () => {
+  const productForm = document.getElementById("addProductForm");
+  const variantsContainer = document.getElementById("variantsContainer");
+  const productId = document.getElementById("productId").value;
+
+  // Initialize variant count based on existing variants
+  const existingBoxes = document.querySelectorAll(".variant-box");
+  let variantCount = 0;
+  existingBoxes.forEach(box => {
+    const idx = parseInt(box.dataset.index);
+    if (idx > variantCount) variantCount = idx;
+  });
+  if (variantCount === 0) variantCount = 1;
+
+  // ─── Helpers ────────────────────────────────────────────────────────────────
+
+  const showError = (elementId, message) => {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.textContent = message;
+      el.classList.remove("hidden");
+    }
+  };
+
+  const clearError = (elementId) => {
+    const el = document.getElementById(elementId);
+    if (el) {
+      el.textContent = "";
+      el.classList.add("hidden");
+    }
+  };
+
+  const clearAllErrors = () => {
+    document.querySelectorAll(".error-msg").forEach((el) => {
+      el.textContent = "";
+      el.classList.add("hidden");
+    });
+  };
+
+  // ─── Validate general fields ─────────────────────────────────────────────────
+
+  const validateGeneralInfo = (name, category, description) => {
+    let isValid = true;
+
+    if (!name.trim()) {
+      showError("nameError", "Product name is required");
+      isValid = false;
+    } else if (name.trim().length < 3) {
+      showError("nameError", "Product name must be at least 3 characters");
+      isValid = false;
+    } else if (name.trim().length > 100) {
+      showError("nameError", "Product name cannot exceed 100 characters");
+      isValid = false;
+    }
+
+    if (!category || category === "") {
+      showError("categoryError", "Please select a category");
+      isValid = false;
+    }
+
+    if (!description.trim()) {
+      showError("descriptionError", "Description is required");
+      isValid = false;
+    } else if (description.trim().length < 10) {
+      showError("descriptionError", "Description must be at least 10 characters");
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
+  // ─── Validate variants ───────────────────────────────────────────────────────
+
+  const validateVariants = () => {
+    let isValid = true;
+    const variantBoxes = document.querySelectorAll(".variant-box");
+
+    if (variantBoxes.length === 0) {
+      Swal.fire({
+        icon: "warning",
+        title: "No Variants",
+        text: "Please add at least one product variant.",
+        confirmButtonColor: "#137fec",
+      });
+      return false;
+    }
+
+    variantBoxes.forEach((box) => {
+      const idx = box.dataset.index;
+
+      const sku = box.querySelector(`#sku_${idx}`)?.value || "";
+      const stock = box.querySelector(`#stock_${idx}`)?.value || "";
+      const color = box.querySelector(`#color_${idx}`)?.value || "";
+      const size = box.querySelector(`#size_${idx}`)?.value || "";
+      const price = box.querySelector(`#price_${idx}`)?.value || "";
+      const discPrice = box.querySelector(`#discountedPrice_${idx}`)?.value || "";
+
+      if (!sku.trim()) {
+        showError(`skuError_${idx}`, "SKU is required");
+        isValid = false;
+      } else if (!/^[a-zA-Z0-9\-_]+$/.test(sku.trim())) {
+        showError(`skuError_${idx}`, "SKU may only contain letters, numbers, hyphens, or underscores");
+        isValid = false;
+      }
+
+      if (stock === "" || isNaN(stock)) {
+        showError(`stockError_${idx}`, "Stock quantity is required");
+        isValid = false;
+      } else if (parseInt(stock) < 0) {
+        showError(`stockError_${idx}`, "Stock cannot be negative");
+        isValid = false;
+      }
+
+      if (!color.trim()) {
+        showError(`colorError_${idx}`, "Color is required");
+        isValid = false;
+      }
+
+      if (!size.trim()) {
+        showError(`sizeError_${idx}`, "Size is required");
+        isValid = false;
+      }
+
+      if (price === "" || isNaN(price)) {
+        showError(`priceError_${idx}`, "Price is required");
+        isValid = false;
+      } else if (parseFloat(price) <= 0) {
+        showError(`priceError_${idx}`, "Price must be greater than 0");
+        isValid = false;
+      }
+
+      if (discPrice !== "") {
+        if (isNaN(discPrice) || parseFloat(discPrice) < 0) {
+          showError(`discountedPriceError_${idx}`, "Enter a valid discounted price");
+          isValid = false;
+        } else if (parseFloat(discPrice) >= parseFloat(price)) {
+          showError(`discountedPriceError_${idx}`, "Discounted price must be less than original price");
+          isValid = false;
+        }
+      }
+
+      // Image validation (existing + new)
+      const existingImagesInput = document.getElementById(`existingImages_${idx}`);
+      let existingCount = 0;
+      if (existingImagesInput) {
+        try {
+          existingCount = JSON.parse(existingImagesInput.value).length;
+        } catch (e) {
+          existingCount = 0;
+        }
+      }
+
+      const imageInput = box.querySelector(`#variantImages_${idx}`);
+      const newCount = imageInput ? imageInput.files.length : 0;
+      const totalCount = existingCount + newCount;
+
+      if (totalCount === 0) {
+        showError(`imagesError_${idx}`, "Please have at least 1 image for this variant");
+        isValid = false;
+      } else if (totalCount > 3) {
+        showError(`imagesError_${idx}`, "Maximum 3 images allowed per variant (including existing)");
+        isValid = false;
+      }
+    });
+
+    return isValid;
+  };
+
+  // ─── Build variant HTML ──────────────────────────────────────────────────────
+
+  const createVariantHTML = (idx) => `
+        <div class="variant-box bg-[#1c2632]/30 border border-[#1c2632] rounded-xl overflow-hidden p-6 space-y-6" data-index="${idx}">
+            <div class="flex justify-between items-center">
+                <span class="text-xs font-black uppercase tracking-widest text-primary">Variant ${idx}</span>
+                <button type="button" onclick="removeVariant(this)" class="text-slate-500 hover:text-red-500 transition-colors">
+                    <span class="material-symbols-outlined">delete</span>
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- SKU -->
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">SKU</label>
+                    <input id="sku_${idx}" name="sku_${idx}" class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" placeholder="FB-GLV-001" type="text" />
+                    <p id="skuError_${idx}" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                </div>
+                <!-- Stock -->
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Stock Quantity</label>
+                    <input id="stock_${idx}" name="stock_${idx}" class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" placeholder="100" type="number" min="0" />
+                    <p id="stockError_${idx}" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                </div>
+                <!-- Color -->
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Color</label>
+                    <input id="color_${idx}" name="color_${idx}" class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" placeholder="e.g. Neon Green" type="text" />
+                    <p id="colorError_${idx}" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                </div>
+                <!-- Size -->
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Size</label>
+                    <input id="size_${idx}" name="size_${idx}" class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" placeholder="e.g. 9" type="text" />
+                    <p id="sizeError_${idx}" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                </div>
+                <!-- Price -->
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Price (₹)</label>
+                    <input id="price_${idx}" name="price_${idx}" class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" placeholder="49.99" type="number" min="0" step="0.01" />
+                    <p id="priceError_${idx}" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                </div>
+                <!-- Discounted Price -->
+                <div class="space-y-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Discounted Price (₹)</label>
+                    <input id="discountedPrice_${idx}" name="discountedPrice_${idx}" class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" placeholder="39.99" type="number" min="0" step="0.01" />
+                    <p id="discountedPriceError_${idx}" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                </div>
+            </div>
+
+            <!-- Variant Images -->
+            <div class="space-y-3 pt-4 border-t border-[#1c2632]">
+                <div class="flex flex-col gap-1">
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Variant Images</label>
+                    <p class="text-[10px] text-slate-500 uppercase tracking-widest font-black">Max 3 images for this variant</p>
+                </div>
+                <div class="relative">
+                    <label for="variantImages_${idx}"
+                        class="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-[#1c2632] rounded-lg cursor-pointer hover:bg-[#1c2632]/40 transition-colors group">
+                        <span class="material-symbols-outlined text-slate-500 group-hover:text-primary">add_a_photo</span>
+                        <span class="text-xs font-bold text-slate-500 group-hover:text-primary mt-1">CLICK TO UPLOAD</span>
+                    </label>
+                    <input id="variantImages_${idx}" name="variantImages_${idx}" type="file" accept="image/*" multiple class="hidden" onchange="previewImages(this, ${idx})" />
+                </div>
+                <input type="hidden" name="existingImages_${idx}" id="existingImages_${idx}" value="[]" />
+                <div id="imagePreview_${idx}" class="grid grid-cols-4 gap-3 mt-2"></div>
+                <p id="imagesError_${idx}" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+            </div>
+        </div>
+    `;
+
+  // ─── Add Variant ─────────────────────────────────────────────────────────────
+
+  window.addVariant = () => {
+    variantCount++;
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = createVariantHTML(variantCount).trim();
+    variantsContainer.insertBefore(
+      wrapper.firstChild,
+      document.getElementById("addVariantBtn"),
+    );
+  };
+
+  // ─── Remove Variant ──────────────────────────────────────────────────────────
+
+  window.removeVariant = (btn) => {
+    const box = btn.closest(".variant-box");
+    const allBoxes = document.querySelectorAll(".variant-box");
+    if (allBoxes.length <= 1) {
+      Swal.fire({
+        icon: "warning",
+        title: "Cannot Remove",
+        text: "At least one variant is required.",
+        confirmButtonColor: "#137fec",
+      });
+      return;
+    }
+    box.remove();
+  };
+
+  // ─── Existing Image Removal ────────────────────────────────────────────────
+
+  window.removeExistingImage = (idx, imgIndex) => {
+    const hiddenField = document.getElementById(`existingImages_${idx}`);
+    try {
+      const existing = JSON.parse(hiddenField.value);
+      existing.splice(imgIndex, 1);
+      hiddenField.value = JSON.stringify(existing);
+
+      // Re-render the UI for existing images
+      const previewContainer = document.getElementById(`imagePreview_${idx}`);
+      const oldNodes = Array.from(previewContainer.querySelectorAll('.existing-image'));
+      oldNodes.forEach(n => n.remove());
+
+      existing.forEach((img, newIndex) => {
+        const div = document.createElement("div");
+        div.className = "relative existing-image";
+        div.setAttribute("data-index", newIndex);
+
+        div.innerHTML = `
+             <div class="aspect-square rounded-lg bg-cover bg-center border border-[#1c2632]"
+                  style="background-image: url('${img.replace(/\\/g, '/')}')">
+             </div>
+             <button type="button"
+                 onclick="removeExistingImage(${idx}, ${newIndex})"
+                 class="absolute top-1 right-1 bg-black/70 text-white text-xs px-1 rounded hover:bg-red-500">
+                 ✕
+             </button>
+        `;
+        previewContainer.insertAdjacentElement('afterbegin', div);
+      });
+    } catch (e) {
+      console.error("Failed to remove existing image", e);
+    }
+  };
+
+  // ─── Image Preview ───────────────────────────────────────────────────────────
+
+  const variantImageStore = {};
+
+  window.previewImages = (input, idx) => {
+    const previewContainer = document.getElementById(`imagePreview_${idx}`);
+    const errorEl = document.getElementById(`imagesError_${idx}`);
+
+    if (!variantImageStore[idx]) {
+      variantImageStore[idx] = [];
+    }
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp","image/avif",'image/jpg'];
+    const newFiles = Array.from(input.files);
+
+    // validate file types
+    for (let file of newFiles) {
+      if (!allowedTypes.includes(file.type)) {
+        showError(`imagesError_${idx}`, "Only JPG, PNG, JPG, AVIF and WEBP images are allowed");
+        input.value = "";
+        return;
+      }
+    }
+
+    // merge old + new files
+    let totalFiles = [...variantImageStore[idx], ...newFiles];
+
+    // Check with existing limits
+    const existingImagesInput = document.getElementById(`existingImages_${idx}`);
+    let existingCount = 0;
+    if (existingImagesInput) {
+      try {
+        existingCount = JSON.parse(existingImagesInput.value).length;
+      } catch (e) {}
+    }
+
+    // limit to 3 images total
+    if (totalFiles.length + existingCount > 3) {
+      showError(`imagesError_${idx}`, "Maximum 3 images allowed per variant (including existing)");
+      return;
+    } else {
+      clearError(`imagesError_${idx}`);
+    }
+
+    variantImageStore[idx] = totalFiles;
+
+    // remove only newly uploaded image previews
+    Array.from(previewContainer.querySelectorAll('.new-image')).forEach(n => n.remove());
+
+    // show all newly uploaded images
+    variantImageStore[idx].forEach((file, i) => {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const div = document.createElement("div");
+        div.className = "relative new-image";
+
+        div.innerHTML = `
+            <div class="aspect-square rounded-lg bg-cover bg-center border border-[#1c2632]"
+                 style="background-image: url('${e.target.result}')">
+            </div>
+
+            <button type="button"
+                onclick="removeImage(${idx}, ${i})"
+                class="absolute top-1 right-1 bg-black/70 text-white text-xs px-1 rounded hover:bg-red-500">
+                ✕
+            </button>
+        `;
+
+        previewContainer.appendChild(div);
+      };
+
+      reader.readAsDataURL(file);
+    });
+
+    const dataTransfer = new DataTransfer();
+    variantImageStore[idx].forEach((file) => dataTransfer.items.add(file));
+    input.files = dataTransfer.files;
+  };
+
+  window.removeImage = (idx, imageIndex) => {
+    const input = document.getElementById(`variantImages_${idx}`);
+    const previewContainer = document.getElementById(`imagePreview_${idx}`);
+
+    // remove from store
+    variantImageStore[idx].splice(imageIndex, 1);
+
+    const dataTransfer = new DataTransfer();
+    variantImageStore[idx].forEach((file) => dataTransfer.items.add(file));
+    input.files = dataTransfer.files;
+
+    Array.from(previewContainer.querySelectorAll('.new-image')).forEach(n => n.remove());
+
+    variantImageStore[idx].forEach((file, i) => {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const div = document.createElement("div");
+        div.className = "relative new-image";
+
+        div.innerHTML = `
+                <div class="aspect-square rounded-lg bg-cover bg-center border border-[#1c2632]"
+                     style="background-image: url('${e.target.result}')">
+                </div>
+
+                <button type="button"
+                    onclick="removeImage(${idx}, ${i})"
+                    class="absolute top-1 right-1 bg-black/70 text-white text-xs px-1 rounded hover:bg-red-500">
+                    ✕
+                </button>
+            `;
+
+        previewContainer.appendChild(div);
+      };
+
+      reader.readAsDataURL(file);
+    });
+  };
+
+  // ─── Form Submission ─────────────────────────────────────────────────────────
+
+  if (productForm) {
+    productForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearAllErrors();
+
+      const name = document.getElementById("productName").value;
+      const category = document.getElementById("productCategory").value;
+      const description = document.getElementById("productDescription").value;
+
+      const generalValid = validateGeneralInfo(name, category, description);
+      const variantsValid = validateVariants();
+
+      if (!generalValid || !variantsValid) return;
+
+      const formData = new FormData(productForm);
+
+      const submitBtn = document.getElementById("submitProductBtn");
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span class="material-symbols-outlined text-sm animate-spin">autorenew</span> Saving...`;
+
+      try {
+        const response = await fetch(`/admin/product-edit/${productId}`, {
+          method: "PUT",
+          body: formData,
+        });
+
+        const result = await response.json();
+
+        if (response.ok && result.success !== false) {
+          Swal.fire({
+            icon: "success",
+            title: "Product Updated!",
+            text: result.message || "Product has been updated successfully.",
+            confirmButtonColor: "#137fec",
+          }).then(() => {
+            window.location.href = "/admin/products";
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Failed",
+            text: result.message || "Could not save product. Please try again.",
+            confirmButtonColor: "#137fec",
+          });
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = `<span class="material-symbols-outlined text-sm font-bold">save</span> SAVE PRODUCT`;
+        }
+      } catch (error) {
+        console.error("Error updating product:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "An unexpected error occurred. Please try again.",
+          confirmButtonColor: "#137fec",
+        });
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `<span class="material-symbols-outlined text-sm font-bold">save</span> SAVE PRODUCT`;
+      }
+    });
+  }
+
+  // ─── Live clear errors on input ──────────────────────────────────────────────
+
+  document
+    .getElementById("productName")
+    ?.addEventListener("input", () => clearError("nameError"));
+  document
+    .getElementById("productCategory")
+    ?.addEventListener("change", () => clearError("categoryError"));
+  document
+    .getElementById("productDescription")
+    ?.addEventListener("input", () => clearError("descriptionError"));
+});

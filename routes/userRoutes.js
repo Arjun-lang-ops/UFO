@@ -15,7 +15,7 @@ const router = express.Router();
 router.get('/', landingPageRender)
 router.get('/register',isLoggedOut, registerRender);
 router.get('/login',isLoggedOut, loginRender);
-router.get('/home', isLoggedIn, homePageRender);
+router.get('/home', isLoggedIn, homePageRender,loadHomePage);
 router.get('/otp', registerOtp);
 router.get('/forgotPassword', forgotpasswordRender)
 

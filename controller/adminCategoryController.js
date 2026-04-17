@@ -1,18 +1,39 @@
 // controllers/categoryController.js
 
-import { addCategoryService, editCategoryService, getAllCategoriesService } from "../service/adminCategoryService.js";
+import { addCategoryService, editCategoryService, getAllCategoriesService, getAllCategoriesPaginatedService } from "../service/adminCategoryService.js";
 
 export const categoryRender = async (req, res) => {
   try {
-    const categories = await getAllCategoriesService();
+    const page = parseInt(req.query.page) || 1;
+    const limit = 4;
+    const search = req.query.search || '';
 
-    return res.render('adminViews/adminCategoryManagement', { categories });
+    const filter = {};
+    if (search) {
+      filter.name = { $regex: search, $options: 'i' };
+    }
+
+    const result = await getAllCategoriesPaginatedService({ filter, page, limit });
+
+    return res.render('adminViews/adminCategoryManagement', {
+      categories: result.data,
+      totalPages: result.totalPages,
+      currentPage: result.currentPage,
+      totalCategories: result.totalCategories,
+      limit,
+      search
+    });
 
   } catch (error) {
     console.error(error);
 
-    res.render("adminViews/categoryPage", {
-      categories: []
+    res.render("adminViews/adminCategoryManagement", {
+      categories: [],
+      totalPages: 1,
+      currentPage: 1,
+      totalCategories: 0,
+      limit: 4,
+      search: ''
     });
   }
 };

@@ -2,6 +2,7 @@ import { registerUserLogic, verifyUserOtp, userLoginLogic, changePasswordService
 import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
 import { sendForgotPasswordMail, sendMail } from "../utils/mailer.js";
 import User from "../models/userModel.js";
+import Category from "../models/categoryModel.js";
 
 
 
@@ -16,11 +17,13 @@ export const loginRender = (req, res) =>
 export const landingPageRender = (req, res) =>
   res.render('userViews/userLandingPage');
 
-export const homePageRender = (req, res) => {
+export const homePageRender = async (req, res) => {
   if (!req.session.user) {
     return res.redirect('/login')
   }
-  res.render('userViews/userHomePage');
+   const categories = await Category.find({ isListed: true });
+
+  res.render('userViews/userHomePage', { categories });
 }
 
 

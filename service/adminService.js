@@ -119,3 +119,49 @@ export const addProductService = async (data, files) => {
     throw new Error(error.message);
   }
 };
+
+// EDIT PRODUCT
+export const editProductService = async (productId, data, files) => {
+  try {
+    const variants = [];
+    const keys = Object.keys(data);
+    const skuKeys = keys.filter(k => k.startsWith('sku_'));
+    const indices = skuKeys.map(k => k.split('_')[1]);
+
+    for (const idx of indices) {
+      const newImages = files ? files[`variantImages_${idx}`] : undefined;
+      const newImagePaths = newImages ? newImages.map(file => file.path) : [];
+      
+      let existingImages = [];
+      if (data[`existingImages_${idx}`]) {
+        try {
+          const parsed = JSON.parse(data[`existingImages_${idx}`]);
+          existingImages = Array.isArray(parsed) ? parsed : [parsed];
+        } catch (e) {
+          existingImages = Array.isArray(data[`existingImages_${idx}`]) ? data[`existingImages_${idx}`] : [data[`existingImages_${idx}`]];
+        }
+      }
+
+      variants.push({
+        sku: data[`sku_${idx}`],
+        color: data[`color_${idx}`],
+        size: data[`size_${idx}`],
+        price: Number(data[`price_${idx}`]),
+        discountedPrice: data[`discountedPrice_${idx}`] ? Number(data[`discountedPrice_${idx}`]) : null,
+        stock: Number(data[`stock_${idx}`]),
+        images: [...existingImages, ...newImagePaths],
+      });
+    }
+
+    const product = await Product.findByIdAndUpdate(productId, {
+      name: data.name,
+      category: data.category,
+      description: data.description,
+      variants,
+    }, { new: true });
+
+    return product;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

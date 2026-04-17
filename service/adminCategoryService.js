@@ -7,6 +7,25 @@ export const getAllCategoriesService = async () => {
 };
 
 
+export const getAllCategoriesPaginatedService = async ({ filter, page, limit }) => {
+  const skip = (page - 1) * limit;
+
+  const [categories, totalCategories] = await Promise.all([
+    Category.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit),
+    Category.countDocuments(filter)
+  ]);
+
+  const totalPages = Math.ceil(totalCategories / limit);
+
+  return {
+    success: true,
+    data: categories,
+    totalCategories,
+    totalPages,
+    currentPage: page
+  };
+};
+
 export const addCategoryService = async (name, description, isListed) => {
 
   if (!name || !description) {
@@ -38,21 +57,27 @@ export const addCategoryService = async (name, description, isListed) => {
 };
 
 
-export const editCategoryService=async(id,name,description,isListed)=>{
-    const existing=await Category.findOne({name,_id:{$ne:id}});
-    if(existing){
-        throw new Error('Category Already Exists')
+export const editCategoryService = async (id, name, description, isListed) => {
+   
+
+    const existing = await Category.findOne({
+        name:{$regex:`{name}$`,$options:'i'},
+        _id: { $ne: id } // ✅ exclude current category
+    });
+
+    if (existing) {
+        throw new Error('Category Already Exists');
     }
 
-    const updated= await Category.findByIdAndUpdate(id,{name,description,isListed},{new:true});
-    if(updated.name===name){
-      throw new Error('category already exists')
+    const updated = await Category.findByIdAndUpdate(
+        id,
+        { name, description, isListed },
+        { new: true }
+    );
+
+    if (!updated) {
+        throw new Error('Category not found');
     }
 
-    if(!updated){
-        throw new Error('Category not found')
-    }
-
-    return updated
-
-}
+    return updated;
+};

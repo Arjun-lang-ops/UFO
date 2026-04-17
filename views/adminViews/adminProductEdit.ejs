@@ -132,7 +132,7 @@
       <header
         class="sticky top-0 z-40 bg-[#101922]/95 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-8 h-16 w-full">
         <h2 class="text-xl font-bold text-white tracking-tight font-display">
-          Add New Product
+          Edit Product
         </h2>
         <div class="flex items-center gap-4">
           <button class="material-symbols-outlined text-slate-400 hover:text-white">
@@ -168,9 +168,10 @@
                     <div class="space-y-1">
                       <label for="productName" class="text-sm font-bold text-slate-300">Product Name <span
                           class="text-red-400">*</span></label>
-                      <input id="productName" name="name"
+                      <input id="productName" name="name" value="<%= product.name %>"
                         class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white px-3 py-2"
                         placeholder="e.g. Pro Grip Goalkeeper Gloves" type="text" />
+                      <input type="hidden" id="productId" name="productId" value="<%= product._id %>" />
                       <p id="nameError" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                     </div>
 
@@ -183,7 +184,7 @@
                         <option value="">Select Category</option>
                         <% if (typeof categories !=='undefined' ) { %>
                           <% categories.forEach(cat=> { %>
-                            <option value="<%= cat._id %>">
+                            <option value="<%= cat._id %>" <%= product.category && product.category._id.toString() === cat._id.toString() ? 'selected' : '' %>>
                               <%= cat.name %>
                             </option>
                             <% }); %>
@@ -199,7 +200,7 @@
                       <div class="border border-[#1c2632] rounded-lg overflow-hidden">
                         <textarea id="productDescription" name="description"
                           class="w-full bg-[#101922] border-none focus:ring-0 text-white p-3 font-body"
-                          placeholder="Describe the material, fit, and features..." rows="6"></textarea>
+                          placeholder="Describe the material, fit, and features..." rows="6"><%= product.description %></textarea>
                       </div>
                       <p id="descriptionError" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                     </div>
@@ -218,13 +219,14 @@
 
                   <!-- Variants Container -->
                   <div id="variantsContainer" class="space-y-4">
-
-                    <!-- Variant 1 (Static First Variant) -->
+                    <% product.variants.forEach((variant, index) => { %>
+                    <% const idx = index + 1; %>
+                    <!-- Variant <%= idx %> -->
                     <div
                       class="variant-box bg-[#1c2632]/30 border border-[#1c2632] rounded-xl overflow-hidden p-6 space-y-6"
-                      data-index="1">
+                      data-index="<%= idx %>">
                       <div class="flex justify-between items-center">
-                        <span class="text-xs font-black uppercase tracking-widest text-primary">Variant 1</span>
+                        <span class="text-xs font-black uppercase tracking-widest text-primary">Variant <%= idx %></span>
                         <button type="button" onclick="removeVariant(this)"
                           class="text-slate-500 hover:text-red-500 transition-colors">
                           <span class="material-symbols-outlined">delete</span>
@@ -234,84 +236,85 @@
                       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- SKU -->
                         <div class="space-y-1">
-                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">SKU <span
-                              class="text-red-400">*</span></label>
-                          <input id="sku_1" name="sku_1"
-                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2"
-                            placeholder="FB-GLV-001" type="text" />
-                          <p id="skuError_1" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">SKU <span class="text-red-400">*</span></label>
+                          <input id="sku_<%= idx %>" name="sku_<%= idx %>" value="<%= variant.sku %>"
+                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" type="text" />
+                          <p id="skuError_<%= idx %>" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                         </div>
                         <!-- Stock -->
                         <div class="space-y-1">
-                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Stock Quantity <span
-                              class="text-red-400">*</span></label>
-                          <input id="stock_1" name="stock_1"
-                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2"
-                            placeholder="100" type="number" min="0" />
-                          <p id="stockError_1" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Stock Quantity <span class="text-red-400">*</span></label>
+                          <input id="stock_<%= idx %>" name="stock_<%= idx %>" value="<%= variant.stock %>"
+                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" type="number" min="0" />
+                          <p id="stockError_<%= idx %>" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                         </div>
                         <!-- Color -->
                         <div class="space-y-1">
-                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Color <span
-                              class="text-red-400">*</span></label>
-                          <input id="color_1" name="color_1"
-                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2"
-                            placeholder="e.g. Neon Green" type="text" />
-                          <p id="colorError_1" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Color <span class="text-red-400">*</span></label>
+                          <input id="color_<%= idx %>" name="color_<%= idx %>" value="<%= variant.color %>"
+                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" type="text" />
+                          <p id="colorError_<%= idx %>" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                         </div>
                         <!-- Size -->
                         <div class="space-y-1">
-                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Size <span
-                              class="text-red-400">*</span></label>
-                          <input id="size_1" name="size_1"
-                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2"
-                            placeholder="e.g. 9" type="text" />
-                          <p id="sizeError_1" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Size <span class="text-red-400">*</span></label>
+                          <input id="size_<%= idx %>" name="size_<%= idx %>" value="<%= variant.size %>"
+                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" type="text" />
+                          <p id="sizeError_<%= idx %>" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                         </div>
                         <!-- Price -->
                         <div class="space-y-1">
-                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Price (₹) <span
-                              class="text-red-400">*</span></label>
-                          <input id="price_1" name="price_1"
-                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2"
-                            placeholder="49.99" type="number" min="0" step="0.01" />
-                          <p id="priceError_1" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Price (₹) <span class="text-red-400">*</span></label>
+                          <input id="price_<%= idx %>" name="price_<%= idx %>" value="<%= variant.price %>"
+                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" type="number" min="0" step="0.01" />
+                          <p id="priceError_<%= idx %>" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                         </div>
                         <!-- Discounted Price -->
                         <div class="space-y-1">
-                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Discounted Price
-                            (₹)</label>
-                          <input id="discountedPrice_1" name="discountedPrice_1"
-                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2"
-                            placeholder="39.99" type="number" min="0" step="0.01" />
-                          <p id="discountedPriceError_1" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Discounted Price (₹)</label>
+                          <input id="discountedPrice_<%= idx %>" name="discountedPrice_<%= idx %>" value="<%= variant.discountedPrice || '' %>"
+                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" type="number" min="0" step="0.01" />
+                          <p id="discountedPriceError_<%= idx %>" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                         </div>
                       </div>
 
                       <!-- Variant Images -->
                       <div class="space-y-3 pt-4 border-t border-[#1c2632]">
                         <div class="flex flex-col gap-1">
-                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Variant Images <span
-                              class="text-red-400">*</span></label>
-                          <p class="text-[10px] text-slate-500 uppercase tracking-widest font-black">Max 3 images for
-                            this variant</p>
+                          <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Variant Images <span class="text-red-400">*</span></label>
+                          <p class="text-[10px] text-slate-500 uppercase tracking-widest font-black">Max 3 images for this variant</p>
                         </div>
                         <div class="relative">
-                          <label for="variantImages_1"
+                          <label for="variantImages_<%= idx %>"
                             class="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-[#1c2632] rounded-lg cursor-pointer hover:bg-[#1c2632]/40 transition-colors group">
-                            <span
-                              class="material-symbols-outlined text-slate-500 group-hover:text-primary">add_a_photo</span>
-                            <span class="text-xs font-bold text-slate-500 group-hover:text-primary mt-1">CLICK TO
-                              UPLOAD</span>
+                            <span class="material-symbols-outlined text-slate-500 group-hover:text-primary">add_a_photo</span>
+                            <span class="text-xs font-bold text-slate-500 group-hover:text-primary mt-1">CLICK TO UPLOAD</span>
                           </label>
-                          <input id="variantImages_1" name="variantImages_1" type="file" accept="image/*" multiple
-                            class="hidden" onchange="previewImages(this, 1)" />
+                          <input id="variantImages_<%= idx %>" name="variantImages_<%= idx %>" type="file" accept="image/*" multiple class="hidden" data-idx="<%= idx %>" onchange="previewImages(this, this.dataset.idx)" />
                         </div>
-                        <div id="imagePreview_1" class="grid grid-cols-4 gap-3 mt-2"></div>
-                        <p id="imagesError_1" class="error-msg hidden text-red-400 text-xs mt-1"></p>
+                        
+                        <input type="hidden" name="existingImages_<%= idx %>" id="existingImages_<%= idx %>" value='<%- JSON.stringify(variant.images) %>' />
+                        
+                        <!-- Image Preview Grid -->
+                        <div id="imagePreview_<%= idx %>" class="grid grid-cols-4 gap-3 mt-2">
+                           <% variant.images.forEach((img, imgIndex) => { %>
+                             <div class="relative existing-image" data-index="<%= imgIndex %>">
+                               <div class="aspect-square rounded-lg bg-cover bg-center border border-[#1c2632]"
+                                    style="background-image: url('<%= img.replace(/\\/g, '/') %>');">
+                               </div>
+                               <button type="button"
+                                   data-idx="<%= idx %>" data-imgindex="<%= imgIndex %>"
+                                   onclick="removeExistingImage(this.dataset.idx, this.dataset.imgindex)"
+                                   class="absolute top-1 right-1 bg-black/70 text-white text-xs px-1 rounded hover:bg-red-500">
+                                   ✕
+                               </button>
+                             </div>
+                           <% }); %>
+                        </div>
+                        <p id="imagesError_<%= idx %>" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                       </div>
                     </div>
-
+                    <% }); %>
                     <!-- Add Another Variant Button -->
                     <button id="addVariantBtn" type="button" onclick="addVariant()"
                       class="w-full py-4 border-2 border-dashed border-[#1c2632] rounded-xl flex items-center justify-center gap-2 text-slate-400 hover:text-white hover:bg-[#1c2632]/30 transition-all font-bold text-sm">
@@ -350,8 +353,8 @@
     </main>
   </div>
 
-  <!-- Product Validation Script -->
-  <script src="/adminJs/productValidation.js"></script>
+  <!-- Product Edit Validation Script -->
+  <script src="/adminJs/productEditValidation.js"></script>
 </body>
 
 </html>

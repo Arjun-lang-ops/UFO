@@ -134,26 +134,7 @@
             </a>
           </div>
         </nav>
-        <div class="p-4 border-t border-slate-200 dark:border-slate-800">
-          <div class="flex items-center gap-3 p-2">
-            <div
-              class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center"
-              data-alt="Admin user profile picture"
-              style="
-                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuB326A9q4ygFaAU5OvMe5s0Xl_pR3TGhShDKCBL39Pjk0YH_gCp3opRRpO8PznaUu9i5hDLsYlkEay0pKSDeIb23xT1L9_voS9jw3H-TdAlKuNtfFEX8Wv_vNA3znQoqHCgrgr0d2vYYn_6OQ1T3zyJNXYibsdTuPDsa8O7E0HwC-5LV-J07O1bUwp_y1QVkM462VJP0kjQhM2ohlvS9jXL-Agdsyh9oxdGDA3FaIC2MgDTv2Ga4Ty3K37A-WIekHHcs-4wDm30AGY&quot;);
-              "
-            ></div>
-            <div class="flex flex-col">
-              <span class="text-sm font-semibold text-slate-900 dark:text-white"
-                >Alex Morgan</span
-              >
-              <span
-                class="text-xs text-slate-500 dark:text-slate-400 leading-none"
-                >Store Manager</span
-              >
-            </div>
-          </div>
-        </div>
+        
       </aside>
       <!-- Main Content Area -->
       <main class="flex-1 overflow-y-auto flex flex-col">
@@ -184,20 +165,28 @@
         <section class="px-8 py-4 space-y-4">
           <div class="flex flex-col md:flex-row gap-4 items-center">
             <!-- Search Bar -->
-            <div class="flex-1 w-full">
-              <div class="relative">
+            <form action="/admin/categories" method="GET" class="flex-1 w-full flex items-center gap-2">
+              <div class="relative flex-1">
                 <div
                   class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400 dark:text-[#9dabb9]"
                 >
                   <span class="material-symbols-outlined">search</span>
                 </div>
                 <input
+                  name="search"
+                  id="searchInput"
+                  value="<%= typeof search !== 'undefined' ? search : '' %>"
                   class="block w-full h-11 pl-12 bg-white dark:bg-[#283039] border border-slate-200 dark:border-transparent rounded-lg text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition-all"
                   placeholder="Search categories by name..."
                   type="text"
                 />
               </div>
-            </div>
+              <button type="submit" class="bg-primary hover:bg-primary/90 text-white rounded-lg h-11 px-4 text-sm font-bold transition-all">Search</button>
+              <button type="button" onclick="document.getElementById('searchInput').value=''" class="bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg h-11 px-4 text-sm font-bold flex items-center transition-all">Cancel</button>
+              <% if (typeof search !== 'undefined' && search) { %>
+                <a href="/admin/categories" class="bg-red-500 hover:bg-red-600 text-white rounded-lg h-11 px-4 text-sm font-bold flex items-center transition-all">Clear</a>
+              <% } %>
+            </form>
             <!-- Chips/Filters -->
             <div
               class="flex gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0"
@@ -333,25 +322,59 @@
             <div
               class="px-6 py-4 bg-slate-50 dark:bg-[#1c2127] border-t border-slate-200 dark:border-[#3b4754] flex items-center justify-between"
             >
-              <span
-                class="text-xs font-medium text-slate-500 dark:text-slate-400"
-                >Showing 1 to 4 of 24 categories</span
-              >
-              <div class="flex gap-2">
-                <button
-                  class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:bg-white dark:hover:bg-slate-800 transition-colors"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >chevron_left</span
-                  >
-                </button>
-                <button
-                  class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:bg-white dark:hover:bg-slate-800 transition-colors"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >chevron_right</span
-                  >
-                </button>
+              <p class="text-xs font-medium text-slate-500 dark:text-slate-400">
+                Showing <%= (currentPage - 1) * limit + 1 %>–<%= Math.min(currentPage * limit, totalCategories) %> of <%= totalCategories %> categories
+              </p>
+              <div class="flex gap-1 items-center">
+
+                <%# Previous button %>
+                <% if (currentPage > 1) { %>
+                  <a href="/admin/categories?page=<%= currentPage - 1 %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                  </a>
+                <% } else { %>
+                  <span class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-300 dark:text-slate-600 cursor-not-allowed">
+                    <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                  </span>
+                <% } %>
+
+                <%# Page number buttons with smart ellipsis %>
+                <%
+                  let pagesToShow = [];
+                  if (totalPages <= 7) {
+                    for (let i = 1; i <= totalPages; i++) pagesToShow.push(i);
+                  } else {
+                    pagesToShow.push(1);
+                    if (currentPage > 3) pagesToShow.push('...');
+                    let start = Math.max(2, currentPage - 1);
+                    let end   = Math.min(totalPages - 1, currentPage + 1);
+                    for (let i = start; i <= end; i++) pagesToShow.push(i);
+                    if (currentPage < totalPages - 2) pagesToShow.push('...');
+                    pagesToShow.push(totalPages);
+                  }
+                %>
+
+                <% pagesToShow.forEach(p => { %>
+                  <% if (p === '...') { %>
+                    <span class="px-1 text-slate-400 dark:text-slate-500 text-sm">…</span>
+                  <% } else if (p === currentPage) { %>
+                    <span class="h-8 w-8 rounded-lg bg-primary text-white text-sm font-bold flex items-center justify-center"><%= p %></span>
+                  <% } else { %>
+                    <a href="/admin/categories?page=<%= p %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>" class="h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium flex items-center justify-center hover:bg-white dark:hover:bg-slate-800 transition-colors"><%= p %></a>
+                  <% } %>
+                <% }) %>
+
+                <%# Next button %>
+                <% if (currentPage < totalPages) { %>
+                  <a href="/admin/categories?page=<%= currentPage + 1 %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                  </a>
+                <% } else { %>
+                  <span class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-300 dark:text-slate-600 cursor-not-allowed">
+                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                  </span>
+                <% } %>
+
               </div>
             </div>
           </div>

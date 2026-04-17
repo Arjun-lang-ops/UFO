@@ -3,7 +3,7 @@ import { adminLoginRender, adminHomeRender, adminLogin, logoutAdmin, adminUserMa
 import express from 'express';
 import { adminLoggedIn, adminLoggedOut } from "../middlewares/adminAuth.js";
 import { addCategoryController, categoryRender,editCategoryController } from "../controller/adminCategoryController.js";
-import { addProduct, addProductController, editProduct, productRender } from "../controller/adminProductController.js";
+import { addProduct, addProductController, editProduct, productRender, editProductController } from "../controller/adminProductController.js";
 import { uploadVariantImages } from "../middlewares/uploadProduct.js";
 
 const router = express.Router();
@@ -23,6 +23,6 @@ router.patch('/block-user/:id',adminLoggedIn, toggleBlockUser);
 router.post('/addCategory',addCategoryController);
 router.put('/editCategory/:id',editCategoryController);
 router.post('/product-added',uploadVariantImages,addProductController)
-
+router.put('/product-edit/:id',uploadVariantImages, editProductController)
 
 export default router;
