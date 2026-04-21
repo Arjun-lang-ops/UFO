@@ -2,7 +2,11 @@ import { forgotUserService, resetPasswordService } from "../service/userService.
 import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
 import { sendForgotPasswordMail } from "../utils/mailer.js";
 import Otp from "../models/otpModel.js";
+
+
+
 export const forgotPasswordVerify=async(req,res)=>{
+  
     return res.render('userViews/userForgotPasswordVerify')
 }
 
@@ -50,6 +54,8 @@ export const verifyForgotOtp=async(req,res)=>{
     const {otp,email}=req.body;
     console.log('otp :',otp,email)
     await verifyOtp(email,otp);
+    req.session.isOtpVerified = true;
+    req.session.resetEmail = email;
     res.status(200).json({
       success:true,
       message:'verified'

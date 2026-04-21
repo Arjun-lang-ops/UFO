@@ -16,6 +16,7 @@ export const generateAndSaveOtp = async (email) => {
     return rawOtp;
 }
 
+
 export const verifyOtp = async (email, otp) => {
     const otpRecord = await Otp.findOne({ email });
     if (!otpRecord) throw new Error("OTP not found");
@@ -32,4 +33,6 @@ export const verifyOtp = async (email, otp) => {
     
     return true
 }
+
+
 

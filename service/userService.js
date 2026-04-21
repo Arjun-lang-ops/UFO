@@ -19,7 +19,6 @@ export const registerUserLogic = async (data) => {
     email,
     password: hashedPassword,
     isVerified: false,
-
   });
   return user;
 };
@@ -37,7 +36,7 @@ export const verifyUserOtp = async (email) => {
   const user = await User.findOne({ email });
   if (!user) {
     throw new Error("user not found");
-  };
+  }
 
   user.isVerified = true;
 
@@ -52,22 +51,22 @@ export const userLoginLogic = async (data) => {
 
   if (!existingUser) {
     throw new Error("user not found");
-  };
+  }
 
   if (existingUser.isBlocked) {
     throw new Error("Your account has been blocked by admin");
-  };
+  }
   if (!existingUser.password) {
     throw new Error("Please login using Google");
-  };
+  }
   const passwordMatch = await bcrypt.compare(password, existingUser.password);
   if (!passwordMatch) {
     throw new Error("Invalid Password");
-  };
+  }
 
   if (!existingUser.isVerified) {
     throw new Error("User not verified with OTP");
-  };
+  }
 
   return existingUser;
 };
@@ -82,6 +81,7 @@ export const forgotUserService = async (data) => {
 
   return existingUser;
 };
+
 
 export const resetPasswordService = async (
   email,

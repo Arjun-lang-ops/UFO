@@ -204,7 +204,7 @@
                   >arrow_back</span
                 >
               </button>
-              <button
+              <button 
                 class="flex items-center justify-center w-8 h-8 rounded-full bg-surface-dark hover:bg-slate-700 transition-colors"
               >
                 <span class="material-symbols-outlined text-sm"
@@ -213,11 +213,15 @@
               </button>
             </div>
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <!-- Product Card 1 -->
+             <% products.forEach(product=>{
+              const variant=product.variants[0]
+              %>
             <div
               class="group flex flex-col gap-3 rounded-xl bg-surface-dark/50 p-3 hover:bg-surface-dark transition-all border border-transparent hover:border-slate-700/50"
-            >
+            ><a href="product/<%= product._id %>">
+              
               <div
                 class="relative w-full aspect-[4/5] rounded-lg overflow-hidden"
               >
@@ -225,7 +229,7 @@
                   class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
                   data-alt="Neon yellow soccer boots floating"
                   style="
-                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBnSJ_SAqGnG3AxnoNYc-J7lfh4wLQugZEr0UJ57LN69JYSdZOtuJaSjrLYSl2ObzXhbr5R6rb7SjBUXufIRceT5h3YYU4eY2zY04mJgsm1zNtdLSVHhYyzGq5oQXjUr1FLNZm5T338Xt3om5J9kOJg0gAEmWpP-5HZ5P2afroYJskiB-oIX0-au_js21Ca_GHNJN2hE8mrk4memd0piROcQCVt58mXDne7Y-Q40Lv58IjHAOPu17KkaCqskGU8XMZYzrmO0w8cMGQ&quot;);
+                    background-image: url('<%= variant.images[0] %>');
                   "
                 ></div>
                 <div
@@ -244,123 +248,21 @@
               <div>
                 <div class="flex justify-between items-start">
                   <h3 class="text-base font-bold leading-tight">
-                    Speed Vapor 15
+                    <%= product.name %>
                   </h3>
-                  <p class="text-primary font-bold">$185</p>
+                            <p class="text-primary font-bold">
+                      ₹<%= variant.discountedPrice || variant.price %>
+                    </p>
                 </div>
-                <p class="text-slate-500 dark:text-[#9dabb9] text-sm mt-1">
-                  Pro FG Cleats
-                </p>
+               
+                          <p class="text-slate-500 text-sm mt-1">
+                    <%= variant.color %> | <%= variant.size %>
+                  </p>
               </div>
-            </div>
-            <!-- Product Card 2 -->
-            <div
-              class="group flex flex-col gap-3 rounded-xl bg-surface-dark/50 p-3 hover:bg-surface-dark transition-all border border-transparent hover:border-slate-700/50"
-            >
-              <div
-                class="relative w-full aspect-[4/5] rounded-lg overflow-hidden"
-              >
-                <div
-                  class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  data-alt="White and blue professional match ball"
-                  style="
-                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAXbKdh_Ah3Vu1qlIpPj4xOOw3xrnFbAj5VpzlwYPhl7YxEYZMfD0_ycgiABND6N6ysfdOl5bkcdKAt9L6Z54XUAfVmmIKcoYCsRTytk3OlTL_Pj-mUgmuSrjzhlZYcyLVy6PxO-A13Shfeq-NN_b1oLRjRgrgDkRFo9vc57zFd0W-yN7Zj8wgTbqPY5nIVP_zLt8IQ2lnmHZI4r76OOxt0fSDS30LLuMObLAePz2Y_-l97shHmGbG9VMg59O0h2jNKlGgTyG0PRyY&quot;);
-                  "
-                ></div>
-                <button
-                  class="absolute bottom-3 right-3 h-10 w-10 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all shadow-lg"
-                >
-                  <span class="material-symbols-outlined text-[20px]"
-                    >add_shopping_cart</span
-                  >
-                </button>
-              </div>
-              <div>
-                <div class="flex justify-between items-start">
-                  <h3 class="text-base font-bold leading-tight">
-                    Pro League Ball
-                  </h3>
-                  <p class="text-primary font-bold">$140</p>
-                </div>
-                <p class="text-slate-500 dark:text-[#9dabb9] text-sm mt-1">
-                  Official Match Ball
-                </p>
-              </div>
-            </div>
-            <!-- Product Card 3 -->
-            <div
-              class="group flex flex-col gap-3 rounded-xl bg-surface-dark/50 p-3 hover:bg-surface-dark transition-all border border-transparent hover:border-slate-700/50"
-            >
-              <div
-                class="relative w-full aspect-[4/5] rounded-lg overflow-hidden"
-              >
-                <div
-                  class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  data-alt="Black goalkeeper gloves with foam grip"
-                  style="
-                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAhF_GRxLCy7xSkE4CHsSp7oNunoldS8qP4IPOCXvznfTCWQQLkTf1f1Qt8uQ6UcOKQ3yy8dfqu3GZlDIdmSNVDLx2OO6oL_nXm4cJT9sPJ8qa5nBBe-wLOFb7FR8z444udnRiDbihNQxegG3L10uvKacHlTj5V0a7OWW_3YKQwwahjiqQKhf4zAF5v_qK4HUTTpiHzcChKdHu7X0reIco0P2DQ_0qzGhVbfZ0HqRRVhLb3mwI-t2UwaIC_utA5wpfZt-90BWzQ40o&quot;);
-                  "
-                ></div>
-                <button
-                  class="absolute bottom-3 right-3 h-10 w-10 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all shadow-lg"
-                >
-                  <span class="material-symbols-outlined text-[20px]"
-                    >add_shopping_cart</span
-                  >
-                </button>
-              </div>
-              <div>
-                <div class="flex justify-between items-start">
-                  <h3 class="text-base font-bold leading-tight">
-                    Predator Pro
-                  </h3>
-                  <p class="text-primary font-bold">$95</p>
-                </div>
-                <p class="text-slate-500 dark:text-[#9dabb9] text-sm mt-1">
-                  Hybrid Cut Gloves
-                </p>
-              </div>
-            </div>
-            <!-- Product Card 4 -->
-            <div
-              class="group flex flex-col gap-3 rounded-xl bg-surface-dark/50 p-3 hover:bg-surface-dark transition-all border border-transparent hover:border-slate-700/50"
-            >
-              <div
-                class="relative w-full aspect-[4/5] rounded-lg overflow-hidden"
-              >
-                <div
-                  class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                  data-alt="Red team jersey with modern pattern"
-                  style="
-                    background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuA3SwIl9ftIpLOmOoKOu1p31bn90t6Y8sJboLeRq1bb26XCNmOD-JUtV299xlcdxyuf0oImpchm1ANq9p4QOoEfkZbTvNHl0R4ibbMWd12Wna9WCDLVGIe5haRi5-M63gUdnuDHzINTYspYGz9JKoABlfD17tUxT3ktG92mg7HS9WhQrQCJnQWqP2OuGnUNa6dSFDdhYwU1HX-PGPXh1vosN4rmUE5vSAzdtywQV4Cyrv38CirGB8iU166f4WZp4OnOJvmR9vn_W8c&quot;);
-                  "
-                ></div>
-                <div
-                  class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded"
-                >
-                  NEW
-                </div>
-                <button
-                  class="absolute bottom-3 right-3 h-10 w-10 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all shadow-lg"
-                >
-                  <span class="material-symbols-outlined text-[20px]"
-                    >add_shopping_cart</span
-                  >
-                </button>
-              </div>
-              <div>
-                <div class="flex justify-between items-start">
-                  <h3 class="text-base font-bold leading-tight">
-                    United Home Kit
-                  </h3>
-                  <p class="text-primary font-bold">$80</p>
-                </div>
-                <p class="text-slate-500 dark:text-[#9dabb9] text-sm mt-1">
-                  2024/25 Season
-                </p>
-              </div>
-            </div>
-          </div>
+              
+            </div></a>
+           <% }) %>
+           
         </section>
         <!-- Promo Banner -->
         <section class="w-full">

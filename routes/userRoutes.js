@@ -1,4 +1,4 @@
-import { homePageRender, landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp, updatePassword, userChangePasswordRender, userLogout, userProfileRender, getMe, forgotpasswordRender, resetPassword } from "../controller/userController.js";
+import {  landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp, updatePassword, userChangePasswordRender, userLogout, userProfileRender, getMe, forgotpasswordRender, resetPassword } from "../controller/userController.js";
 import express from "express";
 import { isLoggedIn, isLoggedOut } from "../middlewares/userAuth.js";
 import passport from "passport";
@@ -15,7 +15,7 @@ const router = express.Router();
 router.get('/', landingPageRender)
 router.get('/register',isLoggedOut, registerRender);
 router.get('/login',isLoggedOut, loginRender);
-router.get('/home', isLoggedIn, homePageRender,loadHomePage);
+router.get('/home', isLoggedIn,loadHomePage);
 router.get('/otp', registerOtp);
 router.get('/forgotPassword', forgotpasswordRender)
 

@@ -3,6 +3,8 @@ import { generateAndSaveOtp, verifyOtp } from "../service/otpService.js";
 import { sendForgotPasswordMail, sendMail } from "../utils/mailer.js";
 import User from "../models/userModel.js";
 import Category from "../models/categoryModel.js";
+import Product from "../models/productModel.js";
+import Otp from "../models/otpModel.js";
 
 
 
@@ -17,14 +19,6 @@ export const loginRender = (req, res) =>
 export const landingPageRender = (req, res) =>
   res.render('userViews/userLandingPage');
 
-export const homePageRender = async (req, res) => {
-  if (!req.session.user) {
-    return res.redirect('/login')
-  }
-   const categories = await Category.find({ isListed: true });
-
-  res.render('userViews/userHomePage', { categories });
-}
 
 
 export const registerOtp = (req, res) =>
@@ -125,6 +119,7 @@ export const loginUser = async (req, res) => {
 //forgot password
 
 export const forgotpasswordRender = (req, res) => {
+  
   return res.render('userViews/userForgotPassword')
 }
 

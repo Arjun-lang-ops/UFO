@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Product Details - ProSports</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#137fec",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+              "surface-dark": "#1b2732",
+              "surface-light": "#ffffff",
+            },
+            fontFamily: {
+              display: ["Lexend", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Lexend", sans-serif;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-200"
+  >
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+      <header
+        class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#283039] bg-surface-light dark:bg-[#111418] px-4 md:px-10 py-3 shadow-sm"
+      >
+        <div class="flex items-center gap-8">
+          <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+            <div class="size-8 text-primary">
+              <svg
+                class="w-full h-full"
+                fill="none"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">
+              ProSports
+            </h2>
+          </div>
+          <div class="hidden lg:flex items-center gap-9">
+            <a
+              class="text-slate-600 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+              href="#"
+              >Men</a
+            >
+            <a
+              class="text-slate-600 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+              href="#"
+              >Women</a
+            >
+            <a
+              class="text-slate-600 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+              href="#"
+              >Accessories</a
+            >
+            <a
+              class="text-slate-600 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+              href="#"
+              >Sale</a
+            >
+          </div>
+        </div>
+        <div class="flex flex-1 justify-end gap-4 md:gap-8">
+          <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+            <div
+              class="flex w-full flex-1 items-stretch rounded-lg h-full border border-slate-200 dark:border-none"
+            >
+              <div
+                class="text-[#9dabb9] flex border-none bg-slate-100 dark:bg-[#283039] items-center justify-center pl-4 rounded-l-lg border-r-0"
+              >
+                <span class="material-symbols-outlined text-[24px]"
+                  >search</span
+                >
+              </div>
+              <input
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-[#283039] focus:border-none h-full placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                placeholder="Search"
+                value=""
+              />
+            </div>
+          </label>
+          <div class="flex gap-2">
+            <button
+              class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-[#323b45] transition-colors"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >shopping_cart</span
+              >
+            </button>
+            <button
+              class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-[#323b45] transition-colors"
+            >
+              <span class="material-symbols-outlined text-[20px]"
+                >account_circle</span
+              >
+            </button>
+          </div>
+        </div>
+      </header>
+      <div class="layout-container flex h-full grow flex-col">
+        <div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
+          <div
+            class="layout-content-container flex flex-col max-w-[1200px] flex-1"
+          >
+            <div class="flex flex-wrap gap-2 px-4 py-2 mb-4">
+              <a
+                class="text-[#9dabb9] hover:text-primary text-sm font-medium leading-normal"
+                href="#"
+                >Home</a
+              >
+              <span class="text-[#9dabb9] text-sm font-medium leading-normal"
+                >/</span
+              >
+              <a
+                class="text-[#9dabb9] hover:text-primary text-sm font-medium leading-normal"
+                href="#"
+                >Accessories</a
+              >
+              <span class="text-[#9dabb9] text-sm font-medium leading-normal"
+                >/</span
+              >
+              <span
+                class="text-slate-900 dark:text-white text-sm font-medium leading-normal"
+                >Football Gloves</span
+              >
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 px-4">
+              <div class="lg:col-span-7 flex flex-col gap-4">
+                <div
+                  class="relative w-full aspect-[4/5] md:aspect-square bg-surface-dark rounded-xl overflow-hidden group"
+                >
+                  <div
+                    class="absolute inset-0 bg-center bg-cover bg-no-repeat transition-transform duration-500 group-hover:scale-105 grayscale brightness-125"
+                    data-alt="Close up of white professional football gloves"
+                    style="
+                      background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCQq1Rr0cyp_Hag_ew9Py3bDHAlkYqcrG8RSn4MGEekZoTladkPkPXDzueFTCcSPsSAnqDmK1wBPOvgQWnTRF_rHm1OZ8HPjgvmJ6dJNRLHOare0EJd3Cizgr7WZ5RfZtJ-z7p_W5zMhUBIKCZc-1Ul-UE25X1xk0uUsHGoWJAOEx-LAyhUP4OxGTGQ94p3Dw84vEYuo0_3_0bAxaxs_ry-TxsZYToqUARgxGP7R7OMKXa8FzhjgjDc5u_5XGcLI6dO9g2az-QwZ2s&quot;);
+                    "
+                  ></div>
+                  <div
+                    class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"
+                  >
+                    Bestseller
+                  </div>
+                  <button
+                    class="absolute bottom-4 right-4 bg-black/50 hover:bg-black/70 p-2 rounded-full text-white backdrop-blur-sm transition-colors"
+                  >
+                    <span class="material-symbols-outlined">zoom_in</span>
+                  </button>
+                </div>
+                <div class="grid grid-cols-4 gap-3">
+                  <button
+                    class="relative aspect-square rounded-lg overflow-hidden border-2 border-primary ring-2 ring-primary/20"
+                  >
+                    <div
+                      class="absolute inset-0 bg-center bg-cover grayscale brightness-125"
+                      data-alt="Front view of white football gloves"
+                      style="
+                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuALHNknY4q_YqwC8_-zG4pGkBdvEwZDaQi48FEfhcNvw5Ppx-6iCZnRcAdY9bZzh00DBRQxrZbL3tYu4nn38m3E-DkTNHd3jvdw8Tl-VBztPHP-b9ho1zNoyUP9wCH6nDg_loTN5mOKjArrhBHOJy8tqYfMcAyF8UnrFll7cmdvXk3sadPvA_hARZeZjNPhEUnLHYS2QIRUB6RjhxiIT2veZHeKmOyCheE8Zn9Ocj-FXLyzx_Jl0Ap9Zvt9SmEju-AehjR7cC7X-a4&quot;);
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="relative aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
+                  >
+                    <div
+                      class="absolute inset-0 bg-center bg-cover grayscale brightness-125"
+                      data-alt="Back view showing palm grip texture"
+                      style="
+                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDM5oL4HO7tR6rHW6TzX-DdSH8dxl3bzIbq0zmGK4HDQj8oJQ65TOCjhLov1NZMgzl2Xh9g7ZrRuzgRJOV4fUs-F94GDe_ANSRpL7HXENdrxDuphMYChLVSDIXwypvakR51MOdXDJBghtf9JZrXugFWm7_qCDPrtWt732ZzIJrmXxngLSo3dJ_sAZ82aWNiTRdS9EVG-RCd2rInBAhkxkUEzlZxRRAgrYWnZewdTX-sqvWyxSoonBF7ceH8GRFw2o_4zDSryNYYtc8&quot;);
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="relative aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
+                  >
+                    <div
+                      class="absolute inset-0 bg-center bg-cover grayscale brightness-125"
+                      data-alt="Action shot of player wearing white gloves"
+                      style="
+                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuC4zt7m0OR6uKb3PcwtrGurwwM4rkBudSckYgsbgrI9PtcM3pToHJdX9nvSAuTK7MFEV5WcqOg06bqiTEU4NcQtBrpeAVRF5jmszg4uqmV7z-D1CHz3-zJfemKzf5_QhaLvcnRffK1zqFqJc8zg4z8i0M9SYwOcyOXX4jSW5VyRl80DaOquyj_c7FBDx7gGoiIiiU50Z0Y1urnaBKe4Ug9yNO1HCuCLVrfZsZCXOEENzj5tBtCdOJz7w3v1A7QILXIaIwy9FrfrIEs&quot;);
+                      "
+                    ></div>
+                  </button>
+                  <button
+                    class="relative aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 transition-colors flex items-center justify-center bg-slate-100 dark:bg-surface-dark"
+                  >
+                    <span class="material-symbols-outlined text-slate-400"
+                      >play_circle</span
+                    >
+                  </button>
+                </div>
+              </div>
+              <div class="lg:col-span-5 flex flex-col gap-6">
+                <div class="flex flex-col gap-2">
+                  <h1
+                    class="text-3xl md:text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white"
+                  >
+                    Pro-Grip Elite Football Gloves
+                  </h1>
+                  <div class="flex items-center gap-3">
+                    <div class="flex text-yellow-400 text-sm">
+                      <span
+                        class="material-symbols-outlined fill-1"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined fill-1"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined fill-1"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined fill-1"
+                        style="font-variation-settings: &quot;FILL&quot; 1"
+                        >star</span
+                      >
+                      <span
+                        class="material-symbols-outlined fill-1"
+                        style="font-variation-settings: &quot;FILL&quot; 0.5"
+                        >star_half</span
+                      >
+                    </div>
+                    <span
+                      class="text-sm font-medium text-slate-500 dark:text-[#9dabb9]"
+                      >(248 Reviews)</span
+                    >
+                  </div>
+                  <div class="flex items-baseline gap-3 mt-2">
+                    <h2 class="text-3xl font-bold text-primary">$45.00</h2>
+                    <span
+                      class="text-lg text-slate-400 line-through decoration-slate-400/50"
+                      >$60.00</span
+                    >
+                    <span
+                      class="text-xs font-bold text-green-500 bg-green-500/10 px-2 py-1 rounded"
+                      >Save 25%</span
+                    >
+                  </div>
+                  <p
+                    class="text-slate-600 dark:text-[#9dabb9] text-base leading-relaxed mt-2"
+                  >
+                    Professional grade receiver gloves with maximum tackiness.
+                    Engineered for breathability and all-weather performance.
+                  </p>
+                </div>
+                <hr class="border-slate-200 dark:border-slate-800" />
+                <div class="flex flex-col gap-6">
+                  <div class="flex flex-col gap-3">
+                    <span
+                      class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+                      >Color:
+                      <span class="text-slate-900 dark:text-white ml-1"
+                        >Classic White</span
+                      ></span
+                    >
+                    <div class="flex gap-3">
+                      <button
+                        aria-label="Select Black"
+                        class="w-10 h-10 rounded-full bg-black border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 ring-2 ring-transparent transition-all"
+                      ></button>
+                      <button
+                        aria-label="Select Red"
+                        class="w-10 h-10 rounded-full bg-red-600 border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 ring-2 ring-transparent transition-all"
+                      ></button>
+                      <button
+                        aria-label="Select Blue"
+                        class="w-10 h-10 rounded-full bg-blue-600 border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 ring-2 ring-transparent transition-all"
+                      ></button>
+                      <button
+                        aria-label="Select White"
+                        class="w-10 h-10 rounded-full bg-white border-2 border-slate-200 ring-2 ring-primary relative flex items-center justify-center shadow-lg"
+                      ></button>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-3">
+                    <div class="flex justify-between items-center">
+                      <span
+                        class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+                        >Size:
+                        <span class="text-slate-900 dark:text-white ml-1"
+                          >L</span
+                        ></span
+                      >
+                      <button
+                        class="text-xs font-medium text-primary hover:underline flex items-center gap-1"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"
+                          >straighten</span
+                        >
+                        Size Guide
+                      </button>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                      <button
+                        class="px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-800/50 cursor-not-allowed text-sm font-medium relative overflow-hidden"
+                      >
+                        S
+                        <div
+                          class="absolute inset-0 flex items-center justify-center"
+                        >
+                          <div
+                            class="w-full h-px bg-slate-400 -rotate-45"
+                          ></div>
+                        </div>
+                      </button>
+                      <button
+                        class="px-6 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary text-slate-700 dark:text-slate-300 bg-white dark:bg-surface-dark text-sm font-medium transition-colors"
+                      >
+                        M
+                      </button>
+                      <button
+                        class="px-6 py-2 rounded-lg border-2 border-primary text-primary bg-primary/10 text-sm font-bold shadow-sm"
+                      >
+                        L
+                      </button>
+                      <button
+                        class="px-6 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary text-slate-700 dark:text-slate-300 bg-white dark:bg-surface-dark text-sm font-medium transition-colors"
+                      >
+                        XL
+                      </button>
+                      <button
+                        class="px-6 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary text-slate-700 dark:text-slate-300 bg-white dark:bg-surface-dark text-sm font-medium transition-colors"
+                      >
+                        XXL
+                      </button>
+                    </div>
+                    <div
+                      class="text-xs text-orange-500 font-medium flex items-center gap-1 mt-1"
+                    >
+                      <span class="material-symbols-outlined text-[14px]"
+                        >local_fire_department</span
+                      >
+                      Only 3 left in stock for size L
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col gap-4 mt-2">
+                  <div class="flex gap-4">
+                    <div
+                      class="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-surface-dark h-12 w-32 shrink-0"
+                    >
+                      <button
+                        class="w-10 h-full flex items-center justify-center text-slate-500 hover:text-primary transition-colors"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >remove</span
+                        >
+                      </button>
+                      <input
+                        class="w-12 h-full text-center bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white font-medium p-0"
+                        readonly=""
+                        type="text"
+                        value="1"
+                      />
+                      <button
+                        class="w-10 h-full flex items-center justify-center text-slate-500 hover:text-primary transition-colors"
+                      >
+                        <span class="material-symbols-outlined text-sm"
+                          >add</span
+                        >
+                      </button>
+                    </div>
+                    <button
+                      class="flex-1 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg h-12 flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]"
+                    >
+                      <span class="material-symbols-outlined"
+                        >shopping_bag</span
+                      >
+                      Add to Cart
+                    </button>
+                    <button
+                      aria-label="Add to Wishlist"
+                      class="h-12 w-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark text-slate-900 dark:text-white hover:text-red-500 hover:border-red-200 dark:hover:border-red-900/30 transition-colors shrink-0"
+                    >
+                      <span class="material-symbols-outlined">favorite</span>
+                    </button>
+                    <button
+                      aria-label="Share"
+                      class="h-12 w-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark text-slate-900 dark:text-white hover:text-primary hover:border-primary/50 transition-colors shrink-0"
+                    >
+                      <span class="material-symbols-outlined">share</span>
+                    </button>
+                  </div>
+                  <button
+                    class="w-full bg-slate-900 dark:bg-white text-white dark:text-black font-bold rounded-lg h-12 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
+                  >
+                    Buy Now
+                  </button>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-2">
+                  <div
+                    class="flex items-start gap-3 p-3 rounded-lg bg-slate-100 dark:bg-surface-dark"
+                  >
+                    <span class="material-symbols-outlined text-primary mt-0.5"
+                      >local_shipping</span
+                    >
+                    <div>
+                      <p
+                        class="text-sm font-bold text-slate-900 dark:text-white"
+                      >
+                        Free Shipping
+                      </p>
+                      <p class="text-xs text-slate-500 dark:text-slate-400">
+                        On orders over $75
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-start gap-3 p-3 rounded-lg bg-slate-100 dark:bg-surface-dark"
+                  >
+                    <span class="material-symbols-outlined text-primary mt-0.5"
+                      >verified_user</span
+                    >
+                    <div>
+                      <p
+                        class="text-sm font-bold text-slate-900 dark:text-white"
+                      >
+                        2 Year Warranty
+                      </p>
+                      <p class="text-xs text-slate-500 dark:text-slate-400">
+                        Full coverage
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="flex flex-col border-t border-slate-200 dark:border-slate-800 mt-4"
+                >
+                  <details
+                    class="group py-4 border-b border-slate-200 dark:border-slate-800 cursor-pointer"
+                    open=""
+                  >
+                    <summary
+                      class="flex items-center justify-between font-bold text-slate-900 dark:text-white list-none"
+                    >
+                      Description
+                      <span
+                        class="material-symbols-outlined transition-transform group-open:rotate-180"
+                        >keyboard_arrow_down</span
+                      >
+                    </summary>
+                    <div
+                      class="pt-3 text-sm text-slate-600 dark:text-[#9dabb9] leading-relaxed"
+                    >
+                      Dominate the field with Pro-Grip Elite. Featuring our
+                      proprietary sticky polymer palm technology, these gloves
+                      ensure you catch every pass, rain or shine. The
+                      lightweight mesh back keeps your hands cool, while the
+                      adjustable wrist strap provides a custom, locked-in feel.
+                    </div>
+                  </details>
+                  <details
+                    class="group py-4 border-b border-slate-200 dark:border-slate-800 cursor-pointer"
+                  >
+                    <summary
+                      class="flex items-center justify-between font-bold text-slate-900 dark:text-white list-none"
+                    >
+                      Materials &amp; Care
+                      <span
+                        class="material-symbols-outlined transition-transform group-open:rotate-180"
+                        >keyboard_arrow_down</span
+                      >
+                    </summary>
+                    <div
+                      class="pt-3 text-sm text-slate-600 dark:text-[#9dabb9] leading-relaxed"
+                    >
+                      <ul class="list-disc pl-4 space-y-1">
+                        <li>Palm: 100% Silicone Grip</li>
+                        <li>Back: 85% Polyester, 15% Spandex</li>
+                        <li>Machine wash cold</li>
+                        <li>Air dry only</li>
+                      </ul>
+                    </div>
+                  </details>
+                </div>
+              </div>
+            </div>
+           
+  </body>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  let selectedSize = null;
+  let selectedColor = null;
+  const quantityInput = document.getElementById("quantity");
+
+  // ✅ Quantity logic
+  document.getElementById("increaseQty").addEventListener("click", () => {
+    quantityInput.value = parseInt(quantityInput.value) + 1;
+  });
+
+  document.getElementById("decreaseQty").addEventListener("click", () => {
+    if (quantityInput.value > 1) {
+      quantityInput.value = parseInt(quantityInput.value) - 1;
+    }
+  });
+
+  // ✅ Size selection
+  document.querySelectorAll(".size-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      selectedSize = btn.dataset.size;
+
+      document.querySelectorAll(".size-btn").forEach(b => {
+        b.classList.remove("border-primary", "text-primary");
+      });
+
+      btn.classList.add("border-primary", "text-primary");
+    });
+  });
+
+  // ✅ Color selection
+  document.querySelectorAll(".color-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      selectedColor = btn.dataset.color;
+
+      document.querySelectorAll(".color-btn").forEach(b => {
+        b.classList.remove("ring-primary");
+      });
+
+      btn.classList.add("ring-primary");
+    });
+  });
+
+  // ✅ Add to Cart
+  document.getElementById("addToCartBtn").addEventListener("click", async () => {
+
+    const productId = document.getElementById("productId").value;
+    const quantity = parseInt(quantityInput.value);
+
+    // 🔥 VALIDATION
+    if (!selectedSize) {
+      alert("Please select size");
+      return;
+    }
+
+    if (!selectedColor) {
+      alert("Please select color");
+      return;
+    }
+
+    if (quantity < 1) {
+      alert("Invalid quantity");
+      return;
+    }
+
+    try {
+      const response = await fetch("/add-to-cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          productId,
+          size: selectedSize,
+          color: selectedColor,
+          quantity
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert("Added to cart ✅");
+      } else {
+        alert(data.message || "Failed to add");
+      }
+
+    } catch (error) {
+      console.log(error);
+      alert("Something went wrong");
+    }
+
+  });
+
+});
+</script>
+</html>
