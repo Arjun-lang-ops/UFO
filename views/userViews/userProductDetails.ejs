@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Product Details - ProSports</title>
+    <title>Product Details - Urban Football</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
@@ -76,31 +76,10 @@
               </svg>
             </div>
             <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">
-              ProSports
+              Urban Football
             </h2>
           </div>
-          <div class="hidden lg:flex items-center gap-9">
-            <a
-              class="text-slate-600 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
-              href="#"
-              >Men</a
-            >
-            <a
-              class="text-slate-600 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
-              href="#"
-              >Women</a
-            >
-            <a
-              class="text-slate-600 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
-              href="#"
-              >Accessories</a
-            >
-            <a
-              class="text-slate-600 dark:text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
-              href="#"
-              >Sale</a
-            >
-          </div>
+         
         </div>
         <div class="flex flex-1 justify-end gap-4 md:gap-8">
           <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
@@ -129,13 +108,15 @@
                 >shopping_cart</span
               >
             </button>
-            <button
+           <a href="/profile">
+             <button
               class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-[#323b45] transition-colors"
             >
               <span class="material-symbols-outlined text-[20px]"
                 >account_circle</span
               >
             </button>
+           </a>
           </div>
         </div>
       </header>
@@ -144,38 +125,18 @@
           <div
             class="layout-content-container flex flex-col max-w-[1200px] flex-1"
           >
-            <div class="flex flex-wrap gap-2 px-4 py-2 mb-4">
-              <a
-                class="text-[#9dabb9] hover:text-primary text-sm font-medium leading-normal"
-                href="#"
-                >Home</a
-              >
-              <span class="text-[#9dabb9] text-sm font-medium leading-normal"
-                >/</span
-              >
-              <a
-                class="text-[#9dabb9] hover:text-primary text-sm font-medium leading-normal"
-                href="#"
-                >Accessories</a
-              >
-              <span class="text-[#9dabb9] text-sm font-medium leading-normal"
-                >/</span
-              >
-              <span
-                class="text-slate-900 dark:text-white text-sm font-medium leading-normal"
-                >Football Gloves</span
-              >
-            </div>
+            
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 px-4">
               <div class="lg:col-span-7 flex flex-col gap-4">
                 <div
+                id="zoomContainer"
                   class="relative w-full aspect-[4/5] md:aspect-square bg-surface-dark rounded-xl overflow-hidden group"
                 >
-                  <div
-                    class="absolute inset-0 bg-center bg-cover bg-no-repeat transition-transform duration-500 group-hover:scale-105 grayscale brightness-125"
-                    data-alt="Close up of white professional football gloves"
+                  <div id="mainImage"
+                    class="absolute inset-0 bg-center bg-cover bg-no-repeat transition-transform duration-500 group-hover:scale-105  brightness-125"
+                    
                     style="
-                      background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuCQq1Rr0cyp_Hag_ew9Py3bDHAlkYqcrG8RSn4MGEekZoTladkPkPXDzueFTCcSPsSAnqDmK1wBPOvgQWnTRF_rHm1OZ8HPjgvmJ6dJNRLHOare0EJd3Cizgr7WZ5RfZtJ-z7p_W5zMhUBIKCZc-1Ul-UE25X1xk0uUsHGoWJAOEx-LAyhUP4OxGTGQ94p3Dw84vEYuo0_3_0bAxaxs_ry-TxsZYToqUARgxGP7R7OMKXa8FzhjgjDc5u_5XGcLI6dO9g2az-QwZ2s&quot;);
+                      background-image: url('<%= product.variants[0].images[0] %>');
                     "
                   ></div>
                   <div
@@ -190,93 +151,32 @@
                   </button>
                 </div>
                 <div class="grid grid-cols-4 gap-3">
-                  <button
-                    class="relative aspect-square rounded-lg overflow-hidden border-2 border-primary ring-2 ring-primary/20"
-                  >
-                    <div
-                      class="absolute inset-0 bg-center bg-cover grayscale brightness-125"
-                      data-alt="Front view of white football gloves"
-                      style="
-                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuALHNknY4q_YqwC8_-zG4pGkBdvEwZDaQi48FEfhcNvw5Ppx-6iCZnRcAdY9bZzh00DBRQxrZbL3tYu4nn38m3E-DkTNHd3jvdw8Tl-VBztPHP-b9ho1zNoyUP9wCH6nDg_loTN5mOKjArrhBHOJy8tqYfMcAyF8UnrFll7cmdvXk3sadPvA_hARZeZjNPhEUnLHYS2QIRUB6RjhxiIT2veZHeKmOyCheE8Zn9Ocj-FXLyzx_Jl0Ap9Zvt9SmEju-AehjR7cC7X-a4&quot;);
-                      "
-                    ></div>
-                  </button>
-                  <button
-                    class="relative aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
-                  >
-                    <div
-                      class="absolute inset-0 bg-center bg-cover grayscale brightness-125"
-                      data-alt="Back view showing palm grip texture"
-                      style="
-                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDM5oL4HO7tR6rHW6TzX-DdSH8dxl3bzIbq0zmGK4HDQj8oJQ65TOCjhLov1NZMgzl2Xh9g7ZrRuzgRJOV4fUs-F94GDe_ANSRpL7HXENdrxDuphMYChLVSDIXwypvakR51MOdXDJBghtf9JZrXugFWm7_qCDPrtWt732ZzIJrmXxngLSo3dJ_sAZ82aWNiTRdS9EVG-RCd2rInBAhkxkUEzlZxRRAgrYWnZewdTX-sqvWyxSoonBF7ceH8GRFw2o_4zDSryNYYtc8&quot;);
-                      "
-                    ></div>
-                  </button>
-                  <button
-                    class="relative aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
-                  >
-                    <div
-                      class="absolute inset-0 bg-center bg-cover grayscale brightness-125"
-                      data-alt="Action shot of player wearing white gloves"
-                      style="
-                        background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuC4zt7m0OR6uKb3PcwtrGurwwM4rkBudSckYgsbgrI9PtcM3pToHJdX9nvSAuTK7MFEV5WcqOg06bqiTEU4NcQtBrpeAVRF5jmszg4uqmV7z-D1CHz3-zJfemKzf5_QhaLvcnRffK1zqFqJc8zg4z8i0M9SYwOcyOXX4jSW5VyRl80DaOquyj_c7FBDx7gGoiIiiU50Z0Y1urnaBKe4Ug9yNO1HCuCLVrfZsZCXOEENzj5tBtCdOJz7w3v1A7QILXIaIwy9FrfrIEs&quot;);
-                      "
-                    ></div>
-                  </button>
-                  <button
-                    class="relative aspect-square rounded-lg overflow-hidden border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 transition-colors flex items-center justify-center bg-slate-100 dark:bg-surface-dark"
-                  >
-                    <span class="material-symbols-outlined text-slate-400"
-                      >play_circle</span
-                    >
-                  </button>
-                </div>
+  <% product.variants[0].images.forEach((img, index) => { %>
+    <button
+      class="thumbnail-btn relative aspect-square rounded-lg overflow-hidden border-2 <%= index === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-transparent' %>"
+      data-img="<%= img %>"
+    >
+      <div
+        class="absolute inset-0 bg-center bg-cover brightness-125"
+        style="background-image: url('<%= img %>');"
+      ></div>
+    </button>
+  <% }) %>
+</div>
               </div>
               <div class="lg:col-span-5 flex flex-col gap-6">
                 <div class="flex flex-col gap-2">
                   <h1
                     class="text-3xl md:text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white"
                   >
-                    Pro-Grip Elite Football Gloves
+                    <%= product.name%>
                   </h1>
-                  <div class="flex items-center gap-3">
-                    <div class="flex text-yellow-400 text-sm">
-                      <span
-                        class="material-symbols-outlined fill-1"
-                        style="font-variation-settings: &quot;FILL&quot; 1"
-                        >star</span
-                      >
-                      <span
-                        class="material-symbols-outlined fill-1"
-                        style="font-variation-settings: &quot;FILL&quot; 1"
-                        >star</span
-                      >
-                      <span
-                        class="material-symbols-outlined fill-1"
-                        style="font-variation-settings: &quot;FILL&quot; 1"
-                        >star</span
-                      >
-                      <span
-                        class="material-symbols-outlined fill-1"
-                        style="font-variation-settings: &quot;FILL&quot; 1"
-                        >star</span
-                      >
-                      <span
-                        class="material-symbols-outlined fill-1"
-                        style="font-variation-settings: &quot;FILL&quot; 0.5"
-                        >star_half</span
-                      >
-                    </div>
-                    <span
-                      class="text-sm font-medium text-slate-500 dark:text-[#9dabb9]"
-                      >(248 Reviews)</span
-                    >
-                  </div>
+                  
                   <div class="flex items-baseline gap-3 mt-2">
-                    <h2 class="text-3xl font-bold text-primary">$45.00</h2>
+                    <h2 class="text-3xl font-bold text-primary"> ₹<%=product.variants[0].discountedPrice%></h2>
                     <span
                       class="text-lg text-slate-400 line-through decoration-slate-400/50"
-                      >$60.00</span
+                      >₹<%=product.variants[0].price%></span
                     >
                     <span
                       class="text-xs font-bold text-green-500 bg-green-500/10 px-2 py-1 rounded"
@@ -286,46 +186,54 @@
                   <p
                     class="text-slate-600 dark:text-[#9dabb9] text-base leading-relaxed mt-2"
                   >
-                    Professional grade receiver gloves with maximum tackiness.
-                    Engineered for breathability and all-weather performance.
+                   <%=product.description%>
                   </p>
                 </div>
                 <hr class="border-slate-200 dark:border-slate-800" />
                 <div class="flex flex-col gap-6">
                   <div class="flex flex-col gap-3">
-                    <span
-                      class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
-                      >Color:
-                      <span class="text-slate-900 dark:text-white ml-1"
-                        >Classic White</span
-                      ></span
-                    >
-                    <div class="flex gap-3">
-                      <button
-                        aria-label="Select Black"
-                        class="w-10 h-10 rounded-full bg-black border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 ring-2 ring-transparent transition-all"
-                      ></button>
-                      <button
-                        aria-label="Select Red"
-                        class="w-10 h-10 rounded-full bg-red-600 border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 ring-2 ring-transparent transition-all"
-                      ></button>
-                      <button
-                        aria-label="Select Blue"
-                        class="w-10 h-10 rounded-full bg-blue-600 border-2 border-transparent hover:border-slate-300 dark:hover:border-slate-600 ring-2 ring-transparent transition-all"
-                      ></button>
-                      <button
-                        aria-label="Select White"
-                        class="w-10 h-10 rounded-full bg-white border-2 border-slate-200 ring-2 ring-primary relative flex items-center justify-center shadow-lg"
-                      ></button>
+                      <span
+                        class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+                      >
+                        Color:
+                        <span class="text-slate-900 dark:text-white ml-1">
+                          <%= product.variants[0].color %>
+                        </span>
+                      </span>
+
+                      <div class="flex flex-wrap gap-3">
+                        <button
+                          class="px-4 py-2 text-sm font-medium border rounded-md border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+                        >
+                          Black
+                        </button>
+
+                        <button
+                          class="px-4 py-2 text-sm font-medium border rounded-md border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+                        >
+                          Red
+                        </button>
+
+                        <button
+                          class="px-4 py-2 text-sm font-medium border rounded-md border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+                        >
+                          Blue
+                        </button>
+
+                        <button
+                          class="px-4 py-2 text-sm font-medium border rounded-md border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
+                        >
+                          White
+                        </button>
+                      </div>
                     </div>
-                  </div>
                   <div class="flex flex-col gap-3">
                     <div class="flex justify-between items-center">
                       <span
                         class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
                         >Size:
                         <span class="text-slate-900 dark:text-white ml-1"
-                          >L</span
+                          ><%=product.variants[0].size%></span
                         ></span
                       >
                       <button
@@ -407,14 +315,14 @@
                         >
                       </button>
                     </div>
-                    <button
+                       <button
                       class="flex-1 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg h-12 flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]"
-                    >
+                        >
                       <span class="material-symbols-outlined"
                         >shopping_bag</span
                       >
                       Add to Cart
-                    </button>
+                      </button>
                     <button
                       aria-label="Add to Wishlist"
                       class="h-12 w-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark text-slate-900 dark:text-white hover:text-red-500 hover:border-red-200 dark:hover:border-red-900/30 transition-colors shrink-0"
@@ -496,129 +404,49 @@
                       adjustable wrist strap provides a custom, locked-in feel.
                     </div>
                   </details>
-                  <details
-                    class="group py-4 border-b border-slate-200 dark:border-slate-800 cursor-pointer"
-                  >
-                    <summary
-                      class="flex items-center justify-between font-bold text-slate-900 dark:text-white list-none"
-                    >
-                      Materials &amp; Care
-                      <span
-                        class="material-symbols-outlined transition-transform group-open:rotate-180"
-                        >keyboard_arrow_down</span
-                      >
-                    </summary>
-                    <div
-                      class="pt-3 text-sm text-slate-600 dark:text-[#9dabb9] leading-relaxed"
-                    >
-                      <ul class="list-disc pl-4 space-y-1">
-                        <li>Palm: 100% Silicone Grip</li>
-                        <li>Back: 85% Polyester, 15% Spandex</li>
-                        <li>Machine wash cold</li>
-                        <li>Air dry only</li>
-                      </ul>
-                    </div>
-                  </details>
+                  
                 </div>
               </div>
             </div>
            
   </body>
   <script>
-document.addEventListener("DOMContentLoaded", () => {
 
-  let selectedSize = null;
-  let selectedColor = null;
-  const quantityInput = document.getElementById("quantity");
+document.querySelectorAll(".thumbnail-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
 
-  // ✅ Quantity logic
-  document.getElementById("increaseQty").addEventListener("click", () => {
-    quantityInput.value = parseInt(quantityInput.value) + 1;
-  });
+    const newImg = btn.dataset.img;
 
-  document.getElementById("decreaseQty").addEventListener("click", () => {
-    if (quantityInput.value > 1) {
-      quantityInput.value = parseInt(quantityInput.value) - 1;
-    }
-  });
+    // Change main image
+    document.getElementById("mainImage").style.backgroundImage = `url(${newImg})`;
 
-  // ✅ Size selection
-  document.querySelectorAll(".size-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      selectedSize = btn.dataset.size;
-
-      document.querySelectorAll(".size-btn").forEach(b => {
-        b.classList.remove("border-primary", "text-primary");
-      });
-
-      btn.classList.add("border-primary", "text-primary");
+    // Active border styling
+    document.querySelectorAll(".thumbnail-btn").forEach(b => {
+      b.classList.remove("border-primary", "ring-2", "ring-primary/20");
+      b.classList.add("border-transparent");
     });
+
+    btn.classList.add("border-primary", "ring-2", "ring-primary/20");
   });
-
-  // ✅ Color selection
-  document.querySelectorAll(".color-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      selectedColor = btn.dataset.color;
-
-      document.querySelectorAll(".color-btn").forEach(b => {
-        b.classList.remove("ring-primary");
-      });
-
-      btn.classList.add("ring-primary");
-    });
-  });
-
-  // ✅ Add to Cart
-  document.getElementById("addToCartBtn").addEventListener("click", async () => {
-
-    const productId = document.getElementById("productId").value;
-    const quantity = parseInt(quantityInput.value);
-
-    // 🔥 VALIDATION
-    if (!selectedSize) {
-      alert("Please select size");
-      return;
-    }
-
-    if (!selectedColor) {
-      alert("Please select color");
-      return;
-    }
-
-    if (quantity < 1) {
-      alert("Invalid quantity");
-      return;
-    }
-
-    try {
-      const response = await fetch("/add-to-cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          productId,
-          size: selectedSize,
-          color: selectedColor,
-          quantity
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        alert("Added to cart ✅");
-      } else {
-        alert(data.message || "Failed to add");
-      }
-
-    } catch (error) {
-      console.log(error);
-      alert("Something went wrong");
-    }
-
-  });
-
 });
+
+const zoomContainer = document.getElementById("zoomContainer");
+const mainImage = document.getElementById("mainImage");
+
+zoomContainer.addEventListener("mousemove", (e) => {
+  const rect = zoomContainer.getBoundingClientRect();
+
+  const x = ((e.clientX - rect.left) / rect.width) * 100;
+  const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+  mainImage.style.backgroundPosition = `${x}% ${y}%`;
+  mainImage.style.backgroundSize = "250%"; // zoom level
+});
+
+zoomContainer.addEventListener("mouseleave", () => {
+  mainImage.style.backgroundPosition = "center";
+  mainImage.style.backgroundSize = "100%";
+});
+
 </script>
 </html>
