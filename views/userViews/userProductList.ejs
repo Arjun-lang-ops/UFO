@@ -112,28 +112,7 @@
         </label>
       </div>
       <div class="flex flex-1 justify-end gap-4 lg:gap-8 items-center">
-        <div class="hidden lg:flex items-center gap-9">
-          <a
-            class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
-            href="#"
-            >Jerseys</a
-          >
-          <a
-            class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
-            href="#"
-            >Boots</a
-          >
-          <a
-            class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
-            href="#"
-            >Footballs</a
-          >
-          <a
-            class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
-            href="#"
-            >Sale</a
-          >
-        </div>
+        
         <div class="flex gap-2">
           <a href="/profile">
             <button
@@ -213,7 +192,6 @@
               <option>Sort by: Newest</option>
               <option>Price: Low to High</option>
               <option>Price: High to Low</option>
-              <option>Top Rated</option>
             </select>
             <div
               class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#9dabb9]"
@@ -223,25 +201,6 @@
               >
             </div>
           </div>
-          <!-- View Toggle -->
-          <div
-            class="flex bg-surface-dark p-1 rounded-lg border border-border-dark"
-          >
-            <button
-              class="flex items-center justify-center size-8 rounded bg-primary text-white shadow-sm"
-            >
-              <span class="material-symbols-outlined text-[20px]"
-                >grid_view</span
-              >
-            </button>
-            <button
-              class="flex items-center justify-center size-8 rounded text-[#9dabb9] hover:text-white hover:bg-[#3b4754] transition-colors"
-            >
-              <span class="material-symbols-outlined text-[20px]"
-                >view_list</span
-              >
-            </button>
-          </div>
         </div>
       </div>
       <div class="flex flex-col lg:flex-row gap-8">
@@ -249,61 +208,41 @@
         <aside class="w-full lg:w-64 flex-shrink-0 space-y-8 hidden lg:block">
           <!-- Filter Group: Categories -->
           <div class="flex flex-col gap-4">
-            <h3 class="text-white text-base font-bold">Categories</h3>
-            <div class="flex flex-col gap-3">
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <input
-                  checked=""
-                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
-                  type="checkbox"
-                />
-                <span
-                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
-                  >All Accessories</span
-                >
-              </label>
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <input
-                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
-                  type="checkbox"
-                />
-                <span
-                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
-                  >Gloves</span
-                >
-              </label>
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <input
-                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
-                  type="checkbox"
-                />
-                <span
-                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
-                  >Shin Guards</span
-                >
-              </label>
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <input
-                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
-                  type="checkbox"
-                />
-                <span
-                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
-                  >Training Equipment</span
-                >
-              </label>
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <input
-                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
-                  type="checkbox"
-                />
-                <span
-                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
-                  >Bags</span
-                >
-              </label>
-            </div>
-          </div>
+  <h3 class="text-white text-base font-bold">Category</h3>
+
+  <div class="flex flex-col gap-3">
+
+    <!-- All Categories -->
+    <label class="flex items-center gap-3 cursor-pointer group">
+      <input
+        type="checkbox"
+        name="category"
+        value="all"
+        class="rounded border-[#3b4754] bg-[#1c2127] text-primary size-4"
+        checked
+      />
+      <span class="text-[#9dabb9] group-hover:text-white text-sm">
+        All Categories
+      </span>
+    </label>
+
+    <!-- Dynamic Categories -->
+    <% categories.forEach(category => { %>
+      <label class="flex items-center gap-3 cursor-pointer group">
+        <input
+          type="checkbox"
+          name="category"
+          value="<%= category._id %>"
+          class="rounded border-[#3b4754] bg-[#1c2127] text-primary size-4"
+        />
+        <span class="text-[#9dabb9] group-hover:text-white text-sm">
+          <%= category.name %>
+        </span>
+      </label>
+    <% }) %>
+
+  </div>
+</div>
           <div class="h-px bg-border-dark w-full"></div>
           <!-- Filter Group: Price -->
           <div class="flex flex-col gap-4">
@@ -351,59 +290,42 @@
               ></div>
             </div>
           </div>
-          <div class="h-px bg-border-dark w-full"></div>
+         
           <!-- Filter Group: Brand -->
           <div class="flex flex-col gap-4">
-            <h3 class="text-white text-base font-bold">Brand</h3>
-            <div class="flex flex-col gap-3">
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <input
-                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
-                  type="checkbox"
-                />
-                <span
-                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
-                  >Nike</span
-                >
-              </label>
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <input
-                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
-                  type="checkbox"
-                />
-                <span
-                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
-                  >Adidas</span
-                >
-              </label>
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <input
-                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
-                  type="checkbox"
-                />
-                <span
-                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
-                  >Puma</span
-                >
-              </label>
-              <label class="flex items-center gap-3 cursor-pointer group">
-                <input
-                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
-                  type="checkbox"
-                />
-                <span
-                  class="text-[#9dabb9] group-hover:text-white text-sm transition-colors"
-                  >Under Armour</span
-                >
-              </label>
-            </div>
-          </div>
+  <h3 class="text-white text-base font-bold">Size</h3>
+
+  <div class="flex flex-col gap-3">
+    <% sizes.forEach(size => { %>
+      <label class="flex items-center gap-3 cursor-pointer group">
+        <input
+          type="checkbox"
+          name="size"
+          value="<%= size %>"
+          class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
+        />
+        <span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">
+          <%= size %>
+        </span>
+      </label>
+    <% }) %>
+  </div>
+</div>
           <!-- Mobile Filter Button (Visible only on small, functionality implied) -->
           <button
             class="lg:hidden w-full bg-surface-dark text-white font-bold py-3 rounded-lg border border-border-dark"
           >
             Show Filters
           </button>
+          <div class="pt-4">
+    <button
+      class="w-full bg-primary text-white font-semibold py-3 rounded-lg hover:opacity-90 transition"
+    >
+      Apply
+    </button>
+  </div>
+
+          
         </aside>
         <!-- Product Grid -->
         <main class="flex-1">
@@ -420,6 +342,7 @@
             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
             <!-- Product Card 1 -->
+             <% products.forEach(product=>{%>
             <div
               class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
             >
@@ -441,10 +364,10 @@
                   >
                 </button>
                 <img
-                  alt="Goalkeeper Gloves"
+                 
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  data-alt="Black goalkeeper gloves on dark background"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRiptWuAsXmjamdZ8zoYRejWeqvOnuas3EUbIbxGspwPyjwgvX1fIL-a7CMDsGwrOeffoewGE1b6-Hs98XWAO1idUOH6RspFHoqqDaR_dSN2TPydjjJxDK_Kldcz6lavkExHJPUgIB41R8LJkgTInUrtgMew2F7iXZfL7LarpQ043E8l2KQb2jjsBmA0rezoA77ke9aukDQs16QsV2sk8HlOPDMZ2OgbK5syeHtUCm0Ccptq-_XSD8EVmRaxsLSxtLChOpZ2EKe0Q"
+                  src="<%= product.images?.[0] %>"
+                   alt="<%= product.name %>"
                 />
                 <!-- Quick Add (Desktop Hover) -->
                 <div
@@ -458,37 +381,16 @@
                 </div>
               </div>
               <div class="p-4 flex flex-col flex-grow">
-                <p class="text-[#9dabb9] text-xs font-medium mb-1">Adidas</p>
-                <h3
+               <a href="/product/<%= product.productId %>?variant=<%= product.variantId %>">
+                 <h3
                   class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
                 >
-                  Predator Match Goalkeeper Gloves
+                  <%=product.name%>
                 </h3>
-                <div class="flex items-center gap-1 mb-3">
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-[#3b4754] text-[16px]"
-                    >star</span
-                  >
-                  <span class="text-[#9dabb9] text-xs ml-1">(42)</span>
-                </div>
+               </a>
+                
                 <div class="mt-auto flex items-center justify-between">
-                  <span class="text-white text-lg font-bold">$35.00</span>
+                  <span class="text-white text-lg font-bold">₹<%=product.price%></span>
                   <button
                     class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
                   >
@@ -499,527 +401,10 @@
                 </div>
               </div>
             </div>
-            <!-- Product Card 2 -->
-            <div
-              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
-            >
-              <div
-                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
-              >
-                <div
-                  class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded"
-                >
-                  Sale
-                </div>
-                <button
-                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >favorite</span
-                  >
-                </button>
-                <img
-                  alt="Football Cleats"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  data-alt="Detailed shot of football cleats texture"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbTOFtRlvf-WBsNZRT1ccag0SWnMq3UAUMU2Zc2Pn26xjt5h_ZC4_JlyBd9W56Oza7rP-0K_rKLHjBYjlOy6tzxb0zavZtGk55_qsQYrGTJQOdN_RhHcKizDP3KszpX7Vf9IPI4yPpX5aFRoBeNtQGu5jQRxbkSetylxOLdNQAHxHgCIIJwS6MtO0-iGiu_8Vh0G93Y3nkkhqhzovas8QLYIUZCUdolVpMkSv4d_Oc7_-Z2P8ZWjOuMblCeaJ1mVRgoahjxZEPPQQ"
-                />
-                <div
-                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
-                >
-                  <button
-                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
-                  >
-                    Quick Add
-                  </button>
-                </div>
-              </div>
-              <div class="p-4 flex flex-col flex-grow">
-                <p class="text-[#9dabb9] text-xs font-medium mb-1">Nike</p>
-                <h3
-                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
-                >
-                  Mercurial Superfly 9 Elite
-                </h3>
-                <div class="flex items-center gap-1 mb-3">
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span class="text-[#9dabb9] text-xs ml-1">(128)</span>
-                </div>
-                <div class="mt-auto flex items-center justify-between">
-                  <div class="flex gap-2 items-baseline">
-                    <span class="text-white text-lg font-bold">$235.00</span>
-                    <span class="text-[#9dabb9] text-sm line-through"
-                      >$275.00</span
-                    >
-                  </div>
-                  <button
-                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
-                  >
-                    <span class="material-symbols-outlined text-[18px]"
-                      >add</span
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
-            <!-- Product Card 3 -->
-            <div
-              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
-            >
-              <div
-                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
-              >
-                <button
-                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >favorite</span
-                  >
-                </button>
-                <img
-                  alt="Soccer Ball"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  data-alt="Classic football soccer ball on grass"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-8zOTqpZbV8JdagTugoMvr9f5z1nmTUbktIpfhQ1TpmsbNNw-e9BpQY9QOejEZsLrUAXFjXyMwdR1euIs_35MiIAusoNsS-Tk8OHYsLUpozhQGiq9L0l0ZFX_2vOdNeQaNt3HyG_2eYSxWHpHPhn9HRsnha3SP6nyFXtn1a7z7xS001HQP5SUFJJpg29ImqrKHPXap44hLGvnbCGXMhGo5HzlX9WKP5g80B_OOZCusW-Um2L0Mq-5IbSHBwnt4pciVJ1-GOUWxMU"
-                />
-                <div
-                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
-                >
-                  <button
-                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
-                  >
-                    Quick Add
-                  </button>
-                </div>
-              </div>
-              <div class="p-4 flex flex-col flex-grow">
-                <p class="text-[#9dabb9] text-xs font-medium mb-1">Puma</p>
-                <h3
-                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
-                >
-                  Orbita 1 La Liga Match Ball
-                </h3>
-                <div class="flex items-center gap-1 mb-3">
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-[#3b4754] text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span class="text-[#9dabb9] text-xs ml-1">(15)</span>
-                </div>
-                <div class="mt-auto flex items-center justify-between">
-                  <span class="text-white text-lg font-bold">$110.00</span>
-                  <button
-                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
-                  >
-                    <span class="material-symbols-outlined text-[18px]"
-                      >add</span
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
-            <!-- Product Card 4 -->
-            <div
-              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
-            >
-              <div
-                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
-              >
-                <button
-                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >favorite</span
-                  >
-                </button>
-                <img
-                  alt="Shin Guards"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  data-alt="Sports athletic training gear"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJQh6rFJ4DZ1EcxdfpCwS_0HcWV1Oh4IIV82OiPK9uGasZ4eHX1fOlrfUq5jetClyTcqply483Es1oN2kkIMp5tI5SWL0oT0Upw_DlAOCuOsIeBZnojfM2gRKCZ00LmFGqf4ViOQUgOKIt3MKO2Kcz5RM-iDOl-JCc5z6tHYM25uLwWiJHlFjzqzuVWkqzR3nfUUan7U_Vq0ymn4fgkhIuxWEyiPV_1aXy9et4chi2MM79wLnIb5M5v7c0ie0_Vpjq33NazCzwti0"
-                />
-                <div
-                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
-                >
-                  <button
-                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
-                  >
-                    Quick Add
-                  </button>
-                </div>
-              </div>
-              <div class="p-4 flex flex-col flex-grow">
-                <p class="text-[#9dabb9] text-xs font-medium mb-1">Nike</p>
-                <h3
-                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
-                >
-                  Mercurial Lite Shin Guards
-                </h3>
-                <div class="flex items-center gap-1 mb-3">
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span class="text-[#9dabb9] text-xs ml-1">(89)</span>
-                </div>
-                <div class="mt-auto flex items-center justify-between">
-                  <span class="text-white text-lg font-bold">$25.00</span>
-                  <button
-                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
-                  >
-                    <span class="material-symbols-outlined text-[18px]"
-                      >add</span
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
-            <!-- Product Card 5 -->
-            <div
-              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
-            >
-              <div
-                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
-              >
-                <button
-                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >favorite</span
-                  >
-                </button>
-                <img
-                  alt="Training Bib"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  data-alt="Athletic clothing on hanger"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz-Mc41O_tCf7oHIzSR4-_LsadmV6nVKy2uzsteq2WlMI1-PfiqZXkPwijpnyh8kwNfsj1OCf1euO-Rfdxl9ft_J0XfK8URmatj0tE6UtOTVMoFZxeMsgch-omWmVX9TWaCS-tKBR1kKQ7l08zZMxgfp9MaeEh9j-_h_RFsxBUZwlD8Il7z33BfjbwEePeFoLcRKd1ZHtHYsODmXg93S5rRCogo2OMN6s_yZ8PQdQRDLcY6yXL4_zvrhIUQV5LKNucK7cFCbl3_j4"
-                />
-                <div
-                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
-                >
-                  <button
-                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
-                  >
-                    Quick Add
-                  </button>
-                </div>
-              </div>
-              <div class="p-4 flex flex-col flex-grow">
-                <p class="text-[#9dabb9] text-xs font-medium mb-1">ProSports</p>
-                <h3
-                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
-                >
-                  Mesh Training Bib (Pack of 10)
-                </h3>
-                <div class="flex items-center gap-1 mb-3">
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-[#3b4754] text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span class="text-[#9dabb9] text-xs ml-1">(5)</span>
-                </div>
-                <div class="mt-auto flex items-center justify-between">
-                  <span class="text-white text-lg font-bold">$45.00</span>
-                  <button
-                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
-                  >
-                    <span class="material-symbols-outlined text-[18px]"
-                      >add</span
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
-            <!-- Product Card 6 -->
-            <div
-              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
-            >
-              <div
-                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
-              >
-                <div
-                  class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded"
-                >
-                  Best Seller
-                </div>
-                <button
-                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >favorite</span
-                  >
-                </button>
-                <img
-                  alt="Water Bottle"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  data-alt="Sports water bottle isolated on dark"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdSU1_56yPQQE5-Hs7dSgCmnHMtQf7XwpSaEHyuXuKSWZeESL4bRyHJiC4MF6I_mXNa9ZYXg8c52GDbXxuOVau5IKlY51TM_QYUNs0LucR4YwVSJ9xJi5jwHBrxQQDTLuyVKtaNLM_zWXgNeRmmJO6eTYJOChQ2Fcei340yv7piFes9-owEjOFMD9JM2GltAShxzufcYjpHYZwLX5asHsCW5PDPqcJk56UgBVWiKqQ1sJfRDTu5MyvAmvXS6Tmvpc1v70yxktg_vo"
-                />
-                <div
-                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
-                >
-                  <button
-                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
-                  >
-                    Quick Add
-                  </button>
-                </div>
-              </div>
-              <div class="p-4 flex flex-col flex-grow">
-                <p class="text-[#9dabb9] text-xs font-medium mb-1">Adidas</p>
-                <h3
-                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
-                >
-                  Performance Water Bottle 750ml
-                </h3>
-                <div class="flex items-center gap-1 mb-3">
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span class="text-[#9dabb9] text-xs ml-1">(245)</span>
-                </div>
-                <div class="mt-auto flex items-center justify-between">
-                  <span class="text-white text-lg font-bold">$12.00</span>
-                  <button
-                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
-                  >
-                    <span class="material-symbols-outlined text-[18px]"
-                      >add</span
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
-            <!-- Product Card 7 -->
-            <div
-              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
-            >
-              <div
-                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
-              >
-                <button
-                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >favorite</span
-                  >
-                </button>
-                <img
-                  alt="Gym Bag"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  data-alt="Black sports backpack"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcGCqcO4eoN2IEtH0vE_XYKdnY2KdjsHVFtaMWhuy7S6V0R8jHz0ElwLccen1kC53LBA25BX6aEfSbd8KA9wDrySlPgIR7Cz2JTLGWZY9YV9o70OdXFsfT69NXR2rfs501LVjVCAOPITCvnvUqSzQcHAa3l7RAaLkCe0HSPyD4HpWflOwA0OqlkA3tcsU2rANSeG1bZlfrRfvxtnmSTJ_AvORmbcKO_XGiKJZMl-GaxSpSHF0jt7HlJKvc7gR_veZ3oEJezjMv9Eg"
-                />
-                <div
-                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
-                >
-                  <button
-                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
-                  >
-                    Quick Add
-                  </button>
-                </div>
-              </div>
-              <div class="p-4 flex flex-col flex-grow">
-                <p class="text-[#9dabb9] text-xs font-medium mb-1">
-                  Under Armour
-                </p>
-                <h3
-                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
-                >
-                  Undeniable 5.0 Duffel Bag
-                </h3>
-                <div class="flex items-center gap-1 mb-3">
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-[#3b4754] text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span class="text-[#9dabb9] text-xs ml-1">(56)</span>
-                </div>
-                <div class="mt-auto flex items-center justify-between">
-                  <span class="text-white text-lg font-bold">$45.00</span>
-                  <button
-                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
-                  >
-                    <span class="material-symbols-outlined text-[18px]"
-                      >add</span
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
-            <!-- Product Card 8 -->
-            <div
-              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
-            >
-              <div
-                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
-              >
-                <button
-                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >favorite</span
-                  >
-                </button>
-                <img
-                  alt="Captain Band"
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  data-alt="Macro shot of football net"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnadW7UX2QlkfCXZInxcdUej-i0DyqDUxqn5Wqu2Rl2WA12-Y8l3FcTiYOD-nmQc7qcVuGhmWi05ZAHhSCNlSXgm1Cy5l6uIjvW8GqPn-6N4WQqcD20FgD1kRJMa4uVxDf1g6babKpko_2mUGVk2q7ld-m6fFxfAQbI_G3KoS4UCxXMAAg68sJVee0c3ry_0lfeWPAgLE5ZHZSfhKPMkgbtnCwl4TibwVsyRyTxrIBhNbnbsx-1syRnvkGVlWiPjTz3ZT4Ewpqy70"
-                />
-                <div
-                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
-                >
-                  <button
-                    class="w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
-                  >
-                    Quick Add
-                  </button>
-                </div>
-              </div>
-              <div class="p-4 flex flex-col flex-grow">
-                <p class="text-[#9dabb9] text-xs font-medium mb-1">ProSports</p>
-                <h3
-                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
-                >
-                  Official Captain's Armband
-                </h3>
-                <div class="flex items-center gap-1 mb-3">
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span
-                    class="material-symbols-outlined text-yellow-500 text-[16px] fill-current"
-                    >star</span
-                  >
-                  <span class="text-[#9dabb9] text-xs ml-1">(12)</span>
-                </div>
-                <div class="mt-auto flex items-center justify-between">
-                  <span class="text-white text-lg font-bold">$8.00</span>
-                  <button
-                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
-                  >
-                    <span class="material-symbols-outlined text-[18px]"
-                      >add</span
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
+            <%})%>
+
+          
+            
           </div>
           <!-- Pagination -->
           <div class="flex items-center justify-center gap-2 mt-12">
@@ -1063,7 +448,7 @@
       class="mt-auto border-t border-border-dark bg-background-dark py-8 px-4 lg:px-10"
     >
       <div class="max-w-[1440px] mx-auto text-center text-[#9dabb9] text-sm">
-        <p>© 2024 ProSports. All rights reserved.</p>
+        <p>© 2026 Urban Football. All rights reserved.</p>
       </div>
     </footer>
   </body>

@@ -75,9 +75,11 @@
                 ></path>
               </svg>
             </div>
-            <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">
+            <a href="/home">
+              <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">
               Urban Football
             </h2>
+            </a>
           </div>
          
         </div>
@@ -136,7 +138,7 @@
                     class="absolute inset-0 bg-center bg-cover bg-no-repeat transition-transform duration-500 group-hover:scale-105  brightness-125"
                     
                     style="
-                      background-image: url('<%= product.variants[0].images[0] %>');
+                      background-image: url('<%= selectedVariant.images[0] %>');
                     "
                   ></div>
                   <div
@@ -150,8 +152,8 @@
                     <span class="material-symbols-outlined">zoom_in</span>
                   </button>
                 </div>
-                <div class="grid grid-cols-4 gap-3">
-  <% product.variants[0].images.forEach((img, index) => { %>
+                <div id="thumbnailContainer" class="grid grid-cols-4 gap-3">
+  <% selectedVariant.images.forEach((img, index) => { %>
     <button
       class="thumbnail-btn relative aspect-square rounded-lg overflow-hidden border-2 <%= index === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-transparent' %>"
       data-img="<%= img %>"
@@ -173,10 +175,10 @@
                   </h1>
                   
                   <div class="flex items-baseline gap-3 mt-2">
-                    <h2 class="text-3xl font-bold text-primary"> ₹<%=product.variants[0].discountedPrice%></h2>
-                    <span
+                    <h2 id="price" class="text-3xl font-bold text-primary"> ₹<%=selectedVariant.discountedPrice%></h2>
+                    <span id="originalPrice"
                       class="text-lg text-slate-400 line-through decoration-slate-400/50"
-                      >₹<%=product.variants[0].price%></span
+                      >₹<%=selectedVariant.price%></span
                     >
                     <span
                       class="text-xs font-bold text-green-500 bg-green-500/10 px-2 py-1 rounded"
@@ -192,102 +194,88 @@
                 <hr class="border-slate-200 dark:border-slate-800" />
                 <div class="flex flex-col gap-6">
                   <div class="flex flex-col gap-3">
-                      <span
-                        class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
-                      >
-                        Color:
-                        <span class="text-slate-900 dark:text-white ml-1">
-                          <%= product.variants[0].color %>
-                        </span>
-                      </span>
 
-                      <div class="flex flex-wrap gap-3">
-                        <button
-                          class="px-4 py-2 text-sm font-medium border rounded-md border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
-                        >
-                          Black
-                        </button>
+  <% 
+    const colors = [...new Set(product.variants.map(v => v.color))];
+  %>
 
-                        <button
-                          class="px-4 py-2 text-sm font-medium border rounded-md border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
-                        >
-                          Red
-                        </button>
+  <span
+    class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+  >
+    Color:
+    <span id="selectedColor" class="text-slate-900 dark:text-white ml-1">
+      <%= selectedVariant.color %>
+    </span>
+  </span>
 
-                        <button
-                          class="px-4 py-2 text-sm font-medium border rounded-md border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
-                        >
-                          Blue
-                        </button>
+  <div class="flex flex-wrap gap-3">
+    <% colors.forEach((color, index) => { %>
+      <button
+        class="color-btn px-4 py-2 text-sm font-medium border rounded-md transition
+        <%= index === 0
+          ? 'border-primary text-primary bg-primary/10'
+          : 'border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700' %>"
+        data-color="<%= color %>"
+      >
+        <%= color %>
+      </button>
+    <% }) %>
+  </div>
 
-                        <button
-                          class="px-4 py-2 text-sm font-medium border rounded-md border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition"
-                        >
-                          White
-                        </button>
-                      </div>
-                    </div>
-                  <div class="flex flex-col gap-3">
-                    <div class="flex justify-between items-center">
-                      <span
-                        class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
-                        >Size:
-                        <span class="text-slate-900 dark:text-white ml-1"
-                          ><%=product.variants[0].size%></span
-                        ></span
-                      >
-                      <button
-                        class="text-xs font-medium text-primary hover:underline flex items-center gap-1"
-                      >
-                        <span class="material-symbols-outlined text-[16px]"
-                          >straighten</span
-                        >
-                        Size Guide
-                      </button>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                      <button
-                        class="px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 bg-slate-50 dark:bg-slate-800/50 cursor-not-allowed text-sm font-medium relative overflow-hidden"
-                      >
-                        S
-                        <div
-                          class="absolute inset-0 flex items-center justify-center"
-                        >
-                          <div
-                            class="w-full h-px bg-slate-400 -rotate-45"
-                          ></div>
-                        </div>
-                      </button>
-                      <button
-                        class="px-6 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary text-slate-700 dark:text-slate-300 bg-white dark:bg-surface-dark text-sm font-medium transition-colors"
-                      >
-                        M
-                      </button>
-                      <button
-                        class="px-6 py-2 rounded-lg border-2 border-primary text-primary bg-primary/10 text-sm font-bold shadow-sm"
-                      >
-                        L
-                      </button>
-                      <button
-                        class="px-6 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary text-slate-700 dark:text-slate-300 bg-white dark:bg-surface-dark text-sm font-medium transition-colors"
-                      >
-                        XL
-                      </button>
-                      <button
-                        class="px-6 py-2 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-primary text-slate-700 dark:text-slate-300 bg-white dark:bg-surface-dark text-sm font-medium transition-colors"
-                      >
-                        XXL
-                      </button>
-                    </div>
-                    <div
-                      class="text-xs text-orange-500 font-medium flex items-center gap-1 mt-1"
-                    >
-                      <span class="material-symbols-outlined text-[14px]"
-                        >local_fire_department</span
-                      >
-                      Only 3 left in stock for size L
-                    </div>
-                  </div>
+</div>
+                 <div class="flex flex-col gap-3">
+  <div class="flex justify-between items-center">
+    <span class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+      Size:
+      <span class="text-slate-900 dark:text-white ml-1">
+        <%= selectedVariant.size %>
+      </span>
+    </span>
+  </div>
+
+  <div id="sizeContainer" class="flex flex-wrap gap-2">
+    
+    <% product.variants.forEach((variant, index) => { %>
+      
+      <% if (variant.stock === 0) { %>
+
+  <!-- Out of stock -->
+  <button
+    class="px-4 py-2 rounded-lg border text-slate-400 bg-slate-50 cursor-not-allowed text-sm font-medium relative overflow-hidden"
+  >
+    <%= variant.size %>
+    <div class="absolute inset-0 flex items-center justify-center">
+      <div class="w-full h-px bg-slate-400 -rotate-45"></div>
+    </div>
+  </button>
+
+<% } else { %>
+
+  <!-- Available -->
+  <button
+    class="px-6 py-2 rounded-lg border text-sm font-medium transition-colors
+    <%= variant._id.toString() === selectedVariant._id.toString()
+        ? 'border-primary text-primary bg-primary/10 font-bold'
+        : 'border-slate-200 dark:border-slate-700 hover:border-primary text-slate-700 bg-white' %>"
+    data-size="<%= variant.size %>"
+  >
+    <%= variant.size %>
+  </button>
+
+<% } %>
+
+    <% }) %>
+
+  </div>
+
+  <!-- Stock message -->
+  <div class="text-xs text-orange-500 font-medium flex items-center gap-1 mt-1">
+    <span class="material-symbols-outlined text-[14px]">
+      local_fire_department
+    </span>
+    Only <%= product.variants[0].stock %> left in stock for size <%= product.variants[0].size %>
+  </div>
+</div>
                 </div>
                 <div class="flex flex-col gap-4 mt-2">
                   <div class="flex gap-4">
@@ -397,11 +385,7 @@
                     <div
                       class="pt-3 text-sm text-slate-600 dark:text-[#9dabb9] leading-relaxed"
                     >
-                      Dominate the field with Pro-Grip Elite. Featuring our
-                      proprietary sticky polymer palm technology, these gloves
-                      ensure you catch every pass, rain or shine. The
-                      lightweight mesh back keeps your hands cool, while the
-                      adjustable wrist strap provides a custom, locked-in feel.
+                      <%=product.description%>
                     </div>
                   </details>
                   
@@ -410,6 +394,84 @@
             </div>
            
   </body>
+  <script>
+  const variants = <%- JSON.stringify(product.variants) %>;
+  let selectedVariant = variants[0];
+
+document.querySelectorAll(".color-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+
+    const color = btn.dataset.color;
+
+    // 🔥 Get first variant of that color
+    const variant = variants.find(v => v.color === color);
+
+    if (!variant) return;
+
+    selectedVariant = variant;
+
+    // ✅ Update main image
+    document.getElementById("mainImage").style.backgroundImage =
+      `url(${variant.images[0]})`;
+
+    // ✅ Update thumbnails
+    const thumbContainer = document.getElementById("thumbnailContainer");
+    thumbContainer.innerHTML = "";
+
+    variant.images.forEach((img, index) => {
+      thumbContainer.innerHTML += `
+  <button
+    class="thumbnail-btn relative aspect-square rounded-lg overflow-hidden border-2 ${index === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-transparent'}"
+    data-img="${img}"
+  >
+    <div
+      class="absolute inset-0 bg-center bg-cover brightness-125"
+      style="background-image: url('${img}');"
+    ></div>
+  </button>
+`;
+    });
+
+    // 🔥 Re-bind thumbnail click
+    document.querySelectorAll(".thumbnail-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.getElementById("mainImage").style.backgroundImage =
+          `url(${btn.dataset.img})`;
+      });
+    });
+
+    // ✅ Update price
+    document.getElementById("price").innerText =
+      `₹${variant.discountedPrice || variant.price}`;
+
+    document.getElementById("originalPrice").innerText =
+      `₹${variant.price}`;
+
+    // ✅ Update color text
+    document.getElementById("selectedColor").innerText = variant.color;
+
+    // ✅ Highlight selected button
+    document.querySelectorAll(".color-btn").forEach(b => {
+      b.classList.remove("border-primary", "text-primary", "bg-primary/10");
+    });
+
+    btn.classList.add("border-primary", "text-primary", "bg-primary/10");
+
+  });
+});
+
+document.querySelectorAll('#sizeContainer button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const size = btn.dataset.size;
+
+      const selected = variants.find(v => v.size === size);
+
+      console.log(selected); // use this to update UI
+    });
+  });
+
+
+</script>
   <script>
 
 document.querySelectorAll(".thumbnail-btn").forEach(btn => {
@@ -447,6 +509,9 @@ zoomContainer.addEventListener("mouseleave", () => {
   mainImage.style.backgroundPosition = "center";
   mainImage.style.backgroundSize = "100%";
 });
+
+
+
 
 </script>
 </html>
