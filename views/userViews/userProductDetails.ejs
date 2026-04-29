@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -103,13 +104,15 @@
             </div>
           </label>
           <div class="flex gap-2">
-            <button
+           <a href="/cart">
+             <button
               class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-[#323b45] transition-colors"
             >
               <span class="material-symbols-outlined text-[20px]"
                 >shopping_cart</span
               >
             </button>
+           </a>
            <a href="/profile">
              <button
               class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-[#323b45] transition-colors"
@@ -282,20 +285,20 @@
                     <div
                       class="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-surface-dark h-12 w-32 shrink-0"
                     >
-                      <button
+                      <button id="decreaseQty"
                         class="w-10 h-full flex items-center justify-center text-slate-500 hover:text-primary transition-colors"
                       >
                         <span class="material-symbols-outlined text-sm"
                           >remove</span
                         >
                       </button>
-                      <input
+                      <input id="quantityInput"
                         class="w-12 h-full text-center bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white font-medium p-0"
                         readonly=""
                         type="text"
                         value="1"
                       />
-                      <button
+                      <button id="increaseQty"
                         class="w-10 h-full flex items-center justify-center text-slate-500 hover:text-primary transition-colors"
                       >
                         <span class="material-symbols-outlined text-sm"
@@ -303,7 +306,7 @@
                         >
                       </button>
                     </div>
-                       <button
+                       <button id="addToCartBtn"
                       class="flex-1 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg h-12 flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]"
                         >
                       <span class="material-symbols-outlined"
@@ -460,15 +463,7 @@ document.querySelectorAll(".color-btn").forEach(btn => {
   });
 });
 
-document.querySelectorAll('#sizeContainer button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const size = btn.dataset.size;
 
-      const selected = variants.find(v => v.size === size);
-
-      console.log(selected); // use this to update UI
-    });
-  });
 
 
 </script>
@@ -513,5 +508,73 @@ zoomContainer.addEventListener("mouseleave", () => {
 
 
 
+</script>
+
+<script>
+  const qtyInput=document.getElementById("quantityInput");
+  const increaseBtn=document.getElementById("increaseQty");
+  const decreaseBtn=document.getElementById('decreaseQty');
+  let quantity=1;
+
+  increaseBtn.addEventListener('click',()=>{
+    quantity++;
+    qtyInput.value=quantity
+  })
+
+  decreaseBtn.addEventListener("click",()=>{
+    if(quantity>1){
+      quantity--;
+      qtyInput.value=quantity
+    }
+  })
+
+ document.getElementById("addToCartBtn").addEventListener("click", async () => {
+
+  const productId = "<%= product._id %>";
+  const variantId = selectedVariant._id;
+  const quantity = parseInt(document.getElementById("quantityInput").value);
+
+  try {
+    const res = await fetch("/add-to-cart", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        productId,
+        variantId,
+        quantity
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      Swal.fire({
+        icon: "success",
+        title: "Added to Cart",
+        text: "Product added successfully!",
+        showConfirmButton: false,
+        timer: 1500
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: data.message || "Failed to add product"
+      });
+    }
+
+  } catch (err) {
+    console.error(err);
+
+    Swal.fire({
+      icon: "error",
+      title: "Server Error",
+      text: "Something went wrong!"
+    });
+  }
+
+});
 </script>
 </html>
