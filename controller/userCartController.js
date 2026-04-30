@@ -32,7 +32,7 @@ export const addToCart = async (req, res) => {
     console.log(error)
     return res.status(400).json({
       success: false,
-      message: err.message || "Something went wrong"
+      message: error.message || "Out of Stock"
     });
   }
 };
@@ -48,6 +48,7 @@ export const getCartController=async(req,res)=>{
         res.redirect('/home')
     }
 }
+
 
 
 export const removeFromCartController = async (req, res) => {

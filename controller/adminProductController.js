@@ -3,21 +3,46 @@ import Product from "../models/productModel.js";
 import { addProductService, editProductService } from "../service/adminService.js";
 
 export const productRender = async (req, res) => {
-
   try {
-    const products = await Product.find().populate("category");
-    const totalProducts = products.length;
+    const { search, page = 1 } = req.query;
+
+    const limit = 4;
+    const currentPage = Number(page);
+    const skip = (currentPage - 1) * limit;
+
+    let filter = {};
+
+    if (search && search.trim() !== "") {
+      filter.name = { $regex: search, $options: "i" };
+    }
+
+    
+    const products = await Product.find(filter)
+      .populate("category")
+      .skip(skip)
+      .limit(limit);
+
+    
+    const totalProducts = await Product.countDocuments(filter);
+    const totalPages = Math.ceil(totalProducts / limit);
 
     res.render("adminViews/adminProductManagement", {
       product: products,
-      totalProducts
+      totalProducts,
+      currentPage,
+      totalPages,
+      search: search || ""
     });
 
   } catch (error) {
     console.error(error);
+
     res.render("adminViews/adminProductManagement", {
       product: [],
-      totalProducts: 0
+      totalProducts: 0,
+      currentPage: 1,
+      totalPages: 1,
+      search: ""
     });
   }
 };
