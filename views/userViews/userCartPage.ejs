@@ -159,34 +159,39 @@
           class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
         >
           <div class="lg:col-span-8 flex flex-col gap-6">
-            <div
-              class="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-[#283039] text-[#9dabb9] text-sm font-medium uppercase tracking-wider"
-            >
-              <div class="col-span-6">Product</div>
-              <div class="col-span-2 text-center">Price</div>
-              <div class="col-span-2 text-center">Quantity</div>
-              <div class="col-span-2 text-right">Total</div>
-            </div>
-
-            <div class="lg:col-span-8 flex flex-col gap-6">
 
   <!-- Header -->
-  
+  <div class="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-[#283039] text-[#9dabb9] text-sm font-medium uppercase tracking-wider">
+    <div class="col-span-6">Product</div>
+    <div class="col-span-2 text-center">Quantity</div>
+    <div class="col-span-2 text-center">Price</div>
+    
+    <div class="col-span-2 text-right">Total</div>
+  </div>
 
-  <!-- 🔥 DYNAMIC CART ITEMS -->
   <% if (cart && cart.items.length > 0) { %>
 
     <% cart.items.forEach(item => { 
       const product = item.productId;
-      const variant = product.variants.find(v => v._id.toString() === item.variantId.toString());
+      let variant = null;
+
+      if (product && product.variants) {
+        variant = product.variants.find(v => 
+          v._id.toString() === item.variantId.toString()
+        );
+      }
+
+      const price = variant?.discountedPrice || variant?.price || 0;
+      const total = price * item.quantity;
     %>
 
+    <!-- ITEM -->
     <div class="group relative flex flex-col md:grid md:grid-cols-12 gap-4 md:items-center bg-[#1a222d] md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none md:border-b border-[#283039] md:pb-6">
 
       <!-- Product -->
       <div class="col-span-6 flex items-center gap-4">
         <div class="relative shrink-0 overflow-hidden rounded-lg size-24 md:size-28 bg-[#283039] border border-[#283039]">
-          <img class="h-full w-full object-cover" src="<%= variant.images[0] %>" />
+          <img src="<%= variant?.images?.[0] %>" class="h-full w-full object-cover" />
         </div>
 
         <div class="flex flex-col gap-1">
@@ -195,51 +200,63 @@
           </h3>
 
           <p class="text-[#9dabb9] text-sm">
-            Size: <%= variant.size %> • Color: <%= variant.color %>
+            Size: <%= variant?.size || "N/A" %> • Color: <%= variant?.color || "N/A" %>
           </p>
+
+          <!-- Mobile Remove -->
+          <button 
+            class="flex md:hidden items-center gap-1 text-[#ef4444] text-xs font-bold mt-2 delete-btn"
+            data-variant="<%= item.variantId %>"
+          >
+            <span class="material-symbols-outlined text-[16px]">delete</span>
+            Remove
+          </button>
+        </div>
+      </div>
+
+      
+      <!-- Quantity -->
+      <div class="flex md:contents items-center justify-between mt-2 md:mt-0">
+        <div class="md:hidden text-white font-bold text-lg">
+          ₹<%= price %>
+        </div>
+
+        <div class="col-span-2 flex justify-center">
+          <input
+            value="<%= item.quantity %>"
+            readonly
+            class="w-10 bg-transparent border-none text-center text-white text-sm font-medium"
+          />
         </div>
       </div>
 
       <!-- Price -->
-      <div class="col-span-2 text-center text-[#9dabb9] font-medium hidden md:block">
-        ₹<%= variant.discountedPrice || variant.price %>
+      <div class="col-span-2 hidden md:block text-center text-[#9dabb9] font-medium">
+        ₹<%= price %>
       </div>
 
-      <!-- Quantity -->
-      <div class="col-span-2 flex justify-center">
-        <input
-  value="<%= item.quantity %>"
-  readonly
-  class="w-10 bg-transparent border-none text-center text-white text-sm font-medium focus:ring-0 p-0"
-/>
+
+      <!-- Total + Delete -->
+      <div class="col-span-2 flex items-center justify-between md:justify-end gap-4">
+        <span class="hidden md:block text-white font-bold text-lg">
+          ₹<%= total %>
+        </span>
+
+        <button 
+          class="hidden md:flex size-8 items-center justify-center rounded-full text-[#9dabb9] hover:bg-[#283039] hover:text-[#ef4444] delete-btn"
+          data-variant="<%= item.variantId %>"
+        >
+          <span class="material-symbols-outlined text-[20px]">delete</span>
+        </button>
       </div>
-
-      <div class="col-span-2 flex items-center justify-end gap-3 text-white font-bold">
-
-  <!-- Total -->
-  <span>
-    ₹<%= (variant.discountedPrice || variant.price) * item.quantity %>
-  </span>
-
-  <!-- Delete Button -->
-  <button 
-    class="delete-btn size-8 flex items-center justify-center rounded-full text-[#9dabb9] hover:bg-[#283039] hover:text-red-500 transition-colors delete-btn"
-    data-variant="<%= item.variantId %>"
-  >
-    <span class="material-symbols-outlined text-[20px]">delete</span>
-  </button>
-
-</div>
-
-       
 
     </div>
 
     <% }) %>
 
-  <% } else {   %>
+  <% } else { %>
 
-    <p class="text-white text-center">Your cart is empty 🛒</p>
+    <p class="text-white text-center py-10">Your cart is empty 🛒</p>
 
   <% } %>
 
@@ -247,13 +264,10 @@
 
             
             
-            <div
-              class="group relative flex flex-col md:grid md:grid-cols-12 gap-4 md:items-center bg-[#1a222d] md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none md:border-b border-[#283039] md:pb-6 transition-colors"
-            >
-          </div>
+            
           <div class="lg:col-span-4 flex flex-col gap-6">
             <div
-              class="sticky top-28 bg-[#1a222d] border border-[#283039] rounded-xl p-6 shadow-xl shadow-black/20"
+              class="sticky lg:top-28 bg-[#1a222d] border border-[#283039] rounded-xl p-6 shadow-xl shadow-black/20"
             >
               <h2 class="text-white text-xl font-bold mb-6">Order Summary</h2>
               <div class="flex flex-col gap-3 mb-6">
@@ -275,10 +289,7 @@
                   <span>Shipping estimate</span>
                   <span class="text-[#4ade80] font-medium">Free</span>
                 </div>
-                <div class="flex justify-between items-center text-[#9dabb9]">
-                  <span>Tax</span>
-                  <span class="text-white font-medium">$24.80</span>
-                </div>
+                
               </div>
               <div class="mb-6">
                 <div

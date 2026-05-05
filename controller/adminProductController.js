@@ -1,6 +1,6 @@
 import Category from "../models/categoryModel.js";
 import Product from "../models/productModel.js";
-import { addProductService, editProductService } from "../service/adminService.js";
+import { addProductService, editProductService,toggleProductStatusService } from "../service/adminService.js";
 
 export const productRender = async (req, res) => {
   try {
@@ -18,7 +18,7 @@ export const productRender = async (req, res) => {
 
     
     const products = await Product.find(filter)
-      .populate("category")
+      .populate("category").sort({createdAt:-1})
       .skip(skip)
       .limit(limit);
 
@@ -123,4 +123,24 @@ export const editProduct = async (req, res) => {
   }
 };
 
+export const toggleProductStatusController = async (req, res) => {
+  try {
+    const productId = req.params.id;
 
+    const product = await toggleProductStatusService(productId);
+
+    res.status(200).json({
+      success: true,
+      message: product.isActive
+        ? "Product listed successfully"
+        : "Product unlisted successfully",
+      product,
+    });
+
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};

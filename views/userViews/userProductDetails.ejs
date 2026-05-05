@@ -212,17 +212,17 @@
   </span>
 
   <div class="flex flex-wrap gap-3">
-    <% colors.forEach((color, index) => { %>
-      <button
-        class="color-btn px-4 py-2 text-sm font-medium border rounded-md transition
-        <%= index === 0
-          ? 'border-primary text-primary bg-primary/10'
-          : 'border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700' %>"
-        data-color="<%= color %>"
-      >
-        <%= color %>
-      </button>
-    <% }) %>
+    <% colors.forEach((color) => { %>
+  <button
+    class="color-btn px-4 py-2 text-sm font-medium border rounded-md transition
+    <%= color === selectedVariant.color
+        ? 'border-primary text-primary bg-primary/10'
+        : 'border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700' %>"
+    data-color="<%= color %>"
+  >
+    <%= color %>
+  </button>
+<% }) %>
   </div>
 
 </div>
@@ -243,7 +243,7 @@
       <% if (variant.stock === 0) { %>
 
   <!-- Out of stock -->
-  <button
+  <button 
     class="px-4 py-2 rounded-lg border text-slate-400 bg-slate-50 cursor-not-allowed text-sm font-medium relative overflow-hidden"
   >
     <%= variant.size %>
@@ -276,7 +276,7 @@
     <span class="material-symbols-outlined text-[14px]">
       local_fire_department
     </span>
-    Only <%= product.variants[0].stock %> left in stock for size <%= product.variants[0].size %>
+    Only <%= selectedVariant.stock %> left in stock for size <%= product.variants[0].size %>
   </div>
 </div>
                 </div>
@@ -305,15 +305,20 @@
                           >add</span
                         >
                       </button>
+                      
                     </div>
+                    <% const isOutOfStock = !selectedVariant || selectedVariant.stock <= 0; %>
                        <button id="addToCartBtn"
-                      class="flex-1 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg h-12 flex items-center justify-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]"
-                        >
-                      <span class="material-symbols-outlined"
-                        >shopping_bag</span
-                      >
-                      Add to Cart
-                      </button>
+  class="flex-1 font-bold rounded-lg h-12 flex items-center justify-center gap-2 shadow-lg transition-all active:scale-[0.98]
+  <%= isOutOfStock 
+      ? 'bg-gray-400 cursor-not-allowed text-white' 
+      : 'bg-primary hover:bg-blue-600 text-white shadow-primary/20' %>"
+  <%= isOutOfStock ? 'disabled' : '' %>
+>
+  <span class="material-symbols-outlined">shopping_bag</span>
+
+  <%= isOutOfStock ? 'Out of Stock' : 'Add to Cart' %>
+</button>
                     <button
                       aria-label="Add to Wishlist"
                       class="h-12 w-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark text-slate-900 dark:text-white hover:text-red-500 hover:border-red-200 dark:hover:border-red-900/30 transition-colors shrink-0"
@@ -327,11 +332,17 @@
                       <span class="material-symbols-outlined">share</span>
                     </button>
                   </div>
-                  <button
-                    class="w-full bg-slate-900 dark:bg-white text-white dark:text-black font-bold rounded-lg h-12 flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
-                  >
-                    Buy Now
-                  </button>
+                  
+
+<button id="buyNowBtn"
+  class="w-full font-bold rounded-lg h-12 flex items-center justify-center gap-2 transition-all
+  <%= isOutOfStock 
+      ? 'bg-gray-400 text-white cursor-not-allowed' 
+      : 'bg-slate-900 dark:bg-white text-white dark:text-black hover:opacity-90' %>"
+  <%= isOutOfStock ? 'disabled' : '' %>
+>
+  <%= isOutOfStock ? 'Out of Stock' : 'Buy Now' %>
+</button>
                 </div>
                 <div class="grid grid-cols-2 gap-4 mt-2">
                   <div
@@ -399,25 +410,61 @@
   </body>
   <script>
   const variants = <%- JSON.stringify(product.variants) %>;
-  let selectedVariant = variants[0];
+  let selectedVariant = <%- JSON.stringify(selectedVariant) %>;
 
 document.querySelectorAll(".color-btn").forEach(btn => {
   btn.addEventListener("click", () => {
 
     const color = btn.dataset.color;
 
-    // 🔥 Get first variant of that color
-    const variant = variants.find(v => v.color === color);
+    
+    const variant = variants.find(v => v.color === color && v.stock > 0)
+        || variants.find(v => v.color === color);
 
     if (!variant) return;
 
     selectedVariant = variant;
 
-    // ✅ Update main image
+    const addToCartBtn = document.getElementById("addToCartBtn");
+const buyNowBtn = document.getElementById("buyNowBtn");
+
+if (variant.stock <= 0) {
+  // ❌ Disable Add to Cart
+  addToCartBtn.disabled = true;
+  addToCartBtn.innerHTML = `
+    <span class="material-symbols-outlined">shopping_bag</span>
+    Out of Stock
+  `;
+  addToCartBtn.classList.remove("bg-primary");
+  addToCartBtn.classList.add("bg-gray-400", "cursor-not-allowed");
+
+  // ❌ Disable Buy Now
+  buyNowBtn.disabled = true;
+  buyNowBtn.innerText = "Out of Stock";
+  buyNowBtn.classList.remove("bg-slate-900");
+  buyNowBtn.classList.add("bg-gray-400", "cursor-not-allowed");
+
+} else {
+  // ✅ Enable Add to Cart
+  addToCartBtn.disabled = false;
+  addToCartBtn.innerHTML = `
+    <span class="material-symbols-outlined">shopping_bag</span>
+    Add to Cart
+  `;
+  addToCartBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
+  addToCartBtn.classList.add("bg-primary");
+
+  // ✅ Enable Buy Now
+  buyNowBtn.disabled = false;
+  buyNowBtn.innerText = "Buy Now";
+  buyNowBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
+  buyNowBtn.classList.add("bg-slate-900");
+}
+    
     document.getElementById("mainImage").style.backgroundImage =
       `url(${variant.images[0]})`;
 
-    // ✅ Update thumbnails
+   
     const thumbContainer = document.getElementById("thumbnailContainer");
     thumbContainer.innerHTML = "";
 
@@ -435,7 +482,7 @@ document.querySelectorAll(".color-btn").forEach(btn => {
 `;
     });
 
-    // 🔥 Re-bind thumbnail click
+    
     document.querySelectorAll(".thumbnail-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.getElementById("mainImage").style.backgroundImage =
@@ -443,17 +490,17 @@ document.querySelectorAll(".color-btn").forEach(btn => {
       });
     });
 
-    // ✅ Update price
+    
     document.getElementById("price").innerText =
       `₹${variant.discountedPrice || variant.price}`;
 
     document.getElementById("originalPrice").innerText =
       `₹${variant.price}`;
 
-    // ✅ Update color text
+  
     document.getElementById("selectedColor").innerText = variant.color;
 
-    // ✅ Highlight selected button
+    
     document.querySelectorAll(".color-btn").forEach(b => {
       b.classList.remove("border-primary", "text-primary", "bg-primary/10");
     });
@@ -511,6 +558,7 @@ zoomContainer.addEventListener("mouseleave", () => {
 </script>
 
 <script>
+  
   const qtyInput=document.getElementById("quantityInput");
   const increaseBtn=document.getElementById("increaseQty");
   const decreaseBtn=document.getElementById('decreaseQty');
@@ -576,5 +624,24 @@ zoomContainer.addEventListener("mouseleave", () => {
   }
 
 });
+
+const addToCartBtn = document.getElementById("addToCartBtn");
+
+if (!variant || variant.stock <= 0) {
+  addToCartBtn.disabled = true;
+  addToCartBtn.innerText = "Out of Stock";
+  addToCartBtn.classList.remove("bg-primary");
+  addToCartBtn.classList.add("bg-gray-400", "cursor-not-allowed");
+} else {
+  addToCartBtn.disabled = false;
+  addToCartBtn.innerHTML = `
+    <span class="material-symbols-outlined">shopping_bag</span>
+    Add to Cart
+  `;
+  addToCartBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
+  addToCartBtn.classList.add("bg-primary");
+}
+
 </script>
+
 </html>

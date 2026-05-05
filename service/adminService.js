@@ -165,3 +165,21 @@ export const editProductService = async (productId, data, files) => {
     throw new Error(error.message);
   }
 };
+
+
+export const toggleProductStatusService=async(productId)=>{
+  try {
+    const product=await Product.findById(productId);
+    if(!product){
+      throw new Error('Product not found')
+    }
+
+    product.isActive=!product.isActive;
+    await product.save();
+
+    return product
+    
+  } catch (error) {
+    throw new Error
+  }
+}

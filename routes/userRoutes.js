@@ -1,6 +1,6 @@
 import {  landingPageRender, loginRender, loginUser, otpVerification, registerOtp, registerRender, registerUser, resendOtp, updatePassword, userChangePasswordRender, userLogout, userProfileRender, getMe, forgotpasswordRender, resetPassword } from "../controller/userController.js";
 import express from "express";
-import { isLoggedIn, isLoggedOut } from "../middlewares/userAuth.js";
+import { checkUserBlocked, isLoggedIn, isLoggedOut } from "../middlewares/userAuth.js";
 import passport from "passport";
 import { emailOtpRender, emailOtpSend, resendEmailOtp, verifyEmailOtp } from "../controller/userEmailChangeController.js";
 import { addAddressController, editAddressRender,userAddressRender,removeAddressController, updateAddressController } from "../controller/userAddressController.js";
@@ -15,7 +15,7 @@ const router = express.Router();
 router.get('/', landingPageRender)
 router.get('/register',isLoggedOut, registerRender);
 router.get('/login',isLoggedOut, loginRender);
-router.get('/home', isLoggedIn,loadHomePage);
+router.get('/home', isLoggedIn,checkUserBlocked,loadHomePage);
 router.get('/otp', registerOtp);
 router.get('/forgotPassword', forgotpasswordRender)
 
@@ -24,11 +24,11 @@ router.get('/forgotPassword', forgotpasswordRender)
 router.get('/forgotPassword/otp', resetPassword)
 router.get('/forgotPassword/verify',forgotPasswordVerify)
 
-router.get('/profile', isLoggedIn, userProfileRender)
-router.get('/profile/address', isLoggedIn, userAddressRender);
-router.get('/profile/address/edit/:id',isLoggedIn,editAddressRender)
-router.get('/profile/email-otp', isLoggedIn, emailOtpRender);
-router.get('/profile/changePassword', isLoggedIn, userChangePasswordRender)
+router.get('/profile', isLoggedIn,checkUserBlocked, userProfileRender)
+router.get('/profile/address', isLoggedIn,checkUserBlocked, userAddressRender);
+router.get('/profile/address/edit/:id',isLoggedIn,checkUserBlocked,editAddressRender)
+router.get('/profile/email-otp', isLoggedIn,checkUserBlocked, emailOtpRender);
+router.get('/profile/changePassword', isLoggedIn,checkUserBlocked, userChangePasswordRender)
 router.get('/logout', userLogout)
 
 router.get('/api/me', getMe)
@@ -50,7 +50,6 @@ router.get(
   }),
   googleAuthCallback
 );
-
 
 router.post('/register', registerUser);
 router.post('/verify-otp', otpVerification);

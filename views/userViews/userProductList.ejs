@@ -98,20 +98,28 @@
           
         </div>
         <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64 lg:w-96">
-          <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+          <div class=" relative flex w-full flex-1 items-stretch rounded-lg h-full">
             <div
               class="text-[#9dabb9] flex border-none bg-surface-dark items-center justify-center pl-4 rounded-l-lg border-r-0"
             >
               <span class="material-symbols-outlined text-[24px]">search</span>
             </div>
             <form action="">
-              <input
-              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-surface-dark focus:border-none h-full placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+              <input id="searchInput"
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-surface-dark focus:border-none h-full placeholder:text-[#9dabb9] px-8 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
               placeholder="Search accessories..."
               value="<%=query.search||''%>"
               type="text"
               name="search"
             />
+             <button
+    type="button"
+    id="clearSearch"
+    class="absolute right-3 top-1/2 -translate-y-1/2 text-[#9dabb9] hover:text-white hidden"
+  >
+    ✕
+  </button>
+             
             </form>
             
           </div>
@@ -358,6 +366,7 @@
             class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
           >
             <!-- Product Card 1 -->
+             <% if (products.length > 0) { %>
              <% products.forEach(product=>{%>
             <div
               class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
@@ -419,6 +428,30 @@
               </div>
             </div>
             <%})%>
+            <% } else { %>
+
+  <!-- ❌ No Products Found UI -->
+  <div class="col-span-full flex flex-col items-center justify-center py-20 text-center">
+    
+    <span class="material-symbols-outlined text-6xl text-[#9dabb9] mb-4">
+      search_off
+    </span>
+
+    <h2 class="text-xl font-bold text-white mb-2">
+      No products found
+    </h2>
+
+    <p class="text-[#9dabb9] text-sm">
+      Try adjusting your filters or search terms.
+    </p>
+
+    <a href="/product" class="mt-4 px-5 py-2 bg-primary text-white rounded-lg text-sm hover:opacity-90 transition">
+      Reset Filters
+    </a>
+
+  </div>
+
+<% } %>
 
           
             
@@ -481,5 +514,36 @@
       </div>
     </footer>
   </body>
+  <script>
+const input = document.getElementById("searchInput");
+const clearBtn = document.getElementById("clearSearch");
+
+// Show/hide logic
+function toggleClear() {
+  if (input.value.trim() !== "" && document.activeElement === input) {
+    clearBtn.classList.remove("hidden");
+  } else {
+    clearBtn.classList.add("hidden");
+  }
+}
+
+input.addEventListener("focus", toggleClear);
+input.addEventListener("input", toggleClear);
+input.addEventListener("blur", () => {
+  setTimeout(toggleClear, 150);
+});
+
+// Clear action
+clearBtn.addEventListener("click", () => {
+  input.value = "";
+  input.focus();
+
+  const url = new URL(window.location.href);
+  url.searchParams.delete("search");
+  url.searchParams.set("page", 1);
+
+  window.location.href = url.toString();
+});
+</script>
 
 </html>

@@ -104,15 +104,36 @@
         <header
             class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-8 py-4">
             <div class="flex items-center gap-4 w-full max-w-md">
-                <div class="relative w-full">
-                    <span
-                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
-                    <form action="/admin/products" method="GET" >
-                        <input name="search"
-                        class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary text-slate-900 dark:text-slate-100"
-                        placeholder="Search by Product..." type="text" value="<%=search||''%>" />
+               <div class="relative w-full">
+
+                    <!-- Icon -->
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">
+                        search
+                    </span>
+
+                    <form action="/admin/products" method="GET">
+
+                        <!-- Input -->
+                        <input
+                        name="search"
+                        id="searchInput"
+                        class="w-full pl-10 pr-10 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary text-slate-900 dark:text-slate-100"
+                        placeholder="Search by Product..."
+                        type="text"
+                        value="<%=search||''%>"
+                        />
+
+                        <!-- Clear button -->
+                        <button
+                        id="clearSearch"
+                        type="button"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-[#9dabb9] hover:text-white hidden"
+                        >
+                        ✕
+                        </button>
+
                     </form>
-                </div>
+                    </div>
             </div>
             <div class="flex items-center gap-4">
                
@@ -303,5 +324,36 @@
         </div>
     </main>
 </body>
+<script>
+const input = document.getElementById("searchInput");
+const clearBtn = document.getElementById("clearSearch");
+
+// Show/hide logic
+function toggleClear() {
+  if (input.value.trim() !== "" && document.activeElement === input) {
+    clearBtn.classList.remove("hidden");
+  } else {
+    clearBtn.classList.add("hidden");
+  }
+}
+
+input.addEventListener("focus", toggleClear);
+input.addEventListener("input", toggleClear);
+input.addEventListener("blur", () => {
+  setTimeout(toggleClear, 150);
+});
+
+// Clear action
+clearBtn.addEventListener("click", () => {
+  input.value = "";
+  input.focus();
+
+  const url = new URL(window.location.href);
+  url.searchParams.delete("search");
+  url.searchParams.set("page", 1);
+
+  window.location.href = url.toString();
+});
+</script>
 
 </html>

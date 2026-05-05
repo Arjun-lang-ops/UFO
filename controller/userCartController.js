@@ -19,7 +19,7 @@ export const addToCart = async (req, res) => {
       });
     }
 
-    const cart=await addToCartService(userId,{productId, variantId, quantity});
+    const cart=await addToCartService(userId,{productId, variantId, quantity:Number(quantity)});
 
     return res.status(200).json({
         success:true,

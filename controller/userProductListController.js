@@ -77,10 +77,10 @@ export const getProducts = async (req, res) => {
     const sizes = [].concat(req.query.size || []);
     const { minPrice, maxPrice,sort } = req.query;
     const search = req.query.search || "";
-    const page=Number(req.query.page);
-    const limit=8;
+    const page=Number(req.query.page)||1;
+    const limit=4;
 
-    let filter = {};
+    let filter = {isActive:true};
 
     
     if (categories.length && !categories.includes("all")) {
@@ -175,7 +175,7 @@ if (search) {
     console.log("FINAL COUNT:", productList.length);
 
     res.render("userViews/userProductList", {
-      products: productList, 
+      products: paginatedProducts, 
       categories: await Category.find({ isListed: true }),
       sizes: uniqueSizes,
       query:req.query,

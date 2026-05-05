@@ -8,15 +8,25 @@ export const addToCartService = async (userId, {productId, variantId, quantity})
   if (!product) {
     throw new Error("Product not found");
   }
-
+ if (!product.isActive) {
+    throw new Error("Product is not available");
+  }
 
   const variant = product.variants.id(variantId);
   if (!variant) {
     throw new Error("Variant not found");
   }
 
+  if (variant.stock <= 0) {
+    throw new Error("Product is out of stock");
+  }
+
   if (variant.stock < quantity) {
     throw new Error("Insufficient stock");
+  }
+
+  if (quantity > variant.stock) {
+    throw new Error(`Only ${variant.stock} items available`);
   }
 
   
