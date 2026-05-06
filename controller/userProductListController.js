@@ -1,5 +1,5 @@
 import Category from "../models/categoryModel.js";
-import { productDetailsService } from "../service/userProductService.js";
+import { getRelatedProducts, productDetailsService } from "../service/userProductService.js";
 import Product from "../models/productModel.js";
 
 // export const productListRender = async (req, res) => {
@@ -58,9 +58,25 @@ export const productDetailsRender = async (req, res) => {
       selectedVariant = product.variants[0];
     }
 
+    const relatedProducts=await getRelatedProducts(product.category._id,product._id)
+    console.log(relatedProducts)
+
+    const sameCategoryProducts = await Product.find({
+  category: product.category._id
+});
+
+console.log("Same category count:", sameCategoryProducts.length);
+console.log("Products:", sameCategoryProducts.map(p => ({
+  id: p._id,
+  name: p.name,
+  category: p.category
+})));
+
     res.render("userViews/userProductDetails", {
       product,
       selectedVariant,
+      query:req.query,
+      relatedProducts
     });
   } catch (error) {
     console.log(error);
@@ -82,10 +98,18 @@ export const getProducts = async (req, res) => {
 
     let filter = {isActive:true};
 
+
     
     if (categories.length && !categories.includes("all")) {
       filter.category = { $in: categories };
     }
+
+    const categoryDocs = await Category.find({ isListed: true });
+
+const categoryMap = {};
+categoryDocs.forEach(cat => {
+  categoryMap[cat._id.toString()] = cat.name;
+});
 
     // search
 if (search) {
@@ -163,6 +187,7 @@ if (search) {
       break;
   }
 }
+console.log(productList)
 
     const totalProducts = productList.length;
     const totalPages = Math.ceil(totalProducts / limit);
@@ -176,7 +201,8 @@ if (search) {
 
     res.render("userViews/userProductList", {
       products: paginatedProducts, 
-      categories: await Category.find({ isListed: true }),
+      categories: categoryDocs,
+      categoryMap,
       sizes: uniqueSizes,
       query:req.query,
       selectedValue:sort,

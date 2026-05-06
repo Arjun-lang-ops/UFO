@@ -16,6 +16,7 @@ import userProductRoutes from "./routes/userProductRoutes.js"
 import userCartRoutes from './routes/userCartRoutes.js'
 import passport from "./config/passport.js";
 import cors from "cors";
+import { cartCountMiddleware } from "./middlewares/cartMiddleware.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -50,11 +51,12 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(cartCountMiddleware)
 app.use("/", userRoutes);
 app.use('/',userProductRoutes)
 app.use('/',userCartRoutes)
 app.use("/admin", adminRoutes);
+
 
 //error handling middleware
 app.use((err, req, res, next) => {

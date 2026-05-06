@@ -108,3 +108,24 @@ export const removeAddressController=async(req,res)=>{
         })
     }
 }
+
+export const setDefaultAddressController = async (req, res) => {
+    try {
+        const userId = req.session.user;
+        const addressId = req.params.id;
+
+        await Address.updateMany({ user: userId }, { $set: { isDefault: false } });
+        await Address.updateOne({ _id: addressId, user: userId }, { $set: { isDefault: true } });
+
+        res.status(200).json({
+            success: true,
+            message: "Default address updated successfully"
+        });
+    } catch (error) {
+        console.log('setDefaultAddressError:', error);
+        res.status(500).json({
+            success: false,
+            message: "Server error"
+        });
+    }
+}

@@ -309,4 +309,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             addressToDelete = null;
         });
+
+        // Set as Default AJAX
+        document.querySelectorAll('.set-default-address').forEach(btn => {
+            btn.addEventListener('click', async function () {
+                const addressId = this.dataset.id;
+                try {
+                    const res = await fetch(`/profile/address/default/${addressId}`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    const data = await res.json();
+
+                    if (res.ok && data.success) {
+                        Swal.fire({ toast: true, position: 'top-end', icon: 'success', title: data.message || 'Default address updated', showConfirmButton: false, timer: 2500 });
+                        setTimeout(() => window.location.reload(), 1000);
+                    } else {
+                        Swal.fire({ toast: true, position: 'top-end', icon: 'error', title: data.message || 'Failed to update', showConfirmButton: false, timer: 2500 });
+                    }
+                } catch (err) {
+                    Swal.fire({ toast: true, position: 'top-end', icon: 'error', title: 'Something went wrong', showConfirmButton: false, timer: 2500 });
+                }
+            });
+        });
     

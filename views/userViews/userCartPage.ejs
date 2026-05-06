@@ -7,11 +7,11 @@
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;900&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;900&display=swap"
       rel="stylesheet"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -24,7 +24,7 @@
               primary: "#137fec",
               "background-light": "#f6f7f8",
               "background-dark": "#101922",
-              "surface-dark": "#1a222d", // Slightly lighter for cards
+              "surface-dark": "#1a222d",
             },
             fontFamily: {
               display: ["Lexend", "sans-serif"],
@@ -41,346 +41,328 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #101922;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #283039;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #374151;
-      }
+      ::-webkit-scrollbar { width: 8px; }
+      ::-webkit-scrollbar-track { background: #101922; }
+      ::-webkit-scrollbar-thumb { background: #283039; border-radius: 4px; }
+      ::-webkit-scrollbar-thumb:hover { background: #374151; }
     </style>
   </head>
-  <body
-    class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col overflow-x-hidden"
-  >
-    <header
-      class="sticky top-0 z-50 w-full border-b border-[#283039] bg-background-dark/95 backdrop-blur-sm px-4 lg:px-10 py-3"
-    >
-      <div
-        class="max-w-[1440px] mx-auto flex items-center justify-between gap-4"
-      >
+  <body class="bg-background-light dark:bg-background-dark font-display min-h-screen flex flex-col overflow-x-hidden">
+
+    <!-- ── HEADER ── -->
+    <header class="sticky top-0 z-50 w-full border-b border-[#283039] bg-background-dark/95 backdrop-blur-sm px-4 lg:px-10 py-3">
+      <div class="max-w-[1440px] mx-auto flex items-center justify-between gap-4">
         <div class="flex items-center gap-8">
-          <a
-            class="flex items-center gap-3 text-white hover:opacity-80 transition-opacity"
-            href="#"
-          >
+          <a class="flex items-center gap-3 text-white hover:opacity-80 transition-opacity" href="#">
             <div class="size-8 text-primary">
-              <svg
-                fill="currentColor"
-                viewBox="0 0 48 48"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z"
-                ></path>
+              <svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                <path d="M44 4H30.6666V17.3334H17.3334V30.6666H4V44H44V4Z"></path>
               </svg>
             </div>
-            <h2 class="text-white text-xl font-bold tracking-tight">
-              Urban Football
-            </h2>
+            <h2 class="text-white text-xl font-bold tracking-tight">Urban Football</h2>
           </a>
           <nav class="hidden md:flex items-center gap-8">
-            <a
-              class="text-[#9dabb9] hover:text-white text-sm font-medium transition-colors"
-              href="/home"
-              >Shop</a
-            >
-           
+            <a class="text-[#9dabb9] hover:text-white text-sm font-medium transition-colors" href="/home">Shop</a>
           </nav>
         </div>
         <div class="flex flex-1 justify-end gap-4 md:gap-6">
           <label class="hidden md:flex flex-col min-w-40 h-10 max-w-64 w-full">
-            <div
-              class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#1a222d] border border-[#283039] focus-within:border-primary transition-colors"
-            >
+            <div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#1a222d] border border-[#283039] focus-within:border-primary transition-colors">
               <div class="text-[#9dabb9] flex items-center justify-center pl-3">
-                <span class="material-symbols-outlined text-[20px]"
-                  >search</span
-                >
+                <span class="material-symbols-outlined text-[20px]">search</span>
               </div>
-              <input
-                class="w-full bg-transparent border-none text-white placeholder-[#9dabb9] px-3 focus:ring-0 text-sm"
-                placeholder="Search products..."
-              />
+              <input class="w-full bg-transparent border-none text-white placeholder-[#9dabb9] px-3 focus:ring-0 text-sm" placeholder="Search products..." />
             </div>
           </label>
           <div class="flex items-center gap-3">
-            <button
-              class="relative flex items-center justify-center size-10 rounded-lg hover:bg-[#283039] text-white transition-colors"
-            >
+            <button class="relative flex items-center justify-center size-10 rounded-lg hover:bg-[#283039] text-white transition-colors">
               <span class="material-symbols-outlined">favorite</span>
             </button>
-            <button
-              class="relative flex items-center justify-center size-10 rounded-lg bg-[#283039] text-white transition-colors hover:bg-primary/20 hover:text-primary"
-            >
+            <button class="relative flex items-center justify-center size-10 rounded-lg bg-[#283039] text-white transition-colors hover:bg-primary/20 hover:text-primary">
               <span class="material-symbols-outlined">shopping_cart</span>
-              <span
-                class="absolute top-1.5 right-1.5 size-2.5 bg-primary rounded-full border border-[#283039]"
-              ></span>
+              <span class="absolute top-1.5 right-1.5 size-2.5 bg-primary rounded-full border border-[#283039]"></span>
             </button>
           </div>
         </div>
       </div>
     </header>
+
+    <!-- ── MAIN ── -->
     <main class="flex-grow w-full px-4 lg:px-10 py-8 lg:py-12">
       <div class="max-w-[1200px] mx-auto">
-        <div
-          class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 lg:mb-12"
-        >
+
+        <!-- Page Heading -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8 lg:mb-12">
           <div>
-            <h1
-              class="text-white text-3xl md:text-4xl font-black tracking-tight mb-2"
-            >
-              Your Shopping Cart
-            </h1>
+            <h1 class="text-white text-3xl md:text-4xl font-black tracking-tight mb-2">Your Shopping Cart</h1>
             <p class="text-[#9dabb9] text-base">
-              You have <span class="text-white font-medium"><%=cart?.items.length%></span> in
-              your cart ready for checkout.
+              You have <span class="text-white font-medium"><%= cart?.items?.length || 0 %></span> items in your cart ready for checkout.
             </p>
           </div>
-          <a
-            class="inline-flex items-center justify-center h-10 px-6 rounded-lg border border-[#283039] bg-transparent text-white text-sm font-bold hover:bg-[#283039] transition-colors gap-2 group"
-            href="/home"
-          >
-            <span
-              class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform"
-              >arrow_back</span
-            >
+          <a class="inline-flex items-center justify-center h-10 px-6 rounded-lg border border-[#283039] bg-transparent text-white text-sm font-bold hover:bg-[#283039] transition-colors gap-2 group" href="/home">
+            <span class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
             Continue Shopping
           </a>
         </div>
-        <div
-          class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
-        >
+
+        <!-- ── Two-Column Grid ── -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 relative">
+
+          <!-- ── LEFT: Cart Items (8 cols) ── -->
           <div class="lg:col-span-8 flex flex-col gap-6">
 
-  <!-- Header -->
-  <div class="hidden md:grid grid-cols-12 gap-4 pb-4 border-b border-[#283039] text-[#9dabb9] text-sm font-medium uppercase tracking-wider">
-    <div class="col-span-6">Product</div>
-    <div class="col-span-2 text-center">Quantity</div>
-    <div class="col-span-2 text-center">Price</div>
-    
-    <div class="col-span-2 text-right">Total</div>
-  </div>
+            <!-- Table Header -->
+            <div class="hidden md:grid grid-cols-12 gap-3 pb-4 border-b border-[#283039] text-[#9dabb9] text-sm font-semibold uppercase tracking-wider">
+              <div class="col-span-6">Product</div>
+              <div class="col-span-2 text-center">Quantity</div>
+              <div class="col-span-2 text-center">Price</div>
+              <div class="col-span-2 text-right">Total</div>
+            </div>
 
-  <% if (cart && cart.items.length > 0) { %>
+            <% if (cart && cart.items && cart.items.length > 0) { %>
+              <% cart.items.forEach(item => {
+                const product = item.productId || null;
+                let variant = null;
+                if (product && product.variants) {
+                  variant = product.variants.find(v =>
+                    v._id.toString() === item.variantId.toString()
+                  );
+                }
+                const isOutOfStock = !variant || variant.stock <= 0;
+                const price = isOutOfStock ? 0 : (variant?.discountedPrice || variant?.price || 0);
+                const total = isOutOfStock ? 0 : price * item.quantity;
+                // Use last-known image/details even if OOS
+                const imgSrc = variant?.images?.[0] || '/images/default.jpg';
+                const sizeLbl = variant?.size || 'N/A';
+                const colorLbl = variant?.color || 'N/A';
+              %>
 
-    <% cart.items.forEach(item => { 
-      const product = item.productId;
-      let variant = null;
+              <!-- Cart Item -->
+              <div class="cart-item group relative flex flex-col md:grid md:grid-cols-12 gap-4 md:items-center bg-[#1a222d] md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none md:border-b border-[#283039] md:pb-6
+                <%= isOutOfStock ? 'oos-item opacity-75' : '' %>"
+                data-variant="<%= item.variantId %>"
+                data-out-of-stock="<%= isOutOfStock %>">
 
-      if (product && product.variants) {
-        variant = product.variants.find(v => 
-          v._id.toString() === item.variantId.toString()
-        );
-      }
-
-      const price = variant?.discountedPrice || variant?.price || 0;
-      const total = price * item.quantity;
-    %>
-
-    <!-- ITEM -->
-    <div class="group relative flex flex-col md:grid md:grid-cols-12 gap-4 md:items-center bg-[#1a222d] md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none md:border-b border-[#283039] md:pb-6">
-
-      <!-- Product -->
-      <div class="col-span-6 flex items-center gap-4">
-        <div class="relative shrink-0 overflow-hidden rounded-lg size-24 md:size-28 bg-[#283039] border border-[#283039]">
-          <img src="<%= variant?.images?.[0] %>" class="h-full w-full object-cover" />
-        </div>
-
-        <div class="flex flex-col gap-1">
-          <h3 class="text-white text-base md:text-lg font-bold">
-            <%= product.name %>
-          </h3>
-
-          <p class="text-[#9dabb9] text-sm">
-            Size: <%= variant?.size || "N/A" %> • Color: <%= variant?.color || "N/A" %>
-          </p>
-
-          <!-- Mobile Remove -->
-          <button 
-            class="flex md:hidden items-center gap-1 text-[#ef4444] text-xs font-bold mt-2 delete-btn"
-            data-variant="<%= item.variantId %>"
-          >
-            <span class="material-symbols-outlined text-[16px]">delete</span>
-            Remove
-          </button>
-        </div>
-      </div>
-
-      
-      <!-- Quantity -->
-      <div class="flex md:contents items-center justify-between mt-2 md:mt-0">
-        <div class="md:hidden text-white font-bold text-lg">
-          ₹<%= price %>
-        </div>
-
-        <div class="col-span-2 flex justify-center">
-          <input
-            value="<%= item.quantity %>"
-            readonly
-            class="w-10 bg-transparent border-none text-center text-white text-sm font-medium"
-          />
-        </div>
-      </div>
-
-      <!-- Price -->
-      <div class="col-span-2 hidden md:block text-center text-[#9dabb9] font-medium">
-        ₹<%= price %>
-      </div>
-
-
-      <!-- Total + Delete -->
-      <div class="col-span-2 flex items-center justify-between md:justify-end gap-4">
-        <span class="hidden md:block text-white font-bold text-lg">
-          ₹<%= total %>
-        </span>
-
-        <button 
-          class="hidden md:flex size-8 items-center justify-center rounded-full text-[#9dabb9] hover:bg-[#283039] hover:text-[#ef4444] delete-btn"
-          data-variant="<%= item.variantId %>"
-        >
-          <span class="material-symbols-outlined text-[20px]">delete</span>
-        </button>
-      </div>
-
-    </div>
-
-    <% }) %>
-
+                <!-- Product Info -->
+                <div class="col-span-6 flex items-center gap-4 min-w-0">
+                  <div class="relative shrink-0 overflow-hidden rounded-lg size-24 md:size-28 bg-[#283039] border border-[#283039] flex items-center justify-center">
+  
+  <% if (!isOutOfStock && variant?.images?.length) { %>
+    <img src="<%= variant.images[0] %>" 
+         class="h-full w-full object-cover" 
+         alt="<%= product?.name || 'Unknown Product' %>" />
   <% } else { %>
-
-    <p class="text-white text-center py-10">Your cart is empty 🛒</p>
-
+    <!-- Empty / placeholder -->
+    <span class="text-[#9dabb9] text-xs ">OUT OF STOCK</span>
   <% } %>
 
 </div>
+                  <div class="flex flex-col gap-1 min-w-0">
+                    <h3 class="text-white text-base md:text-lg font-bold truncate"><%= product?.name || 'Unknown Product' %></h3>
+                    <p class="text-[#9dabb9] text-sm truncate">Size: <%= sizeLbl %> &bull; Color: <%= colorLbl %></p>
+                    <% if (isOutOfStock) { %>
+                    <span class="inline-flex items-center gap-1 text-[#ef4444] text-xs font-bold mt-1">
+                      <span class="material-symbols-outlined text-[14px]">block</span>
+                      Currently unavailable
+                    </span>
+                    <% } %>
+                    <!-- Mobile Remove -->
+                    <button class="flex md:hidden items-center gap-1 text-[#ef4444] text-xs font-bold mt-2 w-max delete-btn" data-variant="<%= item.variantId %>">
+                      <span class="material-symbols-outlined text-[16px]">delete</span>
+                      Remove
+                    </button>
+                  </div>
+                </div>
 
-            
-            
-            
-          <div class="lg:col-span-4 flex flex-col gap-6">
-            <div
-              class="sticky lg:top-28 bg-[#1a222d] border border-[#283039] rounded-xl p-6 shadow-xl shadow-black/20"
-            >
+                <!-- Quantity + Price + Total -->
+                <div class="flex md:contents items-center justify-between mt-2 md:mt-0">
+
+                  <!-- Mobile Price -->
+                  <div class="md:hidden text-white font-bold text-lg">
+                    <% if (isOutOfStock) { %>—<% } else { %>&#8377;<%= price %><% } %>
+                  </div>
+
+                  <!-- Quantity Controls -->
+                  <div class="col-span-2 flex justify-center items-center gap-1">
+                    <button
+                      class="decrease-btn size-6 flex items-center justify-center rounded transition-colors
+                        <%= isOutOfStock ? 'bg-[#1e2630] text-[#4a5568] cursor-not-allowed' : 'bg-[#283039] text-white hover:bg-[#374151]' %>"
+                      <%= isOutOfStock ? 'disabled' : '' %>>
+                      -
+                    </button>
+                    <input value="<%= item.quantity %>" readonly
+                      class="qty-input w-10 bg-transparent border-none text-center text-sm font-medium
+                        <%= isOutOfStock ? 'text-[#4a5568]' : 'text-white' %>" />
+                    <button
+                      class="increase-btn size-6 flex items-center justify-center rounded transition-colors
+                        <%= isOutOfStock ? 'bg-[#1e2630] text-[#4a5568] cursor-not-allowed' : 'bg-[#283039] text-white hover:bg-[#374151]' %>"
+                      <%= isOutOfStock ? 'disabled' : '' %>>
+                      +
+                    </button>
+                  </div>
+
+                  <!-- Desktop Price -->
+                  <div class="col-span-2 hidden md:flex justify-center items-center font-medium price
+                    <%= isOutOfStock ? 'text-[#4a5568]' : 'text-[#9dabb9]' %>">
+                    <% if (isOutOfStock) { %>—<% } else { %>&#8377;<%= price %><% } %>
+                  </div>
+
+                  <!-- Total + Delete -->
+                  <div class="col-span-2 flex items-center justify-end gap-4">
+                    <span class="hidden md:block font-bold text-lg item-total
+                      <%= isOutOfStock ? 'text-[#4a5568]' : 'text-white' %>">
+                      <% if (isOutOfStock) { %>—<% } else { %>&#8377;<%= total %><% } %>
+                    </span>
+                    <button class="hidden md:flex size-8 items-center justify-center rounded-full text-[#9dabb9] hover:bg-[#283039] hover:text-[#ef4444] transition-colors delete-btn"
+                      data-variant="<%= item.variantId %>">
+                      <span class="material-symbols-outlined text-[20px]">delete</span>
+                    </button>
+                  </div>
+
+                </div><!-- end quantity/price/total row -->
+              </div><!-- end cart-item -->
+
+              <% }) %>
+            <% } else { %>
+              <div class="bg-[#1a222d] border border-[#283039] rounded-xl p-10 flex flex-col items-center justify-center gap-4 text-center">
+                <span class="material-symbols-outlined text-6xl text-[#9dabb9]">shopping_cart</span>
+                <p class="text-white text-lg font-bold">Your cart is empty</p>
+                <a href="/home" class="mt-2 text-primary hover:text-blue-400 font-medium">Start Shopping</a>
+              </div>
+            <% } %>
+
+          </div><!-- end lg:col-span-8 -->
+
+          <!-- ── RIGHT: Order Summary (4 cols) ── -->
+          <div class="lg:col-span-4 relative">
+            <div class="lg:sticky lg:top-28 bg-[#1a222d] border border-[#283039] rounded-xl p-6 shadow-xl shadow-black/20">
               <h2 class="text-white text-xl font-bold mb-6">Order Summary</h2>
+
               <div class="flex flex-col gap-3 mb-6">
                 <div class="flex justify-between items-center text-[#9dabb9]">
                   <span>Subtotal</span>
-                  <span class="text-white font-medium">$310.00</span>
+                  <span id="cart-total" class="text-white font-bold text-lg">&#8377;<%= typeof cartTotal !== 'undefined' ? cartTotal : 0 %></span>
                 </div>
                 <div class="flex justify-between items-center text-[#4ade80]">
                   <div class="flex items-center gap-2">
                     <span>Discount</span>
-                    <span
-                      class="text-xs bg-[#4ade80]/10 px-1.5 py-0.5 rounded border border-[#4ade80]/20"
-                      >GOAL20</span
-                    >
+                    <span class="text-xs bg-[#4ade80]/10 px-1.5 py-0.5 rounded border border-[#4ade80]/20">GOAL20</span>
                   </div>
-                  <span class="font-medium">-$20.00</span>
+                  <span class="font-medium">-&#8377;20.00</span>
                 </div>
                 <div class="flex justify-between items-center text-[#9dabb9]">
                   <span>Shipping estimate</span>
                   <span class="text-[#4ade80] font-medium">Free</span>
                 </div>
-                
               </div>
+
               <div class="mb-6">
-                <div
-                  class="flex items-center justify-between p-3 rounded-lg bg-[#111418] border border-[#283039]"
-                >
+                <div class="flex items-center justify-between p-3 rounded-lg bg-[#111418] border border-[#283039]">
                   <div class="flex items-center gap-3 overflow-hidden">
-                    <div
-                      class="shrink-0 size-8 rounded-full bg-[#283039] flex items-center justify-center text-[#9dabb9]"
-                    >
-                      <span class="material-symbols-outlined text-[16px]"
-                        >location_on</span
-                      >
+                    <div class="shrink-0 size-8 rounded-full bg-[#283039] flex items-center justify-center text-[#9dabb9]">
+                      <span class="material-symbols-outlined text-[16px]">location_on</span>
                     </div>
                     <div class="flex flex-col overflow-hidden">
-                      <span
-                        class="text-[10px] text-[#9dabb9] uppercase font-bold tracking-wider"
-                        >Shipping to</span
-                      >
-                      <span class="text-sm text-white font-medium truncate"
-                        >New York, NY 10012</span
-                      >
+                      <span class="text-[10px] text-[#9dabb9] uppercase font-bold tracking-wider">Shipping to</span>
+                      <span class="text-sm text-white font-medium truncate">New York, NY 10012</span>
                     </div>
                   </div>
-                  <button
-                    class="shrink-0 text-xs font-bold text-primary hover:text-white transition-colors px-2 py-1"
-                  >
-                    CHANGE
-                  </button>
+                  <button class="shrink-0 text-xs font-bold text-primary hover:text-white transition-colors px-2 py-1">CHANGE</button>
                 </div>
               </div>
+
               <div class="mb-6">
-                <button
-                  class="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-primary/20 transition-all text-sm"
-                >
-                  <span class="material-symbols-outlined text-[20px]"
-                    >sell</span
-                  >
+                <button class="w-full h-12 flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-primary/20 transition-all text-sm">
+                  <span class="material-symbols-outlined text-[20px]">sell</span>
                   Apply Coupon
                 </button>
               </div>
+
               <div class="h-px bg-[#283039] mb-6"></div>
+
               <div class="flex justify-between items-end mb-6">
                 <span class="text-white text-lg font-medium">Total</span>
-                <span class="text-white text-3xl font-black tracking-tight"
-                  >$314.80</span
-                >
+                <span class="text-white text-3xl font-black tracking-tight" id="cart-grand-total">&#8377;<%= typeof cartTotal !== 'undefined' ? cartTotal : 0 %></span>
               </div>
-              <button
-                class="w-full h-12 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
-              >
+
+              <button class="w-full h-12 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
                 Proceed to Checkout
-                <span class="material-symbols-outlined text-[20px]"
-                  >arrow_forward</span
-                >
+                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
               </button>
-              <div
-                class="mt-4 flex items-center justify-center gap-2 text-[#9dabb9] text-sm"
-              >
+
+              <div class="mt-4 flex items-center justify-center gap-2 text-[#9dabb9] text-sm">
                 <span class="material-symbols-outlined text-[16px]">lock</span>
                 Secure Checkout
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </div><!-- end lg:col-span-4 -->
+
+        </div><!-- end grid -->
+      </div><!-- end max-w container -->
     </main>
+
   </body>
   <script>
-    const increase=document.getElementById('increaseBtn');
-    const decrease=document.getElementById('decreaseBtn');
-    const inputQty=document.getElementById('quantityBtn');
-    let quantity=1;
+   document.querySelectorAll(".cart-item").forEach(item => {
+  const variantId = item.dataset.variant;
+  const isOOS = item.dataset.outOfStock === 'true';
+  const increaseBtn = item.querySelector(".increase-btn");
+  const decreaseBtn = item.querySelector(".decrease-btn");
+  const qtyInput   = item.querySelector(".qty-input");
+  const priceEl    = item.querySelector(".price");
+  const totalEl    = item.querySelector(".item-total");
 
-    increase.addEventListener('click',()=>{
-        quantity++;
-        inputQty.value=quantity
+  // Skip wiring events for out-of-stock items (buttons are already disabled via HTML)
+  if (isOOS) return;
+
+  const getPrice = () => Number(priceEl.innerText.replace("₹", "").trim());
+
+  const updateItemUI = (newQty) => {
+    qtyInput.value = newQty;
+    totalEl.innerText = `₹${getPrice() * newQty}`;
+    updateCartTotal();
+  };
+
+  increaseBtn.addEventListener("click", async () => {
+    const res = await fetch("/update-cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ variantId, action: "increase" })
     });
-    decrease.addEventListener('click',()=>{
-        if(quantity>1){
-            quantity--;
-            inputQty.value=quantity
-        }
-    })
+    const data = await res.json();
+    if (data.success) updateItemUI(data.quantity);
+    else if (data.message) Swal.fire("Error", data.message, "error");
+  });
+
+  decreaseBtn.addEventListener("click", async () => {
+    const res = await fetch("/update-cart", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ variantId, action: "decrease" })
+    });
+    const data = await res.json();
+    if (data.success) updateItemUI(data.quantity);
+  });
+});
+
+function updateCartTotal() {
+  let total = 0;
+  document.querySelectorAll(".cart-item").forEach(item => {
+    // Skip out-of-stock items when summing up the total
+    if (item.dataset.outOfStock === 'true') return;
+    const totalEl = item.querySelector(".item-total");
+    if (totalEl) total += Number(totalEl.innerText.replace("₹", "").trim());
+  });
+  const cartTotalEl = document.getElementById("cart-total");
+  if (cartTotalEl) cartTotalEl.innerText = `₹${total}`;
+  const grandTotalEl = document.getElementById("cart-grand-total");
+  if (grandTotalEl) grandTotalEl.innerText = `₹${total}`;
+}
   </script>
   <script>
 document.querySelectorAll(".delete-btn").forEach(btn => {
   btn.addEventListener("click", async () => {
-
     const variantId = btn.dataset.variant;
-
-    // 🔥 Confirm popup
     const result = await Swal.fire({
       title: "Remove item?",
       text: "This product will be removed from your cart",
@@ -389,27 +371,18 @@ document.querySelectorAll(".delete-btn").forEach(btn => {
       confirmButtonColor: "#ef4444",
       confirmButtonText: "Yes, remove it"
     });
-
     if (!result.isConfirmed) return;
-
-    // 🔥 API call
     const res = await fetch("/remove-from-cart", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ variantId })
     });
-
     const data = await res.json();
-
     if (data.success) {
-      Swal.fire("Removed!", "Item removed from cart", "success")
-        .then(() => location.reload());
+      Swal.fire("Removed!", "Item removed from cart", "success").then(() => location.reload());
     } else {
       Swal.fire("Error", data.message, "error");
     }
-
   });
 });
 </script>

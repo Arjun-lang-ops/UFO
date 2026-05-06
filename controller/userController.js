@@ -5,6 +5,7 @@ import User from "../models/userModel.js";
 import Category from "../models/categoryModel.js";
 import Product from "../models/productModel.js";
 import Otp from "../models/otpModel.js";
+import Address from "../models/userAddressModel.js";
 
 
 
@@ -146,8 +147,24 @@ export const userProfileRender = async (req, res) => {
 
   try {
     const userId = req.session.user;
+    const defaultAddress = await Address.findOne({
+      user: userId,
+      isDefault: true
+    });
+
+    
+
+if (!defaultAddress) {
+  defaultAddress = await Address.findOne({ user: userId });
+
+  if (defaultAddress) {
+    defaultAddress.isDefault = true;
+    await defaultAddress.save();
+  }
+}
+
     const user = await User.findById(userId);
-    res.render('userViews/userProfile', { user })
+    res.render('userViews/userProfile', { user,defaultAddress })
     console.log(req.session.user);
 
   } catch (error) {

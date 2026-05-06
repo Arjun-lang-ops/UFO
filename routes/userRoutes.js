@@ -3,7 +3,7 @@ import express from "express";
 import { checkUserBlocked, isLoggedIn, isLoggedOut } from "../middlewares/userAuth.js";
 import passport from "passport";
 import { emailOtpRender, emailOtpSend, resendEmailOtp, verifyEmailOtp } from "../controller/userEmailChangeController.js";
-import { addAddressController, editAddressRender,userAddressRender,removeAddressController, updateAddressController } from "../controller/userAddressController.js";
+import { addAddressController, editAddressRender,userAddressRender,removeAddressController, updateAddressController, setDefaultAddressController } from "../controller/userAddressController.js";
 import { upload } from "../middlewares/upload.js";
 import { updateProfilePhotoController } from "../controller/userProfileController.js";
 import { forgotPasswordVerify,resendOtpReset,resetSendMail, setPassword, verifyForgotOtp } from "../controller/userForgotPasswordController.js";
@@ -72,6 +72,7 @@ router.post(
 
 
 router.put('/profile/address/update/:id',updateAddressController)
+router.patch('/profile/address/default/:id', isLoggedIn, checkUserBlocked, setDefaultAddressController);
 router.put('/profile/update-password', updatePassword);
 router.delete('/profile/address/remove/:id',removeAddressController)
 

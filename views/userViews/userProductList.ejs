@@ -104,7 +104,7 @@
             >
               <span class="material-symbols-outlined text-[24px]">search</span>
             </div>
-            <form action="">
+            <form action="/product" method="GET">
               <input id="searchInput"
               class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-surface-dark focus:border-none h-full placeholder:text-[#9dabb9] px-8 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
               placeholder="Search accessories..."
@@ -138,17 +138,21 @@
           </button>
           </a>
           <a href="/cart">
-            <button
-            class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors relative"
-          >
-            <span class="material-symbols-outlined text-[20px]"
-              >shopping_cart</span
-            >
-            <span
-              class="absolute top-1.5 right-1.5 size-2 rounded-full bg-primary"
-            ></span>
-          </button>
-          </a>
+  <button
+    class="flex items-center justify-center rounded-lg h-10 w-10 hover:bg-slate-200 dark:hover:bg-[#283039] transition-colors relative"
+  >
+    <span class="material-symbols-outlined">shopping_cart</span>
+
+    <% if (cartCount > 0) { %>
+      <span
+        id="cart-count"
+        class="absolute -top-1 -right-1 bg-primary text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full">
+        <%= cartCount %>
+      </span>
+    <% } %>
+
+  </button>
+</a>
           <button
             class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors"
           >
@@ -168,23 +172,22 @@
       class="layout-container flex flex-col flex-grow px-4 md:px-10 lg:px-20 py-6 max-w-[1440px] mx-auto w-full"
     >
       <!-- Breadcrumbs -->
-      <div class="flex flex-wrap gap-2 mb-6">
-        <a
-          class="text-[#9dabb9] text-sm font-medium leading-normal hover:text-white transition-colors"
-          href="#"
-          >Home</a
-        >
-        <span class="text-[#9dabb9] text-sm font-medium leading-normal">/</span>
-        <a
-          class="text-[#9dabb9] text-sm font-medium leading-normal hover:text-white transition-colors"
-          href="#"
-          >Accessories</a
-        >
-        <span class="text-[#9dabb9] text-sm font-medium leading-normal">/</span>
-        <span class="text-white text-sm font-medium leading-normal"
-          >Football</span
-        >
-      </div>
+      <nav class="text-sm text-gray-400 mb-4">
+  <a href="/home" class="hover:text-white">Home</a>
+
+  <% if (query.search) { %>
+    <span> > </span>
+    <span>Search: "<%= query.search %>"</span>
+
+  <% } else if (query.category && categoryMap[query.category]) { %>
+    <span> > </span>
+    <span><%= categoryMap[query.category] %></span>
+
+  <% } else { %>
+    <span> > </span>
+    <span>All Products</span>
+  <% } %>
+</nav>
       <!-- Page Heading & Top Controls -->
       <div
         class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 pb-6 border-b border-border-dark"
@@ -209,7 +212,9 @@
           <!-- Sort Dropdown -->
           <div class="relative min-w-[160px] flex-1 md:flex-none">
             <form method="GET" action="/product">
-             
+              <% if (query && query.search) { %>
+                <input type="hidden" name="search" value="<%= query.search %>">
+              <% } %>
  
             <select name="sort" onchange="this.form.submit()"
               class="appearance-none w-full bg-surface-dark text-white text-sm border border-border-dark rounded-lg px-4 py-2.5 pr-8 focus:outline-none focus:border-primary cursor-pointer"

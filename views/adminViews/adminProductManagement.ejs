@@ -189,15 +189,7 @@
                 <button
                     class="px-4 py-1.5 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-bold hover:border-primary transition-colors text-orange-500">Low
                     Stock Only</button>
-                <div class="ml-auto flex items-center gap-2">
-                    <span class="text-xs text-slate-500">Sort by:</span>
-                    <select
-                        class="text-xs bg-transparent border-none focus:ring-0 font-bold text-slate-900 dark:text-slate-100 cursor-pointer">
-                        <option>Newest First</option>
-                        <option>Price: High to Low</option>
-                        <option>Stock Level</option>
-                    </select>
-                </div>
+                
             </div>
             <!-- Table Section -->
             <div
@@ -241,9 +233,15 @@
                                 <span class="text-sm font-bold"><%=item.variants[0]?.price%></span>
                             </td>
                             <td class="px-6 py-4">
-                                <span
-                                    class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-500 uppercase">In
-                                    Stock</span>
+                                <% if (item.isActive) { %>
+  <span class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-500 uppercase">
+    Listed
+  </span>
+<% } else { %>
+  <span class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-500 uppercase">
+    Unlisted
+  </span>
+<% } %>
                             </td>
                             <td class="px-6 py-4 text-right">
                                 <div class="flex items-center justify-end gap-2">
@@ -252,9 +250,7 @@
                                         <span class="material-symbols-outlined text-lg">edit</span>
                                     </button>
                                     </a>
-                                    <button class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
-                                        <span class="material-symbols-outlined text-lg">delete</span>
-                                    </button>
+                                   
                                 </div>
                             </td>
                         </tr>
