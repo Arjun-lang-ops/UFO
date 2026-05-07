@@ -287,52 +287,67 @@ for (let file of newFiles) {
   }
 }
 
-    // merge old + new files
-    let totalFiles = [...variantImageStore[idx], ...newFiles];
-
-    // limit to 3 images
-    if (totalFiles.length > 3) {
-      showError(`imagesError_${idx}`, "Maximum 3 images allowed per variant");
-      return;
+    // pass validated files to cropper if available
+    if (window.openCropQueue && newFiles.length > 0) {
+      window.openCropQueue(newFiles, (croppedFiles) => {
+        if (croppedFiles && croppedFiles.length > 0) {
+          processValidatedFiles(croppedFiles);
+        } else {
+          input.value = ""; // reset if cancelled or empty
+        }
+      });
     } else {
-      clearError(`imagesError_${idx}`);
+      processValidatedFiles(newFiles);
     }
 
-    variantImageStore[idx] = totalFiles;
+    function processValidatedFiles(processedFiles) {
+      // merge old + new files
+      let totalFiles = [...variantImageStore[idx], ...processedFiles];
 
-    // clear preview
-    previewContainer.innerHTML = "";
+      // limit to 3 images
+      if (totalFiles.length > 3) {
+        showError(`imagesError_${idx}`, "Maximum 3 images allowed per variant");
+        return;
+      } else {
+        clearError(`imagesError_${idx}`);
+      }
 
-    // show all images
-    variantImageStore[idx].forEach((file, i) => {
-      const reader = new FileReader();
+      variantImageStore[idx] = totalFiles;
 
-      reader.onload = (e) => {
-        const div = document.createElement("div");
-        div.className = "relative";
+      // clear preview
+      previewContainer.innerHTML = "";
 
-        div.innerHTML = `
-            <div class="aspect-square rounded-lg bg-cover bg-center border border-[#1c2632]"
-                 style="background-image: url('${e.target.result}')">
-            </div>
+      // show all images
+      variantImageStore[idx].forEach((file, i) => {
+        const reader = new FileReader();
 
-            <button type="button"
-                onclick="removeImage(${idx}, ${i})"
-                class="absolute top-1 right-1 bg-black/70 text-white text-xs px-1 rounded hover:bg-red-500">
-                ✕
-            </button>
-        `;
+        reader.onload = (e) => {
+          const div = document.createElement("div");
+          div.className = "relative";
 
-        previewContainer.appendChild(div);
-      };
+          div.innerHTML = `
+              <div class="aspect-square rounded-lg bg-cover bg-center border border-[#1c2632]"
+                   style="background-image: url('${e.target.result}')">
+              </div>
 
-      reader.readAsDataURL(file);
-    });
+              <button type="button"
+                  onclick="removeImage(${idx}, ${i})"
+                  class="absolute top-1 right-1 bg-black/70 text-white text-xs px-1 rounded hover:bg-red-500">
+                  ✕
+              </button>
+          `;
 
-    // IMPORTANT: update input files
-    const dataTransfer = new DataTransfer();
-    variantImageStore[idx].forEach((file) => dataTransfer.items.add(file));
-    input.files = dataTransfer.files;
+          previewContainer.appendChild(div);
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      // IMPORTANT: update input files
+      const dataTransfer = new DataTransfer();
+      variantImageStore[idx].forEach((file) => dataTransfer.items.add(file));
+      input.files = dataTransfer.files;
+    }
   };
 
   //remove images

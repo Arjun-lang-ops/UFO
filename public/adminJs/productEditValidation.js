@@ -329,60 +329,75 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // merge old + new files
-    let totalFiles = [...variantImageStore[idx], ...newFiles];
-
-    // Check with existing limits
-    const existingImagesInput = document.getElementById(`existingImages_${idx}`);
-    let existingCount = 0;
-    if (existingImagesInput) {
-      try {
-        existingCount = JSON.parse(existingImagesInput.value).length;
-      } catch (e) {}
-    }
-
-    // limit to 3 images total
-    if (totalFiles.length + existingCount > 3) {
-      showError(`imagesError_${idx}`, "Maximum 3 images allowed per variant (including existing)");
-      return;
+    // pass validated files to cropper if available
+    if (window.openCropQueue && newFiles.length > 0) {
+      window.openCropQueue(newFiles, (croppedFiles) => {
+        if (croppedFiles && croppedFiles.length > 0) {
+          processValidatedFiles(croppedFiles);
+        } else {
+          input.value = ""; // reset if cancelled or empty
+        }
+      });
     } else {
-      clearError(`imagesError_${idx}`);
+      processValidatedFiles(newFiles);
     }
 
-    variantImageStore[idx] = totalFiles;
+    function processValidatedFiles(processedFiles) {
+      // merge old + new files
+      let totalFiles = [...variantImageStore[idx], ...processedFiles];
 
-    // remove only newly uploaded image previews
-    Array.from(previewContainer.querySelectorAll('.new-image')).forEach(n => n.remove());
+      // Check with existing limits
+      const existingImagesInput = document.getElementById(`existingImages_${idx}`);
+      let existingCount = 0;
+      if (existingImagesInput) {
+        try {
+          existingCount = JSON.parse(existingImagesInput.value).length;
+        } catch (e) {}
+      }
 
-    // show all newly uploaded images
-    variantImageStore[idx].forEach((file, i) => {
-      const reader = new FileReader();
+      // limit to 3 images total
+      if (totalFiles.length + existingCount > 3) {
+        showError(`imagesError_${idx}`, "Maximum 3 images allowed per variant (including existing)");
+        return;
+      } else {
+        clearError(`imagesError_${idx}`);
+      }
 
-      reader.onload = (e) => {
-        const div = document.createElement("div");
-        div.className = "relative new-image";
+      variantImageStore[idx] = totalFiles;
 
-        div.innerHTML = `
-            <div class="aspect-square rounded-lg bg-cover bg-center border border-[#1c2632]"
-                 style="background-image: url('${e.target.result}')">
-            </div>
+      // remove only newly uploaded image previews
+      Array.from(previewContainer.querySelectorAll('.new-image')).forEach(n => n.remove());
 
-            <button type="button"
-                onclick="removeImage(${idx}, ${i})"
-                class="absolute top-1 right-1 bg-black/70 text-white text-xs px-1 rounded hover:bg-red-500">
-                ✕
-            </button>
-        `;
+      // show all newly uploaded images
+      variantImageStore[idx].forEach((file, i) => {
+        const reader = new FileReader();
 
-        previewContainer.appendChild(div);
-      };
+        reader.onload = (e) => {
+          const div = document.createElement("div");
+          div.className = "relative new-image";
 
-      reader.readAsDataURL(file);
-    });
+          div.innerHTML = `
+              <div class="aspect-square rounded-lg bg-cover bg-center border border-[#1c2632]"
+                   style="background-image: url('${e.target.result}')">
+              </div>
 
-    const dataTransfer = new DataTransfer();
-    variantImageStore[idx].forEach((file) => dataTransfer.items.add(file));
-    input.files = dataTransfer.files;
+              <button type="button"
+                  onclick="removeImage(${idx}, ${i})"
+                  class="absolute top-1 right-1 bg-black/70 text-white text-xs px-1 rounded hover:bg-red-500">
+                  ✕
+              </button>
+          `;
+
+          previewContainer.appendChild(div);
+        };
+
+        reader.readAsDataURL(file);
+      });
+
+      const dataTransfer = new DataTransfer();
+      variantImageStore[idx].forEach((file) => dataTransfer.items.add(file));
+      input.files = dataTransfer.files;
+    }
   };
 
   window.removeImage = (idx, imageIndex) => {
