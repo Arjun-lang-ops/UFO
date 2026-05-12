@@ -147,7 +147,7 @@ export const userProfileRender = async (req, res) => {
 
   try {
     const userId = req.session.user;
-    const defaultAddress = await Address.findOne({
+    let defaultAddress = await Address.findOne({
       user: userId,
       isDefault: true
     });

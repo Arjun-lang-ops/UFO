@@ -17,7 +17,7 @@ export const isLoggedOut=(req,res,next)=>{
 export const checkUserBlocked = async (req, res, next) => {
   try {
     
-    const userId = req.session.user?._id || req.user?._id;
+    const userId = req.session.user || req.user?._id;
 
     if (!userId) {
       return res.redirect("/login");

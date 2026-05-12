@@ -62,7 +62,7 @@ export const editCategoryService = async (id, name, description, isListed) => {
 
     const existing = await Category.findOne({
         name:{$regex:`{name}$`,$options:'i'},
-        _id: { $ne: id } // ✅ exclude current category
+        _id: { $ne: id } 
     });
 
     if (existing) {

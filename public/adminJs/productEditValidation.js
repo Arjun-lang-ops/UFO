@@ -181,6 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <input type="hidden" id="variantId_${idx}" name="variantId_${idx}" value="" />
                 <!-- SKU -->
                 <div class="space-y-1">
                     <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">SKU</label>
@@ -513,4 +514,52 @@ document.addEventListener("DOMContentLoaded", () => {
   document
     .getElementById("productDescription")
     ?.addEventListener("input", () => clearError("descriptionError"));
+
+    // ─── Live clear variant errors ──────────────────────────────────────────────
+
+document.addEventListener("input", (e) => {
+  const id = e.target.id;
+
+  if (!id) return;
+
+  // SKU
+  if (id.startsWith("sku_")) {
+    clearError(`skuError_${id.split("_")[1]}`);
+  }
+
+  // Stock
+  if (id.startsWith("stock_")) {
+    clearError(`stockError_${id.split("_")[1]}`);
+  }
+
+  // Color
+  if (id.startsWith("color_")) {
+    clearError(`colorError_${id.split("_")[1]}`);
+  }
+
+  // Size
+  if (id.startsWith("size_")) {
+    clearError(`sizeError_${id.split("_")[1]}`);
+  }
+
+  // Price
+  if (id.startsWith("price_")) {
+    clearError(`priceError_${id.split("_")[1]}`);
+  }
+
+  // Discounted Price
+  if (id.startsWith("discountedPrice_")) {
+    clearError(`discountedPriceError_${id.split("_")[1]}`);
+  }
+});
+
+// Clear image errors when selecting files
+document.addEventListener("change", (e) => {
+  const id = e.target.id;
+
+  if (id && id.startsWith("variantImages_")) {
+    clearError(`imagesError_${id.split("_")[1]}`);
+  }
+});
+ 
 });

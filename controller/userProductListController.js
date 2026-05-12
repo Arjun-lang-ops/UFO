@@ -45,6 +45,7 @@ export const productDetailsRender = async (req, res) => {
     const variantId = req.query.variant;
 
     const product = await productDetailsService(productId);
+    
 
     let selectedVariant;
 

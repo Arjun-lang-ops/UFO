@@ -123,12 +123,24 @@ export const addProductService = async (data, files) => {
 // EDIT PRODUCT
 export const editProductService = async (productId, data, files) => {
   try {
+    const existingProduct = await Product.findById(productId).select("variants");
+    if (!existingProduct) {
+      throw new Error("Product not found");
+    }
+    const existingVariantsById = new Map(
+      existingProduct.variants.map(variant => [variant._id.toString(), variant])
+    );
+
     const variants = [];
     const keys = Object.keys(data);
     const skuKeys = keys.filter(k => k.startsWith('sku_'));
     const indices = skuKeys.map(k => k.split('_')[1]);
 
     for (const idx of indices) {
+      const existingVariantId = data[`variantId_${idx}`];
+      const existingVariant = existingVariantId
+        ? existingVariantsById.get(existingVariantId.toString())
+        : existingProduct.variants[Number(idx) - 1];
       const newImages = files ? files[`variantImages_${idx}`] : undefined;
       const newImagePaths = newImages ? newImages.map(file => file.path) : [];
       
@@ -143,6 +155,7 @@ export const editProductService = async (productId, data, files) => {
       }
 
       variants.push({
+        ...(existingVariant ? { _id: existingVariant._id } : {}),
         sku: data[`sku_${idx}`],
         color: data[`color_${idx}`],
         size: data[`size_${idx}`],

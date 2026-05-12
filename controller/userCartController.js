@@ -10,7 +10,7 @@ export const cartRender = async (req, res) => {
 
 export const addToCart = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user?._id||req.session.user;
     const { productId, variantId, quantity } = req.body;
     if (!productId || !variantId || !quantity) {
       return res.status(400).json({
@@ -40,7 +40,7 @@ export const addToCart = async (req, res) => {
 
 export const getCartController = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user?._id||req.session.user;
 
     const cart = await getCartService(userId);
 
@@ -55,7 +55,7 @@ export const getCartController = async (req, res) => {
           v._id.toString() === item.variantId.toString()
         );
 
-        const isOutOfStock = !variant || variant.stock <= 0;
+        const isOutOfStock = !variant || variant.stock <= 0 || !product || !product.isActive;
         const price = isOutOfStock ? 0 : (variant?.discountedPrice || variant?.price || 0);
 
         cartTotal += price * item.quantity;
@@ -64,7 +64,7 @@ export const getCartController = async (req, res) => {
 
     res.render("userViews/userCartPage", {
       cart,
-      cartTotal   // ✅ NOW PASSED
+      cartTotal   
     });
 
   } catch (error) {

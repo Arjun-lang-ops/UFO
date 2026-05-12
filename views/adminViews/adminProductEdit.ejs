@@ -152,7 +152,7 @@
 
           <!-- ═══════════════ FORM ═══════════════ -->
           <form id="addProductForm" enctype="multipart/form-data" novalidate>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
               <!-- Left Column (Main Form Content) -->
               <div class="lg:col-span-2 space-y-8">
@@ -247,6 +247,7 @@
                     <div
                       class="variant-box bg-[#1c2632]/30 border border-[#1c2632] rounded-xl overflow-hidden p-6 space-y-6"
                       data-index="<%= idx %>">
+                      
                       <div class="flex justify-between items-center">
                         <span class="text-xs font-black uppercase tracking-widest text-primary">Variant <%= idx %></span>
                         <button type="button" onclick="removeVariant(this)"
@@ -256,6 +257,7 @@
                       </div>
 
                       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="hidden" id="variantId_<%= idx %>" name="variantId_<%= idx %>" value="<%= variant._id %>" />
                         <!-- SKU -->
                         <div class="space-y-1">
                           <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">SKU <span class="text-red-400">*</span></label>

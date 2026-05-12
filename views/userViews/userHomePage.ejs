@@ -92,23 +92,41 @@
         </div>
         <div class="flex flex-1 justify-end gap-4 md:gap-8 items-center">
           <label class="hidden sm:flex flex-col min-w-40 h-10 max-w-64 flex-1">
-            <div
-              class="flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-200 dark:bg-[#283039]"
-            >
-              <form action="/home">
-                <div
-                class="text-slate-500 dark:text-[#9dabb9] flex items-center justify-center pl-4 rounded-l-lg border-r-0"
-              >
-                <span class="material-symbols-outlined text-[20px]"
-                  >search</span
-                >
-              </div>
-              </form>
-              <input
-                class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg bg-transparent text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none h-full placeholder:text-slate-500 dark:placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
-                placeholder="Search gear..."
-              />
-            </div>
+            <form action="/home" method="GET" class="w-full h-full">
+  <div
+    class="relative flex w-full flex-1 items-stretch rounded-lg h-full bg-slate-200 dark:bg-[#283039]"
+  >
+
+    <!-- Search Icon -->
+    <div
+      class="text-slate-500 dark:text-[#9dabb9] flex items-center justify-center pl-4 rounded-l-lg"
+    >
+      <span class="material-symbols-outlined text-[20px]">
+        search
+      </span>
+    </div>
+
+    <!-- Input -->
+    <input
+      id="searchInput"
+      type="text"
+      name="search"
+      value="<%= query?.search || '' %>"
+      placeholder="Search gear..."
+      class="flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg bg-transparent text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none h-full placeholder:text-slate-500 dark:placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 pr-10 text-sm font-normal leading-normal"
+    />
+
+    <!-- Clear Button -->
+    <button
+      type="button"
+      id="clearSearch"
+      class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 dark:text-[#9dabb9] hover:text-white hidden"
+    >
+      ✕
+    </button>
+
+  </div>
+</form>
           </label>
           <div class="flex gap-2">
             <button
@@ -429,4 +447,37 @@
       </footer>
     </div>
   </body>
+  <script>
+const input = document.getElementById("searchInput");
+const clearBtn = document.getElementById("clearSearch");
+
+// Show/hide clear button
+function toggleClearButton() {
+  if (input.value.trim() !== "") {
+    clearBtn.classList.remove("hidden");
+  } else {
+    clearBtn.classList.add("hidden");
+  }
+}
+
+// Initial check
+toggleClearButton();
+
+// Input typing
+input.addEventListener("input", toggleClearButton);
+
+// Clear search
+clearBtn.addEventListener("click", () => {
+
+  input.value = "";
+
+  // Redirect without search query
+  const url = new URL(window.location.href);
+
+  url.searchParams.delete("search");
+
+  window.location.href = url.toString();
+});
+</script>
+
 </html>

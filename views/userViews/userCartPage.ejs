@@ -66,14 +66,7 @@
           </nav>
         </div>
         <div class="flex flex-1 justify-end gap-4 md:gap-6">
-          <label class="hidden md:flex flex-col min-w-40 h-10 max-w-64 w-full">
-            <div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-[#1a222d] border border-[#283039] focus-within:border-primary transition-colors">
-              <div class="text-[#9dabb9] flex items-center justify-center pl-3">
-                <span class="material-symbols-outlined text-[20px]">search</span>
-              </div>
-              <input class="w-full bg-transparent border-none text-white placeholder-[#9dabb9] px-3 focus:ring-0 text-sm" placeholder="Search products..." />
-            </div>
-          </label>
+          
           <div class="flex items-center gap-3">
             <button class="relative flex items-center justify-center size-10 rounded-lg hover:bg-[#283039] text-white transition-colors">
               <span class="material-symbols-outlined">favorite</span>
@@ -128,7 +121,7 @@
                     v._id.toString() === item.variantId.toString()
                   );
                 }
-                const isOutOfStock = !variant || variant.stock <= 0;
+                const isOutOfStock = !variant || variant.stock <= 0 || !product || !product.isActive;
                 const price = isOutOfStock ? 0 : (variant?.discountedPrice || variant?.price || 0);
                 const total = isOutOfStock ? 0 : price * item.quantity;
                 // Use last-known image/details even if OOS
