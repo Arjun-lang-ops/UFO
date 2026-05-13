@@ -77,7 +77,7 @@ export const getCartController = async (req, res) => {
 
 export const removeFromCartController = async (req, res) => {
   try {
-    const userId = req.user._id;
+    const userId = req.user?._id || req.session.user;
     const { variantId } = req.body;
 
     await removeFromCartService(userId, variantId);

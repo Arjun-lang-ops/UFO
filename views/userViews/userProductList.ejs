@@ -21,6 +21,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
       rel="stylesheet"
     />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -404,11 +405,12 @@
                   class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
                 >
                   <button
-                    class="quick-add-btn w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
-                   
-                  >
-                    Quick Add
-                  </button>
+  class="quick-add-btn w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
+  data-product-id="<%= product.productId %>"
+  data-variant-id="<%= product.variantId %>"
+>
+  Quick Add
+</button>
                 </div>
               </div>
               <div class="p-4 flex flex-col flex-grow">
@@ -548,6 +550,104 @@ clearBtn.addEventListener("click", () => {
   url.searchParams.set("page", 1);
 
   window.location.href = url.toString();
+});
+</script>
+<script>
+document.querySelectorAll(".quick-add-btn").forEach(button => {
+
+  button.addEventListener("click", async () => {
+
+    const productId = button.dataset.productId;
+    const variantId = button.dataset.variantId;
+
+    try {
+
+      const response = await fetch("/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          productId,
+          variantId,
+          quantity: 1
+        })
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        Swal.fire({
+  icon: "success",
+  title: "Added to Cart",
+  text: "Product added successfully",
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 1500,
+  background: "#1c2127",
+  color: "#fff"
+});
+
+        const cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+
+          cartCount.textContent = data.cartCount;
+
+        } else {
+
+          const badge = document.createElement("span");
+
+          badge.id = "cart-count";
+
+          badge.className =
+            "absolute -top-1 -right-1 bg-primary text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full";
+
+          badge.textContent = data.cartCount;
+
+          document
+            .querySelector('a[href="/cart"] button')
+            .appendChild(badge);
+        }
+
+        button.textContent = "Added";
+        button.disabled = true;
+
+        setTimeout(() => {
+          button.textContent = "Quick Add";
+          button.disabled = false;
+        }, 1500);
+
+      } else {
+
+        Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: data.message || "Failed to add to cart",
+  background: "#1c2127",
+  color: "#fff",
+  confirmButtonColor: "#137fec"
+});
+
+      }
+
+    } catch (error) {
+
+      console.log(error);
+      Swal.fire({
+  icon: "error",
+  title: "Error",
+  text: "Something went wrong",
+  background: "#1c2127",
+  color: "#fff",
+  confirmButtonColor: "#137fec"
+});
+
+    }
+
+  });
+
 });
 </script>
 

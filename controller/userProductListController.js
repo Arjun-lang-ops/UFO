@@ -1,6 +1,7 @@
 import Category from "../models/categoryModel.js";
 import { getRelatedProducts, productDetailsService } from "../service/userProductService.js";
 import Product from "../models/productModel.js";
+import { addToCartService } from "../service/userCartService.js";
 
 // export const productListRender = async (req, res) => {
 //   try {
@@ -217,3 +218,26 @@ console.log(productList)
     console.log(error);
   }
 };
+
+
+export const addToCartController=async(req,res)=>{
+  try {
+    const userId=req.session.user|| req.user?._id;
+    const { productId, variantId, quantity } = req.body;
+    const cart=await addToCartService(userId,{productId, variantId, quantity:Number(quantity)})
+    let cartCount=0;
+    cart.items.forEach(item=>{
+      cartCount+=item.quantity
+    })
+    console.log(cart)
+    res.json({
+      success:true,
+      cartCount
+    })
+  } catch (error) {
+    res.status(400).json({
+      success:false,
+      message:error.message
+    })
+  }
+}

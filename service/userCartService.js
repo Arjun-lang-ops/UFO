@@ -76,7 +76,8 @@ export const addToCartService = async (userId, { productId, variantId, quantity 
 
 
 export const getCartService = async (userId) => {
-  const cart = await Cart.findOne({ userId }).populate('items.productId').lean();
+  const cart = await Cart.findOne({ userId }).populate('items.productId');
+  
   if (!cart) return null;
 
   return cart;
@@ -109,22 +110,37 @@ export const updateQuantity = async (userId, variantId, action) => {
   const cart = await Cart.findOne({ userId }).populate('items.productId');
 
   const item = cart.items.find(
-    i => i.variantId.toString() === variantId
+    i => i.variantId?.toString() === variantId
   );
 
+  if(!item){
+    throw new Error('cart item not found')
+  }
+
   const product = item.productId;
+
+  if(!product){
+    throw new Error('Product no longer exists')
+  }
   const variant = product.variants.id(variantId)
 
-  if (!variant || variant.stock <= 0 || !product || !product.isActive) {
+  if(!variant){
+    throw new Error('variants not found')
+  }
+
+  if (  variant.stock <= 0  || !product.isActive) {
     throw new Error("Product is out of stock")
   }
 
+  const max_Qty=10;
 
 
   if (action === "increase") {
     if (item.quantity + 1 > variant.stock) {
       throw new Error(`Only ${variant.stock} items available`);
 
+    }else if(item.quantity +1 > max_Qty){
+      throw new Error(`maximum ${max_Qty} can be added to cart`)
     }
     item.quantity += 1;
   };
@@ -132,7 +148,7 @@ export const updateQuantity = async (userId, variantId, action) => {
   if (action === "decrease" && item.quantity > 1) {
     item.quantity -= 1;
   }
-
+  
   await cart.save();
 
   return item;
