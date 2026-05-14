@@ -88,6 +88,17 @@ export const addProductService = async (data, files) => {
     while (data[`sku_${i}`]) {
       const variantImages = files[`variantImages_${i}`] || [];
 
+      if(variantImages.length<3){
+        throw new Error(`Variant ${i} must contain at least 3 images`)
+      }
+
+
+      const duplicateVariant=variants.find(v=>v.color.toLowerCase()===data[`color_${i}`].toLowerCase() && v.size.toLowerCase()===data[`size${i}`].toLowerCase());
+
+      if(duplicateVariant){
+        throw new Error('`Duplicate variant found: ${data[`color_${i}`]} / ${data[`size_${i}`]}`')
+      }
+
       variants.push({
         sku: data[`sku_${i}`],
         color: data[`color_${i}`],
@@ -154,6 +165,25 @@ export const editProductService = async (productId, data, files) => {
         }
       }
 
+      const totalImages = [...existingImages, ...newImagePaths];
+
+        if (totalImages.length < 3) {
+          throw new Error(`Variant ${idx} must contain at least 3 images`);
+        }
+
+        
+
+        const color= data[`color_${idx}`].trim().toLowerCase();
+        const size=data[`size_${idx}`].trim().toLowerCase();
+
+        const duplicateVariant=variants.find(v=>v.color.toLowerCase()===color && v.size.toLowerCase()===size);
+
+        if(duplicateVariant){
+          throw new Error(`Duplicate variant: ${color} / ${size}`)
+        }
+
+
+
       variants.push({
         ...(existingVariant ? { _id: existingVariant._id } : {}),
         sku: data[`sku_${idx}`],
@@ -162,7 +192,7 @@ export const editProductService = async (productId, data, files) => {
         price: Number(data[`price_${idx}`]),
         discountedPrice: data[`discountedPrice_${idx}`] ? Number(data[`discountedPrice_${idx}`]) : null,
         stock: Number(data[`stock_${idx}`]),
-        images: [...existingImages, ...newImagePaths],
+        images: totalImages,
       });
     }
 

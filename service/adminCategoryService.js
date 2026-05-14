@@ -60,8 +60,9 @@ export const addCategoryService = async (name, description, isListed) => {
 export const editCategoryService = async (id, name, description, isListed) => {
    
 
-    const existing = await Category.findOne({
-        name:{$regex:`{name}$`,$options:'i'},
+    try {
+      const existing = await Category.findOne({
+        name:{$regex:`^${name}$`,$options:'i'},
         _id: { $ne: id } 
     });
 
@@ -75,9 +76,19 @@ export const editCategoryService = async (id, name, description, isListed) => {
         { new: true }
     );
 
+   
+
     if (!updated) {
         throw new Error('Category not found');
     }
 
     return updated;
+    } catch (error) {
+      if (error.code === 11000) {
+      throw new Error("Category already exists");
+    }
+
+    throw error;
+      
+    }
 };

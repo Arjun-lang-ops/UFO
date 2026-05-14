@@ -71,10 +71,7 @@
             <button class="relative flex items-center justify-center size-10 rounded-lg hover:bg-[#283039] text-white transition-colors">
               <span class="material-symbols-outlined">favorite</span>
             </button>
-            <button class="relative flex items-center justify-center size-10 rounded-lg bg-[#283039] text-white transition-colors hover:bg-primary/20 hover:text-primary">
-              <span class="material-symbols-outlined">shopping_cart</span>
-              <span class="absolute top-1.5 right-1.5 size-2.5 bg-primary rounded-full border border-[#283039]"></span>
-            </button>
+            
           </div>
         </div>
       </div>
@@ -121,7 +118,7 @@
                     v._id.toString() === item.variantId.toString()
                   );
                 }
-                const isOutOfStock = !variant || variant.stock <= 0 || !product || !product.isActive;
+                const isOutOfStock = !variant || variant.stock <= 0 || !product || !product.isActive ||!product.category?.isListed;
                 const price = isOutOfStock ? 0 : (variant?.discountedPrice || variant?.price || 0);
                 const total = isOutOfStock ? 0 : price * item.quantity;
                 // Use last-known image/details even if OOS

@@ -76,7 +76,12 @@ export const addToCartService = async (userId, { productId, variantId, quantity 
 
 
 export const getCartService = async (userId) => {
-  const cart = await Cart.findOne({ userId }).populate('items.productId');
+  const cart = await Cart.findOne({ userId }).populate({
+  path: "items.productId",
+  populate: {
+    path: "category"
+  }
+});
   
   if (!cart) return null;
 
@@ -153,3 +158,5 @@ export const updateQuantity = async (userId, variantId, action) => {
 
   return item;
 };
+
+
