@@ -387,13 +387,29 @@
                   New
                 </div>
                 <!-- Favorite Button -->
-                <button
-                  class="absolute top-3 right-3 size-8 rounded-full bg-black/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-primary"
-                >
-                  <span class="material-symbols-outlined text-[18px]"
-                    >favorite</span
-                  >
-                </button>
+                <!-- Wishlist Button -->
+<form class="wishlist-form">
+
+   <%
+const currentWishlistItems = typeof wishlistItems !== 'undefined' ? wishlistItems : [];
+const isWishlisted = currentWishlistItems.some(item =>
+    item.productId === product.productId.toString() &&
+    item.variantId === product.variantId.toString()
+);
+%>
+  
+  <button
+  type="submit"
+  class="wishlist-btn absolute top-3 right-3 z-20 h-9 w-9 rounded-full <%= isWishlisted ? 'bg-red-500 text-white' : 'bg-black/50 text-white' %> backdrop-blur-sm flex items-center justify-center hover:bg-red-500 transition-all duration-300"
+  data-product-id="<%= product.productId %>"
+  data-variant-id="<%= product.variantId %>"
+  data-wishlisted="<%= isWishlisted ? 'true' : 'false' %>"
+>
+  <span class="material-symbols-outlined text-[18px]">
+    favorite
+  </span>
+</button>
+</form>
                 <img
                  
                   class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -422,8 +438,29 @@
                 </h3>
                </a>
                 
-                <div class="mt-auto flex items-center justify-between">
-                  <span class="text-white text-lg font-bold">₹<%=product.price%></span>
+                <!-- Variant Details -->
+<div class="flex items-center gap-2 mb-3 flex-wrap">
+
+  <!-- Color -->
+  <span
+    class="px-2 py-1 text-xs rounded-md bg-[#283039] text-[#d1d5db] border border-border-dark"
+  >
+    Color: <%= product.color %>
+  </span>
+
+  <!-- Size -->
+  <span
+    class="px-2 py-1 text-xs rounded-md bg-[#283039] text-[#d1d5db] border border-border-dark"
+  >
+    Size: <%= product.size %>
+  </span>
+
+</div>
+
+<div class="mt-auto flex items-center justify-between">
+  <span class="text-white text-lg font-bold">
+    ₹<%= product.price %>
+  </span>
                   <button
                     class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
                   >
@@ -649,6 +686,89 @@ document.querySelectorAll(".quick-add-btn").forEach(button => {
   });
 
 });
+</script>
+
+
+<script>
+
+document.querySelectorAll(".wishlist-form").forEach(form => {
+
+  form.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const button = form.querySelector(".wishlist-btn");
+
+    const productId = button.dataset.productId;
+    const variantId = button.dataset.variantId;
+    const isWishlisted = button.getAttribute("data-wishlisted") === "true";
+    const endpoint = isWishlisted ? "/removeWishlist" : "/wishlist/add";
+
+    try {
+
+      const response = await fetch(endpoint, {
+
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials:'same-origin',
+
+        body: JSON.stringify({
+          productId,
+          variantId
+        })
+
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+
+        if (isWishlisted) {
+          button.setAttribute("data-wishlisted", "false");
+          button.classList.remove("bg-red-500");
+          button.classList.add("bg-black/50");
+        } else {
+          button.setAttribute("data-wishlisted", "true");
+          button.classList.add("bg-red-500");
+          button.classList.remove("bg-black/50");
+        }
+
+        Swal.fire({
+          icon: "success",
+          text: data.message,
+          toast:true,
+          position: "top-end",
+          timer: 1500,
+          showConfirmButton: false
+        });
+
+      } else {
+
+        Swal.fire({
+          icon: "error",
+          text: data.message
+        });
+
+      }
+
+    } catch (error) {
+
+      console.log(error);
+
+      Swal.fire({
+        icon: "error",
+        text: "Something went wrong"
+      });
+
+    }
+
+  });
+
+});
+
 </script>
 
 </html>

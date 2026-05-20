@@ -2,6 +2,7 @@ import Category from "../models/categoryModel.js";
 import { getRelatedProducts, productDetailsService } from "../service/userProductService.js";
 import Product from "../models/productModel.js";
 import { addToCartService } from "../service/userCartService.js";
+import Wishlist from "../models/userWishlistModel.js";
 
 // export const productListRender = async (req, res) => {
 //   try {
@@ -44,6 +45,7 @@ export const productDetailsRender = async (req, res) => {
   try {
     const productId = req.params.id;
     const variantId = req.query.variant;
+    const userId=req.session?.userId|| req.user?._id;
 
     const product = await productDetailsService(productId);
     
@@ -67,6 +69,13 @@ export const productDetailsRender = async (req, res) => {
   category: product.category._id
 });
 
+const wishlist = await Wishlist.findOne({ userId });
+
+const wishlistItems = wishlist?.products.map(item => ({
+        productId: item.product.toString(),
+        variantId: item.variant.toString()
+    })) || [];
+
 console.log("Same category count:", sameCategoryProducts.length);
 console.log("Products:", sameCategoryProducts.map(p => ({
   id: p._id,
@@ -78,7 +87,8 @@ console.log("Products:", sameCategoryProducts.map(p => ({
       product,
       selectedVariant,
       query:req.query,
-      relatedProducts
+      relatedProducts,
+      wishlistItems
     });
   } catch (error) {
     console.log(error);
@@ -100,7 +110,7 @@ export const getProducts = async (req, res) => {
 
     let filter = {isActive:true};
 
-
+    const userId=req.session?.userId|| req.user?._id;
     
     if (categories.length && !categories.includes("all")) {
       filter.category = { $in: categories };
@@ -163,6 +173,7 @@ if (search) {
           price: variant.price,
           images: variant.images,
           stock: variant.stock,
+          color:variant.color
         });
       });
     });
@@ -201,6 +212,12 @@ console.log(productList)
 
     console.log("FINAL COUNT:", productList.length);
 
+  const wishlist = await Wishlist.findOne({ userId });
+    const wishlistItems = wishlist?.products.map(item => ({
+        productId: item.product.toString(),
+        variantId: item.variant.toString()
+    })) || [];
+
     res.render("userViews/userProductList", {
       products: paginatedProducts, 
       categories: categoryDocs,
@@ -211,7 +228,8 @@ console.log(productList)
       currentPage:page,
       totalPages,
       totalProducts,
-      limit
+      limit,
+      wishlistItems
     });
 
   } catch (error) {
@@ -229,7 +247,7 @@ export const addToCartController=async(req,res)=>{
     cart.items.forEach(item=>{
       cartCount+=item.quantity
     })
-    console.log(cart)
+    console.log('add to cart from product listing')
     res.json({
       success:true,
       cartCount

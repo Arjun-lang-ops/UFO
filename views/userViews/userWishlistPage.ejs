@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>My Wishlist - Football Shop</title>
+    <title>My Wishlist - Urban Football</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
@@ -18,6 +18,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
@@ -56,7 +58,7 @@
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-4">
             <div class="flex items-center gap-8">
                 <a class="flex items-center gap-3 text-slate-900 dark:text-white hover:opacity-80 transition-opacity"
-                    href="#">
+                    href="/home">
                     <div class="size-8 text-primary">
                         <svg fill="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -64,14 +66,11 @@
                             </path>
                         </svg>
                     </div>
-                    <h2 class="text-xl font-bold tracking-tight">Football Shop</h2>
+                    <h2 class="text-xl font-bold tracking-tight">Urban Football</h2>
                 </a>
                 <nav class="hidden lg:flex items-center gap-6">
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Home</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Men</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Women</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Accessories</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Sale</a>
+                    <a  class="text-sm font-medium hover:text-primary transition-colors" href="/home">Home</a>
+                    
                 </nav>
             </div>
             <div class="flex flex-1 items-center justify-end gap-4 lg:gap-8">
@@ -85,19 +84,20 @@
                 </div>
                 <!-- Actions -->
                 <div class="flex items-center gap-3">
-                    <button
+                    <a href="/cart">
+                        <button
                         class="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-[#283039] transition-colors relative group">
                         <span class="material-symbols-outlined text-slate-900 dark:text-white">shopping_cart</span>
                         <span class="absolute top-1.5 right-1.5 size-2 rounded-full bg-primary"></span>
                     </button>
-                    <button
+                    </a>
+                    <a href="/profile">
+                        <button
                         class="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-[#283039] transition-colors">
                         <span class="material-symbols-outlined text-slate-900 dark:text-white">person</span>
                     </button>
-                    <div class="size-9 rounded-full bg-gray-300 bg-cover bg-center cursor-pointer border border-transparent hover:border-primary transition-all"
-                        data-alt="User profile avatar placeholder"
-                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYTt8qEw_21ZS31B9YU-U37RUJRSKjVGeIq7Pn67edg3bGtGVbf23JHJV75iEEtYYQyV6xjk9TXDm-0jMd7cDgL3zSLVENQ9jj-TlP175adKiTIMBrhTc8m6JZ7FeWkuqNEHIBdS2QEaik_VINOZ4lNMy7nByT3XyQnQ4-IeCO_zq6q4ozMsrGTnCO_Jqem9N1LOP3qE1u8INJ8XvOXJOuSyIfrCsStj9PCSP5Lz9xceUUR_iAe1Hv4cistI4x-R5SdHlFrnTaVDs");'>
-                    </div>
+                    </a>
+                    
                 </div>
             </div>
         </div>
@@ -112,7 +112,7 @@
                     <div class="flex flex-col gap-1">
                         <h1 class="text-3xl md:text-4xl font-black tracking-tight text-slate-900 dark:text-white">My
                             Wishlist</h1>
-                        <p class="text-gray-500 dark:text-[#9dabb9] text-base font-normal">5 items saved</p>
+                        <p class="text-gray-500 dark:text-[#9dabb9] text-base font-normal"><%=wishlist?.products?.length||0%> items saved</p>
                     </div>
                     <button
                         class="flex items-center justify-center gap-2 rounded-lg bg-primary hover:bg-blue-600 transition-colors h-11 px-6 text-white text-sm font-bold shadow-lg shadow-blue-900/20">
@@ -121,224 +121,175 @@
                     </button>
                 </div>
                 <!-- Filters Row -->
-                <div class="flex flex-wrap items-center gap-3">
-                    <button
-                        class="group flex h-9 items-center gap-2 rounded-full border border-gray-300 dark:border-[#283039] bg-white dark:bg-[#1c2127] px-4 hover:border-primary hover:bg-gray-50 dark:hover:bg-[#242a31] transition-all">
-                        <span class="text-sm font-medium">Sort by Date</span>
-                        <span class="material-symbols-outlined text-base">expand_more</span>
-                    </button>
-                    <button
-                        class="group flex h-9 items-center gap-2 rounded-full border border-gray-300 dark:border-[#283039] bg-white dark:bg-[#1c2127] px-4 hover:border-primary hover:bg-gray-50 dark:hover:bg-[#242a31] transition-all">
-                        <span class="text-sm font-medium">Sort by Price</span>
-                        <span class="material-symbols-outlined text-base">expand_more</span>
-                    </button>
-                    <button
-                        class="group flex h-9 items-center gap-2 rounded-full border border-gray-300 dark:border-[#283039] bg-white dark:bg-[#1c2127] px-4 hover:border-primary hover:bg-gray-50 dark:hover:bg-[#242a31] transition-all">
-                        <span class="text-sm font-medium">In Stock Only</span>
-                        <span class="material-symbols-outlined text-base">check</span>
-                    </button>
-                </div>
+                
             </div>
             <!-- Product Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                <!-- Card 1 -->
-                <div
-                    class="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 dark:border-[#283039] bg-white dark:bg-[#1c2127] shadow-sm hover:shadow-xl hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
-                    <div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-[#111418]">
-                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Nike Mercurial Vapor football boots on grass"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDpO30pHiym0mnV4Gl99yQPSq6wWDIaFAIVDTvWebvULiaGCfDpwnvvI3vGAcg4zY6UvAyfjWdmsTUEjBpX5EBm3ngrDWv8bx7cMkzjO9y49ZLho6ZEeqHvXPCHnFzxXdoq9LN5ZLrYcNwjeFC3_9zu0L_YdFBd3j9PR3DbSDlZyFQmjqVQp02E8wKHdWK0dBEdbxzBJMpw_SblN_jy-82LyOHhv4EgLkkbKMbGhygbSiqI-5xgPNfSOJ2C1rL1GwGAYbJlJ_pEud8");'>
-                        </div>
-                        <div class="absolute top-3 right-3 flex gap-2">
-                            <button
+           
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+
+    <% if(wishlist && wishlist.products && wishlist.products.length > 0){ %>
+
+        <% wishlist.products.forEach(item => { %>
+
+            <div
+                class="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 dark:border-[#283039] bg-white dark:bg-[#1c2127] shadow-sm hover:shadow-xl hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
+
+                <!-- Product Image -->
+                <div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-[#111418]">
+
+                   <% 
+   const selectedVariant = item.product.variants.find(
+      v => v._id.toString() === item.variant.toString()
+   );
+%>
+
+<div
+  class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+ style="background-image: url('<%= selectedVariant?.images?.[0] || "" %>');">
+
+</div>
+
+                    <!-- Remove Wishlist Button -->
+                    <div class="absolute top-3 right-3 flex gap-2">
+
+                        <form class="remove-wishlist">
+                            <input type="hidden" name="productId" value="<%= item.product._id %>">
+
+                             <input
+        type="hidden"
+        name="variantId"
+        value="<%= item.variant %>">
+
+                            <button type="submit"
                                 class="flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-red-500 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">delete</span>
+
+                                <span class="material-symbols-outlined text-[18px]">
+                                    delete
+                                </span>
+
                             </button>
-                        </div>
-                        <div class="absolute bottom-3 left-3">
-                            <span
-                                class="inline-flex items-center rounded-md bg-green-500/90 px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">In
-                                Stock</span>
-                        </div>
+                        </form>
+
                     </div>
-                    <div class="flex flex-1 flex-col p-4">
-                        <div class="flex-1">
-                            <p
-                                class="text-gray-500 dark:text-[#9dabb9] text-xs font-medium uppercase tracking-wider mb-1">
-                                Boots</p>
-                            <h3
-                                class="text-base font-bold leading-tight text-slate-900 dark:text-white line-clamp-2 mb-2">
-                                Nike Mercurial Vapor 15 Elite</h3>
-                            <div class="flex items-center gap-2 mb-4">
-                                <span class="text-lg font-bold text-primary">$259.99</span>
-                                <span class="text-sm text-gray-400 line-through">$275.00</span>
-                            </div>
-                        </div>
-                        <button
-                            class="w-full flex items-center justify-center gap-2 rounded-lg bg-slate-900 dark:bg-[#283039] hover:bg-primary dark:hover:bg-primary py-2.5 text-white text-sm font-bold transition-colors">
-                            <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
-                            Add to Cart
-                        </button>
+
+                    <!-- Stock Badge -->
+                    <div class="absolute bottom-3 left-3">
+
+                        <% if(selectedVariant?.stock > 0){ %>
+
+                            <span
+                                class="inline-flex items-center rounded-md bg-green-500/90 px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">
+                                In Stock
+                            </span>
+
+                        <% } else { %>
+
+                            <span
+                                class="inline-flex items-center rounded-md bg-red-500/90 px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">
+                                Out of Stock
+                            </span>
+
+                        <% } %>
+
                     </div>
                 </div>
-                <!-- Card 2 -->
-                <div
-                    class="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 dark:border-[#283039] bg-white dark:bg-[#1c2127] shadow-sm hover:shadow-xl hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
-                    <div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-[#111418]">
-                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Official match football close up"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDajFMi6fWvqwUvsCqa0P4JgiF2nrK_IAdtB_ZxaHpO2dD_P7kzdGogAsn51XMs_v2fyQ_tAHxPemFeTbNJQ5BYmEYUKtHLo8GCIkiPKXOmLVZumt9iCgVCGRxOKuyD9Db-VqHHyVWlYXThXTArvEK0QcaGiFKPIVgn6gBNFh_cUwwgVbxvnLtCLcplFH1Kjc0z4e5r285YbZL9ozYArm9xNBtsNoZbPL7yxqIOljw8nXuo7sVQ87N1tRKxDfZ8Tw2_fwQ-W7ggNqY");'>
+
+                <!-- Product Details -->
+                <div class="flex flex-1 flex-col p-4">
+
+                    <div class="flex-1">
+
+                        <!-- Category -->
+                        <p
+                            class="text-gray-500 dark:text-[#9dabb9] text-xs font-medium uppercase tracking-wider mb-1">
+
+                            <%= item.product.category.name %>
+
+                        </p>
+
+                        <!-- Product Name -->
+                        <a href="/product/<%=item.product._id%>?variant=<%=item.variant%>"><h3
+                            class="text-base font-bold leading-tight text-slate-900 dark:text-white line-clamp-2 mb-2">
+
+                            <%= item.product.name %>
+
+                        </h3></a>
+
+                        <!-- Price -->
+                        <div class="flex items-center gap-2 mb-4">
+
+                            <span class="text-lg font-bold text-primary">
+                                ₹<%= selectedVariant?.discountedPrice %>
+                            </span>
+
+                            <% if(selectedVariant?.price >selectedVariant?.discountedPrice ){ %>
+
+                                <span class="text-sm text-gray-400 line-through">
+                                    ₹<%= selectedVariant?.price %>
+                                </span>
+
+                            <% } %>
+
                         </div>
-                        <div class="absolute top-3 right-3 flex gap-2">
-                            <button
-                                class="flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-red-500 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">delete</span>
-                            </button>
-                        </div>
-                        <div class="absolute bottom-3 left-3">
-                            <span
-                                class="inline-flex items-center rounded-md bg-yellow-500/90 px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">Low
-                                Stock</span>
-                        </div>
+
                     </div>
-                    <div class="flex flex-1 flex-col p-4">
-                        <div class="flex-1">
-                            <p
-                                class="text-gray-500 dark:text-[#9dabb9] text-xs font-medium uppercase tracking-wider mb-1">
-                                Equipment</p>
-                            <h3
-                                class="text-base font-bold leading-tight text-slate-900 dark:text-white line-clamp-2 mb-2">
-                                Adidas Al Rihla Pro Ball</h3>
-                            <div class="flex items-center gap-2 mb-4">
-                                <span class="text-lg font-bold text-primary">$165.00</span>
-                            </div>
-                        </div>
-                        <button
+
+                    <!-- Add To Cart -->
+                    <form  class="add-to-cart">
+
+                        <input type="hidden" name="productId" value="<%= item.product._id %>">
+                        <input type="hidden"
+        name="variantId"
+        value="<%= item.variant %>">
+
+                        <button type="submit"
                             class="w-full flex items-center justify-center gap-2 rounded-lg bg-slate-900 dark:bg-[#283039] hover:bg-primary dark:hover:bg-primary py-2.5 text-white text-sm font-bold transition-colors">
-                            <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
+
+                            <span class="material-symbols-outlined text-[18px]">
+                                shopping_cart
+                            </span>
+
                             Add to Cart
+
                         </button>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div
-                    class="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 dark:border-[#283039] bg-white dark:bg-[#1c2127] shadow-sm hover:shadow-xl hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
-                    <div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-[#111418]">
-                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Red football jersey flat lay"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBWGgsqPBZssiknDrOIAzh2WrRNa-P8K1lS-Rj8uTN2qvtpwDvAAz6xHgBV_hPYDvyfe1Wx7fys-LWpzORaRtffFKj1_sptk9M-7j1mVs1X89xKbRqR29OJbYS33sl_wt0RqLhtu3Mc4PbcAJlZJn-v7FGSpsM2OIYfr6e4TTS06TG5QWgewi5HbiDCp-r0pnousN8GZdlHHukSaCDS8ehaz8vtuVZQE8UsjKc_hc3k2iSgT1HH-8Q3LPIGK5J3lFPtGx5EBLgNVdE");'>
-                        </div>
-                        <div class="absolute top-3 right-3 flex gap-2">
-                            <button
-                                class="flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-red-500 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">delete</span>
-                            </button>
-                        </div>
-                        <div class="absolute bottom-3 left-3">
-                            <span
-                                class="inline-flex items-center rounded-md bg-green-500/90 px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">In
-                                Stock</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-1 flex-col p-4">
-                        <div class="flex-1">
-                            <p
-                                class="text-gray-500 dark:text-[#9dabb9] text-xs font-medium uppercase tracking-wider mb-1">
-                                Jerseys</p>
-                            <h3
-                                class="text-base font-bold leading-tight text-slate-900 dark:text-white line-clamp-2 mb-2">
-                                Liverpool FC Home Kit 23/24</h3>
-                            <div class="flex items-center gap-2 mb-4">
-                                <span class="text-lg font-bold text-primary">$89.99</span>
-                            </div>
-                        </div>
-                        <button
-                            class="w-full flex items-center justify-center gap-2 rounded-lg bg-slate-900 dark:bg-[#283039] hover:bg-primary dark:hover:bg-primary py-2.5 text-white text-sm font-bold transition-colors">
-                            <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <!-- Card 4 -->
-                <div
-                    class="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 dark:border-[#283039] bg-white dark:bg-[#1c2127] shadow-sm hover:shadow-xl hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
-                    <div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-[#111418]">
-                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                            data-alt="Goalkeeper gloves on dark background"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCa2HywhYTa5ktiNSHYnWKtTsrksLx17O2d2pHICn6S8RNEzCW2Q0lUrs8LNdu1jWLcON1OVOOSmvrhIl099FynHDi6cP5-zTImzicT-Hp_4acCkLnuep4kh6lbs8EKrSNG2Q2pA87RQDvd_yu7FAmqKf85qOwnyDK-4Nq4-xwiucl9xUb24gvpBVQODeW-Zn4D_5F1Lr1M23bcWAC46UtySFuUo1__B3EHzUxXOweZahSjQo2Im4tTViRSqt6cQovv09j-xSzPMjs");'>
-                        </div>
-                        <div class="absolute top-3 right-3 flex gap-2">
-                            <button
-                                class="flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-red-500 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">delete</span>
-                            </button>
-                        </div>
-                        <div class="absolute bottom-3 left-3">
-                            <span
-                                class="inline-flex items-center rounded-md bg-green-500/90 px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">In
-                                Stock</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-1 flex-col p-4">
-                        <div class="flex-1">
-                            <p
-                                class="text-gray-500 dark:text-[#9dabb9] text-xs font-medium uppercase tracking-wider mb-1">
-                                Gloves</p>
-                            <h3
-                                class="text-base font-bold leading-tight text-slate-900 dark:text-white line-clamp-2 mb-2">
-                                Predator Pro Goalkeeper Gloves</h3>
-                            <div class="flex items-center gap-2 mb-4">
-                                <span class="text-lg font-bold text-primary">$120.00</span>
-                            </div>
-                        </div>
-                        <button
-                            class="w-full flex items-center justify-center gap-2 rounded-lg bg-slate-900 dark:bg-[#283039] hover:bg-primary dark:hover:bg-primary py-2.5 text-white text-sm font-bold transition-colors">
-                            <span class="material-symbols-outlined text-[18px]">shopping_cart</span>
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-                <!-- Card 5 -->
-                <div
-                    class="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 dark:border-[#283039] bg-white dark:bg-[#1c2127] shadow-sm hover:shadow-xl hover:border-primary/50 dark:hover:border-primary/50 transition-all duration-300">
-                    <div class="relative aspect-[4/3] w-full overflow-hidden bg-gray-100 dark:bg-[#111418]">
-                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110 opacity-75"
-                            data-alt="Black football socks folded"
-                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCpuSZ8R2VmZryo4o7NH7s_jwdk3Hgz7u4XnEqa5tpFwo58IKYReTtv1dqkIbMFGmP1QD62Hn0gHk16uREdg4WPv37i2-5tzRe2ad3EKNbYmq-SZp2Y03Z5pxkfGiJy-6aTHDykyrzNP3nILYExErZqTe1lTYsTugg-iOvWM_rpshLqPy3rHOBkpqpVpNnXrzup_EYgcSPtoCgfmA9sjm7IcsBdEqbheTqiWb72w_XEcL2j6sHAI8dg-Io66FVj4NfgxG825e-y4oQ");'>
-                        </div>
-                        <div class="absolute top-3 right-3 flex gap-2">
-                            <button
-                                class="flex size-8 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm hover:bg-red-500 transition-colors">
-                                <span class="material-symbols-outlined text-[18px]">delete</span>
-                            </button>
-                        </div>
-                        <div class="absolute bottom-3 left-3">
-                            <span
-                                class="inline-flex items-center rounded-md bg-red-500/90 px-2 py-1 text-xs font-bold text-white backdrop-blur-sm">Out
-                                of Stock</span>
-                        </div>
-                    </div>
-                    <div class="flex flex-1 flex-col p-4">
-                        <div class="flex-1">
-                            <p
-                                class="text-gray-500 dark:text-[#9dabb9] text-xs font-medium uppercase tracking-wider mb-1">
-                                Accessories</p>
-                            <h3
-                                class="text-base font-bold leading-tight text-slate-900 dark:text-white line-clamp-2 mb-2">
-                                Nike MatchFit Socks - Black</h3>
-                            <div class="flex items-center gap-2 mb-4">
-                                <span class="text-lg font-bold text-primary">$14.00</span>
-                            </div>
-                        </div>
-                        <button
-                            class="w-full flex items-center justify-center gap-2 rounded-lg bg-gray-300 dark:bg-[#283039] text-gray-500 dark:text-gray-500 py-2.5 text-sm font-bold cursor-not-allowed opacity-70"
-                            disabled="">
-                            <span class="material-symbols-outlined text-[18px]">notifications</span>
-                            Notify Me
-                        </button>
-                    </div>
+
+                    </form>
+
                 </div>
             </div>
+
+        <% }) %>
+
+    <% } else { %>
+
+        <!-- Empty Wishlist -->
+
+        <div class="col-span-full flex flex-col items-center justify-center py-20">
+
+            <span class="material-symbols-outlined text-7xl text-gray-400 mb-4">
+                favorite
+            </span>
+
+            <h2 class="text-2xl font-bold mb-2">
+                Your wishlist is empty
+            </h2>
+
+            <p class="text-gray-500 dark:text-[#9dabb9] mb-6">
+                Save your favorite football products here.
+            </p>
+
+            <a href="/home"
+                class="px-6 py-3 rounded-lg bg-primary text-white font-semibold hover:bg-blue-600 transition">
+
+                Continue Shopping
+
+            </a>
+
+        </div>
+
+    <% } %>
+
+</div>
         </div>
     </main>
     <!-- Footer -->
@@ -354,7 +305,7 @@
                             </path>
                         </svg>
                     </div>
-                    <span class="font-bold text-lg">Football Shop</span>
+                    <span class="font-bold text-lg">Urban Football</span>
                 </div>
                 <div class="flex gap-8 text-sm font-medium text-gray-500 dark:text-[#9dabb9]">
                     <a class="hover:text-primary" href="#">Terms</a>
@@ -362,10 +313,147 @@
                     <a class="hover:text-primary" href="#">Returns</a>
                     <a class="hover:text-primary" href="#">Help Center</a>
                 </div>
-                <p class="text-sm text-gray-500 dark:text-[#9dabb9]">© 2024 Football Shop Inc.</p>
+                <p class="text-sm text-gray-500 dark:text-[#9dabb9]">© 2024 urban Football Inc.</p>
             </div>
         </div>
     </footer>
 </body>
+
+<script>
+document.querySelectorAll(".remove-wishlist")
+.forEach(form => {
+
+    form.addEventListener("submit", async (e) => {
+
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        const data = {
+            productId: formData.get("productId"),
+            variantId: formData.get("variantId")
+        };
+
+        const response = await fetch("/removeWishlist", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            Swal.fire({
+                icon: "success",
+                title: "Removed from wishlist",
+                timer: 1200,
+                showConfirmButton: false
+            });
+
+            form.closest(".group").remove();
+
+        } else {
+
+            Swal.fire({
+                icon: "error",
+                title: result.message
+            });
+
+        }
+
+    });
+
+});
+</script>
+
+<script>
+
+document.querySelectorAll(".add-to-cart")
+.forEach(form => {
+
+    form.addEventListener("submit", async (e) => {
+
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        const data = {
+            productId: formData.get("productId"),
+            variantId: formData.get("variantId"),
+            quantity: 1
+        };
+
+        try {
+
+            // ADD TO CART
+
+            const cartResponse = await fetch("/cart/add", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const cartResult = await cartResponse.json();
+
+            if (!cartResult.success) {
+
+                return Swal.fire({
+                    icon: "error",
+                    title: cartResult.message
+                });
+
+            }
+
+            // REMOVE FROM WISHLIST
+
+            const wishlistResponse = await fetch("/removeWishlist", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    productId: data.productId,
+                    variantId: data.variantId
+                })
+            });
+
+            const wishlistResult = await wishlistResponse.json();
+
+            if (wishlistResult.success) {
+
+                Swal.fire({
+                    icon: "success",
+                    title: "Added to cart",
+                    timer: 1200,
+                    showConfirmButton: false
+                });
+
+                // REMOVE CARD FROM UI
+
+                form.closest(".group").remove();
+
+            }
+
+        } catch (error) {
+
+            console.log(error);
+
+            Swal.fire({
+                icon: "error",
+                title: "Something went wrong"
+            });
+
+        }
+
+    });
+
+});
+
+</script>
 
 </html>

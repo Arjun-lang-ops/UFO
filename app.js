@@ -13,7 +13,9 @@ import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import userProductRoutes from "./routes/userProductRoutes.js" 
-import userCartRoutes from './routes/userCartRoutes.js'
+import userCartRoutes from './routes/userCartRoutes.js';
+import userWishlistRoutes from './routes/userWishlistRoutes.js';
+import userCheckoutRoutes from './routes/userCheckoutRoutes.js'
 import passport from "./config/passport.js";
 import cors from "cors";
 import { cartCountMiddleware } from "./middlewares/cartMiddleware.js";
@@ -55,6 +57,8 @@ app.use(cartCountMiddleware)
 app.use("/", userRoutes);
 app.use('/',userProductRoutes)
 app.use('/',userCartRoutes)
+app.use('/',userWishlistRoutes);
+app.use('/',userCheckoutRoutes)
 app.use("/admin", adminRoutes);
 
 

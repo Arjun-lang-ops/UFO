@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Checkout Booking - Urban Football</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-[#111418] dark:text-white overflow-x-hidden transition-colors duration-200">
+    <div class="flex flex-col min-h-screen">
+        <!-- Top Navigation -->
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-[#283039] bg-background-light dark:bg-background-dark px-6 py-4 lg:px-10">
+            <div class="flex items-center gap-4 text-[#111418] dark:text-white">
+                <div class="size-8 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined !text-[32px]">sports_soccer</span>
+                </div>
+                <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="hidden sm:flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+                    <span class="material-symbols-outlined !text-lg text-primary">lock</span>
+                    Secure Checkout
+                </div>
+            </div>
+        </header>
+        <main class="flex-grow flex justify-center py-8 px-4 sm:px-6 lg:px-8">
+            <div class="w-full max-w-7xl flex flex-col gap-8">
+                <!-- Breadcrumbs / Progress Stepper -->
+                <nav class="flex flex-wrap items-center gap-2 text-sm sm:text-base">
+                    <a class="text-gray-500 hover:text-primary transition-colors font-medium flex items-center gap-1"
+                        href="#">
+                        <span class="material-symbols-outlined !text-lg">shopping_cart</span> Cart
+                    </a>
+                    <span class="material-symbols-outlined !text-lg text-gray-400">chevron_right</span>
+                    <span class="text-primary font-bold flex items-center gap-1">
+                        <span class="material-symbols-outlined !text-lg">info</span> Information
+                    </span>
+                    <span class="material-symbols-outlined !text-lg text-gray-400">chevron_right</span>
+                    <span class="text-gray-400 font-medium">Payment</span>
+                    <span class="material-symbols-outlined !text-lg text-gray-400">chevron_right</span>
+                    <span class="text-gray-400 font-medium">Complete</span>
+                </nav>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+                    <!-- Left Column: Forms & Input -->
+                    <div class="lg:col-span-7 xl:col-span-8 flex flex-col gap-8">
+                        <!-- Page Heading -->
+                        <div>
+                            <h1 class="text-3xl font-bold tracking-tight text-[#111418] dark:text-white">Checkout</h1>
+                            <p class="text-gray-500 dark:text-gray-400 mt-2">Please fill in your details to complete the
+                                order.</p>
+                        </div>
+                        <!-- Contact Information -->
+                        <!-- Shipping Address -->
+                        <section
+                            class="bg-white dark:bg-[#1c232d] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-[#283039]">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-lg font-bold flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-primary">local_shipping</span>Delivery
+                                    Details</h3>
+                                    <a href="/checkout/address">
+                                        <button
+                                    class="text-primary text-sm font-medium hover:underline flex items-center gap-1"><span
+                                        class="material-symbols-outlined !text-sm">edit</span>Edit</button>
+                                    </a>
+                            </div>
+                            <div class="flex flex-col gap-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><label
+                                        class="flex flex-col gap-2"><span
+                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">Phone
+                                            Number</span><input
+                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
+                                            placeholder="+91 9876543210" type="tel" /></label></div>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><label
+                                        class="flex flex-col gap-2"><span
+                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">First
+                                            Name</span><input
+                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
+                                            placeholder="Alex" type="text" /></label><label
+                                        class="flex flex-col gap-2"><span
+                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">Last
+                                            Name</span><input
+                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
+                                            placeholder="Morgan" type="text" /></label></div><label
+                                    class="flex flex-col gap-2"><span
+                                        class="text-sm font-medium text-[#111418] dark:text-gray-300">Address</span><input
+                                        class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
+                                        placeholder="123 Stadium Ave" type="text" /></label>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4"><label
+                                        class="flex flex-col gap-2 sm:col-span-1"><span
+                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">City</span><input
+                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
+                                            placeholder="New York" type="text" /></label><label
+                                        class="flex flex-col gap-2 sm:col-span-1"><span
+                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">State /
+                                            Province</span><input
+                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
+                                            placeholder="NY" type="text" /></label><label
+                                        class="flex flex-col gap-2 sm:col-span-1"><span
+                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">ZIP / Postal
+                                            Code</span><input
+                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
+                                            placeholder="10001" type="text" /></label></div>
+                            </div>
+                        </section>
+                        <!-- Shipping Method -->
+                        <section
+                            class="bg-white dark:bg-[#1c232d] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-[#283039]">
+                            <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">local_shipping</span>
+                                Shipping Method
+                            </h3>
+                            <div class="space-y-3">
+                                <label
+                                    class="relative flex items-center justify-between p-4 rounded-lg border-2 border-primary bg-blue-50/50 dark:bg-blue-900/10 cursor-pointer transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <input checked=""
+                                            class="h-5 w-5 text-primary border-gray-300 focus:ring-primary"
+                                            name="shipping" type="radio" />
+                                        <div class="flex flex-col">
+                                            <span class="text-base font-bold text-[#111418] dark:text-white">Cash on Delivery
+                                                </span>
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">Est. 3-5 business
+                                                days</span>
+                                        </div>
+                                    </div>
+                                    <span class="font-bold text-[#111418] dark:text-white">Free</span>
+                                </label>
+                                <label
+                                    class="relative flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-[#3b4754] hover:border-gray-400 dark:hover:border-gray-500 cursor-pointer transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <input class="h-5 w-5 text-primary border-gray-300 focus:ring-primary"
+                                            name="shipping" type="radio" />
+                                        <div class="flex flex-col">
+                                            <span class="text-base font-bold text-[#111418] dark:text-white">Express
+                                                Delivery</span>
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">Est. 1-2 business
+                                                days</span>
+                                        </div>
+                                    </div>
+                                    <span class="font-bold text-[#111418] dark:text-white">$15.00</span>
+                                </label>
+                            </div>
+                        </section>
+                        <!-- Review Cart Items (Mobile visible, could be collapsed) -->
+                        <section
+                            class="bg-white dark:bg-[#1c232d] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-[#283039]">
+                            <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">shopping_bag</span>
+                                Review Items
+                            </h3>
+                            <div class="flex flex-col gap-6">
+                                <!-- Item 1 -->
+                                <div class="flex items-start gap-4 pb-6 border-b border-gray-100 dark:border-[#283039]">
+                                    <div
+                                        class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-800">
+                                        <img class="h-full w-full object-cover object-center"
+                                            data-alt="Pair of professional football boots on grass"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfOPdTiCMNmzo_GAgAxKab_wapnIc0jhht7XM7FJ9t2NomQiLccGxX0d2CZ8bUmrNMo2tS7YupM2EzBk0niTtEftSF6QoAwVAIpHTf1nEfBe_bmCrBLLKaFMIy9bFmUb0PI-js4bXHLuFTX0raZHSgCQaLlQVXutebsBJYHrPMdI_wILHz1YWfEYEv0tgAkOzjhDX2k_1I9xhIyZvFur6oKqiNrq-lVnTXZ_NhpfNdaCp7x25RMhPYHIGgfFD90SLyUZ8NKRSl0LA" />
+                                    </div>
+                                    <div class="flex flex-1 flex-col">
+                                        <div>
+                                            <div
+                                                class="flex justify-between text-base font-medium text-[#111418] dark:text-white">
+                                                <h4>Phantom Elite FG</h4>
+                                                <p>$250.00</p>
+                                            </div>
+                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Neon Yellow / Black
+                                            </p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">Size: 10 US</p>
+                                        </div>
+                                        <div class="flex flex-1 items-end justify-between text-sm">
+                                            <p class="text-gray-500 dark:text-gray-400">Qty 1</p>
+                                            <div class="flex">
+                                                <button class="font-medium text-primary hover:text-blue-400"
+                                                    type="button">Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Item 2 -->
+                                <div class="flex items-start gap-4">
+                                    <div
+                                        class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-800">
+                                        <img class="h-full w-full object-cover object-center"
+                                            data-alt="Close up of goalkeeper gloves"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCr2XqYEfRsHuJ7_ykkgosL83wWK43BSijzS0ioLHqxwuDnlFllmtyMvlRqXoAj0K1lDmosrdMY_LzQQXMp1FQ6LZLyhmJYu4zpssk550XWZp2MpxG9MpSAbrhKOpFmCC2CTJMT3noK1buGta1rA-pt3V0nQY3VfOLRqbbAq0WO_vna1jkBkrtnm9KR-joLWj_q4I6nq_ZnNulni9dgXiGr7Qnp9kaPketGhu0kGAd5CVZ_x15pvCv5yNbbKgEfUOKVCVWO0ZtEg4" />
+                                    </div>
+                                    <div class="flex flex-1 flex-col">
+                                        <div>
+                                            <div
+                                                class="flex justify-between text-base font-medium text-[#111418] dark:text-white">
+                                                <h4>Pro Grip Gloves</h4>
+                                                <p>$45.00</p>
+                                            </div>
+                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">White / Red</p>
+                                            <p class="text-sm text-gray-500 dark:text-gray-400">Size: L</p>
+                                        </div>
+                                        <div class="flex flex-1 items-end justify-between text-sm">
+                                            <p class="text-gray-500 dark:text-gray-400">Qty 1</p>
+                                            <div class="flex">
+                                                <button class="font-medium text-primary hover:text-blue-400"
+                                                    type="button">Edit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <!-- Right Column: Order Summary (Sticky) -->
+                    <div class="lg:col-span-5 xl:col-span-4">
+                        <div
+                            class="sticky top-24 rounded-xl bg-white dark:bg-[#1c232d] shadow-lg border border-gray-100 dark:border-[#283039] overflow-hidden">
+                            <div class="p-6">
+                                <h2 class="text-lg font-bold text-[#111418] dark:text-white mb-4">Order Summary</h2>
+                                <div class="flow-root">
+                                    <dl class="-my-4 divide-y divide-gray-100 dark:divide-[#283039] text-sm">
+                                        <div class="flex items-center justify-between py-4">
+                                            <dt class="text-gray-500 dark:text-gray-400">Subtotal</dt>
+                                            <dd class="font-medium text-[#111418] dark:text-white">$295.00</dd>
+                                        </div>
+                                        <div class="flex items-center justify-between py-4">
+                                            <dt class="text-gray-500 dark:text-gray-400">Shipping</dt>
+                                            <dd class="font-medium text-[#111418] dark:text-white">Free</dd>
+                                        </div>
+                                        <div class="flex items-center justify-between py-4">
+                                            <dt class="text-gray-500 dark:text-gray-400">Tax</dt>
+                                            <dd class="font-medium text-[#111418] dark:text-white">$24.00</dd>
+                                        </div>
+                                        <div
+                                            class="flex items-center justify-between py-4 border-t-2 border-dashed dark:border-[#3b4754] !border-b-0 mt-2">
+                                            <dt class="text-base font-bold text-[#111418] dark:text-white">Total</dt>
+                                            <dd class="text-xl font-bold text-primary">$319.00</dd>
+                                        </div>
+                                    </dl>
+                                </div>
+                                <!-- Promo Code -->
+                                <div class="mt-6 pt-6 border-t border-gray-100 dark:border-[#283039]">
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Promo
+                                        Code</label>
+                                    <div class="flex space-x-2">
+                                        <input
+                                            class="block w-full rounded-lg border-gray-200 dark:border-[#3b4754] bg-gray-50 dark:bg-[#121922] p-2.5 text-sm dark:text-white placeholder-gray-400 focus:border-primary focus:ring-primary"
+                                            placeholder="Enter code" type="text" />
+                                        <button
+                                            class="rounded-lg bg-gray-200 dark:bg-[#283039] px-4 py-2 text-sm font-medium text-[#111418] dark:text-white hover:bg-gray-300 dark:hover:bg-[#3b4754] focus:outline-none focus:ring-2 focus:ring-gray-300"
+                                            type="button">Apply</button>
+                                    </div>
+                                </div>
+                                <!-- Action Button -->
+                                <div class="mt-8">
+                                    <button
+                                        class="w-full flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-base font-bold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all">
+                                        Proceed to Payment
+                                        <span class="material-symbols-outlined">arrow_forward</span>
+                                    </button>
+                                    <div class="mt-4 flex justify-center items-center gap-3 opacity-60">
+                                        <span class="material-symbols-outlined text-gray-400 dark:text-gray-500"
+                                            title="Credit Card">credit_card</span>
+                                        <span class="material-symbols-outlined text-gray-400 dark:text-gray-500"
+                                            title="Lock">lock</span>
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">Secure 256-bit SSL encrypted
+                                            payment</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

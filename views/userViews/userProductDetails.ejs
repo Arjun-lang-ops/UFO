@@ -348,12 +348,39 @@
 
   <%= isOutOfStock ? 'Out of Stock' : 'Add to Cart' %>
 </button>
-                    <button
-                      aria-label="Add to Wishlist"
-                      class="h-12 w-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark text-slate-900 dark:text-white hover:text-red-500 hover:border-red-200 dark:hover:border-red-900/30 transition-colors shrink-0"
-                    >
-                      <span class="material-symbols-outlined">favorite</span>
-                    </button>
+                    <form class="add-to-wishlist">
+
+                      <%
+const currentWishlistItems = typeof wishlistItems !== 'undefined' ? wishlistItems : [];
+const isWishlisted = currentWishlistItems.some(item =>
+    item.productId === product._id.toString() &&
+    item.variantId === selectedVariant._id.toString()
+);
+%>
+
+    <input
+        type="hidden"
+        name="productId"
+        value="<%= product._id %>">
+
+    <input
+        type="hidden"
+        name="variantId"
+        value="<%= selectedVariant._id %>">
+
+    <button
+    type="submit"
+    aria-label="Add to Wishlist"
+    class="wishlist-btn h-12 w-12 flex items-center justify-center rounded-lg border bg-white dark:bg-surface-dark transition-colors shrink-0 <%= isWishlisted ? 'text-red-500 border-red-500' : 'border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white hover:text-red-500 hover:border-red-200 dark:hover:border-red-900/30' %>"
+    data-wishlisted="<%= isWishlisted ? 'true' : 'false' %>">
+
+    <span class="material-symbols-outlined">
+        favorite
+    </span>
+
+</button>
+
+</form>
                     <button
                       aria-label="Share"
                       class="h-12 w-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark text-slate-900 dark:text-white hover:text-primary hover:border-primary/50 transition-colors shrink-0"
@@ -363,7 +390,8 @@
                   </div>
                   
 
-<button id="buyNowBtn"
+<a href="/checkout">
+  <button id="buyNowBtn"
   class="w-full font-bold rounded-lg h-12 flex items-center justify-center gap-2 transition-all
   <%= isOutOfStock 
       ? 'bg-gray-400 text-white cursor-not-allowed' 
@@ -372,6 +400,7 @@
 >
   <%= isOutOfStock ? 'Out of Stock' : 'Buy Now' %>
 </button>
+</a>
                 </div>
                 <div class="grid grid-cols-2 gap-4 mt-2">
                   <div
@@ -476,6 +505,29 @@
   <script>
   const variants = <%- JSON.stringify(product.variants) %>;
   let selectedVariant = <%- JSON.stringify(selectedVariant) %>;
+  let wishlistItems = <%- typeof wishlistItems !== 'undefined' ? JSON.stringify(wishlistItems) : '[]' %>;
+  const productId = "<%= product._id %>";
+
+  function updateWishlistButtonState() {
+    const btn = document.querySelector(".add-to-wishlist .wishlist-btn");
+    const variantInput = document.querySelector(".add-to-wishlist input[name='variantId']");
+    if (!btn || !variantInput) return;
+
+    const currentVariantId = selectedVariant._id.toString();
+    variantInput.value = currentVariantId;
+
+    const isWishlisted = wishlistItems.some(item => 
+      item.productId === productId && item.variantId === currentVariantId
+    );
+
+    btn.setAttribute("data-wishlisted", isWishlisted ? "true" : "false");
+
+    if (isWishlisted) {
+      btn.className = "wishlist-btn h-12 w-12 flex items-center justify-center rounded-lg border bg-white dark:bg-surface-dark transition-colors shrink-0 text-red-500 border-red-500";
+    } else {
+      btn.className = "wishlist-btn h-12 w-12 flex items-center justify-center rounded-lg border bg-white dark:bg-surface-dark transition-colors shrink-0 border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white hover:text-red-500 hover:border-red-200 dark:hover:border-red-900/30";
+    }
+  }
 
 document.querySelectorAll(".color-btn").forEach(btn => {
   btn.addEventListener("click", () => {
@@ -567,6 +619,7 @@ if (variant.stock <= 0) {
     // Re-render size buttons filtered to the new color
     renderSizeButtons(variant.color);
     updateCartButtons(variant);
+    updateWishlistButtonState();
 
     // Update stock message
     const stockCount = document.getElementById("stockCount");
@@ -657,6 +710,7 @@ function handleSizeSelect(btn) {
 
   // Update cart/buy buttons
   updateCartButtons(variant);
+  updateWishlistButtonState();
 }
 
 function updateCartButtons(variant) {
@@ -809,6 +863,81 @@ increaseBtn.addEventListener('click', () => {
 
 });
 
+
+</script>
+
+<script>
+
+const wishlistForm = document.querySelector(".add-to-wishlist");
+
+wishlistForm.addEventListener("submit", async (e) => {
+
+    e.preventDefault();
+
+    const formData = new FormData(wishlistForm);
+    const productId = formData.get("productId");
+    const variantId = formData.get("variantId");
+
+    const btn = wishlistForm.querySelector(".wishlist-btn");
+    const isWishlisted = btn.getAttribute("data-wishlisted") === "true";
+    const endpoint = isWishlisted ? "/removeWishlist" : "/wishlist/add";
+
+    try {
+
+        const response = await fetch(endpoint, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                productId,
+                variantId
+            })
+
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+
+            if (isWishlisted) {
+                wishlistItems = wishlistItems.filter(item => !(item.productId === productId && item.variantId === variantId));
+            } else {
+                wishlistItems.push({ productId, variantId });
+            }
+            updateWishlistButtonState();
+
+            Swal.fire({
+                icon: "success",
+                title: result.message || (isWishlisted ? "Removed from wishlist" : "Added to wishlist"),
+                timer: 1200,
+                showConfirmButton: false
+            });
+
+        } else {
+
+            Swal.fire({
+                icon: "error",
+                title: result.message
+            });
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+        Swal.fire({
+            icon: "error",
+            title: "Something went wrong"
+        });
+
+    }
+
+});
 
 </script>
 

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Select Address - Urban Football</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;family=Noto+Sans:wght@100..900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#005eb4",
+                        "on-secondary": "#123158",
+                        "on-error": "#690005",
+                        "on-primary-fixed": "#001b3c",
+                        "tertiary-fixed": "#ffdbc9",
+                        "surface-container-low": "#101922",
+                        "secondary": "#adc8f7",
+                        "outline": "#283039",
+                        "secondary-container": "#2c4770",
+                        "on-primary-fixed-variant": "#004689",
+                        "on-tertiary": "#532200",
+                        "surface-container-lowest": "#080c11",
+                        "primary-container": "#137fec",
+                        "on-tertiary-container": "#481d00",
+                        "on-tertiary-fixed": "#321200",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#414753",
+                        "tertiary-container": "#e47019",
+                        "surface-tint": "#137fec",
+                        "surface-container-high": "#1c2632",
+                        "primary-fixed": "#d5e3ff",
+                        "on-tertiary-fixed-variant": "#753400",
+                        "secondary-fixed-dim": "#adc8f7",
+                        "surface-variant": "#1c2632",
+                        "primary": "#137fec",
+                        "on-secondary-fixed-variant": "#2c4770",
+                        "on-primary-container": "#ffffff",
+                        "on-background": "#f6f7f8",
+                        "surface-dim": "#0d141b",
+                        "tertiary": "#ffb68c",
+                        "on-secondary-container": "#9bb6e5",
+                        "surface-container-highest": "#283039",
+                        "surface-bright": "#1c2632",
+                        "on-error-container": "#ffdad6",
+                        "error-container": "#93000a",
+                        "primary-fixed-dim": "#a8c8ff",
+                        "inverse-surface": "#f6f7f8",
+                        "background": "#101922",
+                        "on-secondary-fixed": "#001b3c",
+                        "error": "#ffb4ab",
+                        "surface": "#101922",
+                        "on-surface-variant": "#9dabb9",
+                        "surface-container": "#151f2a",
+                        "tertiary-fixed-dim": "#ffb68c",
+                        "secondary-fixed": "#d5e3ff",
+                        "on-surface": "#f6f7f8",
+                        "inverse-on-surface": "#101922"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Lexend"],
+                        "display": ["Lexend"],
+                        "body": ["Lexend"],
+                        "label": ["Lexend"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .step-active {
+            color: #137fec;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body selection:bg-primary/30 min-h-screen flex flex-col">
+    <!-- TopNavBar (Shared Component) -->
+    <nav
+        class="bg-slate-900/95 backdrop-blur-md text-blue-500 font-['Lexend'] tracking-tight fixed top-0 w-full z-50 border-b border-slate-700/50 shadow-2xl flex justify-between items-center px-6 py-4 w-full">
+        <div class="text-2xl font-black text-white uppercase tracking-tighter">Urban Football</div>
+        <div class="hidden md:flex gap-8 items-center">
+            <a class="text-slate-300 hover:text-white transition-colors" href="#">Footballs</a>
+            <a class="text-slate-300 hover:text-white transition-colors" href="#">Jerseys</a>
+            <a class="text-slate-300 hover:text-white transition-colors" href="#">Boots</a>
+            <a class="text-slate-300 hover:text-white transition-colors" href="#">Clubs</a>
+        </div>
+        <div class="flex gap-4 items-center">
+            <button class="p-2 hover:bg-slate-800/50 transition-all duration-200 active:scale-95 text-slate-300">
+                <span class="material-symbols-outlined">shopping_cart</span>
+            </button>
+            <button class="p-2 hover:bg-slate-800/50 transition-all duration-200 active:scale-95 text-slate-300">
+                <span class="material-symbols-outlined">person</span>
+            </button>
+        </div>
+    </nav>
+    <main class="flex-grow pt-24 pb-12 px-6 max-w-7xl mx-auto w-full">
+        <!-- Back Link & Title -->
+        <div class="mb-8">
+            <a class="inline-flex items-center text-on-surface-variant hover:text-primary transition-colors gap-2 text-sm group"
+                href="/checkout">
+                <span
+                    class="material-symbols-outlined text-sm transition-transform group-hover:-translate-x-1">arrow_back</span>
+                Back to Checkout
+            </a>
+            <h1 class="text-3xl font-black tracking-tighter mt-4 uppercase">Select Shipping Address</h1>
+        </div>
+        <!-- Progress Stepper -->
+        <div class="mb-12 flex items-center justify-between max-w-2xl">
+            <div class="flex flex-col items-center gap-2">
+                <div
+                    class="w-10 h-10 rounded-full border-2 border-primary bg-primary/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary"
+                        style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-widest text-primary">Cart</span>
+            </div>
+            <div class="h-[2px] flex-grow mx-4 bg-primary/30"></div>
+            <div class="flex flex-col items-center gap-2">
+                <div
+                    class="w-10 h-10 rounded-full border-2 border-primary bg-primary flex items-center justify-center shadow-[0_0_15px_rgba(19,127,236,0.4)]">
+                    <span class="text-white font-bold">2</span>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-widest text-primary">Shipping</span>
+            </div>
+            <div class="h-[2px] flex-grow mx-4 bg-outline"></div>
+            <div class="flex flex-col items-center gap-2 opacity-40">
+                <div class="w-10 h-10 rounded-full border-2 border-outline flex items-center justify-center">
+                    <span class="text-on-surface-variant font-bold">3</span>
+                </div>
+                <span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Payment</span>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
+            <!-- Address Selection List -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Home Address -->
+                    <div class="address-card group cursor-pointer relative bg-surface-container-high p-6 rounded-lg border-2 border-transparent hover:border-primary/50 transition-all duration-300 active:scale-[0.98] ring-1 ring-white/5 selected shadow-2xl border-primary"
+                        id="addr-1" onclick="selectAddress(this)">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-primary">home</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="p-2 text-on-surface-variant hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">edit</span>
+                                </button>
+                                <button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="font-black text-lg mb-1 tracking-tight">HOME</h3>
+                        <p class="text-on-surface-variant text-sm font-['Noto_Sans'] leading-relaxed">
+                            Marcus Rashford<br />
+                            88 Old Trafford Way, Carrington<br />
+                            Manchester, M16 0RA<br />
+                            United Kingdom
+                        </p>
+                        <div class="absolute bottom-6 right-6 check-mark opacity-100">
+                            <span class="material-symbols-outlined text-primary"
+                                style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        </div>
+                    </div>
+                    <!-- Office Address -->
+                    <div class="address-card group cursor-pointer relative bg-surface-container-high p-6 rounded-lg border-2 border-transparent hover:border-primary/50 transition-all duration-300 active:scale-[0.98] ring-1 ring-white/5"
+                        id="addr-2" onclick="selectAddress(this)">
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-slate-400">work</span>
+                            </div>
+                            <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button class="p-2 text-on-surface-variant hover:text-white transition-colors">
+                                    <span class="material-symbols-outlined text-sm">edit</span>
+                                </button>
+                                <button class="p-2 text-on-surface-variant hover:text-error transition-colors">
+                                    <span class="material-symbols-outlined text-sm">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <h3 class="font-black text-lg mb-1 tracking-tight">OFFICE</h3>
+                        <p class="text-on-surface-variant text-sm font-['Noto_Sans'] leading-relaxed">
+                            Marcus Rashford<br />
+                            Adidas Performance Center, Floor 4<br />
+                            Herzogenaurach, 91074<br />
+                            Germany
+                        </p>
+                        <div class="absolute bottom-6 right-6 check-mark opacity-0">
+                            <span class="material-symbols-outlined text-primary"
+                                style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                        </div>
+                    </div>
+                    <!-- Add New Button (Bento Style) -->
+                    <button
+                        class="flex flex-col items-center justify-center gap-4 bg-surface-container-lowest border-2 border-dashed border-outline hover:border-primary/50 hover:bg-surface-container-low transition-all duration-300 p-6 rounded-lg group">
+                        <div
+                            class="w-12 h-12 rounded-full bg-outline group-hover:bg-primary transition-colors flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white">add</span>
+                        </div>
+                        <span
+                            class="font-bold text-sm uppercase tracking-widest text-on-surface-variant group-hover:text-primary transition-colors">Add
+                            New Address</span>
+                    </button>
+                </div>
+                <!-- Action Button -->
+                <div class="pt-8">
+                    <button
+                        class="w-full md:w-auto px-12 py-4 bg-primary text-white font-black text-lg tracking-tight uppercase shadow-[0_10px_30px_rgba(19,127,236,0.3)] hover:translate-y-[-2px] active:translate-y-[1px] transition-all rounded-lg">
+                        Deliver to this Address
+                    </button>
+                </div>
+            </div>
+            <!-- Order Summary Sidebar -->
+            <aside class="space-y-6 lg:sticky lg:top-28">
+                <div class="bg-surface-container-high rounded-lg p-6 ring-1 ring-white/5 shadow-2xl">
+                    <h2 class="font-black text-xl mb-6 tracking-tighter uppercase border-b border-outline pb-4">Order
+                        Summary</h2>
+                    <div class="space-y-4 mb-6">
+                        <div class="flex gap-4">
+                            <div class="w-16 h-16 bg-slate-800 rounded overflow-hidden flex-shrink-0">
+                                <img class="w-full h-full object-cover"
+                                    data-alt="A macro shot of a high-performance football with intricate hexagonal textures and neon blue accents. The lighting is cinematic and dramatic, reminiscent of a midnight stadium match under powerful floodlights. The composition is tight and focused, highlighting the premium craftsmanship of the urban football equipment."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFQNhorYyKQTTrrz1GvBo_PqykUgTEO4-2HBf-Ka-s7ytJ7msQUExIoN_-xf0TYJsnfHnFO_aQIsWASaJIyduZX0gAeTokhPDFk9VWMT_fo70Up0fWLTegy-JgwifOZ1nlOP39sQi4ZIfPDMudMJmYaBLB2UBkeo0pj2d1O9d1JR4EA4uzO9LGatt-HEH5I67xoKOqotAeCi1-9zfSz2HQ6-wzedhCcVO7Nk-bwfhNbiNNqK-BnNgB8IFwKBII4ZRgLF9-bu3Awok" />
+                            </div>
+                            <div class="flex-grow">
+                                <p class="font-bold text-sm uppercase leading-tight">UCL Pro Match Ball</p>
+                                <p class="text-xs text-on-surface-variant font-['Noto_Sans']">Quantity: 1</p>
+                                <p class="text-primary font-bold mt-1">£140.00</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-16 h-16 bg-slate-800 rounded overflow-hidden flex-shrink-0">
+                                <img class="w-full h-full object-cover"
+                                    data-alt="A professional football jersey displayed in high-contrast lighting. The fabric features a deep slate blue mesh texture with vibrant primary blue detailing. The shot is an atmospheric, close-up editorial photo that emphasizes the technical athletic performance materials and premium midnight pitch aesthetic."
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMxQ9myqwCQy6hD1sva6k9P5MpkewWEMF_6_v17TkH2izXuuPfu72rdyK0Pl_RFjwLGEzy7hVRz-tcf68Xh_FHGkqE2AOVDzGOYhubO0lR5HqtRgkdP5b2Qo4iZDVn9e71mmRdV5Ph6tATZGdbq1NqUl-Z7Z4a98hbf8sQMTbTmeeYVA9yi_K18J7oKCNwei2MYbnARnQFNNwBsqkHiMlGFKanQTZ9pQyf4DSEg_0nzvX7gDA16z8n4nyhX_1cWdsam68G6ckLoEE" />
+                            </div>
+                            <div class="flex-grow">
+                                <p class="font-bold text-sm uppercase leading-tight">Manchester Club Jersey</p>
+                                <p class="text-xs text-on-surface-variant font-['Noto_Sans']">Size: L | Qty: 1</p>
+                                <p class="text-primary font-bold mt-1">£85.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="space-y-3 pt-6 border-t border-outline">
+                        <div class="flex justify-between text-sm font-['Noto_Sans']">
+                            <span class="text-on-surface-variant">Subtotal</span>
+                            <span>£225.00</span>
+                        </div>
+                        <div class="flex justify-between text-sm font-['Noto_Sans']">
+                            <span class="text-on-surface-variant">Shipping</span>
+                            <span class="text-primary font-bold uppercase text-[10px] tracking-widest">Calculated next
+                                step</span>
+                        </div>
+                        <div
+                            class="flex justify-between font-black text-xl pt-4 border-t border-outline tracking-tighter uppercase">
+                            <span>Total</span>
+                            <span class="text-primary">£225.00</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Promo Badge -->
+                <div class="bg-primary/10 border border-primary/20 p-4 rounded-lg flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary">local_offer</span>
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-widest text-primary">Free UK Shipping</p>
+                        <p class="text-[10px] text-on-surface-variant font-['Noto_Sans']">Applied to orders over £150
+                        </p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <!-- Footer (Shared Component) -->
+    <footer class="bg-slate-900 w-full py-12 px-6 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="text-lg font-bold text-white">Urban Football</div>
+            <div class="flex gap-6">
+                <a class="text-slate-500 font-['Noto_Sans'] text-sm hover:text-blue-500 transition-colors"
+                    href="#">Privacy Policy</a>
+                <a class="text-slate-500 font-['Noto_Sans'] text-sm hover:text-blue-500 transition-colors"
+                    href="#">Terms of Service</a>
+                <a class="text-slate-500 font-['Noto_Sans'] text-sm hover:text-blue-500 transition-colors"
+                    href="#">Shipping</a>
+                <a class="text-slate-500 font-['Noto_Sans'] text-sm hover:text-blue-500 transition-colors"
+                    href="#">Contact Us</a>
+            </div>
+            <div class="text-slate-500 font-['Noto_Sans'] text-sm">© 2024 Urban Football. Engineered for the Pitch.
+            </div>
+        </div>
+    </footer>
+    <script>
+        function selectAddress(element) {
+            // Remove selection from all cards
+            document.querySelectorAll('.address-card').forEach(card => {
+                card.classList.remove('border-primary', 'shadow-2xl');
+                card.classList.add('border-transparent');
+                card.querySelector('.check-mark').style.opacity = '0';
+            });
+
+            // Add selection to clicked card
+            element.classList.remove('border-transparent');
+            element.classList.add('border-primary', 'shadow-2xl');
+            element.querySelector('.check-mark').style.opacity = '1';
+
+            // Pulse effect
+            element.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        // Add a subtle hover interaction for the Order Summary items
+        document.querySelectorAll('aside .flex.gap-4').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateX(4px)';
+                item.style.transition = 'transform 0.2s ease';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateX(0)';
+            });
+        });
+    </script>
+</body>
+
+</html>
