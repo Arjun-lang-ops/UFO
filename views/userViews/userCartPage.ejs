@@ -277,10 +277,11 @@
                 <span class="text-white text-3xl font-black tracking-tight" id="cart-grand-total">&#8377;<%= typeof cartTotal !== 'undefined' ? cartTotal : 0 %></span>
               </div>
 
-              <button class="w-full h-12 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+              <a href="/checkout">
+                <button id="proceed-btn" class="w-full h-12 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
                 Proceed to Checkout
                 <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-              </button>
+              </button></a>
 
               <div class="mt-4 flex items-center justify-center gap-2 text-[#9dabb9] text-sm">
                 <span class="material-symbols-outlined text-[16px]">lock</span>

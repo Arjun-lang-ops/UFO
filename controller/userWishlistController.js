@@ -19,7 +19,13 @@ export const wishlistRender = async (req, res) => {
 
     if (wishlist) {
       wishlist.products = wishlist.products.filter(
-        item => item.product
+        item => {
+          const product=  item.product;
+
+        return (
+          product && product.isActive && product.category && product.category.isListed
+        )
+        }
       );
     }
 

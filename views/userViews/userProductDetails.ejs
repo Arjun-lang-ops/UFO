@@ -250,9 +250,7 @@
   <div class="flex justify-between items-center">
     <span class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
       Size:
-      <span class="text-slate-900 dark:text-white ml-1">
-        <%= selectedVariant.size %>
-      </span>
+      
     </span>
   </div>
 
@@ -390,17 +388,9 @@ const isWishlisted = currentWishlistItems.some(item =>
                   </div>
                   
 
-<a href="/checkout">
-  <button id="buyNowBtn"
-  class="w-full font-bold rounded-lg h-12 flex items-center justify-center gap-2 transition-all
-  <%= isOutOfStock 
-      ? 'bg-gray-400 text-white cursor-not-allowed' 
-      : 'bg-slate-900 dark:bg-white text-white dark:text-black hover:opacity-90' %>"
-  <%= isOutOfStock ? 'disabled' : '' %>
->
-  <%= isOutOfStock ? 'Out of Stock' : 'Buy Now' %>
-</button>
-</a>
+
+  
+
                 </div>
                 <div class="grid grid-cols-2 gap-4 mt-2">
                   <div
@@ -543,40 +533,7 @@ document.querySelectorAll(".color-btn").forEach(btn => {
     selectedVariant = variant;
 
     const addToCartBtn = document.getElementById("addToCartBtn");
-const buyNowBtn = document.getElementById("buyNowBtn");
 
-if (variant.stock <= 0) {
-  // ❌ Disable Add to Cart
-  addToCartBtn.disabled = true;
-  addToCartBtn.innerHTML = `
-    <span class="material-symbols-outlined">shopping_bag</span>
-    Out of Stock
-  `;
-  addToCartBtn.classList.remove("bg-primary");
-  addToCartBtn.classList.add("bg-gray-400", "cursor-not-allowed");
-
-  // ❌ Disable Buy Now
-  buyNowBtn.disabled = true;
-  buyNowBtn.innerText = "Out of Stock";
-  buyNowBtn.classList.remove("bg-slate-900");
-  buyNowBtn.classList.add("bg-gray-400", "cursor-not-allowed");
-
-} else {
-  // ✅ Enable Add to Cart
-  addToCartBtn.disabled = false;
-  addToCartBtn.innerHTML = `
-    <span class="material-symbols-outlined">shopping_bag</span>
-    Add to Cart
-  `;
-  addToCartBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
-  addToCartBtn.classList.add("bg-primary");
-
-  // ✅ Enable Buy Now
-  buyNowBtn.disabled = false;
-  buyNowBtn.innerText = "Buy Now";
-  buyNowBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
-  buyNowBtn.classList.add("bg-slate-900");
-}
     
     document.getElementById("mainImage").style.backgroundImage =
       `url(${variant.images[0]})`;
@@ -714,27 +671,46 @@ function handleSizeSelect(btn) {
 }
 
 function updateCartButtons(variant) {
-  const addToCartBtn = document.getElementById("addToCartBtn");
-  const buyNowBtn    = document.getElementById("buyNowBtn");
+
+  const addToCartBtn =
+    document.getElementById("addToCartBtn");
 
   if (variant.stock <= 0) {
+
     addToCartBtn.disabled = true;
-    addToCartBtn.innerHTML = `<span class="material-symbols-outlined">shopping_bag</span> Out of Stock`;
+
+    addToCartBtn.innerHTML = `
+      <span class="material-symbols-outlined">
+        shopping_bag
+      </span>
+      Out of Stock
+    `;
+
     addToCartBtn.classList.remove("bg-primary");
-    addToCartBtn.classList.add("bg-gray-400", "cursor-not-allowed");
-    buyNowBtn.disabled = true;
-    buyNowBtn.innerText = "Out of Stock";
-    buyNowBtn.classList.remove("bg-slate-900", "dark:bg-white");
-    buyNowBtn.classList.add("bg-gray-400", "cursor-not-allowed");
+
+    addToCartBtn.classList.add(
+      "bg-gray-400",
+      "cursor-not-allowed"
+    );
+
   } else {
+
     addToCartBtn.disabled = false;
-    addToCartBtn.innerHTML = `<span class="material-symbols-outlined">shopping_bag</span> Add to Cart`;
-    addToCartBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
+
+    addToCartBtn.innerHTML = `
+      <span class="material-symbols-outlined">
+        shopping_bag
+      </span>
+      Add to Cart
+    `;
+
+    addToCartBtn.classList.remove(
+      "bg-gray-400",
+      "cursor-not-allowed"
+    );
+
     addToCartBtn.classList.add("bg-primary");
-    buyNowBtn.disabled = false;
-    buyNowBtn.innerText = "Buy Now";
-    buyNowBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
-    buyNowBtn.classList.add("bg-slate-900");
+
   }
 }
 
@@ -940,5 +916,7 @@ wishlistForm.addEventListener("submit", async (e) => {
 });
 
 </script>
+
+
 
 </html>

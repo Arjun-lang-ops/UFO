@@ -5,11 +5,8 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Checkout Booking - Urban Football</title>
+    <title>Checkout Booking - ProKicks</title>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -45,7 +42,7 @@
                 <div class="size-8 flex items-center justify-center text-primary">
                     <span class="material-symbols-outlined !text-[32px]">sports_soccer</span>
                 </div>
-                <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
+                <a href="/home"><h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">Urban Football</h2></a>
             </div>
             <div class="flex items-center gap-4">
                 <div class="hidden sm:flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -59,7 +56,7 @@
                 <!-- Breadcrumbs / Progress Stepper -->
                 <nav class="flex flex-wrap items-center gap-2 text-sm sm:text-base">
                     <a class="text-gray-500 hover:text-primary transition-colors font-medium flex items-center gap-1"
-                        href="#">
+                        href="/cart">
                         <span class="material-symbols-outlined !text-lg">shopping_cart</span> Cart
                     </a>
                     <span class="material-symbols-outlined !text-lg text-gray-400">chevron_right</span>
@@ -80,57 +77,58 @@
                             <p class="text-gray-500 dark:text-gray-400 mt-2">Please fill in your details to complete the
                                 order.</p>
                         </div>
-                        <!-- Contact Information -->
-                        <!-- Shipping Address -->
+                        <!-- Delivery Address Section -->
                         <section
                             class="bg-white dark:bg-[#1c232d] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-[#283039]">
                             <div class="flex items-center justify-between mb-6">
-                                <h3 class="text-lg font-bold flex items-center gap-2"><span
-                                        class="material-symbols-outlined text-primary">local_shipping</span>Delivery
-                                    Details</h3>
-                                    <a href="/checkout/address">
-                                        <button
-                                    class="text-primary text-sm font-medium hover:underline flex items-center gap-1"><span
-                                        class="material-symbols-outlined !text-sm">edit</span>Edit</button>
-                                    </a>
+                                <h3 class="text-lg font-bold flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary">location_on</span>
+                                    Delivery Address
+                                </h3>
+                                <button id="openAddAddressModal" type="button"
+                                    class="text-primary text-sm font-bold hover:underline flex items-center gap-1">
+                                    <span class="material-symbols-outlined !text-lg">add</span>
+                                    Add New
+                                </button>
                             </div>
-                            <div class="flex flex-col gap-4">
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><label
-                                        class="flex flex-col gap-2"><span
-                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">Phone
-                                            Number</span><input
-                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
-                                            placeholder="+91 9876543210" type="tel" /></label></div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4"><label
-                                        class="flex flex-col gap-2"><span
-                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">First
-                                            Name</span><input
-                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
-                                            placeholder="Alex" type="text" /></label><label
-                                        class="flex flex-col gap-2"><span
-                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">Last
-                                            Name</span><input
-                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
-                                            placeholder="Morgan" type="text" /></label></div><label
-                                    class="flex flex-col gap-2"><span
-                                        class="text-sm font-medium text-[#111418] dark:text-gray-300">Address</span><input
-                                        class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
-                                        placeholder="123 Stadium Ave" type="text" /></label>
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4"><label
-                                        class="flex flex-col gap-2 sm:col-span-1"><span
-                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">City</span><input
-                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
-                                            placeholder="New York" type="text" /></label><label
-                                        class="flex flex-col gap-2 sm:col-span-1"><span
-                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">State /
-                                            Province</span><input
-                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
-                                            placeholder="NY" type="text" /></label><label
-                                        class="flex flex-col gap-2 sm:col-span-1"><span
-                                            class="text-sm font-medium text-[#111418] dark:text-gray-300">ZIP / Postal
-                                            Code</span><input
-                                            class="form-input w-full rounded-lg bg-gray-50 dark:bg-[#121922] border-gray-200 dark:border-[#3b4754] text-[#111418] dark:text-white focus:ring-primary focus:border-primary placeholder-gray-400 p-3"
-                                            placeholder="10001" type="text" /></label></div>
+                            <div id="selectedAddress"
+                                class="rounded-xl border border-gray-200 dark:border-[#3b4754] p-5 flex justify-between items-start">
+                                <div class="flex flex-col gap-1">
+                                    <%if(checkoutData.defaultAddress){%>
+                                    <h4 id="checkoutAddressName" class="text-lg font-bold text-[#111418] dark:text-white"><%=checkoutData?.defaultAddress?.fullname%></h4>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400 space-y-0.5">
+                                        <p id="checkoutAddressStreet"><%=checkoutData?.defaultAddress?.street%></p>
+                                        <p id="checkoutAddressLocation"><%= checkoutData?.defaultAddress?.apartment %>,
+  <%= checkoutData?.defaultAddress?.state %> -
+  <%= checkoutData?.defaultAddress?.pincode %></p>
+                                    </div>
+                                    <p class="mt-3 text-sm font-medium text-[#111418] dark:text-gray-300">Phone:
+                                        <span id="checkoutAddressPhone"><%=checkoutData?.defaultAddress?.phone%></span></p>
+                                        <%}else{%>
+                                             <p class="text-red-500">
+      No default address found
+   </p>
+
+<% } %>
+                                </div>
+                                <button
+    id="openEditAddressModal"
+    type="button"
+    data-id="<%= checkoutData?.defaultAddress?._id %>"
+    data-fullname="<%= checkoutData?.defaultAddress?.fullname %>"
+    data-phone="<%= checkoutData?.defaultAddress?.phone %>"
+    data-country="<%= checkoutData?.defaultAddress?.country %>"
+    data-state="<%= checkoutData?.defaultAddress?.state %>"
+    data-street="<%= checkoutData?.defaultAddress?.street %>"
+    data-apartment="<%= checkoutData?.defaultAddress?.apartment %>"
+    data-pincode="<%= checkoutData?.defaultAddress?.pincode %>"
+
+    class="flex items-center gap-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
+
+    <span class="material-symbols-outlined !text-lg">edit</span>
+    Edit
+
+</button>
                             </div>
                         </section>
                         <!-- Shipping Method -->
@@ -138,41 +136,53 @@
                             class="bg-white dark:bg-[#1c232d] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-[#283039]">
                             <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
                                 <span class="material-symbols-outlined text-primary">local_shipping</span>
-                                Shipping Method
+                                Payment Method
                             </h3>
                             <div class="space-y-3">
                                 <label
-                                    class="relative flex items-center justify-between p-4 rounded-lg border-2 border-primary bg-blue-50/50 dark:bg-blue-900/10 cursor-pointer transition-all">
+                                    class="shipping-option relative flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-[#3b4754] hover:border-gray-400 dark:hover:border-gray-500 cursor-pointer transition-all">
                                     <div class="flex items-center gap-3">
                                         <input checked=""
                                             class="h-5 w-5 text-primary border-gray-300 focus:ring-primary"
                                             name="shipping" type="radio" />
                                         <div class="flex flex-col">
-                                            <span class="text-base font-bold text-[#111418] dark:text-white">Cash on Delivery
-                                                </span>
-                                            <span class="text-sm text-gray-500 dark:text-gray-400">Est. 3-5 business
-                                                days</span>
+                                            <span class="text-base font-bold text-[#111418] dark:text-white">Cash On
+                                                Delivery</span>
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">Pay when your order arrives. No wallet refund is created unless a paid order is later returned.</span>
                                         </div>
                                     </div>
-                                    <span class="font-bold text-[#111418] dark:text-white">Free</span>
+                                    
                                 </label>
                                 <label
-                                    class="relative flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-[#3b4754] hover:border-gray-400 dark:hover:border-gray-500 cursor-pointer transition-all">
+                                    class="shipping-option relative flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-[#3b4754] hover:border-gray-400 dark:hover:border-gray-500 cursor-pointer transition-all">
                                     <div class="flex items-center gap-3">
                                         <input class="h-5 w-5 text-primary border-gray-300 focus:ring-primary"
                                             name="shipping" type="radio" />
                                         <div class="flex flex-col">
-                                            <span class="text-base font-bold text-[#111418] dark:text-white">Express
-                                                Delivery</span>
-                                            <span class="text-sm text-gray-500 dark:text-gray-400">Est. 1-2 business
+                                            <span class="text-base font-bold text-[#111418] dark:text-white">Online
+                                                Payment</span>
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">Pay securely with Razorpay using UPI, cards, net banking, or wallets.</span>
+                                        </div>
+                                    </div>
+                                    
+                                </label>
+                                <label
+                                   class="shipping-option relative flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-[#3b4754] hover:border-gray-400 dark:hover:border-gray-500 cursor-pointer transition-all">
+                                    <div class="flex items-center gap-3">
+                                        <input class="h-5 w-5 text-primary border-gray-300 focus:ring-primary"
+                                            name="shipping" type="radio" />
+                                        <div class="flex flex-col">
+                                            <span class="text-base font-bold text-[#111418] dark:text-white">Wallet
+                                                </span>
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">Est. 5-7 business
                                                 days</span>
                                         </div>
                                     </div>
-                                    <span class="font-bold text-[#111418] dark:text-white">$15.00</span>
+                                    
                                 </label>
                             </div>
                         </section>
-                        <!-- Review Cart Items (Mobile visible, could be collapsed) -->
+                        <!-- Review Cart Items -->
                         <section
                             class="bg-white dark:bg-[#1c232d] rounded-xl p-6 shadow-sm border border-gray-100 dark:border-[#283039]">
                             <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
@@ -180,61 +190,62 @@
                                 Review Items
                             </h3>
                             <div class="flex flex-col gap-6">
+
+                                 <% checkoutData.cartItems.forEach(item => { %>
+
+      <div class="flex items-start gap-4 pb-6 border-b border-gray-100 dark:border-[#283039]">
+
+         <!-- IMAGE -->
+         <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-800">
+
+            <img
+               class="h-full w-full object-cover object-center"
+               src="<%= item.image %>"
+               alt="<%= item.name %>"
+            />
+
+         </div>
+
+         <!-- DETAILS -->
+         <div class="flex flex-1 flex-col">
+
+            <div>
+
+               <div class="flex justify-between text-base font-medium text-[#111418] dark:text-white">
+
+                  <h4><%= item.name %></h4>
+
+                  <p>₹<%= item.total %></p>
+
+               </div>
+
+               <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                  <%= item.color %>
+               </p>
+
+               <p class="text-sm text-gray-500 dark:text-gray-400">
+                  Size: <%= item.size %>
+               </p>
+
+            </div>
+
+            <div class="flex flex-1 items-end justify-between text-sm">
+
+               <p class="text-gray-500 dark:text-gray-400">
+                  Qty <%= item.quantity %>
+               </p>
+
+            </div>
+
+         </div>
+
+      </div>
+
+   <% }) %>
                                 <!-- Item 1 -->
-                                <div class="flex items-start gap-4 pb-6 border-b border-gray-100 dark:border-[#283039]">
-                                    <div
-                                        class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-800">
-                                        <img class="h-full w-full object-cover object-center"
-                                            data-alt="Pair of professional football boots on grass"
-                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfOPdTiCMNmzo_GAgAxKab_wapnIc0jhht7XM7FJ9t2NomQiLccGxX0d2CZ8bUmrNMo2tS7YupM2EzBk0niTtEftSF6QoAwVAIpHTf1nEfBe_bmCrBLLKaFMIy9bFmUb0PI-js4bXHLuFTX0raZHSgCQaLlQVXutebsBJYHrPMdI_wILHz1YWfEYEv0tgAkOzjhDX2k_1I9xhIyZvFur6oKqiNrq-lVnTXZ_NhpfNdaCp7x25RMhPYHIGgfFD90SLyUZ8NKRSl0LA" />
-                                    </div>
-                                    <div class="flex flex-1 flex-col">
-                                        <div>
-                                            <div
-                                                class="flex justify-between text-base font-medium text-[#111418] dark:text-white">
-                                                <h4>Phantom Elite FG</h4>
-                                                <p>$250.00</p>
-                                            </div>
-                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Neon Yellow / Black
-                                            </p>
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">Size: 10 US</p>
-                                        </div>
-                                        <div class="flex flex-1 items-end justify-between text-sm">
-                                            <p class="text-gray-500 dark:text-gray-400">Qty 1</p>
-                                            <div class="flex">
-                                                <button class="font-medium text-primary hover:text-blue-400"
-                                                    type="button">Edit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                                 <!-- Item 2 -->
-                                <div class="flex items-start gap-4">
-                                    <div
-                                        class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-800">
-                                        <img class="h-full w-full object-cover object-center"
-                                            data-alt="Close up of goalkeeper gloves"
-                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCr2XqYEfRsHuJ7_ykkgosL83wWK43BSijzS0ioLHqxwuDnlFllmtyMvlRqXoAj0K1lDmosrdMY_LzQQXMp1FQ6LZLyhmJYu4zpssk550XWZp2MpxG9MpSAbrhKOpFmCC2CTJMT3noK1buGta1rA-pt3V0nQY3VfOLRqbbAq0WO_vna1jkBkrtnm9KR-joLWj_q4I6nq_ZnNulni9dgXiGr7Qnp9kaPketGhu0kGAd5CVZ_x15pvCv5yNbbKgEfUOKVCVWO0ZtEg4" />
-                                    </div>
-                                    <div class="flex flex-1 flex-col">
-                                        <div>
-                                            <div
-                                                class="flex justify-between text-base font-medium text-[#111418] dark:text-white">
-                                                <h4>Pro Grip Gloves</h4>
-                                                <p>$45.00</p>
-                                            </div>
-                                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">White / Red</p>
-                                            <p class="text-sm text-gray-500 dark:text-gray-400">Size: L</p>
-                                        </div>
-                                        <div class="flex flex-1 items-end justify-between text-sm">
-                                            <p class="text-gray-500 dark:text-gray-400">Qty 1</p>
-                                            <div class="flex">
-                                                <button class="font-medium text-primary hover:text-blue-400"
-                                                    type="button">Edit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             </div>
                         </section>
                     </div>
@@ -248,26 +259,26 @@
                                     <dl class="-my-4 divide-y divide-gray-100 dark:divide-[#283039] text-sm">
                                         <div class="flex items-center justify-between py-4">
                                             <dt class="text-gray-500 dark:text-gray-400">Subtotal</dt>
-                                            <dd class="font-medium text-[#111418] dark:text-white">$295.00</dd>
+                                            <dd class="font-medium text-[#111418] dark:text-white">₹ <%=checkoutData?.subtotal%></dd>
                                         </div>
                                         <div class="flex items-center justify-between py-4">
                                             <dt class="text-gray-500 dark:text-gray-400">Shipping</dt>
-                                            <dd class="font-medium text-[#111418] dark:text-white">Free</dd>
+                                            <dd class="font-medium text-[#111418] dark:text-white">₹ <%= checkoutData?.shippingCharge %></dd>
                                         </div>
                                         <div class="flex items-center justify-between py-4">
                                             <dt class="text-gray-500 dark:text-gray-400">Tax</dt>
-                                            <dd class="font-medium text-[#111418] dark:text-white">$24.00</dd>
+                                            <dd class="font-medium text-[#111418] dark:text-white">Free</dd>
                                         </div>
                                         <div
                                             class="flex items-center justify-between py-4 border-t-2 border-dashed dark:border-[#3b4754] !border-b-0 mt-2">
                                             <dt class="text-base font-bold text-[#111418] dark:text-white">Total</dt>
-                                            <dd class="text-xl font-bold text-primary">$319.00</dd>
+                                            <dd class="text-xl font-bold text-primary">₹ <%=checkoutData?.grandTotal%></dd>
                                         </div>
                                     </dl>
                                 </div>
                                 <!-- Promo Code -->
                                 <div class="mt-6 pt-6 border-t border-gray-100 dark:border-[#283039]">
-                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Promo
+                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Coupon
                                         Code</label>
                                     <div class="flex space-x-2">
                                         <input
@@ -282,7 +293,7 @@
                                 <div class="mt-8">
                                     <button
                                         class="w-full flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-base font-bold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all">
-                                        Proceed to Payment
+                                        Place Order
                                         <span class="material-symbols-outlined">arrow_forward</span>
                                     </button>
                                     <div class="mt-4 flex justify-center items-center gap-3 opacity-60">
@@ -301,6 +312,314 @@
             </div>
         </main>
     </div>
+
+    <!-- Address Modal -->
+    <div id="addressModal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 px-4 py-6 opacity-0 backdrop-blur-sm transition-opacity duration-200">
+        <div id="addressModalPanel"
+            class="w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-xl border border-gray-200 dark:border-[#283039] bg-white dark:bg-[#1c232d] shadow-2xl scale-95 transition-transform duration-200">
+            <div
+                class="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 dark:border-[#283039] bg-white/95 dark:bg-[#1c232d]/95 px-6 py-4 backdrop-blur">
+                <div>
+                    <h3 id="addressModalTitle" class="text-xl font-bold text-[#111418] dark:text-white">Add New Address</h3>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Enter the delivery details for this order.</p>
+                </div>
+                <button id="closeAddressModal" type="button"
+                    class="flex size-10 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-100 hover:text-[#111418] dark:text-gray-400 dark:hover:bg-[#283039] dark:hover:text-white"
+                    aria-label="Close address modal">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <form id="checkoutAddressForm" class="p-6">
+                <input type="hidden" id="addressId" name="addressId">
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <label class="flex flex-col gap-2">
+                        <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Full Name</span>
+                        <input id="addressFullname" name="fullname" type="text" placeholder="John Doe"
+                            class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                    </label>
+                    <label class="flex flex-col gap-2">
+                        <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Phone Number</span>
+                        <input id="addressPhone" name="phone" type="tel" placeholder="9876543210"
+                            class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                    </label>
+                    <label class="flex flex-col gap-2">
+                        <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Country</span>
+                        <input id="addressCountry" name="country" type="text" placeholder="India"
+                            class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                    </label>
+                    <label class="flex flex-col gap-2">
+                        <span class="text-sm font-medium text-[#111418] dark:text-gray-200">State / Province</span>
+                        <input id="addressState" name="state" type="text" placeholder="Kerala"
+                            class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                    </label>
+                    <label class="flex flex-col gap-2 md:col-span-2">
+                        <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Street Address</span>
+                        <input id="addressStreet" name="street" type="text" placeholder="House name, street, locality"
+                            class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                    </label>
+                    <label class="flex flex-col gap-2">
+                        <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Apartment / City</span>
+                        <input id="addressApartment" name="apartment" type="text" placeholder="Apartment, suite, city"
+                            class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                    </label>
+                    <label class="flex flex-col gap-2">
+                        <span class="text-sm font-medium text-[#111418] dark:text-gray-200">ZIP / Pincode</span>
+                        <input id="addressPincode" name="pincode" type="text" placeholder="688526"
+                            class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                    </label>
+                </div>
+
+                <label class="mt-5 flex items-center gap-3">
+                    <input id="addressDefault" name="isDefault" type="checkbox"
+                        class="size-4 rounded border-gray-300 text-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922]" />
+                    <span class="text-sm text-gray-600 dark:text-gray-300">Set as default shipping address</span>
+                </label>
+
+                <div class="mt-6 flex flex-col-reverse gap-3 border-t border-gray-100 pt-5 dark:border-[#283039] sm:flex-row sm:justify-end">
+                    <button id="cancelAddressModal" type="button"
+                        class="rounded-lg px-5 py-3 text-sm font-bold text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#283039]">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-600">
+                        Save Address
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const addressModal = document.getElementById("addressModal");
+        const addressModalPanel = document.getElementById("addressModalPanel");
+        const addressModalTitle = document.getElementById("addressModalTitle");
+        const checkoutAddressForm = document.getElementById("checkoutAddressForm");
+        const openAddAddressModal = document.getElementById("openAddAddressModal");
+        const openEditAddressModal = document.getElementById("openEditAddressModal");
+        const closeAddressModal = document.getElementById("closeAddressModal");
+        const cancelAddressModal = document.getElementById("cancelAddressModal");
+
+        const addressFields = {
+            fullname: document.getElementById("addressFullname"),
+            phone: document.getElementById("addressPhone"),
+            country: document.getElementById("addressCountry"),
+            state: document.getElementById("addressState"),
+            street: document.getElementById("addressStreet"),
+            apartment: document.getElementById("addressApartment"),
+            pincode: document.getElementById("addressPincode"),
+            isDefault: document.getElementById("addressDefault")
+        };
+
+        const selectedAddress = {
+            name: document.getElementById("checkoutAddressName"),
+            street: document.getElementById("checkoutAddressStreet"),
+            location: document.getElementById("checkoutAddressLocation"),
+            phone: document.getElementById("checkoutAddressPhone")
+        };
+
+        const showAddressModal = (mode) => {
+            checkoutAddressForm.dataset.mode = mode;
+            addressModalTitle.textContent = mode === "edit" ? "Edit Address" : "Add New Address";
+
+           if (mode === "edit") {
+
+            document.getElementById("addressId").value =
+            openEditAddressModal.dataset.id;
+
+    addressFields.fullname.value =
+        openEditAddressModal.dataset.fullname || "";
+
+    addressFields.phone.value =
+        openEditAddressModal.dataset.phone || "";
+
+    addressFields.country.value =
+        openEditAddressModal.dataset.country || "";
+
+    addressFields.state.value =
+        openEditAddressModal.dataset.state || "";
+
+    addressFields.street.value =
+        openEditAddressModal.dataset.street || "";
+
+    addressFields.apartment.value =
+        openEditAddressModal.dataset.apartment || "";
+
+    addressFields.pincode.value =
+        openEditAddressModal.dataset.pincode || "";
+
+} else {
+                checkoutAddressForm.reset();
+            }
+
+            addressModal.classList.remove("hidden");
+            addressModal.classList.add("flex");
+            document.body.classList.add("overflow-hidden");
+
+            requestAnimationFrame(() => {
+                addressModal.classList.remove("opacity-0");
+                addressModalPanel.classList.remove("scale-95");
+            });
+        };
+
+        const hideAddressModal = () => {
+            addressModal.classList.add("opacity-0");
+            addressModalPanel.classList.add("scale-95");
+            document.body.classList.remove("overflow-hidden");
+
+            setTimeout(() => {
+                addressModal.classList.add("hidden");
+                addressModal.classList.remove("flex");
+            }, 200);
+        };
+
+        openAddAddressModal.addEventListener("click", () => showAddressModal("add"));
+        openEditAddressModal.addEventListener("click", () => showAddressModal("edit"));
+        closeAddressModal.addEventListener("click", hideAddressModal);
+        cancelAddressModal.addEventListener("click", hideAddressModal);
+
+        addressModal.addEventListener("click", (event) => {
+            if (event.target === addressModal) hideAddressModal();
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && !addressModal.classList.contains("hidden")) {
+                hideAddressModal();
+            }
+        });
+
+        checkoutAddressForm.addEventListener("submit", async (event) => {
+
+    event.preventDefault();
+
+    const mode = checkoutAddressForm.dataset.mode;
+
+    const addressData = {
+
+        fullname: addressFields.fullname.value,
+        phone: addressFields.phone.value,
+        country: addressFields.country.value,
+        state: addressFields.state.value,
+        street: addressFields.street.value,
+        apartment: addressFields.apartment.value,
+        pincode: addressFields.pincode.value,
+        isDefault: addressFields.isDefault.checked
+
+    };
+
+    try {
+
+        // EDIT ADDRESS
+        if (mode === "edit") {
+
+            const addressId =
+                document.getElementById("addressId").value;
+
+            const response = await fetch(`/edit-address/${addressId}`, {
+
+                method: "PUT",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(addressData)
+
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+
+                selectedAddress.name.textContent =
+                    addressData.fullname;
+
+                selectedAddress.street.textContent =
+                    addressData.street;
+
+                selectedAddress.location.textContent =
+                    `${addressData.apartment}, ${addressData.state} - ${addressData.pincode}`;
+
+                selectedAddress.phone.textContent =
+                    addressData.phone;
+
+                hideAddressModal();
+
+            } else {
+
+                alert(result.message || "Failed to update address");
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert("Something went wrong");
+
+    }
+
+});
+
+
+
+        //label outline blue color script
+        const shippingOptions = document.querySelectorAll(".shipping-option");
+const shippingRadios = document.querySelectorAll('input[name="shipping"]');
+
+const updateShippingSelection = () => {
+
+    shippingOptions.forEach(option => {
+
+        option.classList.remove(
+            "border-2",
+            "border-primary",
+            "bg-blue-50/50",
+            "dark:bg-blue-900/10"
+        );
+
+        option.classList.add(
+            "border",
+            "border-gray-200",
+            "dark:border-[#3b4754]"
+        );
+
+    });
+
+    shippingRadios.forEach(radio => {
+
+        if (radio.checked) {
+
+            const selectedOption = radio.closest(".shipping-option");
+
+            selectedOption.classList.remove(
+                "border",
+                "border-gray-200",
+                "dark:border-[#3b4754]"
+            );
+
+            selectedOption.classList.add(
+                "border-2",
+                "border-primary",
+                "bg-blue-50/50",
+                "dark:bg-blue-900/10"
+            );
+
+        }
+
+    });
+
+};
+
+shippingRadios.forEach(radio => {
+    radio.addEventListener("change", updateShippingSelection);
+});
+
+updateShippingSelection();
+    </script>
 </body>
 
 </html>
