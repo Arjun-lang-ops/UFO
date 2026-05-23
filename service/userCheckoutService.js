@@ -79,16 +79,131 @@ export const checkoutRenderService=async(userId)=>{
             subtotal + shippingCharge - discount;
 
 
-            const defaultAddress= await Address.findOne({user:userId,isDefault:true});
+            let defaultAddress= await Address.findOne({user:userId,isDefault:true});
+
+            if (!defaultAddress) {
+                defaultAddress = await Address.findOne({ user: userId });
+
+                if (defaultAddress) {
+                    defaultAddress.isDefault = true;
+                    await defaultAddress.save();
+                }
+            }
+
+            const addresses = await Address.find({ user: userId }).sort({ isDefault: -1, createdAt: -1 });
 
             return {
                 cartItems,
                 defaultAddress,
+                addresses,
                 totalQuantity,
                 subtotal,
                 shippingCharge,
                 discount,
                 grandTotal
             };
+
+};
+
+
+export const updateAddressService=async(id,userId,body)=>{
+
+    const existingAddress=await Address.findOne({_id:id,user:userId});
+
+    if(!existingAddress){
+        return {
+            success:false,
+            status:404,
+            message:'Address not found'
+        }
+
+    };
+
+    const shouldBeDefault= body.isDefault===true || body.isDefault==='true' || existingAddress.isDefault;
+
+    const addressData={
+        fullname:body.fullname,
+        phone:body.phone,
+        country: body.country,
+        state: body.state,
+        street: body.street,
+        apartment: body.apartment,
+        pincode: body.pincode,
+        isDefault: shouldBeDefault
+    }
+
+    if(addressData.isDefault){
+        await Address.updateMany({
+            user:userId,
+            _id:{$ne:id}
+        },
+         {
+                $set:{isDefault:false}
+            })
+    }
+
+
+    const updatedAddress = await Address.findOneAndUpdate(
+        {
+            _id: id,
+            user: userId
+        },
+        {
+            $set: addressData
+        },
+        {
+            new: true
+        }
+    );
+
+    return {
+        success: true,
+        address: updatedAddress
+    };
+
+}
+
+
+export const addAddressService = async (userId, body) => {
+
+    const hasAddress = await Address.exists({
+        user: userId
+    });
+
+    const shouldBeDefault =
+        !hasAddress ||
+        body.isDefault === true ||
+        body.isDefault === "true";
+
+    if (shouldBeDefault) {
+
+        await Address.updateMany(
+            {
+                user: userId
+            },
+            {
+                $set: { isDefault: false }
+            }
+        );
+
+    }
+
+    const address = await Address.create({
+        user: userId,
+        fullname: body.fullname,
+        phone: body.phone,
+        country: body.country,
+        state: body.state,
+        street: body.street,
+        apartment: body.apartment,
+        pincode: body.pincode,
+        isDefault: shouldBeDefault
+    });
+
+    return {
+        success: true,
+        message: "Address added successfully",
+        address
+    };
 
 };

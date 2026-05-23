@@ -91,6 +91,20 @@
                                     Add New
                                 </button>
                             </div>
+                            <% const checkoutAddresses = checkoutData.addresses || []; %>
+                            <% if (checkoutAddresses.length > 0) { %>
+                            <label class="mb-4 flex flex-col gap-2">
+                                <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Select delivery address</span>
+                                <select id="checkoutAddressSelect"
+                                    class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white">
+                                    <% checkoutAddresses.forEach(address => { %>
+                                        <option value="<%= address._id %>" <%= checkoutData?.defaultAddress?._id?.toString() === address._id.toString() ? 'selected' : '' %>>
+                                            <%= address.fullname %> - <%= address.street %>, <%= address.state %> <%= address.isDefault ? '(Default)' : '' %>
+                                        </option>
+                                    <% }) %>
+                                </select>
+                            </label>
+                            <% } %>
                             <div id="selectedAddress"
                                 class="rounded-xl border border-gray-200 dark:border-[#3b4754] p-5 flex justify-between items-start">
                                 <div class="flex flex-col gap-1">
@@ -122,8 +136,9 @@
     data-street="<%= checkoutData?.defaultAddress?.street %>"
     data-apartment="<%= checkoutData?.defaultAddress?.apartment %>"
     data-pincode="<%= checkoutData?.defaultAddress?.pincode %>"
+    data-is-default="<%= checkoutData?.defaultAddress?.isDefault ? 'true' : 'false' %>"
 
-    class="flex items-center gap-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
+    class="<%= checkoutData?.defaultAddress ? '' : 'hidden ' %>flex items-center gap-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
 
     <span class="material-symbols-outlined !text-lg">edit</span>
     Edit
@@ -398,6 +413,7 @@
         const checkoutAddressForm = document.getElementById("checkoutAddressForm");
         const openAddAddressModal = document.getElementById("openAddAddressModal");
         const openEditAddressModal = document.getElementById("openEditAddressModal");
+        const checkoutAddressSelect = document.getElementById("checkoutAddressSelect");
         const closeAddressModal = document.getElementById("closeAddressModal");
         const cancelAddressModal = document.getElementById("cancelAddressModal");
 
@@ -419,11 +435,43 @@
             phone: document.getElementById("checkoutAddressPhone")
         };
 
+        const setEditButtonAddress = (address) => {
+            if (!openEditAddressModal || !address) return;
+
+            openEditAddressModal.dataset.id = address._id;
+            openEditAddressModal.dataset.fullname = address.fullname || "";
+            openEditAddressModal.dataset.phone = address.phone || "";
+            openEditAddressModal.dataset.country = address.country || "";
+            openEditAddressModal.dataset.state = address.state || "";
+            openEditAddressModal.dataset.street = address.street || "";
+            openEditAddressModal.dataset.apartment = address.apartment || "";
+            openEditAddressModal.dataset.pincode = address.pincode || "";
+            openEditAddressModal.dataset.isDefault = address.isDefault ? "true" : "false";
+            openEditAddressModal.classList.remove("hidden");
+        };
+
+        const updateSelectedAddress = (address) => {
+            if (!address || !selectedAddress.name) {
+                window.location.reload();
+                return;
+            }
+
+            selectedAddress.name.textContent = address.fullname || "";
+            selectedAddress.street.textContent = address.street || "";
+            selectedAddress.location.textContent = `${address.apartment || ""}, ${address.state || ""} - ${address.pincode || ""}`;
+            selectedAddress.phone.textContent = address.phone || "";
+            setEditButtonAddress(address);
+        };
+
         const showAddressModal = (mode) => {
             checkoutAddressForm.dataset.mode = mode;
             addressModalTitle.textContent = mode === "edit" ? "Edit Address" : "Add New Address";
 
            if (mode === "edit") {
+            if (!openEditAddressModal.dataset.id) {
+                alert("Please select an address first");
+                return;
+            }
 
             document.getElementById("addressId").value =
             openEditAddressModal.dataset.id;
@@ -449,8 +497,13 @@
     addressFields.pincode.value =
         openEditAddressModal.dataset.pincode || "";
 
+    addressFields.isDefault.checked =
+        openEditAddressModal.dataset.isDefault === "true";
+
 } else {
                 checkoutAddressForm.reset();
+                document.getElementById("addressId").value = "";
+                addressFields.isDefault.checked = !checkoutAddressSelect;
             }
 
             addressModal.classList.remove("hidden");
@@ -475,9 +528,32 @@
         };
 
         openAddAddressModal.addEventListener("click", () => showAddressModal("add"));
-        openEditAddressModal.addEventListener("click", () => showAddressModal("edit"));
+        openEditAddressModal?.addEventListener("click", () => showAddressModal("edit"));
         closeAddressModal.addEventListener("click", hideAddressModal);
         cancelAddressModal.addEventListener("click", hideAddressModal);
+
+        checkoutAddressSelect?.addEventListener("change", async (event) => {
+            try {
+                const response = await fetch(`/checkout/address/select/${event.target.value}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                const result = await response.json();
+
+                if (!result.success) {
+                    alert(result.message || "Failed to select address");
+                    return;
+                }
+
+                updateSelectedAddress(result.address);
+            } catch (error) {
+                console.log(error);
+                alert("Something went wrong");
+            }
+        });
 
         addressModal.addEventListener("click", (event) => {
             if (event.target === addressModal) hideAddressModal();
@@ -544,11 +620,49 @@
                 selectedAddress.phone.textContent =
                     addressData.phone;
 
+                openEditAddressModal.dataset.fullname = addressData.fullname;
+                openEditAddressModal.dataset.phone = addressData.phone;
+                openEditAddressModal.dataset.country = addressData.country;
+                openEditAddressModal.dataset.state = addressData.state;
+                openEditAddressModal.dataset.street = addressData.street;
+                openEditAddressModal.dataset.apartment = addressData.apartment;
+                openEditAddressModal.dataset.pincode = addressData.pincode;
+                openEditAddressModal.dataset.isDefault = result.address?.isDefault ? "true" : String(addressData.isDefault);
+
                 hideAddressModal();
 
             } else {
 
                 alert(result.message || "Failed to update address");
+
+            }
+
+        }
+
+        if (mode === "add") {
+
+            const response = await fetch("/checkout/address/add", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(addressData)
+
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+
+                hideAddressModal();
+                window.location.reload();
+
+            } else {
+
+                alert(result.message || "Failed to add address");
 
             }
 
