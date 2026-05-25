@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Order History - Football Accessories Co.</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1c242e",
+                        "border-dark": "#283039",
+                        "text-secondary": "#9dabb9"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #101922;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #283039;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3e4856;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col font-display selection:bg-primary/30">
+    <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-border-dark px-4 lg:px-10 py-3 bg-white dark:bg-surface-dark sticky top-0 z-50">
+        <div class="flex items-center gap-4 lg:gap-8">
+            <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+                <div class="size-8 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-3xl">sports_soccer</span>
+                </div>
+                <h2 class="hidden md:block text-lg font-bold leading-tight tracking-[-0.015em]">Football Accessories Co.
+                </h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-6 lg:gap-9">
+                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Shop</a>
+                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Teams</a>
+                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sale</a>
+                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Support</a>
+            </nav>
+        </div>
+        <div class="flex flex-1 justify-end gap-4 lg:gap-8">
+            <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+                <div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-gray-200 dark:border-none">
+                    <div
+                        class="text-text-secondary flex border-none bg-gray-50 dark:bg-border-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+                        <span class="material-symbols-outlined text-[24px]">search</span>
+                    </div>
+                    <input
+                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-gray-50 dark:bg-border-dark focus:border-none h-full placeholder:text-text-secondary px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                        placeholder="Search products..." value="" />
+                </div>
+            </label>
+            <div class="flex gap-2">
+                <button
+                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                </button>
+                <button
+                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">notifications</span>
+                </button>
+                <button
+                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">account_circle</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="flex-1 flex justify-center py-5 px-4 md:px-8 lg:px-12 xl:px-40">
+        <div class="flex flex-col md:flex-row w-full max-w-[1280px] gap-8">
+            <aside class="w-full md:w-64 flex-shrink-0">
+                <div class="sticky top-24 flex flex-col gap-6">
+                    <div
+                        class="flex gap-3 items-center p-4 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark">
+                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 shadow-inner"
+                            data-alt="User profile picture of a football fan"
+                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_I8YVj0_qwyi_nZ_cqgcjnK_ddZ6B6zun2Rs02d6G370QMmZ5T02LYQTuEg6txKqO56rGmh288NeBim2KyAKm2uThQ5BtrZRufI5DiqPZLGdwyHhjJmWW4rch0W92L-1CdkX1sdJr3651GWjEPjQvsg6sqUyEog2CB7kg2qu49mP5fcryB6i33KmLOPaUQ-k-fimSPh9eMhOs1oRJqePeMw5oyYwl2H-rlxe3to4yJhWR0LBFMCp7drA7RVuHt-O6s_owRmav2P4");'>
+                        </div>
+                        <div class="flex flex-col">
+                            <h1 class="text-base font-bold leading-tight">Alex Morgan</h1>
+                            <p class="text-text-secondary text-xs">Elite Member</p>
+                        </div>
+                    </div>
+                    <nav
+                        class="flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark">
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
+                            href="#">
+                            <span class="material-symbols-outlined text-[24px] group-hover:text-primary">person</span>
+                            <span class="text-sm font-medium">Profile Settings</span>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 dark:bg-border-dark text-primary dark:text-white"
+                            href="#">
+                            <span class="material-symbols-outlined text-[24px] text-primary">assignment</span>
+                            <span class="text-sm font-medium">Order History</span>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
+                            href="#">
+                            <span
+                                class="material-symbols-outlined text-[24px] group-hover:text-primary">location_on</span>
+                            <span class="text-sm font-medium">Saved Addresses</span>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
+                            href="#">
+                            <span
+                                class="material-symbols-outlined text-[24px] group-hover:text-primary">credit_card</span>
+                            <span class="text-sm font-medium">Payment Methods</span>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
+                            href="#">
+                            <span class="material-symbols-outlined text-[24px] group-hover:text-primary">favorite</span>
+                            <span class="text-sm font-medium">Wishlist</span>
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+            <main class="flex-1 flex flex-col min-w-0">
+                <div class="flex flex-wrap gap-2 pb-4">
+                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="#">Home</a>
+                    <span class="text-text-secondary text-sm font-medium">/</span>
+                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="#">Account</a>
+                    <span class="text-text-secondary text-sm font-medium">/</span>
+                    <span class="text-slate-900 dark:text-white text-sm font-medium">Order History</span>
+                </div>
+                <div class="flex flex-col gap-2 mb-8">
+                    <h1 class="text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Order History</h1>
+                    <p class="text-text-secondary text-base">Check the status of recent orders, manage returns, and
+                        download invoices.</p>
+                </div>
+                <div class="flex gap-3 mb-6 overflow-x-auto pb-2 scrollbar-hide">
+                    <button
+                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-4 transition-colors">
+                        <p class="text-sm font-medium">All Orders</p>
+                    </button>
+                    <button
+                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200 dark:bg-border-dark hover:bg-gray-300 dark:hover:bg-[#323b46] px-4 transition-colors">
+                        <p class="text-slate-900 dark:text-white text-sm font-medium">Processing</p>
+                    </button>
+                    <button
+                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200 dark:bg-border-dark hover:bg-gray-300 dark:hover:bg-[#323b46] px-4 transition-colors">
+                        <p class="text-slate-900 dark:text-white text-sm font-medium">Shipped</p>
+                    </button>
+                    <button
+                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200 dark:bg-border-dark hover:bg-gray-300 dark:hover:bg-[#323b46] px-4 transition-colors">
+                        <p class="text-slate-900 dark:text-white text-sm font-medium">Delivered</p>
+                    </button>
+                    <button
+                        class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-gray-200 dark:bg-border-dark hover:bg-gray-300 dark:hover:bg-[#323b46] px-4 transition-colors">
+                        <p class="text-slate-900 dark:text-white text-sm font-medium">Returns</p>
+                    </button>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div
+                        class="flex flex-col rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark overflow-hidden group hover:border-primary/50 transition-colors">
+                        <div
+                            class="flex flex-wrap items-center justify-between gap-4 p-4 md:p-6 bg-gray-50 dark:bg-white/5 border-b border-gray-200 dark:border-border-dark">
+                            <div class="flex flex-wrap gap-6 md:gap-12">
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Order
+                                        Placed</span>
+                                    <span class="text-sm font-medium text-slate-900 dark:text-white">Oct 24, 2023</span>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <span
+                                        class="text-xs uppercase font-bold text-text-secondary tracking-wider">Total</span>
+                                    <span class="text-sm font-medium text-slate-900 dark:text-white">$124.50</span>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Order
+                                        #</span>
+                                    <span
+                                        class="text-sm font-medium text-slate-900 dark:text-white">ORD-2023-8821</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <a class="text-sm font-bold text-primary hover:text-blue-400 flex items-center gap-1"
+                                    href="#">
+                                    View Invoice
+                                    <span class="material-symbols-outlined text-[16px]">description</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-4 md:p-6 flex flex-col md:flex-row gap-6 md:items-center justify-between">
+                            <div class="flex flex-col gap-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="flex h-2.5 w-2.5 rounded-full bg-green-500"></span>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Delivered on Oct 27,
+                                        2023</h3>
+                                </div>
+                                <div class="flex -space-x-3 hover:space-x-0 transition-all duration-300">
+                                    <div class="relative group/img cursor-pointer">
+                                        <img class="size-16 md:size-20 rounded-lg border-2 border-white dark:border-surface-dark object-cover shadow-sm"
+                                            data-alt="Red and black football boots on grass"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgrUzj2NLy4GFAlMxVH_jyuitewEn8uta2PoRcNOFMWmXuTIno9Nt6bnzYr5NAy65cQcSw3_cinNcbGzjXGi0Co1cWpeOasduxe4cXE1Y4oQ9lrBVhkUzKjPp1KFBylyR489qBj8HSrlLthtXRNQ0iyGYCYz8oD0udP0FLK9W7Py1Rsn_4xlq1GDiGNSCroGWTwf8_OsrKHjJ121Eg5TCjmC2PQbI_12YBmg4_s1hHTFThQPRO3Xm42h9_vd3tZqlJu3kjGvIBLa4" />
+                                        <div
+                                            class="absolute inset-0 bg-black/40 rounded-lg opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                            <span class="text-white text-xs font-medium">Boots</span>
+                                        </div>
+                                    </div>
+                                    <div class="relative group/img cursor-pointer">
+                                        <img class="size-16 md:size-20 rounded-lg border-2 border-white dark:border-surface-dark object-cover shadow-sm"
+                                            data-alt="Blue football socks texture"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9uN2SVPWos1OZ-31dkWFBMxMyMEi5d_z1w13_XYama6VZq7OOCtanqPbkUKgiPbJPiqaPCJefBByyI9GvSrJtmofh1WddxhWF6GAkjdKKN1I-Jl1jH9jguupEnrvpw4-DzTlNOedggveMMJc0rjbhGCR2gJLKXIsyi-cOd4EzEy_dPMzJblSD0ltuj4gVuAy7kftNhJFAc2Eaff0ocf2a0tR62PfHjaapaZXmcy4vdn_cZiztvVofmIRYQAbRn8b4Ha4npRjGrOc" />
+                                        <div
+                                            class="absolute inset-0 bg-black/40 rounded-lg opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                            <span class="text-white text-xs font-medium">Socks</span>
+                                        </div>
+                                    </div>
+                                    <div class="relative group/img cursor-pointer">
+                                        <img class="size-16 md:size-20 rounded-lg border-2 border-white dark:border-surface-dark object-cover shadow-sm"
+                                            data-alt="Close up of black shin guards"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtwo41YZkNc1x-6RdRJ5YsZ2iQyd3AzO9XR6no0cVjVRhL29NEoPtN07yh1TMjnqstXomSIQEXxer4AnsI9iNMshD8ISFRae5oSQV5E6DGSLMv1va9qaZ4nnqzPtq8HHkSg97xjDggk6-sJoF4JphgTUFeqotjQP4Jli7USiR6Ow8NH0yR6Y1AvTFZbkplnK5ZKSf_q44UbMcGDyCU--ivmYuaQcAJ2ZzFZvrcUudSolsKoRQkZJWmFx35KkiYyaBRYQyuUnY7Cwg" />
+                                        <div
+                                            class="absolute inset-0 bg-black/40 rounded-lg opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                            <span class="text-white text-xs font-medium">+1</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <button
+                                    class="h-10 px-5 rounded-lg bg-primary hover:bg-blue-600 text-white text-sm font-bold transition-colors shadow-lg shadow-primary/20">
+                                    Buy Again
+                                </button>
+                                <button
+                                    class="h-10 px-5 rounded-lg bg-gray-100 dark:bg-border-dark hover:bg-gray-200 dark:hover:bg-[#323b46] text-slate-900 dark:text-white border border-gray-200 dark:border-none text-sm font-bold transition-colors">
+                                    View Details
+                                </button>
+                                <button
+                                    class="h-10 px-5 rounded-lg bg-white dark:bg-transparent hover:bg-gray-50 dark:hover:bg-white/5 text-slate-600 dark:text-text-secondary border border-gray-200 dark:border-border-dark text-sm font-bold transition-colors">
+                                    Return
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark overflow-hidden group hover:border-primary/50 transition-colors">
+                        <div
+                            class="flex flex-wrap items-center justify-between gap-4 p-4 md:p-6 bg-gray-50 dark:bg-white/5 border-b border-gray-200 dark:border-border-dark">
+                            <div class="flex flex-wrap gap-6 md:gap-12">
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Order
+                                        Placed</span>
+                                    <span class="text-sm font-medium text-slate-900 dark:text-white">Nov 02, 2023</span>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <span
+                                        class="text-xs uppercase font-bold text-text-secondary tracking-wider">Total</span>
+                                    <span class="text-sm font-medium text-slate-900 dark:text-white">$89.00</span>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Order
+                                        #</span>
+                                    <span
+                                        class="text-sm font-medium text-slate-900 dark:text-white">ORD-2023-9004</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <a class="text-sm font-bold text-primary hover:text-blue-400 flex items-center gap-1"
+                                    href="#">
+                                    Track Package
+                                    <span class="material-symbols-outlined text-[16px]">local_shipping</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="p-4 md:p-6 flex flex-col md:flex-row gap-6 md:items-center justify-between">
+                            <div class="flex flex-col gap-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="flex h-2.5 w-2.5 rounded-full bg-primary animate-pulse"></span>
+                                    <h3 class="text-lg font-bold text-primary">On the way</h3>
+                                    <span class="text-sm text-text-secondary">- Arriving Monday</span>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="relative group/img cursor-pointer">
+                                        <img class="size-16 md:size-20 rounded-lg border-2 border-white dark:border-surface-dark object-cover shadow-sm"
+                                            data-alt="Blue and white striped football jersey"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzLHXP61uxJW4KUFGv93JBa5UuFRczrRXT--KAjo5BPgsfKR6wxAjlxPgHp_pUjXECSFY-mXQ5J575bX5LS3KdhC01CJKfWMhmQwBNe7MQ-wqlSZTDE_RfEsbQoKqivFOSUAsq3mheizZDgoWPGC0hZli9MMqIkafPkG21_JJ7LkV8izvzqmNmqEyrxuj25pYB4-SmOaNIYn3lc0ZJOLY6b0fVt2gFaF-ECb3D1p6ZYm30zs5ERe1MZiliiSMhrpwOqUa2zWecfy4" />
+                                    </div>
+                                    <div class="relative group/img cursor-pointer">
+                                        <img class="size-16 md:size-20 rounded-lg border-2 border-white dark:border-surface-dark object-cover shadow-sm"
+                                            data-alt="Standard white and black football"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4npDYtmkvNHiqslDw4PbpI-gVhCF95k3vOcptw3WmjfUEaNRh39u_LZdANh3p0kPOJqY5R7k8qy0yMfgDEFiL1lbVd8jZdtRI2fwhO2B2lVnn_wkrl7VKsJhscf5i2LnPxR9vgoS9gcUrKJQdOX41cdIARbBIjJEw-TXSC3uuG95emZLuaLIkM3Efo-kgDBmMQWiwM_gSdacWXnaFTsRposwis2UlO1S19R5ta7PYsIpPm2tsocJMNtWSqQdrGxcigArpKY1m_OA" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <button
+                                    class="h-10 px-5 rounded-lg bg-gray-100 dark:bg-border-dark hover:bg-gray-200 dark:hover:bg-[#323b46] text-slate-900 dark:text-white border border-gray-200 dark:border-none text-sm font-bold transition-colors">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark overflow-hidden group hover:border-primary/50 transition-colors">
+                        <div
+                            class="flex flex-wrap items-center justify-between gap-4 p-4 md:p-6 bg-gray-50 dark:bg-white/5 border-b border-gray-200 dark:border-border-dark">
+                            <div class="flex flex-wrap gap-6 md:gap-12">
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Order
+                                        Placed</span>
+                                    <span class="text-sm font-medium text-slate-900 dark:text-white">Nov 04, 2023</span>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <span
+                                        class="text-xs uppercase font-bold text-text-secondary tracking-wider">Total</span>
+                                    <span class="text-sm font-medium text-slate-900 dark:text-white">$45.00</span>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Order
+                                        #</span>
+                                    <span
+                                        class="text-sm font-medium text-slate-900 dark:text-white">ORD-2023-9112</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 md:p-6 flex flex-col md:flex-row gap-6 md:items-center justify-between">
+                            <div class="flex flex-col gap-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="flex h-2.5 w-2.5 rounded-full bg-amber-500"></span>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Processing</h3>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="relative group/img cursor-pointer">
+                                        <img class="size-16 md:size-20 rounded-lg border-2 border-white dark:border-surface-dark object-cover shadow-sm"
+                                            data-alt="Goalkeeper gloves on grass"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuD43JL4RiGKQuSw3c_zwMB9MSVskS8H0GKvxYqHrkHrcdQBnses1Q3Zkr53ERqdzKag_wHHPgO-_GLF9bbGlgIz3lfkm97fbHHTm6Ds3Thml0A5w0dzhlHVaMblvW0QW0brVZ1TL_yJF2Ue1nDAZgZhrE1a3LtHGQit4EwRVhOgG2pJHWRQJ5gGkLSvayutztEFVibrIzTsxgM9aVHTdOyvPWRfe0hL31bXmOVZGjhthJpChGjIKAa-im0j1gteKTpHfJfqQxkPxwA" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <button
+                                    class="h-10 px-5 rounded-lg bg-gray-100 dark:bg-border-dark hover:bg-gray-200 dark:hover:bg-[#323b46] text-slate-900 dark:text-white border border-gray-200 dark:border-none text-sm font-bold transition-colors">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="flex flex-col rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark overflow-hidden opacity-75 hover:opacity-100 transition-opacity">
+                        <div
+                            class="flex flex-wrap items-center justify-between gap-4 p-4 md:p-6 bg-gray-50 dark:bg-white/5 border-b border-gray-200 dark:border-border-dark">
+                            <div class="flex flex-wrap gap-6 md:gap-12">
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Order
+                                        Placed</span>
+                                    <span class="text-sm font-medium text-slate-900 dark:text-white">Sep 15, 2023</span>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <span
+                                        class="text-xs uppercase font-bold text-text-secondary tracking-wider">Total</span>
+                                    <span class="text-sm font-medium text-slate-900 dark:text-white">$12.00</span>
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Order
+                                        #</span>
+                                    <span
+                                        class="text-sm font-medium text-slate-900 dark:text-white">ORD-2023-7550</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 md:p-6 flex flex-col md:flex-row gap-6 md:items-center justify-between">
+                            <div class="flex flex-col gap-4">
+                                <div class="flex items-center gap-2">
+                                    <span class="flex h-2.5 w-2.5 rounded-full bg-red-500"></span>
+                                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Cancelled</h3>
+                                </div>
+                                <div class="flex gap-2">
+                                    <div class="relative group/img cursor-pointer grayscale">
+                                        <img class="size-16 md:size-20 rounded-lg border-2 border-white dark:border-surface-dark object-cover shadow-sm"
+                                            data-alt="Orange training cones on field"
+                                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjqxMpP_l4Z7fyxSJhTq67aXBEq3a5X1ZoCui4XTlVMfh26JQzFVegJBsN8RYLa1habMm4YPMV3aaYOgGdGjb0ls1emJpH_4C8vmIteJOTKOMu8KPkwtYAYsZDu8zMEdOY1E1QXblPMFnp87FISczzS18PnYQ1klvrl57yAv5zGFMFduNP7R5Vo7jnDwlgtjLxSVnkaL8ZRFgPF0v_-Z4J8NlJFU905iPLWnz5WKZkLc1HbjR8eEIhnY9tvp6oPMaeXsfGGgzFxwM" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-3">
+                                <button
+                                    class="h-10 px-5 rounded-lg bg-gray-100 dark:bg-border-dark hover:bg-gray-200 dark:hover:bg-[#323b46] text-slate-900 dark:text-white border border-gray-200 dark:border-none text-sm font-bold transition-colors">
+                                    Order Again
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex justify-center mt-10">
+                    <div class="flex items-center gap-2">
+                        <button
+                            class="flex items-center justify-center h-10 w-10 rounded-lg bg-white dark:bg-border-dark text-slate-600 dark:text-text-secondary hover:text-primary dark:hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-xl">chevron_left</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-center h-10 w-10 rounded-lg bg-primary text-white font-bold">1</button>
+                        <button
+                            class="flex items-center justify-center h-10 w-10 rounded-lg bg-white dark:bg-surface-dark hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-text-secondary transition-colors font-medium">2</button>
+                        <button
+                            class="flex items-center justify-center h-10 w-10 rounded-lg bg-white dark:bg-surface-dark hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-text-secondary transition-colors font-medium">3</button>
+                        <button
+                            class="flex items-center justify-center h-10 w-10 rounded-lg bg-white dark:bg-border-dark text-slate-600 dark:text-text-secondary hover:text-primary dark:hover:text-white transition-colors">
+                            <span class="material-symbols-outlined text-xl">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

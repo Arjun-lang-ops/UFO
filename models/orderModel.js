@@ -102,7 +102,13 @@ const orderSchema = new mongoose.Schema({
         default: "Pending"
     },
 
-    subtotal: {
+    orderNumber:{
+        type:String,
+        required:true,
+        unique :true
+    },
+
+    subTotal: {
         type: Number,
         required: true
     },
@@ -124,6 +130,10 @@ const orderSchema = new mongoose.Schema({
 
     couponCode: {
         type: String
+    },
+    estimatedDelivery:{
+        type:String,
+        required:true
     },
 
     orderedAt: {

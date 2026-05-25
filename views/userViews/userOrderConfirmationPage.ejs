@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Order Confirmation - Urban Football</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700;900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111418", // Matching the component's base dark color
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="flex flex-col w-full bg-[#111418] border-b border-[#283039]">
+            <header
+                class="flex items-center justify-between whitespace-nowrap px-10 py-3 max-w-[1440px] mx-auto w-full">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-4 text-white cursor-pointer">
+                        <div class="size-8 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined !text-3xl">sports_soccer</span>
+                        </div>
+                        <h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
+                    </div>
+                    <div class="hidden md:flex items-center gap-9">
+                        <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+                            href="/home">Shop</a>
+                        
+                    </div>
+                </div>
+                <div class="flex flex-1 justify-end gap-8 items-center">
+                    <label class="hidden lg:flex flex-col min-w-40 !h-10 max-w-64">
+                        <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                            <div
+                                class="text-[#9dabb9] flex border-none bg-[#283039] items-center justify-center pl-4 rounded-l-lg border-r-0">
+                                <span class="material-symbols-outlined">search</span>
+                            </div>
+                            <input
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#283039] focus:border-none h-full placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+                                placeholder="Search gear..." value="" />
+                        </div>
+                    </label>
+                    <div class="flex gap-3">
+                        <a href="/cart">
+                            <button
+                            class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#283039] text-white hover:bg-[#3b4754] transition-colors">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </button>
+                        </a>
+                       <a href="/profile">
+                         <button
+                            class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#283039] text-white hover:bg-[#3b4754] transition-colors">
+                            <span class="material-symbols-outlined">account_circle</span>
+                        </button>
+                       </a>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="flex flex-1 justify-center py-5 px-4 md:px-10 lg:px-40">
+            <div class="layout-content-container flex flex-col max-w-[960px] flex-1 gap-6">
+                <div class="flex flex-wrap gap-2 px-4 pt-4">
+                    <a class="text-[#9dabb9] text-sm font-medium leading-normal hover:text-white transition-colors"
+                        href="#">Home</a>
+                    <span class="text-[#9dabb9] text-sm font-medium leading-normal">/</span>
+                    <span class="text-white text-sm font-medium leading-normal">Order Confirmation</span>
+                </div>
+                <div class="flex flex-col gap-6 px-4">
+                    <div
+                        class="flex flex-col items-center justify-center text-center py-10 rounded-xl bg-[#1c2127] border border-[#3b4754]">
+                        <div class="size-16 rounded-full bg-green-500/10 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-green-500 !text-4xl">check_circle</span>
+                        </div>
+                        <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] mb-2">Thank you for
+                            your order!</h1>
+                        <p class="text-[#9dabb9] text-lg font-normal leading-normal max-w-lg">Your order <span
+                                class="text-white font-bold"><%=order.orderNumber%></span> has been placed successfully.</p>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 flex flex-col gap-6">
+                            <div class="rounded-xl border border-[#3b4754] bg-[#1c2127] overflow-hidden">
+                                <div class="p-6 border-b border-[#3b4754]">
+                                    <h3 class="text-white text-lg font-bold">Order Summary</h3>
+                                </div>
+                                <div class="p-6">
+                                   <div class="flex flex-col gap-4">
+
+    <% order.items.forEach(item => { %>
+
+        <% const variant =
+            item.product?.variants?.find(
+                v =>
+                v._id.toString() ===
+                item.variant.toString()
+            );
+        %>
+
+        <div class="flex gap-4 items-center">
+
+            <div
+              class="size-20 rounded-lg overflow-hidden
+              border border-[#3b4754]">
+
+                <img
+                  class="object-cover w-full h-full"
+                  src="<%= variant?.images?.[0] || '' %>"
+                  alt="<%= item.product.name %>"
+                />
+
+            </div>
+
+            <div
+              class="flex flex-1 justify-between">
+
+                <div>
+
+                    <span class="text-white font-medium">
+
+                        <%= item.product.name %>
+
+                    </span>
+
+                    <div
+                     class="text-[#9dabb9] text-sm">
+
+                        <p>
+                            Size:
+                            <%= variant?.size %>
+                        </p>
+
+                        <p>
+                            Qty:
+                            <%= item.quantity %>
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <span class="text-white font-bold">
+
+                    ₹<%= item.totalPrice %>
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <div
+         class="h-px bg-[#3b4754]">
+
+        </div>
+
+    <% }) %>
+
+</div>
+                                </div>
+                                <div class="bg-[#283039]/50 p-6 border-t border-[#3b4754]">
+                                    <div class="flex flex-col gap-3">
+                                       <div class="flex justify-between text-[#9dabb9]">
+    <span>Subtotal</span>
+    <span class="text-white">
+        ₹<%= order.subTotal %>
+    </span>
+</div>
+
+<div class="flex justify-between text-[#9dabb9]">
+    <span>Shipping</span>
+    <span class="text-white">
+        ₹<%= order.deliveryCharge %>
+    </span>
+</div>
+
+<div class="flex justify-between text-[#9dabb9]">
+    <span>Discount</span>
+    <span class="text-white">
+        ₹<%= order.discount %>
+    </span>
+</div>
+
+<div class="flex justify-between">
+
+    <span class="text-white font-bold">
+
+        Total
+
+    </span>
+
+    <span class="text-white font-black">
+
+        ₹<%= order.totalAmount %>
+
+    </span>
+
+</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-6">
+                            <div class="rounded-xl border border-[#3b4754] bg-[#1c2127] p-6">
+                                <h3 class="text-white text-lg font-bold mb-4">Estimated Delivery</h3>
+                                <div class="flex gap-4 items-center mb-4">
+                                    <div
+                                        class="size-10 rounded-full bg-[#283039] flex items-center justify-center flex-shrink-0 text-primary">
+                                        <span class="material-symbols-outlined">local_shipping</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">
+
+    <%= new Date(
+        order.estimatedDelivery
+    ).toDateString() %>
+
+</p>
+                                    </div>
+                                </div>
+                                <div class="w-full h-2 bg-[#283039] rounded-full mb-2">
+                                    <div class="w-1/4 h-full bg-primary rounded-full"></div>
+                                </div>
+                                <p class="text-[#9dabb9] text-xs text-center">Order Processing</p>
+                            </div>
+                            <div class="rounded-xl border border-[#3b4754] bg-[#1c2127] p-6">
+                                <h3 class="text-white text-lg font-bold mb-4">Shipping Details</h3>
+                                <div class="flex flex-col gap-1 text-[#9dabb9]">
+
+    <span class="text-white font-medium">
+
+        <%= order.address.fullname %>
+
+    </span>
+
+    <span>
+
+        <%= order.address.street %>
+
+    </span>
+
+    <span>
+
+        <%= order.address.apartment %>
+
+    </span>
+
+    <span>
+
+        <%= order.address.state %> -
+        <%= order.address.pincode %>
+
+    </span>
+
+    <span>
+
+        <%= order.address.country %>
+
+    </span>
+
+    <span class="mt-2">
+
+        <%= order.address.phone %>
+
+    </span>
+
+</div>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <button
+                                    class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors">
+                                    Track Order
+                                </button>
+                                <a href="/home"><button
+                                    class="w-full bg-transparent hover:bg-[#283039] text-white border border-[#3b4754] font-bold py-3 px-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors">
+                                    <span class="material-symbols-outlined !text-lg">storefront</span>
+                                    Continue Shopping
+                                </button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+  window.addEventListener("load", () => {
+
+    // center burst
+    confetti({
+      particleCount: 120,
+      spread: 80,
+      origin: { y: 0.6 }
+    });
+
+    // left + right crackers
+    setTimeout(() => {
+      confetti({
+        particleCount: 80,
+        angle: 60,
+        spread: 70,
+        origin: { x: 0, y: 0.7 }
+      });
+
+      confetti({
+        particleCount: 80,
+        angle: 120,
+        spread: 70,
+        origin: { x: 1, y: 0.7 }
+      });
+    }, 300);
+
+  });
+</script>
+
+</html>

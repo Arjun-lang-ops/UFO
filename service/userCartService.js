@@ -1,8 +1,10 @@
 import Cart from "../models/cartModel.js";
 import Product from "../models/productModel.js";
 
-export const addToCartService = async (userId, { productId, variantId, quantity }) => {
-
+export const addToCartService = async (
+  userId,
+  { productId, variantId, quantity },
+) => {
   const MAX_QTY_PER_PRODUCT = 10;
 
   const product = await Product.findById(productId);
@@ -34,9 +36,7 @@ export const addToCartService = async (userId, { productId, variantId, quantity 
     throw new Error(`Only ${variant.stock} items available`);
   }
 
-
   let cart = await Cart.findOne({ userId });
-
 
   if (!cart) {
     cart = new Cart({
@@ -48,15 +48,15 @@ export const addToCartService = async (userId, { productId, variantId, quantity 
     return cart;
   }
 
-
   const existingItem = cart.items.find(
-    item => item.variantId.toString() === variantId
+    (item) => item.variantId.toString() === variantId,
   );
 
   if (existingItem) {
-
     if (existingItem.quantity + quantity > MAX_QTY_PER_PRODUCT) {
-      throw new Error(`Maximum ${MAX_QTY_PER_PRODUCT} items allowed per product`);
+      throw new Error(
+        `Maximum ${MAX_QTY_PER_PRODUCT} items allowed per product`,
+      );
     }
 
     if (existingItem.quantity + quantity > variant.stock) {
@@ -64,9 +64,7 @@ export const addToCartService = async (userId, { productId, variantId, quantity 
     }
 
     existingItem.quantity += quantity;
-
   } else {
-
     cart.items.push({ productId, variantId, quantity });
   }
 
@@ -74,89 +72,75 @@ export const addToCartService = async (userId, { productId, variantId, quantity 
   return cart;
 };
 
-
 export const getCartService = async (userId) => {
   const cart = await Cart.findOne({ userId }).populate({
-  path: "items.productId",
-  populate: {
-    path: "category"
-  }
-});
-  
+    path: "items.productId",
+    populate: {
+      path: "category",
+    },
+  });
+
   if (!cart) return null;
 
   return cart;
-}
-
-
+};
 
 export const removeFromCartService = async (userId, variantId) => {
-
   const cart = await Cart.findOne({ userId });
 
   if (!cart) {
     throw new Error("Cart not found");
   }
 
-
   cart.items = cart.items.filter(
-    item => item.variantId.toString() !== variantId
+    (item) => item.variantId.toString() !== variantId,
   );
 
   await cart.save();
 
   return cart;
-
 };
 
-
 export const updateQuantity = async (userId, variantId, action) => {
+  const cart = await Cart.findOne({ userId }).populate("items.productId");
 
-  const cart = await Cart.findOne({ userId }).populate('items.productId');
+  const item = cart.items.find((i) => i.variantId?.toString() === variantId);
 
-  const item = cart.items.find(
-    i => i.variantId?.toString() === variantId
-  );
-
-  if(!item){
-    throw new Error('cart item not found')
+  if (!item) {
+    throw new Error("cart item not found");
   }
 
   const product = item.productId;
 
-  if(!product){
-    throw new Error('Product no longer exists')
+  if (!product) {
+    throw new Error("Product no longer exists");
   }
-  const variant = product.variants.id(variantId)
+  const variant = product.variants.id(variantId);
 
-  if(!variant){
-    throw new Error('variants not found')
-  }
-
-  if (  variant.stock <= 0  || !product.isActive) {
-    throw new Error("Product is out of stock")
+  if (!variant) {
+    throw new Error("variants not found");
   }
 
-  const max_Qty=10;
+  if (variant.stock <= 0 || !product.isActive) {
+    throw new Error("Product is out of stock");
+  }
 
+  const max_Qty = 10;
 
   if (action === "increase") {
     if (item.quantity + 1 > variant.stock) {
       throw new Error(`Only ${variant.stock} items available`);
-
-    }else if(item.quantity +1 > max_Qty){
-      throw new Error(`maximum ${max_Qty} can be added to cart`)
+    } else if (item.quantity + 1 > max_Qty) {
+      throw new Error(`maximum ${max_Qty} can be added to cart`);
     }
     item.quantity += 1;
-  };
+  }
 
   if (action === "decrease" && item.quantity > 1) {
     item.quantity -= 1;
   }
-  
+
   await cart.save();
 
   return item;
 };
-
-

@@ -12,16 +12,13 @@ export const checkoutRender=async(req,res)=>{
     } catch (error) {
         console.log(error);
 
-        return res.status(400).render('userViews/userCheckoutPage',{
-            cartItems:[],
-            defaultAddress:null,
-            totalQuantity:0,
-            subtotal: 0,
-            shippingCharge: 0,
-            discount: 0,
-            grandTotal: 0,
-            error: error.message
-        })
+  if (error.message === "cart is empty") {
+    return res.redirect("/cart");
+  }
+
+  return res.status(500).send(
+    "Something went wrong"
+  );
     }
 };
 

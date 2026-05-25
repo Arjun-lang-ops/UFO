@@ -12,10 +12,12 @@ import nocache from "nocache";
 import connectDB from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import adminOrderRoutes from './routes/adminOrderRoutes.js'
 import userProductRoutes from "./routes/userProductRoutes.js" 
 import userCartRoutes from './routes/userCartRoutes.js';
 import userWishlistRoutes from './routes/userWishlistRoutes.js';
-import userCheckoutRoutes from './routes/userCheckoutRoutes.js'
+import userCheckoutRoutes from './routes/userCheckoutRoutes.js';
+import userOrderRoutes from './routes/userOrderRoutes.js';
 import passport from "./config/passport.js";
 import cors from "cors";
 import { cartCountMiddleware } from "./middlewares/cartMiddleware.js";
@@ -58,8 +60,10 @@ app.use("/", userRoutes);
 app.use('/',userProductRoutes)
 app.use('/',userCartRoutes)
 app.use('/',userWishlistRoutes);
-app.use('/',userCheckoutRoutes)
+app.use('/',userCheckoutRoutes);
+app.use('/',userOrderRoutes)
 app.use("/admin", adminRoutes);
+app.use('/admin',adminOrderRoutes)
 
 
 //error handling middleware

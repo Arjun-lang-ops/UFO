@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Admin Dashboard Overview - Football Accessories</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Admin Dashboard Overview - Football Accessories</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -24,388 +29,460 @@
             },
         }
     </script>
-<style>
+    <style>
         body {
             font-family: 'Lexend', sans-serif;
         }
+
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
         .active-nav {
             background-color: #137fec;
             color: white;
         }
+
         .custom-scrollbar::-webkit-scrollbar {
             width: 4px;
         }
+
         .custom-scrollbar::-webkit-scrollbar-track {
             background: transparent;
         }
+
         .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #283039;
             border-radius: 10px;
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
-<div class="flex">
-<aside class="fixed left-0 top-0 h-screen w-64 bg-white dark:bg-[#111418] border-r border-slate-200 dark:border-[#283039] flex flex-col z-50">
-<div class="p-6">
-<div class="flex items-center gap-3 text-primary">
-<span class="material-symbols-outlined text-3xl font-bold">sports_soccer</span>
-<div>
-<h1 class="text-lg font-bold leading-none dark:text-white">Urban Football Admin</h1>
-<p class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-[#9dabb9] mt-1 font-semibold">Football Pro</p>
-</div>
-</div>
-</div>
-<nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto custom-scrollbar">
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg active-nav transition-all" href="#">
-<span class="material-symbols-outlined">dashboard</span>
-<span class="text-sm font-medium">Dashboard</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all" href="#">
-<span class="material-symbols-outlined">shopping_bag</span>
-<span class="text-sm font-medium">Orders</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all" href="#">
-<span class="material-symbols-outlined">assignment_return</span>
-<span class="text-sm font-medium">Returns</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all" href="/admin/products">
-<span class="material-symbols-outlined">inventory_2</span>
-<span class="text-sm font-medium">Products</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all" href="/admin/userManagement">
-<span class="material-symbols-outlined">group</span>
-<span class="text-sm font-medium">Users</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all" href="#">
-<span class="material-symbols-outlined">analytics</span>
-<span class="text-sm font-medium">Analytics</span>
-</a>
-<div class="pt-4 pb-2">
-<p class="px-3 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Marketing</p>
-</div>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all" href="#">
-<span class="material-symbols-outlined">confirmation_number</span>
-<span class="text-sm font-medium">Coupons</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all" href="/admin/categories">
-<span class="material-symbols-outlined">category</span>
-<span class="text-sm font-medium">Categories</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all" href="#">
-<span class="material-symbols-outlined">campaign</span>
-<span class="text-sm font-medium">Offers</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all" href="#">
-<span class="material-symbols-outlined">view_carousel</span>
-<span class="text-sm font-medium">Banners</span>
-</a>
-<div class="pt-4 pb-2">
-<p class="px-3 text-[11px] font-bold text-slate-400 uppercase tracking-widest">System</p>
-</div>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all" href="#">
-<span class="material-symbols-outlined">account_circle</span>
-<span class="text-sm font-medium">Profile</span>
-</a>
-</nav>
-<a href="/admin/logout">
-    <div class="p-4 border-t border-slate-200 dark:border-[#283039]">
-<button class="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
-<span class="material-symbols-outlined">logout</span>
-<span class="text-sm font-medium">Logout</span>
-</button>
-</a>
-</div>
-</aside>
-<main class="ml-64 flex-1 flex flex-col min-h-screen">
-<header class="sticky top-0 z-40 bg-white dark:bg-[#111418]/80 backdrop-blur-md border-b border-slate-200 dark:border-[#283039] px-8 py-3 flex items-center justify-between">
-<div class="flex items-center gap-4 flex-1">
-<div class="relative w-full max-w-md">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
-<input class="w-full bg-slate-100 dark:bg-[#283039] border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary dark:text-white dark:placeholder-[#9dabb9]" placeholder="Search orders, products, customers..." type="text"/>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<button class="relative p-2 text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] rounded-lg">
-<span class="material-symbols-outlined">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#111418]"></span>
-</button>
-<button class="p-2 text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] rounded-lg">
-<span class="material-symbols-outlined">settings</span>
-</button>
-<div class="h-8 w-px bg-slate-200 dark:bg-[#283039] mx-2"></div>
-<div class="flex items-center gap-3 cursor-pointer group">
-<div class="text-right">
-<p class="text-xs font-bold dark:text-white">Alex Johnson</p>
-<p class="text-[10px] text-slate-500 dark:text-[#9dabb9]">Store Manager</p>
-</div>
-<div class="w-10 h-10 rounded-full bg-slate-200 bg-cover bg-center border-2 border-primary/20" data-alt="User profile avatar circle" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAUbFfYhPg2XzZDFJVzbMMjFnZTouBWsbnh1kHg8duqYsJVaEpRJUX1gz5lbOZ2GHwui94TfHeGD7_mTKjB1411ZCgl5I9gacmtdeYWhIU62Ttoa0HSA5nrSoY1wdeRhbSbCE5eqsSczrbNsWrHaKX6NVqFnMuMgrxmLPEnmb72FGliwUfaasXO1Ks799MIvNXDEIHE5MRRx4IkU6MVaJDDBveimokZ8l80Ld6aMlsWhjYTc4R5C0ctC-yr4T0EePOrGTeZstU0kqc");'></div>
-</div>
-</div>
-</header>
-<div class="p-8">
-<div class="flex flex-wrap justify-between items-end gap-4 mb-8">
-<div>
-<h2 class="text-3xl font-black tracking-tight dark:text-white">Dashboard Overview</h2>
-<p class="text-slate-500 dark:text-[#9dabb9] mt-1">Welcome back, here's what's happening with your store today.</p>
-</div>
-<div class="flex gap-3">
-<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#283039] border border-slate-200 dark:border-[#3b4754] text-slate-700 dark:text-white rounded-lg text-sm font-bold hover:bg-slate-50 transition-all">
-<span class="material-symbols-outlined text-lg">download</span>
-                            Export Report
-                        </button>
-<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
-<span class="material-symbols-outlined text-lg">add</span>
-                            New Product
-                        </button>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-<div class="bg-white dark:bg-[#111418] p-6 rounded-xl border border-slate-200 dark:border-[#3b4754]">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-primary/10 rounded-lg text-primary">
-<span class="material-symbols-outlined">payments</span>
-</div>
-<span class="text-[#0bda5b] text-xs font-bold bg-[#0bda5b]/10 px-2 py-1 rounded-full">+12.5%</span>
-</div>
-<p class="text-slate-500 dark:text-[#9dabb9] text-xs font-semibold uppercase tracking-wider">Total Sales</p>
-<p class="text-2xl font-black dark:text-white mt-1">$45,231.89</p>
-<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
-<div class="h-full bg-primary" style="width: 75%"></div>
-</div>
-</div>
-<div class="bg-white dark:bg-[#111418] p-6 rounded-xl border border-slate-200 dark:border-[#3b4754]">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-orange-500/10 rounded-lg text-orange-500">
-<span class="material-symbols-outlined">shopping_cart</span>
-</div>
-<span class="text-[#0bda5b] text-xs font-bold bg-[#0bda5b]/10 px-2 py-1 rounded-full">+8.2%</span>
-</div>
-<p class="text-slate-500 dark:text-[#9dabb9] text-xs font-semibold uppercase tracking-wider">Total Orders</p>
-<p class="text-2xl font-black dark:text-white mt-1">1,205</p>
-<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
-<div class="h-full bg-orange-500" style="width: 45%"></div>
-</div>
-</div>
-<div class="bg-white dark:bg-[#111418] p-6 rounded-xl border border-slate-200 dark:border-[#3b4754]">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-green-500/10 rounded-lg text-green-500">
-<span class="material-symbols-outlined">person_add</span>
-</div>
-<span class="text-red-500 text-xs font-bold bg-red-500/10 px-2 py-1 rounded-full">-2.1%</span>
-</div>
-<p class="text-slate-500 dark:text-[#9dabb9] text-xs font-semibold uppercase tracking-wider">Active Users</p>
-<p class="text-2xl font-black dark:text-white mt-1">8,432</p>
-<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
-<div class="h-full bg-green-500" style="width: 60%"></div>
-</div>
-</div>
-<div class="bg-white dark:bg-[#111418] p-6 rounded-xl border border-slate-200 dark:border-[#3b4754]">
-<div class="flex justify-between items-start mb-4">
-<div class="p-2 bg-purple-500/10 rounded-lg text-purple-500">
-<span class="material-symbols-outlined">conversion_path</span>
-</div>
-<span class="text-[#0bda5b] text-xs font-bold bg-[#0bda5b]/10 px-2 py-1 rounded-full">+0.5%</span>
-</div>
-<p class="text-slate-500 dark:text-[#9dabb9] text-xs font-semibold uppercase tracking-wider">Conversion Rate</p>
-<p class="text-2xl font-black dark:text-white mt-1">3.42%</p>
-<div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
-<div class="h-full bg-purple-500" style="width: 32%"></div>
-</div>
-</div>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-<div class="lg:col-span-2 bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#3b4754] p-6">
-<div class="flex items-center justify-between mb-6">
-<div>
-<h3 class="font-bold text-lg dark:text-white">Revenue Over Time</h3>
-<div class="flex items-center gap-2">
-<span class="text-2xl font-black dark:text-white">$12,400</span>
-<span class="text-[#0bda5b] text-sm font-medium">+15% vs last week</span>
-</div>
-</div>
-<select class="bg-slate-50 dark:bg-[#283039] border-none text-xs font-bold rounded-lg focus:ring-primary dark:text-[#9dabb9]">
-<option>Last 7 Days</option>
-<option>Last 30 Days</option>
-<option>This Year</option>
-</select>
-</div>
-<div class="h-64 flex flex-col justify-between">
-<svg fill="none" height="180" preserveAspectRatio="none" viewBox="-3 0 478 150" width="100%" xmlns="http://www.w3.org/2000/svg">
-<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z" fill="url(#paint0_linear)"></path>
-<path d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25" stroke="#137fec" stroke-linecap="round" stroke-width="3"></path>
-<defs>
-<linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear" x1="236" x2="236" y1="1" y2="149">
-<stop stop-color="#137fec" stop-opacity="0.3"></stop>
-<stop offset="1" stop-color="#137fec" stop-opacity="0"></stop>
-</linearGradient>
-</defs>
-</svg>
-<div class="flex justify-between px-2 pt-2 border-t border-slate-100 dark:border-[#283039]">
-<span class="text-slate-400 text-[10px] font-bold">MON</span>
-<span class="text-slate-400 text-[10px] font-bold">TUE</span>
-<span class="text-slate-400 text-[10px] font-bold">WED</span>
-<span class="text-slate-400 text-[10px] font-bold">THU</span>
-<span class="text-slate-400 text-[10px] font-bold">FRI</span>
-<span class="text-slate-400 text-[10px] font-bold">SAT</span>
-<span class="text-slate-400 text-[10px] font-bold">SUN</span>
-</div>
-</div>
-</div>
-<div class="bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#3b4754] p-6">
-<h3 class="font-bold text-lg dark:text-white mb-6">Sales by Category</h3>
-<div class="space-y-4">
-<div class="flex flex-col gap-1">
-<div class="flex justify-between text-xs font-bold mb-1">
-<span class="dark:text-white">Football Boots</span>
-<span class="text-primary">42%</span>
-</div>
-<div class="h-2 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
-<div class="h-full bg-primary" style="width: 42%"></div>
-</div>
-</div>
-<div class="flex flex-col gap-1">
-<div class="flex justify-between text-xs font-bold mb-1">
-<span class="dark:text-white">Team Jerseys</span>
-<span class="text-orange-500">28%</span>
-</div>
-<div class="h-2 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
-<div class="h-full bg-orange-500" style="width: 28%"></div>
-</div>
-</div>
-<div class="flex flex-col gap-1">
-<div class="flex justify-between text-xs font-bold mb-1">
-<span class="dark:text-white">Match Balls</span>
-<span class="text-green-500">18%</span>
-</div>
-<div class="h-2 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
-<div class="h-full bg-green-500" style="width: 18%"></div>
-</div>
-</div>
-<div class="flex flex-col gap-1">
-<div class="flex justify-between text-xs font-bold mb-1">
-<span class="dark:text-white">Goalkeeper Gloves</span>
-<span class="text-purple-500">12%</span>
-</div>
-<div class="h-2 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
-<div class="h-full bg-purple-500" style="width: 12%"></div>
-</div>
-</div>
-</div>
-<div class="mt-8 pt-6 border-t border-slate-100 dark:border-[#283039] flex items-center justify-center">
-<div class="relative size-24">
-<svg class="size-full transform -rotate-90" viewBox="0 0 36 36">
-<circle class="stroke-slate-100 dark:stroke-[#283039]" cx="18" cy="18" fill="none" r="16" stroke-width="3"></circle>
-<circle class="stroke-primary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100" stroke-dashoffset="30" stroke-width="3"></circle>
-</svg>
-<div class="absolute inset-0 flex flex-col items-center justify-center">
-<span class="text-xs font-black dark:text-white">70%</span>
-<span class="text-[8px] text-slate-500 uppercase font-bold">Target</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#3b4754] overflow-hidden">
-<div class="px-6 py-4 border-b border-slate-200 dark:border-[#3b4754] flex items-center justify-between">
-<h3 class="font-bold text-lg dark:text-white">Recent Orders</h3>
-<button class="text-primary text-sm font-bold hover:underline">View All Orders</button>
-</div>
-<div class="overflow-x-auto">
-<table class="w-full text-left">
-<thead class="bg-slate-50 dark:bg-[#283039] text-slate-500 dark:text-[#9dabb9] text-xs uppercase font-bold tracking-wider">
-<tr>
-<th class="px-6 py-3">Order ID</th>
-<th class="px-6 py-3">Customer</th>
-<th class="px-6 py-3">Product</th>
-<th class="px-6 py-3">Date</th>
-<th class="px-6 py-3">Amount</th>
-<th class="px-6 py-3">Status</th>
-<th class="px-6 py-3">Action</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-slate-100 dark:divide-[#283039]">
-<tr class="hover:bg-slate-50 dark:hover:bg-[#1c242e] transition-colors">
-<td class="px-6 py-4 text-sm font-bold dark:text-white">#ORD-2841</td>
-<td class="px-6 py-4">
-<div class="flex items-center gap-2">
-<div class="size-7 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">MW</div>
-<span class="text-sm dark:text-slate-300">Marcus Wright</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm dark:text-slate-400">Golden Strike Cleats</td>
-<td class="px-6 py-4 text-sm dark:text-slate-400">Oct 24, 2023</td>
-<td class="px-6 py-4 text-sm font-bold dark:text-white">$129.99</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 text-[10px] font-bold rounded bg-[#0bda5b]/10 text-[#0bda5b] border border-[#0bda5b]/20">Delivered</span>
-</td>
-<td class="px-6 py-4">
-<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">more_horiz</button>
-</td>
-</tr>
-<tr class="hover:bg-slate-50 dark:hover:bg-[#1c242e] transition-colors">
-<td class="px-6 py-4 text-sm font-bold dark:text-white">#ORD-2842</td>
-<td class="px-6 py-4">
-<div class="flex items-center gap-2">
-<div class="size-7 rounded-full bg-orange-500/20 flex items-center justify-center text-[10px] font-bold text-orange-500">SB</div>
-<span class="text-sm dark:text-slate-300">Sarah Bennett</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm dark:text-slate-400">Pro-Grip Gloves (Elite)</td>
-<td class="px-6 py-4 text-sm dark:text-slate-400">Oct 24, 2023</td>
-<td class="px-6 py-4 text-sm font-bold dark:text-white">$85.50</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 text-[10px] font-bold rounded bg-orange-500/10 text-orange-500 border border-orange-500/20">Processing</span>
-</td>
-<td class="px-6 py-4">
-<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">more_horiz</button>
-</td>
-</tr>
-<tr class="hover:bg-slate-50 dark:hover:bg-[#1c242e] transition-colors">
-<td class="px-6 py-4 text-sm font-bold dark:text-white">#ORD-2843</td>
-<td class="px-6 py-4">
-<div class="flex items-center gap-2">
-<div class="size-7 rounded-full bg-purple-500/20 flex items-center justify-center text-[10px] font-bold text-purple-500">DK</div>
-<span class="text-sm dark:text-slate-300">David Kross</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm dark:text-slate-400">Team Jersey Set (Home)</td>
-<td class="px-6 py-4 text-sm dark:text-slate-400">Oct 23, 2023</td>
-<td class="px-6 py-4 text-sm font-bold dark:text-white">$342.00</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 text-[10px] font-bold rounded bg-primary/10 text-primary border border-primary/20">Shipped</span>
-</td>
-<td class="px-6 py-4">
-<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">more_horiz</button>
-</td>
-</tr>
-<tr class="hover:bg-slate-50 dark:hover:bg-[#1c242e] transition-colors">
-<td class="px-6 py-4 text-sm font-bold dark:text-white">#ORD-2844</td>
-<td class="px-6 py-4">
-<div class="flex items-center gap-2">
-<div class="size-7 rounded-full bg-green-500/20 flex items-center justify-center text-[10px] font-bold text-green-500">LC</div>
-<span class="text-sm dark:text-slate-300">Leo Castor</span>
-</div>
-</td>
-<td class="px-6 py-4 text-sm dark:text-slate-400">Training Cone Set</td>
-<td class="px-6 py-4 text-sm dark:text-slate-400">Oct 23, 2023</td>
-<td class="px-6 py-4 text-sm font-bold dark:text-white">$45.00</td>
-<td class="px-6 py-4">
-<span class="px-2 py-1 text-[10px] font-bold rounded bg-red-500/10 text-red-500 border border-red-500/20">Cancelled</span>
-</td>
-<td class="px-6 py-4">
-<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">more_horiz</button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</main>
-</div>
 
-</body></html>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="flex">
+        <aside
+            class="fixed left-0 top-0 h-screen w-64 bg-white dark:bg-[#111418] border-r border-slate-200 dark:border-[#283039] flex flex-col z-50">
+            <div class="p-6">
+                <div class="flex items-center gap-3 text-primary">
+                    <span class="material-symbols-outlined text-3xl font-bold">sports_soccer</span>
+                    <div>
+                        <h1 class="text-lg font-bold leading-none dark:text-white">Urban Football Admin</h1>
+                        <p
+                            class="text-[10px] uppercase tracking-widest text-slate-500 dark:text-[#9dabb9] mt-1 font-semibold">
+                            Football Pro</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="flex-1 px-4 py-4 space-y-1 overflow-y-auto custom-scrollbar">
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg active-nav transition-all" href="#">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span class="text-sm font-medium">Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all"
+                    href="/admin/orderManagement">
+                    <span class="material-symbols-outlined">shopping_bag</span>
+                    <span class="text-sm font-medium">Orders</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">assignment_return</span>
+                    <span class="text-sm font-medium">Returns</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all"
+                    href="/admin/products">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span class="text-sm font-medium">Products</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all"
+                    href="/admin/userManagement">
+                    <span class="material-symbols-outlined">group</span>
+                    <span class="text-sm font-medium">Customers</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">analytics</span>
+                    <span class="text-sm font-medium">Analytics</span>
+                </a>
+                <div class="pt-4 pb-2">
+                    <p class="px-3 text-[11px] font-bold text-slate-400 uppercase tracking-widest">Marketing</p>
+                </div>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">confirmation_number</span>
+                    <span class="text-sm font-medium">Coupons</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all"
+                    href="/admin/categories">
+                    <span class="material-symbols-outlined">category</span>
+                    <span class="text-sm font-medium">Categories</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">campaign</span>
+                    <span class="text-sm font-medium">Offers</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">view_carousel</span>
+                    <span class="text-sm font-medium">Banners</span>
+                </a>
+                <div class="pt-4 pb-2">
+                    <p class="px-3 text-[11px] font-bold text-slate-400 uppercase tracking-widest">System</p>
+                </div>
+                <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] transition-all"
+                    href="#">
+                    <span class="material-symbols-outlined">account_circle</span>
+                    <span class="text-sm font-medium">Profile</span>
+                </a>
+            </nav>
+            <a href="/admin/logout">
+                <div class="p-4 border-t border-slate-200 dark:border-[#283039]">
+                    <button
+                        class="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all">
+                        <span class="material-symbols-outlined">logout</span>
+                        <span class="text-sm font-medium">Logout</span>
+                    </button>
+            </a>
+    </div>
+    </aside>
+    <main class="ml-64 flex-1 flex flex-col min-h-screen">
+        <header
+            class="sticky top-0 z-40 bg-white dark:bg-[#111418]/80 backdrop-blur-md border-b border-slate-200 dark:border-[#283039] px-8 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-4 flex-1">
+                <div class="relative w-full max-w-md">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                    <input
+                        class="w-full bg-slate-100 dark:bg-[#283039] border-none rounded-lg py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary dark:text-white dark:placeholder-[#9dabb9]"
+                        placeholder="Search orders, products, customers..." type="text" />
+                </div>
+            </div>
+            <div class="flex items-center gap-4">
+                <button
+                    class="relative p-2 text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] rounded-lg">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span
+                        class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-[#111418]"></span>
+                </button>
+                <button
+                    class="p-2 text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-[#283039] rounded-lg">
+                    <span class="material-symbols-outlined">settings</span>
+                </button>
+                <div class="h-8 w-px bg-slate-200 dark:bg-[#283039] mx-2"></div>
+                <div class="flex items-center gap-3 cursor-pointer group">
+                    <div class="text-right">
+                        <p class="text-xs font-bold dark:text-white">Alex Johnson</p>
+                        <p class="text-[10px] text-slate-500 dark:text-[#9dabb9]">Store Manager</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-full bg-slate-200 bg-cover bg-center border-2 border-primary/20"
+                        data-alt="User profile avatar circle"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAUbFfYhPg2XzZDFJVzbMMjFnZTouBWsbnh1kHg8duqYsJVaEpRJUX1gz5lbOZ2GHwui94TfHeGD7_mTKjB1411ZCgl5I9gacmtdeYWhIU62Ttoa0HSA5nrSoY1wdeRhbSbCE5eqsSczrbNsWrHaKX6NVqFnMuMgrxmLPEnmb72FGliwUfaasXO1Ks799MIvNXDEIHE5MRRx4IkU6MVaJDDBveimokZ8l80Ld6aMlsWhjYTc4R5C0ctC-yr4T0EePOrGTeZstU0kqc");'>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="p-8">
+            <div class="flex flex-wrap justify-between items-end gap-4 mb-8">
+                <div>
+                    <h2 class="text-3xl font-black tracking-tight dark:text-white">Dashboard Overview</h2>
+                    <p class="text-slate-500 dark:text-[#9dabb9] mt-1">Welcome back, here's what's happening with your
+                        store today.</p>
+                </div>
+                <div class="flex gap-3">
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#283039] border border-slate-200 dark:border-[#3b4754] text-slate-700 dark:text-white rounded-lg text-sm font-bold hover:bg-slate-50 transition-all">
+                        <span class="material-symbols-outlined text-lg">download</span>
+                        Export Report
+                    </button>
+                    <button
+                        class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:brightness-110 transition-all">
+                        <span class="material-symbols-outlined text-lg">add</span>
+                        New Product
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white dark:bg-[#111418] p-6 rounded-xl border border-slate-200 dark:border-[#3b4754]">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-primary/10 rounded-lg text-primary">
+                            <span class="material-symbols-outlined">payments</span>
+                        </div>
+                        <span
+                            class="text-[#0bda5b] text-xs font-bold bg-[#0bda5b]/10 px-2 py-1 rounded-full">+12.5%</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-semibold uppercase tracking-wider">Total
+                        Sales</p>
+                    <p class="text-2xl font-black dark:text-white mt-1">$45,231.89</p>
+                    <div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
+                        <div class="h-full bg-primary" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-[#111418] p-6 rounded-xl border border-slate-200 dark:border-[#3b4754]">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-orange-500/10 rounded-lg text-orange-500">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </div>
+                        <span
+                            class="text-[#0bda5b] text-xs font-bold bg-[#0bda5b]/10 px-2 py-1 rounded-full">+8.2%</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-semibold uppercase tracking-wider">Total
+                        Orders</p>
+                    <p class="text-2xl font-black dark:text-white mt-1">1,205</p>
+                    <div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
+                        <div class="h-full bg-orange-500" style="width: 45%"></div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-[#111418] p-6 rounded-xl border border-slate-200 dark:border-[#3b4754]">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-green-500/10 rounded-lg text-green-500">
+                            <span class="material-symbols-outlined">person_add</span>
+                        </div>
+                        <span class="text-red-500 text-xs font-bold bg-red-500/10 px-2 py-1 rounded-full">-2.1%</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-semibold uppercase tracking-wider">Active
+                        Users</p>
+                    <p class="text-2xl font-black dark:text-white mt-1">8,432</p>
+                    <div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
+                        <div class="h-full bg-green-500" style="width: 60%"></div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-[#111418] p-6 rounded-xl border border-slate-200 dark:border-[#3b4754]">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="p-2 bg-purple-500/10 rounded-lg text-purple-500">
+                            <span class="material-symbols-outlined">conversion_path</span>
+                        </div>
+                        <span
+                            class="text-[#0bda5b] text-xs font-bold bg-[#0bda5b]/10 px-2 py-1 rounded-full">+0.5%</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-semibold uppercase tracking-wider">
+                        Conversion Rate</p>
+                    <p class="text-2xl font-black dark:text-white mt-1">3.42%</p>
+                    <div class="mt-4 h-1 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
+                        <div class="h-full bg-purple-500" style="width: 32%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                <div
+                    class="lg:col-span-2 bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#3b4754] p-6">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h3 class="font-bold text-lg dark:text-white">Revenue Over Time</h3>
+                            <div class="flex items-center gap-2">
+                                <span class="text-2xl font-black dark:text-white">$12,400</span>
+                                <span class="text-[#0bda5b] text-sm font-medium">+15% vs last week</span>
+                            </div>
+                        </div>
+                        <select
+                            class="bg-slate-50 dark:bg-[#283039] border-none text-xs font-bold rounded-lg focus:ring-primary dark:text-[#9dabb9]">
+                            <option>Last 7 Days</option>
+                            <option>Last 30 Days</option>
+                            <option>This Year</option>
+                        </select>
+                    </div>
+                    <div class="h-64 flex flex-col justify-between">
+                        <svg fill="none" height="180" preserveAspectRatio="none" viewBox="-3 0 478 150" width="100%"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25V149H326.769H0V109Z"
+                                fill="url(#paint0_linear)"></path>
+                            <path
+                                d="M0 109C18.1538 109 18.1538 21 36.3077 21C54.4615 21 54.4615 41 72.6154 41C90.7692 41 90.7692 93 108.923 93C127.077 93 127.077 33 145.231 33C163.385 33 163.385 101 181.538 101C199.692 101 199.692 61 217.846 61C236 61 236 45 254.154 45C272.308 45 272.308 121 290.462 121C308.615 121 308.615 149 326.769 149C344.923 149 344.923 1 363.077 1C381.231 1 381.231 81 399.385 81C417.538 81 417.538 129 435.692 129C453.846 129 453.846 25 472 25"
+                                stroke="#137fec" stroke-linecap="round" stroke-width="3"></path>
+                            <defs>
+                                <linearGradient gradientUnits="userSpaceOnUse" id="paint0_linear" x1="236" x2="236"
+                                    y1="1" y2="149">
+                                    <stop stop-color="#137fec" stop-opacity="0.3"></stop>
+                                    <stop offset="1" stop-color="#137fec" stop-opacity="0"></stop>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="flex justify-between px-2 pt-2 border-t border-slate-100 dark:border-[#283039]">
+                            <span class="text-slate-400 text-[10px] font-bold">MON</span>
+                            <span class="text-slate-400 text-[10px] font-bold">TUE</span>
+                            <span class="text-slate-400 text-[10px] font-bold">WED</span>
+                            <span class="text-slate-400 text-[10px] font-bold">THU</span>
+                            <span class="text-slate-400 text-[10px] font-bold">FRI</span>
+                            <span class="text-slate-400 text-[10px] font-bold">SAT</span>
+                            <span class="text-slate-400 text-[10px] font-bold">SUN</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#3b4754] p-6">
+                    <h3 class="font-bold text-lg dark:text-white mb-6">Sales by Category</h3>
+                    <div class="space-y-4">
+                        <div class="flex flex-col gap-1">
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span class="dark:text-white">Football Boots</span>
+                                <span class="text-primary">42%</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
+                                <div class="h-full bg-primary" style="width: 42%"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span class="dark:text-white">Team Jerseys</span>
+                                <span class="text-orange-500">28%</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
+                                <div class="h-full bg-orange-500" style="width: 28%"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span class="dark:text-white">Match Balls</span>
+                                <span class="text-green-500">18%</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
+                                <div class="h-full bg-green-500" style="width: 18%"></div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-1">
+                            <div class="flex justify-between text-xs font-bold mb-1">
+                                <span class="dark:text-white">Goalkeeper Gloves</span>
+                                <span class="text-purple-500">12%</span>
+                            </div>
+                            <div class="h-2 w-full bg-slate-100 dark:bg-[#283039] rounded-full overflow-hidden">
+                                <div class="h-full bg-purple-500" style="width: 12%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="mt-8 pt-6 border-t border-slate-100 dark:border-[#283039] flex items-center justify-center">
+                        <div class="relative size-24">
+                            <svg class="size-full transform -rotate-90" viewBox="0 0 36 36">
+                                <circle class="stroke-slate-100 dark:stroke-[#283039]" cx="18" cy="18" fill="none"
+                                    r="16" stroke-width="3"></circle>
+                                <circle class="stroke-primary" cx="18" cy="18" fill="none" r="16" stroke-dasharray="100"
+                                    stroke-dashoffset="30" stroke-width="3"></circle>
+                            </svg>
+                            <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                <span class="text-xs font-black dark:text-white">70%</span>
+                                <span class="text-[8px] text-slate-500 uppercase font-bold">Target</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-[#3b4754] overflow-hidden">
+                <div
+                    class="px-6 py-4 border-b border-slate-200 dark:border-[#3b4754] flex items-center justify-between">
+                    <h3 class="font-bold text-lg dark:text-white">Recent Orders</h3>
+                    <button class="text-primary text-sm font-bold hover:underline">View All Orders</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead
+                            class="bg-slate-50 dark:bg-[#283039] text-slate-500 dark:text-[#9dabb9] text-xs uppercase font-bold tracking-wider">
+                            <tr>
+                                <th class="px-6 py-3">Order ID</th>
+                                <th class="px-6 py-3">Customer</th>
+                                <th class="px-6 py-3">Product</th>
+                                <th class="px-6 py-3">Date</th>
+                                <th class="px-6 py-3">Amount</th>
+                                <th class="px-6 py-3">Status</th>
+                                <th class="px-6 py-3">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 dark:divide-[#283039]">
+                            <tr class="hover:bg-slate-50 dark:hover:bg-[#1c242e] transition-colors">
+                                <td class="px-6 py-4 text-sm font-bold dark:text-white">#ORD-2841</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div
+                                            class="size-7 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">
+                                            MW</div>
+                                        <span class="text-sm dark:text-slate-300">Marcus Wright</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm dark:text-slate-400">Golden Strike Cleats</td>
+                                <td class="px-6 py-4 text-sm dark:text-slate-400">Oct 24, 2023</td>
+                                <td class="px-6 py-4 text-sm font-bold dark:text-white">$129.99</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="px-2 py-1 text-[10px] font-bold rounded bg-[#0bda5b]/10 text-[#0bda5b] border border-[#0bda5b]/20">Delivered</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button
+                                        class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">more_horiz</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 dark:hover:bg-[#1c242e] transition-colors">
+                                <td class="px-6 py-4 text-sm font-bold dark:text-white">#ORD-2842</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div
+                                            class="size-7 rounded-full bg-orange-500/20 flex items-center justify-center text-[10px] font-bold text-orange-500">
+                                            SB</div>
+                                        <span class="text-sm dark:text-slate-300">Sarah Bennett</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm dark:text-slate-400">Pro-Grip Gloves (Elite)</td>
+                                <td class="px-6 py-4 text-sm dark:text-slate-400">Oct 24, 2023</td>
+                                <td class="px-6 py-4 text-sm font-bold dark:text-white">$85.50</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="px-2 py-1 text-[10px] font-bold rounded bg-orange-500/10 text-orange-500 border border-orange-500/20">Processing</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button
+                                        class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">more_horiz</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 dark:hover:bg-[#1c242e] transition-colors">
+                                <td class="px-6 py-4 text-sm font-bold dark:text-white">#ORD-2843</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div
+                                            class="size-7 rounded-full bg-purple-500/20 flex items-center justify-center text-[10px] font-bold text-purple-500">
+                                            DK</div>
+                                        <span class="text-sm dark:text-slate-300">David Kross</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm dark:text-slate-400">Team Jersey Set (Home)</td>
+                                <td class="px-6 py-4 text-sm dark:text-slate-400">Oct 23, 2023</td>
+                                <td class="px-6 py-4 text-sm font-bold dark:text-white">$342.00</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="px-2 py-1 text-[10px] font-bold rounded bg-primary/10 text-primary border border-primary/20">Shipped</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button
+                                        class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">more_horiz</button>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-slate-50 dark:hover:bg-[#1c242e] transition-colors">
+                                <td class="px-6 py-4 text-sm font-bold dark:text-white">#ORD-2844</td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <div
+                                            class="size-7 rounded-full bg-green-500/20 flex items-center justify-center text-[10px] font-bold text-green-500">
+                                            LC</div>
+                                        <span class="text-sm dark:text-slate-300">Leo Castor</span>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm dark:text-slate-400">Training Cone Set</td>
+                                <td class="px-6 py-4 text-sm dark:text-slate-400">Oct 23, 2023</td>
+                                <td class="px-6 py-4 text-sm font-bold dark:text-white">$45.00</td>
+                                <td class="px-6 py-4">
+                                    <span
+                                        class="px-2 py-1 text-[10px] font-bold rounded bg-red-500/10 text-red-500 border border-red-500/20">Cancelled</span>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <button
+                                        class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors">more_horiz</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    </div>
+
+</body>
+
+</html>

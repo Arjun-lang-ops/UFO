@@ -82,7 +82,6 @@ export const forgotUserService = async (data) => {
   return existingUser;
 };
 
-
 export const resetPasswordService = async (
   email,
   newPassword,
