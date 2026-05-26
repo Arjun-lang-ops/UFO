@@ -121,7 +121,7 @@ deliveryDate.setDate(
 
     paymentMethod,
     paymentStatus,
-    orderStatus:'Pending',
+    orderStatus:'Confirmed',
     orderNumber:generateOrderNumber(),
     subTotal,
     discount,
@@ -156,3 +156,18 @@ deliveryDate.setDate(
   
 
 };
+
+
+
+export const orderHistoryService=async(userId)=>{
+  const orders=await Order.find({user:userId}).populate('items.product').populate('user').sort({createdAt:-1});
+
+  return orders
+}
+
+
+
+export const returnService=async(orderId)=>{
+  const returnItem=await Order.findById(orderId).populate('items.product').populate('user');
+  return returnItem
+}

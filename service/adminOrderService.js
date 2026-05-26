@@ -3,7 +3,7 @@ import User from "../models/userModel.js";
 
 export const orderManagementService=async(page,search)=>{
 
-    const limit=4;
+    const limit=10;
 
     const skip=(page-1)*limit;
 
@@ -51,5 +51,14 @@ export const orderManagementService=async(page,search)=>{
         search
 
     }
+
+};
+
+
+
+export const orderDetailsService=async(orderId)=>{
+    const orderDetails=await Order.findById(orderId).populate('items.product');
+    return orderDetails;
+
 
 }

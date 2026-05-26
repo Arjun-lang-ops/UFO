@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Order History - Football Accessories Co.</title>
+    <title>Order History - Urban Football </title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700;900&amp;display=swap"
@@ -75,14 +75,12 @@
                 <div class="size-8 flex items-center justify-center text-primary">
                     <span class="material-symbols-outlined text-3xl">sports_soccer</span>
                 </div>
-                <h2 class="hidden md:block text-lg font-bold leading-tight tracking-[-0.015em]">Football Accessories Co.
+                <h2 class="hidden md:block text-lg font-bold leading-tight tracking-[-0.015em]">Urban Football
                 </h2>
             </div>
             <nav class="hidden md:flex items-center gap-6 lg:gap-9">
-                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Shop</a>
-                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Teams</a>
-                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sale</a>
-                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Support</a>
+                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="/home">Shop</a>
+                
             </nav>
         </div>
         <div class="flex flex-1 justify-end gap-4 lg:gap-8">
@@ -98,18 +96,19 @@
                 </div>
             </label>
             <div class="flex gap-2">
-                <button
+                <a href="/cart">
+                    <button
                     class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
                     <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
                 </button>
-                <button
-                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
-                    <span class="material-symbols-outlined text-[20px]">notifications</span>
-                </button>
-                <button
+                </a>
+                
+                <a href="/profile">
+                    <button
                     class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
                     <span class="material-symbols-outlined text-[20px]">account_circle</span>
                 </button>
+                </a>
             </div>
         </div>
     </header>
@@ -124,16 +123,16 @@
                             style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_I8YVj0_qwyi_nZ_cqgcjnK_ddZ6B6zun2Rs02d6G370QMmZ5T02LYQTuEg6txKqO56rGmh288NeBim2KyAKm2uThQ5BtrZRufI5DiqPZLGdwyHhjJmWW4rch0W92L-1CdkX1sdJr3651GWjEPjQvsg6sqUyEog2CB7kg2qu49mP5fcryB6i33KmLOPaUQ-k-fimSPh9eMhOs1oRJqePeMw5oyYwl2H-rlxe3to4yJhWR0LBFMCp7drA7RVuHt-O6s_owRmav2P4");'>
                         </div>
                         <div class="flex flex-col">
-                            <h1 class="text-base font-bold leading-tight">Alex Morgan</h1>
-                            <p class="text-text-secondary text-xs">Elite Member</p>
+                            <h1 class="text-base font-bold leading-tight">Alex</h1>
+                            <p class="text-text-secondary text-xs">Elite Memberr</p>
                         </div>
                     </div>
                     <nav
                         class="flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark">
                         <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
-                            href="#">
+                            href="/profile">
                             <span class="material-symbols-outlined text-[24px] group-hover:text-primary">person</span>
-                            <span class="text-sm font-medium">Profile Settings</span>
+                            <span class="text-sm font-medium">Profile</span>
                         </a>
                         <a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 dark:bg-border-dark text-primary dark:text-white"
                             href="#">
@@ -153,7 +152,7 @@
                             <span class="text-sm font-medium">Payment Methods</span>
                         </a>
                         <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
-                            href="#">
+                            href="/wishlist">
                             <span class="material-symbols-outlined text-[24px] group-hover:text-primary">favorite</span>
                             <span class="text-sm font-medium">Wishlist</span>
                         </a>
@@ -162,9 +161,9 @@
             </aside>
             <main class="flex-1 flex flex-col min-w-0">
                 <div class="flex flex-wrap gap-2 pb-4">
-                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="#">Home</a>
+                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="/home">Home</a>
                     <span class="text-text-secondary text-sm font-medium">/</span>
-                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="#">Account</a>
+                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="/profile">Account</a>
                     <span class="text-text-secondary text-sm font-medium">/</span>
                     <span class="text-slate-900 dark:text-white text-sm font-medium">Order History</span>
                 </div>
@@ -196,6 +195,118 @@
                     </button>
                 </div>
                 <div class="flex flex-col gap-4">
+                    <%
+                        const userOrders = Array.isArray(orders) ? orders : [];
+                    %>
+
+                    <% if (userOrders.length > 0) { %>
+                        <% userOrders.forEach(order => { %>
+                            <%
+                                const placedDate = new Date(order.createdAt || order.orderedAt).toLocaleDateString("en-IN", {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric"
+                                });
+                                const status = order.orderStatus || "Pending";
+                                const statusClass = status === "Delivered"
+                                    ? "bg-green-500"
+                                    : status === "Cancelled" || status === "Returned"
+                                    ? "bg-red-500"
+                                    : status === "Shipped"
+                                    ? "bg-primary animate-pulse"
+                                    : "bg-amber-500";
+                                const statusTextClass = status === "Shipped" ? "text-primary" : "text-slate-900 dark:text-white";
+                            %>
+                            <div
+                                class="flex flex-col rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark overflow-hidden group hover:border-primary/50 transition-colors">
+                                <div
+                                    class="flex flex-wrap items-center justify-between gap-4 p-4 md:p-6 bg-gray-50 dark:bg-white/5 border-b border-gray-200 dark:border-border-dark">
+                                    <div class="flex flex-wrap gap-6 md:gap-12">
+                                        <div class="flex flex-col gap-1">
+                                            <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Order Placed</span>
+                                            <span class="text-sm font-medium text-slate-900 dark:text-white"><%= placedDate %></span>
+                                        </div>
+                                        <div class="flex flex-col gap-1">
+                                            <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Total</span>
+                                            <span class="text-sm font-medium text-slate-900 dark:text-white">Rs. <%= Number(order.totalAmount || 0).toLocaleString("en-IN") %></span>
+                                        </div>
+                                        <div class="flex flex-col gap-1">
+                                            <span class="text-xs uppercase font-bold text-text-secondary tracking-wider">Order #</span>
+                                            <span class="text-sm font-medium text-slate-900 dark:text-white"><%= order.orderNumber %></span>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="px-3 py-1 rounded-full text-xs font-bold bg-gray-200 dark:bg-border-dark text-slate-700 dark:text-white">
+                                        <%= order.paymentStatus %>
+                                    </span>
+                                </div>
+                                <div class="p-4 md:p-6 flex flex-col md:flex-row gap-6 md:items-center justify-between">
+                                    <div class="flex flex-col gap-4">
+                                        <div class="flex items-center gap-2">
+                                            <span class="flex h-2.5 w-2.5 rounded-full <%= statusClass %>"></span>
+                                            <h3 class="text-lg font-bold <%= statusTextClass %>"><%= status %></h3>
+                                            <% if (order.estimatedDelivery && !["Delivered", "Cancelled", "Returned"].includes(status)) { %>
+                                                <span class="text-sm text-text-secondary">
+                                                    - Expected <%= new Date(order.estimatedDelivery).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) %>
+                                                </span>
+                                            <% } %>
+                                        </div>
+                                        <div class="flex -space-x-3 hover:space-x-0 transition-all duration-300">
+                                            <% (order.items || []).slice(0, 4).forEach((item, index) => { %>
+                                                <%
+                                                    const product = item.product;
+                                                    const selectedVariant = product?.variants?.find(variant =>
+                                                        String(variant._id) === String(item.variant)
+                                                    );
+                                                    const fallbackVariant = product?.variants?.[0];
+                                                    const image = selectedVariant?.images?.[0] || fallbackVariant?.images?.[0] || "";
+                                                    const extraCount = (order.items || []).length - 3;
+                                                %>
+                                                <div class="relative group/img cursor-pointer <%= status === 'Cancelled' || status === 'Returned' ? 'grayscale' : '' %>">
+                                                    <% if (image) { %>
+                                                        <img class="size-16 md:size-20 rounded-lg border-2 border-white dark:border-surface-dark object-cover shadow-sm"
+                                                            alt="<%= product?.name || 'Product image' %>"
+                                                            src="<%= image %>" />
+                                                    <% } else { %>
+                                                        <div class="size-16 md:size-20 rounded-lg border-2 border-white dark:border-surface-dark bg-gray-100 dark:bg-border-dark flex items-center justify-center shadow-sm">
+                                                            <span class="material-symbols-outlined text-text-secondary">inventory_2</span>
+                                                        </div>
+                                                    <% } %>
+                                                    <div
+                                                        class="absolute inset-0 bg-black/40 rounded-lg opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                                        <span class="text-white text-xs font-medium">
+                                                            <%= index === 3 && extraCount > 0 ? `+${extraCount}` : (product?.name || 'Product') %>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            <% }) %>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-col sm:flex-row gap-3">
+                                        <a href="/orderHistory/<%= order._id %>"
+                                            class="h-10 px-5 rounded-lg bg-gray-100 dark:bg-border-dark hover:bg-gray-200 dark:hover:bg-[#323b46] text-slate-900 dark:text-white border border-gray-200 dark:border-none text-sm font-bold transition-colors flex items-center justify-center">
+                                            View Details
+                                        </a>
+                                        <% if (status === "Delivered") { %>
+                                            <a href="/orderReturn/<%= order._id %>"
+                                                class="h-10 px-5 rounded-lg bg-white dark:bg-transparent hover:bg-gray-50 dark:hover:bg-white/5 text-slate-600 dark:text-text-secondary border border-gray-200 dark:border-border-dark text-sm font-bold transition-colors flex items-center justify-center">
+                                                Return
+                                            </a>
+                                        <% } %>
+                                    </div>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } else { %>
+                        <div
+                            class="rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark p-10 text-center">
+                            <span class="material-symbols-outlined text-5xl text-text-secondary mb-3">assignment</span>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">No orders yet</h3>
+                            <p class="text-sm text-text-secondary mt-1">Your recent orders will appear here.</p>
+                        </div>
+                    <% } %>
+
+                    <% if (false) { %>
                     <div
                         class="flex flex-col rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark overflow-hidden group hover:border-primary/50 transition-colors">
                         <div
@@ -272,10 +383,12 @@
                                     class="h-10 px-5 rounded-lg bg-gray-100 dark:bg-border-dark hover:bg-gray-200 dark:hover:bg-[#323b46] text-slate-900 dark:text-white border border-gray-200 dark:border-none text-sm font-bold transition-colors">
                                     View Details
                                 </button>
-                                <button
+                                <a href="/orderReturn/:id">
+                                    <button
                                     class="h-10 px-5 rounded-lg bg-white dark:bg-transparent hover:bg-gray-50 dark:hover:bg-white/5 text-slate-600 dark:text-text-secondary border border-gray-200 dark:border-border-dark text-sm font-bold transition-colors">
                                     Return
                                 </button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -427,8 +540,9 @@
                             </div>
                         </div>
                     </div>
+                    <% } %>
                 </div>
-                <div class="flex justify-center mt-10">
+                <div class="hidden justify-center mt-10">
                     <div class="flex items-center gap-2">
                         <button
                             class="flex items-center justify-center h-10 w-10 rounded-lg bg-white dark:bg-border-dark text-slate-600 dark:text-text-secondary hover:text-primary dark:hover:text-white transition-colors">

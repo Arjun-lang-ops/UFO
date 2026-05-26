@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Order Details - Football Accessories Co.</title>
+    <title>Order Details - Urban Football</title>
     <link href="https://fonts.googleapis.com" rel="preconnect" />
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700;900&amp;display=swap"
@@ -65,6 +65,31 @@
 
 <body
     class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col font-display selection:bg-primary/30">
+    <%
+        const order = orderDetails;
+        const items = order?.items || [];
+        const formatDate = (date, options = {}) => date
+            ? new Date(date).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+                ...options
+            })
+            : "";
+        const formatCurrency = amount => `Rs. ${Number(amount || 0).toLocaleString("en-IN")}`;
+        const currentStatus = order?.orderStatus || "Pending";
+        const statusSteps = ["Pending", "Confirmed", "Shipped", "Delivered"];
+        const currentStepIndex = currentStatus === "Cancelled" || currentStatus === "Returned"
+            ? -1
+            : statusSteps.indexOf(currentStatus);
+        const progressWidth = currentStepIndex <= 0
+            ? "0%"
+            : currentStepIndex === 1
+            ? "33%"
+            : currentStepIndex === 2
+            ? "66%"
+            : "100%";
+    %>
     <header
         class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-border-dark px-4 lg:px-10 py-3 bg-white dark:bg-surface-dark sticky top-0 z-50">
         <div class="flex items-center gap-4 lg:gap-8">
@@ -72,14 +97,12 @@
                 <div class="size-8 flex items-center justify-center text-primary">
                     <span class="material-symbols-outlined text-3xl">sports_soccer</span>
                 </div>
-                <h2 class="hidden md:block text-lg font-bold leading-tight tracking-[-0.015em]">Football Accessories Co.
+                <h2 class="hidden md:block text-lg font-bold leading-tight tracking-[-0.015em]"> Urban Football 
                 </h2>
             </div>
             <nav class="hidden md:flex items-center gap-6 lg:gap-9">
-                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Shop</a>
-                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Teams</a>
-                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sale</a>
-                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Support</a>
+                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="/home">Shop</a>
+                
             </nav>
         </div>
         <div class="flex flex-1 justify-end gap-4 lg:gap-8">
@@ -114,26 +137,35 @@
         <div class="flex flex-col w-full max-w-[1280px] gap-8">
             <div class="flex flex-col gap-4">
                 <div class="flex flex-wrap gap-2">
-                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="#">Home</a>
+                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="/home">Home</a>
                     <span class="text-text-secondary text-sm font-medium">/</span>
                     <a class="text-text-secondary text-sm font-medium hover:text-primary" href="#">Account</a>
                     <span class="text-text-secondary text-sm font-medium">/</span>
-                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="#">Order History</a>
+                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="/orderHistory">Order History</a>
                     <span class="text-text-secondary text-sm font-medium">/</span>
-                    <span class="text-slate-900 dark:text-white text-sm font-medium">ORD-2023-8821</span>
+                    <span class="text-slate-900 dark:text-white text-sm font-medium"><%= order.orderNumber || "Order not found" %></span>
                 </div>
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
                     <div class="flex flex-col gap-1">
                         <h1 class="text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Order
-                            ORD-2023-8821</h1>
-                        <p class="text-text-secondary text-base">Placed on October 24, 2023 • 3 Items</p>
+                            <%= order.orderNumber %></h1>
+                        <p class="text-text-secondary text-base">Placed on <%= formatDate(order.createdAt || order.orderedAt) %> &bull; <%= items.length %> Item<%= items.length === 1 ? "" : "s" %></p>
                     </div>
                     <div class="flex flex-wrap gap-3">
-                        <button
-                            class="flex items-center gap-2 h-11 px-6 rounded-lg bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark text-slate-900 dark:text-white text-sm font-bold hover:bg-gray-50 dark:hover:bg-border-dark transition-colors">
-                            <span class="material-symbols-outlined text-lg">download</span>
-                            Invoice
-                        </button>
+                        <a
+  href="/invoice/<%= order._id %>/download"
+  class="flex items-center gap-2 h-11 px-6 rounded-lg
+         bg-white dark:bg-surface-dark
+         border border-gray-200 dark:border-border-dark
+         text-slate-900 dark:text-white
+         text-sm font-bold"
+>
+    <span class="material-symbols-outlined text-lg">
+        download
+    </span>
+
+    Invoice
+</a>
                         <button
                             class="flex items-center gap-2 h-11 px-6 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-600 transition-colors shadow-lg shadow-primary/20">
                             <span class="material-symbols-outlined text-lg">replay</span>
@@ -146,39 +178,26 @@
                 class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-2xl p-6 md:p-8">
                 <div class="relative">
                     <div class="absolute top-5 left-0 w-full h-1 bg-gray-200 dark:bg-border-dark rounded-full"></div>
-                    <div class="absolute top-5 left-0 w-full h-1 bg-green-500 rounded-full"></div>
+                    <div class="absolute top-5 left-0 h-1 <%= currentStatus === 'Cancelled' || currentStatus === 'Returned' ? 'bg-red-500' : 'bg-green-500' %> rounded-full" style="width: <%= progressWidth %>"></div>
                     <div class="relative flex justify-between">
-                        <div class="flex flex-col items-center gap-3">
-                            <div
-                                class="size-11 rounded-full bg-green-500 text-white flex items-center justify-center ring-4 ring-white dark:ring-surface-dark">
-                                <span class="material-symbols-outlined">check</span>
+                        <% statusSteps.forEach((step, index) => { %>
+                            <div class="flex flex-col items-center gap-3">
+                                <div
+                                    class="size-11 rounded-full <%= index <= currentStepIndex ? 'bg-green-500 text-white' : 'bg-gray-200 dark:bg-border-dark text-text-secondary' %> flex items-center justify-center ring-4 ring-white dark:ring-surface-dark">
+                                    <span class="material-symbols-outlined"><%= index <= currentStepIndex ? 'check' : 'radio_button_unchecked' %></span>
+                                </div>
+                                <div class="text-center">
+                                    <p class="text-sm font-bold"><%= step === "Pending" ? "Ordered" : step %></p>
+                                    <p class="text-[10px] text-text-secondary uppercase">
+                                        <%= index === 0 ? formatDate(order.createdAt || order.orderedAt, { month: "short", day: "2-digit" }) : "" %>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="text-center">
-                                <p class="text-sm font-bold">Ordered</p>
-                                <p class="text-[10px] text-text-secondary uppercase">Oct 24</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-col items-center gap-3">
-                            <div
-                                class="size-11 rounded-full bg-green-500 text-white flex items-center justify-center ring-4 ring-white dark:ring-surface-dark">
-                                <span class="material-symbols-outlined">check</span>
-                            </div>
-                            <div class="text-center">
-                                <p class="text-sm font-bold">Shipped</p>
-                                <p class="text-[10px] text-text-secondary uppercase">Oct 25</p>
-                            </div>
-                        </div>
-                        <div class="flex flex-col items-center gap-3">
-                            <div
-                                class="size-11 rounded-full bg-green-500 text-white flex items-center justify-center ring-4 ring-white dark:ring-surface-dark">
-                                <span class="material-symbols-outlined">check</span>
-                            </div>
-                            <div class="text-center">
-                                <p class="text-sm font-bold">Delivered</p>
-                                <p class="text-[10px] text-text-secondary uppercase">Oct 27</p>
-                            </div>
-                        </div>
+                        <% }) %>
                     </div>
+                    <% if (currentStatus === "Cancelled" || currentStatus === "Returned") { %>
+                        <p class="mt-6 text-center text-sm font-bold text-red-500">Order <%= currentStatus %></p>
+                    <% } %>
                 </div>
             </div>
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -190,75 +209,53 @@
                             <h3 class="font-bold">Items in your order</h3>
                         </div>
                         <div class="divide-y divide-gray-200 dark:divide-border-dark">
-                            <div class="p-6 flex gap-6">
-                                <img alt="Football Boots"
-                                    class="size-24 rounded-xl object-cover border border-gray-200 dark:border-border-dark bg-background-light dark:bg-background-dark"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgrUzj2NLy4GFAlMxVH_jyuitewEn8uta2PoRcNOFMWmXuTIno9Nt6bnzYr5NAy65cQcSw3_cinNcbGzjXGi0Co1cWpeOasduxe4cXE1Y4oQ9lrBVhkUzKjPp1KFBylyR489qBj8HSrlLthtXRNQ0iyGYCYz8oD0udP0FLK9W7Py1Rsn_4xlq1GDiGNSCroGWTwf8_OsrKHjJ121Eg5TCjmC2PQbI_12YBmg4_s1hHTFThQPRO3Xm42h9_vd3tZqlJu3kjGvIBLa4" />
-                                <div class="flex-1 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex flex-col gap-1">
-                                        <h4
-                                            class="font-bold text-lg hover:text-primary transition-colors cursor-pointer">
-                                            Elite Pro Football Boots</h4>
-                                        <p class="text-sm text-text-secondary">Color: <span
-                                                class="text-slate-900 dark:text-white">Phantom Black/Red</span></p>
-                                        <p class="text-sm text-text-secondary">Size: <span
-                                                class="text-slate-900 dark:text-white">US 10.5</span></p>
-                                        <p class="text-sm text-text-secondary">Qty: <span
-                                                class="text-slate-900 dark:text-white">1</span></p>
-                                    </div>
-                                    <div class="flex flex-col md:items-end justify-between">
-                                        <span class="text-lg font-bold">$85.00</span>
-                                        <button class="text-primary text-sm font-bold hover:underline">Return
-                                            Item</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-6 flex gap-6">
-                                <img alt="Socks"
-                                    class="size-24 rounded-xl object-cover border border-gray-200 dark:border-border-dark bg-background-light dark:bg-background-dark"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9uN2SVPWos1OZ-31dkWFBMxMyMEi5d_z1w13_XYama6VZq7OOCtanqPbkUKgiPbJPiqaPCJefBByyI9GvSrJtmofh1WddxhWF6GAkjdKKN1I-Jl1jH9jguupEnrvpw4-DzTlNOedggveMMJc0rjbhGCR2gJLKXIsyi-cOd4EzEy_dPMzJblSD0ltuj4gVuAy7kftNhJFAc2Eaff0ocf2a0tR62PfHjaapaZXmcy4vdn_cZiztvVofmIRYQAbRn8b4Ha4npRjGrOc" />
-                                <div class="flex-1 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex flex-col gap-1">
-                                        <h4
-                                            class="font-bold text-lg hover:text-primary transition-colors cursor-pointer">
-                                            Performance Grip Socks</h4>
-                                        <p class="text-sm text-text-secondary">Color: <span
-                                                class="text-slate-900 dark:text-white">Ocean Blue</span></p>
-                                        <p class="text-sm text-text-secondary">Size: <span
-                                                class="text-slate-900 dark:text-white">Large</span></p>
-                                        <p class="text-sm text-text-secondary">Qty: <span
-                                                class="text-slate-900 dark:text-white">1</span></p>
-                                    </div>
-                                    <div class="flex flex-col md:items-end justify-between">
-                                        <span class="text-lg font-bold">$19.50</span>
-                                        <button class="text-primary text-sm font-bold hover:underline">Return
-                                            Item</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="p-6 flex gap-6">
-                                <img alt="Shin Guards"
-                                    class="size-24 rounded-xl object-cover border border-gray-200 dark:border-border-dark bg-background-light dark:bg-background-dark"
-                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtwo41YZkNc1x-6RdRJ5YsZ2iQyd3AzO9XR6no0cVjVRhL29NEoPtN07yh1TMjnqstXomSIQEXxer4AnsI9iNMshD8ISFRae5oSQV5E6DGSLMv1va9qaZ4nnqzPtq8HHkSg97xjDggk6-sJoF4JphgTUFeqotjQP4Jli7USiR6Ow8NH0yR6Y1AvTFZbkplnK5ZKSf_q44UbMcGDyCU--ivmYuaQcAJ2ZzFZvrcUudSolsKoRQkZJWmFx35KkiYyaBRYQyuUnY7Cwg" />
-                                <div class="flex-1 flex flex-col md:flex-row justify-between gap-4">
-                                    <div class="flex flex-col gap-1">
-                                        <h4
-                                            class="font-bold text-lg hover:text-primary transition-colors cursor-pointer">
-                                            Carbon Flex Shin Guards</h4>
-                                        <p class="text-sm text-text-secondary">Color: <span
-                                                class="text-slate-900 dark:text-white">Stealth Black</span></p>
-                                        <p class="text-sm text-text-secondary">Size: <span
-                                                class="text-slate-900 dark:text-white">Standard</span></p>
-                                        <p class="text-sm text-text-secondary">Qty: <span
-                                                class="text-slate-900 dark:text-white">1</span></p>
-                                    </div>
-                                    <div class="flex flex-col md:items-end justify-between">
-                                        <span class="text-lg font-bold">$20.00</span>
-                                        <button class="text-primary text-sm font-bold hover:underline">Return
-                                            Item</button>
+                            <% items.forEach(item => { %>
+                                <%
+                                    const product = item.product;
+                                    const selectedVariant = product?.variants?.find(variant =>
+                                        String(variant._id) === String(item.variant)
+                                    );
+                                    const fallbackVariant = product?.variants?.[0];
+                                    const itemImage = selectedVariant?.images?.[0] || fallbackVariant?.images?.[0] || "";
+                                %>
+                                <div class="p-6 flex gap-6">
+                                    <% if (itemImage) { %>
+                                        <img alt="<%= product?.name || 'Product image' %>"
+                                            class="size-24 rounded-xl object-cover border border-gray-200 dark:border-border-dark bg-background-light dark:bg-background-dark"
+                                            src="<%= itemImage %>" />
+                                    <% } else { %>
+                                        <div
+                                            class="size-24 rounded-xl border border-gray-200 dark:border-border-dark bg-background-light dark:bg-background-dark flex items-center justify-center">
+                                            <span class="material-symbols-outlined text-text-secondary">inventory_2</span>
+                                        </div>
+                                    <% } %>
+                                    <div class="flex-1 flex flex-col md:flex-row justify-between gap-4">
+                                        <div class="flex flex-col gap-1">
+                                            <h4 class="font-bold text-lg hover:text-primary transition-colors cursor-pointer">
+                                                <%= product?.name || "Product unavailable" %>
+                                            </h4>
+                                            <% if (selectedVariant?.color) { %>
+                                                <p class="text-sm text-text-secondary">Color: <span
+                                                        class="text-slate-900 dark:text-white"><%= selectedVariant.color %></span></p>
+                                            <% } %>
+                                            <% if (selectedVariant?.size) { %>
+                                                <p class="text-sm text-text-secondary">Size: <span
+                                                        class="text-slate-900 dark:text-white"><%= selectedVariant.size %></span></p>
+                                            <% } %>
+                                            <p class="text-sm text-text-secondary">Qty: <span
+                                                    class="text-slate-900 dark:text-white"><%= item.quantity %></span></p>
+                                        </div>
+                                        <div class="flex flex-col md:items-end justify-between gap-3">
+                                            <span class="text-lg font-bold"><%= formatCurrency(item.totalPrice || (item.price * item.quantity)) %></span>
+                                            <% if (currentStatus === "Delivered") { %>
+                                                <a href="/orderReturn/<%= order._id %>"
+                                                    class="text-primary text-sm font-bold hover:underline">Return Item</a>
+                                            <% } %>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            <% }) %>
+                            
                         </div>
                     </div>
                 </div>
@@ -269,20 +266,21 @@
                             <h3 class="text-xs uppercase font-bold text-text-secondary tracking-widest mb-3">Shipping
                                 Address</h3>
                             <div class="text-sm leading-relaxed">
-                                <p class="font-bold">Alex Morgan</p>
-                                <p>123 Stadium Way, Apt 4B</p>
-                                <p>Manchester, M1 1AF</p>
-                                <p>United Kingdom</p>
+                                <p class="font-bold"><%= order.address?.fullname %></p>
+                                <p><%= order.address?.street %><%= order.address?.apartment ? `, ${order.address.apartment}` : "" %></p>
+                                <p><%= order.address?.state %>, <%= order.address?.pincode %></p>
+                                <p><%= order.address?.country %></p>
+                                <p class="mt-2 text-text-secondary"><%= order.address?.phone %></p>
                             </div>
                         </div>
                         <div class="pt-6 border-t border-gray-100 dark:border-border-dark">
                             <h3 class="text-xs uppercase font-bold text-text-secondary tracking-widest mb-3">Payment
                                 Method</h3>
                             <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-text-secondary">credit_card</span>
+                                <span class="material-symbols-outlined text-text-secondary"><%= order.paymentMethod === "COD" ? "payments" : "credit_card" %></span>
                                 <div class="text-sm">
-                                    <p class="font-bold">Mastercard ending in 4421</p>
-                                    <p class="text-text-secondary text-xs">Expires 12/26</p>
+                                    <p class="font-bold"><%= order.paymentMethod %></p>
+                                    <p class="text-text-secondary text-xs"><%= order.paymentStatus %></p>
                                 </div>
                             </div>
                         </div>
@@ -294,20 +292,22 @@
                         <div class="flex flex-col gap-3">
                             <div class="flex justify-between text-sm">
                                 <span class="text-text-secondary">Subtotal</span>
-                                <span>$124.50</span>
+                                <span><%= formatCurrency(order.subTotal) %></span>
                             </div>
                             <div class="flex justify-between text-sm">
                                 <span class="text-text-secondary">Shipping</span>
-                                <span class="text-green-500 font-medium">Free</span>
+                                <span class="<%= Number(order.deliveryCharge || 0) === 0 ? 'text-green-500 font-medium' : '' %>">
+                                    <%= Number(order.deliveryCharge || 0) === 0 ? "Free" : formatCurrency(order.deliveryCharge) %>
+                                </span>
                             </div>
                             <div class="flex justify-between text-sm">
-                                <span class="text-text-secondary">Estimated Tax</span>
-                                <span>$0.00</span>
+                                <span class="text-text-secondary">Discount</span>
+                                <span><%= formatCurrency(order.discount) %></span>
                             </div>
                             <div class="h-px bg-gray-100 dark:bg-border-dark my-2"></div>
                             <div class="flex justify-between items-center">
                                 <span class="font-bold text-lg">Total</span>
-                                <span class="font-black text-xl text-primary">$124.50</span>
+                                <span class="font-black text-xl text-primary"><%= formatCurrency(order.totalAmount) %></span>
                             </div>
                         </div>
                     </div>

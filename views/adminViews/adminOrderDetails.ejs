@@ -11,6 +11,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -62,28 +63,28 @@
                     <span class="material-symbols-outlined text-2xl">sports_soccer</span>
                 </div>
                 <div>
-                    <h1 class="text-base font-bold leading-tight">ProKick Admin</h1>
+                    <h1 class="text-base font-bold leading-tight">Urban Football Admin</h1>
                     <p class="text-slate-500 dark:text-slate-400 text-xs">Accessory Store</p>
                 </div>
             </div>
             <nav class="flex-1 px-4 space-y-1 mt-4">
                 <a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="#">
+                    href="/admin/dashboard">
                     <span class="material-symbols-outlined">grid_view</span>
                     <span class="text-sm font-medium">Dashboard</span>
                 </a>
                 <a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="#">
+                    href="/admin/products">
                     <span class="material-symbols-outlined">inventory_2</span>
-                    <span class="text-sm font-medium">Inventory</span>
+                    <span class="text-sm font-medium">Products</span>
                 </a>
                 <a class="flex items-center gap-3 px-3 py-2 bg-primary text-white rounded-lg shadow-lg shadow-primary/20"
-                    href="#">
+                    href="/admin/orderManagement">
                     <span class="material-symbols-outlined fill-icon">shopping_cart</span>
                     <span class="text-sm font-medium">Orders</span>
                 </a>
                 <a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="#">
+                    href="/admin/userManagement">
                     <span class="material-symbols-outlined">group</span>
                     <span class="text-sm font-medium">Customers</span>
                 </a>
@@ -92,38 +93,20 @@
                     <span class="material-symbols-outlined">bar_chart</span>
                     <span class="text-sm font-medium">Analytics</span>
                 </a>
-                <a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined">settings</span>
-                    <span class="text-sm font-medium">Settings</span>
-                </a>
+                
             </nav>
-            <div class="p-4 border-t border-slate-200 dark:border-slate-800">
-                <div class="flex items-center gap-3 p-2">
-                    <div class="size-9 rounded-full bg-center bg-no-repeat bg-cover"
-                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsT29TB-jmu8dH5tEdUbk6fcq4T_c-T9_6l0pHboy9cH3nlct2EVABdxagUwVtoU8Xmh95015swJgN7CTcvP_JUea3seBcCmvPKcc7eFXC3HpTpDLlZ2-TxJs0gfkYfdGAVeGG-yROAQgqiE7WAR6_CzULyeZgQXTTazJ1YG-VWmMRuzRNTD095IqpxbFd4Yj5_h_rMuD8f_Hlhm7cGd3JvWyzzmj_8oAL3UaMYltKr6huqFyRiKmiscyzkiK6vXpDNiT5HWoSo6M')">
-                    </div>
-                    <div class="flex-1 overflow-hidden">
-                        <p class="text-sm font-semibold truncate">Alex Johnson</p>
-                        <p class="text-xs text-slate-500 truncate">Super Admin</p>
-                    </div>
-                </div>
-                <button
-                    class="w-full mt-3 flex items-center justify-center gap-2 py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-sm font-bold transition-colors">
-                    <span class="material-symbols-outlined text-sm">help</span>
-                    Support
-                </button>
-            </div>
+            
         </aside>
         <main class="flex-1 flex flex-col overflow-hidden">
             <header
                 class="h-16 flex items-center justify-between px-8 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark shrink-0">
                 <div class="flex items-center gap-4">
-                    <a class="text-slate-400 hover:text-primary transition-colors" href="#">
+                    <a class="text-slate-400 hover:text-primary transition-colors" href="/admin/ordermanagement">
                         <span class="material-symbols-outlined">arrow_back</span>
                     </a>
-                    <h2 class="text-xl font-bold tracking-tight">Order Details <span
-                            class="text-slate-400 font-normal">#ORD-1024</span></h2>
+                    <h2 class="text-xl font-bold tracking-tight">Order Details <span class="text-slate-400 font-normal">
+                            <%=order.orderNumber%>
+                        </span></h2>
                 </div>
                 <div class="flex items-center gap-3">
                     <button
@@ -137,13 +120,34 @@
                         Refund
                     </button>
                     <div class="h-8 w-px bg-slate-200 dark:border-slate-700 mx-2"></div>
-                    <div class="relative group">
-                        <button
-                            class="h-10 px-4 flex items-center gap-2 bg-primary text-white rounded-lg font-bold text-sm shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                    <form id="orderStatusForm" data-order-id="<%= order._id %>" class="flex items-center gap-2">
+                        <div class="relative">
+
+                            <select id="orderStatus" name="orderStatus" class="h-10 min-w-36 appearance-none rounded-lg
+      border border-slate-200 dark:border-slate-700
+      bg-slate-100 dark:bg-slate-800
+      py-0 pl-3 pr-9 text-sm font-semibold">
+
+                                <% const orderStatuses=[ "Pending" , "Confirmed" , "Shipped" , "Delivered" , "Cancelled"
+                                    , "Returned" ]; %>
+
+                                    <% orderStatuses.forEach(status=> { %>
+
+                                        <option value="<%= status %>" <%=order.orderStatus===status ? "selected" : "" %>
+                                            >
+                                            <%= status %>
+                                        </option>
+
+                                        <% }) %>
+
+                            </select>
+
+                        </div>
+
+                        <button type="submit" class="h-10 px-4 bg-primary text-white rounded-lg font-bold text-sm">
                             Update Status
-                            <span class="material-symbols-outlined text-lg">expand_more</span>
                         </button>
-                    </div>
+                    </form>
                 </div>
             </header>
             <section class="flex-1 overflow-y-auto p-8 bg-slate-50 dark:bg-slate-900/30">
@@ -156,7 +160,9 @@
                             </div>
                             <div>
                                 <p class="text-xs text-slate-500 dark:text-slate-400">Order Date</p>
-                                <p class="text-sm font-bold">Oct 12, 2023 10:45 AM</p>
+                                <p class="text-sm font-bold">
+                                    <%=order.orderedAt%>
+                                </p>
                             </div>
                         </div>
                         <div
@@ -166,9 +172,18 @@
                                 <span class="material-symbols-outlined">local_shipping</span>
                             </div>
                             <div>
-                                <p class="text-xs text-slate-500 dark:text-slate-400">Current Status</p>
-                                <span
-                                    class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">Shipped</span>
+                                <p class="text-xs text-slate-500 dark:text-slate-400">
+                                    Current Status
+                                </p>
+
+                                <span id="statusBadge" class="inline-flex items-center px-2 py-0.5 rounded-full
+        text-[10px] font-bold uppercase tracking-wide
+        bg-blue-100 dark:bg-blue-900/30
+        text-blue-600 dark:text-blue-400">
+
+                                    <%= order.orderStatus %>
+
+                                </span>
                             </div>
                         </div>
                         <div
@@ -180,7 +195,9 @@
                             <div>
                                 <p class="text-xs text-slate-500 dark:text-slate-400">Payment Status</p>
                                 <span
-                                    class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">Paid</span>
+                                    class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wide bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400">
+                                    <%=order.paymentStatus%>
+                                </span>
                             </div>
                         </div>
                         <div
@@ -191,7 +208,8 @@
                             </div>
                             <div>
                                 <p class="text-xs text-slate-500 dark:text-slate-400">Total Amount</p>
-                                <p class="text-sm font-bold">$120.00</p>
+                                <p class="text-sm font-bold">₹<%=order.totalAmount%>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -201,7 +219,9 @@
                                 class="bg-white dark:bg-background-dark rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
                                 <div
                                     class="px-6 py-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                                    <h3 class="font-bold text-slate-800 dark:text-slate-100">Order Items (3)</h3>
+                                    <h3 class="font-bold text-slate-800 dark:text-slate-100">Order Items (
+                                        <%=order.items.length%>)
+                                    </h3>
                                 </div>
                                 <div class="overflow-x-auto">
                                     <table class="w-full text-left">
@@ -215,42 +235,105 @@
                                             </tr>
                                         </thead>
                                         <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
-                                            <tr>
-                                                <td class="px-6 py-4">
-                                                    <div class="flex items-center gap-3">
-                                                        <div
-                                                            class="size-12 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center border border-slate-200 dark:border-slate-700 shrink-0 overflow-hidden">
-                                                            <img alt="Product" class="object-cover size-full"
-                                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8G1yCOB-3huoolla40gK5OZFX-fjmXwXaHFbcjmwi8gLRg3r0CQAQylDE4AWWqbvFbLVWVV-w_ahkbRpDeecxM9DMpyucLEh3ZebylSW9ZkbvGfsaD_jXD3zgBJEINZVcQqPG-iWwVBIQRyJTOQXaIqDlNCqFmADb0Go3Bw-XScvhVvURVRGdWAIMiKryeTcfUKILUVSpM7Q7yVqkpo2dQk29CtEBdxauGT3dCyHuNt1mCaXL32BaeBV65wP85ubiNIi5CFSWV0c" />
-                                                        </div>
-                                                        <div>
-                                                            <p class="text-sm font-bold">Nike Phantom GX Elite FG</p>
-                                                            <p class="text-xs text-slate-500">SKU: PRO-PK-8821</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="px-6 py-4 text-sm">$80.00</td>
-                                                <td class="px-6 py-4 text-sm">1</td>
-                                                <td class="px-6 py-4 text-sm font-bold text-right">$80.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="px-6 py-4">
-                                                    <div class="flex items-center gap-3">
-                                                        <div
-                                                            class="size-12 rounded bg-slate-100 dark:bg-slate-800 flex items-center justify-center border border-slate-200 dark:border-slate-700 shrink-0 overflow-hidden">
-                                                            <img alt="Product" class="object-cover size-full"
-                                                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuADVcMxebSj1yK5C98ihlJ-zuQzygvvw3JIFf51wknF-C2M03fZJLPZ0Pbr8vIJmDQfk99ZT6B2HteLUMhyimwQNadLoVTqdg9yAAHimafW6U7cD6beZ5TCZyAPOuoQym26F4_5eGyPTbljx7D5mcOsF_IzQx1tCBV2tIN7zRDRZ6XCr6j6zRYohciJCKlY6gzP-YqU0RwBZLvcJ9bgNG-QtdlCRMJQi_CzIAIOq99-twvKKvaPW0rHW8Kmfh4owWlPLlJpxf3vd3U" />
-                                                        </div>
-                                                        <div>
-                                                            <p class="text-sm font-bold">Pro Training Grip Socks</p>
-                                                            <p class="text-xs text-slate-500">SKU: PRO-GS-102</p>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="px-6 py-4 text-sm">$20.00</td>
-                                                <td class="px-6 py-4 text-sm">2</td>
-                                                <td class="px-6 py-4 text-sm font-bold text-right">$40.00</td>
-                                            </tr>
+
+                                            <% if (order.items && order.items.length) { %>
+
+                                                <% order.items.forEach(item=> { %>
+                                                    <% const product=item.product; const
+                                                        selectedVariant=product?.variants?.find(variant=>
+                                                        String(variant._id) === String(item.variant)
+                                                        );
+                                                        const fallbackVariant = product?.variants?.[0];
+                                                        const productImage = selectedVariant?.images?.[0]
+                                                        || fallbackVariant?.images?.[0]
+                                                        || "";
+                                                        %>
+
+                                                        <tr>
+
+                                                            <!-- product -->
+                                                            <td class="px-6 py-4">
+
+                                                                <div class="flex items-center gap-3">
+
+                                                                    <div class="size-12 rounded bg-slate-100 dark:bg-slate-800
+              flex items-center justify-center border
+              border-slate-200 dark:border-slate-700
+              shrink-0 overflow-hidden">
+
+                                                                        <% if (productImage) { %>
+                                                                            <img src="<%= productImage %>"
+                                                                                alt="<%= product?.name || 'Product image' %>"
+                                                                                class="object-cover size-full" />
+                                                                            <% } else { %>
+                                                                                <span
+                                                                                    class="material-symbols-outlined text-slate-400">inventory_2</span>
+                                                                                <% } %>
+
+                                                                    </div>
+
+                                                                    <div>
+
+                                                                        <p class="text-sm font-bold">
+                                                                            <%= product?.name || "Product unavailable"
+                                                                                %>
+                                                                        </p>
+
+                                                                        <% if (selectedVariant?.size) { %>
+                                                                            <p class="text-xs text-slate-500">
+                                                                                Size: <%= selectedVariant.size %>
+                                                                            </p>
+                                                                            <% } %>
+
+                                                                                <% if (selectedVariant?.sku) { %>
+                                                                                    <p class="text-xs text-slate-500">
+                                                                                        SKU: <%= selectedVariant.sku %>
+                                                                                    </p>
+                                                                                    <% } %>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </td>
+
+                                                            <!-- price -->
+                                                            <td class="px-6 py-4 text-sm font-medium">
+
+                                                                ₹<%= item.price.toLocaleString("en-IN") %>
+
+                                                            </td>
+
+                                                            <!-- qty -->
+                                                            <td class="px-6 py-4 text-sm">
+
+                                                                <%= item.quantity %>
+
+                                                            </td>
+
+                                                            <!-- total -->
+                                                            <td class="px-6 py-4 text-sm font-bold text-right">
+
+                                                                ₹<%= (item.price * item.quantity)
+                                                                    .toLocaleString("en-IN") %>
+
+                                                            </td>
+
+                                                        </tr>
+
+                                                        <% }) %>
+
+                                                            <% } else { %>
+
+                                                                <tr>
+                                                                    <td colspan="4"
+                                                                        class="px-6 py-8 text-center text-sm text-slate-500">
+                                                                        No products found
+                                                                    </td>
+                                                                </tr>
+
+                                                                <% } %>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -259,20 +342,37 @@
                                     <div class="flex flex-col items-end space-y-2">
                                         <div class="flex justify-between w-64 text-sm">
                                             <span class="text-slate-500">Subtotal</span>
-                                            <span class="font-medium">$120.00</span>
+                                            <span class="font-medium">₹<%= order.subTotal %></span>
                                         </div>
                                         <div class="flex justify-between w-64 text-sm">
                                             <span class="text-slate-500">Shipping (Standard)</span>
-                                            <span class="font-medium text-emerald-500">FREE</span>
+                                            <span class="font-medium text-emerald-500">₹<%= order.shippingCharge
+                                                    || "Free" %></span>
                                         </div>
                                         <div class="flex justify-between w-64 text-sm">
                                             <span class="text-slate-500">Estimated Tax</span>
-                                            <span class="font-medium">$0.00</span>
+                                            <span class="font-medium">₹0.00</span>
+                                        </div>
+                                        <div class="flex justify-between w-64 text-sm">
+                                            <span class="text-slate-500">Discount</span>
+
+                                            <span class="font-medium text-emerald-500">
+                                                -₹<%= order.discount %>
+                                            </span>
+                                        </div>
+
+                                        <div class="flex justify-between w-64 text-sm">
+                                            <span class="text-slate-500">Delivery Charge</span>
+
+                                            <span class="font-medium text-emerald-500">
+                                                +₹<%= order.deliveryCharge %>
+                                            </span>
                                         </div>
                                         <div
                                             class="pt-2 mt-2 border-t border-slate-200 dark:border-slate-700 flex justify-between w-64">
                                             <span class="font-bold">Total</span>
-                                            <span class="font-bold text-lg text-primary">$120.00</span>
+                                            <span class="font-bold text-lg text-primary"> ₹<%= order.totalAmount%>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -345,7 +445,9 @@
                                             JD
                                         </div>
                                         <div>
-                                            <h4 class="font-bold">John Doe</h4>
+                                            <h4 class="font-bold">
+                                                <%=order.address.fullname%>
+                                            </h4>
                                             <p class="text-sm text-slate-500">Customer since Oct 2022</p>
                                         </div>
                                     </div>
@@ -354,22 +456,27 @@
                                             <p
                                                 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
                                                 Email Address</p>
-                                            <p class="text-sm font-medium">john.doe@example.com</p>
+                                            <p class="text-sm font-medium">
+                                                <%=order.user.email%>
+                                            </p>
                                         </div>
                                         <div>
                                             <p
                                                 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">
                                                 Phone Number</p>
-                                            <p class="text-sm font-medium">+1 (555) 000-1234</p>
+                                            <p class="text-sm font-medium">
+                                                <%=order.address.phone%>
+                                            </p>
                                         </div>
                                         <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
                                             <p
                                                 class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">
                                                 Shipping Address</p>
                                             <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-                                                123 Stadium Way, Suite 400<br />
-                                                Manchester, M14 5TQ<br />
-                                                United Kingdom
+                                                <%=order.address.apartment%>
+                                                    <%=order.address.street%><br />
+                                                        <%=order.address.state%>, <%=order.address.pincode%><br />
+                                                                <%=order.address.country%>
                                             </p>
                                         </div>
                                     </div>
@@ -428,5 +535,87 @@
     </div>
 
 </body>
+<script>
+document
+  .getElementById("orderStatusForm")
+  .addEventListener("submit", async function (e) {
+
+    e.preventDefault();
+
+    const orderId =
+      this.dataset.orderId;
+
+    const orderStatus =
+      document.getElementById(
+        "orderStatus"
+      ).value;
+
+    try {
+
+      const response =
+        await fetch(
+          `/admin/orders/${orderId}/status`,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+            },
+
+            body: JSON.stringify({
+              orderStatus,
+            }),
+          }
+        );
+
+      const data =
+        await response.json();
+
+      if (data.success) {
+
+        document.getElementById(
+          "statusBadge"
+        ).textContent =
+          orderStatus;
+
+        Swal.fire({
+          icon: "success",
+          title:
+            "Status Updated",
+          text:
+            "Order status updated successfully",
+          timer: 1800,
+          showConfirmButton: false,
+        });
+
+      } else {
+
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text:
+            data.message ||
+            "Update failed",
+        });
+
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      Swal.fire({
+        icon: "error",
+        title:
+          "Server Error",
+        text:
+          "Something went wrong",
+      });
+
+    }
+
+});
+</script>
 
 </html>

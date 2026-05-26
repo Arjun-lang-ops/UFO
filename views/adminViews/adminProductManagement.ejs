@@ -52,8 +52,8 @@
                     <span class="material-symbols-outlined">sports_soccer</span>
                 </div>
                 <div class="flex flex-col">
-                    <h1 class="text-base font-bold leading-none">Admin Panel</h1>
-                    <p class="text-slate-500 dark:text-slate-400 text-xs">Football Gear Pro</p>
+                    <h1 class="text-base font-bold leading-none">Urban Football</h1>
+                    <p class="text-slate-500 dark:text-slate-400 text-xs">Admin</p>
                 </div>
             </div>
             <nav class="flex flex-col gap-2 grow">
@@ -62,15 +62,16 @@
                     <span class="material-symbols-outlined">dashboard</span>
                     <span class="text-sm font-medium">Dashboard</span>
                 </a>
+                
+                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                    href="/admin/orderManagement">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                    <span class="text-sm font-medium">Orders</span>
+                </a>
                 <a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary transition-colors"
                     href="#">
                     <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1">inventory_2</span>
                     <span class="text-sm font-bold">Products</span>
-                </a>
-                <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined">shopping_cart</span>
-                    <span class="text-sm font-medium">Orders</span>
                 </a>
                 <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                     href="/admin/userManagement">
@@ -78,24 +79,12 @@
                     <span class="text-sm font-medium">Users</span>
                 </a>
                 <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                    href="#">
+                    href="/admin/categories">
                     <span class="material-symbols-outlined">analytics</span>
-                    <span class="text-sm font-medium">Reports</span>
+                    <span class="text-sm font-medium">categories</span>
                 </a>
             </nav>
-            <div class="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800">
-                <div class="flex items-center gap-3 px-3 py-2">
-                    <div class="bg-slate-200 dark:bg-slate-700 rounded-full w-8 h-8 bg-cover bg-center"
-                        data-alt="Avatar of the system administrator"
-                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB1G_U5HMScEizj3iB5yYa8rbVucM8i2IJK3-pf8SVawZjdusDF3lTCnaQLYZaJwpHNWGxehz8wls2kHGMZ6wO96XZ4xCPvH4hL1NCLgOqu3a8zRe_S0m8a4uHqD9wssex5meeD15QHQfQUMwM75-iBvKE_1yeVrB44qsyXPwfyZ6y6aKP93Rk-gYg3URfGfPUUNjs2LlKln3VV3Gi7Bcovj_6sxk8U1ssGFxcf1dhE8TKyMTLUMwy9WZHSRejmd1KsTPgy3drSe9E')">
-                    </div>
-                    <div class="flex flex-col">
-                        <span class="text-xs font-bold truncate">Alex Morgan</span>
-                        <span class="text-[10px] text-slate-500">Super Admin</span>
-                    </div>
-                    <span class="material-symbols-outlined text-slate-400 text-sm ml-auto">logout</span>
-                </div>
-            </div>
+           
         </div>
     </aside>
     <!-- Main Content -->
@@ -152,11 +141,7 @@
                         pricing.</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    <button
-                        class="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-bold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-                        <span class="material-symbols-outlined text-lg">file_download</span>
-                        Export CSV
-                    </button>
+                    
                     <a href="/admin/product-add">
                         <button
                         class="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
@@ -180,15 +165,7 @@
                 <button
                     class="px-4 py-1.5 bg-primary/10 text-primary border border-primary/20 rounded-full text-xs font-bold">All
                     Products</button>
-                <button
-                    class="px-4 py-1.5 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-bold hover:border-primary transition-colors">Boots</button>
-                <button
-                    class="px-4 py-1.5 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-bold hover:border-primary transition-colors">Balls</button>
-                <button
-                    class="px-4 py-1.5 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-bold hover:border-primary transition-colors">Apparel</button>
-                <button
-                    class="px-4 py-1.5 bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-full text-xs font-bold hover:border-primary transition-colors text-orange-500">Low
-                    Stock Only</button>
+                
                 
             </div>
             <!-- Table Section -->

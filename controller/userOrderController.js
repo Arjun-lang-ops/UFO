@@ -1,5 +1,6 @@
-import { placeOrderService } from "../service/userOrderService.js";
+import { placeOrderService,orderHistoryService, returnService } from "../service/userOrderService.js";
 import Order from "../models/orderModel.js";
+import { orderDetailsService } from "../service/adminOrderService.js";
 export const orderConfirmRender = async (req, res) => {
     try {
 
@@ -48,5 +49,53 @@ export const placeOrderController=async(req,res)=>{
             success:false,
             message:error.message
         })
+    }
+};
+
+
+
+export const orderHistoryRender=async(req,res)=>{
+    try {
+
+        const userId=req.session.user || req.session.userId || req.user?._id;
+        const orders=await orderHistoryService(userId);
+
+        return res.render('userViews/userOrderListing',{orders});
+    } catch (error) {
+        console.log(error);
+        res.redirect('/profile')
+    }
+}
+
+
+export const orderDetailsRender=async(req,res)=>{
+    try {
+
+        const orderId=req.params.id;
+        console.log('OrderId:' ,orderId)
+        const orderDetails=await orderDetailsService(orderId);
+
+        if(!orderDetails){
+            res.redirect("/orderHistory")
+        }
+        return res.render('userViews/userOrderDetails',{orderDetails})
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+export const orderReturnRender=async(req,res)=>{
+    try {
+        const orderId=req.params.id;
+
+        const returnItem=await returnService(orderId);
+
+        if(!returnItem){
+         return res.redirect('/orderHistory/:id')
+        }
+        return res.render('userViews/userOrderReturn',{returnItem})
+    } catch (error) {
+        console.log(error)
     }
 }

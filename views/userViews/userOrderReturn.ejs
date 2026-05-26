@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Product Return Details - Urban Football</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1c242e",
+                        "border-dark": "#283039",
+                        "text-secondary": "#9dabb9"
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #101922;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #283039;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3e4856;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col font-display selection:bg-primary/30">
+    <%
+        const order = returnItem;
+        const items = order?.items || [];
+        const formatCurrency = amount => `Rs. ${Number(amount || 0).toLocaleString("en-IN")}`;
+        const formatDate = date => date
+            ? new Date(date).toLocaleDateString("en-IN", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric"
+            })
+            : "";
+    %>
+    <header
+        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-border-dark px-4 lg:px-10 py-3 bg-white dark:bg-surface-dark sticky top-0 z-50">
+        <div class="flex items-center gap-4 lg:gap-8">
+            <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+                <div class="size-8 flex items-center justify-center text-primary">
+                    <span class="material-symbols-outlined text-3xl">sports_soccer</span>
+                </div>
+                <h2 class="hidden md:block text-lg font-bold leading-tight tracking-[-0.015em]"> Urban Football 
+                </h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-6 lg:gap-9">
+                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="/home">Shop</a>
+                
+            </nav>
+        </div>
+        <div class="flex flex-1 justify-end gap-4 lg:gap-8">
+            <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+                <div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-gray-200 dark:border-none">
+                    <div
+                        class="text-text-secondary flex border-none bg-gray-50 dark:bg-border-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+                        <span class="material-symbols-outlined text-[24px]">search</span>
+                    </div>
+                    <input
+                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-gray-50 dark:bg-border-dark focus:border-none h-full placeholder:text-text-secondary px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                        placeholder="Search products..." value="" />
+                </div>
+            </label>
+            <div class="flex gap-2">
+                <button
+                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                </button>
+                <button
+                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">notifications</span>
+                </button>
+                <button
+                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                    <span class="material-symbols-outlined text-[20px]">account_circle</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="flex-1 flex justify-center py-5 px-4 md:px-8 lg:px-12 xl:px-40">
+        <div class="flex flex-col md:flex-row w-full max-w-[1280px] gap-8">
+            <aside class="w-full md:w-64 flex-shrink-0">
+                <div class="sticky top-24 flex flex-col gap-6">
+                    <div
+                        class="flex gap-3 items-center p-4 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark">
+                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 shadow-inner"
+                            data-alt="User profile picture of a football fan"
+                            style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_I8YVj0_qwyi_nZ_cqgcjnK_ddZ6B6zun2Rs02d6G370QMmZ5T02LYQTuEg6txKqO56rGmh288NeBim2KyAKm2uThQ5BtrZRufI5DiqPZLGdwyHhjJmWW4rch0W92L-1CdkX1sdJr3651GWjEPjQvsg6sqUyEog2CB7kg2qu49mP5fcryB6i33KmLOPaUQ-k-fimSPh9eMhOs1oRJqePeMw5oyYwl2H-rlxe3to4yJhWR0LBFMCp7drA7RVuHt-O6s_owRmav2P4");'>
+                        </div>
+                        <div class="flex flex-col">
+                            <h1 class="text-base font-bold leading-tight"><%=returnItem.user.fullname%></h1>
+                            <p class="text-text-secondary text-xs">Elite Member</p>
+                        </div>
+                    </div>
+                    <nav
+                        class="flex flex-col gap-2 p-2 rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark">
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
+                            href="#">
+                            <span class="material-symbols-outlined text-[24px] group-hover:text-primary">person</span>
+                            <span class="text-sm font-medium">Profile Settings</span>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 dark:bg-border-dark text-primary dark:text-white"
+                            href="#">
+                            <span class="material-symbols-outlined text-[24px] text-primary">assignment</span>
+                            <span class="text-sm font-medium">Order History</span>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
+                            href="#">
+                            <span
+                                class="material-symbols-outlined text-[24px] group-hover:text-primary">location_on</span>
+                            <span class="text-sm font-medium">Saved Addresses</span>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
+                            href="#">
+                            <span
+                                class="material-symbols-outlined text-[24px] group-hover:text-primary">credit_card</span>
+                            <span class="text-sm font-medium">Payment Methods</span>
+                        </a>
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
+                            href="#">
+                            <span class="material-symbols-outlined text-[24px] group-hover:text-primary">favorite</span>
+                            <span class="text-sm font-medium">Wishlist</span>
+                        </a>
+                    </nav>
+                </div>
+            </aside>
+            <main class="flex-1 flex flex-col min-w-0">
+                <div class="flex flex-wrap gap-2 pb-4">
+                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="/home">Home</a>
+                    <span class="text-text-secondary text-sm font-medium">/</span>
+                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="#">Account</a>
+                    <span class="text-text-secondary text-sm font-medium">/</span>
+                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="/orderHistory">Orders</a>
+                    <span class="text-text-secondary text-sm font-medium">/</span>
+                    <span class="text-slate-900 dark:text-white text-sm font-medium">Return Request</span>
+                </div>
+                <div class="flex flex-col gap-2 mb-8">
+                    <h1 class="text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Product Return Details
+                    </h1>
+                    <p class="text-text-secondary text-base">Order <%= order.orderNumber %> placed on <%= formatDate(order.createdAt || order.orderedAt) %></p>
+                </div>
+                <div
+                    class="bg-white dark:bg-surface-dark rounded-xl border border-gray-200 dark:border-border-dark p-6 md:p-8 shadow-sm">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 pb-8 border-b border-gray-200 dark:border-border-dark">
+                        <div class="rounded-xl bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-border-dark p-4">
+                            <p class="text-xs uppercase font-bold text-text-secondary tracking-widest">Order Number</p>
+                            <p class="mt-1 font-bold text-slate-900 dark:text-white"><%= order.orderNumber %></p>
+                        </div>
+                        <div class="rounded-xl bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-border-dark p-4">
+                            <p class="text-xs uppercase font-bold text-text-secondary tracking-widest">Order Status</p>
+                            <p class="mt-1 font-bold text-slate-900 dark:text-white"><%= order.orderStatus %></p>
+                        </div>
+                        <div class="rounded-xl bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-border-dark p-4">
+                            <p class="text-xs uppercase font-bold text-text-secondary tracking-widest">Order Total</p>
+                            <p class="mt-1 font-bold text-slate-900 dark:text-white"><%= formatCurrency(order.totalAmount) %></p>
+                        </div>
+                    </div>
+
+                    <form class="flex flex-col gap-8">
+                        <input type="hidden" name="orderId" value="<%= order._id %>" />
+
+                        <div class="flex flex-col gap-4">
+                            <div>
+                                <h2 class="text-lg font-bold text-slate-900 dark:text-white">Select Product to Return</h2>
+                                <p class="text-sm text-text-secondary">Choose the product and quantity you want to return from this order.</p>
+                            </div>
+
+                            <div class="grid grid-cols-1 gap-4">
+                                <% items.forEach((item, index) => { %>
+                                    <%
+                                        const product = item.product;
+                                        const selectedVariant = product?.variants?.find(variant =>
+                                            String(variant._id) === String(item.variant)
+                                        );
+                                        const fallbackVariant = product?.variants?.[0];
+                                        const itemImage = selectedVariant?.images?.[0] || fallbackVariant?.images?.[0] || "";
+                                    %>
+                                    <label
+                                        class="relative flex flex-col sm:flex-row gap-4 p-4 rounded-xl border border-gray-200 dark:border-border-dark cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-white/5 has-[:checked]:border-primary has-[:checked]:bg-primary/5 dark:has-[:checked]:bg-primary/10">
+                                        <div class="flex items-start gap-4 flex-1">
+                                            <input
+                                                class="mt-2 size-4 text-primary border-gray-300 dark:border-gray-600 focus:ring-primary"
+                                                name="returnItemId"
+                                                type="radio"
+                                                value="<%= item.variant %>"
+                                                <%= index === 0 ? "checked" : "" %> />
+
+                                            <% if (itemImage) { %>
+                                                <img class="size-20 md:size-24 rounded-lg border border-gray-100 dark:border-border-dark object-cover shrink-0"
+                                                    alt="<%= product?.name || 'Product image' %>"
+                                                    src="<%= itemImage %>" />
+                                            <% } else { %>
+                                                <div
+                                                    class="size-20 md:size-24 rounded-lg border border-gray-100 dark:border-border-dark bg-gray-50 dark:bg-background-dark flex items-center justify-center shrink-0">
+                                                    <span class="material-symbols-outlined text-text-secondary">inventory_2</span>
+                                                </div>
+                                            <% } %>
+
+                                            <div class="flex flex-col gap-1">
+                                                <h3 class="text-lg font-bold text-slate-900 dark:text-white"><%= product?.name || "Product unavailable" %></h3>
+                                                <% if (selectedVariant?.size || selectedVariant?.color) { %>
+                                                    <p class="text-sm text-text-secondary">
+                                                        <% if (selectedVariant?.size) { %>Size: <span class="text-slate-900 dark:text-white"><%= selectedVariant.size %></span><% } %>
+                                                        <% if (selectedVariant?.size && selectedVariant?.color) { %> | <% } %>
+                                                        <% if (selectedVariant?.color) { %>Color: <span class="text-slate-900 dark:text-white"><%= selectedVariant.color %></span><% } %>
+                                                    </p>
+                                                <% } %>
+                                                <% if (selectedVariant?.sku) { %>
+                                                    <p class="text-sm text-text-secondary">SKU: <span class="text-slate-900 dark:text-white"><%= selectedVariant.sku %></span></p>
+                                                <% } %>
+                                                <p class="text-sm text-text-secondary">Purchased quantity: <span class="text-slate-900 dark:text-white"><%= item.quantity %></span></p>
+                                                <p class="text-sm font-medium text-slate-900 dark:text-white mt-1"><%= formatCurrency(item.totalPrice || (item.price * item.quantity)) %></p>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex flex-col gap-2 sm:w-36">
+                                            <span class="text-sm font-bold text-slate-900 dark:text-white">Return Qty</span>
+                                            <input
+                                                class="w-full h-11 px-4 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-border-dark text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary"
+                                                max="<%= item.quantity %>"
+                                                min="1"
+                                                name="returnQuantity_<%= item.variant %>"
+                                                type="number"
+                                                value="1" />
+                                            <span class="text-xs text-text-secondary">Max: <%= item.quantity %></span>
+                                        </div>
+                                    </label>
+                                <% }) %>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="flex flex-col gap-2">
+                                <label class="text-sm font-bold text-slate-900 dark:text-white"
+                                    for="return-reason">Reason for Return</label>
+                                <div class="relative">
+                                    <select
+                                        class="w-full h-11 px-4 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-border-dark text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary appearance-none cursor-pointer"
+                                        id="return-reason"
+                                        name="returnReason"
+                                        required>
+                                        <option disabled="" selected="" value="">Select a reason</option>
+                                        <option value="wrong_size">Size didn't fit</option>
+                                        <option value="defective">Item defective or damaged</option>
+                                        <option value="wrong_item">Received wrong item</option>
+                                        <option value="not_liked">Did not like the style</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <span
+                                        class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-text-secondary">expand_more</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-2">
+                                <label class="text-sm font-bold text-slate-900 dark:text-white"
+                                    for="refund-method">Refund Method</label>
+                                <input
+                                    class="w-full h-11 px-4 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-border-dark text-slate-900 dark:text-white"
+                                    id="refund-method"
+                                    readonly
+                                    type="text"
+                                    value="<%= order.paymentMethod === 'COD' ? 'Refund after pickup approval' : order.paymentMethod %>" />
+                                <p class="text-xs text-text-secondary">Original payment status: <%= order.paymentStatus %></p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-sm font-bold text-slate-900 dark:text-white"
+                                for="return-comments">Additional Comments <span
+                                    class="text-text-secondary font-normal">(Optional)</span></label>
+                            <textarea
+                                class="w-full p-4 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-border-dark text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary resize-none placeholder:text-text-secondary"
+                                id="return-comments"
+                                name="returnComments"
+                                placeholder="Please provide more details about why you are returning this product..."
+                                rows="4"></textarea>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <label class="text-sm font-bold text-slate-900 dark:text-white">Return Shipping
+                                Method</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <label
+                                    class="relative flex items-start gap-4 p-4 rounded-xl border border-gray-200 dark:border-border-dark cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-white/5 has-[:checked]:border-primary has-[:checked]:bg-primary/5 dark:has-[:checked]:bg-primary/10">
+                                    <div class="flex items-center h-5">
+                                        <input checked=""
+                                            class="size-4 text-primary border-gray-300 dark:border-gray-600 focus:ring-primary"
+                                            name="shipping_method" type="radio" value="courier_pickup" />
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <div class="flex items-center gap-2">
+                                            <span class="material-symbols-outlined text-primary">local_shipping</span>
+                                            <span class="font-bold text-slate-900 dark:text-white">Courier Pickup</span>
+                                        </div>
+                                        <p class="text-sm text-text-secondary">A courier will pick up the package from
+                                            your delivery address.</p>
+                                    </div>
+                                </label>
+                                <label
+                                    class="relative flex items-start gap-4 p-4 rounded-xl border border-gray-200 dark:border-border-dark cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-white/5 has-[:checked]:border-primary has-[:checked]:bg-primary/5 dark:has-[:checked]:bg-primary/10">
+                                    <div class="flex items-center h-5">
+                                        <input
+                                            class="size-4 text-primary border-gray-300 dark:border-gray-600 focus:ring-primary"
+                                            name="shipping_method" type="radio" value="drop_off" />
+                                    </div>
+                                    <div class="flex flex-col gap-1">
+                                        <div class="flex items-center gap-2">
+                                            <span class="material-symbols-outlined text-primary">storefront</span>
+                                            <span class="font-bold text-slate-900 dark:text-white">Drop-off Point</span>
+                                        </div>
+                                        <p class="text-sm text-text-secondary">Drop off your package at the nearest
+                                            partner store or locker.</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col-reverse sm:flex-row gap-4 mt-4 pt-6 border-t border-gray-200 dark:border-border-dark">
+                            <button
+                                class="h-12 px-6 rounded-lg bg-gray-100 dark:bg-border-dark hover:bg-gray-200 dark:hover:bg-[#323b46] text-slate-900 dark:text-white font-bold transition-colors"
+                                type="button"
+                                onclick="window.location.href='/orderHistory/<%= order._id %>'">
+                                Cancel
+                            </button>
+                            <button
+                                class="h-12 px-8 rounded-lg bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-primary/20 transition-colors flex items-center justify-center gap-2"
+                                type="submit">
+                                <span>Submit Return Request</span>
+                                <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    </div>
+
+</body>
+
+</html>
