@@ -141,9 +141,21 @@ export const downloadInvoice = async (req, res) => {
 
     rowY += 25;
 
-    const subtotal = order.subtotal || order.totalAmount;
-    const discount = order.discount || 0;
-    const shipping = order.shippingCharge || 0;
+    const subtotal =
+  Number(order.subTotal || 0);
+
+const discount =
+  Number(order.discount || 0);
+
+const shipping =
+  Number(order.shippingCharge || 0);
+
+const grandTotal =
+  Number(
+    order.finalAmount ??
+    order.totalAmount ??
+    subtotal - discount + shipping
+  );
 
     const totalsX = 390;
 
@@ -184,7 +196,7 @@ export const downloadInvoice = async (req, res) => {
       .font("Helvetica-Bold")
       .fontSize(13)
       .text("Grand Total:", totalsX, rowY)
-      .text(`₹${order.finalAmount}`, 470, rowY, {
+      .text(`₹${grandTotal}`, 470, rowY, {
         width: 80,
         align: "right",
       });

@@ -26,9 +26,51 @@ const orderItemSchema = new mongoose.Schema({
     totalPrice: {
         type: Number,
         required: true
-    }
+    },
+     // RETURN DETAILS
+    returnRequest: {
+      type: Boolean,
+      default: false,
+    },
+
+    returnQuantity: {
+      type: Number,
+      default: 0,
+    },
+
+    returnReason: {
+      type: String,
+      default:''
+    },
+
+    returnDescription: {
+      type: String,
+      trim: true,
+      default: "",
+    },
+
+    returnStatus: {
+      type: String,
+      default: 'Pending',
+    },
+
+    requestedAt:{
+        type:Date,
+        default:Date.now
+    },
+
+
+    returnedAt:{
+        type:Date,
+        default:Date.now
+    },
+
+    adminReturnRemark: {
+      type: String,
+      default: "",
+    },
 }, {
-    _id: false
+    _id: true
 });
 
 const orderSchema = new mongoose.Schema({

@@ -128,6 +128,9 @@
         method="GET"
         class="flex items-center gap-2"
     >
+        <% if(orderData.status){ %>
+            <input type="hidden" name="status" value="<%= orderData.status %>">
+        <% } %>
 
         <div class="relative min-w-[320px]">
 
@@ -163,63 +166,54 @@
         </button>
 
         <!-- Clear button -->
-        <% if(orderData.search){ %>
+        <%
+            const clearSearchParams = new URLSearchParams();
+            if (orderData.status) {
+                clearSearchParams.set("status", orderData.status);
+            }
+        %>
 
-            <a
-                href="/admin/orderManagement"
-                class="px-4 py-2 rounded-lg
-                border border-slate-300 dark:border-slate-700
-                bg-white dark:bg-slate-900
-                text-sm font-semibold
-                hover:bg-slate-100 dark:hover:bg-slate-800
-                transition"
-            >
-                Clear
-            </a>
-
-        <% } %>
+        <a
+            href="/admin/orderManagement<%= clearSearchParams.toString() ? '?' + clearSearchParams.toString() : '' %>"
+            class="px-4 py-2 rounded-lg
+            border border-slate-300 dark:border-slate-700
+            bg-white dark:bg-slate-900
+            text-sm font-semibold
+            hover:bg-slate-100 dark:hover:bg-slate-800
+            transition"
+        >
+            Clear
+        </a>
 
     </form>
 
 </div>
                         </div>
-                        <div class="flex gap-2">
-                            <button
-                                class="flex items-center gap-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-3 py-2 rounded-lg text-sm font-medium hover:border-primary transition-colors">
-                                <span class="material-symbols-outlined text-lg">filter_list</span>
-                                All Orders
-                                <span class="material-symbols-outlined text-lg">expand_more</span>
-                            </button>
-                            <button
-                                class="flex items-center gap-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-3 py-2 rounded-lg text-sm font-medium hover:border-primary transition-colors">
-                                Status: Any
-                                <span class="material-symbols-outlined text-lg">expand_more</span>
-                            </button>
-                            <button
-                                class="flex items-center gap-2 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 px-3 py-2 rounded-lg text-sm font-medium hover:border-primary transition-colors">
-                                Date Range
-                                <span class="material-symbols-outlined text-lg">calendar_today</span>
-                            </button>
-                        </div>
+                        
                     </div>
                     <div class="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
-                        <span>Showing 1-10 of 1,240 results</span>
+                        <span>Showing <%= orderData.orders.length ? ((orderData.currentPage - 1) * 10) + 1 : 0 %>-<%= ((orderData.currentPage - 1) * 10) + orderData.orders.length %> of <%= orderData.totalOrders || 0 %> results</span>
                     </div>
                 </div>
                 <!-- Chips Row -->
                 <div class="flex gap-2 pb-2 overflow-x-auto no-scrollbar">
-                    <button
-                        class="px-4 py-1.5 rounded-full bg-primary text-white text-xs font-semibold whitespace-nowrap">All</button>
-                    <button
-                        class="px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold whitespace-nowrap hover:border-primary">Pending</button>
-                    <button
-                        class="px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold whitespace-nowrap hover:border-primary">Processing</button>
-                    <button
-                        class="px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold whitespace-nowrap hover:border-primary">Shipped</button>
-                    <button
-                        class="px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold whitespace-nowrap hover:border-primary">Delivered</button>
-                    <button
-                        class="px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-xs font-semibold whitespace-nowrap hover:border-primary text-red-500">Cancelled</button>
+                    <%
+                        const chipParams = new URLSearchParams();
+                        if (orderData.search) {
+                            chipParams.set("search", orderData.search);
+                        }
+                    %>
+                    <a
+                        href="?<%= chipParams.toString() %>"
+                        class="px-4 py-1.5 rounded-full <%= !orderData.status ? 'bg-primary text-white' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary' %> text-xs font-semibold whitespace-nowrap">All</a>
+                    <% ["Pending", "Confirmed", "Shipped", "Delivered", "Cancelled", "Returned"].forEach(status => { %>
+                        <%
+                            chipParams.set("status", status);
+                        %>
+                        <a
+                            href="?<%= chipParams.toString() %>"
+                            class="px-4 py-1.5 rounded-full <%= orderData.status === status ? 'bg-primary text-white' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary' %> text-xs font-semibold whitespace-nowrap <%= ['Cancelled', 'Returned'].includes(status) && orderData.status !== status ? 'text-red-500' : '' %>"><%= status %></a>
+                    <% }) %>
                 </div>
                 <!-- Table Section -->
                 <div
@@ -312,7 +306,7 @@
 
         <span
             class="px-2 py-1 rounded-full text-[10px] font-bold
-            <%= order.paymentStatus === 'PAID'
+            <%= order.paymentStatus === 'Paid'
                 ? 'bg-emerald-100 text-emerald-600'
                 : 'bg-amber-100 text-amber-600'
             %>">
@@ -328,9 +322,9 @@
 
         <span
             class="px-2 py-1 rounded-full text-[10px] font-bold
-            <%= order.orderStatus === 'DELIVERED'
+            <%= order.orderStatus === 'Delivered'
                 ? 'bg-emerald-100 text-emerald-600'
-                : order.orderStatus === 'CANCELLED'
+                : order.orderStatus === 'Cancelled'
                 ? 'bg-red-100 text-red-600'
                 : 'bg-blue-100 text-blue-600'
             %>">
@@ -395,6 +389,10 @@
 
     if (orderData.search) {
         params.set("search", orderData.search);
+    }
+
+    if (orderData.status) {
+        params.set("status", orderData.status);
     }
 
     const groupSize = 3;

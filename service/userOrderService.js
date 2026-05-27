@@ -13,12 +13,13 @@ export const placeOrderService = async (
   paymentMethod,
   couponCode,
 ) => {
-
-    console.log(userId)
+  console.log(userId);
   //cart
-  const cart = await Cart.findOne({ userId: userId }).populate("items.productId");
+  const cart = await Cart.findOne({ userId: userId }).populate(
+    "items.productId",
+  );
 
-  console.log(cart)
+  console.log(cart);
 
   if (!cart || !cart.items || cart.items.length === 0) {
     throw new Error("cart is empty");
@@ -40,134 +41,173 @@ export const placeOrderService = async (
 
   let subTotal = 0;
 
-  const orderItems =[];
+  const orderItems = [];
 
-  for(const item of cart.items){
-    const product=item.productId;
+  for (const item of cart.items) {
+    const product = item.productId;
 
-    if(!product){
-        throw new Error('Product not found');
-    };
+    if (!product) {
+      throw new Error("Product not found");
+    }
 
     //embedded variant
-   
-  const variant = product.variants.id(item.variantId);
 
-  if(!variant){
-    throw new Error('variant not found')
-  };
+    const variant = product.variants.id(item.variantId);
 
-  //stock check
+    if (!variant) {
+      throw new Error("variant not found");
+    }
 
-  if(variant.stock < item.quantity){
-    throw new Error(`${product.name} is out of stock`)
+    //stock check
+
+    if (variant.stock < item.quantity) {
+      throw new Error(`${product.name} is out of stock`);
+    }
+
+    //DB price
+
+    const price = variant.discountedPrice ?? variant.price;
+
+    const totalPrice = price * item.quantity;
+
+    subTotal += totalPrice;
+
+    //push items
+
+    orderItems.push({
+      product: product._id,
+      variant: variant._id,
+      quantity: item.quantity,
+      price,
+      totalPrice,
+    });
   }
-  
-  //DB price
-
-  const price=variant.discountedPrice ?? variant.price;
-
-  const totalPrice= price * item.quantity;
-
-  subTotal += totalPrice;
-
-  //push items
-
-  orderItems.push({
-    product: product._id,
-    variant : variant._id,
-    quantity:item.quantity,
-    price,
-    totalPrice
-  })
-  };
 
   //totals
 
-  const discount=0;
+  const discount = 0;
 
-  const deliveryCharge =subTotal >3999 ? 0 : 50;
-  const totalAmount=subTotal - discount + deliveryCharge;
+  const deliveryCharge = subTotal > 3999 ? 0 : 50;
+  const totalAmount = subTotal - discount + deliveryCharge;
 
+  let paymentStatus = "Pending";
 
-  let paymentStatus= 'Pending';
-
-  if(paymentMethod==='WALLET'){
-    paymentStatus='Paid'
+  if (paymentMethod === "WALLET") {
+    paymentStatus = "Paid";
   }
 
-  const deliveryDate =
-    new Date();
+  const deliveryDate = new Date();
 
-deliveryDate.setDate(
-    deliveryDate.getDate() + 5
-);
-
+  deliveryDate.setDate(deliveryDate.getDate() + 5);
 
   //create order
 
   const order = await Order.create({
-    user:userId,
-    items:orderItems,
-    address:{
-        fullname:selectedAddress.fullname,
-        phone:selectedAddress.phone,
-        country:selectedAddress.country,
-        state:selectedAddress.state,
-        street:selectedAddress.street,
-        apartment:selectedAddress.apartment,
-        pincode:selectedAddress.pincode
+    user: userId,
+    items: orderItems,
+    address: {
+      fullname: selectedAddress.fullname,
+      phone: selectedAddress.phone,
+      country: selectedAddress.country,
+      state: selectedAddress.state,
+      street: selectedAddress.street,
+      apartment: selectedAddress.apartment,
+      pincode: selectedAddress.pincode,
     },
 
     paymentMethod,
     paymentStatus,
-    orderStatus:'Confirmed',
-    orderNumber:generateOrderNumber(),
+    orderStatus: "Confirmed",
+    orderNumber: generateOrderNumber(),
     subTotal,
     discount,
     deliveryCharge,
     totalAmount,
     couponCode,
-    estimatedDelivery:deliveryDate
+    estimatedDelivery: deliveryDate,
   });
 
   //reduce Stock
 
-  for(const item of cart.items){
-    await Product.updateOne({
+  for (const item of cart.items) {
+    await Product.updateOne(
+      {
         _id: item.productId._id,
-        'variants._id':item.variantId
-    },
-{
-    $inc:{
-        'variants.$.stock':-item.quantity
-    }
-})
+        "variants._id": item.variantId,
+      },
+      {
+        $inc: {
+          "variants.$.stock": -item.quantity,
+        },
+      },
+    );
   }
 
   //clear cart
 
-  cart.items=[];
+  cart.items = [];
 
   await cart.save();
 
   return order;
-
-  
-
 };
 
+export const orderHistoryService = async (userId) => {
+  const orders = await Order.find({ user: userId })
+    .populate("items.product")
+    .populate("user")
+    .sort({ createdAt: -1 });
 
+  return orders;
+};
 
-export const orderHistoryService=async(userId)=>{
-  const orders=await Order.find({user:userId}).populate('items.product').populate('user').sort({createdAt:-1});
+export const returnService = async (orderId) => {
+  const returnItem = await Order.findById(orderId)
+    .populate("items.product")
+    .populate("user");
+  return returnItem;
+};
 
-  return orders
-}
+export const requestReturnService = async ({ userId,
+  orderId,
+  returnItemId,
+  quantity,
+  reason,
+  description,
+  shippingMethod,}
+ 
+) => {
+  const order = await Order.findOne({ _id: orderId, user: userId });
 
+  if (!order) {
+    throw new Error("Order not found");
+  }
 
+  if (order.orderStatus !== "Delivered") {
+    throw new Error("Return allowed only after delivery");
+  }
 
-export const returnService=async(orderId)=>{
-  const returnItem=await Order.findById(orderId).populate('items.product').populate('user');
-  return returnItem
-}
+  const item = order.items.id(returnItemId);
+  if (!item) {
+    throw new Error("Item not found");
+  }
+
+  if (item.returnRequest) {
+    throw new Error("Return already requested");
+  }
+
+  if (!quantity || quantity < 1 || quantity > item.quantity) {
+    throw new Error("Invalid quantity");
+  }
+
+  item.returnRequest = true;
+  item.returnQuantity = quantity;
+  item.returnReason = reason;
+  item.returnDescription = description || "";
+
+  item.returnStatus = "Pending";
+  item.requestedAt = new Date();
+  await order.save();
+
+  return order;
+};

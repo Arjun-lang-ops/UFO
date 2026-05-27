@@ -6,8 +6,9 @@ export const adminOrderManagementRender = async (req, res) => {
     const page = Number(req.query.page || 1);
 
     const search = req.query.search || "";
+    const status = req.query.status || "";
 
-    const orderData = await orderManagementService(page, search);
+    const orderData = await orderManagementService(page, search, status);
 
     return res.render("adminViews/adminOrderManagement", { orderData });
   } catch (error) {
@@ -18,7 +19,9 @@ export const adminOrderManagementRender = async (req, res) => {
         orders: [],
         currentPage: 1,
         totalPages: 1,
+        totalOrders: 0,
         search: "",
+        status: "",
       },
       error: "Failed to load orders",
     });
@@ -31,9 +34,11 @@ export const orderDetailsRender = async (req, res) => {
       .populate("user")
       .populate("items.product");
     if (!order) {
-      return res.redirect("/admin/orderManagement");
+      return null;
     }
-    return res.render("adminViews/adminOrderDetails", { order });
+
+    const returnItems=order.items.filter(item=>item.returnRequest)
+    return res.render("adminViews/adminOrderDetails", { order,returnItems });
   } catch (error) {
     console.log(error);
 
@@ -79,3 +84,7 @@ export const updateOrderStatus = async (req, res) => {
     });
   }
 };
+
+
+
+

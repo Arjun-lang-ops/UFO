@@ -1,4 +1,4 @@
-import { placeOrderService,orderHistoryService, returnService } from "../service/userOrderService.js";
+import { placeOrderService,orderHistoryService, returnService, requestReturnService } from "../service/userOrderService.js";
 import Order from "../models/orderModel.js";
 import { orderDetailsService } from "../service/adminOrderService.js";
 export const orderConfirmRender = async (req, res) => {
@@ -99,3 +99,50 @@ export const orderReturnRender=async(req,res)=>{
         console.log(error)
     }
 }
+
+
+export const requestReturn = async (req, res) => {
+  try {
+    const userId =
+      req.session.user ||
+      req.session.userId ||
+      req.user?._id;
+
+    const {
+      orderId,
+      returnItemId,
+      returnReason,
+      returnComments,
+      shipping_method
+    } = req.body;
+
+    console.log(req.body)
+
+    const qty =
+      req.body[`returnQuantity_${returnItemId}`];
+
+    await requestReturnService({
+      userId,
+      orderId,
+      returnItemId,
+      quantity: Number(qty),
+      reason: returnReason,
+      description: returnComments,
+      shippingMethod: shipping_method
+    });
+
+    return res.status(200).json({
+        success:true,
+        message:'Return request submitted'
+    });
+
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({
+      success: false,
+      message:
+        error.message ||
+        "Return failed"
+    });
+  }
+};

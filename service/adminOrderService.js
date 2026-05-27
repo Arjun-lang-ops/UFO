@@ -1,13 +1,28 @@
 import Order from "../models/orderModel.js";
 import User from "../models/userModel.js";
 
-export const orderManagementService=async(page,search)=>{
+export const orderManagementService=async(page,search,status)=>{
 
     const limit=10;
 
     const skip=(page-1)*limit;
 
     const filter={};
+
+    const validStatuses = [
+        "Pending",
+        "Confirmed",
+        "Shipped",
+        "Delivered",
+        "Cancelled",
+        "Returned"
+    ];
+
+    const selectedStatus = validStatuses.includes(status) ? status : "";
+
+    if (selectedStatus) {
+        filter.orderStatus = selectedStatus;
+    }
 
     if (search && search.trim()) {
         const users = await User.find(
@@ -48,7 +63,9 @@ export const orderManagementService=async(page,search)=>{
         orders,
         currentPage:Number(page),
         totalPages,
-        search
+        totalOrders,
+        search,
+        status: selectedStatus
 
     }
 

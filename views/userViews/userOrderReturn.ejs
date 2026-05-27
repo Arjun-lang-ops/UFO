@@ -13,6 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -68,6 +69,7 @@
     <%
         const order = returnItem;
         const items = order?.items || [];
+        const availableReturnItems = items.filter(item => !item.returnRequest);
         const formatCurrency = amount => `Rs. ${Number(amount || 0).toLocaleString("en-IN")}`;
         const formatDate = date => date
             ? new Date(date).toLocaleDateString("en-IN", {
@@ -199,7 +201,7 @@
                         </div>
                     </div>
 
-                    <form class="flex flex-col gap-8">
+                    <form class="flex flex-col gap-8" id="returnRequestForm">
                         <input type="hidden" name="orderId" value="<%= order._id %>" />
 
                         <div class="flex flex-col gap-4">
@@ -209,7 +211,7 @@
                             </div>
 
                             <div class="grid grid-cols-1 gap-4">
-                                <% items.forEach((item, index) => { %>
+                                <% items.forEach((item) => { %>
                                     <%
                                         const product = item.product;
                                         const selectedVariant = product?.variants?.find(variant =>
@@ -217,16 +219,19 @@
                                         );
                                         const fallbackVariant = product?.variants?.[0];
                                         const itemImage = selectedVariant?.images?.[0] || fallbackVariant?.images?.[0] || "";
+                                        const isReturnRequested = Boolean(item.returnRequest);
+                                        const isFirstAvailable = availableReturnItems[0] && String(availableReturnItems[0]._id) === String(item._id);
                                     %>
                                     <label
-                                        class="relative flex flex-col sm:flex-row gap-4 p-4 rounded-xl border border-gray-200 dark:border-border-dark cursor-pointer transition-all hover:bg-gray-50 dark:hover:bg-white/5 has-[:checked]:border-primary has-[:checked]:bg-primary/5 dark:has-[:checked]:bg-primary/10">
+                                        class="relative flex flex-col sm:flex-row gap-4 p-4 rounded-xl border <%= isReturnRequested ? 'border-amber-200 dark:border-amber-900/50 bg-amber-50/60 dark:bg-amber-900/10 cursor-not-allowed opacity-75' : 'border-gray-200 dark:border-border-dark cursor-pointer hover:bg-gray-50 dark:hover:bg-white/5 has-[:checked]:border-primary has-[:checked]:bg-primary/5 dark:has-[:checked]:bg-primary/10' %> transition-all">
                                         <div class="flex items-start gap-4 flex-1">
                                             <input
                                                 class="mt-2 size-4 text-primary border-gray-300 dark:border-gray-600 focus:ring-primary"
                                                 name="returnItemId"
                                                 type="radio"
-                                                value="<%= item.variant %>"
-                                                <%= index === 0 ? "checked" : "" %> />
+                                                value="<%= item._id %>"
+                                                <%= isFirstAvailable ? "checked" : "" %>
+                                                <%= isReturnRequested ? "disabled" : "" %> />
 
                                             <% if (itemImage) { %>
                                                 <img class="size-20 md:size-24 rounded-lg border border-gray-100 dark:border-border-dark object-cover shrink-0"
@@ -253,6 +258,21 @@
                                                 <% } %>
                                                 <p class="text-sm text-text-secondary">Purchased quantity: <span class="text-slate-900 dark:text-white"><%= item.quantity %></span></p>
                                                 <p class="text-sm font-medium text-slate-900 dark:text-white mt-1"><%= formatCurrency(item.totalPrice || (item.price * item.quantity)) %></p>
+                                                <% if (isReturnRequested) { %>
+                                                    <div class="mt-2 flex flex-wrap items-center gap-2">
+                                                        <span
+                                                            class="inline-flex items-center gap-1 rounded-full bg-amber-100 dark:bg-amber-900/30 px-3 py-1 text-xs font-bold text-amber-700 dark:text-amber-300">
+                                                            <span class="material-symbols-outlined text-base">assignment_return</span>
+                                                            Return Requested
+                                                        </span>
+                                                        <span class="text-xs text-text-secondary">
+                                                            Status: <%= item.returnStatus || "Pending" %>
+                                                        </span>
+                                                    </div>
+                                                    <% if (item.returnReason) { %>
+                                                        <p class="text-xs text-text-secondary">Reason: <%= item.returnReason %></p>
+                                                    <% } %>
+                                                <% } %>
                                             </div>
                                         </div>
 
@@ -262,9 +282,10 @@
                                                 class="w-full h-11 px-4 rounded-lg bg-gray-50 dark:bg-background-dark border border-gray-200 dark:border-border-dark text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/20 focus:border-primary"
                                                 max="<%= item.quantity %>"
                                                 min="1"
-                                                name="returnQuantity_<%= item.variant %>"
+                                                name="returnQuantity_<%= item._id %>"
                                                 type="number"
-                                                value="1" />
+                                                value="<%= isReturnRequested ? item.returnQuantity || 1 : 1 %>"
+                                                <%= isReturnRequested ? "disabled" : "" %> />
                                             <span class="text-xs text-text-secondary">Max: <%= item.quantity %></span>
                                         </div>
                                     </label>
@@ -363,9 +384,10 @@
                                 Cancel
                             </button>
                             <button
-                                class="h-12 px-8 rounded-lg bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-primary/20 transition-colors flex items-center justify-center gap-2"
-                                type="submit">
-                                <span>Submit Return Request</span>
+                                class="h-12 px-8 rounded-lg bg-primary hover:bg-blue-600 text-white font-bold shadow-lg shadow-primary/20 transition-colors flex items-center justify-center gap-2 <%= availableReturnItems.length ? '' : 'opacity-50 cursor-not-allowed' %>"
+                                type="submit"
+                                <%= availableReturnItems.length ? "" : "disabled" %>>
+                                <span><%= availableReturnItems.length ? "Submit Return Request" : "Return Already Requested" %></span>
                                 <span class="material-symbols-outlined text-lg">arrow_forward</span>
                             </button>
                         </div>
@@ -376,5 +398,105 @@
     </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document
+  .getElementById("returnRequestForm")
+  .addEventListener(
+    "submit",
+    async function (e) {
+
+      e.preventDefault();
+
+      const form = e.target;
+
+      const submitBtn =
+        form.querySelector(
+          'button[type="submit"]'
+        );
+
+      const oldText =
+        submitBtn.innerHTML;
+
+      try {
+
+        submitBtn.disabled =
+          true;
+
+        submitBtn.innerHTML =
+          "Submitting...";
+
+        const formData =
+          new FormData(form);
+
+        const payload =
+          Object.fromEntries(
+            formData.entries()
+          );
+
+        const response =
+          await fetch(
+            "/order/returnRequest",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
+              body:
+                JSON.stringify(
+                  payload
+                )
+            }
+          );
+
+        const data =
+          await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.message
+          );
+        }
+
+        await Swal.fire({
+          icon: "success",
+          title:
+            "Return Requested",
+          text:
+            data.message,
+          confirmButtonText:
+            "OK"
+        });
+
+        window.location.href =
+          "/orderHistory/" +
+          payload.orderId;
+
+      } catch (error) {
+
+        await Swal.fire({
+          icon: "error",
+          title:
+            "Return Failed",
+          text:
+            error.message ||
+            "Something went wrong",
+          confirmButtonText:
+            "OK"
+        });
+
+      } finally {
+
+        submitBtn.disabled =
+          false;
+
+        submitBtn.innerHTML =
+          oldText;
+      }
+    }
+  );
+</script>
 
 </html>
