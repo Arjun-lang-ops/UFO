@@ -6,6 +6,7 @@ import {
   orderReturnRender,
   placeOrderController,
   requestReturn,
+  requestCancel
 } from "../controller/userOrderController.js";
 import { downloadInvoice } from "../config/pdf.js";
 import { isLoggedIn } from "../middlewares/userAuth.js";
@@ -19,5 +20,6 @@ router.get("/orderReturn/:id", isLoggedIn, orderReturnRender);
 router.post("/checkout/confirm", placeOrderController);
 router.get("/invoice/:id/download", isLoggedIn, downloadInvoice);
 router.post("/order/returnRequest", requestReturn);
+router.post("/order/cancel", requestCancel);
 
 export default router;

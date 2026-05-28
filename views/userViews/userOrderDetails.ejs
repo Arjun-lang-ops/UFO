@@ -78,6 +78,7 @@
             : "";
         const formatCurrency = amount => `Rs. ${Number(amount || 0).toLocaleString("en-IN")}`;
         const currentStatus = order?.orderStatus || "Pending";
+        const cancellableOrderStatuses = ["Pending", "Confirmed", "Shipped"];
         const statusSteps = ["Pending", "Confirmed", "Shipped", "Delivered"];
         const currentStepIndex = currentStatus === "Cancelled" || currentStatus === "Returned"
             ? -1
@@ -217,6 +218,7 @@
                                     );
                                     const fallbackVariant = product?.variants?.[0];
                                     const itemImage = selectedVariant?.images?.[0] || fallbackVariant?.images?.[0] || "";
+                                    const canCancelItem = cancellableOrderStatuses.includes(currentStatus) && !item.cancelRequest && item.cancelStatus !== "Cancelled";
                                 %>
                                 <div class="p-6 flex gap-6">
                                     <% if (itemImage) { %>
@@ -247,22 +249,69 @@
                                         </div>
                                         <div class="flex flex-col md:items-end justify-between gap-3">
                                             <span class="text-lg font-bold"><%= formatCurrency(item.totalPrice || (item.price * item.quantity)) %></span>
-                                            <% if (currentStatus === "Delivered") { %>
+                                            <% if (canCancelItem) { %>
+                                                <button type="button"
+                                                    data-cancel-item-button
+                                                    data-order-id="<%= order._id %>"
+                                                    data-item-id="<%= item._id %>"
+                                                    data-product-name="<%= product?.name || 'this product' %>"
+                                                    data-quantity="<%= item.quantity %>"
+                                                    class="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 text-sm font-bold text-red-600 transition-colors hover:bg-red-100 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20">
+                                                    <span class="material-symbols-outlined text-lg">cancel</span>
+                                                    Cancel
+                                                </button>
+                                            <% } else if (item.cancelRequest) { %>
+                                                <div class="flex flex-col md:items-end gap-1">
+                                                    <span
+                                                        class="inline-flex items-center gap-1 rounded-full <%= item.cancelStatus === 'Rejected' ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300' : item.cancelStatus === 'Approved' || item.cancelStatus === 'Cancelled' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300' %> px-3 py-1 text-xs font-bold">
+                                                        <span class="material-symbols-outlined text-base">pending_actions</span>
+                                                        Cancellation <%= item.cancelStatus || "Pending" %>
+                                                    </span>
+                                                    <% if (item.cancelReason) { %>
+                                                        <span class="text-xs text-text-secondary">Reason: <%= item.cancelReason %></span>
+                                                    <% } %>
+                                                </div>
+                                            <% } else if (currentStatus === "Delivered") { %>
                                                 <% if (item.returnRequest) { %>
-                                                    <div class="flex flex-col md:items-end gap-1">
-                                                        <span
-                                                            class="inline-flex items-center gap-1 rounded-full bg-amber-100 dark:bg-amber-900/30 px-3 py-1 text-xs font-bold text-amber-700 dark:text-amber-300">
-                                                            <span class="material-symbols-outlined text-base">assignment_return</span>
-                                                            Return Requested
-                                                        </span>
-                                                        <% if (item.returnReason) { %>
-                                                            <span class="text-xs text-text-secondary">Reason: <%= item.returnReason %></span>
-                                                        <% } %>
-                                                    </div>
-                                                <% } else { %>
-                                                    <a href="/orderReturn/<%= order._id %>"
-                                                        class="text-primary text-sm font-bold hover:underline">Return Item</a>
-                                                <% } %>
+
+    <div class="flex flex-col md:items-end gap-1">
+
+        <span
+            class="inline-flex items-center gap-1 rounded-full
+            <%= item.returnStatus === 'Rejected'
+                ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'
+                : item.returnStatus === 'Approved'
+                ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300'
+                : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300'
+            %>
+            px-3 py-1 text-xs font-bold">
+
+            <span class="material-symbols-outlined text-base">
+                assignment_return
+            </span>
+
+            Return <%= item.returnStatus || "Pending" %>
+
+        </span>
+
+        <% if (item.returnReason) { %>
+            <span class="text-xs text-text-secondary">
+                Reason: <%= item.returnReason %>
+            </span>
+        <% } %>
+
+    </div>
+
+<% } else { %>
+
+    <a
+        href="/orderReturn/<%= order._id %>"
+        class="text-primary text-sm font-bold hover:underline"
+    >
+        Return Item
+    </a>
+
+<% } %>
                                             <% } %>
                                         </div>
                                     </div>
@@ -348,6 +397,149 @@
             </div>
         </div>
     </footer>
+    <div id="cancelRequestModal"
+        class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 px-4">
+        <form id="cancelRequestForm"
+            class="w-full max-w-lg rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl dark:border-border-dark dark:bg-surface-dark">
+            <input type="hidden" name="orderId" id="cancelOrderId" />
+            <input type="hidden" name="cancelItemId" id="cancelItemId" />
+            <input type="hidden" id="cancelQuantityInput" />
+
+            <div class="flex items-start gap-4">
+                <div class="flex size-11 shrink-0 items-center justify-center rounded-full bg-red-100 text-red-600 dark:bg-red-500/10 dark:text-red-400">
+                    <span class="material-symbols-outlined">cancel</span>
+                </div>
+                <div class="min-w-0">
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Cancel product</h3>
+                    <p id="cancelProductText" class="mt-2 text-sm leading-6 text-text-secondary">
+                        Select a reason to request cancellation.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-6 space-y-4">
+                <label class="block">
+                    <span class="text-sm font-bold text-slate-900 dark:text-white">Reason</span>
+                    <select name="cancelReason" required
+                        class="mt-2 h-11 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm text-slate-900 focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-white">
+                        <option value="">Select a reason</option>
+                        <option value="changed_mind">Changed my mind</option>
+                        <option value="ordered_by_mistake">Ordered by mistake</option>
+                        <option value="wrong_address">Wrong shipping address</option>
+                        <option value="found_better_price">Found a better price</option>
+                        <option value="delivery_too_late">Delivery is too late</option>
+                        <option value="other">Other</option>
+                    </select>
+                </label>
+
+                <label class="block">
+                    <span class="text-sm font-bold text-slate-900 dark:text-white">Comments</span>
+                    <textarea name="cancelComments" rows="3"
+                        class="mt-2 w-full resize-none rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-slate-900 focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-white"
+                        placeholder="Add any details for the seller"></textarea>
+                </label>
+
+                <p id="cancelRequestMessage" class="hidden rounded-lg p-3 text-sm font-medium"></p>
+            </div>
+
+            <div class="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+                <button type="button" id="cancelModalClose"
+                    class="h-10 rounded-lg border border-gray-200 px-5 text-sm font-bold text-slate-700 transition-colors hover:bg-gray-100 dark:border-border-dark dark:text-white dark:hover:bg-white/5">
+                    Keep product
+                </button>
+                <button type="submit" id="cancelRequestSubmit"
+                    class="h-10 rounded-lg bg-red-600 px-5 text-sm font-bold text-white transition-colors hover:bg-red-700">
+                    Submit request
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const cancelRequestModal = document.getElementById("cancelRequestModal");
+        const cancelRequestForm = document.getElementById("cancelRequestForm");
+        const cancelProductText = document.getElementById("cancelProductText");
+        const cancelOrderId = document.getElementById("cancelOrderId");
+        const cancelItemId = document.getElementById("cancelItemId");
+        const cancelQuantityInput = document.getElementById("cancelQuantityInput");
+        const cancelModalClose = document.getElementById("cancelModalClose");
+        const cancelRequestSubmit = document.getElementById("cancelRequestSubmit");
+        const cancelRequestMessage = document.getElementById("cancelRequestMessage");
+        let activeCancelButton = null;
+
+        const showCancelMessage = (message, isSuccess = false) => {
+            cancelRequestMessage.textContent = message;
+            cancelRequestMessage.className = isSuccess
+                ? "rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm font-medium text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-300"
+                : "rounded-lg border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300";
+        };
+
+        const hideCancelModal = () => {
+            cancelRequestModal.classList.add("hidden");
+            cancelRequestModal.classList.remove("flex");
+            cancelRequestForm.reset();
+            cancelRequestMessage.classList.add("hidden");
+            activeCancelButton = null;
+        };
+
+        document.querySelectorAll("[data-cancel-item-button]").forEach(button => {
+            button.addEventListener("click", () => {
+                activeCancelButton = button;
+                const productName = button.dataset.productName || "this product";
+                const quantity = button.dataset.quantity || "1";
+                const itemId = button.dataset.itemId;
+
+                cancelProductText.textContent = `Tell us why you want to cancel ${productName}.`;
+                cancelOrderId.value = button.dataset.orderId;
+                cancelItemId.value = itemId;
+                cancelQuantityInput.name = `cancelQuantity_${itemId}`;
+                cancelQuantityInput.value = quantity;
+                cancelRequestModal.classList.remove("hidden");
+                cancelRequestModal.classList.add("flex");
+            });
+        });
+
+        cancelRequestForm.addEventListener("submit", async event => {
+            event.preventDefault();
+            cancelRequestSubmit.disabled = true;
+            cancelRequestSubmit.textContent = "Submitting...";
+            cancelRequestMessage.classList.add("hidden");
+
+            try {
+                const response = await fetch("/order/cancel", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams(new FormData(cancelRequestForm)),
+                });
+                const data = await response.json();
+
+                if (!response.ok || !data.success) {
+                    throw new Error(data.message || "Cancellation request failed");
+                }
+
+                showCancelMessage(data.message || "Cancellation request submitted", true);
+                if (activeCancelButton) {
+                    activeCancelButton.disabled = true;
+                    activeCancelButton.textContent = "Cancellation Pending";
+                    activeCancelButton.className = "inline-flex h-10 items-center justify-center rounded-lg bg-amber-100 px-4 text-sm font-bold text-amber-700 dark:bg-amber-900/30 dark:text-amber-300";
+                }
+                setTimeout(() => window.location.reload(), 900);
+            } catch (error) {
+                showCancelMessage(error.message || "Something went wrong");
+                cancelRequestSubmit.disabled = false;
+                cancelRequestSubmit.textContent = "Submit request";
+            }
+        });
+
+        cancelModalClose.addEventListener("click", hideCancelModal);
+        cancelRequestModal.addEventListener("click", event => {
+            if (event.target === cancelRequestModal) {
+                hideCancelModal();
+            }
+        });
+    </script>
 
 </body>
 

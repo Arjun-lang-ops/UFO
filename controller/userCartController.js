@@ -62,9 +62,12 @@ export const getCartController = async (req, res) => {
       });
     }
 
+    let shippingCharge=cartTotal>3999?0:50;
+     let subtotal=cartTotal+shippingCharge
+
     res.render("userViews/userCartPage", {
       cart,
-      cartTotal   
+      cartTotal ,shippingCharge ,subtotal 
     });
 
   } catch (error) {

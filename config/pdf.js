@@ -15,22 +15,50 @@ export const downloadInvoice = async (req, res) => {
       size: "A4",
     });
 
+    const currency = (amount) =>
+      `Rs. ${Number(amount || 0).toLocaleString("en-IN")}`;
+    const cancelledStatuses = ["Approved", "Cancelled", "Refunded"];
+    const returnedStatuses = ["Approved", "Returned", "Refunded"];
+    const getItemStatus = (item) => {
+      if (
+        order.orderStatus === "Cancelled" ||
+        (item.cancelRequest && cancelledStatuses.includes(item.cancelStatus))
+      ) {
+        return "Cancelled";
+      }
+
+      if (
+        order.orderStatus === "Returned" ||
+        (item.returnRequest && returnedStatuses.includes(item.returnStatus))
+      ) {
+        return "Returned";
+      }
+
+      return "";
+    };
+    const getExcludedQuantity = (item, status) => {
+      if (!["Cancelled", "Returned"].includes(status)) {
+        return 0;
+      }
+
+      if (order.orderStatus === "Cancelled" || order.orderStatus === "Returned") {
+        return Number(item.quantity || 0);
+      }
+
+      return status === "Cancelled"
+        ? Number(item.cancelQuantity || item.quantity || 0)
+        : Number(item.returnQuantity || item.quantity || 0);
+    };
+
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename=invoice-${order.orderNumber}.pdf`
+      `attachment; filename=invoice-${order.orderNumber}.pdf`,
     );
 
     doc.pipe(res);
 
-    /* =========================
-       HEADER
-    ========================= */
-
-    doc
-      .fontSize(22)
-      .font("Helvetica-Bold")
-      .text("URBAN FOOTBALL", 40, 40);
+    doc.fontSize(22).font("Helvetica-Bold").text("URBAN FOOTBALL", 40, 40);
 
     doc
       .fontSize(11)
@@ -54,17 +82,10 @@ export const downloadInvoice = async (req, res) => {
         `Date: ${new Date(order.createdAt).toLocaleDateString("en-IN")}`,
         400,
         92,
-        { align: "right" }
+        { align: "right" },
       );
 
-    /* =========================
-       SHIPPING ADDRESS
-    ========================= */
-
-    doc
-      .moveDown(3)
-      .font("Helvetica-Bold")
-      .text("Shipping Address", 40, 140);
+    doc.moveDown(3).font("Helvetica-Bold").text("Shipping Address", 40, 140);
 
     doc
       .font("Helvetica")
@@ -72,152 +93,148 @@ export const downloadInvoice = async (req, res) => {
       .text(order.address.fullname)
       .text(order.address.apartment || "")
       .text(
-        `${order.address.street}, ${order.address.state} - ${order.address.pincode}`
+        `${order.address.street}, ${order.address.state} - ${order.address.pincode}`,
       )
       .text(`Phone: ${order.address.phone}`);
 
-    /* =========================
-       TABLE HEADER
-    ========================= */
-
     const tableTop = 260;
 
-    const drawRow = (y, item, qty, price, total, bold = false) => {
+    const drawRow = (y, item, qty, price, total, status = "", bold = false) => {
+      const isInactive = ["Cancelled", "Returned"].includes(status);
+
       doc
         .font(bold ? "Helvetica-Bold" : "Helvetica")
-        .fontSize(11);
+        .fontSize(10)
+        .fillColor(isInactive ? "#9f1239" : "black");
 
-      doc.text(item, 45, y, { width: 250 });
-      doc.text(qty, 330, y, { width: 50, align: "center" });
-      doc.text(`₹${price}`, 390, y, {
+      doc.text(item, 45, y, { width: 210 });
+      doc.text(qty, 270, y, { width: 45, align: "center" });
+      doc.text(currency(price), 325, y, {
         width: 70,
         align: "right",
       });
-      doc.text(`₹${total}`, 470, y, {
-        width: 80,
+      doc.text(currency(total), 405, y, {
+        width: 70,
+        align: "right",
+      });
+      doc.text(status || "-", 490, y, {
+        width: 60,
         align: "right",
       });
 
+      if (isInactive) {
+        doc
+          .moveTo(45, y + 8)
+          .lineTo(555, y + 8)
+          .strokeColor("#dc2626")
+          .lineWidth(1.5)
+          .stroke()
+          .lineWidth(1);
+      }
+
       doc.moveTo(40, y + 20).lineTo(555, y + 20).strokeColor("#ddd").stroke();
+      doc.fillColor("black");
     };
 
-    // table heading background
-    doc
-      .rect(40, tableTop - 8, 515, 25)
-      .fill("#f5f5f5");
-
+    doc.rect(40, tableTop - 8, 515, 25).fill("#f5f5f5");
     doc.fillColor("black");
 
-    drawRow(
-      tableTop,
-      "Item",
-      "Qty",
-      "Price",
-      "Total",
-      true
-    );
-
-    /* =========================
-       ITEMS
-    ========================= */
+    drawRow(tableTop, "Item", "Qty", "Price", "Total", "Status", true);
 
     let rowY = tableTop + 30;
+    let excludedItemsTotal = 0;
 
     order.items.forEach((item) => {
+      const itemStatus = getItemStatus(item);
+      const lineTotal = Number(item.totalPrice || item.quantity * item.price || 0);
+      const excludedQuantity = getExcludedQuantity(item, itemStatus);
+
+      if (["Cancelled", "Returned"].includes(itemStatus)) {
+        excludedItemsTotal += Number(item.price || 0) * excludedQuantity;
+      }
+
       drawRow(
         rowY,
-        item.product.name,
+        item.product?.name || "Product unavailable",
         item.quantity,
         item.price,
-        item.quantity * item.price
+        lineTotal,
+        itemStatus,
       );
 
       rowY += 30;
     });
 
-    /* =========================
-       TOTALS
-    ========================= */
-
     rowY += 25;
 
-    const subtotal =
-  Number(order.subTotal || 0);
-
-const discount =
-  Number(order.discount || 0);
-
-const shipping =
-  Number(order.shippingCharge || 0);
-
-const grandTotal =
-  Number(
-    order.finalAmount ??
-    order.totalAmount ??
-    subtotal - discount + shipping
-  );
-
+    const subtotal = Number(order.subTotal || 0);
+    const discount = Number(order.discount || 0);
+    const shipping = Number(order.deliveryCharge ?? order.shippingCharge ?? 0);
+    const originalGrandTotal = Number(
+      order.finalAmount ?? order.totalAmount ?? subtotal - discount + shipping,
+    );
+    const grandTotal = Math.max(0, originalGrandTotal - excludedItemsTotal);
     const totalsX = 390;
 
     doc
       .font("Helvetica")
+      .fontSize(11)
       .text("Subtotal:", totalsX, rowY)
-      .text(`₹${subtotal}`, 470, rowY, {
+      .text(currency(subtotal), 470, rowY, {
         width: 80,
         align: "right",
       });
 
     rowY += 20;
+
+    if (excludedItemsTotal > 0) {
+      doc
+        .fillColor("#dc2626")
+        .text("Cancelled/Returned:", totalsX, rowY)
+        .text(`- ${currency(excludedItemsTotal)}`, 470, rowY, {
+          width: 80,
+          align: "right",
+        })
+        .fillColor("black");
+
+      rowY += 20;
+    }
 
     doc
       .text("Discount:", totalsX, rowY)
-      .text(`- ₹${discount}`, 470, rowY, {
+      .text(`- ${currency(discount)}`, 470, rowY, {
         width: 80,
         align: "right",
       });
 
     rowY += 20;
 
-    doc
-      .text("Shipping:", totalsX, rowY)
-      .text(`₹${shipping}`, 470, rowY, {
-        width: 80,
-        align: "right",
-      });
+    doc.text("Shipping:", totalsX, rowY).text(currency(shipping), 470, rowY, {
+      width: 80,
+      align: "right",
+    });
 
     rowY += 28;
 
-    doc
-      .moveTo(390, rowY - 8)
-      .lineTo(555, rowY - 8)
-      .stroke();
+    doc.moveTo(390, rowY - 8).lineTo(555, rowY - 8).stroke();
 
     doc
       .font("Helvetica-Bold")
       .fontSize(13)
       .text("Grand Total:", totalsX, rowY)
-      .text(`₹${grandTotal}`, 470, rowY, {
+      .text(currency(grandTotal), 470, rowY, {
         width: 80,
         align: "right",
       });
-
-    /* =========================
-       FOOTER
-    ========================= */
 
     doc
       .font("Helvetica-Oblique")
       .fontSize(10)
       .fillColor("gray")
-      .text(
-        "This is a computer-generated invoice.",
-        40,
-        760,
-        {
-          align: "center",
-          width: 515,
-        }
-      );
+      .text("This is a computer-generated invoice.", 40, 760, {
+        align: "center",
+        width: 515,
+      });
 
     doc.end();
   } catch (error) {

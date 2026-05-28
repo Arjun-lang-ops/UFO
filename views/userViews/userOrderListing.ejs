@@ -84,17 +84,30 @@
             </nav>
         </div>
         <div class="flex flex-1 justify-end gap-4 lg:gap-8">
-            <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
-                <div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-gray-200 dark:border-none">
-                    <div
-                        class="text-text-secondary flex border-none bg-gray-50 dark:bg-border-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
-                        <span class="material-symbols-outlined text-[24px]">search</span>
-                    </div>
-                    <input
-                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-gray-50 dark:bg-border-dark focus:border-none h-full placeholder:text-text-secondary px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
-                        placeholder="Search products..." value="" />
+            <form action="/orderHistory" method="GET"
+                class="hidden md:flex min-w-56 max-w-80 flex-1 items-stretch rounded-lg border border-gray-200 dark:border-none">
+                <div
+                    class="text-text-secondary flex border-none bg-gray-50 dark:bg-border-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+                    <span class="material-symbols-outlined text-[24px]">search</span>
                 </div>
-            </label>
+                <input
+                    class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-gray-50 dark:bg-border-dark focus:border-none h-10 placeholder:text-text-secondary px-3 text-sm font-normal leading-normal"
+                    type="text"
+                    name="search"
+                    value="<%= search || '' %>"
+                    placeholder="Search orders..." />
+                <% if (search) { %>
+                    <a href="/orderHistory"
+                        class="flex h-10 items-center justify-center bg-gray-50 dark:bg-border-dark px-2 text-text-secondary hover:text-primary transition-colors"
+                        aria-label="Clear search">
+                        <span class="material-symbols-outlined text-[20px]">close</span>
+                    </a>
+                <% } %>
+                <button type="submit"
+                    class="flex h-10 items-center justify-center rounded-r-lg bg-primary px-4 text-sm font-bold text-white hover:bg-blue-600 transition-colors">
+                    Search
+                </button>
+            </form>
             <div class="flex gap-2">
                 <a href="/cart">
                     <button
@@ -123,7 +136,7 @@
                             style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD_I8YVj0_qwyi_nZ_cqgcjnK_ddZ6B6zun2Rs02d6G370QMmZ5T02LYQTuEg6txKqO56rGmh288NeBim2KyAKm2uThQ5BtrZRufI5DiqPZLGdwyHhjJmWW4rch0W92L-1CdkX1sdJr3651GWjEPjQvsg6sqUyEog2CB7kg2qu49mP5fcryB6i33KmLOPaUQ-k-fimSPh9eMhOs1oRJqePeMw5oyYwl2H-rlxe3to4yJhWR0LBFMCp7drA7RVuHt-O6s_owRmav2P4");'>
                         </div>
                         <div class="flex flex-col">
-                            <h1 class="text-base font-bold leading-tight">Alex</h1>
+                            <h1 class="text-base font-bold leading-tight"><%=user.fullname%></h1>
                             <p class="text-text-secondary text-xs">Elite Memberr</p>
                         </div>
                     </div>
@@ -135,27 +148,28 @@
                             <span class="text-sm font-medium">Profile</span>
                         </a>
                         <a class="flex items-center gap-3 px-3 py-3 rounded-lg bg-primary/10 dark:bg-border-dark text-primary dark:text-white"
-                            href="#">
+                            href="/orderHistory">
                             <span class="material-symbols-outlined text-[24px] text-primary">assignment</span>
-                            <span class="text-sm font-medium">Order History</span>
+                            <span class="text-sm font-medium">Orders</span>
                         </a>
                         <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
-                            href="#">
+                            href="/profile/address">
                             <span
                                 class="material-symbols-outlined text-[24px] group-hover:text-primary">location_on</span>
-                            <span class="text-sm font-medium">Saved Addresses</span>
-                        </a>
-                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
-                            href="#">
-                            <span
-                                class="material-symbols-outlined text-[24px] group-hover:text-primary">credit_card</span>
-                            <span class="text-sm font-medium">Payment Methods</span>
+                            <span class="text-sm font-medium">Addresses</span>
                         </a>
                         <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
                             href="/wishlist">
                             <span class="material-symbols-outlined text-[24px] group-hover:text-primary">favorite</span>
                             <span class="text-sm font-medium">Wishlist</span>
                         </a>
+                        <a class="flex items-center gap-3 px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-border-dark text-slate-600 dark:text-gray-300 transition-colors group"
+                            href="#">
+                            <span
+                                class="material-symbols-outlined text-[24px] group-hover:text-primary">credit_card</span>
+                            <span class="text-sm font-medium">Refer and Earn</span>
+                        </a>
+                        
                     </nav>
                 </div>
             </aside>
@@ -301,8 +315,12 @@
                         <div
                             class="rounded-xl bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark p-10 text-center">
                             <span class="material-symbols-outlined text-5xl text-text-secondary mb-3">assignment</span>
-                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">No orders yet</h3>
-                            <p class="text-sm text-text-secondary mt-1">Your recent orders will appear here.</p>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                                <%= search ? "No matching orders" : "No orders yet" %>
+                            </h3>
+                            <p class="text-sm text-text-secondary mt-1">
+                                <%= search ? "Try another order number, product name, or status." : "Your recent orders will appear here." %>
+                            </p>
                         </div>
                     <% } %>
 

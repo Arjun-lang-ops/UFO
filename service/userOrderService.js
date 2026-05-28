@@ -152,13 +152,25 @@ export const placeOrderService = async (
   return order;
 };
 
-export const orderHistoryService = async (userId) => {
+export const orderHistoryService = async (userId, search) => {
+  const keyword = (search || "").trim().toLowerCase();
   const orders = await Order.find({ user: userId })
     .populate("items.product")
     .populate("user")
     .sort({ createdAt: -1 });
 
-  return orders;
+  if (!keyword) {
+    return orders;
+  }
+
+  return orders.filter(
+    (order) =>
+      order.orderNumber?.toLowerCase().includes(keyword) ||
+      order.orderStatus?.toLowerCase().includes(keyword) ||
+      order.items.some((item) =>
+        item.product?.name?.toLowerCase().includes(keyword),
+      ),
+  );
 };
 
 export const returnService = async (orderId) => {
@@ -168,15 +180,15 @@ export const returnService = async (orderId) => {
   return returnItem;
 };
 
-export const requestReturnService = async ({ userId,
+export const requestReturnService = async ({
+  userId,
   orderId,
   returnItemId,
   quantity,
   reason,
   description,
-  shippingMethod,}
- 
-) => {
+  shippingMethod,
+}) => {
   const order = await Order.findOne({ _id: orderId, user: userId });
 
   if (!order) {
@@ -207,6 +219,59 @@ export const requestReturnService = async ({ userId,
 
   item.returnStatus = "Pending";
   item.requestedAt = new Date();
+  await order.save();
+
+  return order;
+};
+
+export const requestCancelService = async ({
+  userId,
+  orderId,
+  cancelItemId,
+  quantity,
+  reason,
+  description,
+}) => {
+  const order = await Order.findOne({
+    _id: orderId,
+    user: userId,
+  });
+
+  if (!order) {
+    throw new Error("Order not found");
+  }
+
+  
+  if (["Delivered", "Returned", "Cancelled"].includes(order.orderStatus)) {
+    throw new Error("Cannot cancel this order");
+  }
+
+  const item = order.items.id(cancelItemId);
+
+  if (!item) {
+    throw new Error("Item not found");
+  }
+
+  if (item.cancelRequest) {
+    throw new Error("Cancellation already requested");
+  }
+
+  if (!quantity || quantity < 1 || quantity > item.quantity) {
+    throw new Error("Invalid quantity");
+  }
+
+  item.cancelRequest = true;
+
+  item.cancelQuantity = quantity;
+
+  item.cancelReason = reason;
+
+  item.cancelDescription = description || "";
+
+  item.cancelStatus = "Pending";
+
+  item.cancelledAt = new Date();
+
   await order.save();
 
   return order;

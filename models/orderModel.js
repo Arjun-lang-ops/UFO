@@ -69,6 +69,54 @@ const orderItemSchema = new mongoose.Schema({
       type: String,
       default: "",
     },
+    cancelRequest: {
+    type: Boolean,
+    default: false
+  },
+
+  cancelQuantity: {
+    type: Number,
+    default: 0
+  },
+
+  cancelReason: {
+    type: String,
+    default: ""
+  },
+
+  cancelDescription: {
+    type: String,
+    trim: true,
+    default: ""
+  },
+
+  cancelStatus: {
+    type: String,
+    enum: [
+      "Pending",
+      "Approved",
+      "Rejected",
+      "Cancelled",
+      "Refunded"
+    ],
+    default: "Pending"
+  },
+
+  cancelledAt: {
+    type: Date
+  },
+
+  refundAmount: {
+    type: Number,
+    default: 0
+  },
+
+
+  adminCancelRemark: {
+    type: String,
+    default: ""
+  }
+
 }, {
     _id: true
 });

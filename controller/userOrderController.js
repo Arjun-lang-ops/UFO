@@ -1,4 +1,4 @@
-import { placeOrderService,orderHistoryService, returnService, requestReturnService } from "../service/userOrderService.js";
+import { placeOrderService,orderHistoryService, returnService, requestReturnService, requestCancelService } from "../service/userOrderService.js";
 import Order from "../models/orderModel.js";
 import { orderDetailsService } from "../service/adminOrderService.js";
 export const orderConfirmRender = async (req, res) => {
@@ -56,11 +56,12 @@ export const placeOrderController=async(req,res)=>{
 
 export const orderHistoryRender=async(req,res)=>{
     try {
+        const user=req.session.user || req.user
+        const search=(req.query.search || "").trim();
+        const userId=req.session.user?._id || req.session.userId || req.user?._id;
+        const orders=await orderHistoryService(userId,search);
 
-        const userId=req.session.user || req.session.userId || req.user?._id;
-        const orders=await orderHistoryService(userId);
-
-        return res.render('userViews/userOrderListing',{orders});
+        return res.render('userViews/userOrderListing',{orders,user,search});
     } catch (error) {
         console.log(error);
         res.redirect('/profile')
@@ -146,3 +147,50 @@ export const requestReturn = async (req, res) => {
     });
   }
 };
+
+
+export const requestCancel=async(req,res)=>{
+    try {
+
+        const userId= req.session.userId || req.user?._id || req.session.user?._id;
+
+        const {orderId,cancelItemId, cancelReason,cancelComments}=req.body;
+
+        const qty =
+        req.body[
+          `cancelQuantity_${cancelItemId}`
+        ];
+
+        await requestCancelService({
+        userId,
+        orderId,
+        cancelItemId,
+        quantity:
+          Number(qty),
+        reason:
+          cancelReason,
+        description:
+          cancelComments
+      });
+
+      return res.json({
+        success: true,
+        message:
+          "Cancellation request submitted"
+      });
+        
+    } catch (error) {
+        console.log(error);
+         console.log(error);
+
+      return res
+        .status(400)
+        .json({
+          success: false,
+          message:
+            error.message
+        });
+
+        
+    }
+}
