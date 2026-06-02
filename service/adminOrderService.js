@@ -1,5 +1,16 @@
 import Order from "../models/orderModel.js";
+import Product from "../models/productModel.js";
 import User from "../models/userModel.js";
+
+const orderStatusFlow = ["Pending", "Confirmed", "Shipped", "Delivered"];
+const terminalOrderStatus = ["Cancelled", "Returned"];
+const validOrderStatus = [...orderStatusFlow, ...terminalOrderStatus];
+
+const createServiceError = (message, statusCode) => {
+  const error = new Error(message);
+  error.statusCode = statusCode;
+  return error;
+};
 
 export const orderManagementService = async (page, search, status) => {
   const limit = 10;
@@ -20,22 +31,37 @@ export const orderManagementService = async (page, search, status) => {
 
   const selectedStatus = validStatuses.includes(status) ? status : "";
 
-  
+  if(selectedStatus){
+    filter.orderStatus=selectedStatus;
+  }
 
   //returning id of each users
 
   if (search && search.trim()) {
+    const trimmedSearch = search.trim();
+    const escapedSearch = trimmedSearch.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+
     const users = await User.find(
       {
-        fullname: {
-          $regex: search,
-          $options: "i",
-        },
+        $or: [
+          {
+            fullname: {
+              $regex: escapedSearch,
+              $options: "i",
+            },
+          },
+          {
+            email: {
+              $regex: escapedSearch,
+              $options: "i",
+            },
+          },
+        ],
       },
       "_id",
     );
 
-    console.log('users :',users)
+    console.log('users :', users)
 
 
     //taking ids of the users
@@ -45,7 +71,7 @@ export const orderManagementService = async (page, search, status) => {
     filter.$or = [
       {
         orderNumber: {
-          $regex: search,
+          $regex: escapedSearch,
           $options: "i",
         },
       },
@@ -54,10 +80,22 @@ export const orderManagementService = async (page, search, status) => {
           $in: userIds, 
         },
       },
+      {
+        "address.fullname": {
+          $regex: escapedSearch,
+          $options: "i",
+        },
+      },
+      {
+        "address.phone": {
+          $regex: escapedSearch,
+          $options: "i",
+        },
+      },
     ];
   }
 
-  console.log(filter);
+  console.log('afdgnalkdfg',filter);
 
   
 
@@ -84,4 +122,101 @@ export const orderManagementService = async (page, search, status) => {
 export const orderDetailsService = async (orderId) => {
   const orderDetails = await Order.findById(orderId).populate("items.product");
   return orderDetails;
+};
+
+export const updateOrderStatusService = async (orderId, nextStatus) => {
+  if (!validOrderStatus.includes(nextStatus)) {
+    throw createServiceError("Invalid order status", 400);
+  }
+
+  const order = await Order.findById(orderId);
+  
+
+  if (!order) {
+    throw createServiceError("Order not found", 404);
+  }
+
+  const currentStatus = order.orderStatus;
+
+  if (currentStatus === nextStatus) {
+    return order;
+  }
+
+  if (terminalOrderStatus.includes(currentStatus)) {
+    throw createServiceError(
+      `Cannot update an order that is already ${currentStatus}`,
+      400,
+    );
+  }
+
+  const currentIndex = orderStatusFlow.indexOf(currentStatus);
+  const nextIndex = orderStatusFlow.indexOf(nextStatus);
+
+  if (currentIndex !== -1 && nextIndex !== -1 && nextIndex < currentIndex) {
+    throw createServiceError(
+      `Cannot move order status back from ${currentStatus} to ${nextStatus}`,
+      400,
+    );
+  }
+
+  if (nextStatus === "Delivered") {
+    order.paymentStatus = "Paid";
+  }
+
+  
+
+  order.orderStatus = nextStatus;
+
+  await order.save();
+
+  return order;
+};
+
+export const approveReturnService = async (orderId, itemId, status) => {
+  
+  if (!["Approved", "Rejected"].includes(status)) {
+    const error = new Error("Invalid return status");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  const order = await Order.findById(orderId);
+
+  if (!order) {
+    const error = new Error("Order not found");
+    error.statusCode = 404;
+    throw error;
+  }
+
+  const item = order.items.id(itemId);
+
+  if (!item || !item.returnRequest) {
+    const error = new Error("Return request not found");
+    error.statusCode = 404;
+    throw error;
+  }
+
+  if (status === "Approved" && item.returnStatus !== "Approved") {
+    await Product.updateOne(
+      {
+        _id: item.product,
+        "variants._id": item.variant,
+      },
+      {
+        $inc: {
+          "variants.$.stock": item.returnQuantity,
+        },
+      },
+    );
+  }
+
+  item.returnStatus = status;
+  item.returnedAt = new Date();
+  if(status==="Approved"){
+    order.orderStatus="Returned"
+  }
+
+  await order.save();
+
+  return order;
 };

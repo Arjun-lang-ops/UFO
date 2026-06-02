@@ -1,12 +1,22 @@
 import Order from "../models/orderModel.js";
-import { orderManagementService } from "../service/adminOrderService.js";
+import {
+  approveReturnService,
+  orderManagementService,
+  updateOrderStatusService,
+} from "../service/adminOrderService.js";
 
 export const adminOrderManagementRender = async (req, res) => {
   try {
     const page = Number(req.query.page || 1);
 
+    console.log("FULL QUERY:", req.query);
+
     const search = req.query.search || "";
     const status = req.query.status || "";
+
+     console.log("STATUS:", status);
+
+   
 
     const orderData = await orderManagementService(page, search, status);
 
@@ -14,7 +24,7 @@ export const adminOrderManagementRender = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    return res.status(500).render("adminViews/orderManagement", {
+    return res.status(500).render("adminViews/adminOrderManagement", {
       orderData: {
         orders: [],
         currentPage: 1,
@@ -54,21 +64,7 @@ export const updateOrderStatus = async (req, res) => {
 
     const { orderStatus } = req.body;
 
-    const order = await Order.findById(orderId);
-
-    if (!order) {
-      return res.status(404).json({
-        success: false,
-        message: "Order not found",
-      });
-    }
-    if (orderStatus === "Delivered") {
-      order.paymentStatus = "Paid";
-    }
-
-    order.orderStatus = orderStatus;
-
-    await order.save();
+    await updateOrderStatusService(orderId, orderStatus);
 
     return res.json({
       success: true,
@@ -77,9 +73,9 @@ export const updateOrderStatus = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
+    return res.status(error.statusCode || 500).json({
       success: false,
-      message: "Server error",
+      message: error.statusCode ? error.message : "Server error",
     });
   }
 };
@@ -90,48 +86,7 @@ export const approveReturnController = async (req, res) => {
 
     const { status } = req.body;
 
-    if (!["Approved", "Rejected"].includes(status)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid return status",
-      });
-    }
-
-    const order = await Order.findById(orderId);
-
-    if (!order) {
-      return res.status(404).json({
-        success: false,
-        message: "Order not found",
-      });
-    }
-
-    const item = order.items.id(itemId);
-
-    if (!item || !item.returnRequest) {
-      return res.status(404).json({
-        success: false,
-        message: "Return request not found",
-      });
-    }
-
-    if (status === "Approved") {
-  const product = await Product.findById(item.product);
-
-  if (product) {
-    const variant = product.variants.id(item.variantId);
-
-    if (variant) {
-      variant.stock += item.quantity;
-      await product.save();
-    }
-  }
-}
-
-    item.returnStatus = status;
-    item.returnedAt = new Date();
-
-    await order.save();
+    await approveReturnService(orderId, itemId, status);
 
     return res.json({
       success: true,
@@ -140,9 +95,9 @@ export const approveReturnController = async (req, res) => {
   } catch (error) {
     console.log(error);
 
-    return res.status(500).json({
+    return res.status(error.statusCode || 500).json({
       success: false,
-      message: "Server error",
+      message: error.statusCode ? error.message : "Server error",
     });
   }
 };
