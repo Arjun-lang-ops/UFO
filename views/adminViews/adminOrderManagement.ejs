@@ -203,10 +203,11 @@
                             chipParams.set("search", orderData.search);
                         }
                     %>
+                    
                     <a
                         href="?<%= chipParams.toString() %>"
                         class="px-4 py-1.5 rounded-full <%= !orderData.status ? 'bg-primary text-white' : 'bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:border-primary' %> text-xs font-semibold whitespace-nowrap">All</a>
-                    <% ["Pending", "Confirmed", "Shipped", "Delivered", "Cancelled", "Returned",'Old Orders'].forEach(status => { %>
+                    <% ["Pending", "Confirmed", "Shipped", "Delivered", "Cancelled", "Returned"].forEach(status => { %>
                         <%
                             chipParams.set("status", status);
                         %>
@@ -223,11 +224,10 @@
                             <thead>
                                 <tr
                                     class="bg-slate-50 dark:bg-slate-900/50 border-b border-slate-200 dark:border-slate-800">
-                                    <th class="px-6 py-4">
-                                        <input
-                                            class="rounded text-primary focus:ring-primary bg-transparent border-slate-300 dark:border-slate-700"
-                                            type="checkbox" />
-                                    </th>
+                                    <th
+                                        class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                        SL No</th>
+                            </th>
                                     <th
                                         class="px-6 py-4 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                                         Order ID</th>
@@ -255,13 +255,13 @@
 
 <% if (orderData.orders.length > 0) { %>
 
-    <% orderData.orders.forEach(order => { %>
+    <% orderData.orders.forEach((order,index) => { %>
 
 <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/40">
 
-    <td class="px-6 py-4">
-        <input type="checkbox">
-    </td>
+     <td class="px-6 py-4 text-center">
+            <%= index + 1 %>
+        </td>
 
     <!-- order number -->
     <td class="px-6 py-4 text-sm font-semibold text-primary">

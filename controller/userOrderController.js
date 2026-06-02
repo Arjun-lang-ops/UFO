@@ -176,7 +176,7 @@ export const requestCancel=async(req,res)=>{
       return res.json({
         success: true,
         message:
-          "Cancellation request submitted"
+          "Product cancelled successfully"
       });
         
     } catch (error) {

@@ -242,7 +242,7 @@ export const requestCancelService = async ({
   }
 
   
-  if (["Delivered", "Returned", "Cancelled"].includes(order.orderStatus)) {
+  if (["Shipped", "Delivered", "Returned", "Cancelled"].includes(order.orderStatus)) {
     throw new Error("Cannot cancel this order");
   }
 
@@ -252,8 +252,8 @@ export const requestCancelService = async ({
     throw new Error("Item not found");
   }
 
-  if (item.cancelRequest) {
-    throw new Error("Cancellation already requested");
+  if (item.cancelRequest || item.cancelStatus === "Cancelled") {
+    throw new Error("Item already cancelled");
   }
 
   if (!quantity || quantity < 1 || quantity > item.quantity) {
@@ -261,16 +261,34 @@ export const requestCancelService = async ({
   }
 
   item.cancelRequest = true;
-
   item.cancelQuantity = quantity;
-
   item.cancelReason = reason;
-
   item.cancelDescription = description || "";
-
-  item.cancelStatus = "Pending";
-
+  item.cancelStatus = "Cancelled";
   item.cancelledAt = new Date();
+  item.refundAmount = (item.price || 0) * quantity;
+
+  await Product.updateOne(
+    {
+      _id: item.product,
+      "variants._id": item.variant,
+    },
+    {
+      $inc: {
+        "variants.$.stock": quantity,
+      },
+    },
+  );
+
+  const allItemsCancelled = order.items.every(
+    (orderItem) =>
+      orderItem.cancelRequest &&
+      ["Cancelled", "Approved"].includes(orderItem.cancelStatus),
+  );
+
+  if (allItemsCancelled) {
+    order.orderStatus = "Cancelled";
+  }
 
   await order.save();
 

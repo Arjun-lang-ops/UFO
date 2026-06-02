@@ -359,36 +359,43 @@
                         <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Full Name</span>
                         <input id="addressFullname" name="fullname" type="text" placeholder="John Doe"
                             class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                        <span id="addressFullnameError" class="hidden text-xs font-medium text-red-500"></span>
                     </label>
                     <label class="flex flex-col gap-2">
                         <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Phone Number</span>
-                        <input id="addressPhone" name="phone" type="tel" placeholder="9876543210"
+                        <input id="addressPhone" name="phone" type="tel" placeholder="9876543210" inputmode="numeric" maxlength="10"
                             class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                        <span id="addressPhoneError" class="hidden text-xs font-medium text-red-500"></span>
                     </label>
                     <label class="flex flex-col gap-2">
                         <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Country</span>
                         <input id="addressCountry" name="country" type="text" placeholder="India"
                             class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                        <span id="addressCountryError" class="hidden text-xs font-medium text-red-500"></span>
                     </label>
                     <label class="flex flex-col gap-2">
                         <span class="text-sm font-medium text-[#111418] dark:text-gray-200">State / Province</span>
                         <input id="addressState" name="state" type="text" placeholder="Kerala"
                             class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                        <span id="addressStateError" class="hidden text-xs font-medium text-red-500"></span>
                     </label>
                     <label class="flex flex-col gap-2 md:col-span-2">
                         <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Street Address</span>
                         <input id="addressStreet" name="street" type="text" placeholder="House name, street, locality"
                             class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                        <span id="addressStreetError" class="hidden text-xs font-medium text-red-500"></span>
                     </label>
                     <label class="flex flex-col gap-2">
                         <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Apartment / City</span>
                         <input id="addressApartment" name="apartment" type="text" placeholder="Apartment, suite, city"
                             class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                        <span id="addressApartmentError" class="hidden text-xs font-medium text-red-500"></span>
                     </label>
                     <label class="flex flex-col gap-2">
                         <span class="text-sm font-medium text-[#111418] dark:text-gray-200">ZIP / Pincode</span>
-                        <input id="addressPincode" name="pincode" type="text" placeholder="688526"
+                        <input id="addressPincode" name="pincode" type="text" placeholder="688526" inputmode="numeric" maxlength="6"
                             class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
+                        <span id="addressPincodeError" class="hidden text-xs font-medium text-red-500"></span>
                     </label>
                 </div>
 
@@ -449,11 +456,117 @@
             isDefault: document.getElementById("addressDefault")
         };
 
+        const addressErrors = {
+            fullname: document.getElementById("addressFullnameError"),
+            phone: document.getElementById("addressPhoneError"),
+            country: document.getElementById("addressCountryError"),
+            state: document.getElementById("addressStateError"),
+            street: document.getElementById("addressStreetError"),
+            apartment: document.getElementById("addressApartmentError"),
+            pincode: document.getElementById("addressPincodeError")
+        };
+
         const selectedAddress = {
             name: document.getElementById("checkoutAddressName"),
             street: document.getElementById("checkoutAddressStreet"),
             location: document.getElementById("checkoutAddressLocation"),
             phone: document.getElementById("checkoutAddressPhone")
+        };
+
+        const showAddressError = (fieldName, message) => {
+            const input = addressFields[fieldName];
+            const error = addressErrors[fieldName];
+
+            if (!input || !error) return;
+
+            input.classList.add("border-red-500", "focus:border-red-500", "focus:ring-red-500");
+            input.classList.remove("border-gray-200", "focus:border-primary", "focus:ring-primary", "dark:border-[#3b4754]");
+            error.textContent = message;
+            error.classList.remove("hidden");
+        };
+
+        const clearAddressError = (fieldName) => {
+            const input = addressFields[fieldName];
+            const error = addressErrors[fieldName];
+
+            if (!input || !error) return;
+
+            input.classList.remove("border-red-500", "focus:border-red-500", "focus:ring-red-500");
+            input.classList.add("border-gray-200", "focus:border-primary", "focus:ring-primary", "dark:border-[#3b4754]");
+            error.textContent = "";
+            error.classList.add("hidden");
+        };
+
+        const clearAddressErrors = () => {
+            Object.keys(addressErrors).forEach(clearAddressError);
+        };
+
+        const validateCheckoutAddressForm = () => {
+            let isValid = true;
+            clearAddressErrors();
+
+            const values = {
+                fullname: addressFields.fullname.value.trim(),
+                phone: addressFields.phone.value.trim(),
+                country: addressFields.country.value.trim(),
+                state: addressFields.state.value.trim(),
+                street: addressFields.street.value.trim(),
+                apartment: addressFields.apartment.value.trim(),
+                pincode: addressFields.pincode.value.trim()
+            };
+
+            const nameRegex = /^[A-Za-z\s]{3,50}$/;
+            const phoneRegex = /^[0-9]{10}$/;
+            const pincodeRegex = /^[0-9]{6}$/;
+
+            if (!values.fullname) {
+                showAddressError("fullname", "Full name is required");
+                isValid = false;
+            } else if (!nameRegex.test(values.fullname)) {
+                showAddressError("fullname", "Enter a valid name with at least 3 letters");
+                isValid = false;
+            }
+
+            if (!values.phone) {
+                showAddressError("phone", "Phone number is required");
+                isValid = false;
+            } else if (!phoneRegex.test(values.phone)) {
+                showAddressError("phone", "Phone number must be exactly 10 digits");
+                isValid = false;
+            }
+
+            if (!values.country) {
+                showAddressError("country", "Country is required");
+                isValid = false;
+            }
+
+            if (!values.state) {
+                showAddressError("state", "State is required");
+                isValid = false;
+            }
+
+            if (!values.street) {
+                showAddressError("street", "Street address is required");
+                isValid = false;
+            } else if (values.street.length < 5) {
+                showAddressError("street", "Street address is too short");
+                isValid = false;
+            }
+
+            if (!values.apartment) {
+                showAddressError("apartment", "Apartment or city is required");
+                isValid = false;
+            }
+
+            if (!values.pincode) {
+                showAddressError("pincode", "Pincode is required");
+                isValid = false;
+            } else if (!pincodeRegex.test(values.pincode)) {
+                showAddressError("pincode", "Pincode must be exactly 6 digits");
+                isValid = false;
+            }
+
+            return isValid;
         };
 
         const setEditButtonAddress = (address) => {
@@ -487,6 +600,7 @@
         const showAddressModal = (mode) => {
             checkoutAddressForm.dataset.mode = mode;
             addressModalTitle.textContent = mode === "edit" ? "Edit Address" : "Add New Address";
+            clearAddressErrors();
 
            if (mode === "edit") {
             if (!openEditAddressModal.dataset.id) {
@@ -538,6 +652,7 @@
         };
 
         const hideAddressModal = () => {
+            clearAddressErrors();
             addressModal.classList.add("opacity-0");
             addressModalPanel.classList.add("scale-95");
             document.body.classList.remove("overflow-hidden");
@@ -552,6 +667,22 @@
         openEditAddressModal?.addEventListener("click", () => showAddressModal("edit"));
         closeAddressModal.addEventListener("click", hideAddressModal);
         cancelAddressModal.addEventListener("click", hideAddressModal);
+
+        Object.entries(addressFields).forEach(([fieldName, input]) => {
+            if (!addressErrors[fieldName]) return;
+
+            input.addEventListener("input", () => {
+                if (fieldName === "phone") {
+                    input.value = input.value.replace(/\D/g, "").slice(0, 10);
+                }
+
+                if (fieldName === "pincode") {
+                    input.value = input.value.replace(/\D/g, "").slice(0, 6);
+                }
+
+                clearAddressError(fieldName);
+            });
+        });
 
         checkoutAddressSelect?.addEventListener("change", async (event) => {
             try {
@@ -590,17 +721,19 @@
 
     event.preventDefault();
 
+    if (!validateCheckoutAddressForm()) return;
+
     const mode = checkoutAddressForm.dataset.mode;
 
     const addressData = {
 
-        fullname: addressFields.fullname.value,
-        phone: addressFields.phone.value,
-        country: addressFields.country.value,
-        state: addressFields.state.value,
-        street: addressFields.street.value,
-        apartment: addressFields.apartment.value,
-        pincode: addressFields.pincode.value,
+        fullname: addressFields.fullname.value.trim(),
+        phone: addressFields.phone.value.trim(),
+        country: addressFields.country.value.trim(),
+        state: addressFields.state.value.trim(),
+        street: addressFields.street.value.trim(),
+        apartment: addressFields.apartment.value.trim(),
+        pincode: addressFields.pincode.value.trim(),
         isDefault: addressFields.isDefault.checked
 
     };

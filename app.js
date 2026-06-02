@@ -35,6 +35,7 @@ app.use(
     credentials: true,
   }),
 );
+
 app.use(nocache());
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));

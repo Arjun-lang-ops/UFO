@@ -1,6 +1,5 @@
 import Order from "../models/orderModel.js";
-import Product from "../models/productModel.js";
-import { orderManagementService,approveCancelService } from "../service/adminOrderService.js";
+import { orderManagementService } from "../service/adminOrderService.js";
 
 export const adminOrderManagementRender = async (req, res) => {
   try {
@@ -39,8 +38,7 @@ export const orderDetailsRender = async (req, res) => {
     }
 
     const returnItems = order.items.filter((item) => item.returnRequest);
-    const cancelItems = order.items.filter((item) => item.cancelRequest);
-    return res.render("adminViews/adminOrderDetails", { order, returnItems, cancelItems });
+    return res.render("adminViews/adminOrderDetails", { order, returnItems });
   } catch (error) {
     console.log(error);
 
@@ -117,6 +115,19 @@ export const approveReturnController = async (req, res) => {
       });
     }
 
+    if (status === "Approved") {
+  const product = await Product.findById(item.product);
+
+  if (product) {
+    const variant = product.variants.id(item.variantId);
+
+    if (variant) {
+      variant.stock += item.quantity;
+      await product.save();
+    }
+  }
+}
+
     item.returnStatus = status;
     item.returnedAt = new Date();
 
@@ -135,37 +146,3 @@ export const approveReturnController = async (req, res) => {
     });
   }
 };
-
-
-
-
-export const approveCancelController =
-  async (req, res) => {
-    try {
-      const {
-        orderId,
-        itemId,
-      } = req.params;
-
-      const { status } =
-        req.body;
-
-      const result =
-        await approveCancelService(
-          orderId,
-          itemId,
-          status
-        );
-
-      return res.json(result);
-    } catch (error) {
-      console.log(error);
-
-      return res.status(500).json({
-        success: false,
-        message:
-          error.message ||
-          "Server error",
-      });
-    }
-  };

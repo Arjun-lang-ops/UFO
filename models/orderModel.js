@@ -112,11 +112,6 @@ const orderItemSchema = new mongoose.Schema({
   },
 
 
-  adminCancelRemark: {
-    type: String,
-    default: ""
-  }
-
 }, {
     _id: true
 });

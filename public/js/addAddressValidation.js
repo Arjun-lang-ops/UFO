@@ -104,13 +104,13 @@ document.addEventListener('DOMContentLoaded', () => {
             isValid = false;
         }
 
-        // Phone validation (10 to 15 digits, optional + prefix)
-        const phoneRegex = /^\+?[\d\s-]{10,15}$/;
+        // Phone validation (exactly 10 digits)
+        const phoneRegex = /^[0-9]{10}$/;
         if (!phoneValue) {
             showError(fields.phone, 'Phone number is required');
             isValid = false;
-        } else if (!phoneRegex.test(phoneValue.replace(/\s+/g, ''))) {
-            showError(fields.phone, 'Enter a valid phone number');
+        } else if (!phoneRegex.test(phoneValue)) {
+            showError(fields.phone, 'Phone number must be exactly 10 digits');
             isValid = false;
         }
 
@@ -237,6 +237,10 @@ document.addEventListener('DOMContentLoaded', () => {
     Object.values(fields).forEach(field => {
         if (field.input.type !== 'checkbox') {
             field.input.addEventListener('input', () => {
+                if (field.input.id === 'phone') {
+                    field.input.value = field.input.value.replace(/\D/g, '').slice(0, 10);
+                }
+
                 if (!field.error.classList.contains('hidden')) {
                     clearError(field);
                 }

@@ -133,6 +133,7 @@
               <div class="cart-item group relative flex flex-col md:grid md:grid-cols-12 gap-4 md:items-center bg-[#1a222d] md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none md:border-b border-[#283039] md:pb-6
                 <%= isOutOfStock ? 'oos-item opacity-75' : '' %>"
                 data-variant="<%= item.variantId %>"
+                data-stock="<%=variant?.stock||0%>"
                 data-out-of-stock="<%= isOutOfStock %>">
 
                 <!-- Product Info -->
@@ -287,6 +288,8 @@
   const priceEl    = item.querySelector(".price");
   const totalEl    = item.querySelector(".item-total");
 
+  
+
   // Skip wiring events for out-of-stock items (buttons are already disabled via HTML)
   if (isOOS) return;
 
@@ -299,15 +302,51 @@
   };
 
   increaseBtn.addEventListener("click", async () => {
-    const res = await fetch("/update-cart", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ variantId, action: "increase" })
+  const qty = Number(qtyInput.value);
+  const stock = Number(item.dataset.stock);
+
+  // stop at max 10
+  if (qty >= 10) {
+    Swal.fire({
+      icon: "warning",
+      title: "Maximum limit reached",
+      text: "You can only add up to 10 items of this product.",
+      confirmButtonColor: "#137fec"
     });
-    const data = await res.json();
-    if (data.success) updateItemUI(data.quantity);
-    else if (data.message) Swal.fire("Error", data.message, "error");
+    return;
+  }
+
+  // stop at available stock
+  if (qty >= stock) {
+    Swal.fire({
+      icon: "warning",
+      title: "Stock limit reached",
+      text: `Only ${stock} item(s) available in stock.`,
+      confirmButtonColor: "#137fec"
+    });
+    return;
+  }
+
+  // continue updating cart
+  const res = await fetch("/update-cart", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      variantId,
+      action: "increase"
+    })
   });
+
+  const data = await res.json();
+
+  if (data.success) {
+    updateItemUI(data.quantity);
+  } else if (data.message) {
+    Swal.fire("Error", data.message, "error");
+  }
+});
 
   decreaseBtn.addEventListener("click", async () => {
     const res = await fetch("/update-cart", {

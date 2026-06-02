@@ -12,7 +12,10 @@ export const getWishlistItems = async (userId) => {
       variantId: item.variant.toString(),
     })) || []
   );
-};
+}; 
+
+
+
 
 export const addToWishlistService = async (userId, productId, variantId) => {
   if (!userId) {

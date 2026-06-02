@@ -78,7 +78,7 @@
             : "";
         const formatCurrency = amount => `Rs. ${Number(amount || 0).toLocaleString("en-IN")}`;
         const currentStatus = order?.orderStatus || "Pending";
-        const cancellableOrderStatuses = ["Pending", "Confirmed", "Shipped"];
+        const cancellableOrderStatuses = ["Pending", "Confirmed"];
         const statusSteps = ["Pending", "Confirmed", "Shipped", "Delivered"];
         const currentStepIndex = currentStatus === "Cancelled" || currentStatus === "Returned"
             ? -1
@@ -412,7 +412,7 @@
                 <div class="min-w-0">
                     <h3 class="text-lg font-bold text-slate-900 dark:text-white">Cancel product</h3>
                     <p id="cancelProductText" class="mt-2 text-sm leading-6 text-text-secondary">
-                        Select a reason to request cancellation.
+                        Select a reason to cancel this product.
                     </p>
                 </div>
             </div>
@@ -449,7 +449,7 @@
                 </button>
                 <button type="submit" id="cancelRequestSubmit"
                     class="h-10 rounded-lg bg-red-600 px-5 text-sm font-bold text-white transition-colors hover:bg-red-700">
-                    Submit request
+                    Cancel product
                 </button>
             </div>
         </form>
@@ -519,17 +519,17 @@
                     throw new Error(data.message || "Cancellation request failed");
                 }
 
-                showCancelMessage(data.message || "Cancellation request submitted", true);
+                showCancelMessage(data.message || "Product cancelled successfully", true);
                 if (activeCancelButton) {
                     activeCancelButton.disabled = true;
-                    activeCancelButton.textContent = "Cancellation Pending";
-                    activeCancelButton.className = "inline-flex h-10 items-center justify-center rounded-lg bg-amber-100 px-4 text-sm font-bold text-amber-700 dark:bg-amber-900/30 dark:text-amber-300";
+                    activeCancelButton.textContent = "Cancelled";
+                    activeCancelButton.className = "inline-flex h-10 items-center justify-center rounded-lg bg-emerald-100 px-4 text-sm font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300";
                 }
                 setTimeout(() => window.location.reload(), 900);
             } catch (error) {
                 showCancelMessage(error.message || "Something went wrong");
                 cancelRequestSubmit.disabled = false;
-                cancelRequestSubmit.textContent = "Submit request";
+                cancelRequestSubmit.textContent = "Cancel product";
             }
         });
 
