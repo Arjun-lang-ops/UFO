@@ -194,13 +194,23 @@
                                 <p class="text-xs text-slate-500 dark:text-slate-400">
                                     Order Status
                                 </p>
-
+                                <% 
+                                    const hasPendingReturn = order.items && order.items.some(item => item.returnRequest && item.returnStatus === 'Pending');
+                                %>
                                 <span id="statusBadge" class="inline-flex items-center px-2 py-0.5 rounded-full
         text-[10px] font-bold uppercase tracking-wide
-        bg-blue-100 dark:bg-blue-900/30
-        text-blue-600 dark:text-blue-400">
+        <%= hasPendingReturn
+            ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400'
+            : order.orderStatus === 'Delivered'
+            ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400'
+            : order.orderStatus === 'Cancelled'
+            ? 'bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400'
+            : order.orderStatus === 'Returned'
+            ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400'
+            : 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400'
+        %>">
 
-                                    <%= order.orderStatus %>
+                                    <%= hasPendingReturn ? 'Return Requested' : order.orderStatus %>
 
                                 </span>
                             </div>
@@ -339,7 +349,7 @@
                                                             <!-- qty -->
                                                             <td class="px-6 py-4 text-sm">
 
-                                                                <%= item.returnQuantity %>
+                                                                <%= item.quantity %>
 
                                                             </td>
 

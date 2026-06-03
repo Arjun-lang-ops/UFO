@@ -26,14 +26,24 @@ export const orderManagementService = async (page, search, status) => {
     "Delivered",
     "Cancelled",
     "Returned",
+    'Return Requests'
    
   ];
 
   const selectedStatus = validStatuses.includes(status) ? status : "";
 
-  if(selectedStatus){
-    filter.orderStatus=selectedStatus;
+  if (selectedStatus) {
+  if (selectedStatus === "Return Requests") {
+    filter.items = {
+      $elemMatch: {
+        returnRequest: true,
+        returnStatus: "Pending",
+      },
+    };
+  } else {
+    filter.orderStatus = selectedStatus;
   }
+}
 
   //returning id of each users
 
