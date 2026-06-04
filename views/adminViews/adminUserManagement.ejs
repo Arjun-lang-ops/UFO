@@ -1,357 +1,328 @@
 <!DOCTYPE html>
 
 <html class="dark" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Admin User Management - GoalGear</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-      rel="stylesheet"
-    />
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#137fec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
-            },
-            fontFamily: {
-              display: ["Inter"],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Admin User Management - GoalGear</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#137fec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+          },
+          fontFamily: {
+            display: ["Inter"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
           },
         },
-      };
-    </script>
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-      }
-      .material-symbols-outlined {
-        font-variation-settings:
-          "FILL" 0,
-          "wght" 400,
-          "GRAD" 0,
-          "opsz" 24;
-      }
-      .active-link {
-        background-color: #137fec;
-        color: white;
-      }
-    </style>
-  </head>
-  <body
-    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen"
-  >
-    <div class="flex h-screen overflow-hidden">
-      <!-- Side Navigation Sidebar -->
-      <aside
-        class="w-64 flex-shrink-0 bg-white dark:bg-[#111418] border-r border-slate-200 dark:border-slate-800 flex flex-col h-full"
-      >
-        <div class="p-6">
-          <div class="flex items-center gap-3">
-            <div class="bg-primary rounded-lg p-1.5">
-              <span class="material-symbols-outlined text-white text-2xl"
-                >sports_soccer</span
-              >
-            </div>
-            <div class="flex flex-col">
-              <h1
-                class="text-slate-900 dark:text-white text-lg font-bold leading-tight"
-              >
-                Urban Football
-              </h1>
-              <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-medium">
-                Football Admin
-              </p>
-            </div>
-          </div>
-        </div>
-        <nav class="flex-1 px-4 space-y-1">
-          <a
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-            href="/admin/dashboard"
-          >
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="text-sm font-medium">Dashboard</span>
-          </a>
-          <a
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-            href="#"
-          >
-            <span class="material-symbols-outlined">shopping_bag</span>
-            <span class="text-sm font-medium">Orders</span>
-          </a>
-          <a
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-            href="/admin/products"
-          >
-            <span class="material-symbols-outlined">inventory_2</span>
-            <span class="text-sm font-medium">Products</span>
-          </a>
-          <a
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg active-link shadow-sm"
-            href="#"
-          >
-            <span class="material-symbols-outlined">group</span>
-            <span class="text-sm font-medium">Users</span>
-          </a>
-          <a
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-            href="/admin/categories"
-          >
-            <span class="material-symbols-outlined">category</span>
-            <span class="text-sm font-medium">Categories</span>
-          </a>
+      },
+    };
+  </script>
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+    }
 
-          <div
-            class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800"
-          >
-            <a
-              class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-              href="#"
-            >
-              <span class="material-symbols-outlined">settings</span>
-              <span class="text-sm font-medium">Settings</span>
-            </a>
-          </div>
-        </nav>
-        <div class="p-4 border-t border-slate-200 dark:border-slate-800">
-          <div class="flex items-center gap-3 p-2">
-            <div
-              class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center"
-              data-alt="Admin user profile picture"
-              style="
-                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDO6my1XVaQw5_cf-J5iDETNNqDVQG9km6csDjoh7EnJVhTpSxfwCNq8uzIY9tJq6LJZgaFvKJY8VPGFLqlCNxa8XkEgYlzN3YsPP6MnXfhDxOOMbFpxa0dEQ9LrMwtcrqf8kHT1XJTdQnw2ZW4aRk06ORywG2V2e2MqDDq6NLplKKAyRP4oeWFNeRtQKpvV-ZeSLi0CI_juqRifm8u0sCc7cmubM_EyMxRosHHLdUpcp2tsGVj-2Xnth0YWSnCHpAywUr6TyJAQhM&quot;);
-              "
-            ></div>
-            <div class="flex flex-col">
-              <span class="text-sm font-semibold text-slate-900 dark:text-white"
-                >Alex Smith</span
-              >
-              <span
-                class="text-xs text-slate-500 dark:text-slate-400 leading-none"
-                >Store Manager</span
-              >
-            </div>
-          </div>
-        </div>
-      </aside>
-      <!-- Main Content Area -->
-      <main class="flex-1 overflow-y-auto flex flex-col">
-        <!-- Page Heading Section -->
-        <header class="p-8 pb-4">
-          <div class="flex flex-wrap items-center justify-between gap-4">
-            <div class="space-y-1">
-              <h2
-                class="text-3xl font-black tracking-tight text-slate-900 dark:text-white"
-              >
-                User Management
-              </h2>
-              <p class="text-slate-500 dark:text-slate-400 text-sm">
-                Manage registered customers and their account status.
-              </p>
-            </div>
-            <button class="flex items-center gap-2 px-5 h-11 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all font-bold text-sm shadow-lg shadow-primary/20">
-              <span class="material-symbols-outlined text-[20px]">file_download</span>
-              <span>Export User Data</span>
-            </button>
-          </div>
-        </header>
-        <!-- Stats Grid -->
-        <section class="px-8 py-4">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754]">
-              <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Total Users</p>
-              <div class="flex items-baseline gap-2">
-                <p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight"><%=totalUsers%></p>
-                <p class="text-emerald-500 text-sm font-bold leading-normal">+12%</p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <!-- Filters and Search -->
-        <section class="px-8 py-4 space-y-4">
-          <div class="flex flex-col md:flex-row gap-4 items-center">
-            <!-- Search Bar -->
-            <form action="/admin/userManagement" method="GET" class="flex-1 w-full flex items-center gap-2">
-              <div class="relative flex-1">
-                <div
-                  class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400 dark:text-[#9dabb9]"
-                >
-                  <span class="material-symbols-outlined">search</span>
-                </div>
-                <input
-                  name="search"
-                  id="searchInput"
-                  value="<%= typeof search !== 'undefined' ? search : '' %>"
-                  class="block w-full h-11 pl-12 bg-white dark:bg-[#283039] border border-slate-200 dark:border-transparent rounded-lg text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition-all"
-                  placeholder="Search users by name or email..."
-                  type="text"
-                />
-              </div>
-              <button type="submit" class="bg-primary hover:bg-primary/90 text-white rounded-lg h-11 px-4 text-sm font-bold transition-all">Search</button>
-              <button type="button" onclick="document.getElementById('searchInput').value=''" class="bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg h-11 px-4 text-sm font-bold flex items-center transition-all">Cancel</button>
-              <% if (typeof search !== 'undefined' && search) { %>
-                <a href="/admin/userManagement" class="bg-red-500 hover:bg-red-600 text-white rounded-lg h-11 px-4 text-sm font-bold flex items-center transition-all">Clear</a>
-              <% } %>
-            </form>
-          </div>
-        </section>
-        <!-- Table Section -->
-        <section class="px-8 py-4 flex-1">
-          <div
-            class="bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm"
-          >
-            <div class="overflow-x-auto @container">
-              <table class="w-full text-left border-collapse">
-                <thead>
-                  <tr
-                    class="bg-slate-50 dark:bg-[#1c2127] border-b border-slate-200 dark:border-[#3b4754]"
-                  >
-                    <th
-                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 w-12 text-center"
-                    >
-                      <input class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
-                    </th>
-                    <th
-                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
-                    >
-                      User
-                    </th>
-                    <th
-                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
-                    >
-                      Email
-                    </th>
-                    <th
-                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
-                    >
-                      Status
-                    </th>
-                    <th
-                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
-                    >
-                      Total Orders
-                    </th>
-                    <th
-                      class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-right"
-                    >
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 dark:divide-[#3b4754]">
+    .material-symbols-outlined {
+      font-variation-settings:
+        "FILL" 0,
+        "wght" 400,
+        "GRAD" 0,
+        "opsz" 24;
+    }
 
-  <% data.forEach(user => { %>
-    <tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group" data-user-id="<%= user._id %>">
-      <td class="px-6 py-5 text-center">
-        <input class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary" type="checkbox"/>
-      </td>
-      <td class="px-6 py-5">
+    .active-link {
+      background-color: #137fec;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+  <div class="flex h-screen overflow-hidden">
+    <!-- Side Navigation Sidebar -->
+    <aside
+      class="w-64 flex-shrink-0 bg-white dark:bg-[#111418] border-r border-slate-200 dark:border-slate-800 flex flex-col h-full">
+      <div class="p-6">
         <div class="flex items-center gap-3">
-          <div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
-            <img alt="Avatar" class="w-full h-full object-cover" data-alt="Customer profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlgJ1EzxZ42e2VPl1JgKZYdn9904C8Ll3WFrBpRAbkpraRjRidYjVuHc9USPcJeLdQOMbS7klDhRCLY9hhhIGN7nL1d6D3OtbOMnTg5OEtsOfvOi2eiQ2uJfgovuJr0_PUU3k9dHmp_siXOizinXwmbTdUDhJoUhbXOBNudMbgk1ek4guTGr4ESu6auJ7RaXoqDl3K-97bZwPSqIBWsqhbn8Yrf6lJrdI-_MjpsZxQL50wuiF7bT91ugQB9VQ6IH0qsG-MBs__O0A"/>
+          <div class="bg-primary rounded-lg p-1.5">
+            <span class="material-symbols-outlined text-white text-2xl">sports_soccer</span>
           </div>
-          <span class="text-sm font-bold text-slate-900 dark:text-white"><%= user.fullname %></span>
+          <div class="flex flex-col">
+            <h1 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">
+              Urban Football
+            </h1>
+            <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-medium">
+              Football Admin
+            </p>
+          </div>
         </div>
-      </td>
-      <td class="px-6 py-5 text-sm text-slate-600 dark:text-[#9dabb9]"><%= user.email %></td>
-      <td class="px-6 py-5">
-        <span class="status-badge inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold
-        <%= user.isBlocked ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700' %>">
-          <%= user.isBlocked ? "Blocked" : "Active" %>
-        </span>
-      </td>
-      <td class="px-6 py-5 text-sm font-medium text-slate-900 dark:text-white">4 Orders</td>
-      <td class="px-6 py-5 text-right">
-        <button class="p-2 text-slate-400 hover:text-primary">
-          <span class="material-symbols-outlined text-[20px]">more_vert</span>
-        </button>
-      </td>
-    </tr>
-  <% }) %>
+      </div>
+      <nav class="flex-1 px-4 space-y-1">
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
+          href="/admin/dashboard">
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="text-sm font-medium">Dashboard</span>
+        </a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
+          href="#">
+          <span class="material-symbols-outlined">shopping_bag</span>
+          <span class="text-sm font-medium">Orders</span>
+        </a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
+          href="/admin/products">
+          <span class="material-symbols-outlined">inventory_2</span>
+          <span class="text-sm font-medium">Products</span>
+        </a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg active-link shadow-sm" href="#">
+          <span class="material-symbols-outlined">group</span>
+          <span class="text-sm font-medium">Users</span>
+        </a>
+        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
+          href="/admin/categories">
+          <span class="material-symbols-outlined">category</span>
+          <span class="text-sm font-medium">Categories</span>
+        </a>
 
-</tbody>
-              </table>
-            </div>
-            <!-- Pagination Footer -->
-            <div
-              class="px-6 py-4 bg-slate-50 dark:bg-[#1c2127] border-t border-slate-200 dark:border-[#3b4754] flex items-center justify-between"
-            >
-              <p class="text-xs font-medium text-slate-500 dark:text-slate-400">
-                Showing <%= (currentPage - 1) * limit + 1 %>–<%= Math.min(currentPage * limit, totalUsers) %> of <%= totalUsers %> users
+        <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800">
+          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
+            href="#">
+            <span class="material-symbols-outlined">settings</span>
+            <span class="text-sm font-medium">Settings</span>
+          </a>
+        </div>
+      </nav>
+      <div class="p-4 border-t border-slate-200 dark:border-slate-800">
+        <div class="flex items-center gap-3 p-2">
+          <div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center"
+            data-alt="Admin user profile picture" style="
+                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDO6my1XVaQw5_cf-J5iDETNNqDVQG9km6csDjoh7EnJVhTpSxfwCNq8uzIY9tJq6LJZgaFvKJY8VPGFLqlCNxa8XkEgYlzN3YsPP6MnXfhDxOOMbFpxa0dEQ9LrMwtcrqf8kHT1XJTdQnw2ZW4aRk06ORywG2V2e2MqDDq6NLplKKAyRP4oeWFNeRtQKpvV-ZeSLi0CI_juqRifm8u0sCc7cmubM_EyMxRosHHLdUpcp2tsGVj-2Xnth0YWSnCHpAywUr6TyJAQhM&quot;);
+              "></div>
+          <div class="flex flex-col">
+            <span class="text-sm font-semibold text-slate-900 dark:text-white">Alex Smith</span>
+            <span class="text-xs text-slate-500 dark:text-slate-400 leading-none">Store Manager</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="flex-1 overflow-y-auto flex flex-col">
+      <!-- Page Heading Section -->
+      <header class="p-8 pb-4">
+        <div class="flex flex-wrap items-center justify-between gap-4">
+          <div class="space-y-1">
+            <h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">
+              User Management
+            </h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm">
+              Manage registered customers and their account status.
+            </p>
+          </div>
+          <button
+            class="flex items-center gap-2 px-5 h-11 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all font-bold text-sm shadow-lg shadow-primary/20">
+            <span class="material-symbols-outlined text-[20px]">file_download</span>
+            <span>Export User Data</span>
+          </button>
+        </div>
+      </header>
+      <!-- Stats Grid -->
+      <section class="px-8 py-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div
+            class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-[#3b4754]">
+            <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Total Users</p>
+            <div class="flex items-baseline gap-2">
+              <p class="text-slate-900 dark:text-white text-3xl font-bold tracking-tight">
+                <%=totalUsers%>
               </p>
-              <div class="flex gap-1 items-center">
-
-                <%# Previous button %>
-                <% if (currentPage > 1) { %>
-                  <a href="/admin/userManagement?page=<%= currentPage - 1 %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:bg-white dark:hover:bg-slate-800 transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">chevron_left</span>
-                  </a>
-                <% } else { %>
-                  <span class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-300 dark:text-slate-600 cursor-not-allowed">
-                    <span class="material-symbols-outlined text-[18px]">chevron_left</span>
-                  </span>
-                <% } %>
-
-                <%# Page number buttons with smart ellipsis %>
-                <%
-                  let pagesToShow = [];
-                  if (totalPages <= 7) {
-                    for (let i = 1; i <= totalPages; i++) pagesToShow.push(i);
-                  } else {
-                    pagesToShow.push(1);
-                    if (currentPage > 3) pagesToShow.push('...');
-                    let start = Math.max(2, currentPage - 1);
-                    let end   = Math.min(totalPages - 1, currentPage + 1);
-                    for (let i = start; i <= end; i++) pagesToShow.push(i);
-                    if (currentPage < totalPages - 2) pagesToShow.push('...');
-                    pagesToShow.push(totalPages);
-                  }
-                %>
-
-                <% pagesToShow.forEach(p => { %>
-                  <% if (p === '...') { %>
-                    <span class="px-1 text-slate-400 dark:text-slate-500 text-sm">…</span>
-                  <% } else if (p === currentPage) { %>
-                    <span class="h-8 w-8 rounded-lg bg-primary text-white text-sm font-bold flex items-center justify-center"><%= p %></span>
-                  <% } else { %>
-                    <a href="/admin/userManagement?page=<%= p %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>" class="h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium flex items-center justify-center hover:bg-white dark:hover:bg-slate-800 transition-colors"><%= p %></a>
-                  <% } %>
-                <% }) %>
-
-                <%# Next button %>
-                <% if (currentPage < totalPages) { %>
-                  <a href="/admin/userManagement?page=<%= currentPage + 1 %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>" class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:bg-white dark:hover:bg-slate-800 transition-colors">
-                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
-                  </a>
-                <% } else { %>
-                  <span class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-300 dark:text-slate-600 cursor-not-allowed">
-                    <span class="material-symbols-outlined text-[18px]">chevron_right</span>
-                  </span>
-                <% } %>
-
-              </div>
+              <p class="text-emerald-500 text-sm font-bold leading-normal">+12%</p>
             </div>
           </div>
-        </section>
-      </main>
-    </div>
-    <script src="/adminJs/userManagement.js"></script>
-  </body>
+        </div>
+      </section>
+      <!-- Filters and Search -->
+      <section class="px-8 py-4 space-y-4">
+        <div class="flex flex-col md:flex-row gap-4 items-center">
+          <!-- Search Bar -->
+          <form action="/admin/userManagement" method="GET" class="flex-1 w-full flex items-center gap-2">
+            <div class="relative flex-1">
+              <div
+                class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400 dark:text-[#9dabb9]">
+                <span class="material-symbols-outlined">search</span>
+              </div>
+              <input name="search" id="searchInput" value="<%= typeof search !== 'undefined' ? search : '' %>"
+                class="block w-full h-11 pl-12 bg-white dark:bg-[#283039] border border-slate-200 dark:border-transparent rounded-lg text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] focus:ring-2 focus:ring-primary focus:border-transparent text-sm transition-all"
+                placeholder="Search users by name or email..." type="text" />
+            </div>
+            <button type="submit"
+              class="bg-primary hover:bg-primary/90 text-white rounded-lg h-11 px-4 text-sm font-bold transition-all">Search</button>
+            <button type="button" onclick="document.getElementById('searchInput').value=''"
+              class="bg-slate-200 hover:bg-slate-300 dark:bg-slate-700 dark:hover:bg-slate-600 text-slate-700 dark:text-slate-200 rounded-lg h-11 px-4 text-sm font-bold flex items-center transition-all">Cancel</button>
+            <% if (typeof search !=='undefined' && search) { %>
+              <a href="/admin/userManagement"
+                class="bg-red-500 hover:bg-red-600 text-white rounded-lg h-11 px-4 text-sm font-bold flex items-center transition-all">Clear</a>
+              <% } %>
+          </form>
+        </div>
+      </section>
+      <!-- Table Section -->
+      <section class="px-8 py-4 flex-1">
+        <div
+          class="bg-white dark:bg-[#111418] rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+          <div class="overflow-x-auto @container">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50 dark:bg-[#1c2127] border-b border-slate-200 dark:border-[#3b4754]">
+                  <th
+                    class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 w-12 text-center">
+                    <input
+                      class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary"
+                      type="checkbox" />
+                  </th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    User
+                  </th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Email
+                  </th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Status
+                  </th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Total Orders
+                  </th>
+                  <th
+                    class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-right">
+                    Actions
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-[#3b4754]">
+
+                <% data.forEach(user=> { %>
+                  <tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group"
+                    data-user-id="<%= user._id %>">
+                    <td class="px-6 py-5 text-center">
+                      <input
+                        class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary"
+                        type="checkbox" />
+                    </td>
+                    <td class="px-6 py-5">
+                      <div class="flex items-center gap-3">
+                        <div
+                          class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold overflow-hidden">
+                          <img alt="Avatar" class="w-full h-full object-cover" data-alt="Customer profile picture"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlgJ1EzxZ42e2VPl1JgKZYdn9904C8Ll3WFrBpRAbkpraRjRidYjVuHc9USPcJeLdQOMbS7klDhRCLY9hhhIGN7nL1d6D3OtbOMnTg5OEtsOfvOi2eiQ2uJfgovuJr0_PUU3k9dHmp_siXOizinXwmbTdUDhJoUhbXOBNudMbgk1ek4guTGr4ESu6auJ7RaXoqDl3K-97bZwPSqIBWsqhbn8Yrf6lJrdI-_MjpsZxQL50wuiF7bT91ugQB9VQ6IH0qsG-MBs__O0A" />
+                        </div>
+                        <span class="text-sm font-bold text-slate-900 dark:text-white">
+                          <%= user.fullname %>
+                        </span>
+                      </div>
+                    </td>
+                    <td class="px-6 py-5 text-sm text-slate-600 dark:text-[#9dabb9]">
+                      <%= user.email %>
+                    </td>
+                    <td class="px-6 py-5">
+                      <span class="status-badge inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold
+        <%= user.isBlocked ? 'bg-amber-100 text-amber-700' : 'bg-emerald-100 text-emerald-700' %>">
+                        <%= user.isBlocked ? "Blocked" : "Active" %>
+                      </span>
+                    </td>
+                    <td class="px-6 py-5 text-sm font-medium text-slate-900 dark:text-white">4 Orders</td>
+                    <td class="px-6 py-5 text-right">
+                      <button class="p-2 text-slate-400 hover:text-primary">
+                        <span class="material-symbols-outlined text-[20px]">more_vert</span>
+                      </button>
+                    </td>
+                  </tr>
+                  <% }) %>
+
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination Footer -->
+          <div
+            class="px-6 py-4 bg-slate-50 dark:bg-[#1c2127] border-t border-slate-200 dark:border-[#3b4754] flex items-center justify-between">
+            <p class="text-xs font-medium text-slate-500 dark:text-slate-400">
+              Showing <%= (currentPage - 1) * limit + 1 %>–<%= Math.min(currentPage * limit, totalUsers) %> of <%=
+                    totalUsers %> users
+            </p>
+            <div class="flex gap-1 items-center">
+
+              <%# Previous button %>
+                <% if (currentPage> 1) { %>
+                  <a href="/admin/userManagement?page=<%= currentPage - 1 %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>"
+                    class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                    <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                  </a>
+                  <% } else { %>
+                    <span
+                      class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-300 dark:text-slate-600 cursor-not-allowed">
+                      <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                    </span>
+                    <% } %>
+
+                      <%# Page number buttons with smart ellipsis %>
+                        <% let pagesToShow=[]; if (totalPages <=7) { for (let i=1; i <=totalPages; i++)
+                          pagesToShow.push(i); } else { pagesToShow.push(1); if (currentPage> 3)
+                          pagesToShow.push('...');
+                          let start = Math.max(2, currentPage - 1);
+                          let end = Math.min(totalPages - 1, currentPage + 1);
+                          for (let i = start; i <= end; i++) pagesToShow.push(i); if (currentPage < totalPages - 2)
+                            pagesToShow.push('...'); pagesToShow.push(totalPages); } %>
+
+                            <% pagesToShow.forEach(p=> { %>
+                              <% if (p==='...' ) { %>
+                                <span class="px-1 text-slate-400 dark:text-slate-500 text-sm">…</span>
+                                <% } else if (p===currentPage) { %>
+                                  <span
+                                    class="h-8 w-8 rounded-lg bg-primary text-white text-sm font-bold flex items-center justify-center">
+                                    <%= p %>
+                                  </span>
+                                  <% } else { %>
+                                    <a href="/admin/userManagement?page=<%= p %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>"
+                                      class="h-8 w-8 rounded-lg border border-slate-200 dark:border-slate-700 text-sm font-medium flex items-center justify-center hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                                      <%= p %>
+                                    </a>
+                                    <% } %>
+                                      <% }) %>
+
+                                        <%# Next button %>
+                                          <% if (currentPage < totalPages) { %>
+                                            <a href="/admin/userManagement?page=<%= currentPage + 1 %><%= typeof search !== 'undefined' && search ? '&search=' + search : '' %>"
+                                              class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 hover:bg-white dark:hover:bg-slate-800 transition-colors">
+                                              <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                                            </a>
+                                            <% } else { %>
+                                              <span
+                                                class="p-2 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-300 dark:text-slate-600 cursor-not-allowed">
+                                                <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                                              </span>
+                                              <% } %>
+
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="/adminJs/userManagement.js"></script>
+</body>
+
 </html>

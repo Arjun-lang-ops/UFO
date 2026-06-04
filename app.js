@@ -18,6 +18,7 @@ import userCartRoutes from './routes/userCartRoutes.js';
 import userWishlistRoutes from './routes/userWishlistRoutes.js';
 import userCheckoutRoutes from './routes/userCheckoutRoutes.js';
 import userOrderRoutes from './routes/userOrderRoutes.js';
+import userPaymentRoutes from './routes/userPaymentRoutes.js'
 import passport from "./config/passport.js";
 import cors from "cors";
 import { cartCountMiddleware } from "./middlewares/cartMiddleware.js";
@@ -62,7 +63,8 @@ app.use('/',userProductRoutes)
 app.use('/',userCartRoutes)
 app.use('/',userWishlistRoutes);
 app.use('/',userCheckoutRoutes);
-app.use('/',userOrderRoutes)
+app.use('/',userOrderRoutes);
+app.use('/',userPaymentRoutes)
 app.use("/admin", adminRoutes);
 app.use('/admin',adminOrderRoutes)
 

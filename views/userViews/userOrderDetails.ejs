@@ -65,219 +65,248 @@
 
 <body
     class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col font-display selection:bg-primary/30">
-    <%
-        const order = orderDetails;
-        const items = order?.items || [];
-        const formatDate = (date, options = {}) => date
-            ? new Date(date).toLocaleDateString("en-IN", {
-                day: "2-digit",
-                month: "short",
-                year: "numeric",
-                ...options
-            })
-            : "";
+    <% const order=orderDetails; const items=order?.items || []; const formatDate=(date, options={})=> date
+        ? new Date(date).toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        ...options
+        })
+        : "";
         const formatCurrency = amount => `Rs. ${Number(amount || 0).toLocaleString("en-IN")}`;
         const currentStatus = order?.orderStatus || "Pending";
         const cancellableOrderStatuses = ["Pending", "Confirmed"];
         const statusSteps = ["Pending", "Confirmed", "Shipped", "Delivered"];
         const currentStepIndex = currentStatus === "Cancelled" || currentStatus === "Returned"
-            ? -1
-            : statusSteps.indexOf(currentStatus);
-        const progressWidth = currentStepIndex <= 0
-            ? "0%"
-            : currentStepIndex === 1
-            ? "33%"
-            : currentStepIndex === 2
-            ? "66%"
-            : "100%";
-    %>
-    <header
-        class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-border-dark px-4 lg:px-10 py-3 bg-white dark:bg-surface-dark sticky top-0 z-50">
-        <div class="flex items-center gap-4 lg:gap-8">
-            <div class="flex items-center gap-4 text-slate-900 dark:text-white">
-                <div class="size-8 flex items-center justify-center text-primary">
-                    <span class="material-symbols-outlined text-3xl">sports_soccer</span>
-                </div>
-                <h2 class="hidden md:block text-lg font-bold leading-tight tracking-[-0.015em]"> Urban Football 
-                </h2>
-            </div>
-            <nav class="hidden md:flex items-center gap-6 lg:gap-9">
-                <a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="/home">Shop</a>
-                
-            </nav>
-        </div>
-        <div class="flex flex-1 justify-end gap-4 lg:gap-8">
-            <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
-                <div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-gray-200 dark:border-none">
-                    <div
-                        class="text-text-secondary flex border-none bg-gray-50 dark:bg-border-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
-                        <span class="material-symbols-outlined text-[24px]">search</span>
+        ? -1
+        : statusSteps.indexOf(currentStatus);
+        const progressWidth = currentStepIndex <= 0 ? "0%" : currentStepIndex===1 ? "33%" : currentStepIndex===2 ? "66%"
+            : "100%" ; %>
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-border-dark px-4 lg:px-10 py-3 bg-white dark:bg-surface-dark sticky top-0 z-50">
+                <div class="flex items-center gap-4 lg:gap-8">
+                    <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+                        <div class="size-8 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined text-3xl">sports_soccer</span>
+                        </div>
+                        <h2 class="hidden md:block text-lg font-bold leading-tight tracking-[-0.015em]"> Urban Football
+                        </h2>
                     </div>
-                    <input
-                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-gray-50 dark:bg-border-dark focus:border-none h-full placeholder:text-text-secondary px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
-                        placeholder="Search products..." value="" />
-                </div>
-            </label>
-            <div class="flex gap-2">
-                <button
-                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
-                    <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
-                </button>
-                <button
-                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
-                    <span class="material-symbols-outlined text-[20px]">notifications</span>
-                </button>
-                <button
-                    class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
-                    <span class="material-symbols-outlined text-[20px]">account_circle</span>
-                </button>
-            </div>
-        </div>
-    </header>
-    <div class="flex-1 flex justify-center py-5 px-4 md:px-8 lg:px-12 xl:px-40">
-        <div class="flex flex-col w-full max-w-[1280px] gap-8">
-            <div class="flex flex-col gap-4">
-                <div class="flex flex-wrap gap-2">
-                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="/home">Home</a>
-                    <span class="text-text-secondary text-sm font-medium">/</span>
-                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="#">Account</a>
-                    <span class="text-text-secondary text-sm font-medium">/</span>
-                    <a class="text-text-secondary text-sm font-medium hover:text-primary" href="/orderHistory">Order History</a>
-                    <span class="text-text-secondary text-sm font-medium">/</span>
-                    <span class="text-slate-900 dark:text-white text-sm font-medium"><%= order.orderNumber || "Order not found" %></span>
-                </div>
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                    <div class="flex flex-col gap-1">
-                        <h1 class="text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Order
-                            <%= order.orderNumber %></h1>
-                        <p class="text-text-secondary text-base">Placed on <%= formatDate(order.createdAt || order.orderedAt) %> &bull; <%= items.length %> Item<%= items.length === 1 ? "" : "s" %></p>
-                    </div>
-                    <div class="flex flex-wrap gap-3">
-                        <a
-  href="/invoice/<%= order._id %>/download"
-  class="flex items-center gap-2 h-11 px-6 rounded-lg
-         bg-white dark:bg-surface-dark
-         border border-gray-200 dark:border-border-dark
-         text-slate-900 dark:text-white
-         text-sm font-bold"
->
-    <span class="material-symbols-outlined text-lg">
-        download
-    </span>
+                    <nav class="hidden md:flex items-center gap-6 lg:gap-9">
+                        <a class="text-sm font-medium leading-normal hover:text-primary transition-colors"
+                            href="/home">Shop</a>
 
-    Invoice
-</a>
+                    </nav>
+                </div>
+                <div class="flex flex-1 justify-end gap-4 lg:gap-8">
+                    <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+                        <div
+                            class="flex w-full flex-1 items-stretch rounded-lg h-full border border-gray-200 dark:border-none">
+                            <div
+                                class="text-text-secondary flex border-none bg-gray-50 dark:bg-border-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+                                <span class="material-symbols-outlined text-[24px]">search</span>
+                            </div>
+                            <input
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-gray-50 dark:bg-border-dark focus:border-none h-full placeholder:text-text-secondary px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                                placeholder="Search products..." value="" />
+                        </div>
+                    </label>
+                    <div class="flex gap-2">
                         <button
-                            class="flex items-center gap-2 h-11 px-6 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-600 transition-colors shadow-lg shadow-primary/20">
-                            <span class="material-symbols-outlined text-lg">replay</span>
-                            Buy Again
+                            class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">notifications</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                            <span class="material-symbols-outlined text-[20px]">account_circle</span>
                         </button>
                     </div>
                 </div>
-            </div>
-            <div
-                class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-2xl p-6 md:p-8">
-                <div class="relative">
-                    <div class="absolute top-5 left-0 w-full h-1 bg-gray-200 dark:bg-border-dark rounded-full"></div>
-                    <div class="absolute top-5 left-0 h-1 <%= currentStatus === 'Cancelled' || currentStatus === 'Returned' ? 'bg-red-500' : 'bg-green-500' %> rounded-full" style="width: <%= progressWidth %>"></div>
-                    <div class="relative flex justify-between">
-                        <% statusSteps.forEach((step, index) => { %>
-                            <div class="flex flex-col items-center gap-3">
-                                <div
-                                    class="size-11 rounded-full <%= index <= currentStepIndex ? 'bg-green-500 text-white' : 'bg-gray-200 dark:bg-border-dark text-text-secondary' %> flex items-center justify-center ring-4 ring-white dark:ring-surface-dark">
-                                    <span class="material-symbols-outlined"><%= index <= currentStepIndex ? 'check' : 'radio_button_unchecked' %></span>
-                                </div>
-                                <div class="text-center">
-                                    <p class="text-sm font-bold"><%= step === "Pending" ? "Ordered" : step %></p>
-                                    <p class="text-[10px] text-text-secondary uppercase">
-                                        <%= index === 0 ? formatDate(order.createdAt || order.orderedAt, { month: "short", day: "2-digit" }) : "" %>
-                                    </p>
-                                </div>
-                            </div>
-                        <% }) %>
-                    </div>
-                    <% if (currentStatus === "Cancelled" || currentStatus === "Returned") { %>
-                        <p class="mt-6 text-center text-sm font-bold text-red-500">Order <%= currentStatus %></p>
-                    <% } %>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 flex flex-col gap-6">
-                    <div
-                        class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-2xl overflow-hidden">
-                        <div
-                            class="px-6 py-4 border-b border-gray-200 dark:border-border-dark bg-gray-50 dark:bg-white/5">
-                            <h3 class="font-bold">Items in your order</h3>
+            </header>
+            <div class="flex-1 flex justify-center py-5 px-4 md:px-8 lg:px-12 xl:px-40">
+                <div class="flex flex-col w-full max-w-[1280px] gap-8">
+                    <div class="flex flex-col gap-4">
+                        <div class="flex flex-wrap gap-2">
+                            <a class="text-text-secondary text-sm font-medium hover:text-primary" href="/home">Home</a>
+                            <span class="text-text-secondary text-sm font-medium">/</span>
+                            <a class="text-text-secondary text-sm font-medium hover:text-primary" href="#">Account</a>
+                            <span class="text-text-secondary text-sm font-medium">/</span>
+                            <a class="text-text-secondary text-sm font-medium hover:text-primary"
+                                href="/orderHistory">Order History</a>
+                            <span class="text-text-secondary text-sm font-medium">/</span>
+                            <span class="text-slate-900 dark:text-white text-sm font-medium">
+                                <%= order.orderNumber || "Order not found" %>
+                            </span>
                         </div>
-                        <div class="divide-y divide-gray-200 dark:divide-border-dark">
-                            <% items.forEach(item => { %>
-                                <%
-                                    const product = item.product;
-                                    const selectedVariant = product?.variants?.find(variant =>
-                                        String(variant._id) === String(item.variant)
-                                    );
-                                    const fallbackVariant = product?.variants?.[0];
-                                    const itemImage = selectedVariant?.images?.[0] || fallbackVariant?.images?.[0] || "";
-                                    const canCancelItem = cancellableOrderStatuses.includes(currentStatus) && !item.cancelRequest && item.cancelStatus !== "Cancelled";
-                                %>
-                                <div class="p-6 flex gap-6">
-                                    <% if (itemImage) { %>
-                                        <img alt="<%= product?.name || 'Product image' %>"
-                                            class="size-24 rounded-xl object-cover border border-gray-200 dark:border-border-dark bg-background-light dark:bg-background-dark"
-                                            src="<%= itemImage %>" />
-                                    <% } else { %>
+                        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                            <div class="flex flex-col gap-1">
+                                <h1 class="text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Order
+                                    <%= order.orderNumber %>
+                                </h1>
+                                <p class="text-text-secondary text-base">Placed on <%= formatDate(order.createdAt ||
+                                        order.orderedAt) %> &bull; <%= items.length %> Item<%= items.length===1 ? ""
+                                                : "s" %>
+                                </p>
+                            </div>
+                            <div class="flex flex-wrap gap-3">
+                                <a href="/invoice/<%= order._id %>/download" class="flex items-center gap-2 h-11 px-6 rounded-lg
+         bg-white dark:bg-surface-dark
+         border border-gray-200 dark:border-border-dark
+         text-slate-900 dark:text-white
+         text-sm font-bold">
+                                    <span class="material-symbols-outlined text-lg">
+                                        download
+                                    </span>
+
+                                    Invoice
+                                </a>
+                                <button
+                                    class="flex items-center gap-2 h-11 px-6 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-600 transition-colors shadow-lg shadow-primary/20">
+                                    <span class="material-symbols-outlined text-lg">replay</span>
+                                    Buy Again
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-2xl p-6 md:p-8">
+                        <div class="relative">
+                            <div class="absolute top-5 left-0 w-full h-1 bg-gray-200 dark:bg-border-dark rounded-full">
+                            </div>
+                            <div class="absolute top-5 left-0 h-1 <%= currentStatus === 'Cancelled' || currentStatus === 'Returned' ? 'bg-red-500' : 'bg-green-500' %> rounded-full"
+                                style="width: <%= progressWidth %>"></div>
+                            <div class="relative flex justify-between">
+                                <% statusSteps.forEach((step, index)=> { %>
+                                    <div class="flex flex-col items-center gap-3">
                                         <div
-                                            class="size-24 rounded-xl border border-gray-200 dark:border-border-dark bg-background-light dark:bg-background-dark flex items-center justify-center">
-                                            <span class="material-symbols-outlined text-text-secondary">inventory_2</span>
+                                            class="size-11 rounded-full <%= index <= currentStepIndex ? 'bg-green-500 text-white' : 'bg-gray-200 dark:bg-border-dark text-text-secondary' %> flex items-center justify-center ring-4 ring-white dark:ring-surface-dark">
+                                            <span class="material-symbols-outlined">
+                                                <%= index <=currentStepIndex ? 'check' : 'radio_button_unchecked' %>
+                                            </span>
                                         </div>
-                                    <% } %>
-                                    <div class="flex-1 flex flex-col md:flex-row justify-between gap-4">
-                                        <div class="flex flex-col gap-1">
-                                            <h4 class="font-bold text-lg hover:text-primary transition-colors cursor-pointer">
-                                                <%= product?.name || "Product unavailable" %>
-                                            </h4>
-                                            <% if (selectedVariant?.color) { %>
-                                                <p class="text-sm text-text-secondary">Color: <span
-                                                        class="text-slate-900 dark:text-white"><%= selectedVariant.color %></span></p>
-                                            <% } %>
-                                            <% if (selectedVariant?.size) { %>
-                                                <p class="text-sm text-text-secondary">Size: <span
-                                                        class="text-slate-900 dark:text-white"><%= selectedVariant.size %></span></p>
-                                            <% } %>
-                                            <p class="text-sm text-text-secondary">Qty: <span
-                                                    class="text-slate-900 dark:text-white"><%= item.quantity %></span></p>
+                                        <div class="text-center">
+                                            <p class="text-sm font-bold">
+                                                <%= step==="Pending" ? "Ordered" : step %>
+                                            </p>
+                                            <p class="text-[10px] text-text-secondary uppercase">
+                                                <%= index===0 ? formatDate(order.createdAt || order.orderedAt, {
+                                                    month: "short" , day: "2-digit" }) : "" %>
+                                            </p>
                                         </div>
-                                        <div class="flex flex-col md:items-end justify-between gap-3">
-                                            <span class="text-lg font-bold"><%= formatCurrency(item.totalPrice || (item.price * item.quantity)) %></span>
-                                            <% if (canCancelItem) { %>
-                                                <button type="button"
-                                                    data-cancel-item-button
-                                                    data-order-id="<%= order._id %>"
-                                                    data-item-id="<%= item._id %>"
-                                                    data-product-name="<%= product?.name || 'this product' %>"
-                                                    data-quantity="<%= item.quantity %>"
-                                                    class="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 text-sm font-bold text-red-600 transition-colors hover:bg-red-100 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20">
-                                                    <span class="material-symbols-outlined text-lg">cancel</span>
-                                                    Cancel
-                                                </button>
-                                            <% } else if (item.cancelRequest) { %>
-                                                <div class="flex flex-col md:items-end gap-1">
-                                                    <span
-                                                        class="inline-flex items-center gap-1 rounded-full <%= item.cancelStatus === 'Rejected' ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300' : item.cancelStatus === 'Approved' || item.cancelStatus === 'Cancelled' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300' %> px-3 py-1 text-xs font-bold">
-                                                        <span class="material-symbols-outlined text-base">pending_actions</span>
-                                                        Cancellation <%= item.cancelStatus || "Pending" %>
-                                                    </span>
-                                                    <% if (item.cancelReason) { %>
-                                                        <span class="text-xs text-text-secondary">Reason: <%= item.cancelReason %></span>
-                                                    <% } %>
-                                                </div>
-                                            <% } else if (currentStatus === "Delivered") { %>
-                                                <% if (item.returnRequest) { %>
+                                    </div>
+                                    <% }) %>
+                            </div>
+                            <% if (currentStatus==="Cancelled" || currentStatus==="Returned" ) { %>
+                                <p class="mt-6 text-center text-sm font-bold text-red-500">Order <%= currentStatus %>
+                                </p>
+                                <% } %>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <div class="lg:col-span-2 flex flex-col gap-6">
+                            <div
+                                class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-2xl overflow-hidden">
+                                <div
+                                    class="px-6 py-4 border-b border-gray-200 dark:border-border-dark bg-gray-50 dark:bg-white/5">
+                                    <h3 class="font-bold">Items in your order</h3>
+                                </div>
+                                <div class="divide-y divide-gray-200 dark:divide-border-dark">
+                                    <% items.forEach(item=> { %>
+                                        <% const product=item.product; const
+                                            selectedVariant=product?.variants?.find(variant=>
+                                            String(variant._id) === String(item.variant)
+                                            );
+                                            const fallbackVariant = product?.variants?.[0];
+                                            const itemImage = selectedVariant?.images?.[0] ||
+                                            fallbackVariant?.images?.[0] || "";
+                                            const canCancelItem = cancellableOrderStatuses.includes(currentStatus) &&
+                                            !item.cancelRequest && item.cancelStatus !== "Cancelled";
+                                            %>
+                                            <div class="p-6 flex gap-6">
+                                                <% if (itemImage) { %>
+                                                    <img alt="<%= product?.name || 'Product image' %>"
+                                                        class="size-24 rounded-xl object-cover border border-gray-200 dark:border-border-dark bg-background-light dark:bg-background-dark"
+                                                        src="<%= itemImage %>" />
+                                                    <% } else { %>
+                                                        <div
+                                                            class="size-24 rounded-xl border border-gray-200 dark:border-border-dark bg-background-light dark:bg-background-dark flex items-center justify-center">
+                                                            <span
+                                                                class="material-symbols-outlined text-text-secondary">inventory_2</span>
+                                                        </div>
+                                                        <% } %>
+                                                            <div
+                                                                class="flex-1 flex flex-col md:flex-row justify-between gap-4">
+                                                                <div class="flex flex-col gap-1">
+                                                                    <h4
+                                                                        class="font-bold text-lg hover:text-primary transition-colors cursor-pointer">
+                                                                        <%= product?.name || "Product unavailable" %>
+                                                                    </h4>
+                                                                    <% if (selectedVariant?.color) { %>
+                                                                        <p class="text-sm text-text-secondary">Color:
+                                                                            <span
+                                                                                class="text-slate-900 dark:text-white">
+                                                                                <%= selectedVariant.color %>
+                                                                            </span></p>
+                                                                        <% } %>
+                                                                            <% if (selectedVariant?.size) { %>
+                                                                                <p class="text-sm text-text-secondary">
+                                                                                    Size: <span
+                                                                                        class="text-slate-900 dark:text-white">
+                                                                                        <%= selectedVariant.size %>
+                                                                                    </span></p>
+                                                                                <% } %>
+                                                                                    <p
+                                                                                        class="text-sm text-text-secondary">
+                                                                                        Qty: <span
+                                                                                            class="text-slate-900 dark:text-white">
+                                                                                            <%= item.quantity %>
+                                                                                        </span></p>
+                                                                </div>
+                                                                <div
+                                                                    class="flex flex-col md:items-end justify-between gap-3">
+                                                                    <span class="text-lg font-bold">
+                                                                        <%= formatCurrency(item.totalPrice ||
+                                                                            (item.price * item.quantity)) %>
+                                                                    </span>
+                                                                    <% if (canCancelItem) { %>
+                                                                        <button type="button" data-cancel-item-button
+                                                                            data-order-id="<%= order._id %>"
+                                                                            data-item-id="<%= item._id %>"
+                                                                            data-product-name="<%= product?.name || 'this product' %>"
+                                                                            data-quantity="<%= item.quantity %>"
+                                                                            class="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 text-sm font-bold text-red-600 transition-colors hover:bg-red-100 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-400 dark:hover:bg-red-500/20">
+                                                                            <span
+                                                                                class="material-symbols-outlined text-lg">cancel</span>
+                                                                            Cancel
+                                                                        </button>
+                                                                        <% } else if (item.cancelRequest) { %>
+                                                                            <div
+                                                                                class="flex flex-col md:items-end gap-1">
+                                                                                <span
+                                                                                    class="inline-flex items-center gap-1 rounded-full <%= item.cancelStatus === 'Rejected' ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300' : item.cancelStatus === 'Approved' || item.cancelStatus === 'Cancelled' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300' %> px-3 py-1 text-xs font-bold">
+                                                                                    <span
+                                                                                        class="material-symbols-outlined text-base">pending_actions</span>
+                                                                                    Cancellation <%= item.cancelStatus
+                                                                                        || "Pending" %>
+                                                                                </span>
+                                                                                <% if (item.cancelReason) { %>
+                                                                                    <span
+                                                                                        class="text-xs text-text-secondary">Reason:
+                                                                                        <%= item.cancelReason %></span>
+                                                                                    <% } %>
+                                                                            </div>
+                                                                            <% } else if (currentStatus==="Delivered" )
+                                                                                { %>
+                                                                                <% if (item.returnRequest) { %>
 
-    <div class="flex flex-col md:items-end gap-1">
+                                                                                    <div
+                                                                                        class="flex flex-col md:items-end gap-1">
 
-        <span
-            class="inline-flex items-center gap-1 rounded-full
+                                                                                        <span class="inline-flex items-center gap-1 rounded-full
             <%= item.returnStatus === 'Rejected'
                 ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'
                 : item.returnStatus === 'Approved'
@@ -286,260 +315,292 @@
             %>
             px-3 py-1 text-xs font-bold">
 
-            <span class="material-symbols-outlined text-base">
-                assignment_return
-            </span>
+                                                                                            <span
+                                                                                                class="material-symbols-outlined text-base">
+                                                                                                assignment_return
+                                                                                            </span>
 
-            Return <%= item.returnStatus || "Pending" %>
+                                                                                            Return <%= item.returnStatus
+                                                                                                || "Pending" %>
 
-        </span>
+                                                                                        </span>
 
-        <% if (item.returnReason) { %>
-            <span class="text-xs text-text-secondary">
-                Reason: <%= item.returnReason %>
-            </span>
-        <% } %>
+                                                                                        <% if (item.returnReason) { %>
+                                                                                            <span
+                                                                                                class="text-xs text-text-secondary">
+                                                                                                Reason: <%=
+                                                                                                    item.returnReason %>
+                                                                                            </span>
+                                                                                            <% } %>
 
-    </div>
+                                                                                    </div>
 
-<% } else { %>
+                                                                                    <% } else { %>
 
-    <a
-        href="/orderReturn/<%= order._id %>"
-        class="text-primary text-sm font-bold hover:underline"
-    >
-        Return Item
-    </a>
+                                                                                        <a href="/orderReturn/<%= order._id %>"
+                                                                                            class="text-primary text-sm font-bold hover:underline">
+                                                                                            Return Item
+                                                                                        </a>
 
-<% } %>
-                                            <% } %>
+                                                                                        <% } %>
+                                                                                            <% } %>
+                                                                </div>
+                                                            </div>
+                                            </div>
+                                            <% }) %>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-8">
+                            <div
+                                class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-2xl p-6 flex flex-col gap-6">
+                                <div>
+                                    <h3 class="text-xs uppercase font-bold text-text-secondary tracking-widest mb-3">
+                                        Shipping
+                                        Address</h3>
+                                    <div class="text-sm leading-relaxed">
+                                        <p class="font-bold">
+                                            <%= order.address?.fullname %>
+                                        </p>
+                                        <p>
+                                            <%= order.address?.street %>
+                                                <%= order.address?.apartment ? `, ${order.address.apartment}` : "" %>
+                                        </p>
+                                        <p>
+                                            <%= order.address?.state %>, <%= order.address?.pincode %>
+                                        </p>
+                                        <p>
+                                            <%= order.address?.country %>
+                                        </p>
+                                        <p class="mt-2 text-text-secondary">
+                                            <%= order.address?.phone %>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="pt-6 border-t border-gray-100 dark:border-border-dark">
+                                    <h3 class="text-xs uppercase font-bold text-text-secondary tracking-widest mb-3">
+                                        Payment
+                                        Method</h3>
+                                    <div class="flex items-center gap-3">
+                                        <span class="material-symbols-outlined text-text-secondary">
+                                            <%= order.paymentMethod==="COD" ? "payments" : "credit_card" %>
+                                        </span>
+                                        <div class="text-sm">
+                                            <p class="font-bold">
+                                                <%= order.paymentMethod %>
+                                            </p>
+                                            <p class="text-text-secondary text-xs">
+                                                <%= order.paymentStatus %>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
-                            <% }) %>
-                            
-                        </div>
-                    </div>
-                </div>
-                <div class="flex flex-col gap-8">
-                    <div
-                        class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-2xl p-6 flex flex-col gap-6">
-                        <div>
-                            <h3 class="text-xs uppercase font-bold text-text-secondary tracking-widest mb-3">Shipping
-                                Address</h3>
-                            <div class="text-sm leading-relaxed">
-                                <p class="font-bold"><%= order.address?.fullname %></p>
-                                <p><%= order.address?.street %><%= order.address?.apartment ? `, ${order.address.apartment}` : "" %></p>
-                                <p><%= order.address?.state %>, <%= order.address?.pincode %></p>
-                                <p><%= order.address?.country %></p>
-                                <p class="mt-2 text-text-secondary"><%= order.address?.phone %></p>
                             </div>
-                        </div>
-                        <div class="pt-6 border-t border-gray-100 dark:border-border-dark">
-                            <h3 class="text-xs uppercase font-bold text-text-secondary tracking-widest mb-3">Payment
-                                Method</h3>
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-text-secondary"><%= order.paymentMethod === "COD" ? "payments" : "credit_card" %></span>
-                                <div class="text-sm">
-                                    <p class="font-bold"><%= order.paymentMethod %></p>
-                                    <p class="text-text-secondary text-xs"><%= order.paymentStatus %></p>
+                            <div
+                                class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-2xl p-6">
+                                <h3 class="text-xs uppercase font-bold text-text-secondary tracking-widest mb-4">Order
+                                    Summary
+                                </h3>
+                                <div class="flex flex-col gap-3">
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-text-secondary">Subtotal</span>
+                                        <span>
+                                            <%= formatCurrency(order.subTotal) %>
+                                        </span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-text-secondary">Shipping</span>
+                                        <span
+                                            class="<%= Number(order.deliveryCharge || 0) === 0 ? 'text-green-500 font-medium' : '' %>">
+                                            <%= Number(order.deliveryCharge || 0)===0 ? "Free" :
+                                                formatCurrency(order.deliveryCharge) %>
+                                        </span>
+                                    </div>
+                                    <div class="flex justify-between text-sm">
+                                        <span class="text-text-secondary">Discount</span>
+                                        <span>
+                                            <%= formatCurrency(order.discount) %>
+                                        </span>
+                                    </div>
+                                    <div class="h-px bg-gray-100 dark:bg-border-dark my-2"></div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-bold text-lg">Total</span>
+                                        <span class="font-black text-xl text-primary">
+                                            <%= formatCurrency(order.totalAmount) %>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div
-                        class="bg-white dark:bg-surface-dark border border-gray-200 dark:border-border-dark rounded-2xl p-6">
-                        <h3 class="text-xs uppercase font-bold text-text-secondary tracking-widest mb-4">Order Summary
-                        </h3>
-                        <div class="flex flex-col gap-3">
-                            <div class="flex justify-between text-sm">
-                                <span class="text-text-secondary">Subtotal</span>
-                                <span><%= formatCurrency(order.subTotal) %></span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-text-secondary">Shipping</span>
-                                <span class="<%= Number(order.deliveryCharge || 0) === 0 ? 'text-green-500 font-medium' : '' %>">
-                                    <%= Number(order.deliveryCharge || 0) === 0 ? "Free" : formatCurrency(order.deliveryCharge) %>
-                                </span>
-                            </div>
-                            <div class="flex justify-between text-sm">
-                                <span class="text-text-secondary">Discount</span>
-                                <span><%= formatCurrency(order.discount) %></span>
-                            </div>
-                            <div class="h-px bg-gray-100 dark:bg-border-dark my-2"></div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-bold text-lg">Total</span>
-                                <span class="font-black text-xl text-primary"><%= formatCurrency(order.totalAmount) %></span>
+                            <div class="flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-text-secondary text-xl">help</span>
+                                <a class="text-sm font-bold text-text-secondary hover:text-primary transition-colors"
+                                    href="#">Need help with this order?</a>
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center justify-center gap-2">
-                        <span class="material-symbols-outlined text-text-secondary text-xl">help</span>
-                        <a class="text-sm font-bold text-text-secondary hover:text-primary transition-colors"
-                            href="#">Need help with this order?</a>
+                </div>
+            </div>
+            <footer class="mt-12 border-t border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark py-10">
+                <div
+                    class="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div class="flex items-center gap-2 text-text-secondary">
+                        <span class="material-symbols-outlined">sports_soccer</span>
+                        <p class="text-sm">© 2023 Football Accessories Co. All rights reserved.</p>
+                    </div>
+                    <div class="flex gap-8">
+                        <a class="text-sm text-text-secondary hover:text-primary transition-colors" href="#">Privacy
+                            Policy</a>
+                        <a class="text-sm text-text-secondary hover:text-primary transition-colors" href="#">Terms of
+                            Service</a>
+                        <a class="text-sm text-text-secondary hover:text-primary transition-colors" href="#">Cookies</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <footer class="mt-12 border-t border-gray-200 dark:border-border-dark bg-white dark:bg-surface-dark py-10">
-        <div
-            class="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-12 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2 text-text-secondary">
-                <span class="material-symbols-outlined">sports_soccer</span>
-                <p class="text-sm">© 2023 Football Accessories Co. All rights reserved.</p>
-            </div>
-            <div class="flex gap-8">
-                <a class="text-sm text-text-secondary hover:text-primary transition-colors" href="#">Privacy Policy</a>
-                <a class="text-sm text-text-secondary hover:text-primary transition-colors" href="#">Terms of
-                    Service</a>
-                <a class="text-sm text-text-secondary hover:text-primary transition-colors" href="#">Cookies</a>
-            </div>
-        </div>
-    </footer>
-    <div id="cancelRequestModal"
-        class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 px-4">
-        <form id="cancelRequestForm"
-            class="w-full max-w-lg rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl dark:border-border-dark dark:bg-surface-dark">
-            <input type="hidden" name="orderId" id="cancelOrderId" />
-            <input type="hidden" name="cancelItemId" id="cancelItemId" />
-            <input type="hidden" id="cancelQuantityInput" />
+            </footer>
+            <div id="cancelRequestModal"
+                class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/60 px-4">
+                <form id="cancelRequestForm"
+                    class="w-full max-w-lg rounded-2xl border border-gray-200 bg-white p-6 shadow-2xl dark:border-border-dark dark:bg-surface-dark">
+                    <input type="hidden" name="orderId" id="cancelOrderId" />
+                    <input type="hidden" name="cancelItemId" id="cancelItemId" />
+                    <input type="hidden" id="cancelQuantityInput" />
 
-            <div class="flex items-start gap-4">
-                <div class="flex size-11 shrink-0 items-center justify-center rounded-full bg-red-100 text-red-600 dark:bg-red-500/10 dark:text-red-400">
-                    <span class="material-symbols-outlined">cancel</span>
-                </div>
-                <div class="min-w-0">
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white">Cancel product</h3>
-                    <p id="cancelProductText" class="mt-2 text-sm leading-6 text-text-secondary">
-                        Select a reason to cancel this product.
-                    </p>
-                </div>
-            </div>
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="flex size-11 shrink-0 items-center justify-center rounded-full bg-red-100 text-red-600 dark:bg-red-500/10 dark:text-red-400">
+                            <span class="material-symbols-outlined">cancel</span>
+                        </div>
+                        <div class="min-w-0">
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">Cancel product</h3>
+                            <p id="cancelProductText" class="mt-2 text-sm leading-6 text-text-secondary">
+                                Select a reason to cancel this product.
+                            </p>
+                        </div>
+                    </div>
 
-            <div class="mt-6 space-y-4">
-                <label class="block">
-                    <span class="text-sm font-bold text-slate-900 dark:text-white">Reason</span>
-                    <select name="cancelReason" required
-                        class="mt-2 h-11 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm text-slate-900 focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-white">
-                        <option value="">Select a reason</option>
-                        <option value="changed_mind">Changed my mind</option>
-                        <option value="ordered_by_mistake">Ordered by mistake</option>
-                        <option value="wrong_address">Wrong shipping address</option>
-                        <option value="found_better_price">Found a better price</option>
-                        <option value="delivery_too_late">Delivery is too late</option>
-                        <option value="other">Other</option>
-                    </select>
-                </label>
+                    <div class="mt-6 space-y-4">
+                        <label class="block">
+                            <span class="text-sm font-bold text-slate-900 dark:text-white">Reason</span>
+                            <select name="cancelReason" required
+                                class="mt-2 h-11 w-full rounded-lg border border-gray-200 bg-gray-50 px-3 text-sm text-slate-900 focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-white">
+                                <option value="">Select a reason</option>
+                                <option value="changed_mind">Changed my mind</option>
+                                <option value="ordered_by_mistake">Ordered by mistake</option>
+                                <option value="wrong_address">Wrong shipping address</option>
+                                <option value="found_better_price">Found a better price</option>
+                                <option value="delivery_too_late">Delivery is too late</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </label>
 
-                <label class="block">
-                    <span class="text-sm font-bold text-slate-900 dark:text-white">Comments</span>
-                    <textarea name="cancelComments" rows="3"
-                        class="mt-2 w-full resize-none rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-slate-900 focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-white"
-                        placeholder="Add any details for the seller"></textarea>
-                </label>
+                        <label class="block">
+                            <span class="text-sm font-bold text-slate-900 dark:text-white">Comments</span>
+                            <textarea name="cancelComments" rows="3"
+                                class="mt-2 w-full resize-none rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-sm text-slate-900 focus:border-primary focus:ring-primary dark:border-border-dark dark:bg-background-dark dark:text-white"
+                                placeholder="Add any details for the seller"></textarea>
+                        </label>
 
-                <p id="cancelRequestMessage" class="hidden rounded-lg p-3 text-sm font-medium"></p>
+                        <p id="cancelRequestMessage" class="hidden rounded-lg p-3 text-sm font-medium"></p>
+                    </div>
+
+                    <div class="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
+                        <button type="button" id="cancelModalClose"
+                            class="h-10 rounded-lg border border-gray-200 px-5 text-sm font-bold text-slate-700 transition-colors hover:bg-gray-100 dark:border-border-dark dark:text-white dark:hover:bg-white/5">
+                            Keep product
+                        </button>
+                        <button type="submit" id="cancelRequestSubmit"
+                            class="h-10 rounded-lg bg-red-600 px-5 text-sm font-bold text-white transition-colors hover:bg-red-700">
+                            Cancel product
+                        </button>
+                    </div>
+                </form>
             </div>
 
-            <div class="mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end">
-                <button type="button" id="cancelModalClose"
-                    class="h-10 rounded-lg border border-gray-200 px-5 text-sm font-bold text-slate-700 transition-colors hover:bg-gray-100 dark:border-border-dark dark:text-white dark:hover:bg-white/5">
-                    Keep product
-                </button>
-                <button type="submit" id="cancelRequestSubmit"
-                    class="h-10 rounded-lg bg-red-600 px-5 text-sm font-bold text-white transition-colors hover:bg-red-700">
-                    Cancel product
-                </button>
-            </div>
-        </form>
-    </div>
+            <script>
+                const cancelRequestModal = document.getElementById("cancelRequestModal");
+                const cancelRequestForm = document.getElementById("cancelRequestForm");
+                const cancelProductText = document.getElementById("cancelProductText");
+                const cancelOrderId = document.getElementById("cancelOrderId");
+                const cancelItemId = document.getElementById("cancelItemId");
+                const cancelQuantityInput = document.getElementById("cancelQuantityInput");
+                const cancelModalClose = document.getElementById("cancelModalClose");
+                const cancelRequestSubmit = document.getElementById("cancelRequestSubmit");
+                const cancelRequestMessage = document.getElementById("cancelRequestMessage");
+                let activeCancelButton = null;
 
-    <script>
-        const cancelRequestModal = document.getElementById("cancelRequestModal");
-        const cancelRequestForm = document.getElementById("cancelRequestForm");
-        const cancelProductText = document.getElementById("cancelProductText");
-        const cancelOrderId = document.getElementById("cancelOrderId");
-        const cancelItemId = document.getElementById("cancelItemId");
-        const cancelQuantityInput = document.getElementById("cancelQuantityInput");
-        const cancelModalClose = document.getElementById("cancelModalClose");
-        const cancelRequestSubmit = document.getElementById("cancelRequestSubmit");
-        const cancelRequestMessage = document.getElementById("cancelRequestMessage");
-        let activeCancelButton = null;
+                const showCancelMessage = (message, isSuccess = false) => {
+                    cancelRequestMessage.textContent = message;
+                    cancelRequestMessage.className = isSuccess
+                        ? "rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm font-medium text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-300"
+                        : "rounded-lg border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300";
+                };
 
-        const showCancelMessage = (message, isSuccess = false) => {
-            cancelRequestMessage.textContent = message;
-            cancelRequestMessage.className = isSuccess
-                ? "rounded-lg border border-emerald-200 bg-emerald-50 p-3 text-sm font-medium text-emerald-700 dark:border-emerald-500/30 dark:bg-emerald-500/10 dark:text-emerald-300"
-                : "rounded-lg border border-red-200 bg-red-50 p-3 text-sm font-medium text-red-700 dark:border-red-500/30 dark:bg-red-500/10 dark:text-red-300";
-        };
+                const hideCancelModal = () => {
+                    cancelRequestModal.classList.add("hidden");
+                    cancelRequestModal.classList.remove("flex");
+                    cancelRequestForm.reset();
+                    cancelRequestMessage.classList.add("hidden");
+                    activeCancelButton = null;
+                };
 
-        const hideCancelModal = () => {
-            cancelRequestModal.classList.add("hidden");
-            cancelRequestModal.classList.remove("flex");
-            cancelRequestForm.reset();
-            cancelRequestMessage.classList.add("hidden");
-            activeCancelButton = null;
-        };
+                document.querySelectorAll("[data-cancel-item-button]").forEach(button => {
+                    button.addEventListener("click", () => {
+                        activeCancelButton = button;
+                        const productName = button.dataset.productName || "this product";
+                        const quantity = button.dataset.quantity || "1";
+                        const itemId = button.dataset.itemId;
 
-        document.querySelectorAll("[data-cancel-item-button]").forEach(button => {
-            button.addEventListener("click", () => {
-                activeCancelButton = button;
-                const productName = button.dataset.productName || "this product";
-                const quantity = button.dataset.quantity || "1";
-                const itemId = button.dataset.itemId;
-
-                cancelProductText.textContent = `Tell us why you want to cancel ${productName}.`;
-                cancelOrderId.value = button.dataset.orderId;
-                cancelItemId.value = itemId;
-                cancelQuantityInput.name = `cancelQuantity_${itemId}`;
-                cancelQuantityInput.value = quantity;
-                cancelRequestModal.classList.remove("hidden");
-                cancelRequestModal.classList.add("flex");
-            });
-        });
-
-        cancelRequestForm.addEventListener("submit", async event => {
-            event.preventDefault();
-            cancelRequestSubmit.disabled = true;
-            cancelRequestSubmit.textContent = "Submitting...";
-            cancelRequestMessage.classList.add("hidden");
-
-            try {
-                const response = await fetch("/order/cancel", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: new URLSearchParams(new FormData(cancelRequestForm)),
+                        cancelProductText.textContent = `Tell us why you want to cancel ${productName}.`;
+                        cancelOrderId.value = button.dataset.orderId;
+                        cancelItemId.value = itemId;
+                        cancelQuantityInput.name = `cancelQuantity_${itemId}`;
+                        cancelQuantityInput.value = quantity;
+                        cancelRequestModal.classList.remove("hidden");
+                        cancelRequestModal.classList.add("flex");
+                    });
                 });
-                const data = await response.json();
 
-                if (!response.ok || !data.success) {
-                    throw new Error(data.message || "Cancellation request failed");
-                }
+                cancelRequestForm.addEventListener("submit", async event => {
+                    event.preventDefault();
+                    cancelRequestSubmit.disabled = true;
+                    cancelRequestSubmit.textContent = "Submitting...";
+                    cancelRequestMessage.classList.add("hidden");
 
-                showCancelMessage(data.message || "Product cancelled successfully", true);
-                if (activeCancelButton) {
-                    activeCancelButton.disabled = true;
-                    activeCancelButton.textContent = "Cancelled";
-                    activeCancelButton.className = "inline-flex h-10 items-center justify-center rounded-lg bg-emerald-100 px-4 text-sm font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300";
-                }
-                setTimeout(() => window.location.reload(), 900);
-            } catch (error) {
-                showCancelMessage(error.message || "Something went wrong");
-                cancelRequestSubmit.disabled = false;
-                cancelRequestSubmit.textContent = "Cancel product";
-            }
-        });
+                    try {
+                        const response = await fetch("/order/cancel", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/x-www-form-urlencoded",
+                            },
+                            body: new URLSearchParams(new FormData(cancelRequestForm)),
+                        });
+                        const data = await response.json();
 
-        cancelModalClose.addEventListener("click", hideCancelModal);
-        cancelRequestModal.addEventListener("click", event => {
-            if (event.target === cancelRequestModal) {
-                hideCancelModal();
-            }
-        });
-    </script>
+                        if (!response.ok || !data.success) {
+                            throw new Error(data.message || "Cancellation request failed");
+                        }
+
+                        showCancelMessage(data.message || "Product cancelled successfully", true);
+                        if (activeCancelButton) {
+                            activeCancelButton.disabled = true;
+                            activeCancelButton.textContent = "Cancelled";
+                            activeCancelButton.className = "inline-flex h-10 items-center justify-center rounded-lg bg-emerald-100 px-4 text-sm font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300";
+                        }
+                        setTimeout(() => window.location.reload(), 900);
+                    } catch (error) {
+                        showCancelMessage(error.message || "Something went wrong");
+                        cancelRequestSubmit.disabled = false;
+                        cancelRequestSubmit.textContent = "Cancel product";
+                    }
+                });
+
+                cancelModalClose.addEventListener("click", hideCancelModal);
+                cancelRequestModal.addEventListener("click", event => {
+                    if (event.target === cancelRequestModal) {
+                        hideCancelModal();
+                    }
+                });
+            </script>
 
 </body>
 

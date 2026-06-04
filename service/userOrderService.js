@@ -2,6 +2,7 @@ import Cart from "../models/cartModel.js";
 import Product from "../models/productModel.js";
 import Order from "../models/orderModel.js";
 import Address from "../models/userAddressModel.js";
+import Wallet from "../models/walletModel.js";
 
 export const generateOrderNumber = () => {
   return `ORD-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -90,6 +91,25 @@ export const placeOrderService = async (
   const deliveryCharge = subTotal > 3999 ? 0 : 50;
   const totalAmount = subTotal - discount + deliveryCharge;
 
+
+ let wallet=null;
+
+if (paymentMethod === "WALLET") {
+   wallet = await Wallet.findOne({ user: userId });
+
+  if (!wallet) {
+  wallet = await Wallet.create({
+    user: userId,
+    balance: 0,
+    transactions: [],
+  });
+}
+
+  if (wallet.balance < totalAmount) {
+    throw new Error("Insufficient wallet balance");
+  }
+}
+
   let paymentStatus = "Pending";
 
   if (paymentMethod === "WALLET") {
@@ -126,6 +146,22 @@ export const placeOrderService = async (
     couponCode,
     estimatedDelivery: deliveryDate,
   });
+
+
+
+  if (paymentMethod === "WALLET") {
+  wallet.balance -= totalAmount;
+
+  wallet.transactions.push({
+    type: "debit",
+    amount: totalAmount,
+    description: `Payment for Order #${order.orderNumber}`,
+    orderId: order._id,
+    balanceAfterTransaction: wallet.balance,
+  });
+
+  await wallet.save();
+}
 
   //reduce Stock
 
@@ -267,6 +303,36 @@ export const requestCancelService = async ({
   item.cancelStatus = "Cancelled";
   item.cancelledAt = new Date();
   item.refundAmount = (item.price || 0) * quantity;
+
+  const refundAmount = item.refundAmount;
+
+// Refund only for prepaid orders
+if (
+  refundAmount > 0 &&
+  ["RAZORPAY", "WALLET"].includes(order.paymentMethod)
+) {
+  let wallet = await Wallet.findOne({ user: userId });
+
+  if (!wallet) {
+    wallet = await Wallet.create({
+      user: userId,
+      balance: 0,
+      transactions: [],
+    });
+  }
+
+  wallet.balance += refundAmount;
+
+  wallet.transactions.push({
+    type: "credit",
+    amount: refundAmount,
+    description: `Refund for cancelled item in Order #${order.orderNumber}`,
+    orderId: order._id,
+    balanceAfterTransaction: wallet.balance,
+  });
+
+  await wallet.save();
+}
 
   await Product.updateOne(
     {

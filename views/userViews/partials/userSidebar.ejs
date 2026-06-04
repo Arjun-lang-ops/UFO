@@ -1,0 +1,86 @@
+<aside class="w-full lg:w-[280px] shrink-0">
+  <div class="flex flex-col gap-4 bg-white dark:bg-[#111418] p-4 rounded-xl border border-slate-200 dark:border-[#283039] h-full shadow-sm">
+    <div class="flex gap-3 items-center pb-4 border-b border-slate-100 dark:border-[#283039]">
+      <div class="flex flex-col">
+        <h2 id="sidebar-fullname" class="text-slate-900 dark:text-white text-base font-bold leading-normal">
+          Loading...
+        </h2>
+        <div class="flex items-center gap-1">
+          <span class="material-symbols-outlined text-primary text-[14px]">verified</span>
+          <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-medium leading-normal">
+            Pro Member
+          </p>
+        </div>
+      </div>
+    </div>
+    <nav class="flex flex-col gap-1">
+      <!-- Personal Info -->
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <%= activePage === 'profile' ? 'bg-primary/10 text-primary dark:bg-primary dark:text-white' : 'text-slate-600 dark:text-[#9dabb9] hover:bg-slate-50 dark:hover:bg-[#283039] hover:text-slate-900 dark:hover:text-white group' %> transition-colors" href="/profile">
+        <span class="material-symbols-outlined text-[20px] <%= activePage === 'profile' ? 'fill-1' : 'group-hover:text-primary transition-colors' %>">person</span>
+        <span class="text-sm font-semibold leading-normal">Personal Info</span>
+      </a>
+      
+      <!-- My Orders -->
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <%= activePage === 'orders' ? 'bg-primary/10 text-primary dark:bg-primary dark:text-white' : 'text-slate-600 dark:text-[#9dabb9] hover:bg-slate-50 dark:hover:bg-[#283039] hover:text-slate-900 dark:hover:text-white group' %> transition-colors" href="/orderHistory">
+        <span class="material-symbols-outlined text-[20px] <%= activePage === 'orders' ? 'fill-1' : 'group-hover:text-primary transition-colors' %>">package_2</span>
+        <span class="text-sm font-semibold leading-normal">My Orders</span>
+      </a>
+      
+      <!-- Addresses -->
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <%= activePage === 'addresses' ? 'bg-primary/10 text-primary dark:bg-primary dark:text-white' : 'text-slate-600 dark:text-[#9dabb9] hover:bg-slate-50 dark:hover:bg-[#283039] hover:text-slate-900 dark:hover:text-white group' %> transition-colors" href="/profile/address">
+        <span class="material-symbols-outlined text-[20px] <%= activePage === 'addresses' ? 'fill-1' : 'group-hover:text-primary transition-colors' %>">location_on</span>
+        <span class="text-sm font-semibold leading-normal">Addresses</span>
+      </a>
+      
+      <!-- Wishlist -->
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <%= activePage === 'wishlist' ? 'bg-primary/10 text-primary dark:bg-primary dark:text-white' : 'text-slate-600 dark:text-[#9dabb9] hover:bg-slate-50 dark:hover:bg-[#283039] hover:text-slate-900 dark:hover:text-white group' %> transition-colors" href="/wishlist">
+        <span class="material-symbols-outlined text-[20px] <%= activePage === 'wishlist' ? 'fill-1' : 'group-hover:text-primary transition-colors' %>">favorite</span>
+        <span class="text-sm font-semibold leading-normal">Wishlist</span>
+      </a>
+      <!-- wallet -->
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <%= activePage === 'wallet' ? 'bg-primary/10 text-primary dark:bg-primary dark:text-white' : 'text-slate-600 dark:text-[#9dabb9] hover:bg-slate-50 dark:hover:bg-[#283039] hover:text-slate-900 dark:hover:text-white group' %> transition-colors" href="/wallet">
+        <span class="material-symbols-outlined text-[20px] <%= activePage === 'wallet' ? 'fill-1' : 'group-hover:text-primary transition-colors' %>">credit_card</span>
+        <span class="text-sm font-semibold leading-normal">Wallet</span>
+      </a>
+
+      <!-- Security -->
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg <%= activePage === 'changePassword' ? 'bg-primary/10 text-primary dark:bg-primary dark:text-white' : 'text-slate-600 dark:text-[#9dabb9] hover:bg-slate-50 dark:hover:bg-[#283039] hover:text-slate-900 dark:hover:text-white group' %> transition-colors" href="/profile/changePassword">
+        <span class="material-symbols-outlined text-[20px] <%= activePage === 'changePassword' ? 'fill-1' : 'group-hover:text-primary transition-colors' %>">lock</span>
+        <span class="text-sm font-semibold leading-normal">Security</span>
+      </a>
+      
+      <div class="h-px bg-slate-100 dark:bg-[#283039] my-1"></div>
+      
+      <!-- Sign Out -->
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-[#9dabb9] hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-colors group" href="/logout">
+        <span class="material-symbols-outlined text-[20px] group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">logout</span>
+        <span class="text-sm font-semibold leading-normal">Sign Out</span>
+      </a>
+    </nav>
+  </div>
+</aside>
+
+<script>
+  (async () => {
+    try {
+      const sidebarNameEl = document.getElementById("sidebar-fullname");
+      if (sidebarNameEl) {
+        const res = await fetch("/api/me", { credentials: "same-origin" });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success && data.user) {
+            sidebarNameEl.textContent = data.user.fullname;
+            const headerNameEl = document.getElementById("header-fullname");
+            if (headerNameEl) headerNameEl.textContent = data.user.fullname;
+            const fullNameInput = document.getElementById("full-name");
+            if (fullNameInput) fullNameInput.value = data.user.fullname;
+            const userEmailInput = document.getElementById("user-email");
+            if (userEmailInput) userEmailInput.value = data.user.email;
+          }
+        }
+      }
+    } catch (err) {
+      console.error("Sidebar user info load error:", err);
+    }
+  })();
+</script>

@@ -102,10 +102,11 @@
             </div>
         </div>
     </header>
-    <!-- Main Content -->
     <main class="flex-grow w-full px-4 py-8 lg:px-10 lg:py-10">
-        <div class="mx-auto max-w-7xl flex flex-col gap-8">
-            <!-- Page Heading & Filters -->
+        <div class="mx-auto max-w-7xl flex flex-col md:flex-row gap-8">
+            <%- include('partials/userSidebar', { activePage: 'wishlist' }) %>
+            <div class="flex-1 flex flex-col gap-8 min-w-0">
+                <!-- Page Heading & Filters -->
             <div class="flex flex-col gap-6">
                 <!-- Heading Row -->
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -286,6 +287,7 @@
     <% } %>
 
 </div>
+            </div>
         </div>
     </main>
     <!-- Footer -->

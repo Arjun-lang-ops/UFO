@@ -66,45 +66,7 @@
 </header>
 <main class="flex-grow flex justify-center py-10 px-6 md:px-10 lg:px-40">
 <div class="layout-content-container flex flex-col md:flex-row gap-8 w-full max-w-[1200px]">
-<aside class="w-full md:w-64 flex flex-col gap-6 shrink-0">
-<div class="flex flex-col bg-slate-200/20 dark:bg-slate-800/40 rounded-xl p-2">
-<div class="px-4 py-3 mb-2">
-<h3 class="text-slate-900 dark:text-white font-bold">My Account</h3>
-<p class="text-slate-500 dark:text-slate-400 text-xs">Manage your profile</p>
-</div>
-<nav class="flex flex-col gap-1">
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="/profile">
-<span class="material-symbols-outlined">person</span>
-<span class="text-sm font-medium">Personal Info</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
-<span class="material-symbols-outlined">package_2</span>
-<span class="text-sm font-medium">My Orders</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-white transition-all" href="#">
-<span class="material-symbols-outlined font-fill">location_on</span>
-<span class="text-sm font-medium">Addresses</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
-<span class="material-symbols-outlined">account_balance_wallet</span>
-<span class="text-sm font-medium">Wallet</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
-<span class="material-symbols-outlined">favorite</span>
-<span class="text-sm font-medium">Wishlist</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-all" href="#">
-<span class="material-symbols-outlined">card_giftcard</span>
-<span class="text-sm font-medium">Refer and Earn</span>
-</a>
-<div class="border-t border-slate-200 dark:border-slate-800 my-2"></div>
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-red-500 hover:bg-red-500/10 transition-all" href="/logout">
-<span class="material-symbols-outlined">logout</span>
-<span class="text-sm font-medium">Sign Out</span>
-</a>
-</nav>
-</div>
-</aside>
+<%- include('partials/userSidebar', { activePage: 'addresses' }) %>
 <div class="flex flex-col gap-4 w-full">
 
     <!-- Add New Address Button (always visible) -->

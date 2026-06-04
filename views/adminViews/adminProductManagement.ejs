@@ -62,7 +62,7 @@
                     <span class="material-symbols-outlined">dashboard</span>
                     <span class="text-sm font-medium">Dashboard</span>
                 </a>
-                
+
                 <a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                     href="/admin/orderManagement">
                     <span class="material-symbols-outlined">shopping_cart</span>
@@ -84,7 +84,7 @@
                     <span class="text-sm font-medium">categories</span>
                 </a>
             </nav>
-           
+
         </div>
     </aside>
     <!-- Main Content -->
@@ -93,42 +93,35 @@
         <header
             class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-8 py-4">
             <div class="flex items-center gap-4 w-full max-w-md">
-               <div class="relative w-full">
+                <div class="relative w-full">
 
                     <!-- Icon -->
-                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">
                         search
                     </span>
 
                     <form action="/admin/products" method="GET">
 
                         <!-- Input -->
-                        <input
-                        name="search"
-                        id="searchInput"
-                        class="w-full pl-10 pr-10 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary text-slate-900 dark:text-slate-100"
-                        placeholder="Search by Product..."
-                        type="text"
-                        value="<%=search||''%>"
-                        />
+                        <input name="search" id="searchInput"
+                            class="w-full pl-10 pr-10 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary text-slate-900 dark:text-slate-100"
+                            placeholder="Search by Product..." type="text" value="<%=search||''%>" />
 
                         <!-- Clear button -->
-                        <button
-                        id="clearSearch"
-                        type="button"
-                        class="absolute right-3 top-1/2 -translate-y-1/2 text-[#9dabb9] hover:text-white hidden"
-                        >
-                        ✕
+                        <button id="clearSearch" type="button"
+                            class="absolute right-3 top-1/2 -translate-y-1/2 text-[#9dabb9] hover:text-white hidden">
+                            ✕
                         </button>
 
                     </form>
-                    </div>
+                </div>
             </div>
             <div class="flex items-center gap-4">
-               
-                
-                
-                
+
+
+
+
             </div>
         </header>
         <!-- Content Area -->
@@ -141,13 +134,13 @@
                         pricing.</p>
                 </div>
                 <div class="flex items-center gap-3">
-                    
+
                     <a href="/admin/product-add">
                         <button
-                        class="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
-                        <span class="material-symbols-outlined text-lg">add</span>
-                        Add New Product
-                    </button>
+                            class="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                            <span class="material-symbols-outlined text-lg">add</span>
+                            Add New Product
+                        </button>
                     </a>
                 </div>
             </div>
@@ -156,17 +149,19 @@
                 <div
                     class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
                     <p class="text-slate-500 text-xs font-bold uppercase tracking-wider mb-1">Total Products</p>
-                    <h3 class="text-2xl font-bold"><%=totalProducts%></h3>
+                    <h3 class="text-2xl font-bold">
+                        <%=totalProducts%>
+                    </h3>
                 </div>
-                
+
             </div>
             <!-- Filter Controls -->
             <div class="flex flex-wrap items-center gap-3 mb-6">
                 <button
                     class="px-4 py-1.5 bg-primary/10 text-primary border border-primary/20 rounded-full text-xs font-bold">All
                     Products</button>
-                
-                
+
+
             </div>
             <!-- Table Section -->
             <div
@@ -175,158 +170,175 @@
                     <thead>
                         <tr
                             class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-                            
+
                             <th class="px-6 py-4">Product Name &amp; SKU</th>
                             <th class="px-6 py-4">Category</th>
-                            
+
                             <th class="px-6 py-4">Price</th>
                             <th class="px-6 py-4">Status</th>
                             <th class="px-6 py-4 text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-                         <% if(!product||product.length === 0) { %>
-    <tr>
-      <td colspan="4" class="text-center py-6 text-slate-500">
-        No Product found
-      </td>
-    </tr>
-  <% } %>
-  <% product.forEach(item=>{%>
-                        <!-- Row 1 -->
-                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
-                            
-                            <td class="px-6 py-4">
-                                <div class="flex flex-col">
-                                    <span class="text-sm font-bold"><%=item.name%></span>
-                                    <span class="text-xs text-slate-500"><%=item.variants[0]?.sku%></span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4">
-                                <span class="text-xs font-medium text-slate-600 dark:text-slate-400"><%=item.category?.name%></span>
-                            </td>
-                            
-                            <td class="px-6 py-4">
-                                <span class="text-sm font-bold"><%=item.variants[0]?.price%></span>
-                            </td>
-                            <td class="px-6 py-4">
-                                <% if (item.isActive) { %>
-  <span class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-500 uppercase">
-    Listed
-  </span>
-<% } else { %>
-  <span class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-500 uppercase">
-    Unlisted
-  </span>
-<% } %>
-                            </td>
-                            <td class="px-6 py-4 text-right">
-                                <div class="flex items-center justify-end gap-2">
-                                    <a href="/admin/product-edit/<%= item._id %>">
-                                        <button class="p-1.5 text-slate-400 hover:text-primary transition-colors">
-                                        <span class="material-symbols-outlined text-lg">edit</span>
-                                    </button>
-                                    </a>
-                                   
-                                </div>
-                            </td>
-                        </tr>
-                        <!-- Row 2 -->
-                        
-                        </tr>
-                    <%})%>
+                        <% if(!product||product.length===0) { %>
+                            <tr>
+                                <td colspan="4" class="text-center py-6 text-slate-500">
+                                    No Product found
+                                </td>
+                            </tr>
+                            <% } %>
+                                <% product.forEach(item=>{%>
+                                    <!-- Row 1 -->
+                                    <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors group">
+
+                                        <td class="px-6 py-4">
+                                            <div class="flex flex-col">
+                                                <span class="text-sm font-bold">
+                                                    <%=item.name%>
+                                                </span>
+                                                <span class="text-xs text-slate-500">
+                                                    <%=item.variants[0]?.sku%>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span class="text-xs font-medium text-slate-600 dark:text-slate-400">
+                                                <%=item.category?.name%>
+                                            </span>
+                                        </td>
+
+                                        <td class="px-6 py-4">
+                                            <span class="text-sm font-bold">
+                                                <%=item.variants[0]?.price%>
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <% if (item.isActive) { %>
+                                                <span
+                                                    class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-500 uppercase">
+                                                    Listed
+                                                </span>
+                                                <% } else { %>
+                                                    <span
+                                                        class="inline-flex items-center px-2 py-1 rounded-md text-[10px] font-bold bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-500 uppercase">
+                                                        Unlisted
+                                                    </span>
+                                                    <% } %>
+                                        </td>
+                                        <td class="px-6 py-4 text-right">
+                                            <div class="flex items-center justify-end gap-2">
+                                                <a href="/admin/product-edit/<%= item._id %>">
+                                                    <button
+                                                        class="p-1.5 text-slate-400 hover:text-primary transition-colors">
+                                                        <span class="material-symbols-outlined text-lg">edit</span>
+                                                    </button>
+                                                </a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <!-- Row 2 -->
+
+                                    </tr>
+                                    <%})%>
                     </tbody>
                 </table>
                 <!-- Pagination -->
-                <div class="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 flex items-center justify-between border-t border-slate-100 dark:divide-slate-800">
+                <div
+                    class="px-6 py-4 bg-slate-50 dark:bg-slate-800/30 flex items-center justify-between border-t border-slate-100 dark:divide-slate-800">
 
-    <!-- ✅ Showing X to Y of Z -->
-    <p class="text-xs text-slate-500">
-        <% 
-            const start = (currentPage - 1) * 4 + 1;
-            const end = Math.min(currentPage * 4, totalProducts);
-        %>
+                    <!-- ✅ Showing X to Y of Z -->
+                    <p class="text-xs text-slate-500">
+                        <% const start=(currentPage - 1) * 4 + 1; const end=Math.min(currentPage * 4, totalProducts); %>
 
-        Showing 
-        <span class="font-bold text-slate-900 dark:text-slate-100"><%= totalProducts === 0 ? 0 : start %></span> 
-        to 
-        <span class="font-bold text-slate-900 dark:text-slate-100"><%= end %></span> 
-        of 
-        <span class="font-bold text-slate-900 dark:text-slate-100"><%= totalProducts %></span> 
-        results
-    </p>
+                            Showing
+                            <span class="font-bold text-slate-900 dark:text-slate-100">
+                                <%= totalProducts===0 ? 0 : start %>
+                            </span>
+                            to
+                            <span class="font-bold text-slate-900 dark:text-slate-100">
+                                <%= end %>
+                            </span>
+                            of
+                            <span class="font-bold text-slate-900 dark:text-slate-100">
+                                <%= totalProducts %>
+                            </span>
+                            results
+                    </p>
 
-    <!-- ✅ Pagination -->
-    <div class="flex items-center gap-2">
+                    <!-- ✅ Pagination -->
+                    <div class="flex items-center gap-2">
 
-        <!-- Prev Button -->
-        <% if (currentPage > 1) { %>
-            <a href="?page=<%= currentPage - 1 %>&search=<%= search %>"
-               class="p-1.5 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400">
-                <span class="material-symbols-outlined text-lg">chevron_left</span>
-            </a>
-        <% } %>
+                        <!-- Prev Button -->
+                        <% if (currentPage> 1) { %>
+                            <a href="?page=<%= currentPage - 1 %>&search=<%= search %>"
+                                class="p-1.5 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400">
+                                <span class="material-symbols-outlined text-lg">chevron_left</span>
+                            </a>
+                            <% } %>
 
-        <!-- Page Numbers -->
-        <% for (let i = 1; i <= totalPages; i++) { %>
+                                <!-- Page Numbers -->
+                                <% for (let i=1; i <=totalPages; i++) { %>
 
-            <% if (i === currentPage) { %>
-                <span class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-lg shadow-sm">
-                    <%= i %>
-                </span>
-            <% } else { %>
-                <a href="?page=<%= i %>&search=<%= search %>"
-                   class="px-3 py-1 text-slate-500 text-xs font-bold rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-                    <%= i %>
-                </a>
-            <% } %>
+                                    <% if (i===currentPage) { %>
+                                        <span
+                                            class="px-3 py-1 bg-primary text-white text-xs font-bold rounded-lg shadow-sm">
+                                            <%= i %>
+                                        </span>
+                                        <% } else { %>
+                                            <a href="?page=<%= i %>&search=<%= search %>"
+                                                class="px-3 py-1 text-slate-500 text-xs font-bold rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                                                <%= i %>
+                                            </a>
+                                            <% } %>
 
-        <% } %>
+                                                <% } %>
 
-        <!-- Next Button -->
-        <% if (currentPage < totalPages) { %>
-            <a href="?page=<%= currentPage + 1 %>&search=<%= search %>"
-               class="p-1.5 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400">
-                <span class="material-symbols-outlined text-lg">chevron_right</span>
-            </a>
-        <% } %>
+                                                    <!-- Next Button -->
+                                                    <% if (currentPage < totalPages) { %>
+                                                        <a href="?page=<%= currentPage + 1 %>&search=<%= search %>"
+                                                            class="p-1.5 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400">
+                                                            <span
+                                                                class="material-symbols-outlined text-lg">chevron_right</span>
+                                                        </a>
+                                                        <% } %>
 
-    </div>
-</div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
 </body>
 <script>
-const input = document.getElementById("searchInput");
-const clearBtn = document.getElementById("clearSearch");
+    const input = document.getElementById("searchInput");
+    const clearBtn = document.getElementById("clearSearch");
 
-// Show/hide logic
-function toggleClear() {
-  if (input.value.trim() !== "" && document.activeElement === input) {
-    clearBtn.classList.remove("hidden");
-  } else {
-    clearBtn.classList.add("hidden");
-  }
-}
+    // Show/hide logic
+    function toggleClear() {
+        if (input.value.trim() !== "" && document.activeElement === input) {
+            clearBtn.classList.remove("hidden");
+        } else {
+            clearBtn.classList.add("hidden");
+        }
+    }
 
-input.addEventListener("focus", toggleClear);
-input.addEventListener("input", toggleClear);
-input.addEventListener("blur", () => {
-  setTimeout(toggleClear, 150);
-});
+    input.addEventListener("focus", toggleClear);
+    input.addEventListener("input", toggleClear);
+    input.addEventListener("blur", () => {
+        setTimeout(toggleClear, 150);
+    });
 
-// Clear action
-clearBtn.addEventListener("click", () => {
-  input.value = "";
-  input.focus();
+    // Clear action
+    clearBtn.addEventListener("click", () => {
+        input.value = "";
+        input.focus();
 
-  const url = new URL(window.location.href);
-  url.searchParams.delete("search");
-  url.searchParams.set("page", 1);
+        const url = new URL(window.location.href);
+        url.searchParams.delete("search");
+        url.searchParams.set("page", 1);
 
-  window.location.href = url.toString();
-});
+        window.location.href = url.toString();
+    });
 </script>
 
 </html>

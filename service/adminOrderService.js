@@ -1,6 +1,7 @@
 import Order from "../models/orderModel.js";
 import Product from "../models/productModel.js";
 import User from "../models/userModel.js";
+import Wallet from "../models/walletModel.js";
 
 const orderStatusFlow = ["Pending", "Confirmed", "Shipped", "Delivered"];
 const terminalOrderStatus = ["Cancelled", "Returned"];
@@ -26,30 +27,32 @@ export const orderManagementService = async (page, search, status) => {
     "Delivered",
     "Cancelled",
     "Returned",
-    'Return Requests'
-   
+    "Return Requests",
   ];
 
   const selectedStatus = validStatuses.includes(status) ? status : "";
 
   if (selectedStatus) {
-  if (selectedStatus === "Return Requests") {
-    filter.items = {
-      $elemMatch: {
-        returnRequest: true,
-        returnStatus: "Pending",
-      },
-    };
-  } else {
-    filter.orderStatus = selectedStatus;
+    if (selectedStatus === "Return Requests") {
+      filter.items = {
+        $elemMatch: {
+          returnRequest: true,
+          returnStatus: "Pending",
+        },
+      };
+    } else {
+      filter.orderStatus = selectedStatus;
+    }
   }
-}
 
   //returning id of each users
 
   if (search && search.trim()) {
     const trimmedSearch = search.trim();
-    const escapedSearch = trimmedSearch.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+    const escapedSearch = trimmedSearch.replace(
+      /[-\/\\^$*+?.()|[\]{}]/g,
+      "\\$&",
+    );
 
     const users = await User.find(
       {
@@ -71,8 +74,7 @@ export const orderManagementService = async (page, search, status) => {
       "_id",
     );
 
-    console.log('users :', users)
-
+    console.log("users :", users);
 
     //taking ids of the users
 
@@ -87,7 +89,7 @@ export const orderManagementService = async (page, search, status) => {
       },
       {
         user: {
-          $in: userIds, 
+          $in: userIds,
         },
       },
       {
@@ -105,13 +107,11 @@ export const orderManagementService = async (page, search, status) => {
     ];
   }
 
-  console.log('afdgnalkdfg',filter);
-
-  
+  console.log("afdgnalkdfg", filter);
 
   const orders = await Order.find(filter)
     .populate("user", "fullname email")
-    .sort({createdAt:-1})
+    .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit);
 
@@ -140,7 +140,6 @@ export const updateOrderStatusService = async (orderId, nextStatus) => {
   }
 
   const order = await Order.findById(orderId);
-  
 
   if (!order) {
     throw createServiceError("Order not found", 404);
@@ -173,8 +172,6 @@ export const updateOrderStatusService = async (orderId, nextStatus) => {
     order.paymentStatus = "Paid";
   }
 
-  
-
   order.orderStatus = nextStatus;
 
   await order.save();
@@ -182,8 +179,9 @@ export const updateOrderStatusService = async (orderId, nextStatus) => {
   return order;
 };
 
+//refund approval service
+
 export const approveReturnService = async (orderId, itemId, status) => {
-  
   if (!["Approved", "Rejected"].includes(status)) {
     const error = new Error("Invalid return status");
     error.statusCode = 400;
@@ -198,7 +196,23 @@ export const approveReturnService = async (orderId, itemId, status) => {
     throw error;
   }
 
+  console.log(order.user);
+  console.log(
+    "asdffijgbalkfdsjbhaliudfshvbaludfsvbnalysdgfbvlauhsdbfvl",
+    typeof order.user,
+  );
+  const customerId = order.user;
+
+  console.log("type of  :", typeof customerId);
+
+  if (!order) {
+    const error = new Error("Order not found");
+    error.statusCode = 404;
+    throw error;
+  }
+  await order.populate("items.product");
   const item = order.items.id(itemId);
+  
 
   if (!item || !item.returnRequest) {
     const error = new Error("Return request not found");
@@ -206,7 +220,9 @@ export const approveReturnService = async (orderId, itemId, status) => {
     throw error;
   }
 
-  if (status === "Approved" && item.returnStatus !== "Approved") {
+  const alreadyApproved = item.returnStatus === "Approved";
+
+  if (status === "Approved" && !alreadyApproved) {
     await Product.updateOne(
       {
         _id: item.product,
@@ -222,8 +238,34 @@ export const approveReturnService = async (orderId, itemId, status) => {
 
   item.returnStatus = status;
   item.returnedAt = new Date();
-  if(status==="Approved"){
-    order.orderStatus="Returned"
+
+  if (status === "Approved" && !alreadyApproved) {
+    const refundAmount = item.price * item.returnQuantity;
+
+    let wallet = await Wallet.findOne({ user: customerId });
+
+    if (!wallet) {
+      wallet = await Wallet.create({
+        user: customerId,
+        balance: 0,
+        transactions: [],
+      });
+    }
+
+    wallet.balance += refundAmount;
+
+    const updatedBalance = wallet.balance;
+
+    wallet.transactions.push({
+      type: "credit",
+      amount: refundAmount,
+      description: `Refund for ${item.product?.name}`,
+      order: order._id,
+      createdAt: new Date(),
+      balanceAfterTransaction: updatedBalance,
+    });
+
+    await wallet.save();
   }
 
   await order.save();
