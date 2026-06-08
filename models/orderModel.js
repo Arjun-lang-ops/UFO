@@ -217,6 +217,7 @@ const orderSchema = new mongoose.Schema({
     couponCode: {
         type: String
     },
+    
     estimatedDelivery:{
         type:String,
         required:true

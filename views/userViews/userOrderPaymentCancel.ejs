@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Order Cancelled - Urban Football</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700;900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111418", // Matching the component's base dark color
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="flex flex-col w-full bg-[#111418] border-b border-[#283039]">
+            <header
+                class="flex items-center justify-between whitespace-nowrap px-10 py-3 max-w-[1440px] mx-auto w-full">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-4 text-white cursor-pointer">
+                        <div class="size-8 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined !text-3xl">sports_soccer</span>
+                        </div>
+                        <h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
+                    </div>
+                    <div class="hidden md:flex items-center gap-9">
+                        <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+                            href="#">Shop</a>
+                        <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+                            href="#">Teams</a>
+                        <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+                            href="#">Sale</a>
+                        <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+                            href="#">Support</a>
+                    </div>
+                </div>
+                <div class="flex flex-1 justify-end gap-8 items-center">
+                    <label class="hidden lg:flex flex-col min-w-40 !h-10 max-w-64">
+                        <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                            <div
+                                class="text-[#9dabb9] flex border-none bg-[#283039] items-center justify-center pl-4 rounded-l-lg border-r-0">
+                                <span class="material-symbols-outlined">search</span>
+                            </div>
+                            <input
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#283039] focus:border-none h-full placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+                                placeholder="Search gear..." value="" />
+                        </div>
+                    </label>
+                    <div class="flex gap-3">
+                        <button
+                            class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#283039] text-white hover:bg-[#3b4754] transition-colors">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#283039] text-white hover:bg-[#3b4754] transition-colors">
+                            <span class="material-symbols-outlined">account_circle</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="flex flex-1 justify-center py-5 px-4 md:px-10 lg:px-40">
+            <div class="layout-content-container flex flex-col max-w-[960px] flex-1 gap-6">
+                <div class="flex flex-wrap gap-2 px-4 pt-4">
+                    <a class="text-[#9dabb9] text-sm font-medium leading-normal hover:text-white transition-colors"
+                        href="#">Home</a>
+                    <span class="text-[#9dabb9] text-sm font-medium leading-normal">/</span>
+                    <span class="text-white text-sm font-medium leading-normal">Order Cancelled</span>
+                </div>
+                <div class="flex flex-col gap-6 px-4">
+                    <div
+                        class="flex flex-col items-center justify-center text-center py-10 rounded-xl bg-[#1c2127] border border-[#3b4754]">
+                        <div class="size-16 rounded-full bg-red-500/10 flex items-center justify-center mb-6">
+                            <span class="material-symbols-outlined text-red-500 !text-4xl">cancel</span>
+                        </div>
+                        <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] mb-2">Order
+                            Cancelled</h1>
+                        <p class="text-[#9dabb9] text-lg font-normal leading-normal max-w-lg">Your order <span
+                                class="text-white font-bold">#102402</span> has been cancelled successfully. A
+                            confirmation email has been sent to <span class="text-white">user@example.com</span>.</p>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 flex flex-col gap-6">
+                            <div class="rounded-xl border border-[#3b4754] bg-[#1c2127] overflow-hidden">
+                                <div class="p-6 border-b border-[#3b4754]">
+                                    <h3 class="text-white text-lg font-bold">Cancelled Items</h3>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex flex-col gap-4">
+                                        <div class="flex gap-4 items-center">
+                                            <div
+                                                class="size-20 rounded-lg bg-gray-700 overflow-hidden flex-shrink-0 relative border border-[#3b4754]">
+                                                <img alt="Pro Elite Match Ball" class="object-cover w-full h-full"
+                                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8qLqXR5oFENxgjwc0cvPeg22VXuVCoqzb8Ay5UkjQqRNZFyCldur2Oa9GgjEquu_0N6ZvY1YWvxQoEG_Q5PC3ljg7dve5JBkAHBo4MPymckoV2D5WKHyAfJofKdASxnbhICT6yycTLUeOBnuowhmKIhVXmDNUciFkNPRJvaHv7gGM_USuKYW6KFYgGWYsKDB1zDmKCXEif_APehY9HjbIIPYAqrO3jx89uf4K18epAAcL4mD0IFZU9Ba0ax2vz_6gAdnjHR8Udk4" />
+                                            </div>
+                                            <div class="flex flex-1 justify-between items-start">
+                                                <div class="flex flex-col gap-1">
+                                                    <span class="text-white font-medium">Pro Elite Match Ball</span>
+                                                    <span class="text-[#9dabb9] text-sm">Size: 5</span>
+                                                    <span class="text-[#9dabb9] text-sm">Qty: 1</span>
+                                                </div>
+                                                <span class="text-white font-bold">$145.50</span>
+                                            </div>
+                                        </div>
+                                        <div class="h-px bg-[#3b4754] w-full my-2"></div>
+                                        <div class="flex gap-4 items-center">
+                                            <div
+                                                class="size-20 rounded-lg bg-gray-700 overflow-hidden flex-shrink-0 relative border border-[#3b4754]">
+                                                <img alt="Away Kit Jersey 23/24" class="object-cover w-full h-full"
+                                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFWeb_o4_Dc7PNLSmyBkeKswuUOHirbyE7IOBRPqLciQFZ1PtX5hX32OcxVw1Xd9Mld8aJoragnd56qa6ad8nWBykS4i4F_2puhoDvZNFhdZlAx-56-pKIhKjpp79_8FORRBTqGE8MKX_zMSDnagEaTbbF1UNLkI-ZNpF2999ri2JqIk5LFM3JXhcIFKJ1CNxjLT80wHqKSqKU2GOKzSe1Ft_ejhd_Ahw9qP4L0eMf1GYmGVyubie2Y6fp-arb6DkLw7cMR207YGE" />
+                                            </div>
+                                            <div class="flex flex-1 justify-between items-start">
+                                                <div class="flex flex-col gap-1">
+                                                    <span class="text-white font-medium">Away Kit Jersey 23/24</span>
+                                                    <span class="text-[#9dabb9] text-sm">Size: L</span>
+                                                    <span class="text-[#9dabb9] text-sm">Qty: 1</span>
+                                                </div>
+                                                <span class="text-white font-bold">$89.00</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-[#283039]/50 p-6 border-t border-[#3b4754]">
+                                    <div class="flex flex-col gap-3">
+                                        <div class="flex justify-between text-[#9dabb9]">
+                                            <span>Subtotal</span>
+                                            <span class="text-white">$234.50</span>
+                                        </div>
+                                        <div class="flex justify-between text-[#9dabb9]">
+                                            <span>Shipping</span>
+                                            <span class="text-white">$12.00</span>
+                                        </div>
+                                        <div class="flex justify-between text-[#9dabb9]">
+                                            <span>Tax</span>
+                                            <span class="text-white">$18.50</span>
+                                        </div>
+                                        <div class="h-px bg-[#3b4754] w-full my-2"></div>
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-white font-bold text-lg">Total Refund Amount</span>
+                                            <span class="text-white font-black text-xl">$265.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-6">
+                            <div class="rounded-xl border border-[#3b4754] bg-[#1c2127] p-6">
+                                <h3 class="text-white text-lg font-bold mb-4">Cancellation Details</h3>
+                                <div class="flex gap-4 items-center mb-4">
+                                    <div
+                                        class="size-10 rounded-full bg-[#283039] flex items-center justify-center flex-shrink-0 text-[#9dabb9]">
+                                        <span class="material-symbols-outlined">info</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Changed Mind</p>
+                                        <p class="text-[#9dabb9] text-sm">Reason provided</p>
+                                    </div>
+                                </div>
+                                <div class="w-full h-px bg-[#283039] my-4"></div>
+                                <div class="flex gap-4 items-center">
+                                    <div
+                                        class="size-10 rounded-full bg-[#283039] flex items-center justify-center flex-shrink-0 text-[#9dabb9]">
+                                        <span class="material-symbols-outlined">account_balance_wallet</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Refund Initiated</p>
+                                        <p class="text-[#9dabb9] text-sm">3-5 Business Days</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rounded-xl border border-[#3b4754] bg-[#1c2127] p-6">
+                                <h3 class="text-white text-lg font-bold mb-2">Need Help?</h3>
+                                <p class="text-[#9dabb9] text-sm mb-4">If you didn't request this cancellation, please
+                                    contact our support team immediately.</p>
+                                <div class="flex flex-col gap-1 text-[#9dabb9]">
+                                    <span class="text-white font-medium">Customer Support</span>
+                                    <span>support@kickoffgear.com</span>
+                                    <span>+1 (555) 123-4567</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col gap-3">
+                                <button
+                                    class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors">
+                                    <span class="material-symbols-outlined !text-lg">shopping_bag</span>
+                                    Browse Products
+                                </button>
+                                <button
+                                    class="w-full bg-transparent hover:bg-[#283039] text-white border border-[#3b4754] font-bold py-3 px-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors">
+                                    <span class="material-symbols-outlined !text-lg">support_agent</span>
+                                    Contact Support
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -2,6 +2,7 @@ import Product from "../models/productModel.js";
 import Cart from "../models/cartModel.js";
 import User from "../models/userModel.js";
 import Address from "../models/userAddressModel.js";
+import Coupon from "../models/couponModel.js";
 
 export const checkoutRenderService = async (userId) => {
   const cart = await Cart.findOne({ userId }).populate({
@@ -66,7 +67,7 @@ export const checkoutRenderService = async (userId) => {
     return (acc += item.total);
   }, 0);
 
-  const shippingCharge =subtotal > 3999 ? 0 :50 ;
+  const shippingCharge = subtotal > 3999 ? 0 : 50;
 
   const discount = 0;
 
@@ -88,6 +89,19 @@ export const checkoutRenderService = async (userId) => {
     createdAt: -1,
   });
 
+
+//coupons
+
+  const availableCoupons = await Coupon.find({
+    isActive: true,
+    expiryDate: { $gt: new Date() },
+    $expr: { $lt: ["$usedCount", "$usageLimit"] },
+  }).sort({ expiryDate: 1 });
+
+  const eligibleCoupons = availableCoupons.filter(
+    (coupon) => subtotal >= coupon.minimumPurchase,
+  );
+
   return {
     cartItems,
     defaultAddress,
@@ -97,6 +111,7 @@ export const checkoutRenderService = async (userId) => {
     shippingCharge,
     discount,
     grandTotal,
+    coupons: eligibleCoupons,
   };
 };
 
@@ -195,4 +210,3 @@ export const addAddressService = async (userId, body) => {
     address,
   };
 };
-

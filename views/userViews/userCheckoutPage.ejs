@@ -42,7 +42,9 @@
                 <div class="size-8 flex items-center justify-center text-primary">
                     <span class="material-symbols-outlined !text-[32px]">sports_soccer</span>
                 </div>
-                <a href="/home"><h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">Urban Football</h2></a>
+                <a href="/home">
+                    <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
+                </a>
             </div>
             <div class="flex items-center gap-4">
                 <div class="hidden sm:flex items-center gap-2 text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -91,60 +93,74 @@
                                     Add New
                                 </button>
                             </div>
-                            <% const checkoutAddresses = checkoutData.addresses || []; %>
-                            <% if (checkoutAddresses.length > 0) { %>
-                            <label class="mb-4 flex flex-col gap-2">
-                                <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Select delivery address</span>
-                                <select id="checkoutAddressSelect"
-                                    class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white">
-                                    <% checkoutAddresses.forEach(address => { %>
-                                        <option value="<%= address._id %>" <%= checkoutData?.defaultAddress?._id?.toString() === address._id.toString() ? 'selected' : '' %>>
-                                            <%= address.fullname %> - <%= address.street %>, <%= address.state %> <%= address.isDefault ? '(Default)' : '' %>
-                                        </option>
-                                    <% }) %>
-                                </select>
-                            </label>
-                            <% } %>
-                            <div id="selectedAddress"
-                                class="rounded-xl border border-gray-200 dark:border-[#3b4754] p-5 flex justify-between items-start">
-                                <div class="flex flex-col gap-1">
-                                    <%if(checkoutData.defaultAddress){%>
-                                    <h4 id="checkoutAddressName" class="text-lg font-bold text-[#111418] dark:text-white"><%=checkoutData?.defaultAddress?.fullname%></h4>
-                                    <div class="text-sm text-gray-600 dark:text-gray-400 space-y-0.5">
-                                        <p id="checkoutAddressStreet"><%=checkoutData?.defaultAddress?.street%></p>
-                                        <p id="checkoutAddressLocation"><%= checkoutData?.defaultAddress?.apartment %>,
-  <%= checkoutData?.defaultAddress?.state %> -
-  <%= checkoutData?.defaultAddress?.pincode %></p>
-                                    </div>
-                                    <p class="mt-3 text-sm font-medium text-[#111418] dark:text-gray-300">Phone:
-                                        <span id="checkoutAddressPhone"><%=checkoutData?.defaultAddress?.phone%></span></p>
-                                        <%}else{%>
-                                             <p class="text-red-500">
-      No default address found
-   </p>
+                            <% const checkoutAddresses=checkoutData.addresses || []; %>
+                                <% if (checkoutAddresses.length> 0) { %>
+                                    <label class="mb-4 flex flex-col gap-2">
+                                        <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Select
+                                            delivery address</span>
+                                        <select id="checkoutAddressSelect"
+                                            class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white">
+                                            <% checkoutAddresses.forEach(address=> { %>
+                                                <option value="<%= address._id %>"
+                                                    <%=checkoutData?.defaultAddress?._id?.toString()===address._id.toString()
+                                                    ? 'selected' : '' %>>
+                                                    <%= address.fullname %> - <%= address.street %>, <%= address.state
+                                                                %>
+                                                                <%= address.isDefault ? '(Default)' : '' %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                    </label>
+                                    <% } %>
+                                        <div id="selectedAddress"
+                                            class="rounded-xl border border-gray-200 dark:border-[#3b4754] p-5 flex justify-between items-start">
+                                            <div class="flex flex-col gap-1">
+                                                <%if(checkoutData.defaultAddress){%>
+                                                    <h4 id="checkoutAddressName"
+                                                        class="text-lg font-bold text-[#111418] dark:text-white">
+                                                        <%=checkoutData?.defaultAddress?.fullname%>
+                                                    </h4>
+                                                    <div class="text-sm text-gray-600 dark:text-gray-400 space-y-0.5">
+                                                        <p id="checkoutAddressStreet">
+                                                            <%=checkoutData?.defaultAddress?.street%>
+                                                        </p>
+                                                        <p id="checkoutAddressLocation">
+                                                            <%= checkoutData?.defaultAddress?.apartment %>,
+                                                                <%= checkoutData?.defaultAddress?.state %> -
+                                                                    <%= checkoutData?.defaultAddress?.pincode %>
+                                                        </p>
+                                                    </div>
+                                                    <p
+                                                        class="mt-3 text-sm font-medium text-[#111418] dark:text-gray-300">
+                                                        Phone:
+                                                        <span id="checkoutAddressPhone">
+                                                            <%=checkoutData?.defaultAddress?.phone%>
+                                                        </span>
+                                                    </p>
+                                                    <%}else{%>
+                                                        <p class="text-red-500">
+                                                            No default address found
+                                                        </p>
 
-<% } %>
-                                </div>
-                                <button
-    id="openEditAddressModal"
-    type="button"
-    data-id="<%= checkoutData?.defaultAddress?._id %>"
-    data-fullname="<%= checkoutData?.defaultAddress?.fullname %>"
-    data-phone="<%= checkoutData?.defaultAddress?.phone %>"
-    data-country="<%= checkoutData?.defaultAddress?.country %>"
-    data-state="<%= checkoutData?.defaultAddress?.state %>"
-    data-street="<%= checkoutData?.defaultAddress?.street %>"
-    data-apartment="<%= checkoutData?.defaultAddress?.apartment %>"
-    data-pincode="<%= checkoutData?.defaultAddress?.pincode %>"
-    data-is-default="<%= checkoutData?.defaultAddress?.isDefault ? 'true' : 'false' %>"
+                                                        <% } %>
+                                            </div>
+                                            <button id="openEditAddressModal" type="button"
+                                                data-id="<%= checkoutData?.defaultAddress?._id %>"
+                                                data-fullname="<%= checkoutData?.defaultAddress?.fullname %>"
+                                                data-phone="<%= checkoutData?.defaultAddress?.phone %>"
+                                                data-country="<%= checkoutData?.defaultAddress?.country %>"
+                                                data-state="<%= checkoutData?.defaultAddress?.state %>"
+                                                data-street="<%= checkoutData?.defaultAddress?.street %>"
+                                                data-apartment="<%= checkoutData?.defaultAddress?.apartment %>"
+                                                data-pincode="<%= checkoutData?.defaultAddress?.pincode %>"
+                                                data-is-default="<%= checkoutData?.defaultAddress?.isDefault ? 'true' : 'false' %>"
+                                                class="<%= checkoutData?.defaultAddress ? '' : 'hidden ' %>flex items-center gap-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
 
-    class="<%= checkoutData?.defaultAddress ? '' : 'hidden ' %>flex items-center gap-1.5 text-sm font-medium text-gray-500 dark:text-gray-400 hover:text-primary transition-colors">
+                                                <span class="material-symbols-outlined !text-lg">edit</span>
+                                                Edit
 
-    <span class="material-symbols-outlined !text-lg">edit</span>
-    Edit
-
-</button>
-                            </div>
+                                            </button>
+                                        </div>
                         </section>
                         <!-- Shipping Method -->
                         <section
@@ -157,47 +173,46 @@
                                 <label
                                     class="shipping-option relative flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-[#3b4754] hover:border-gray-400 dark:hover:border-gray-500 cursor-pointer transition-all">
                                     <div class="flex items-center gap-3">
-                                        <input checked=""
-                                            name="paymentMethod"
-                                            value="COD"
+                                        <input checked="" name="paymentMethod" value="COD"
                                             class="h-5 w-5 text-primary border-gray-300 focus:ring-primary"
                                             type="radio" />
                                         <div class="flex flex-col">
                                             <span class="text-base font-bold text-[#111418] dark:text-white">Cash On
                                                 Delivery</span>
-                                            <span class="text-sm text-gray-500 dark:text-gray-400">Pay when your order arrives. No wallet refund is created unless a paid order is later returned.</span>
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">Pay when your order
+                                                arrives. No wallet refund is created unless a paid order is later
+                                                returned.</span>
                                         </div>
                                     </div>
-                                    
+
                                 </label>
                                 <label
                                     class="shipping-option relative flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-[#3b4754] hover:border-gray-400 dark:hover:border-gray-500 cursor-pointer transition-all">
                                     <div class="flex items-center gap-3">
                                         <input class="h-5 w-5 text-primary border-gray-300 focus:ring-primary"
-                                            name="paymentMethod"
-                                            value="RAZORPAY" type="radio" />
+                                            name="paymentMethod" value="RAZORPAY" type="radio" />
                                         <div class="flex flex-col">
                                             <span class="text-base font-bold text-[#111418] dark:text-white">Online
                                                 Payment</span>
-                                            <span class="text-sm text-gray-500 dark:text-gray-400">Pay securely with Razorpay using UPI, cards, net banking, or wallets.</span>
+                                            <span class="text-sm text-gray-500 dark:text-gray-400">Pay securely with
+                                                Razorpay using UPI, cards, net banking, or wallets.</span>
                                         </div>
                                     </div>
-                                    
+
                                 </label>
                                 <label
-                                   class="shipping-option relative flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-[#3b4754] hover:border-gray-400 dark:hover:border-gray-500 cursor-pointer transition-all">
+                                    class="shipping-option relative flex items-center justify-between p-4 rounded-lg border border-gray-200 dark:border-[#3b4754] hover:border-gray-400 dark:hover:border-gray-500 cursor-pointer transition-all">
                                     <div class="flex items-center gap-3">
                                         <input class="h-5 w-5 text-primary border-gray-300 focus:ring-primary"
-                                            name="paymentMethod"
-                                            value="WALLET" type="radio" />
+                                            name="paymentMethod" value="WALLET" type="radio" />
                                         <div class="flex flex-col">
                                             <span class="text-base font-bold text-[#111418] dark:text-white">Wallet
-                                                </span>
+                                            </span>
                                             <span class="text-sm text-gray-500 dark:text-gray-400">Est. 5-7 business
                                                 days</span>
                                         </div>
                                     </div>
-                                    
+
                                 </label>
                             </div>
                         </section>
@@ -210,61 +225,64 @@
                             </h3>
                             <div class="flex flex-col gap-6">
 
-                                 <% checkoutData.cartItems.forEach(item => { %>
+                                <% checkoutData.cartItems.forEach(item=> { %>
 
-      <div class="flex items-start gap-4 pb-6 border-b border-gray-100 dark:border-[#283039]">
+                                    <div
+                                        class="flex items-start gap-4 pb-6 border-b border-gray-100 dark:border-[#283039]">
 
-         <!-- IMAGE -->
-         <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-800">
+                                        <!-- IMAGE -->
+                                        <div
+                                            class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-800">
 
-            <img
-               class="h-full w-full object-cover object-center"
-               src="<%= item.image %>"
-               alt="<%= item.name %>"
-            />
+                                            <img class="h-full w-full object-cover object-center"
+                                                src="<%= item.image %>" alt="<%= item.name %>" />
 
-         </div>
+                                        </div>
 
-         <!-- DETAILS -->
-         <div class="flex flex-1 flex-col">
+                                        <!-- DETAILS -->
+                                        <div class="flex flex-1 flex-col">
 
-            <div>
+                                            <div>
 
-               <div class="flex justify-between text-base font-medium text-[#111418] dark:text-white">
+                                                <div
+                                                    class="flex justify-between text-base font-medium text-[#111418] dark:text-white">
 
-                  <h4><%= item.name %></h4>
+                                                    <h4>
+                                                        <%= item.name %>
+                                                    </h4>
 
-                  <p>₹<%= item.total %></p>
+                                                    <p>₹<%= item.total %>
+                                                    </p>
 
-               </div>
+                                                </div>
 
-               <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  <%= item.color %>
-               </p>
+                                                <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                                                    <%= item.color %>
+                                                </p>
 
-               <p class="text-sm text-gray-500 dark:text-gray-400">
-                  Size: <%= item.size %>
-               </p>
+                                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                                    Size: <%= item.size %>
+                                                </p>
 
-            </div>
+                                            </div>
 
-            <div class="flex flex-1 items-end justify-between text-sm">
+                                            <div class="flex flex-1 items-end justify-between text-sm">
 
-               <p class="text-gray-500 dark:text-gray-400">
-                  Qty <%= item.quantity %>
-               </p>
+                                                <p class="text-gray-500 dark:text-gray-400">
+                                                    Qty <%= item.quantity %>
+                                                </p>
 
-            </div>
+                                            </div>
 
-         </div>
+                                        </div>
 
-      </div>
+                                    </div>
 
-   <% }) %>
-                                <!-- Item 1 -->
-                                
-                                <!-- Item 2 -->
-                                
+                                    <% }) %>
+                                        <!-- Item 1 -->
+
+                                        <!-- Item 2 -->
+
                             </div>
                         </section>
                     </div>
@@ -278,11 +296,20 @@
                                     <dl class="-my-4 divide-y divide-gray-100 dark:divide-[#283039] text-sm">
                                         <div class="flex items-center justify-between py-4">
                                             <dt class="text-gray-500 dark:text-gray-400">Subtotal</dt>
-                                            <dd class="font-medium text-[#111418] dark:text-white">₹ <%=checkoutData?.subtotal%></dd>
+                                            <dd id="summarySubtotal" class="font-medium text-[#111418] dark:text-white">Rs.
+                                                <%=checkoutData?.subtotal%>
+                                            </dd>
                                         </div>
                                         <div class="flex items-center justify-between py-4">
                                             <dt class="text-gray-500 dark:text-gray-400">Shipping</dt>
-                                            <dd class="font-medium text-[#111418] dark:text-white">₹ <%= checkoutData?.shippingCharge %></dd>
+                                            <dd id="summaryShipping" class="font-medium text-[#111418] dark:text-white">Rs. <%=
+                                                    checkoutData?.shippingCharge %>
+                                            </dd>
+                                        </div>
+                                        <div id="discountSummaryRow"
+                                            class="hidden items-center justify-between py-4">
+                                            <dt class="text-gray-500 dark:text-gray-400">Coupon Discount</dt>
+                                            <dd id="summaryDiscount" class="font-medium text-green-600 dark:text-green-400">- Rs. 0</dd>
                                         </div>
                                         <div class="flex items-center justify-between py-4">
                                             <dt class="text-gray-500 dark:text-gray-400">Tax</dt>
@@ -291,28 +318,86 @@
                                         <div
                                             class="flex items-center justify-between py-4 border-t-2 border-dashed dark:border-[#3b4754] !border-b-0 mt-2">
                                             <dt class="text-base font-bold text-[#111418] dark:text-white">Total</dt>
-                                            <dd class="text-xl font-bold text-primary">₹ <%=checkoutData?.grandTotal%></dd>
+                                            <dd id="summaryGrandTotal" class="text-xl font-bold text-primary">Rs. <%=checkoutData?.grandTotal%>
+                                            </dd>
                                         </div>
                                     </dl>
                                 </div>
                                 <!-- Promo Code -->
                                 <div class="mt-6 pt-6 border-t border-gray-100 dark:border-[#283039]">
-                                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Coupon
-                                        Code</label>
-                                    <div class="flex space-x-2">
-                                        <input
-                                            class="block w-full rounded-lg border-gray-200 dark:border-[#3b4754] bg-gray-50 dark:bg-[#121922] p-2.5 text-sm dark:text-white placeholder-gray-400 focus:border-primary focus:ring-primary"
-                                            placeholder="Enter code" type="text"
-                                            id="couponCode" />
-                                        <button
-                                            class="rounded-lg bg-gray-200 dark:bg-[#283039] px-4 py-2 text-sm font-medium text-[#111418] dark:text-white hover:bg-gray-300 dark:hover:bg-[#3b4754] focus:outline-none focus:ring-2 focus:ring-gray-300"
-                                            type="button">Apply</button>
+                                    <div class="mb-3 flex items-center justify-between gap-3">
+                                        <label
+                                            class="block text-sm font-medium text-gray-700 dark:text-gray-300">Available
+                                            Coupons</label>
+                                        <button id="clearCouponSelection"
+                                            class="hidden text-xs font-bold text-gray-500 hover:text-primary dark:text-gray-400"
+                                            type="button">Clear</button>
                                     </div>
+                                    <input
+                                        class="mb-3 block w-full rounded-lg border-gray-200 dark:border-[#3b4754] bg-gray-50 dark:bg-[#121922] p-2.5 text-sm dark:text-white placeholder-gray-400 focus:border-primary focus:ring-primary"
+                                        placeholder="Select a coupon below" type="text" id="couponCode" readonly />
+                                    <p id="couponApplyMessage" class="mb-3 hidden text-xs font-bold"></p>
+                                    <% const checkoutCoupons=checkoutData.coupons || []; %>
+                                        <% if (checkoutCoupons.length> 0) { %>
+                                            <div id="couponList" class="max-h-60 overflow-y-auto pr-1 space-y-3">
+                                                <% checkoutCoupons.forEach(coupon=> {
+                                                    const discountText = coupon.discountType === "PERCENTAGE"
+                                                    ? `${coupon.discountValue}% off${coupon.maximumDiscount ? ` up to
+                                                    Rs. ${coupon.maximumDiscount}` : ""}`
+                                                    : `Rs. ${coupon.discountValue} off`;
+                                                    const expiryText = coupon.expiryDate
+                                                    ? coupon.expiryDate.toLocaleDateString("en-IN", { day: "2-digit",
+                                                    month: "short", year: "numeric" })
+                                                    : "";
+                                                    %>
+                                                    <label
+                                                        class="coupon-option flex cursor-pointer items-start gap-3 rounded-lg border border-gray-200 bg-gray-50 p-3 transition-all hover:border-primary dark:border-[#3b4754] dark:bg-[#121922]"
+                                                        data-code="<%= coupon.code %>">
+                                                        <input
+                                                            class="mt-1 h-4 w-4 border-gray-300 text-primary focus:ring-primary"
+                                                            name="checkoutCoupon" value="<%= coupon.code %>"
+                                                            type="radio" />
+                                                        <span class="flex min-w-0 flex-1 flex-col gap-1">
+                                                            <span
+                                                                class="flex flex-wrap items-center justify-between gap-2">
+                                                                <span
+                                                                    class="font-mono text-sm font-bold uppercase tracking-wide text-[#111418] dark:text-white">
+                                                                    <%= coupon.code %>
+                                                                </span>
+                                                                <span
+                                                                    class="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-bold text-primary">
+                                                                    <%= discountText %>
+                                                                </span>
+                                                            </span>
+                                                            <span class="text-xs text-gray-500 dark:text-gray-400">
+                                                                <%= coupon.description
+                                                                    || "Apply this coupon to your order" %>
+                                                            </span>
+                                                            <span
+                                                                class="text-[11px] text-gray-500 dark:text-gray-400">Minimum
+                                                                order Rs. <%= coupon.minimumPurchase || 0 %> · Expires
+                                                                    <%= expiryText %></span>
+                                                        </span>
+                                                    </label>
+                                                    <% }) %>
+                                            </div>
+                                            <% } else { %>
+                                                <div
+                                                    class="rounded-lg border border-dashed border-gray-200 p-4 text-center text-sm text-gray-500 dark:border-[#3b4754] dark:text-gray-400">
+                                                    No coupons available for this order.
+                                                </div>
+                                                <% } %>
+                                </div>
+
+                                <div class="mt-3 flex gap-2">
+                                    <button id="applyCouponBtn" type="button"
+                                        class="rounded-lg bg-primary px-4 py-2 text-white font-medium">
+                                        Apply
+                                    </button>
                                 </div>
                                 <!-- Action Button -->
                                 <div class="mt-8">
-                                    <button
-                                        id="placeOrderBtn" type="button"
+                                    <button id="placeOrderBtn" type="button"
                                         class="w-full flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-4 text-base font-bold text-white shadow-sm hover:bg-blue-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-all">
                                         Place Order
                                         <span class="material-symbols-outlined">arrow_forward</span>
@@ -342,8 +427,10 @@
             <div
                 class="sticky top-0 z-10 flex items-center justify-between border-b border-gray-100 dark:border-[#283039] bg-white/95 dark:bg-[#1c232d]/95 px-6 py-4 backdrop-blur">
                 <div>
-                    <h3 id="addressModalTitle" class="text-xl font-bold text-[#111418] dark:text-white">Add New Address</h3>
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Enter the delivery details for this order.</p>
+                    <h3 id="addressModalTitle" class="text-xl font-bold text-[#111418] dark:text-white">Add New Address
+                    </h3>
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">Enter the delivery details for this order.
+                    </p>
                 </div>
                 <button id="closeAddressModal" type="button"
                     class="flex size-10 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-100 hover:text-[#111418] dark:text-gray-400 dark:hover:bg-[#283039] dark:hover:text-white"
@@ -363,7 +450,8 @@
                     </label>
                     <label class="flex flex-col gap-2">
                         <span class="text-sm font-medium text-[#111418] dark:text-gray-200">Phone Number</span>
-                        <input id="addressPhone" name="phone" type="tel" placeholder="9876543210" inputmode="numeric" maxlength="10"
+                        <input id="addressPhone" name="phone" type="tel" placeholder="9876543210" inputmode="numeric"
+                            maxlength="10"
                             class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
                         <span id="addressPhoneError" class="hidden text-xs font-medium text-red-500"></span>
                     </label>
@@ -393,7 +481,8 @@
                     </label>
                     <label class="flex flex-col gap-2">
                         <span class="text-sm font-medium text-[#111418] dark:text-gray-200">ZIP / Pincode</span>
-                        <input id="addressPincode" name="pincode" type="text" placeholder="688526" inputmode="numeric" maxlength="6"
+                        <input id="addressPincode" name="pincode" type="text" placeholder="688526" inputmode="numeric"
+                            maxlength="6"
                             class="h-12 rounded-lg border-gray-200 bg-gray-50 px-4 text-sm text-[#111418] placeholder:text-gray-400 focus:border-primary focus:ring-primary dark:border-[#3b4754] dark:bg-[#121922] dark:text-white" />
                         <span id="addressPincodeError" class="hidden text-xs font-medium text-red-500"></span>
                     </label>
@@ -405,7 +494,8 @@
                     <span class="text-sm text-gray-600 dark:text-gray-300">Set as default shipping address</span>
                 </label>
 
-                <div class="mt-6 flex flex-col-reverse gap-3 border-t border-gray-100 pt-5 dark:border-[#283039] sm:flex-row sm:justify-end">
+                <div
+                    class="mt-6 flex flex-col-reverse gap-3 border-t border-gray-100 pt-5 dark:border-[#283039] sm:flex-row sm:justify-end">
                     <button id="cancelAddressModal" type="button"
                         class="rounded-lg px-5 py-3 text-sm font-bold text-gray-600 transition-colors hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-[#283039]">
                         Cancel
@@ -423,14 +513,17 @@
     <!-- Order Loading Overlay -->
     <div id="orderLoadingOverlay"
         class="fixed inset-0 z-[120] hidden items-center justify-center bg-[#101922]/90 px-4 text-center opacity-0 backdrop-blur-sm transition-opacity duration-200">
-        <div class="flex w-full max-w-sm flex-col items-center rounded-xl border border-[#283039] bg-white p-8 shadow-2xl dark:bg-[#1c232d]">
+        <div
+            class="flex w-full max-w-sm flex-col items-center rounded-xl border border-[#283039] bg-white p-8 shadow-2xl dark:bg-[#1c232d]">
             <div class="relative mb-6 flex size-20 items-center justify-center">
                 <div class="absolute inset-0 rounded-full border-4 border-primary/20"></div>
-                <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-primary animate-spin"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-transparent border-t-primary animate-spin">
+                </div>
                 <span class="material-symbols-outlined text-primary !text-4xl">shopping_bag</span>
             </div>
             <h3 class="text-xl font-bold text-[#111418] dark:text-white">Placing your order</h3>
-            <p class="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">Please wait while we confirm your order details.</p>
+            <p class="mt-2 text-sm leading-6 text-gray-500 dark:text-gray-400">Please wait while we confirm your order
+                details.</p>
         </div>
     </div>
 
@@ -602,40 +695,40 @@
             addressModalTitle.textContent = mode === "edit" ? "Edit Address" : "Add New Address";
             clearAddressErrors();
 
-           if (mode === "edit") {
-            if (!openEditAddressModal.dataset.id) {
-                alert("Please select an address first");
-                return;
-            }
+            if (mode === "edit") {
+                if (!openEditAddressModal.dataset.id) {
+                    alert("Please select an address first");
+                    return;
+                }
 
-            document.getElementById("addressId").value =
-            openEditAddressModal.dataset.id;
+                document.getElementById("addressId").value =
+                    openEditAddressModal.dataset.id;
 
-    addressFields.fullname.value =
-        openEditAddressModal.dataset.fullname || "";
+                addressFields.fullname.value =
+                    openEditAddressModal.dataset.fullname || "";
 
-    addressFields.phone.value =
-        openEditAddressModal.dataset.phone || "";
+                addressFields.phone.value =
+                    openEditAddressModal.dataset.phone || "";
 
-    addressFields.country.value =
-        openEditAddressModal.dataset.country || "";
+                addressFields.country.value =
+                    openEditAddressModal.dataset.country || "";
 
-    addressFields.state.value =
-        openEditAddressModal.dataset.state || "";
+                addressFields.state.value =
+                    openEditAddressModal.dataset.state || "";
 
-    addressFields.street.value =
-        openEditAddressModal.dataset.street || "";
+                addressFields.street.value =
+                    openEditAddressModal.dataset.street || "";
 
-    addressFields.apartment.value =
-        openEditAddressModal.dataset.apartment || "";
+                addressFields.apartment.value =
+                    openEditAddressModal.dataset.apartment || "";
 
-    addressFields.pincode.value =
-        openEditAddressModal.dataset.pincode || "";
+                addressFields.pincode.value =
+                    openEditAddressModal.dataset.pincode || "";
 
-    addressFields.isDefault.checked =
-        openEditAddressModal.dataset.isDefault === "true";
+                addressFields.isDefault.checked =
+                    openEditAddressModal.dataset.isDefault === "true";
 
-} else {
+            } else {
                 checkoutAddressForm.reset();
                 document.getElementById("addressId").value = "";
                 addressFields.isDefault.checked = !checkoutAddressSelect;
@@ -719,332 +812,467 @@
 
         checkoutAddressForm.addEventListener("submit", async (event) => {
 
-    event.preventDefault();
+            event.preventDefault();
 
-    if (!validateCheckoutAddressForm()) return;
+            if (!validateCheckoutAddressForm()) return;
 
-    const mode = checkoutAddressForm.dataset.mode;
+            const mode = checkoutAddressForm.dataset.mode;
 
-    const addressData = {
+            const addressData = {
 
-        fullname: addressFields.fullname.value.trim(),
-        phone: addressFields.phone.value.trim(),
-        country: addressFields.country.value.trim(),
-        state: addressFields.state.value.trim(),
-        street: addressFields.street.value.trim(),
-        apartment: addressFields.apartment.value.trim(),
-        pincode: addressFields.pincode.value.trim(),
-        isDefault: addressFields.isDefault.checked
+                fullname: addressFields.fullname.value.trim(),
+                phone: addressFields.phone.value.trim(),
+                country: addressFields.country.value.trim(),
+                state: addressFields.state.value.trim(),
+                street: addressFields.street.value.trim(),
+                apartment: addressFields.apartment.value.trim(),
+                pincode: addressFields.pincode.value.trim(),
+                isDefault: addressFields.isDefault.checked
 
-    };
+            };
 
-    try {
+            try {
 
-        // EDIT ADDRESS
-        if (mode === "edit") {
+                // EDIT ADDRESS
+                if (mode === "edit") {
 
-            const addressId =
-                document.getElementById("addressId").value;
+                    const addressId =
+                        document.getElementById("addressId").value;
 
-            const response = await fetch(`/edit-address/${addressId}`, {
+                    const response = await fetch(`/edit-address/${addressId}`, {
 
-                method: "PUT",
+                        method: "PUT",
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
 
-                body: JSON.stringify(addressData)
+                        body: JSON.stringify(addressData)
 
-            });
+                    });
 
-            const result = await response.json();
+                    const result = await response.json();
 
-            if (result.success) {
+                    if (result.success) {
 
-                selectedAddress.name.textContent =
-                    addressData.fullname;
+                        selectedAddress.name.textContent =
+                            addressData.fullname;
 
-                selectedAddress.street.textContent =
-                    addressData.street;
+                        selectedAddress.street.textContent =
+                            addressData.street;
 
-                selectedAddress.location.textContent =
-                    `${addressData.apartment}, ${addressData.state} - ${addressData.pincode}`;
+                        selectedAddress.location.textContent =
+                            `${addressData.apartment}, ${addressData.state} - ${addressData.pincode}`;
 
-                selectedAddress.phone.textContent =
-                    addressData.phone;
+                        selectedAddress.phone.textContent =
+                            addressData.phone;
 
-                openEditAddressModal.dataset.fullname = addressData.fullname;
-                openEditAddressModal.dataset.phone = addressData.phone;
-                openEditAddressModal.dataset.country = addressData.country;
-                openEditAddressModal.dataset.state = addressData.state;
-                openEditAddressModal.dataset.street = addressData.street;
-                openEditAddressModal.dataset.apartment = addressData.apartment;
-                openEditAddressModal.dataset.pincode = addressData.pincode;
-                openEditAddressModal.dataset.isDefault = result.address?.isDefault ? "true" : String(addressData.isDefault);
+                        openEditAddressModal.dataset.fullname = addressData.fullname;
+                        openEditAddressModal.dataset.phone = addressData.phone;
+                        openEditAddressModal.dataset.country = addressData.country;
+                        openEditAddressModal.dataset.state = addressData.state;
+                        openEditAddressModal.dataset.street = addressData.street;
+                        openEditAddressModal.dataset.apartment = addressData.apartment;
+                        openEditAddressModal.dataset.pincode = addressData.pincode;
+                        openEditAddressModal.dataset.isDefault = result.address?.isDefault ? "true" : String(addressData.isDefault);
 
-                hideAddressModal();
+                        hideAddressModal();
 
-            } else {
+                    } else {
 
-                alert(result.message || "Failed to update address");
+                        alert(result.message || "Failed to update address");
 
-            }
+                    }
 
-        }
+                }
 
-        if (mode === "add") {
+                if (mode === "add") {
 
-            const response = await fetch("/checkout/address/add", {
-
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify(addressData)
-
-            });
-
-            const result = await response.json();
-
-            if (result.success) {
-
-                hideAddressModal();
-                window.location.reload();
-
-            } else {
-
-                alert(result.message || "Failed to add address");
-
-            }
-
-        }
-
-    } catch (error) {
-
-        console.log(error);
-
-        alert("Something went wrong");
-
-    }
-
-});
-
-
-
-        //label outline blue color script
-const shippingOptions = document.querySelectorAll(".shipping-option");
-const shippingRadios = document.querySelectorAll('input[name="paymentMethod"]');
-
-const updateShippingSelection = () => {
-
-    shippingOptions.forEach(option => {
-
-        option.classList.remove(
-            "border-2",
-            "border-primary",
-            "bg-blue-50/50",
-            "dark:bg-blue-900/10"
-        );
-
-        option.classList.add(
-            "border",
-            "border-gray-200",
-            "dark:border-[#3b4754]"
-        );
-
-    });
-
-    shippingRadios.forEach(radio => {
-
-        if (radio.checked) {
-
-            const selectedOption = radio.closest(".shipping-option");
-
-            selectedOption.classList.remove(
-                "border",
-                "border-gray-200",
-                "dark:border-[#3b4754]"
-            );
-
-            selectedOption.classList.add(
-                "border-2",
-                "border-primary",
-                "bg-blue-50/50",
-                "dark:bg-blue-900/10"
-            );
-
-        }
-
-    });
-
-};
-
-shippingRadios.forEach(radio => {
-    radio.addEventListener("change", updateShippingSelection);
-});
-
-updateShippingSelection();
-
-//place order confirm button validation
-const placeOrderBtn =
-    document.getElementById(
-        "placeOrderBtn"
-    );
-const orderLoadingOverlay = document.getElementById("orderLoadingOverlay");
-
-const showOrderLoading = () => {
-    orderLoadingOverlay.classList.remove("hidden");
-    orderLoadingOverlay.classList.add("flex");
-    document.body.classList.add("overflow-hidden");
-    placeOrderBtn.disabled = true;
-    placeOrderBtn.classList.add("cursor-not-allowed", "opacity-70");
-    placeOrderBtn.innerHTML = `
-        <span class="size-5 rounded-full border-2 border-white/40 border-t-white animate-spin"></span>
-        Placing Order...
-    `;
-
-    requestAnimationFrame(() => {
-        orderLoadingOverlay.classList.remove("opacity-0");
-    });
-};
-
-const hideOrderLoading = () => {
-    orderLoadingOverlay.classList.add("opacity-0");
-    document.body.classList.remove("overflow-hidden");
-    placeOrderBtn.disabled = false;
-    placeOrderBtn.classList.remove("cursor-not-allowed", "opacity-70");
-    placeOrderBtn.innerHTML = `
-        Place Order
-        <span class="material-symbols-outlined">arrow_forward</span>
-    `;
-
-    setTimeout(() => {
-        orderLoadingOverlay.classList.add("hidden");
-        orderLoadingOverlay.classList.remove("flex");
-    }, 200);
-};
-
-placeOrderBtn.addEventListener(
-    "click",
-    async () => {
-
-        //--------------------------------
-        // address
-        //--------------------------------
-
-        const addressId =
-            document.getElementById(
-                "checkoutAddressSelect"
-            )?.value;
-
-        //--------------------------------
-        // payment
-        //--------------------------------
-
-        const selectedPayment =
-            document.querySelector(
-                'input[name="paymentMethod"]:checked'
-            );
-
-        const paymentMethod =
-            selectedPayment?.value;
-
-        //--------------------------------
-        // coupon
-        //--------------------------------
-
-        const couponCode =
-            document.getElementById(
-                "couponCode"
-            )?.value?.trim();
-
-        //--------------------------------
-        // validation
-        //--------------------------------
-
-        if (!addressId) {
-
-            alert(
-                "Please select address"
-            );
-
-            return;
-        }
-
-        if (!paymentMethod) {
-
-            alert(
-                "Please choose payment method"
-            );
-
-            return;
-        }
-
-        showOrderLoading();
-
-        try {
-
-            const response =
-                await fetch(
-                    "/checkout/confirm",
-                    {
+                    const response = await fetch("/checkout/address/add", {
 
                         method: "POST",
 
                         headers: {
-                            "Content-Type":
-                                "application/json"
+                            "Content-Type": "application/json"
                         },
 
-                        body:
-                            JSON.stringify({
+                        body: JSON.stringify(addressData)
 
-                                addressId,
+                    });
 
-                                paymentMethod,
+                    const result = await response.json();
 
-                                couponCode
-                            })
+                    if (result.success) {
+
+                        hideAddressModal();
+                        window.location.reload();
+
+                    } else {
+
+                        alert(result.message || "Failed to add address");
+
                     }
-                );
 
-            const result =
-                await response.json();
+                }
 
-            
+            } catch (error) {
 
-            if (result.success) {
+                console.log(error);
 
-                setTimeout(() => {
-        window.location.href =
-            `/orderConfirm/${result.orderId}`;
-    }, 2000);
+                alert("Something went wrong");
 
-            } else {
-
-                hideOrderLoading();
-
-                alert(
-                    result.message ||
-                    "Failed to place order"
-                );
             }
 
-        } catch (error) {
+        });
 
-            console.log(error);
-            hideOrderLoading();
 
-            alert(
-                "Something went wrong"
+
+        //label outline blue color script
+        const shippingOptions = document.querySelectorAll(".shipping-option");
+        const shippingRadios = document.querySelectorAll('input[name="paymentMethod"]');
+
+        const updateShippingSelection = () => {
+
+            shippingOptions.forEach(option => {
+
+                option.classList.remove(
+                    "border-2",
+                    "border-primary",
+                    "bg-blue-50/50",
+                    "dark:bg-blue-900/10"
+                );
+
+                option.classList.add(
+                    "border",
+                    "border-gray-200",
+                    "dark:border-[#3b4754]"
+                );
+
+            });
+
+            shippingRadios.forEach(radio => {
+
+                if (radio.checked) {
+
+                    const selectedOption = radio.closest(".shipping-option");
+
+                    selectedOption.classList.remove(
+                        "border",
+                        "border-gray-200",
+                        "dark:border-[#3b4754]"
+                    );
+
+                    selectedOption.classList.add(
+                        "border-2",
+                        "border-primary",
+                        "bg-blue-50/50",
+                        "dark:bg-blue-900/10"
+                    );
+
+                }
+
+            });
+
+        };
+
+        shippingRadios.forEach(radio => {
+            radio.addEventListener("change", updateShippingSelection);
+        });
+
+        updateShippingSelection();
+
+        const couponCodeInput = document.getElementById("couponCode");
+        const couponOptions = document.querySelectorAll(".coupon-option");
+        const couponRadios = document.querySelectorAll('input[name="checkoutCoupon"]');
+        const clearCouponSelection = document.getElementById("clearCouponSelection");
+        const applyCouponBtn = document.getElementById("applyCouponBtn");
+        const couponApplyMessage = document.getElementById("couponApplyMessage");
+        const discountSummaryRow = document.getElementById("discountSummaryRow");
+        const summaryDiscount = document.getElementById("summaryDiscount");
+        const summaryGrandTotal = document.getElementById("summaryGrandTotal");
+        const baseGrandTotal = Number("<%= checkoutData?.grandTotal || 0 %>");
+        let appliedCouponCode = "";
+
+        const formatAmount = (amount) => `Rs. ${Number(amount || 0).toFixed(2)}`;
+
+        const showCouponMessage = (message, isSuccess = false) => {
+            couponApplyMessage.textContent = message;
+            couponApplyMessage.classList.remove("hidden", "text-green-600", "text-red-500", "dark:text-green-400", "dark:text-red-400");
+            couponApplyMessage.classList.add(
+                isSuccess ? "text-green-600" : "text-red-500",
+                isSuccess ? "dark:text-green-400" : "dark:text-red-400"
             );
-        }
-    }
-);
+        };
+
+        const resetAppliedCoupon = () => {
+            appliedCouponCode = "";
+            discountSummaryRow.classList.add("hidden");
+            discountSummaryRow.classList.remove("flex");
+            summaryDiscount.textContent = "- Rs. 0";
+            summaryGrandTotal.textContent = formatAmount(baseGrandTotal);
+            couponApplyMessage.classList.add("hidden");
+        };
+
+        const updateCouponSelection = () => {
+            let selectedCode = "";
+
+            couponOptions.forEach(option => {
+                option.classList.remove(
+                    "border-primary",
+                    "bg-blue-50",
+                    "dark:bg-blue-900/10",
+                    "ring-1",
+                    "ring-primary"
+                );
+
+                option.classList.add(
+                    "border-gray-200",
+                    "dark:border-[#3b4754]",
+                    "bg-gray-50",
+                    "dark:bg-[#121922]"
+                );
+            });
+
+            couponRadios.forEach(radio => {
+                if (!radio.checked) return;
+
+                selectedCode = radio.value;
+                const selectedOption = radio.closest(".coupon-option");
+
+                selectedOption.classList.remove(
+                    "border-gray-200",
+                    "dark:border-[#3b4754]",
+                    "bg-gray-50",
+                    "dark:bg-[#121922]"
+                );
+
+                selectedOption.classList.add(
+                    "border-primary",
+                    "bg-blue-50",
+                    "dark:bg-blue-900/10",
+                    "ring-1",
+                    "ring-primary"
+                );
+            });
+
+            couponCodeInput.value = selectedCode;
+            clearCouponSelection?.classList.toggle("hidden", !selectedCode);
+        };
+
+        couponRadios.forEach(radio => {
+            radio.addEventListener("change", () => {
+                updateCouponSelection();
+                resetAppliedCoupon();
+            });
+        });
+
+        clearCouponSelection?.addEventListener("click", () => {
+            couponRadios.forEach(radio => {
+                radio.checked = false;
+            });
+
+            updateCouponSelection();
+            resetAppliedCoupon();
+        });
+
+        updateCouponSelection();
+
+        applyCouponBtn?.addEventListener("click", async () => {
+            const couponCode = couponCodeInput.value.trim();
+
+            if (!couponCode) {
+                showCouponMessage("Select a coupon first");
+                return;
+            }
+
+            try {
+                applyCouponBtn.disabled = true;
+                applyCouponBtn.textContent = "Applying...";
+
+                const response = await fetch("/checkout/apply-coupon", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ couponCode }),
+                });
+
+                const result = await response.json();
+
+                if (!response.ok || !result.success) {
+                    throw new Error(result.message || "Failed to apply coupon");
+                }
+
+                appliedCouponCode = result.couponCode;
+                summaryDiscount.textContent = `- ${formatAmount(result.discount)}`;
+                summaryGrandTotal.textContent = formatAmount(result.grandTotal);
+                discountSummaryRow.classList.remove("hidden");
+                discountSummaryRow.classList.add("flex");
+                showCouponMessage(`${result.couponCode} applied successfully`, true);
+            } catch (error) {
+                appliedCouponCode = "";
+                showCouponMessage(error.message || "Failed to apply coupon");
+            } finally {
+                applyCouponBtn.disabled = false;
+                applyCouponBtn.textContent = "Apply";
+            }
+        });
+
+        //place order confirm button validation
+        const placeOrderBtn =
+            document.getElementById(
+                "placeOrderBtn"
+            );
+        const orderLoadingOverlay = document.getElementById("orderLoadingOverlay");
+
+        const showOrderLoading = () => {
+            orderLoadingOverlay.classList.remove("hidden");
+            orderLoadingOverlay.classList.add("flex");
+            document.body.classList.add("overflow-hidden");
+            placeOrderBtn.disabled = true;
+            placeOrderBtn.classList.add("cursor-not-allowed", "opacity-70");
+            placeOrderBtn.innerHTML = `
+        <span class="size-5 rounded-full border-2 border-white/40 border-t-white animate-spin"></span>
+        Placing Order...
+    `;
+
+            requestAnimationFrame(() => {
+                orderLoadingOverlay.classList.remove("opacity-0");
+            });
+        };
+
+        const hideOrderLoading = () => {
+            orderLoadingOverlay.classList.add("opacity-0");
+            document.body.classList.remove("overflow-hidden");
+            placeOrderBtn.disabled = false;
+            placeOrderBtn.classList.remove("cursor-not-allowed", "opacity-70");
+            placeOrderBtn.innerHTML = `
+        Place Order
+        <span class="material-symbols-outlined">arrow_forward</span>
+    `;
+
+            setTimeout(() => {
+                orderLoadingOverlay.classList.add("hidden");
+                orderLoadingOverlay.classList.remove("flex");
+            }, 200);
+        };
+
+        placeOrderBtn.addEventListener(
+            "click",
+            async () => {
+
+                //--------------------------------
+                // address
+                //--------------------------------
+
+                const addressId =
+                    document.getElementById(
+                        "checkoutAddressSelect"
+                    )?.value;
+
+                //--------------------------------
+                // payment
+                //--------------------------------
+
+                const selectedPayment =
+                    document.querySelector(
+                        'input[name="paymentMethod"]:checked'
+                    );
+
+                const paymentMethod =
+                    selectedPayment?.value;
+
+                //--------------------------------
+                // coupon
+                //--------------------------------
+
+                const couponCode = appliedCouponCode;
+
+                //--------------------------------
+                // validation
+                //--------------------------------
+
+                if (!addressId) {
+
+                    alert(
+                        "Please select address"
+                    );
+
+                    return;
+                }
+
+                if (!paymentMethod) {
+
+                    alert(
+                        "Please choose payment method"
+                    );
+
+                    return;
+                }
+
+                showOrderLoading();
+
+                try {
+
+                    const response =
+                        await fetch(
+                            "/checkout/confirm",
+                            {
+
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        addressId,
+
+                                        paymentMethod,
+
+                                        couponCode
+                                    })
+                            }
+                        );
+
+                    const result =
+                        await response.json();
+
+
+
+                    if (result.success) {
+
+                        setTimeout(() => {
+                            window.location.href =
+                                `/orderConfirm/${result.orderId}`;
+                        }, 2000);
+
+                    } else {
+
+                        hideOrderLoading();
+
+                        alert(
+                            result.message ||
+                            "Failed to place order"
+                        );
+                    }
+
+                } catch (error) {
+
+                    console.log(error);
+                    hideOrderLoading();
+
+                    alert(
+                        "Something went wrong"
+                    );
+                }
+            }
+        );
     </script>
+
 </body>
 
 </html>

@@ -3,6 +3,8 @@ import Product from "../models/productModel.js";
 import Order from "../models/orderModel.js";
 import Address from "../models/userAddressModel.js";
 import Wallet from "../models/walletModel.js";
+import Coupon from "../models/couponModel.js";
+import { applyCouponService } from "./userCouponService.js";
 
 export const generateOrderNumber = () => {
   return `ORD-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -86,9 +88,16 @@ export const placeOrderService = async (
 
   //totals
 
-  const discount = 0;
-
   const deliveryCharge = subTotal > 3999 ? 0 : 50;
+  let discount = 0;
+  let appliedCouponCode = "";
+
+  if (couponCode && couponCode.trim()) {
+    const couponResult = await applyCouponService(userId, couponCode);
+    discount = couponResult.discount;
+    appliedCouponCode = couponResult.couponCode;
+  }
+
   const totalAmount = subTotal - discount + deliveryCharge;
 
 
@@ -143,7 +152,7 @@ if (paymentMethod === "WALLET") {
     discount,
     deliveryCharge,
     totalAmount,
-    couponCode,
+    couponCode: appliedCouponCode,
     estimatedDelivery: deliveryDate,
   });
 
@@ -184,6 +193,13 @@ if (paymentMethod === "WALLET") {
   cart.items = [];
 
   await cart.save();
+
+  if (appliedCouponCode) {
+    await Coupon.updateOne(
+      { code: appliedCouponCode },
+      { $inc: { usedCount: 1 } },
+    );
+  }
 
   return order;
 };

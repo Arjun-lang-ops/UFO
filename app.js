@@ -18,7 +18,9 @@ import userCartRoutes from './routes/userCartRoutes.js';
 import userWishlistRoutes from './routes/userWishlistRoutes.js';
 import userCheckoutRoutes from './routes/userCheckoutRoutes.js';
 import userOrderRoutes from './routes/userOrderRoutes.js';
-import userPaymentRoutes from './routes/userPaymentRoutes.js'
+import userPaymentRoutes from './routes/userPaymentRoutes.js';
+import adminCouponRoutes from './routes/adminCouponRoutes.js';
+import userCouponRoutes from './routes/userCouponRoutes.js';
 import passport from "./config/passport.js";
 import cors from "cors";
 import { cartCountMiddleware } from "./middlewares/cartMiddleware.js";
@@ -65,8 +67,10 @@ app.use('/',userWishlistRoutes);
 app.use('/',userCheckoutRoutes);
 app.use('/',userOrderRoutes);
 app.use('/',userPaymentRoutes)
+app.use('/',userCouponRoutes)
 app.use("/admin", adminRoutes);
 app.use('/admin',adminOrderRoutes)
+app.use('/admin',adminCouponRoutes)
 
 
 //error handling middleware
