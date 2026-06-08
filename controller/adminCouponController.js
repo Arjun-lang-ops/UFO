@@ -29,7 +29,12 @@ export const couponPageRender = async (req, res) => {
 
     const totalPages = Math.ceil(totalCoupons / limit) || 1;
 
-    
+    // Calculate database stats for the dashboard cards (database-wide)
+    const allCouponsForStats = await Coupon.find({}, { usedCount: 1, isActive: 1, expiryDate: 1 });
+    const totalActiveCoupons = allCouponsForStats.filter(coupon => coupon.isActive && (!coupon.expiryDate || coupon.expiryDate >= new Date())).length;
+    const totalRedeemed = allCouponsForStats.reduce((total, coupon) => total + (coupon.usedCount || 0), 0);
+    const totalCouponsGlobal = allCouponsForStats.length;
+
     res.render("adminViews/adminCouponManagement", {
       coupons,
       search,
@@ -37,6 +42,9 @@ export const couponPageRender = async (req, res) => {
       totalPages,
       totalCoupons,
       limit,
+      totalActiveCoupons,
+      totalRedeemed,
+      totalCouponsGlobal,
     });
   } catch (error) {
     console.log(error);
