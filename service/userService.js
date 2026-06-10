@@ -4,12 +4,24 @@ import Address from "../models/userAddressModel.js";
 import { generateAndSaveOtp } from "./otpService.js";
 import { sendMail } from "../utils/mailer.js";
 import Otp from "../models/otpModel.js";
+import { generateReferralcode } from "../controller/userReferralController.js";
+import Refer from "../models/referModel.js";
+import Wallet from "../models/walletModel.js";
 
 export const registerUserLogic = async (data) => {
-  const { fullname, email, password } = data;
+  const { fullname, email, password, referralCode } = data;
   const existingUser = await User.findOne({ email });
   if (existingUser) {
     throw new Error("User already Exists");
+  }
+
+  let referredBy = null;
+  if (referralCode) {
+    const referrerReferral = await Refer.findOne({ referralCode });
+    if (!referrerReferral) {
+      throw new Error("Invalid referral code");
+    }
+    referredBy = referrerReferral.user;
   }
 
   const hashedPassword = await bcrypt.hash(password, 10);
@@ -19,7 +31,16 @@ export const registerUserLogic = async (data) => {
     email,
     password: hashedPassword,
     isVerified: false,
+    referredBy,
   });
+
+  const referrals = await generateReferralcode();
+
+  await Refer.create({
+    user: user._id,
+    referralCode: referrals,
+  });
+
   return user;
 };
 
@@ -39,9 +60,66 @@ export const verifyUserOtp = async (email) => {
   }
 
   user.isVerified = true;
-
   await user.save();
+
   return true;
+};
+
+export const processReferralReward = async (userId) => {
+  const user = await User.findById(userId);
+  if (!user) return;
+
+  if (user.referredBy && !user.referralProcessed) {
+    const Order = (await import("../models/orderModel.js")).default;
+    const confirmedOrder = await Order.findOne({
+      user: userId,
+      $or: [{ orderStatus: "Confirmed" }, { paymentStatus: "Paid" }],
+    });
+
+    if (confirmedOrder) {
+      const referrerId = user.referredBy;
+
+      // Credit referrer's wallet
+      let referrerWallet = await Wallet.findOne({ user: referrerId });
+      if (!referrerWallet) {
+        referrerWallet = await Wallet.create({ user: referrerId, balance: 0 });
+      }
+      referrerWallet.balance += 50;
+      referrerWallet.transactions.push({
+        type: "credit",
+        amount: 50,
+        description: `Referral bonus for inviting ${user.fullname} (First order placed)`,
+        balanceAfterTransaction: referrerWallet.balance,
+      });
+      await referrerWallet.save();
+
+      // Increment referrer's totalRewardsEarned in Refer model
+      await Refer.updateOne(
+        { user: referrerId },
+        { $inc: { totalRewardsEarned: 50 } },
+      );
+
+      // Credit new user's wallet
+      let newUserWallet = await Wallet.findOne({ user: user._id });
+      if (!newUserWallet) {
+        newUserWallet = await Wallet.create({ user: user._id, balance: 0 });
+      }
+      newUserWallet.balance += 50;
+      newUserWallet.transactions.push({
+        type: "credit",
+        amount: 50,
+        description: "Signup bonus via referral code (First order placed)",
+        balanceAfterTransaction: newUserWallet.balance,
+      });
+      await newUserWallet.save();
+
+      user.referralProcessed = true;
+      await user.save();
+      console.log(
+        `Referral rewards processed successfully for user ${userId} and referrer ${referrerId}`,
+      );
+    }
+  }
 };
 
 //user login

@@ -223,7 +223,7 @@
                           id="header-fullname"
                           class="text-slate-900 dark:text-white text-2xl font-bold"
                         >
-                          Loading...
+                          <%=user.fullname%>
                         </h2>
                         
                       </div>
@@ -281,7 +281,7 @@
                           class="bg-slate-50 dark:bg-[#1e293b] border border-slate-200 dark:border-[#283039] text-slate-900 dark:text-white rounded-lg px-4 py-2.5 outline-none cursor-default"
                           type="text"
                           readonly
-                          value=""
+                          value="<%=user.fullname%>"
                         />
                       </div>
                       <div class="flex flex-col gap-1.5 md:col-span-2">
@@ -306,7 +306,7 @@
                             class="w-full bg-slate-50 dark:bg-[#1e293b] border border-slate-200 dark:border-[#283039] text-slate-900 dark:text-white rounded-lg pl-4 pr-10 py-2.5 outline-none cursor-default"
                             type="email"
                             readonly
-                            value=""
+                            value="<%=user.email%>"
                           />
                           <span
                             class="absolute right-3 top-2.5 material-symbols-outlined text-green-500 text-[20px]"

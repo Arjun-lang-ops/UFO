@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Referral Program - Urba Football</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .dark ::-webkit-scrollbar {
+            width: 8px;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #101922; 
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #283039; 
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #374151; 
+        }
+        .football-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(19, 127, 236, 0.15) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <header
+            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#283039] bg-white dark:bg-[#111418] px-4 py-3 lg:px-10 sticky top-0 z-50">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+                    <div class="size-8 text-primary">
+                        <svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path clip-rule="evenodd"
+                                d="M24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 44 24 4ZM24 40C15.1634 40 8 32.8366 8 24C8 15.1634 15.1634 8 24 8C32.8366 8 40 15.1634 40 24C40 32.8366 32.8366 40 24 40Z"
+                                fill="currentColor"></path>
+                            <path d="M24 14L16 28H32L24 14Z" fill="currentColor"></path>
+                        </svg>
+                    </div>
+                    <h2 class="text-slate-900 dark:text-white text-xl font-bold leading-tight tracking-[-0.015em]">
+                        Urban Football</h2>
+                </div>
+                <div class="hidden lg:flex items-center gap-9">
+                    <a class="text-slate-600 dark:text-slate-200 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors"
+                        href="/home">Shop</a>
+                    
+                </div>
+            </div>
+            <div class="flex flex-1 justify-end gap-4 sm:gap-8">
+                <div class="hidden sm:flex flex-col min-w-40 !h-10 max-w-64">
+                    <div
+                        class="flex w-full flex-1 items-stretch rounded-lg h-full border border-slate-200 dark:border-none">
+                        <div
+                            class="text-slate-400 dark:text-[#9dabb9] flex bg-white dark:bg-[#283039] items-center justify-center pl-4 rounded-l-lg border-r-0">
+                            <span class="material-symbols-outlined text-[20px]">search</span>
+                        </div>
+                        <input
+                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-white dark:bg-[#283039] focus:border-none h-full placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+                            placeholder="Search gear..." value="" />
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <a href="/cart">
+                        <button
+                        class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-[#3e4a56] transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                    </button>
+                    </a>
+                    <button
+                        class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-[#3e4a56] transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">notifications</span>
+                    </button>
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-slate-200 dark:border-[#3e4a56] cursor-pointer"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAOe8dOzynzR_8mQ2G0YbbIh0QHIrRROTfOtOox9QC0rRHgcZfV0GbJJ2aFVaq-NYlgfylMAuD9WQfieAM_A68WVWcSXgr_aXQ0qlnvvfXnPuO7lajocByOYbPcmxqPvGOzHaATQS-a2kMlt2wuxFBeaV_7n_Vv6COqGMJSbMlgZtUEvRROBQvk2AZujQRQOdZgPSxRCs5kYZIcTDAGTUVKOuUmr3lJLgBWwEW8UsN_uKZ8jGsBcWUfNss6xWae-7sRJFDuMGtP3bA");'>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class="layout-container flex h-full grow flex-col py-5 px-4 sm:px-6 lg:px-40">
+            <div class="flex flex-1 justify-center">
+                <div class="layout-content-container flex flex-col max-w-[1200px] flex-1 w-full">
+                    <div class="flex flex-col lg:flex-row gap-6">
+                        <%- include('partials/userSidebar', { user: user, activePage: 'referral' }) %>
+                        <div class="flex-1 flex flex-col gap-8">
+                            <section class="relative overflow-hidden bg-slate-900 rounded-3xl p-8 lg:p-12 text-white">
+                                <div class="football-pattern absolute inset-0 opacity-20"></div>
+                                <div
+                                    class="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/20 rounded-full blur-[100px]">
+                                </div>
+                                <div class="relative z-10 max-w-lg">
+                                    <span
+                                        class="inline-block px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest mb-4">Teammates
+                                        Wanted</span>
+                                    <h1 class="text-4xl lg:text-5xl font-black mb-4 leading-tight">INVITE YOUR SQUAD,
+                                        EARN REWARDS.</h1>
+                                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">Bring your teammates to
+                                        Urban Football. When they sign up and make their first purchase, both of you get <span
+                                            class="text-primary font-bold">Rs. 50 credit</span> in your wallets.</p>
+                                    
+                                </div>
+                            </section>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                
+                                <div
+                                    class="bg-white dark:bg-[#111418] p-6 rounded-2xl border border-slate-200 dark:border-[#283039] shadow-sm flex items-center gap-5">
+                                    <div
+                                        class="w-14 h-14 rounded-2xl bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-green-500">
+                                        <span class="material-symbols-outlined text-3xl">payments</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Rewards Earned
+                                        </p>
+                                        <p class="text-3xl font-black text-slate-900 dark:text-white">₹<%= referral ? referral.totalRewardsEarned.toFixed(2) : '0.00' %></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <section
+                                class="bg-white dark:bg-[#111418] rounded-2xl border border-slate-200 dark:border-[#283039] shadow-sm p-8">
+                                <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-primary">share</span>
+                                    Your Unique Referral Code
+                                </h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                    <div class="space-y-2">
+                                        <label
+                                            class="text-xs font-bold text-slate-500 uppercase tracking-wider">Referral
+                                            Code</label>
+                                        <div class="flex h-14">
+                                            <div
+                                                class="flex-1 bg-slate-50 dark:bg-[#1e293b] border border-slate-200 dark:border-[#283039] rounded-l-xl flex items-center px-4 font-mono text-xl font-bold tracking-widest text-primary">
+                                                <%= referral ? referral.referralCode : '' %>
+                                            </div>
+                                            <button id="copyCodeBtn"
+                                                class="bg-primary hover:bg-blue-600 text-white px-5 rounded-r-xl transition-colors">
+                                                <span class="material-symbols-outlined">content_copy</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-slate-500 uppercase tracking-wider">Sharing
+                                            Link</label>
+                                        <div class="flex h-14">
+                                            <div
+                                                class="flex-1 bg-slate-50 dark:bg-[#1e293b] border border-slate-200 dark:border-[#283039] rounded-l-xl flex items-center px-4 text-sm text-slate-600 dark:text-slate-300 truncate">
+                                                <%= referralLink %>
+                                            </div>
+                                            <button id="copyLinkBtn"
+                                                class="bg-primary hover:bg-blue-600 text-white px-5 rounded-r-xl transition-colors">
+                                                <span class="material-symbols-outlined">link</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="flex flex-col sm:flex-row items-center justify-between gap-6 pt-6 border-t border-slate-100 dark:border-[#283039]">
+                                    <p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Quick share with
+                                        your community:</p>
+                                    <div class="flex gap-3">
+                                        <button
+                                            class="w-12 h-12 rounded-full bg-[#1877F2] text-white flex items-center justify-center hover:scale-110 transition-transform">
+                                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                        <button
+                                            class="w-12 h-12 rounded-full bg-[#1DA1F2] text-white flex items-center justify-center hover:scale-110 transition-transform">
+                                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                        <button
+                                            class="w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center hover:scale-110 transition-transform">
+                                            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.94 3.659 1.437 5.634 1.437h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </section>
+                            <section class="mb-10">
+                                <h3 class="text-xl font-bold mb-8 text-center">How the Program Works</h3>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                    <div class="flex flex-col items-center text-center">
+                                        <div
+                                            class="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-4">
+                                            <span class="material-symbols-outlined text-3xl">send</span>
+                                        </div>
+                                        <h4 class="font-bold mb-2 text-slate-900 dark:text-white">1. Share your link
+                                        </h4>
+                                        <p class="text-sm text-slate-500 dark:text-slate-400">Send your unique code or
+                                            link to your teammates, coach, or friends.</p>
+                                    </div>
+                                    <div class="flex flex-col items-center text-center">
+                                        <div
+                                            class="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-4">
+                                            <span class="material-symbols-outlined text-3xl">shopping_bag</span>
+                                        </div>
+                                        <h4 class="font-bold mb-2 text-slate-900 dark:text-white">2. They place an order</h4>
+                                        <p class="text-sm text-slate-500 dark:text-slate-400">When they use your referral link/code to place their first order, they will receive Rs. 50 credit in their wallet.</p>
+                                    </div>
+                                    <div class="flex flex-col items-center text-center">
+                                        <div
+                                            class="size-16 rounded-full bg-primary/10 text-primary flex items-center justify-center mb-4">
+                                            <span class="material-symbols-outlined text-3xl">card_giftcard</span>
+                                        </div>
+                                        <h4 class="font-bold mb-2 text-slate-900 dark:text-white">3. You get rewarded</h4>
+                                        <p class="text-sm text-slate-500 dark:text-slate-400">Once their first order is confirmed or paid, we'll also drop a Rs. 50 credit into your wallet.</p>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const codeBtn = document.getElementById("copyCodeBtn");
+        const linkBtn = document.getElementById("copyLinkBtn");
+        const codeText = "<%= referral ? referral.referralCode : '' %>";
+        const linkText = "<%= referralLink %>";
+
+        if (codeBtn) {
+            codeBtn.addEventListener("click", () => {
+                navigator.clipboard.writeText(codeText).then(() => {
+                    const icon = codeBtn.querySelector("span");
+                    if (icon) {
+                        icon.textContent = "done";
+                        setTimeout(() => {
+                            icon.textContent = "content_copy";
+                        }, 2000);
+                    }
+                }).catch(err => console.error("Could not copy text: ", err));
+            });
+        }
+
+        if (linkBtn) {
+            linkBtn.addEventListener("click", () => {
+                navigator.clipboard.writeText(linkText).then(() => {
+                    const icon = linkBtn.querySelector("span");
+                    if (icon) {
+                        icon.textContent = "done";
+                        setTimeout(() => {
+                            icon.textContent = "link";
+                        }, 2000);
+                    }
+                }).catch(err => console.error("Could not copy text: ", err));
+            });
+        }
+    });
+    </script>
+</body>
+
+</html>

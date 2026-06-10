@@ -37,7 +37,7 @@ export const wishlistRender = async (req, res) => {
     }
 
     return res.render("userViews/userWishlistPage", {
-      wishlist: wishlist || { products: [] },
+      wishlist: wishlist || { products: [] },user:userId
     });
   } catch (error) {
     console.log(error);

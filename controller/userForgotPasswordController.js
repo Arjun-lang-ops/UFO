@@ -6,8 +6,8 @@ import Otp from "../models/otpModel.js";
 
 
 export const forgotPasswordVerify=async(req,res)=>{
-  
-    return res.render('userViews/userForgotPasswordVerify')
+ 
+    return res.render('userViews/userForgotPasswordVerify',)
 }
 
 //sending otp for forgot password

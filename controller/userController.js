@@ -194,8 +194,11 @@ export const getMe = async (req, res) => {
 
 
 
-export const userChangePasswordRender = (req, res) =>
-  res.render('userViews/userChangePassword')
+export const userChangePasswordRender = (req, res) =>{
+ const user=req.session.user || req.session.userId || req.user?._id
+  res.render('userViews/userChangePassword',{user})
+}
+ 
 
 
 

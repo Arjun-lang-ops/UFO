@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Payment Cancelled - Urban Football</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700;900&amp;family=Noto+Sans:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#137fec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#111418", // Matching the component's base dark color
+                    },
+                    fontFamily: {
+                        "display": ["Lexend", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        /* Screen shake on page load */
+        @keyframes failureShake {
+            0%, 100% { transform: translateX(0); }
+            10% { transform: translateX(-6px) rotate(-0.5deg); }
+            20% { transform: translateX(5px) rotate(0.3deg); }
+            30% { transform: translateX(-4px) rotate(-0.2deg); }
+            40% { transform: translateX(3px) rotate(0.1deg); }
+            50% { transform: translateX(-2px); }
+            60% { transform: translateX(1px); }
+        }
+
+        /* Screen-wide flash */
+        @keyframes redFlash {
+            0% { opacity: 0.55; }
+            100% { opacity: 0; }
+        }
+
+        /* Vignette pulse */
+        @keyframes vignettePulse {
+            0% { box-shadow: inset 0 0 100px 30px rgba(239, 68, 68, 0.3); }
+            100% { box-shadow: inset 0 0 100px 30px rgba(239, 68, 68, 0); }
+        }
+
+        /* Error icon scale up and pulse */
+        @keyframes errorPulse {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            75% { transform: scale(0.95); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .failure-shake {
+            animation: failureShake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+        .failure-flash-overlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle, rgba(239,68,68,0.2) 0%, rgba(220,38,38,0.1) 60%, transparent 100%);
+            pointer-events: none;
+            z-index: 9999;
+            animation: redFlash 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .failure-vignette {
+            animation: vignettePulse 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        .error-icon-animated {
+            animation: errorPulse 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white">
+    <div class="failure-flash-overlay"></div>
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden failure-shake failure-vignette">
+        <div class="flex flex-col w-full bg-[#111418] border-b border-[#283039]">
+            <header
+                class="flex items-center justify-between whitespace-nowrap px-10 py-3 max-w-[1440px] mx-auto w-full">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-4 text-white cursor-pointer">
+                        <div class="size-8 flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined !text-3xl">sports_soccer</span>
+                        </div>
+                        <h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
+                    </div>
+                    <div class="hidden md:flex items-center gap-9">
+                        <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+                            href="#">Shop</a>
+                        <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+                            href="#">Teams</a>
+                        <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+                            href="#">Sale</a>
+                        <a class="text-white text-sm font-medium leading-normal hover:text-primary transition-colors"
+                            href="#">Support</a>
+                    </div>
+                </div>
+                <div class="flex flex-1 justify-end gap-8 items-center">
+                    <label class="hidden lg:flex flex-col min-w-40 !h-10 max-w-64">
+                        <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+                            <div
+                                class="text-[#9dabb9] flex border-none bg-[#283039] items-center justify-center pl-4 rounded-l-lg border-r-0">
+                                <span class="material-symbols-outlined">search</span>
+                            </div>
+                            <input
+                                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-[#283039] focus:border-none h-full placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+                                placeholder="Search gear..." value="" />
+                        </div>
+                    </label>
+                    <div class="flex gap-3">
+                        <button
+                            class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#283039] text-white hover:bg-[#3b4754] transition-colors">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </button>
+                        <button
+                            class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-[#283039] text-white hover:bg-[#3b4754] transition-colors">
+                            <span class="material-symbols-outlined">account_circle</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <div class="flex flex-1 justify-center py-5 px-4 md:px-10 lg:px-40">
+            <div class="layout-content-container flex flex-col max-w-[960px] flex-1 gap-6">
+                <div class="flex flex-wrap gap-2 px-4 pt-4">
+                    <a class="text-[#9dabb9] text-sm font-medium leading-normal hover:text-white transition-colors"
+                        href="/home">Home</a>
+                    <span class="text-[#9dabb9] text-sm font-medium leading-normal">/</span>
+                    <a class="text-[#9dabb9] text-sm font-medium leading-normal hover:text-white transition-colors"
+                        href="/orderHistory">Orders</a>
+                    <span class="text-[#9dabb9] text-sm font-medium leading-normal">/</span>
+                    <span class="text-white text-sm font-medium leading-normal">Payment Failed</span>
+                </div>
+                <div class="flex flex-col gap-6 px-4">
+                    <div
+                        class="flex flex-col items-center justify-center text-center py-10 rounded-xl bg-[#1c2127] border border-[#3b4754]">
+                        <div class="size-16 rounded-full bg-red-500/10 flex items-center justify-center mb-6 error-icon-animated">
+                            <span class="material-symbols-outlined text-red-500 !text-4xl">credit_card_off</span>
+                        </div>
+                        <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] mb-2">Payment
+                            Failed</h1>
+                        <p class="text-[#9dabb9] text-lg font-normal leading-normal max-w-lg">The payment for order
+                            <span class="text-white font-bold">
+                                <%= order.orderNumber %>
+                            </span> failed or was declined. Please check your payment details and try again.</p>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-2 flex flex-col gap-6">
+                            <div class="rounded-xl border border-[#3b4754] bg-[#1c2127] overflow-hidden">
+                                <div class="p-6 border-b border-[#3b4754]">
+                                    <h3 class="text-white text-lg font-bold">Items in Cart</h3>
+                                </div>
+                                <div class="p-6">
+                                    <div class="flex flex-col gap-4">
+                                        <% order.items.forEach((item, index)=> { %>
+                                            <% const variant=item.product?.variants?.find(v=> v._id.toString() ===
+                                                item.variant?.toString()); %>
+                                                <div class="flex gap-4 items-center">
+                                                    <div
+                                                        class="size-20 rounded-lg overflow-hidden border border-[#3b4754]">
+                                                        <img src="<%= variant?.images?.[0] || item.product?.images?.[0] || '' %>"
+                                                            alt="<%= item.product?.name || 'Product' %>"
+                                                            class="object-cover w-full h-full" />
+                                                    </div>
+                                                    <div class="flex flex-1 justify-between items-start">
+                                                        <div class="flex flex-col gap-1">
+                                                            <span class="text-white font-medium">
+                                                                <%= item.product?.name || item.product?.productName %>
+                                                            </span>
+                                                            <div class="text-[#9dabb9] text-sm">
+                                                                <% if (variant?.size) { %>
+                                                                    <p>Size: <%= variant.size %>
+                                                                    </p>
+                                                                    <% } %>
+                                                                        <p>Qty: <%= item.quantity %>
+                                                                        </p>
+                                                            </div>
+                                                        </div>
+                                                        <span class="text-white font-bold">
+                                                            ₹<%= item.totalPrice || item.price %>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <% if (index !==order.items.length - 1) { %>
+                                                    <div class="h-px bg-[#3b4754] w-full"></div>
+                                                    <% } %>
+                                                        <% }) %>
+                                    </div>
+                                </div>
+                                <div class="bg-[#283039]/50 p-6 border-t border-[#3b4754]">
+                                    <div class="flex flex-col gap-3">
+                                        <div class="flex justify-between text-[#9dabb9]">
+                                            <span>Subtotal</span>
+                                            <span class="text-white">₹<%= order.subTotal %></span>
+                                        </div>
+                                        <div class="flex justify-between text-[#9dabb9]">
+                                            <span>Shipping</span>
+                                            <span class="text-white">₹<%= order.deliveryCharge || 0 %></span>
+                                        </div>
+                                        <div class="flex justify-between text-[#9dabb9]">
+                                            <span>Discount</span>
+                                            <span class="text-white">- ₹<%= order.discount || 0 %></span>
+                                        </div>
+                                        <% if (order.couponCode) { %>
+                                            <div class="flex justify-between text-[#9dabb9]">
+                                                <span>Coupon (<%= order.couponCode %>)</span>
+                                                <span class="text-green-400">Applied</span>
+                                            </div>
+                                            <% } %>
+                                                <div class="h-px bg-[#3b4754] w-full my-2"></div>
+                                                <div class="flex justify-between items-center">
+                                                    <span class="text-white font-bold text-lg">Total Amount</span>
+                                                    <span class="text-white font-black text-xl">
+                                                        ₹<%= order.totalAmount %>
+                                                    </span>
+                                                </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-6">
+                            <!-- Order Details Card -->
+                            <div class="rounded-xl border border-[#3b4754] bg-[#1c2127] p-6">
+                                <h3 class="text-white text-lg font-bold mb-4">Order Details</h3>
+                                <div class="flex flex-col gap-3">
+                                    <div class="flex justify-between">
+                                        <span class="text-[#9dabb9] text-sm">Order Number</span>
+                                        <span class="text-white text-sm font-medium">
+                                            <%= order.orderNumber %>
+                                        </span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-[#9dabb9] text-sm">Date</span>
+                                        <span class="text-white text-sm font-medium">
+                                            <%= new Date(order.orderedAt).toLocaleDateString('en-IN', { day: 'numeric' ,
+                                                month: 'short' , year: 'numeric' }) %>
+                                        </span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-[#9dabb9] text-sm">Payment Method</span>
+                                        <span class="text-white text-sm font-medium">
+                                            <%= order.paymentMethod %>
+                                        </span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-[#9dabb9] text-sm">Payment Status</span>
+                                        <span
+                                            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-red-500/10 text-red-400">
+                                            <span class="size-1.5 rounded-full bg-red-400"></span>
+                                            <%= order.paymentStatus %>
+                                        </span>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-[#9dabb9] text-sm">Order Status</span>
+                                        <span
+                                            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-bold bg-yellow-500/10 text-yellow-400">
+                                            <span class="size-1.5 rounded-full bg-yellow-400"></span>
+                                            <%= order.orderStatus %>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Payment Status Card -->
+                            <div class="rounded-xl border border-[#3b4754] bg-[#1c2127] p-6">
+                                <h3 class="text-white text-lg font-bold mb-4">Payment Status</h3>
+                                <div class="flex gap-4 items-center mb-4">
+                                    <div
+                                        class="size-10 rounded-full bg-red-500/10 flex items-center justify-center flex-shrink-0 text-red-500">
+                                        <span class="material-symbols-outlined">error</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">Transaction Failed</p>
+                                        <p class="text-[#9dabb9] text-sm">Payment could not be completed</p>
+                                    </div>
+                                </div>
+                                <div class="w-full h-px bg-[#283039] my-4"></div>
+                                <div class="flex gap-4 items-center">
+                                    <div
+                                        class="size-10 rounded-full bg-[#283039] flex items-center justify-center flex-shrink-0 text-[#9dabb9]">
+                                        <span class="material-symbols-outlined">shield</span>
+                                    </div>
+                                    <div>
+                                        <p class="text-white font-medium">No Charge Made</p>
+                                        <p class="text-[#9dabb9] text-sm">Your account was not billed</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Shipping Address Card -->
+                            <div class="rounded-xl border border-[#3b4754] bg-[#1c2127] p-6">
+                                <h3 class="text-white text-lg font-bold mb-4">Shipping Address</h3>
+                                <div class="flex flex-col gap-1 text-[#9dabb9]">
+                                    <span class="text-white font-medium">
+                                        <%= order.address.fullname %>
+                                    </span>
+                                    <span>
+                                        <%= order.address.street %>
+                                    </span>
+                                    <% if (order.address.apartment) { %>
+                                        <span>
+                                            <%= order.address.apartment %>
+                                        </span>
+                                        <% } %>
+                                            <span>
+                                                <%= order.address.state %> - <%= order.address.pincode %>
+                                            </span>
+                                            <span>
+                                                <%= order.address.country %>
+                                            </span>
+                                            <span class="mt-2">
+                                                <%= order.address.phone %>
+                                            </span>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex flex-col gap-3">
+                                <button id="retryPaymentBtn"
+                                    class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors">
+                                    <span class="material-symbols-outlined !text-lg">refresh</span>
+                                    Retry Payment
+                                </button>
+                                <a href="/orderHistory">
+                                    <button
+                                        class="w-full bg-transparent hover:bg-[#283039] text-white border border-[#3b4754] font-bold py-3 px-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors">
+                                        <span class="material-symbols-outlined !text-lg">receipt_long</span>
+                                        View Orders
+                                    </button>
+                                </a>
+                                <a href="/home">
+                                    <button
+                                        class="w-full bg-transparent hover:bg-[#283039] text-white border border-[#3b4754] font-bold py-3 px-4 rounded-lg text-sm flex items-center justify-center gap-2 transition-colors">
+                                        <span class="material-symbols-outlined !text-lg">storefront</span>
+                                        Continue Shopping
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        window.addEventListener('load', () => {
+            const failColors = ['#ef4444', '#dc2626', '#b91c1c', '#991b1b', '#7f1d1d', '#450a0a'];
+            
+            // First main burst
+            confetti({
+                particleCount: 100,
+                spread: 100,
+                origin: { y: 0.4 },
+                colors: failColors,
+                gravity: 1.2
+            });
+
+            // Delayed smaller bursts for debris effect
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    angle: 60,
+                    spread: 80,
+                    origin: { x: 0, y: 0.5 },
+                    colors: failColors,
+                    gravity: 1.4
+                });
+            }, 150);
+
+            setTimeout(() => {
+                confetti({
+                    particleCount: 50,
+                    angle: 120,
+                    spread: 80,
+                    origin: { x: 1, y: 0.5 },
+                    colors: failColors,
+                    gravity: 1.4
+                });
+            }, 250);
+        });
+    </script>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        document.getElementById('retryPaymentBtn')?.addEventListener('click', async () => {
+            const btn = document.getElementById('retryPaymentBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="material-symbols-outlined !text-lg animate-spin">progress_activity</span> Processing...';
+
+            try {
+                const res = await fetch('/order/retry-payment/<%= order._id %>', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.json();
+
+                if (!data.success) {
+                    throw new Error(data.message || 'Failed to initiate payment');
+                }
+
+                const options = {
+                    key: data.key,
+                    amount: data.amount,
+                    currency: 'INR',
+                    name: 'Urban Football',
+                    description: 'Order #<%= order.orderNumber %>',
+                    order_id: data.razorpayOrderId,
+                    handler: async function (response) {
+                        try {
+                            const verifyRes = await fetch('/checkout/verify-payment', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    orderId: data.orderId,
+                                    razorpay_payment_id: response.razorpay_payment_id,
+                                    razorpay_order_id: response.razorpay_order_id,
+                                    razorpay_signature: response.razorpay_signature
+                                })
+                            });
+                            const verifyData = await verifyRes.json();
+                            if (verifyData.success) {
+                                window.location.href = '/orderConfirm/' + data.orderId;
+                            } else {
+                                window.location.reload();
+                            }
+                        } catch (err) {
+                            console.error(err);
+                            window.location.reload();
+                        }
+                    },
+                    prefill: {
+                        name: data.user?.name || '',
+                        email: data.user?.email || '',
+                        contact: data.user?.phone || ''
+                    },
+                    theme: { color: '#137fec' },
+                    modal: {
+                        ondismiss: function () {
+                            btn.disabled = false;
+                            btn.innerHTML = '<span class="material-symbols-outlined !text-lg">refresh</span> Retry Payment';
+                        }
+                    }
+                };
+
+                const rzp = new Razorpay(options);
+                rzp.open();
+            } catch (err) {
+                console.error(err);
+                alert(err.message || 'Something went wrong. Please try again.');
+                btn.disabled = false;
+                btn.innerHTML = '<span class="material-symbols-outlined !text-lg">refresh</span> Retry Payment';
+            }
+        });
+    </script>
+</body>
+
+</html>

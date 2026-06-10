@@ -5,6 +5,7 @@ import Address from "../models/userAddressModel.js";
 import Wallet from "../models/walletModel.js";
 import Coupon from "../models/couponModel.js";
 import { applyCouponService } from "./userCouponService.js";
+import { processReferralReward } from "./userService.js";
 
 export const generateOrderNumber = () => {
   return `ORD-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -146,7 +147,7 @@ if (paymentMethod === "WALLET") {
 
     paymentMethod,
     paymentStatus,
-    orderStatus: "Confirmed",
+    orderStatus: paymentMethod === "RAZORPAY" ? "Pending" : "Confirmed",
     orderNumber: generateOrderNumber(),
     subTotal,
     discount,
@@ -199,6 +200,14 @@ if (paymentMethod === "WALLET") {
       { code: appliedCouponCode },
       { $inc: { usedCount: 1 } },
     );
+  }
+
+  if (paymentMethod !== "RAZORPAY") {
+    try {
+      await processReferralReward(userId);
+    } catch (referralErr) {
+      console.error("Referral processing error:", referralErr);
+    }
   }
 
   return order;

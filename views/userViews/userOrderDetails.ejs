@@ -34,6 +34,7 @@
             },
         }
     </script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <style>
         body {
             font-family: 'Lexend', sans-serif;
@@ -94,7 +95,7 @@
                     </div>
                     <nav class="hidden md:flex items-center gap-6 lg:gap-9">
                         <a class="text-sm font-medium leading-normal hover:text-primary transition-colors"
-                            href="/home">Shop</a>
+                            href="/home">Home</a>
 
                     </nav>
                 </div>
@@ -112,18 +113,19 @@
                         </div>
                     </label>
                     <div class="flex gap-2">
-                        <button
+                        <a href="/cart">
+                            <button
                             class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
                             <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
                         </button>
-                        <button
-                            class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
-                            <span class="material-symbols-outlined text-[20px]">notifications</span>
-                        </button>
-                        <button
+                        </a>
+                        
+                        <a href="/profile">
+                            <button
                             class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
                             <span class="material-symbols-outlined text-[20px]">account_circle</span>
                         </button>
+                        </a>
                     </div>
                 </div>
             </header>
@@ -393,6 +395,12 @@
                                             <p class="text-text-secondary text-xs">
                                                 <%= order.paymentStatus %>
                                             </p>
+                                            <% if (order.paymentMethod === 'RAZORPAY' && order.paymentStatus === 'Pending') { %>
+                                                <button id="payNowBtn" data-order-id="<%= order._id %>" class="mt-3 inline-flex items-center gap-2 h-9 px-4 rounded-lg bg-primary text-white text-xs font-bold hover:bg-blue-600 transition-colors shadow-md">
+                                                    <span class="material-symbols-outlined text-sm">payment</span>
+                                                    Pay Now
+                                                </button>
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -600,6 +608,94 @@
                         hideCancelModal();
                     }
                 });
+
+                // Razorpay Retry Payment Logic
+                const payNowBtn = document.getElementById("payNowBtn");
+                if (payNowBtn) {
+                    payNowBtn.addEventListener("click", async () => {
+                        const orderId = payNowBtn.dataset.orderId;
+                        payNowBtn.disabled = true;
+                        payNowBtn.innerHTML = `
+                            <span class="size-4 rounded-full border-2 border-white/40 border-t-white animate-spin"></span>
+                            Processing...
+                        `;
+                        try {
+                            const res = await fetch(`/order/retry-payment/${orderId}`, {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" }
+                            });
+                            const result = await res.json();
+                            if (!result.success) {
+                                throw new Error(result.message || "Failed to initiate payment retry");
+                            }
+
+                            const options = {
+                                key: result.key,
+                                amount: result.amount,
+                                currency: "INR",
+                                name: "Urban Football",
+                                description: "Order Payment Retry",
+                                order_id: result.razorpayOrderId,
+                                handler: async function (paymentResponse) {
+                                    payNowBtn.innerHTML = `
+                                        <span class="size-4 rounded-full border-2 border-white/40 border-t-white animate-spin"></span>
+                                        Verifying...
+                                    `;
+                                    try {
+                                        const verifyRes = await fetch("/checkout/verify-payment", {
+                                            method: "POST",
+                                            headers: { "Content-Type": "application/json" },
+                                            body: JSON.stringify({
+                                                orderId: result.orderId,
+                                                razorpay_payment_id: paymentResponse.razorpay_payment_id,
+                                                razorpay_order_id: paymentResponse.razorpay_order_id,
+                                                razorpay_signature: paymentResponse.razorpay_signature
+                                            })
+                                        });
+                                        const verifyResult = await verifyRes.json();
+                                        if (verifyResult.success) {
+                                            alert("Payment successful!");
+                                            window.location.reload();
+                                        } else {
+                                            alert(verifyResult.message || "Verification failed");
+                                            window.location.reload();
+                                        }
+                                    } catch (err) {
+                                        console.error(err);
+                                        alert("Verification failed");
+                                        window.location.reload();
+                                    }
+                                },
+                                modal: {
+                                    ondismiss: function () {
+                                        alert("Payment cancelled");
+                                        payNowBtn.disabled = false;
+                                        payNowBtn.innerHTML = `<span class="material-symbols-outlined text-sm">payment</span> Pay Now`;
+                                    }
+                                },
+                                prefill: {
+                                    name: result.user.name,
+                                    email: result.user.email,
+                                    contact: result.user.phone
+                                },
+                                theme: { color: "#137fec" }
+                            };
+
+                            const rzp = new Razorpay(options);
+                            rzp.on('payment.failed', function (resp) {
+                                alert(resp.error.description || "Payment failed");
+                                payNowBtn.disabled = false;
+                                payNowBtn.innerHTML = `<span class="material-symbols-outlined text-sm">payment</span> Pay Now`;
+                            });
+                            rzp.open();
+                        } catch (err) {
+                            console.error(err);
+                            alert(err.message || "Something went wrong. Please try again.");
+                            payNowBtn.disabled = false;
+                            payNowBtn.innerHTML = `<span class="material-symbols-outlined text-sm">payment</span> Pay Now`;
+                        }
+                    });
+                }
             </script>
 
 </body>

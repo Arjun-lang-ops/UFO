@@ -1,18 +1,18 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
     fullname: {
       type: String,
       required: true,
-      trim: true
+      trim: true,
     },
 
     email: {
       type: String,
       required: true,
       unique: true,
-      lowercase: true
+      lowercase: true,
     },
 
     password: {
@@ -21,44 +21,57 @@ const userSchema = new mongoose.Schema(
         return !this.googleId;
       },
       minlength: 8,
-      default: undefined
+      default: undefined,
     },
 
     googleId: {
       type: String,
       unique: true,
-      sparse: true
+      sparse: true,
     },
 
     role: {
       type: String,
-      enum: ['user', 'admin'],
-      default: 'user'
+      enum: ["user", "admin"],
+      default: "user",
     },
 
     isBlocked: {
-    type: Boolean,
-    default: false
-  },
-  profileImage: {
-  url: {
-    type: String,
-    default: "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg"
-  },
-  public_id: {
-    type: String,
-    default: null
-  }
-},
+      type: Boolean,
+      default: false,
+    },
+    profileImage: {
+      url: {
+        type: String,
+        default:
+          "https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg",
+      },
+      public_id: {
+        type: String,
+        default: null,
+      },
+    },
 
     isVerified: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
+
+    referredBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: null,
+    },
+
+    referralProcessed: {
+      type: Boolean,
+      default: false,
+    },
+
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-const User = mongoose.model('User', userSchema, 'urbanfootball');
+const User = mongoose.model("User", userSchema, "urbanfootball");
 
 export default User;

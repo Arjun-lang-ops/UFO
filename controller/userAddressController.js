@@ -10,7 +10,7 @@ export const userAddressRender = async (req, res) => {
 
     const addresses = await Address.find({ user: userId });
 
-    res.render("userViews/userAddress", { addresses });
+    res.render("userViews/userAddress", { addresses ,user:userId});
 
   } catch (error) {
     console.log("Address Render Error:", error);
