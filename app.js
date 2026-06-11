@@ -21,6 +21,7 @@ import userOrderRoutes from './routes/userOrderRoutes.js';
 import userPaymentRoutes from './routes/userPaymentRoutes.js';
 import adminCouponRoutes from './routes/adminCouponRoutes.js';
 import userCouponRoutes from './routes/userCouponRoutes.js';
+import adminOfferRoutes from './routes/adminOfferRoutes.js'
 import passport from "./config/passport.js";
 import cors from "cors";
 import { cartCountMiddleware } from "./middlewares/cartMiddleware.js";
@@ -71,6 +72,7 @@ app.use('/',userCouponRoutes)
 app.use("/admin", adminRoutes);
 app.use('/admin',adminOrderRoutes)
 app.use('/admin',adminCouponRoutes)
+app.use('/admin',adminOfferRoutes)
 
 
 //error handling middleware

@@ -6,12 +6,13 @@ import {
   approveReturnController
 } from "../controller/adminOrderController.js";
 import { downloadInvoice } from "../config/pdf.js";
+import { adminLoggedIn } from "../middlewares/adminAuth.js";
 const router = express.Router();
 
-router.get("/orderManagement", adminOrderManagementRender);
-router.get("/orderManagement/:id", orderDetailsRender);
-router.post("/orders/:id/status", updateOrderStatus);
-router.get("/invoice/:id/download", downloadInvoice);
-router.post("/orders/:orderId/return/:itemId", approveReturnController);
+router.get("/orderManagement",adminLoggedIn, adminOrderManagementRender);
+router.get("/orderManagement/:id",adminLoggedIn, orderDetailsRender);
+router.post("/orders/:id/status",adminLoggedIn, updateOrderStatus);
+router.get("/invoice/:id/download",adminLoggedIn, downloadInvoice);
+router.post("/orders/:orderId/return/:itemId",adminLoggedIn, approveReturnController);
 
 export default router;

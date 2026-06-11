@@ -65,6 +65,8 @@ export const verifyUserOtp = async (email) => {
   return true;
 };
 
+//refer and earn service
+
 export const processReferralReward = async (userId) => {
   const user = await User.findById(userId);
   if (!user) return;
