@@ -18,6 +18,12 @@ const categorySchema = new mongoose.Schema(
     isListed: {
       type: Boolean,
       default: true
+    },
+
+    offer: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Offer",
+      default: null
     }
   },
   { timestamps: true }

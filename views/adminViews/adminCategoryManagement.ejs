@@ -174,6 +174,9 @@
                     Total Products
                   </th>
                   <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    Offer Type
+                  </th>
+                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     Visibility
                   </th>
                   <th
@@ -186,7 +189,7 @@
 
                 <% if(categories.length===0) { %>
                   <tr>
-                    <td colspan="4" class="text-center py-6 text-slate-500">
+                    <td colspan="5" class="text-center py-6 text-slate-500">
                       No categories found
                     </td>
                   </tr>
@@ -218,6 +221,24 @@
                           <span class="text-sm font-medium text-slate-900 dark:text-white">
                             <%= category.productCount || 0 %>
                           </span>
+                        </td>
+
+                        <!-- Offer Type -->
+                        <td class="px-6 py-5">
+                          <select
+                            class="w-48 bg-slate-50 dark:bg-[#283039] border border-slate-200 dark:border-transparent rounded-lg px-3 py-2 text-xs font-medium text-slate-700 dark:text-white focus:ring-2 focus:ring-primary focus:border-primary"
+                            data-category-id="<%= category._id %>">
+                            <option value="">No offer</option>
+                            <% if (typeof categoryOffers !== 'undefined' && categoryOffers.length > 0) { %>
+                              <% categoryOffers.forEach(offer => { %>
+                                <option value="<%= offer._id %>" <%= category.offer && category.offer._id.toString() === offer._id.toString() ? 'selected' : '' %>>
+                                  <%= offer.name %> - <%= offer.offerMode === 'PERCENTAGE' ? offer.discountValue + '%' : 'Rs ' + offer.discountValue %>
+                                </option>
+                              <% }) %>
+                            <% } else { %>
+                              <option value="" disabled>No active category offers</option>
+                            <% } %>
+                          </select>
                         </td>
 
                         <!-- Status -->
@@ -450,6 +471,54 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="/adminJs/categoryValidation.js"></script>
+  <script>
+    document.querySelectorAll('select[data-category-id]').forEach(select => {
+      select.addEventListener('change', async () => {
+        const previousValue = select.dataset.previousValue || '';
+        const categoryId = select.dataset.categoryId;
+        const offerId = select.value;
+
+        select.disabled = true;
+
+        try {
+          const response = await fetch(`/admin/category/${categoryId}/offer`, {
+            method: 'PATCH',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ offerId })
+          });
+
+          const result = await response.json();
+
+          if (!response.ok || !result.success) {
+            throw new Error(result.message || 'Failed to update category offer');
+          }
+
+          select.dataset.previousValue = offerId;
+          Swal.fire({
+            icon: 'success',
+            title: 'Saved',
+            text: result.message,
+            timer: 1200,
+            showConfirmButton: false
+          });
+        } catch (error) {
+          select.value = previousValue;
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.message,
+            confirmButtonColor: '#137fec'
+          });
+        } finally {
+          select.disabled = false;
+        }
+      });
+
+      select.dataset.previousValue = select.value;
+    });
+  </script>
 </body>
 
 </html>

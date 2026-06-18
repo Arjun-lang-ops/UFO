@@ -1,21 +1,22 @@
 <!DOCTYPE html>
+
 <html class="dark" lang="en" style="">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Add New Offer | Urban Football Console</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Edit Offer | Urban Football Console</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&amp;family=Noto+Sans:wght@300;400;500;600&amp;display=swap"
-        rel="stylesheet">
+        rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet">
+        rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet">
+        rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -121,7 +122,7 @@
             <!-- Promotions Tab (ACTIVE) -->
             <a class="flex items-center gap-3 px-3 py-2 text-primary font-bold border-r-2 border-primary hover:bg-surface-bright transition-colors duration-200 active:scale-95 transition-transform"
                 href="#"><span class="material-symbols-outlined"
-                    style="font-variation-settings: &quot;FILL&quot; 1;">local_offer</span><span
+                    style='font-variation-settings: "FILL" 1;'>local_offer</span><span
                     class="font-body text-label tracking-normal">Offers</span></a>
             <!-- Categories Tab -->
             <a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-medium hover:bg-surface-bright transition-colors duration-200 active:scale-95 transition-transform"
@@ -136,7 +137,13 @@
                 <span class="font-body text-label tracking-normal">Settings</span>
             </a>
         </nav>
-
+        <div class="mt-auto space-y-2 pt-6 border-t border-outline/30">
+            <a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-medium hover:bg-surface-bright transition-colors duration-200"
+                href="#">
+                <span class="material-symbols-outlined">help</span>
+                <span class="font-body text-label tracking-normal">Support</span>
+            </a>
+        </div>
     </aside>
     <!-- Main Content Canvas -->
     <main class="ml-64 flex-1 min-h-screen relative overflow-hidden">
@@ -154,7 +161,7 @@
                 <div class="relative hidden lg:block">
                     <input
                         class="bg-surface-container-highest border-none rounded-full px-5 py-1.5 text-sm w-64 focus:ring-1 focus:ring-primary placeholder:text-on-surface-variant/50"
-                        placeholder="Search parameters..." type="text">
+                        placeholder="Search parameters..." type="text" />
                     <span
                         class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-lg">search</span>
                 </div>
@@ -165,7 +172,7 @@
                         class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container cursor-pointer overflow-hidden">
                         <img alt="Admin User Profile" class="w-full h-full object-cover"
                             data-alt="A professional portrait of a tech-savvy administrator in a high-tech office environment. The background features blurred digital screens and modern lighting. The aesthetic is clean and corporate, matching the deep blue and slate tones of the Midnight Pitch design system. High resolution, professional studio lighting."
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvXyDNTtOIdaQx1nw6R5EKiUAQrFKOgtg6IOI702zfRLz2f3BYyPs9c4qpN6T4hLx0nl4-TB52SyDEDaTXNGcy40hVe7kWQPxNPq_d0e-A-4LUpoEq0CzybnQOOT9T85zbfNHJ-WRfB9BCFRTDJmKsVxiwdx_doO_eEvmw-5NUCjZbKUgehe7lbmZXgWVFEhzejxlNt5zhj2zlgeXGfSBoZQr1YIEWZ33wuArDZ52akOiLjlAfQ8udp9qVHNaJR9rap_mZeJn64Oc">
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvXyDNTtOIdaQx1nw6R5EKiUAQrFKOgtg6IOI702zfRLz2f3BYyPs9c4qpN6T4hLx0nl4-TB52SyDEDaTXNGcy40hVe7kWQPxNPq_d0e-A-4LUpoEq0CzybnQOOT9T85zbfNHJ-WRfB9BCFRTDJmKsVxiwdx_doO_eEvmw-5NUCjZbKUgehe7lbmZXgWVFEhzejxlNt5zhj2zlgeXGfSBoZQr1YIEWZ33wuArDZ52akOiLjlAfQ8udp9qVHNaJR9rap_mZeJn64Oc" />
                     </div>
                 </div>
             </div>
@@ -173,8 +180,8 @@
         <!-- Form Section -->
         <div class="p-8 lg:p-12 max-w-5xl mx-auto">
             <div class="mb-8">
-                <h3 class="font-display text-4xl font-extrabold tracking-tight mb-2">Add New Offer</h3>
-                <p class="text-on-surface-variant">Create an offer template that can be assigned from product or
+                <h3 class="font-display text-4xl font-extrabold tracking-tight mb-2">Edit Offer</h3>
+                <p class="text-on-surface-variant">Update this offer template before assigning it from product or
                     category management.</p>
             </div>
             <!-- Bento Grid Form Layout -->
@@ -187,7 +194,8 @@
                                 for="offer_name">Offer Name</label>
                             <input
                                 class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary transition-all placeholder:opacity-30 font-medium"
-                                id="offer_name" placeholder="e.g. Summer Kickoff 2024" type="text">
+                                id="offer_name" placeholder="e.g. Summer Kickoff 2024" type="text"
+                                value="<%= offer ? offer.name : '' %>" />
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
@@ -197,9 +205,9 @@
                                     <select
                                         class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary appearance-none cursor-pointer"
                                         id="offer_type">
-                                        <option value="" disabled="" selected="">Select Type</option>
-                                        <option value="Product">Product</option>
-                                        <option value="Category">Category</option>
+                                        <option disabled value="">Select Type</option>
+                                        <option value="Product" <%= offer && offer.offerType === 'Product' ? 'selected' : '' %>>Product</option>
+                                        <option value="Category" <%= offer && offer.offerType === 'Category' ? 'selected' : '' %>>Category</option>
                                     </select>
                                     <span
                                         class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
@@ -217,10 +225,10 @@
                                         class="flex-1 py-3 px-4 rounded font-bold text-sm transition-all text-on-surface-variant hover:text-on-surface"
                                         id="btn-flat" onclick="setDiscountType('flat')" type="button">Flat</button>
                                 </div>
-                                <input id="discount_type" type="hidden" value="Percentage">
+                                <input id="discount_type" type="hidden"
+                                    value="<%= offer && offer.offerMode === 'FLAT' ? 'Flat' : 'Percentage' %>" />
                             </div>
                         </div>
-
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-bold text-primary mb-2 uppercase tracking-widest"
@@ -228,7 +236,8 @@
                                 <div class="relative">
                                     <input
                                         class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary placeholder:opacity-30"
-                                        id="discount_value" placeholder="0" type="number">
+                                        id="discount_value" placeholder="0" type="number"
+                                        value="<%= offer ? offer.discountValue : '' %>" />
                                     <span
                                         class="absolute right-4 top-1/2 -translate-y-1/2 font-bold text-on-surface-variant"
                                         id="discount-unit">%</span>
@@ -240,7 +249,7 @@
                                 <div class="relative">
                                     <input
                                         class="w-full bg-surface-container-highest border-none rounded-lg p-4 text-on-surface focus:ring-2 focus:ring-primary placeholder:opacity-30"
-                                        id="max_discount" placeholder="0.00" type="number">
+                                        id="max_discount" placeholder="0.00" type="number" />
                                     <span
                                         class="absolute left-4 top-1/2 -translate-y-1/2 font-bold text-on-surface-variant">Rs</span>
                                     <style>
@@ -264,7 +273,7 @@
                         <div class="flex items-center justify-between">
                             <span class="text-sm font-medium text-on-surface">Active</span>
                             <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" id="is_active" class="sr-only peer" checked>
+                                <input id="is_active" class="sr-only peer" type="checkbox" <%= !offer || offer.isActive ? 'checked' : '' %> />
                                 <div
                                     class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-on-surface after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
                                 </div>
@@ -285,19 +294,20 @@
                                     for="start_date">Start Date</label>
                                 <input
                                     class="w-full bg-surface-container-highest border-none rounded-lg p-3 text-sm text-on-surface focus:ring-2 focus:ring-primary"
-                                    id="start_date" type="date">
+                                    id="start_date" type="date"
+                                    value="<%= offer && offer.startDate ? new Date(offer.startDate).toISOString().split('T')[0] : '' %>" />
                             </div>
                             <div>
                                 <label class="block text-xs font-medium text-on-surface-variant mb-1" for="end_date">End
                                     Date</label>
                                 <input
                                     class="w-full bg-surface-container-highest border-none rounded-lg p-3 text-sm text-on-surface focus:ring-2 focus:ring-primary"
-                                    id="end_date" type="date">
+                                    id="end_date" type="date"
+                                    value="<%= offer && offer.endDate ? new Date(offer.endDate).toISOString().split('T')[0] : '' %>" />
                             </div>
                         </div>
                     </div>
-
-                   
+                    
                 </div>
                 <!-- Action Footer -->
                 <div class="md:col-span-12 flex items-center justify-end gap-4 mt-4 pt-8 border-t border-outline/30">
@@ -310,9 +320,7 @@
                     </a>
                     <button
                         class="px-12 py-3 rounded bg-primary text-on-primary font-extrabold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all active:scale-95"
-                        type="submit">
-                        Save Offer
-                    </button>
+                        type="submit">Update Offer</button>
                 </div>
             </form>
         </div>
@@ -347,23 +355,26 @@
             }
         }
 
+        <% if (offer && offer.offerMode === 'FLAT') { %>
+            setDiscountType('flat');
+        <% } else { %>
+            setDiscountType('percentage');
+        <% } %>
+
         // Form Submission and Validation Logic
         document.getElementById('offerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-
             const btn = e.target.querySelector('button[type="submit"]');
 
-            // Gather values
             const name = document.getElementById('offer_name').value.trim();
             const offerType = document.getElementById('offer_type').value;
-            const discountType = document.getElementById('discount_type').value; // 'Percentage' or 'Flat'
+            const discountType = document.getElementById('discount_type').value;
             const discountValueRaw = document.getElementById('discount_value').value;
             const maxDiscountRaw = document.getElementById('max_discount').value;
             const startDateVal = document.getElementById('start_date').value;
             const endDateVal = document.getElementById('end_date').value;
             const isActive = document.getElementById('is_active').checked;
 
-            // Validation Helper
             const showError = (msg) => {
                 Swal.fire({
                     icon: 'error',
@@ -373,38 +384,29 @@
                 });
             };
 
-            // 1. Name Validation
             if (!name) {
                 return showError("Offer Name is required.");
             }
             if (name.length < 3) {
                 return showError("Offer Name must be at least 3 characters.");
             }
-
-            // 2. Offer Type Validation
             if (!offerType) {
                 return showError("Please select an Offer Type (Product or Category).");
             }
 
-            // 3. Discount Value Validation
             const discountValue = parseFloat(discountValueRaw);
             if (isNaN(discountValue) || discountValue <= 0) {
                 return showError("Discount Value must be a number greater than 0.");
             }
-
-            if (discountType === 'Percentage') {
-                if (discountValue < 1 || discountValue > 90) {
-                    return showError("Percentage discount must be between 1 and 90.");
-                }
+            if (discountType === 'Percentage' && (discountValue < 1 || discountValue > 90)) {
+                return showError("Percentage discount must be between 1 and 90.");
             }
 
-            // 4. Max Discount Validation
             const maxDiscount = parseFloat(maxDiscountRaw);
             if (maxDiscountRaw && (isNaN(maxDiscount) || maxDiscount < 0)) {
                 return showError("Maximum Discount Value must be a non-negative number.");
             }
 
-            // 5. Dates Validation
             if (!startDateVal) {
                 return showError("Please select a Start Date.");
             }
@@ -414,22 +416,15 @@
 
             const start = new Date(startDateVal);
             const end = new Date(endDateVal);
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-
-            if (start < today) {
-                return showError("Start Date cannot be in the past.");
-            }
 
             if (start >= end) {
                 return showError("End Date must be strictly after the Start Date.");
             }
 
-            // If valid, format payload
             const payload = {
                 name,
                 offerType,
-                offerMode: discountType.toUpperCase(), // Map "Percentage" / "Flat" to "PERCENTAGE" / "FLAT"
+                offerMode: discountType.toUpperCase(),
                 discountValue,
                 product: null,
                 category: null,
@@ -444,7 +439,7 @@
             btn.classList.add('opacity-50');
 
             try {
-                const response = await fetch('/admin/offers/add', {
+                const response = await fetch('/admin/offers/edit/<%= offer ? offer._id : "" %>', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -452,21 +447,25 @@
                     body: JSON.stringify(payload)
                 });
 
+                const contentType = response.headers.get('content-type') || '';
+                if (!contentType.includes('application/json')) {
+                    throw new Error('Server returned an HTML page instead of JSON. Please log in again or restart the server.');
+                }
+
                 const result = await response.json();
 
                 if (!response.ok) {
-                    throw new Error(result.message || 'Failed to add offer.');
+                    throw new Error(result.message || 'Failed to update offer.');
                 }
 
                 await Swal.fire({
                     icon: 'success',
                     title: 'Success!',
-                    text: result.message || 'Offer added successfully!',
+                    text: result.message || 'Offer updated successfully!',
                     confirmButtonColor: '#137fec'
                 });
 
                 window.location.href = '/admin/offers';
-
             } catch (error) {
                 Swal.fire({
                     icon: 'error',
@@ -491,8 +490,6 @@
             });
         });
     </script>
-
-
 </body>
 
 </html>

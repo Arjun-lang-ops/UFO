@@ -48,6 +48,19 @@ export const productDetailsRender = async (req, res) => {
     const userId=req.session?.userId|| req.user?._id;
 
     const product = await productDetailsService(productId);
+    const now = new Date();
+    const isActiveOffer = (offer) => {
+      return offer &&
+        offer.isActive &&
+        new Date(offer.startDate) <= now &&
+        new Date(offer.endDate) >= now;
+    };
+
+    product.activeOffer = isActiveOffer(product.offer)
+      ? product.offer
+      : isActiveOffer(product.category?.offer)
+        ? product.category.offer
+        : null;
     
 
     let selectedVariant;
@@ -144,13 +157,34 @@ if (search) {
     }
 
    
-    const products = await Product.find(filter).lean();
+    const products = await Product.find(filter)
+      .populate("offer")
+      .populate({
+        path: "category",
+        populate: {
+          path: "offer"
+        }
+      })
+      .lean();
 
     
     let productList = [];
     let sizesList = [];
+    const now = new Date();
+    const isActiveOffer = (offer) => {
+      return offer &&
+        offer.isActive &&
+        new Date(offer.startDate) <= now &&
+        new Date(offer.endDate) >= now;
+    };
 
     products.forEach((product) => {
+      const activeOffer = isActiveOffer(product.offer)
+        ? product.offer
+        : isActiveOffer(product.category?.offer)
+          ? product.category.offer
+          : null;
+
       product.variants.forEach((variant) => {
 
         
@@ -173,7 +207,12 @@ if (search) {
           price: variant.price,
           images: variant.images,
           stock: variant.stock,
-          color:variant.color
+          color:variant.color,
+          offer: activeOffer ? {
+            name: activeOffer.name,
+            offerMode: activeOffer.offerMode,
+            discountValue: activeOffer.discountValue
+          } : null
         });
       });
     });

@@ -6,8 +6,6 @@ export const offerAddService = async (data) => {
     offerType,
     offerMode,
     discountValue,
-    product,
-    category,
     startDate,
     endDate,
     isActive,
@@ -22,40 +20,6 @@ export const offerAddService = async (data) => {
     !endDate
   ) {
     throw new Error("All required fields must be provided");
-  }
-
-  if (offerType === "Product" && !product) {
-    throw new Error("Please select a product");
-  }
-
-  if (offerType === "Category" && !category) {
-    throw new Error("Please select a category");
-  }
-
-  // Prevent duplicate active product offer
-  if (offerType === "Product") {
-    const existingProductOffer = await Offer.findOne({
-      product,
-      isActive: true,
-      endDate: { $gte: new Date() },
-    });
-
-    if (existingProductOffer) {
-      throw new Error("An active offer already exists for this product");
-    }
-  }
-
-  // Prevent duplicate active category offer
-  if (offerType === "Category") {
-    const existingCategoryOffer = await Offer.findOne({
-      category,
-      isActive: true,
-      endDate: { $gte: new Date() },
-    });
-
-    if (existingCategoryOffer) {
-      throw new Error("An active offer already exists for this category");
-    }
   }
 
   const start = new Date(startDate);
@@ -78,12 +42,75 @@ export const offerAddService = async (data) => {
     offerType,
     offerMode,
     discountValue,
-    product: offerType === "Product" ? product : null,
-    category: offerType === "Category" ? category : null,
+    product: null,
+    category: null,
     startDate: start,
     endDate: end,
     isActive: isActive ?? true,
   });
 
   return offer;
+};
+
+
+
+
+
+export const offerEditService = async (id, data) => {
+  const {
+    name,
+    offerType,
+    offerMode,
+    discountValue,
+    startDate,
+    endDate,
+    isActive,
+  } = data;
+
+  if (
+    !name ||
+    !offerType ||
+    !offerMode ||
+    !discountValue ||
+    !startDate ||
+    !endDate
+  ) {
+    throw new Error("All required fields must be provided");
+  }
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  if (start >= end) {
+    throw new Error("End date must be greater than start date");
+  }
+
+  if (offerMode === "PERCENTAGE") {
+    if (discountValue < 1 || discountValue > 90) {
+      throw new Error(
+        "Percentage discount must be between 1 and 90"
+      );
+    }
+  }
+
+  const updatedOffer = await Offer.findByIdAndUpdate(
+    id,
+    {
+      name: name.trim(),
+      offerType,
+      offerMode,
+      discountValue,
+      product: null,
+      category: null,
+      startDate: start,
+      endDate: end,
+      isActive: isActive ?? true,
+    },
+    { new: true }
+  );
+
+  if (!updatedOffer) {
+    throw new Error("Offer not found");
+  }
+
+  return updatedOffer;
 };

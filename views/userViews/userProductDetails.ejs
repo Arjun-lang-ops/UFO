@@ -1,498 +1,412 @@
 <!DOCTYPE html>
 <html class="dark" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Product Details - Urban Football</title>
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#137fec",
-              "background-light": "#f6f7f8",
-              "background-dark": "#101922",
-              "surface-dark": "#1b2732",
-              "surface-light": "#ffffff",
-            },
-            fontFamily: {
-              display: ["Lexend", "sans-serif"],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Product Details - Urban Football</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#137fec",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922",
+            "surface-dark": "#1b2732",
+            "surface-light": "#ffffff",
+          },
+          fontFamily: {
+            display: ["Lexend", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
           },
         },
-      };
-    </script>
-    <style>
-      body {
-        font-family: "Lexend", sans-serif;
-      }
-      .no-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-    </style>
-  </head>
-  <body
-    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-200"
-  >
-    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
-      <header
-        class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#283039] bg-surface-light dark:bg-[#111418] px-4 md:px-10 py-3 shadow-sm"
-      >
-        <div class="flex items-center gap-8">
-          <div class="flex items-center gap-4 text-slate-900 dark:text-white">
-            <div class="size-8 text-primary">
-              <svg
-                class="w-full h-full"
-                fill="none"
-                viewBox="0 0 48 48"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
-                  fill="currentColor"
-                ></path>
-              </svg>
-            </div>
-            <a href="/home">
-              <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">
+      },
+    };
+  </script>
+  <style>
+    body {
+      font-family: "Lexend", sans-serif;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white transition-colors duration-200">
+  <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+    <header
+      class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#283039] bg-surface-light dark:bg-[#111418] px-4 md:px-10 py-3 shadow-sm">
+      <div class="flex items-center gap-8">
+        <div class="flex items-center gap-4 text-slate-900 dark:text-white">
+          <div class="size-8 text-primary">
+            <svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+                fill="currentColor"></path>
+            </svg>
+          </div>
+          <a href="/home">
+            <h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">
               Urban Football
             </h2>
-            </a>
-          </div>
-         
+          </a>
         </div>
-        <div class="flex flex-1 justify-end gap-4 md:gap-8">
-          <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+
+      </div>
+      <div class="flex flex-1 justify-end gap-4 md:gap-8">
+        <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64">
+          <div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-slate-200 dark:border-none">
             <div
-              class="flex w-full flex-1 items-stretch rounded-lg h-full border border-slate-200 dark:border-none"
-            >
-              <div
-                class="text-[#9dabb9] flex border-none bg-slate-100 dark:bg-[#283039] items-center justify-center pl-4 rounded-l-lg border-r-0"
-              >
-                <span class="material-symbols-outlined text-[24px]"
-                  >search</span
-                >
-              </div>
-              <input
-                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-[#283039] focus:border-none h-full placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
-                placeholder="Search"
-                value=""
-              />
+              class="text-[#9dabb9] flex border-none bg-slate-100 dark:bg-[#283039] items-center justify-center pl-4 rounded-l-lg border-r-0">
+              <span class="material-symbols-outlined text-[24px]">search</span>
             </div>
-          </label>
-          <div class="flex gap-2">
-           <a href="/cart">
-  <button
-    class="flex items-center justify-center rounded-lg h-10 w-10 hover:bg-slate-200 dark:hover:bg-[#283039] transition-colors relative"
-  >
-    <span class="material-symbols-outlined">shopping_cart</span>
-
-    <% if (cartCount > 0) { %>
-      <span
-        id="cart-count"
-        class="absolute -top-1 -right-1 bg-primary text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full">
-        <%= cartCount %>
-      </span>
-    <% } %>
-
-  </button>
-</a>
-           <a href="/profile">
-             <button
-              class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-[#323b45] transition-colors"
-            >
-              <span class="material-symbols-outlined text-[20px]"
-                >account_circle</span
-              >
-            </button>
-           </a>
+            <input
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-0 border-none bg-slate-100 dark:bg-[#283039] focus:border-none h-full placeholder:text-[#9dabb9] px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+              placeholder="Search" value="" />
           </div>
+        </label>
+        <div class="flex gap-2">
+          <a href="/cart">
+            <button
+              class="flex items-center justify-center rounded-lg h-10 w-10 hover:bg-slate-200 dark:hover:bg-[#283039] transition-colors relative">
+              <span class="material-symbols-outlined">shopping_cart</span>
+
+              <% if (cartCount> 0) { %>
+                <span id="cart-count"
+                  class="absolute -top-1 -right-1 bg-primary text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full">
+                  <%= cartCount %>
+                </span>
+                <% } %>
+
+            </button>
+          </a>
+          <a href="/profile">
+            <button
+              class="flex items-center justify-center overflow-hidden rounded-lg size-10 bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white hover:bg-slate-200 dark:hover:bg-[#323b45] transition-colors">
+              <span class="material-symbols-outlined text-[20px]">account_circle</span>
+            </button>
+          </a>
         </div>
-      </header>
-      
-      <div class="layout-container flex h-full grow flex-col">
-        <div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
-          <div
-            class="layout-content-container flex flex-col max-w-[1200px] flex-1"
-          >
+      </div>
+    </header>
+
+    <div class="layout-container flex h-full grow flex-col">
+      <div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
+        <div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
           <nav class="text-sm text-gray-400 mb-4">
-  <a href="/home" class="hover:text-white">Home</a>
+            <a href="/home" class="hover:text-white">Home</a>
 
-  <span> > </span>
-  <a href="/product?category=<%= product.category._id %>" 
-     class="hover:text-white">
-    <%= product.category.name %>
-  </a>
+            <span> > </span>
+            <a href="/product?category=<%= product.category._id %>" class="hover:text-white">
+              <%= product.category.name %>
+            </a>
 
-  <span> > </span>
-  <span class="text-white"><%= product.name %></span>
-</nav>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 px-4">
-              <div class="lg:col-span-7 flex flex-col gap-4">
-                <div
-                id="zoomContainer"
-                  class="relative w-full aspect-[4/5] md:aspect-square bg-surface-dark rounded-xl overflow-hidden group"
-                >
-                  <div id="mainImage"
-                    class="absolute inset-0 bg-center bg-cover bg-no-repeat transition-transform duration-500 group-hover:scale-105  brightness-125"
-                    
-                    style="
-                      background-image: url('<%= selectedVariant.images[0] %>');
-                    "
-                  ></div>
+            <span> > </span>
+            <span class="text-white">
+              <%= product.name %>
+            </span>
+          </nav>
+
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 px-4">
+            <div class="lg:col-span-7 flex flex-col gap-4">
+              <div id="zoomContainer"
+                class="relative w-full aspect-[4/5] md:aspect-square bg-surface-dark rounded-xl overflow-hidden group">
+                <div id="mainImage"
+                  class="absolute inset-0 bg-center bg-cover bg-no-repeat transition-transform duration-500 group-hover:scale-105  brightness-125"
+                  style="background-image: url('<%= selectedVariant.images[0] %>');"></div>
+                <% if (product.activeOffer) { %>
                   <div
-                    class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"
-                  >
-                    Bestseller
+                    class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-2 rounded-lg shadow-lg shadow-black/20 max-w-[80%]">
+                    <span class="block truncate"><%= product.activeOffer.name %></span>
+                    <span class="block text-[10px] opacity-90">
+                      <%= product.activeOffer.offerMode === 'PERCENTAGE' ? product.activeOffer.discountValue + '% Off' : 'Rs ' + product.activeOffer.discountValue + ' Off' %>
+                    </span>
                   </div>
-                  <button
-                    class="absolute bottom-4 right-4 bg-black/50 hover:bg-black/70 p-2 rounded-full text-white backdrop-blur-sm transition-colors"
-                  >
-                    <span class="material-symbols-outlined">zoom_in</span>
-                  </button>
-                </div>
-                <div id="thumbnailContainer" class="grid grid-cols-4 gap-3">
-  <% selectedVariant.images.forEach((img, index) => { %>
-    <button
-      class="thumbnail-btn relative aspect-square rounded-lg overflow-hidden border-2 <%= index === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-transparent' %>"
-      data-img="<%= img %>"
-    >
-      <div
-        class="absolute inset-0 bg-center bg-cover brightness-125"
-        style="background-image: url('<%= img %>');"
-      ></div>
-    </button>
-  <% }) %>
-</div>
+                <% } %>
+                <button
+                  class="absolute bottom-4 right-4 bg-black/50 hover:bg-black/70 p-2 rounded-full text-white backdrop-blur-sm transition-colors">
+                  <span class="material-symbols-outlined">zoom_in</span>
+                </button>
               </div>
-              <div class="lg:col-span-5 flex flex-col gap-6">
-                <div class="flex flex-col gap-2">
-                  <h1
-                    class="text-3xl md:text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white"
-                  >
-                    <%= product.name%>
-                  </h1>
-                  
-                  <div class="flex items-baseline gap-3 mt-2">
-                    <h2 id="price" class="text-3xl font-bold text-primary"> ₹<%=selectedVariant.discountedPrice%></h2>
-                    <span id="originalPrice"
-                      class="text-lg text-slate-400 line-through decoration-slate-400/50"
-                      >₹<%=selectedVariant.price%></span
-                    >
-                    <span
-                      class="text-xs font-bold text-green-500 bg-green-500/10 px-2 py-1 rounded"
-                      >Save 25%</span
-                    >
+              <div id="thumbnailContainer" class="grid grid-cols-4 gap-3">
+                <% selectedVariant.images.forEach((img, index)=> { %>
+                  <button
+                    class="thumbnail-btn relative aspect-square rounded-lg overflow-hidden border-2 <%= index === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-transparent' %>"
+                    data-img="<%= img %>">
+                    <div class="absolute inset-0 bg-center bg-cover brightness-125"
+                      style="background-image: url('<%= img %>');"></div>
+                  </button>
+                  <% }) %>
+              </div>
+            </div>
+            <div class="lg:col-span-5 flex flex-col gap-6">
+              <div class="flex flex-col gap-2">
+                <h1 class="text-3xl md:text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-white">
+                  <%= product.name%>
+                </h1>
+                <% if (product.activeOffer) { %>
+                  <div class="w-fit bg-primary/10 text-primary border border-primary/20 rounded-lg px-3 py-2 text-sm font-bold">
+                    <span><%= product.activeOffer.name %></span>
+                    <span class="text-xs text-slate-600 dark:text-[#9dabb9] ml-2">
+                      <%= product.activeOffer.offerMode === 'PERCENTAGE' ? product.activeOffer.discountValue + '% Off' : 'Rs ' + product.activeOffer.discountValue + ' Off' %>
+                    </span>
                   </div>
-                  <p
-                    class="text-slate-600 dark:text-[#9dabb9] text-base leading-relaxed mt-2"
-                  >
-                   <%=product.description%>
-                  </p>
+                <% } %>
+
+                <div class="flex items-baseline gap-3 mt-2">
+                  <h2 id="price" class="text-3xl font-bold text-primary"> ₹<%=selectedVariant.discountedPrice%>
+                  </h2>
+                  <span id="originalPrice" class="text-lg text-slate-400 line-through decoration-slate-400/50">₹
+                    <%=selectedVariant.price%>
+                  </span>
+                  <span class="text-xs font-bold text-green-500 bg-green-500/10 px-2 py-1 rounded">Save 25%</span>
                 </div>
-                <hr class="border-slate-200 dark:border-slate-800" />
-                <div class="flex flex-col gap-6">
-                  <div class="flex flex-col gap-3">
+                <p class="text-slate-600 dark:text-[#9dabb9] text-base leading-relaxed mt-2">
+                  <%=product.description%>
+                </p>
+              </div>
+              <hr class="border-slate-200 dark:border-slate-800" />
+              <div class="flex flex-col gap-6">
+                <div class="flex flex-col gap-3">
 
-  <% 
-    const colors = [...new Set(product.variants.map(v => v.color))];
-  %>
+                  <% const colors=[...new Set(product.variants.map(v=> v.color))];
+                    %>
 
-  <span
-    class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
-  >
-    Color:
-    <span id="selectedColor" class="text-slate-900 dark:text-white ml-1">
-      <%= selectedVariant.color %>
-    </span>
-  </span>
+                    <span class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      Color:
+                      <span id="selectedColor" class="text-slate-900 dark:text-white ml-1">
+                        <%= selectedVariant.color %>
+                      </span>
+                    </span>
 
-  <div class="flex flex-wrap gap-3">
-    <% colors.forEach((color) => { %>
-  <button
-    class="color-btn px-4 py-2 text-sm font-medium border rounded-md transition
+                    <div class="flex flex-wrap gap-3">
+                      <% colors.forEach((color)=> { %>
+                        <button class="color-btn px-4 py-2 text-sm font-medium border rounded-md transition
     <%= color === selectedVariant.color
         ? 'border-primary text-primary bg-primary/10'
         : 'border-slate-300 dark:border-slate-600 hover:bg-slate-100 dark:hover:bg-slate-700' %>"
-    data-color="<%= color %>"
-  >
-    <%= color %>
-  </button>
-<% }) %>
-  </div>
+                          data-color="<%= color %>">
+                          <%= color %>
+                        </button>
+                        <% }) %>
+                    </div>
 
-</div>
-                 <div class="flex flex-col gap-3">
-  <div class="flex justify-between items-center">
-    <span class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-      Size:
-      
-    </span>
-  </div>
+                </div>
+                <div class="flex flex-col gap-3">
+                  <div class="flex justify-between items-center">
+                    <span class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                      Size:
 
-  <div id="sizeContainer" class="flex flex-wrap gap-2">
-    
-    <%
-      // Only show sizes for the currently selected color, deduped by size label
-      const colorVariants = product.variants.filter(v => v.color === selectedVariant.color);
-      const seenSizes = new Set();
-    %>
+                    </span>
+                  </div>
 
-    <% colorVariants.forEach((variant) => { %>
-      <% if (!seenSizes.has(variant.size)) { %>
-        <% seenSizes.add(variant.size); %>
+                  <div id="sizeContainer" class="flex flex-wrap gap-2">
 
-        <% if (variant.stock === 0) { %>
-          <!-- Out of stock -->
-          <button 
-            class="size-btn px-4 py-2 rounded-lg border text-slate-400 bg-slate-50 cursor-not-allowed text-sm font-medium relative overflow-hidden"
-            data-size="<%= variant.size %>"
-            data-variant-id="<%= variant._id %>"
-            disabled
-          >
-            <%= variant.size %>
-            <div class="absolute inset-0 flex items-center justify-center">
-              <div class="w-full h-px bg-slate-400 -rotate-45"></div>
-            </div>
-          </button>
+                    <% // Only show sizes for the currently selected color, deduped by size label const
+                      colorVariants=product.variants.filter(v=> v.color === selectedVariant.color);
+                      const seenSizes = new Set();
+                      %>
 
-        <% } else { %>
-          <!-- Available -->
-          <button
-            class="size-btn px-6 py-2 rounded-lg border text-sm font-medium transition-colors
+                      <% colorVariants.forEach((variant)=> { %>
+                        <% if (!seenSizes.has(variant.size)) { %>
+                          <% seenSizes.add(variant.size); %>
+
+                            <% if (variant.stock===0) { %>
+                              <!-- Out of stock -->
+                              <button
+                                class="size-btn px-4 py-2 rounded-lg border text-slate-400 bg-slate-50 cursor-not-allowed text-sm font-medium relative overflow-hidden"
+                                data-size="<%= variant.size %>" data-variant-id="<%= variant._id %>" disabled>
+                                <%= variant.size %>
+                                  <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="w-full h-px bg-slate-400 -rotate-45"></div>
+                                  </div>
+                              </button>
+
+                              <% } else { %>
+                                <!-- Available -->
+                                <button
+                                  class="size-btn px-6 py-2 rounded-lg border text-sm font-medium transition-colors
             <%= variant._id.toString() === selectedVariant._id.toString()
                 ? 'border-primary text-primary bg-primary/10 font-bold'
                 : 'border-slate-200 dark:border-slate-700 hover:border-primary text-slate-700 dark:text-slate-300 bg-white dark:bg-surface-dark' %>"
-            data-size="<%= variant.size %>"
-            data-variant-id="<%= variant._id %>"
-          >
-            <%= variant.size %>
-          </button>
-        <% } %>
-      <% } %>
-    <% }) %>
+                                  data-size="<%= variant.size %>" data-variant-id="<%= variant._id %>">
+                                  <%= variant.size %>
+                                </button>
+                                <% } %>
+                                  <% } %>
+                                    <% }) %>
 
-  </div>
-
-  <!-- Stock message -->
-  <div id="stockMessage" class="text-xs text-orange-500 font-medium flex items-center gap-1 mt-1">
-    <span class="material-symbols-outlined text-[14px]">
-      local_fire_department
-    </span>
-    Only <span id="stockCount"><%= selectedVariant.stock %></span> left in stock for size <span id="stockSize"><%= selectedVariant.size %></span>
-  </div>
-</div>
-                </div>
-                <div class="flex flex-col gap-4 mt-2">
-                  <div class="flex gap-4">
-                    <div
-                      class="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-surface-dark h-12 w-32 shrink-0"
-                    >
-                      <button id="decreaseQty"
-                        class="w-10 h-full flex items-center justify-center text-slate-500 hover:text-primary transition-colors"
-                      >
-                        <span class="material-symbols-outlined text-sm"
-                          >remove</span
-                        >
-                      </button>
-                      <input id="quantityInput"
-                        class="w-12 h-full text-center bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white font-medium p-0"
-                        readonly=""
-                        type="text"
-                        value="1"
-                      />
-                      <button id="increaseQty"
-                        class="w-10 h-full flex items-center justify-center text-slate-500 hover:text-primary transition-colors"
-                      >
-                        <span class="material-symbols-outlined text-sm"
-                          >add</span
-                        >
-                      </button>
-                      
-                    </div>
-                    <% const isOutOfStock = !selectedVariant || selectedVariant.stock <= 0; %>
-                       <button id="addToCartBtn"
-  class="flex-1 font-bold rounded-lg h-12 flex items-center justify-center gap-2 shadow-lg transition-all active:scale-[0.98]
-  <%= isOutOfStock 
-      ? 'bg-gray-400 cursor-not-allowed text-white' 
-      : 'bg-primary hover:bg-blue-600 text-white shadow-primary/20' %>"
-  <%= isOutOfStock ? 'disabled' : '' %>
->
-  <span class="material-symbols-outlined">shopping_bag</span>
-
-  <%= isOutOfStock ? 'Out of Stock' : 'Add to Cart' %>
-</button>
-                    <form class="add-to-wishlist">
-
-                      <%
-const currentWishlistItems = typeof wishlistItems !== 'undefined' ? wishlistItems : [];
-const isWishlisted = currentWishlistItems.some(item =>
-    item.productId === product._id.toString() &&
-    item.variantId === selectedVariant._id.toString()
-);
-%>
-
-    <input
-        type="hidden"
-        name="productId"
-        value="<%= product._id %>">
-
-    <input
-        type="hidden"
-        name="variantId"
-        value="<%= selectedVariant._id %>">
-
-    <button
-    type="submit"
-    aria-label="Add to Wishlist"
-    class="wishlist-btn h-12 w-12 flex items-center justify-center rounded-lg border bg-white dark:bg-surface-dark transition-colors shrink-0 <%= isWishlisted ? 'text-red-500 border-red-500' : 'border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white hover:text-red-500 hover:border-red-200 dark:hover:border-red-900/30' %>"
-    data-wishlisted="<%= isWishlisted ? 'true' : 'false' %>">
-
-    <span class="material-symbols-outlined">
-        favorite
-    </span>
-
-</button>
-
-</form>
-                    <button
-                      aria-label="Share"
-                      class="h-12 w-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark text-slate-900 dark:text-white hover:text-primary hover:border-primary/50 transition-colors shrink-0"
-                    >
-                      <span class="material-symbols-outlined">share</span>
-                    </button>
                   </div>
-                  
 
-
-  
-
-                </div>
-                <div class="grid grid-cols-2 gap-4 mt-2">
-                  <div
-                    class="flex items-start gap-3 p-3 rounded-lg bg-slate-100 dark:bg-surface-dark"
-                  >
-                    <span class="material-symbols-outlined text-primary mt-0.5"
-                      >local_shipping</span
-                    >
-                    <div>
-                      <p
-                        class="text-sm font-bold text-slate-900 dark:text-white"
-                      >
-                        Free Shipping
-                      </p>
-                      <p class="text-xs text-slate-500 dark:text-slate-400">
-                        On orders over $75
-                      </p>
-                    </div>
+                  <!-- Stock message -->
+                  <div id="stockMessage" class="text-xs text-orange-500 font-medium flex items-center gap-1 mt-1">
+                    <span class="material-symbols-outlined text-[14px]">
+                      local_fire_department
+                    </span>
+                    Only <span id="stockCount">
+                      <%= selectedVariant.stock %>
+                    </span> left in stock for size <span id="stockSize">
+                      <%= selectedVariant.size %>
+                    </span>
                   </div>
-                  <div
-                    class="flex items-start gap-3 p-3 rounded-lg bg-slate-100 dark:bg-surface-dark"
-                  >
-                    <span class="material-symbols-outlined text-primary mt-0.5"
-                      >verified_user</span
-                    >
-                    <div>
-                      <p
-                        class="text-sm font-bold text-slate-900 dark:text-white"
-                      >
-                        2 Year Warranty
-                      </p>
-                      <p class="text-xs text-slate-500 dark:text-slate-400">
-                        Full coverage
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="flex flex-col border-t border-slate-200 dark:border-slate-800 mt-4"
-                >
-                  <details
-                    class="group py-4 border-b border-slate-200 dark:border-slate-800 cursor-pointer"
-                    open=""
-                  >
-                    <summary
-                      class="flex items-center justify-between font-bold text-slate-900 dark:text-white list-none"
-                    >
-                      Description
-                      <span
-                        class="material-symbols-outlined transition-transform group-open:rotate-180"
-                        >keyboard_arrow_down</span
-                      >
-                    </summary>
-                    <div
-                      class="pt-3 text-sm text-slate-600 dark:text-[#9dabb9] leading-relaxed"
-                    >
-                      <%=product.description%>
-                    </div>
-                  </details>
-                  
                 </div>
               </div>
+              <div class="flex flex-col gap-4 mt-2">
+                <div class="flex gap-4">
+                  <div
+                    class="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg bg-white dark:bg-surface-dark h-12 w-32 shrink-0">
+                    <button id="decreaseQty"
+                      class="w-10 h-full flex items-center justify-center text-slate-500 hover:text-primary transition-colors">
+                      <span class="material-symbols-outlined text-sm">remove</span>
+                    </button>
+                    <input id="quantityInput"
+                      class="w-12 h-full text-center bg-transparent border-none focus:ring-0 text-slate-900 dark:text-white font-medium p-0"
+                      readonly="" type="text" value="1" />
+                    <button id="increaseQty"
+                      class="w-10 h-full flex items-center justify-center text-slate-500 hover:text-primary transition-colors">
+                      <span class="material-symbols-outlined text-sm">add</span>
+                    </button>
+
+                  </div>
+                  <% const isOutOfStock=!selectedVariant || selectedVariant.stock <=0; %>
+                    <button id="addToCartBtn" class="flex-1 font-bold rounded-lg h-12 flex items-center justify-center gap-2 shadow-lg transition-all active:scale-[0.98]
+  <%= isOutOfStock 
+      ? 'bg-gray-400 cursor-not-allowed text-white' 
+      : 'bg-primary hover:bg-blue-600 text-white shadow-primary/20' %>" <%=isOutOfStock ? 'disabled' : '' %>
+                      >
+                      <span class="material-symbols-outlined">shopping_bag</span>
+
+                      <%= isOutOfStock ? 'Out of Stock' : 'Add to Cart' %>
+                    </button>
+                    <form class="add-to-wishlist">
+
+                      <% const currentWishlistItems=typeof wishlistItems !=='undefined' ? wishlistItems : []; const
+                        isWishlisted=currentWishlistItems.some(item=>
+                        item.productId === product._id.toString() &&
+                        item.variantId === selectedVariant._id.toString()
+                        );
+                        %>
+
+                        <input type="hidden" name="productId" value="<%= product._id %>">
+
+                        <input type="hidden" name="variantId" value="<%= selectedVariant._id %>">
+
+                        <button type="submit" aria-label="Add to Wishlist"
+                          class="wishlist-btn h-12 w-12 flex items-center justify-center rounded-lg border bg-white dark:bg-surface-dark transition-colors shrink-0 <%= isWishlisted ? 'text-red-500 border-red-500' : 'border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white hover:text-red-500 hover:border-red-200 dark:hover:border-red-900/30' %>"
+                          data-wishlisted="<%= isWishlisted ? 'true' : 'false' %>">
+
+                          <span class="material-symbols-outlined">
+                            favorite
+                          </span>
+
+                        </button>
+
+                    </form>
+                    <button aria-label="Share"
+                      class="h-12 w-12 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-surface-dark text-slate-900 dark:text-white hover:text-primary hover:border-primary/50 transition-colors shrink-0">
+                      <span class="material-symbols-outlined">share</span>
+                    </button>
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-4 mt-2">
+                <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-100 dark:bg-surface-dark">
+                  <span class="material-symbols-outlined text-primary mt-0.5">local_shipping</span>
+                  <div>
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">
+                      Free Shipping
+                    </p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                      On orders over $75
+                    </p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 rounded-lg bg-slate-100 dark:bg-surface-dark">
+                  <span class="material-symbols-outlined text-primary mt-0.5">verified_user</span>
+                  <div>
+                    <p class="text-sm font-bold text-slate-900 dark:text-white">
+                      2 Year Warranty
+                    </p>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">
+                      Full coverage
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col border-t border-slate-200 dark:border-slate-800 mt-4">
+                <details class="group py-4 border-b border-slate-200 dark:border-slate-800 cursor-pointer" open="">
+                  <summary class="flex items-center justify-between font-bold text-slate-900 dark:text-white list-none">
+                    Description
+                    <span
+                      class="material-symbols-outlined transition-transform group-open:rotate-180">keyboard_arrow_down</span>
+                  </summary>
+                  <div class="pt-3 text-sm text-slate-600 dark:text-[#9dabb9] leading-relaxed">
+                    <%=product.description%>
+                  </div>
+                </details>
+
+              </div>
             </div>
-            <!-- Related Products -->
-<div class="mt-16">
-  <h2 class="text-2xl font-bold mb-6">Related Products</h2>
+          </div>
+          <!-- Related Products -->
+          <div class="mt-16">
+            <h2 class="text-2xl font-bold mb-6">Related Products</h2>
 
-  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    
-    <% relatedProducts.forEach(product => { %>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
 
-      <a href="/product/<%= product._id %>" 
-         class="bg-white dark:bg-surface-dark rounded-xl overflow-hidden shadow hover:shadow-lg transition">
+              <% relatedProducts.forEach(product=> { %>
 
-        <!-- Image -->
-        <div class="aspect-square bg-slate-100 overflow-hidden">
-          <img 
-            src="<%= product.variants[0].images[0] %>" 
-            class="w-full h-full object-cover hover:scale-105 transition"
-          />
-        </div>
+                <a href="/product/<%= product._id %>"
+                  class="bg-white dark:bg-surface-dark rounded-xl overflow-hidden shadow hover:shadow-lg transition">
 
-        <!-- Details -->
-        <div class="p-3">
-          <h3 class="text-sm font-semibold truncate">
-            <%= product.name %>
-          </h3>
+                  <!-- Image -->
+                  <div class="aspect-square bg-slate-100 overflow-hidden">
+                    <img src="<%= product.variants[0].images[0] %>"
+                      class="w-full h-full object-cover hover:scale-105 transition" />
+                  </div>
 
-          <p class="text-primary font-bold mt-1">
-            ₹<%= product.variants[0].discountedPrice || product.variants[0].price %>
-          </p>
-        </div>
+                  <!-- Details -->
+                  <div class="p-3">
+                    <h3 class="text-sm font-semibold truncate">
+                      <%= product.name %>
+                    </h3>
 
-      </a>
+                    <p class="text-primary font-bold mt-1">
+                      ₹<%= product.variants[0].discountedPrice || product.variants[0].price %>
+                    </p>
+                  </div>
 
-    <% }) %>
+                </a>
 
-  </div>
-</div>
-           
-  </body>
-  <script>
+                <% }) %>
+
+            </div>
+          </div>
+
+</body>
+<script>
   const variants = <%- JSON.stringify(product.variants) %>;
   let selectedVariant = <%- JSON.stringify(selectedVariant) %>;
   let wishlistItems = <%- typeof wishlistItems !== 'undefined' ? JSON.stringify(wishlistItems) : '[]' %>;
@@ -506,7 +420,7 @@ const isWishlisted = currentWishlistItems.some(item =>
     const currentVariantId = selectedVariant._id.toString();
     variantInput.value = currentVariantId;
 
-    const isWishlisted = wishlistItems.some(item => 
+    const isWishlisted = wishlistItems.some(item =>
       item.productId === productId && item.variantId === currentVariantId
     );
 
@@ -519,335 +433,279 @@ const isWishlisted = currentWishlistItems.some(item =>
     }
   }
 
-document.querySelectorAll(".color-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
+  document.querySelectorAll(".color-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
 
-    const color = btn.dataset.color;
+      const color = btn.dataset.color;
 
-    
-    const variant = variants.find(v => v.color === color && v.stock > 0)
+      // FIX: Find variant for the selected color
+      const variant = variants.find(v => v.color === color && v.stock > 0)
         || variants.find(v => v.color === color);
 
-    if (!variant) return;
+      if (!variant) return;
+
+      selectedVariant = variant;
+
+      // FIX: Added quotes around URL to handle paths with special characters
+      document.getElementById("mainImage").style.backgroundImage =
+        `url('${variant.images[0]}')`;
+
+      // Rebuild thumbnails
+      const thumbContainer = document.getElementById("thumbnailContainer");
+      thumbContainer.innerHTML = "";
+
+      variant.images.forEach((img, index) => {
+        thumbContainer.innerHTML += `
+          <button
+            class="thumbnail-btn relative aspect-square rounded-lg overflow-hidden border-2 ${index === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-transparent'}"
+            data-img="${img}"
+          >
+            <div
+              class="absolute inset-0 bg-center bg-cover brightness-125"
+              style="background-image: url('${img}');"
+            ></div>
+          </button>
+        `;
+      });
+
+      attachThumbnailListeners();
+
+      // Update price
+      document.getElementById("price").innerText = `₹${variant.discountedPrice || variant.price}`;
+      document.getElementById("originalPrice").innerText = `₹${variant.price}`;
+      document.getElementById("selectedColor").innerText = variant.color;
+
+      // Update color button active states
+      document.querySelectorAll(".color-btn").forEach(b => {
+        b.classList.remove("border-primary", "text-primary", "bg-primary/10");
+      });
+      btn.classList.add("border-primary", "text-primary", "bg-primary/10");
+
+      // Re-render size buttons for the new color
+      renderSizeButtons(variant.color);
+      updateCartButtons(variant);
+      updateWishlistButtonState();
+
+      // Update stock message
+      const stockCount = document.getElementById("stockCount");
+      const stockSize = document.getElementById("stockSize");
+      if (stockCount) stockCount.textContent = variant.stock;
+      if (stockSize) stockSize.textContent = variant.size;
+    });
+  });
+
+
+  // ─── Size Button Renderer ──────────────────────────────────────────────────
+  function renderSizeButtons(color) {
+    const sizeContainer = document.getElementById("sizeContainer");
+    sizeContainer.innerHTML = "";
+
+    const seen = new Set();
+    const colorVariants = variants.filter(v => v.color === color);
+
+    colorVariants.forEach(variant => {
+      if (seen.has(variant.size)) return;
+      seen.add(variant.size);
+
+      const isSelected = variant._id.toString() === selectedVariant._id.toString();
+      const isOOS = variant.stock <= 0;
+
+      const btn = document.createElement("button");
+      btn.dataset.size = variant.size;
+      btn.dataset.variantId = variant._id;
+
+      if (isOOS) {
+        btn.disabled = true;
+        btn.className = "size-btn px-4 py-2 rounded-lg border text-slate-400 bg-slate-50 cursor-not-allowed text-sm font-medium relative overflow-hidden";
+        btn.innerHTML = `${variant.size}<div class="absolute inset-0 flex items-center justify-center"><div class="w-full h-px bg-slate-400 -rotate-45"></div></div>`;
+      } else {
+        btn.className = "size-btn px-6 py-2 rounded-lg border text-sm font-medium transition-colors relative overflow-hidden";
+        btn.textContent = variant.size;
+        if (isSelected) {
+          btn.classList.add("border-primary", "text-primary", "bg-primary/10", "font-bold");
+        } else {
+          btn.classList.add("border-slate-200", "dark:border-slate-700", "hover:border-primary", "text-slate-700", "dark:text-slate-300", "bg-white", "dark:bg-surface-dark");
+        }
+        btn.addEventListener("click", () => handleSizeSelect(btn));
+      }
+
+      sizeContainer.appendChild(btn);
+    });
+  }
+
+  function handleSizeSelect(btn) {
+    const variantId = btn.dataset.variantId;
+    const variant = variants.find(v => v._id.toString() === variantId);
+    if (!variant || variant.stock <= 0) return;
 
     selectedVariant = variant;
 
-    const addToCartBtn = document.getElementById("addToCartBtn");
-
-    
-    document.getElementById("mainImage").style.backgroundImage =
-      `url(${variant.images[0]})`;
-
-   
-    const thumbContainer = document.getElementById("thumbnailContainer");
-    thumbContainer.innerHTML = "";
-
-    variant.images.forEach((img, index) => {
-      thumbContainer.innerHTML += `
-  <button
-    class="thumbnail-btn relative aspect-square rounded-lg overflow-hidden border-2 ${index === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-transparent'}"
-    data-img="${img}"
-  >
-    <div
-      class="absolute inset-0 bg-center bg-cover brightness-125"
-      style="background-image: url('${img}');"
-    ></div>
-  </button>
-`;
+    // Update size button active states
+    document.querySelectorAll(".size-btn").forEach(b => {
+      b.classList.remove("border-primary", "text-primary", "bg-primary/10", "font-bold");
+      b.classList.add("border-slate-200", "dark:border-slate-700", "text-slate-700", "dark:text-slate-300");
     });
+    btn.classList.add("border-primary", "text-primary", "bg-primary/10", "font-bold");
+    btn.classList.remove("border-slate-200", "dark:border-slate-700", "text-slate-700", "dark:text-slate-300");
 
-    
-    attachThumbnailListeners();
-
-    
-    document.getElementById("price").innerText =
-      `₹${variant.discountedPrice || variant.price}`;
-
-    document.getElementById("originalPrice").innerText =
-      `₹${variant.price}`;
-
-    document.getElementById("selectedColor").innerText = variant.color;
-
-    document.querySelectorAll(".color-btn").forEach(b => {
-      b.classList.remove("border-primary", "text-primary", "bg-primary/10");
-    });
-    btn.classList.add("border-primary", "text-primary", "bg-primary/10");
-
-    // Re-render size buttons filtered to the new color
-    renderSizeButtons(variant.color);
-    updateCartButtons(variant);
-    updateWishlistButtonState();
+    // Update price
+    document.getElementById("price").innerText = `₹${variant.discountedPrice || variant.price}`;
+    document.getElementById("originalPrice").innerText = `₹${variant.price}`;
 
     // Update stock message
     const stockCount = document.getElementById("stockCount");
-    const stockSize  = document.getElementById("stockSize");
+    const stockSize = document.getElementById("stockSize");
     if (stockCount) stockCount.textContent = variant.stock;
-    if (stockSize)  stockSize.textContent  = variant.size;
+    if (stockSize) stockSize.textContent = variant.size;
 
-  });
-});
+    // FIX: Added quotes around URL to handle paths with special characters
+    document.getElementById("mainImage").style.backgroundImage = `url('${variant.images[0]}')`;
 
-
-// ─── Size Button Handler ───────────────────────────────────────────────────
-function renderSizeButtons(color) {
-  const sizeContainer = document.getElementById("sizeContainer");
-  sizeContainer.innerHTML = "";
-
-  const seen = new Set();
-  const colorVariants = variants.filter(v => v.color === color);
-
-  colorVariants.forEach(variant => {
-    if (seen.has(variant.size)) return;
-    seen.add(variant.size);
-
-    const isSelected = variant._id.toString() === selectedVariant._id.toString();
-    const isOOS = variant.stock <= 0;
-
-    const btn = document.createElement("button");
-    btn.className = "size-btn px-6 py-2 rounded-lg border text-sm font-medium transition-colors relative overflow-hidden";
-    btn.dataset.size = variant.size;
-    btn.dataset.variantId = variant._id;
-    btn.textContent = variant.size;
-
-    if (isOOS) {
-      btn.disabled = true;
-      btn.className = "size-btn px-4 py-2 rounded-lg border text-slate-400 bg-slate-50 cursor-not-allowed text-sm font-medium relative overflow-hidden";
-      btn.innerHTML = `${variant.size}<div class="absolute inset-0 flex items-center justify-center"><div class="w-full h-px bg-slate-400 -rotate-45"></div></div>`;
-    } else if (isSelected) {
-      btn.classList.add("border-primary", "text-primary", "bg-primary/10", "font-bold");
-    } else {
-      btn.classList.add("border-slate-200", "dark:border-slate-700", "hover:border-primary", "text-slate-700", "dark:text-slate-300", "bg-white", "dark:bg-surface-dark");
-    }
-
-    btn.addEventListener("click", () => handleSizeSelect(btn));
-    sizeContainer.appendChild(btn);
-  });
-}
-
-function handleSizeSelect(btn) {
-  const variantId = btn.dataset.variantId;
-  const variant = variants.find(v => v._id.toString() === variantId);
-  if (!variant || variant.stock <= 0) return;
-
-  selectedVariant = variant;
-
-  // Update size button active states
-  document.querySelectorAll(".size-btn").forEach(b => {
-    b.classList.remove("border-primary", "text-primary", "bg-primary/10", "font-bold");
-    b.classList.add("border-slate-200", "dark:border-slate-700", "text-slate-700", "dark:text-slate-300");
-  });
-  btn.classList.add("border-primary", "text-primary", "bg-primary/10", "font-bold");
-  btn.classList.remove("border-slate-200", "dark:border-slate-700", "text-slate-700", "dark:text-slate-300");
-
-  // Update displayed size label
-  const sizeLabel = document.querySelector("[data-size-label]");
-  if (sizeLabel) sizeLabel.textContent = variant.size;
-
-  // Update price
-  document.getElementById("price").innerText = `₹${variant.discountedPrice || variant.price}`;
-  document.getElementById("originalPrice").innerText = `₹${variant.price}`;
-
-  // Update stock message
-  const stockCount = document.getElementById("stockCount");
-  const stockSize  = document.getElementById("stockSize");
-  if (stockCount) stockCount.textContent = variant.stock;
-  if (stockSize)  stockSize.textContent  = variant.size;
-
-  // Update images
-  document.getElementById("mainImage").style.backgroundImage = `url(${variant.images[0]})`;
-  const thumbContainer = document.getElementById("thumbnailContainer");
-  thumbContainer.innerHTML = "";
-  variant.images.forEach((img, index) => {
-    thumbContainer.innerHTML += `
-      <button class="thumbnail-btn relative aspect-square rounded-lg overflow-hidden border-2 ${index === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-transparent'}" data-img="${img}">
-        <div class="absolute inset-0 bg-center bg-cover brightness-125" style="background-image: url('${img}');"></div>
-      </button>`;
-  });
-  attachThumbnailListeners();
-
-  // Update cart/buy buttons
-  updateCartButtons(variant);
-  updateWishlistButtonState();
-}
-
-function updateCartButtons(variant) {
-
-  const addToCartBtn =
-    document.getElementById("addToCartBtn");
-
-  if (variant.stock <= 0) {
-
-    addToCartBtn.disabled = true;
-
-    addToCartBtn.innerHTML = `
-      <span class="material-symbols-outlined">
-        shopping_bag
-      </span>
-      Out of Stock
-    `;
-
-    addToCartBtn.classList.remove("bg-primary");
-
-    addToCartBtn.classList.add(
-      "bg-gray-400",
-      "cursor-not-allowed"
-    );
-
-  } else {
-
-    addToCartBtn.disabled = false;
-
-    addToCartBtn.innerHTML = `
-      <span class="material-symbols-outlined">
-        shopping_bag
-      </span>
-      Add to Cart
-    `;
-
-    addToCartBtn.classList.remove(
-      "bg-gray-400",
-      "cursor-not-allowed"
-    );
-
-    addToCartBtn.classList.add("bg-primary");
-
-  }
-}
-
-// Attach size listeners on initial load
-document.querySelectorAll(".size-btn").forEach(btn => {
-  if (!btn.disabled) btn.addEventListener("click", () => handleSizeSelect(btn));
-});
-
-
-</script>
-  <script>
-
-function attachThumbnailListeners() {
-  document.querySelectorAll(".thumbnail-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const newImg = btn.dataset.img;
-      document.getElementById("mainImage").style.backgroundImage = `url(${newImg})`;
-      document.querySelectorAll(".thumbnail-btn").forEach(b => {
-        b.classList.remove("border-primary", "ring-2", "ring-primary/20");
-        b.classList.add("border-transparent");
-      });
-      btn.classList.add("border-primary", "ring-2", "ring-primary/20");
+    // Rebuild thumbnails
+    const thumbContainer = document.getElementById("thumbnailContainer");
+    thumbContainer.innerHTML = "";
+    variant.images.forEach((img, index) => {
+      thumbContainer.innerHTML += `
+        <button class="thumbnail-btn relative aspect-square rounded-lg overflow-hidden border-2 ${index === 0 ? 'border-primary ring-2 ring-primary/20' : 'border-transparent'}" data-img="${img}">
+          <div class="absolute inset-0 bg-center bg-cover brightness-125" style="background-image: url('${img}');"></div>
+        </button>`;
     });
+    attachThumbnailListeners();
+
+    updateCartButtons(variant);
+    updateWishlistButtonState();
+  }
+
+  function updateCartButtons(variant) {
+    const addToCartBtn = document.getElementById("addToCartBtn");
+
+    if (variant.stock <= 0) {
+      addToCartBtn.disabled = true;
+      addToCartBtn.innerHTML = `<span class="material-symbols-outlined">shopping_bag</span> Out of Stock`;
+      addToCartBtn.classList.remove("bg-primary");
+      addToCartBtn.classList.add("bg-gray-400", "cursor-not-allowed");
+    } else {
+      addToCartBtn.disabled = false;
+      addToCartBtn.innerHTML = `<span class="material-symbols-outlined">shopping_bag</span> Add to Cart`;
+      addToCartBtn.classList.remove("bg-gray-400", "cursor-not-allowed");
+      addToCartBtn.classList.add("bg-primary");
+    }
+  }
+
+  // Attach size listeners on initial load
+  document.querySelectorAll(".size-btn").forEach(btn => {
+    if (!btn.disabled) btn.addEventListener("click", () => handleSizeSelect(btn));
   });
-}
-
-// Attach thumbnail listeners on initial page load
-attachThumbnailListeners();
-
-const zoomContainer = document.getElementById("zoomContainer");
-const mainImage = document.getElementById("mainImage");
-
-zoomContainer.addEventListener("mousemove", (e) => {
-  const rect = zoomContainer.getBoundingClientRect();
-  const x = ((e.clientX - rect.left) / rect.width) * 100;
-  const y = ((e.clientY - rect.top) / rect.height) * 100;
-  mainImage.style.backgroundPosition = `${x}% ${y}%`;
-  mainImage.style.backgroundSize = "250%";
-});
-
-zoomContainer.addEventListener("mouseleave", () => {
-  mainImage.style.backgroundPosition = "center";
-  mainImage.style.backgroundSize = "100%";
-});
-
-
-
-
 </script>
 
 <script>
-  
-  const qtyInput=document.getElementById("quantityInput");
-  const increaseBtn=document.getElementById("increaseQty");
-  const decreaseBtn=document.getElementById('decreaseQty');
-  let quantity=1;
+  function attachThumbnailListeners() {
+    document.querySelectorAll(".thumbnail-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const newImg = btn.dataset.img;
+        // FIX: Added quotes around URL
+        document.getElementById("mainImage").style.backgroundImage = `url('${newImg}')`;
+        document.querySelectorAll(".thumbnail-btn").forEach(b => {
+          b.classList.remove("border-primary", "ring-2", "ring-primary/20");
+          b.classList.add("border-transparent");
+        });
+        btn.classList.add("border-primary", "ring-2", "ring-primary/20");
+      });
+    });
+  }
+
+  // Attach thumbnail listeners on initial page load
+  attachThumbnailListeners();
+
+  const zoomContainer = document.getElementById("zoomContainer");
+  const mainImage = document.getElementById("mainImage");
+
+  zoomContainer.addEventListener("mousemove", (e) => {
+    const rect = zoomContainer.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    mainImage.style.backgroundPosition = `${x}% ${y}%`;
+    mainImage.style.backgroundSize = "250%";
+  });
+
+  zoomContainer.addEventListener("mouseleave", () => {
+    mainImage.style.backgroundPosition = "center";
+    mainImage.style.backgroundSize = "100%";
+  });
+</script>
+
+<script>
+  const qtyInput = document.getElementById("quantityInput");
+  const increaseBtn = document.getElementById("increaseQty");
+  const decreaseBtn = document.getElementById('decreaseQty');
+  let quantity = 1;
 
   const MAX_QTY = 10;
 
-increaseBtn.addEventListener('click', () => {
-  if (quantity < MAX_QTY) {
-    quantity++;
-    qtyInput.value = quantity;
-  } else {
-    Swal.fire({
-      icon: "warning",
-      title: "Limit reached",
-      text: `You can only add up to ${MAX_QTY} items`
-    });
-  }
-});
-
-  decreaseBtn.addEventListener("click",()=>{
-    if(quantity>1){
-      quantity--;
-      qtyInput.value=quantity
-    }
-  })
-
- document.getElementById("addToCartBtn").addEventListener("click", async () => {
-
-  const productId = "<%= product._id %>";
-  const variantId = selectedVariant._id;
-  const quantity = parseInt(document.getElementById("quantityInput").value);
-
-  try {
-    const res = await fetch("/add-to-cart", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        productId,
-        variantId,
-        quantity
-      })
-    });
-
-    const data = await res.json();
-
-    if (data.success) {
-      Swal.fire({
-        icon: "success",
-        title: "Added to Cart",
-        text: "Product added successfully!",
-        showConfirmButton: false,
-        timer: 1500
-      });
+  increaseBtn.addEventListener('click', () => {
+    if (quantity < MAX_QTY) {
+      quantity++;
+      qtyInput.value = quantity;
     } else {
       Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: data.message || "Failed to add product"
+        icon: "warning",
+        title: "Limit reached",
+        text: `You can only add up to ${MAX_QTY} items`
       });
     }
+  });
 
-  } catch (err) {
-    console.error(err);
+  decreaseBtn.addEventListener("click", () => {
+    if (quantity > 1) {
+      quantity--;
+      qtyInput.value = quantity;
+    }
+  });
 
-    Swal.fire({
-      icon: "error",
-      title: "Server Error",
-      text: "Something went wrong!"
-    });
-  }
+  document.getElementById("addToCartBtn").addEventListener("click", async () => {
+    const productId = "<%= product._id %>";
+    const variantId = selectedVariant._id;
+    const quantity = parseInt(document.getElementById("quantityInput").value);
 
-});
+    try {
+      const res = await fetch("/add-to-cart", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId, variantId, quantity })
+      });
 
+      const data = await res.json();
 
+      if (data.success) {
+        Swal.fire({
+          icon: "success",
+          title: "Added to Cart",
+          text: "Product added successfully!",
+          showConfirmButton: false,
+          timer: 1500
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: data.message || "Failed to add product"
+        });
+      }
+    } catch (err) {
+      console.error(err);
+      Swal.fire({
+        icon: "error",
+        title: "Server Error",
+        text: "Something went wrong!"
+      });
+    }
+  });
 </script>
 
 <script>
+  const wishlistForm = document.querySelector(".add-to-wishlist");
 
-const wishlistForm = document.querySelector(".add-to-wishlist");
-
-wishlistForm.addEventListener("submit", async (e) => {
-
+  wishlistForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const formData = new FormData(wishlistForm);
@@ -859,64 +717,42 @@ wishlistForm.addEventListener("submit", async (e) => {
     const endpoint = isWishlisted ? "/removeWishlist" : "/wishlist/add";
 
     try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ productId, variantId })
+      });
 
-        const response = await fetch(endpoint, {
+      const result = await response.json();
 
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                productId,
-                variantId
-            })
-
-        });
-
-        const result = await response.json();
-
-        if (result.success) {
-
-            if (isWishlisted) {
-                wishlistItems = wishlistItems.filter(item => !(item.productId === productId && item.variantId === variantId));
-            } else {
-                wishlistItems.push({ productId, variantId });
-            }
-            updateWishlistButtonState();
-
-            Swal.fire({
-                icon: "success",
-                title: result.message || (isWishlisted ? "Removed from wishlist" : "Added to wishlist"),
-                timer: 1200,
-                showConfirmButton: false
-            });
-
+      if (result.success) {
+        if (isWishlisted) {
+          wishlistItems = wishlistItems.filter(item => !(item.productId === productId && item.variantId === variantId));
         } else {
-
-            Swal.fire({
-                icon: "error",
-                title: result.message
-            });
-
+          wishlistItems.push({ productId, variantId });
         }
-
-    } catch (error) {
-
-        console.log(error);
+        updateWishlistButtonState();
 
         Swal.fire({
-            icon: "error",
-            title: "Something went wrong"
+          icon: "success",
+          title: result.message || (isWishlisted ? "Removed from wishlist" : "Added to wishlist"),
+          timer: 1200,
+          showConfirmButton: false
         });
-
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: result.message
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong"
+      });
     }
-
-});
-
+  });
 </script>
-
-
 
 </html>

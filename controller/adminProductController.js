@@ -1,4 +1,5 @@
 import Category from "../models/categoryModel.js";
+import Offer from "../models/offerModel.js";
 import Product from "../models/productModel.js";
 import { addProductService, editProductService,toggleProductStatusService } from "../service/adminService.js";
 
@@ -18,16 +19,23 @@ export const productRender = async (req, res) => {
 
     
     const products = await Product.find(filter)
-      .populate("category").sort({createdAt:-1})
+      .populate("category").populate("offer").sort({createdAt:-1})
       .skip(skip)
       .limit(limit);
 
     
     const totalProducts = await Product.countDocuments(filter);
     const totalPages = Math.ceil(totalProducts / limit);
+    const productOffers = await Offer.find({
+      offerType: "Product",
+      isActive: true,
+      startDate: { $lte: new Date() },
+      endDate: { $gte: new Date() },
+    }).sort({ createdAt: -1 });
 
     res.render("adminViews/adminProductManagement", {
       product: products,
+      productOffers,
       totalProducts,
       currentPage,
       totalPages,
@@ -39,6 +47,7 @@ export const productRender = async (req, res) => {
 
     res.render("adminViews/adminProductManagement", {
       product: [],
+      productOffers: [],
       totalProducts: 0,
       currentPage: 1,
       totalPages: 1,
@@ -141,6 +150,48 @@ export const toggleProductStatusController = async (req, res) => {
     res.status(400).json({
       success: false,
       message: error.message,
+    });
+  }
+};
+
+export const assignProductOfferController = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { offerId } = req.body;
+
+    if (offerId) {
+      const offer = await Offer.findOne({
+        _id: offerId,
+        offerType: "Product",
+        isActive: true,
+        startDate: { $lte: new Date() },
+        endDate: { $gte: new Date() },
+      });
+
+      if (!offer) {
+        throw new Error("Please select a valid active product offer");
+      }
+    }
+
+    const product = await Product.findByIdAndUpdate(
+      id,
+      { offer: offerId || null },
+      { new: true }
+    );
+
+    if (!product) {
+      throw new Error("Product not found");
+    }
+
+    res.status(200).json({
+      success: true,
+      message: offerId ? "Product offer assigned successfully" : "Product offer removed successfully",
+      product,
+    });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message || "Failed to update product offer",
     });
   }
 };

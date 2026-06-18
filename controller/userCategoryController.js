@@ -14,10 +14,38 @@ export const loadHomePage = async (req, res) => {
 
     const search=req.query.search ||'';
 
-    const products = await Product.find({ isActive: true , name:{$regex:search, $options:'i'}}).populate('category')
+    const products = await Product.find({ isActive: true , name:{$regex:search, $options:'i'}})
+      .populate('offer')
+      .populate({
+        path: 'category',
+        populate: {
+          path: 'offer'
+        }
+      })
       .limit(8); 
 
-      const filteredProducts=products.filter(p=>p.category?.isListed)
+      const now = new Date();
+      const isActiveOffer = (offer) => {
+        return offer &&
+          offer.isActive &&
+          new Date(offer.startDate) <= now &&
+          new Date(offer.endDate) >= now;
+      };
+
+      const filteredProducts=products
+        .filter(p=>p.category?.isListed)
+        .map(product => {
+          const activeOffer = isActiveOffer(product.offer)
+            ? product.offer
+            : isActiveOffer(product.category?.offer)
+              ? product.category.offer
+              : null;
+
+          return {
+            ...product.toObject(),
+            activeOffer
+          };
+        });
 
 
       const wishlist = await Wishlist.findOne({ userId });

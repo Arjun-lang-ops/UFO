@@ -272,12 +272,16 @@
           style="background-image: url('<%= variant.images[0] %>');"
         ></div>
 
-        <!-- Badge -->
-        <div
-          class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded z-10"
-        >
-          HOT
-        </div>
+        <% if (product.activeOffer) { %>
+          <div
+            class="absolute top-3 left-3 bg-primary text-white text-[11px] font-bold px-2 py-1 rounded z-10 shadow-lg shadow-black/20 max-w-[85%]"
+          >
+            <span class="block truncate"><%= product.activeOffer.name %></span>
+            <span class="block text-[10px] opacity-90">
+              <%= product.activeOffer.offerMode === 'PERCENTAGE' ? product.activeOffer.discountValue + '% Off' : 'Rs ' + product.activeOffer.discountValue + ' Off' %>
+            </span>
+          </div>
+        <% } %>
 
       </div>
 
@@ -290,9 +294,16 @@
             <%= product.name %>
           </h3>
 
-          <p class="text-primary font-bold">
-            ₹<%= variant.discountedPrice || variant.price %>
-          </p>
+          <div class="flex items-center gap-2 mt-1">
+            <p class="text-primary font-bold">
+              ₹<%= variant.discountedPrice || variant.price %>
+            </p>
+            <% if (variant.price > (variant.discountedPrice || variant.price)) { %>
+              <span class="text-slate-500 text-xs line-through">
+                ₹<%= variant.price %>
+              </span>
+            <% } %>
+          </div>
 
         </div>
 

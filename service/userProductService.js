@@ -1,7 +1,15 @@
 import Product from "../models/productModel.js";
 
 export const productDetailsService = async (productId) => {
-  const product = await Product.findById(productId).populate("category").lean();
+  const product = await Product.findById(productId)
+    .populate("offer")
+    .populate({
+      path: "category",
+      populate: {
+        path: "offer"
+      }
+    })
+    .lean();
   if (
     !product ||
     !product.isActive ||

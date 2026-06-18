@@ -11,7 +11,7 @@ export const getAllCategoriesPaginatedService = async ({ filter, page, limit }) 
   const skip = (page - 1) * limit;
 
   const [categories, totalCategories] = await Promise.all([
-    Category.find(filter).sort({ createdAt: -1 }).skip(skip).limit(limit),
+    Category.find(filter).populate("offer").sort({ createdAt: -1 }).skip(skip).limit(limit),
     Category.countDocuments(filter)
   ]);
 

@@ -7,6 +7,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Admin Product Inventory - Football Accessories</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
@@ -175,6 +176,7 @@
                             <th class="px-6 py-4">Category</th>
 
                             <th class="px-6 py-4">Price</th>
+                            <th class="px-6 py-4">Offer Type</th>
                             <th class="px-6 py-4">Status</th>
                             <th class="px-6 py-4 text-right">Actions</th>
                         </tr>
@@ -182,7 +184,7 @@
                     <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
                         <% if(!product||product.length===0) { %>
                             <tr>
-                                <td colspan="4" class="text-center py-6 text-slate-500">
+                                <td colspan="6" class="text-center py-6 text-slate-500">
                                     No Product found
                                 </td>
                             </tr>
@@ -211,6 +213,22 @@
                                             <span class="text-sm font-bold">
                                                 <%=item.variants[0]?.price%>
                                             </span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <select
+                                                class="w-44 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-2 text-xs font-medium text-slate-700 dark:text-slate-200 focus:ring-2 focus:ring-primary focus:border-primary"
+                                                data-product-id="<%= item._id %>">
+                                                <option value="">No offer</option>
+                                                <% if (typeof productOffers !== 'undefined' && productOffers.length > 0) { %>
+                                                    <% productOffers.forEach(offer => { %>
+                                                        <option value="<%= offer._id %>" <%= item.offer && item.offer._id.toString() === offer._id.toString() ? 'selected' : '' %>>
+                                                            <%= offer.name %> - <%= offer.offerMode === 'PERCENTAGE' ? offer.discountValue + '%' : 'Rs ' + offer.discountValue %>
+                                                        </option>
+                                                    <% }) %>
+                                                <% } else { %>
+                                                    <option value="" disabled>No active product offers</option>
+                                                <% } %>
+                                            </select>
                                         </td>
                                         <td class="px-6 py-4">
                                             <% if (item.isActive) { %>
@@ -339,6 +357,56 @@
 
         window.location.href = url.toString();
     });
+
+    document.querySelectorAll('select[data-product-id]').forEach(select => {
+    select.addEventListener('change', async () => {
+        const previousValue = select.dataset.previousValue || '';
+        const productId = select.dataset.productId;
+        const offerId = select.value;
+
+        select.disabled = true;
+
+        try {
+            const response = await fetch(`/admin/product/${productId}/offer`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ offerId })
+            });
+
+            const result = await response.json();
+
+            if (!response.ok || !result.success) {
+                throw new Error(result.message || 'Failed to update product offer');
+            }
+
+            select.dataset.previousValue = offerId;
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Offer Updated',
+                text: 'Product offer updated successfully.',
+                timer: 1500,
+                showConfirmButton: false
+            });
+
+        } catch (error) {
+            select.value = previousValue;
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Update Failed',
+                text: error.message
+            });
+
+        } finally {
+            select.disabled = false;
+        }
+    });
+
+    select.dataset.previousValue = select.value;
+});
 </script>
 
 </html>

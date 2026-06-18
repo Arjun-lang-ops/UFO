@@ -66,6 +66,7 @@ export const checkoutRenderService = async (userId) => {
   const subtotal = cartItems.reduce((acc, item) => {
     return (acc += item.total);
   }, 0);
+  
 
   const shippingCharge = subtotal > 3999 ? 0 : 50;
 

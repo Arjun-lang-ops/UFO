@@ -52,6 +52,12 @@ const productSchema = new mongoose.Schema({
 
   variants: [variantSchema], 
 
+  offer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Offer",
+    default: null
+  },
+
   isActive: {
     type: Boolean,
     default: true

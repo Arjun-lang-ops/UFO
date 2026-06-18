@@ -1,773 +1,678 @@
 <!DOCTYPE html>
 
 <html class="dark" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Football Accessories - ProSports</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect" />
-    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&amp;display=swap"
-      rel="stylesheet"
-    />
-    <!-- Material Symbols -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            colors: {
-              primary: "#137fec",
-              "primary-dark": "#0f66bd",
-              "background-light": "#f6f7f8",
-              "background-dark": "#111418", // Matching the example's dark bg
-              "surface-dark": "#1c2127", // Slightly lighter for cards/inputs
-              "border-dark": "#283039", // Borders
-            },
-            fontFamily: {
-              display: ["Lexend", "sans-serif"],
-            },
-            borderRadius: {
-              DEFAULT: "0.25rem",
-              lg: "0.5rem",
-              xl: "0.75rem",
-              full: "9999px",
-            },
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Football Accessories - ProSports</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;700&amp;display=swap" rel="stylesheet" />
+  <!-- Material Symbols -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#137fec",
+            "primary-dark": "#0f66bd",
+            "background-light": "#f6f7f8",
+            "background-dark": "#111418", // Matching the example's dark bg
+            "surface-dark": "#1c2127", // Slightly lighter for cards/inputs
+            "border-dark": "#283039", // Borders
+          },
+          fontFamily: {
+            display: ["Lexend", "sans-serif"],
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px",
           },
         },
-      };
-    </script>
-    <style>
-      /* Custom scrollbar for better aesthetic in dark mode */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #111418;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #283039;
-        border-radius: 4px;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background: #3b4754;
-      }
-    </style>
-  </head>
-  <body
-    class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display min-h-screen flex flex-col overflow-x-hidden"
-  >
-    <!-- Navbar -->
-    <header
-      class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-border-dark bg-background-dark px-4 lg:px-10 py-3"
-    >
-      <div class="flex items-center gap-4 lg:gap-8 w-full md:w-auto">
-        <div class="flex items-center gap-2 text-white cursor-pointer">
-          <div class="size-8 text-primary">
-            <svg
-              class="w-full h-full"
-              fill="none"
-              viewbox="0 0 48 48"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
-                fill="currentColor"
-              ></path>
-            </svg>
-          </div>
-          <a href="/home">
-            <h2
-            class="text-white text-xl font-bold leading-tight tracking-[-0.015em] hidden sm:block"
-          >
-            Urban Football
-          </h2>
-          </a>
-          
-        </div>
-        <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64 lg:w-96">
-          <div class=" relative flex w-full flex-1 items-stretch rounded-lg h-full">
-            <div
-              class="text-[#9dabb9] flex border-none bg-surface-dark items-center justify-center pl-4 rounded-l-lg border-r-0"
-            >
-              <span class="material-symbols-outlined text-[24px]">search</span>
-            </div>
-            <form action="/product" method="GET">
-              <input id="searchInput"
-              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-surface-dark focus:border-none h-full placeholder:text-[#9dabb9] px-8 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
-              placeholder="Search accessories..."
-              value="<%=query.search||''%>"
-              type="text"
-              name="search"
-            />
-             <button
-    type="button"
-    id="clearSearch"
-    class="absolute right-3 top-1/2 -translate-y-1/2 text-[#9dabb9] hover:text-white hidden"
-  >
-    ✕
-  </button>
-             
-            </form>
-            
-          </div>
-        </label>
-      </div>
-      <div class="flex flex-1 justify-end gap-4 lg:gap-8 items-center">
-        
-        <div class="flex gap-2">
-          <a href="/profile">
-            <button
-            class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors"
-          >
-            <span class="material-symbols-outlined text-[20px]"
-              >account_circle</span
-            >
-          </button>
-          </a>
-          <a href="/cart">
-  <button
-    class="flex items-center justify-center rounded-lg h-10 w-10 hover:bg-slate-200 dark:hover:bg-[#283039] transition-colors relative"
-  >
-    <span class="material-symbols-outlined">shopping_cart</span>
-
-    <% if (cartCount > 0) { %>
-      <span
-        id="cart-count"
-        class="absolute -top-1 -right-1 bg-primary text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full">
-        <%= cartCount %>
-      </span>
-    <% } %>
-
-  </button>
-</a>
-          <button
-            class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors"
-          >
-            <span class="material-symbols-outlined text-[20px]">favorite</span>
-          </button>
-          <!-- Mobile Menu Toggle -->
-          <button
-            class="lg:hidden flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors"
-          >
-            <span class="material-symbols-outlined text-[20px]">menu</span>
-          </button>
-        </div>
-      </div>
-    </header>
-    <!-- Main Content Layout -->
-    <div
-      class="layout-container flex flex-col flex-grow px-4 md:px-10 lg:px-20 py-6 max-w-[1440px] mx-auto w-full"
-    >
-      <!-- Breadcrumbs -->
-      <nav class="text-sm text-gray-400 mb-4">
-  <a href="/home" class="hover:text-white">Home</a>
-
-  <% if (query.search) { %>
-    <span> > </span>
-    <span>Search: "<%= query.search %>"</span>
-
-  <% } else if (query.category && categoryMap[query.category]) { %>
-    <span> > </span>
-    <span><%= categoryMap[query.category] %></span>
-
-  <% } else { %>
-    <span> > </span>
-    <span>All Products</span>
-  <% } %>
-</nav>
-      <!-- Page Heading & Top Controls -->
-      <div
-        class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 pb-6 border-b border-border-dark"
-      >
-        <div class="flex flex-col gap-2">
-          <h1
-            class="text-white text-3xl md:text-[32px] font-bold leading-tight tracking-tight"
-          >
-            Football Accessories
-          </h1>
-          <%
-  const limit = 4; // same as backend
-  const start = totalProducts === 0 ? 0 : (currentPage - 1) * limit + 1;
-  const end = Math.min(currentPage * limit, totalProducts);
-%>
-
-<p class="text-[#9dabb9] text-sm font-normal">
-  Showing <%= start %>-<%= end %> of <%= totalProducts %> products
-</p>
-        </div>
-        <div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
-          <!-- Sort Dropdown -->
-          <div class="relative min-w-[160px] flex-1 md:flex-none">
-            <form method="GET" action="/product">
-              <% if (query && query.search) { %>
-                <input type="hidden" name="search" value="<%= query.search %>">
-              <% } %>
- 
-            <select name="sort" onchange="this.form.submit()"
-              class="appearance-none w-full bg-surface-dark text-white text-sm border border-border-dark rounded-lg px-4 py-2.5 pr-8 focus:outline-none focus:border-primary cursor-pointer"
-            >
-              
-              <option <%=selectedValue==="priceLow"?'selected':''%> value="priceLow">
-                Price: Low to High</option>
-              <option <%=selectedValue==="priceHigh"?'selected':''%> value="priceHigh">Price: High to Low</option>
-              <option <%=selectedValue==="az"?'selected':''%> value="az">Name: A → Z</option>
-              <option <%=selectedValue==="za"?'selected':''%> value="za">Name: Z → A</option>
-            </select>
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#9dabb9]"
-            >
-              <span class="material-symbols-outlined text-[20px]"
-                >expand_more</span
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="flex flex-col lg:flex-row gap-8">
-        <!-- Sidebar Filters -->
-        <aside class="w-full lg:w-64 flex-shrink-0 space-y-8 hidden lg:block">
-          
-
-          
-          <!-- Filter Group: Categories -->
-          <div class="flex flex-col gap-4">
-  <h3 class="text-white text-base font-bold">Category</h3>
-
-  <div class="flex flex-col gap-3">
-
-    <!-- All Categories -->
-    <label class="flex items-center gap-3 cursor-pointer group">
-      <input
-        type="checkbox"
-        name="category"
-        value="all"
-        class="rounded border-[#3b4754] bg-[#1c2127] text-primary size-4"
-        checked
-      />
-      <span class="text-[#9dabb9] group-hover:text-white text-sm">
-        All Categories
-      </span>
-    </label>
-
-    <!-- Dynamic Categories -->
-    <% categories.forEach(category => { %>
-      <label class="flex items-center gap-3 cursor-pointer group">
-        <input
-          type="checkbox"
-          name="category"
-          value="<%= category._id %>"
-          class="rounded border-[#3b4754] bg-[#1c2127] text-primary size-4"
-        />
-        <span class="text-[#9dabb9] group-hover:text-white text-sm">
-          <%= category.name %>
-        </span>
-      </label>
-    <% }) %>
-
-  </div>
-</div>
-          <div class="h-px bg-border-dark w-full"></div>
-          <!-- Filter Group: Price -->
-          <div class="flex flex-col gap-4">
-            <div class="flex items-center justify-between">
-              <h3 class="text-white text-base font-bold py-6">Price Range</h3>
-              <span class="text-xs text-primary font-medium cursor-pointer"
-                >Reset</span
-              >
-            </div>
-            <div class="flex items-center gap-2">
-              <div class="relative w-full">
-                <span
-                  class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9dabb9] text-xs"
-                  >$</span
-                >
-                <input
-                  class="w-full bg-surface-dark border border-border-dark rounded-lg py-2 pl-6 pr-2 text-white text-sm focus:border-primary focus:ring-0"
-                  type="number"
-                  name="minPrice"
-                  value="0"
-                />
-              </div>
-              <span class="text-[#9dabb9]">-</span>
-              <div class="relative w-full">
-                <span
-                  class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9dabb9] text-xs"
-                  >$</span
-                >
-                <input
-                  class="w-full bg-surface-dark border border-border-dark rounded-lg py-2 pl-6 pr-2 text-white text-sm focus:border-primary focus:ring-0"
-                  type="number"
-                  name="maxPrice"
-                  value="5000"
-                />
-              </div>
-            </div>
-            <!-- Fake Slider Visual -->
-            
-          </div>
-         
-          <!-- Filter Group: Size -->
-          <div class="flex flex-col gap-4">
-  <h3 class="text-white text-base font-bold py-6">Size</h3>
-
-  <div class="flex flex-col gap-3">
-    <% sizes.forEach(size => { %>
-      <label class="flex items-center gap-3 cursor-pointer group">
-        <input
-          type="checkbox"
-          name="size"
-          value="<%= size %>"
-          class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4"
-        />
-        <span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">
-          <%= size %>
-        </span>
-      </label>
-    <% }) %>
-  </div>
-</div>
-          <!-- Mobile Filter Button (Visible only on small, functionality implied) -->
-          <button
-            class="lg:hidden w-full bg-surface-dark text-white font-bold py-3 rounded-lg border border-border-dark"
-          >
-            Show Filters
-          </button>
-          <div class="pt-4">
-    <button
-    type="submit"
-      class="w-full bg-primary text-white font-semibold py-3 rounded-lg hover:opacity-90 transition"
-    >
-      Apply
-    </button>
-  </div>
-
-          </form>
-        </aside>
-        <!-- Product Grid -->
-        <main class="flex-1">
-          <!-- Mobile Filter Toggle -->
-          <div class="lg:hidden mb-4">
-            <button
-              class="flex items-center gap-2 text-white bg-surface-dark px-4 py-2 rounded-lg border border-border-dark w-full justify-center"
-            >
-              <span class="material-symbols-outlined">filter_list</span>
-              <span>Filter &amp; Sort</span>
-            </button>
-          </div>
-          <div
-            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-          >
-            <!-- Product Card 1 -->
-             <% if (products.length > 0) { %>
-             <% products.forEach(product=>{%>
-            <div
-              class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark"
-            >
-              <div
-                class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]"
-              >
-                <!-- Badge -->
-                <div
-                  class="absolute top-3 left-3 bg-primary text-white text-xs font-bold px-2 py-1 rounded"
-                >
-                  New
-                </div>
-                <!-- Favorite Button -->
-                <!-- Wishlist Button -->
-<form class="wishlist-form">
-
-   <%
-const currentWishlistItems = typeof wishlistItems !== 'undefined' ? wishlistItems : [];
-const isWishlisted = currentWishlistItems.some(item =>
-    item.productId === product.productId.toString() &&
-    item.variantId === product.variantId.toString()
-);
-%>
-  
-  <button
-  type="submit"
-  class="wishlist-btn absolute top-3 right-3 z-20 h-9 w-9 rounded-full <%= isWishlisted ? 'bg-red-500 text-white' : 'bg-black/50 text-white' %> backdrop-blur-sm flex items-center justify-center hover:bg-red-500 transition-all duration-300"
-  data-product-id="<%= product.productId %>"
-  data-variant-id="<%= product.variantId %>"
-  data-wishlisted="<%= isWishlisted ? 'true' : 'false' %>"
->
-  <span class="material-symbols-outlined text-[18px]">
-    favorite
-  </span>
-</button>
-</form>
-                <img
-                 
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  src="<%= product.images?.[0] %>"
-                   alt="<%= product.name %>"
-                />
-                <!-- Quick Add (Desktop Hover) -->
-                <div
-                  class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block"
-                >
-                  <button
-  class="quick-add-btn w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
-  data-product-id="<%= product.productId %>"
-  data-variant-id="<%= product.variantId %>"
->
-  Quick Add
-</button>
-                </div>
-              </div>
-              <div class="p-4 flex flex-col flex-grow">
-               <a href="/product/<%= product.productId %>?variant=<%= product.variantId %>">
-                 <h3
-                  class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer"
-                >
-                  <%=product.name%>
-                </h3>
-               </a>
-                
-                <!-- Variant Details -->
-<div class="flex items-center gap-2 mb-3 flex-wrap">
-
-  <!-- Color -->
-  <span
-    class="px-2 py-1 text-xs rounded-md bg-[#283039] text-[#d1d5db] border border-border-dark"
-  >
-    Color: <%= product.color %>
-  </span>
-
-  <!-- Size -->
-  <span
-    class="px-2 py-1 text-xs rounded-md bg-[#283039] text-[#d1d5db] border border-border-dark"
-  >
-    Size: <%= product.size %>
-  </span>
-
-</div>
-
-<div class="mt-auto flex items-center justify-between">
-  <span class="text-white text-lg font-bold">
-    ₹<%= product.price %>
-  </span>
-                  <button
-                    class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center"
-                  >
-                    <span class="material-symbols-outlined text-[18px]"
-                      >add</span
-                    >
-                  </button>
-                </div>
-              </div>
-            </div>
-            <%})%>
-            <% } else { %>
-
-  <!-- ❌ No Products Found UI -->
-  <div class="col-span-full flex flex-col items-center justify-center py-20 text-center">
-    
-    <span class="material-symbols-outlined text-6xl text-[#9dabb9] mb-4">
-      search_off
-    </span>
-
-    <h2 class="text-xl font-bold text-white mb-2">
-      No products found
-    </h2>
-
-    <p class="text-[#9dabb9] text-sm">
-      Try adjusting your filters or search terms.
-    </p>
-
-    <a href="/product" class="mt-4 px-5 py-2 bg-primary text-white rounded-lg text-sm hover:opacity-90 transition">
-      Reset Filters
-    </a>
-
-  </div>
-
-<% } %>
-
-          
-            
-          </div>
-          <!-- Pagination -->
-          <div class="flex items-center justify-center gap-2 mt-12">
-
-<%
-  const params = new URLSearchParams(query);
-%>
-
-
-<% if (currentPage > 1) { 
-     params.set("page", currentPage - 1);
-%>
-  <a href="?<%= params.toString() %>"
-     class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">
-    <span class="material-symbols-outlined">chevron_left</span>
-  </a>
-<% } %>
-
-
-<% for (let i = 1; i <= totalPages; i++) { 
-     params.set("page", i);
-%>
-
-  <% if (i === currentPage) { %>
-    <span class="size-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">
-      <%= i %>
-    </span>
-  <% } else { %>
-    <a href="?<%= params.toString() %>"
-       class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">
-      <%= i %>
-    </a>
-  <% } %>
-
-<% } %>
-
-
-<% if (currentPage < totalPages) { 
-     params.set("page", currentPage + 1);
-%>
-  <a href="?<%= params.toString() %>"
-     class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">
-    <span class="material-symbols-outlined">chevron_right</span>
-  </a>
-<% } %>
-
-</div>
-        </main>
-      </div>
-    </div>
-    <!-- Footer Simple -->
-    <footer
-      class="mt-auto border-t border-border-dark bg-background-dark py-8 px-4 lg:px-10"
-    >
-      <div class="max-w-[1440px] mx-auto text-center text-[#9dabb9] text-sm">
-        <p>© 2026 Urban Football. All rights reserved.</p>
-      </div>
-    </footer>
-  </body>
-  <script>
-const input = document.getElementById("searchInput");
-const clearBtn = document.getElementById("clearSearch");
-
-// Show/hide logic
-function toggleClear() {
-  if (input.value.trim() !== "" && document.activeElement === input) {
-    clearBtn.classList.remove("hidden");
-  } else {
-    clearBtn.classList.add("hidden");
-  }
-}
-
-input.addEventListener("focus", toggleClear);
-input.addEventListener("input", toggleClear);
-input.addEventListener("blur", () => {
-  setTimeout(toggleClear, 150);
-});
-
-// Clear action
-clearBtn.addEventListener("click", () => {
-  input.value = "";
-  input.focus();
-
-  const url = new URL(window.location.href);
-  url.searchParams.delete("search");
-  url.searchParams.set("page", 1);
-
-  window.location.href = url.toString();
-});
-</script>
-<script>
-document.querySelectorAll(".quick-add-btn").forEach(button => {
-
-  button.addEventListener("click", async () => {
-
-    const productId = button.dataset.productId;
-    const variantId = button.dataset.variantId;
-
-    try {
-
-      const response = await fetch("/cart/add", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          productId,
-          variantId,
-          quantity: 1
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        Swal.fire({
-  icon: "success",
-  title: "Added to Cart",
-  text: "Product added successfully",
-  toast: true,
-  position: "top-end",
-  showConfirmButton: false,
-  timer: 1500,
-  background: "#1c2127",
-  color: "#fff"
-});
-
-        const cartCount = document.getElementById("cart-count");
-
-        if (cartCount) {
-
-          cartCount.textContent = data.cartCount;
-
-        } else {
-
-          const badge = document.createElement("span");
-
-          badge.id = "cart-count";
-
-          badge.className =
-            "absolute -top-1 -right-1 bg-primary text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full";
-
-          badge.textContent = data.cartCount;
-
-          document
-            .querySelector('a[href="/cart"] button')
-            .appendChild(badge);
-        }
-
-        button.textContent = "Added";
-        button.disabled = true;
-
-        setTimeout(() => {
-          button.textContent = "Quick Add";
-          button.disabled = false;
-        }, 1500);
-
-      } else {
-
-        Swal.fire({
-  icon: "error",
-  title: "Oops...",
-  text: data.message || "Failed to add to cart",
-  background: "#1c2127",
-  color: "#fff",
-  confirmButtonColor: "#137fec"
-});
-
-      }
-
-    } catch (error) {
-
-      console.log(error);
-      Swal.fire({
-  icon: "error",
-  title: "Error",
-  text: "Something went wrong",
-  background: "#1c2127",
-  color: "#fff",
-  confirmButtonColor: "#137fec"
-});
-
+      },
+    };
+  </script>
+  <style>
+    /* Custom scrollbar for better aesthetic in dark mode */
+    ::-webkit-scrollbar {
+      width: 8px;
     }
 
+    ::-webkit-scrollbar-track {
+      background: #111418;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #283039;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3b4754;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display min-h-screen flex flex-col overflow-x-hidden">
+  <!-- Navbar -->
+  <header
+    class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-border-dark bg-background-dark px-4 lg:px-10 py-3">
+    <div class="flex items-center gap-4 lg:gap-8 w-full md:w-auto">
+      <div class="flex items-center gap-2 text-white cursor-pointer">
+        <div class="size-8 text-primary">
+          <svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z"
+              fill="currentColor"></path>
+          </svg>
+        </div>
+        <a href="/home">
+          <h2 class="text-white text-xl font-bold leading-tight tracking-[-0.015em] hidden sm:block">
+            Urban Football
+          </h2>
+        </a>
+
+      </div>
+      <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64 lg:w-96">
+        <div class=" relative flex w-full flex-1 items-stretch rounded-lg h-full">
+          <div
+            class="text-[#9dabb9] flex border-none bg-surface-dark items-center justify-center pl-4 rounded-l-lg border-r-0">
+            <span class="material-symbols-outlined text-[24px]">search</span>
+          </div>
+          <form action="/product" method="GET">
+            <input id="searchInput"
+              class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-0 border-none bg-surface-dark focus:border-none h-full placeholder:text-[#9dabb9] px-8 rounded-l-none border-l-0 pl-2 text-sm font-normal leading-normal"
+              placeholder="Search accessories..." value="<%=query.search||''%>" type="text" name="search" />
+            <button type="button" id="clearSearch"
+              class="absolute right-3 top-1/2 -translate-y-1/2 text-[#9dabb9] hover:text-white hidden">
+              ✕
+            </button>
+
+          </form>
+
+        </div>
+      </label>
+    </div>
+    <div class="flex flex-1 justify-end gap-4 lg:gap-8 items-center">
+
+      <div class="flex gap-2">
+        <a href="/profile">
+          <button
+            class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-[20px]">account_circle</span>
+          </button>
+        </a>
+        <a href="/cart">
+          <button
+            class="flex items-center justify-center rounded-lg h-10 w-10 hover:bg-slate-200 dark:hover:bg-[#283039] transition-colors relative">
+            <span class="material-symbols-outlined">shopping_cart</span>
+
+            <% if (cartCount> 0) { %>
+              <span id="cart-count"
+                class="absolute -top-1 -right-1 bg-primary text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full">
+                <%= cartCount %>
+              </span>
+              <% } %>
+
+          </button>
+        </a>
+        <button
+          class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
+          <span class="material-symbols-outlined text-[20px]">favorite</span>
+        </button>
+        <!-- Mobile Menu Toggle -->
+        <button
+          class="lg:hidden flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
+          <span class="material-symbols-outlined text-[20px]">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <!-- Main Content Layout -->
+  <div class="layout-container flex flex-col flex-grow px-4 md:px-10 lg:px-20 py-6 max-w-[1440px] mx-auto w-full">
+    <!-- Breadcrumbs -->
+    <nav class="text-sm text-gray-400 mb-4">
+      <a href="/home" class="hover:text-white">Home</a>
+
+      <% if (query.search) { %>
+        <span> > </span>
+        <span>Search: "<%= query.search %>"</span>
+
+        <% } else if (query.category && categoryMap[query.category]) { %>
+          <span> > </span>
+          <span>
+            <%= categoryMap[query.category] %>
+          </span>
+
+          <% } else { %>
+            <span> > </span>
+            <span>All Products</span>
+            <% } %>
+    </nav>
+    <!-- Page Heading & Top Controls -->
+    <div
+      class="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-8 pb-6 border-b border-border-dark">
+      <div class="flex flex-col gap-2">
+        <h1 class="text-white text-3xl md:text-[32px] font-bold leading-tight tracking-tight">
+          Football Accessories
+        </h1>
+        <% const limit=4;  const start=totalProducts===0 ? 0 : (currentPage - 1) * limit + 1; 
+        const
+          end=Math.min(currentPage * limit, totalProducts); %>
+
+          <p class="text-[#9dabb9] text-sm font-normal">
+            Showing <%= start %>-<%= end %> of <%= totalProducts %> products
+          </p>
+      </div>
+      <div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
+        <!-- Sort Dropdown -->
+        <div class="relative min-w-[160px] flex-1 md:flex-none">
+          <form method="GET" action="/product">
+            <% if (query && query.search) { %>
+              <input type="hidden" name="search" value="<%= query.search %>">
+              <% } %>
+
+                <select name="sort" onchange="this.form.submit()"
+                  class="appearance-none w-full bg-surface-dark text-white text-sm border border-border-dark rounded-lg px-4 py-2.5 pr-8 focus:outline-none focus:border-primary cursor-pointer">
+
+                  <option <%=selectedValue==="priceLow" ?'selected':''%> value="priceLow">
+                    Price: Low to High</option>
+                  <option <%=selectedValue==="priceHigh" ?'selected':''%> value="priceHigh">Price: High to Low</option>
+                  <option <%=selectedValue==="az" ?'selected':''%> value="az">Name: A → Z</option>
+                  <option <%=selectedValue==="za" ?'selected':''%> value="za">Name: Z → A</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-[#9dabb9]">
+                  <span class="material-symbols-outlined text-[20px]">expand_more</span>
+                </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col lg:flex-row gap-8">
+      <!-- Sidebar Filters -->
+      <aside class="w-full lg:w-64 flex-shrink-0 space-y-8 hidden lg:block">
+
+
+
+        <!-- Filter Group: Categories -->
+        <div class="flex flex-col gap-4">
+          <h3 class="text-white text-base font-bold">Category</h3>
+
+          <div class="flex flex-col gap-3">
+
+            <!-- All Categories -->
+            <label class="flex items-center gap-3 cursor-pointer group">
+              <input type="checkbox" name="category" value="all"
+                class="rounded border-[#3b4754] bg-[#1c2127] text-primary size-4" checked />
+              <span class="text-[#9dabb9] group-hover:text-white text-sm">
+                All Categories
+              </span>
+            </label>
+
+            <!-- Dynamic Categories -->
+            <% categories.forEach(category=> { %>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input type="checkbox" name="category" value="<%= category._id %>"
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary size-4" />
+                <span class="text-[#9dabb9] group-hover:text-white text-sm">
+                  <%= category.name %>
+                </span>
+              </label>
+              <% }) %>
+
+          </div>
+        </div>
+        <div class="h-px bg-border-dark w-full"></div>
+        <!-- Filter Group: Price -->
+        <div class="flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <h3 class="text-white text-base font-bold py-6">Price Range</h3>
+            <span class="text-xs text-primary font-medium cursor-pointer">Reset</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <div class="relative w-full">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9dabb9] text-xs">$</span>
+              <input
+                class="w-full bg-surface-dark border border-border-dark rounded-lg py-2 pl-6 pr-2 text-white text-sm focus:border-primary focus:ring-0"
+                type="number" name="minPrice" value="0" />
+            </div>
+            <span class="text-[#9dabb9]">-</span>
+            <div class="relative w-full">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[#9dabb9] text-xs">$</span>
+              <input
+                class="w-full bg-surface-dark border border-border-dark rounded-lg py-2 pl-6 pr-2 text-white text-sm focus:border-primary focus:ring-0"
+                type="number" name="maxPrice" value="5000" />
+            </div>
+          </div>
+          <!-- Fake Slider Visual -->
+
+        </div>
+
+        <!-- Filter Group: Size -->
+        <div class="flex flex-col gap-4">
+          <h3 class="text-white text-base font-bold py-6">Size</h3>
+
+          <div class="flex flex-col gap-3">
+            <% sizes.forEach(size=> { %>
+              <label class="flex items-center gap-3 cursor-pointer group">
+                <input type="checkbox" name="size" value="<%= size %>"
+                  class="rounded border-[#3b4754] bg-[#1c2127] text-primary focus:ring-offset-[#111418] focus:ring-primary size-4" />
+                <span class="text-[#9dabb9] group-hover:text-white text-sm transition-colors">
+                  <%= size %>
+                </span>
+              </label>
+              <% }) %>
+          </div>
+        </div>
+        <!-- Mobile Filter Button (Visible only on small, functionality implied) -->
+        <button class="lg:hidden w-full bg-surface-dark text-white font-bold py-3 rounded-lg border border-border-dark">
+          Show Filters
+        </button>
+        <div class="pt-4">
+          <button type="submit"
+            class="w-full bg-primary text-white font-semibold py-3 rounded-lg hover:opacity-90 transition">
+            Apply
+          </button>
+        </div>
+
+        </form>
+      </aside>
+      <!-- Product Grid -->
+      <main class="flex-1">
+        <!-- Mobile Filter Toggle -->
+        <div class="lg:hidden mb-4">
+          <button
+            class="flex items-center gap-2 text-white bg-surface-dark px-4 py-2 rounded-lg border border-border-dark w-full justify-center">
+            <span class="material-symbols-outlined">filter_list</span>
+            <span>Filter &amp; Sort</span>
+          </button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <!-- Product Card 1 -->
+          <% if (products.length> 0) { %>
+            <% products.forEach(product=>{%>
+              <div
+                class="group flex flex-col bg-surface-dark rounded-xl overflow-hidden hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 border border-transparent hover:border-border-dark">
+                <div class="relative aspect-[4/5] w-full overflow-hidden bg-[#283039]">
+                  <% if (product.offer) { %>
+                    <div
+                      class="absolute top-3 left-3 z-20 bg-primary text-white text-[11px] font-bold px-2 py-1 rounded shadow-lg shadow-black/20 max-w-[70%]">
+                      <span class="block truncate"><%= product.offer.name %></span>
+                      <span class="block text-[10px] opacity-90">
+                        <%= product.offer.offerMode === 'PERCENTAGE' ? product.offer.discountValue + '% Off' : 'Rs ' + product.offer.discountValue + ' Off' %>
+                      </span>
+                    </div>
+                  <% } %>
+                  <!-- Favorite Button -->
+                  <!-- Wishlist Button -->
+                  <form class="wishlist-form">
+
+                    <% const currentWishlistItems=typeof wishlistItems !=='undefined' ? wishlistItems : []; const
+                      isWishlisted=currentWishlistItems.some(item=>
+                      item.productId === product.productId.toString() &&
+                      item.variantId === product.variantId.toString()
+                      );
+                      %>
+
+                      <button type="submit"
+                        class="wishlist-btn absolute top-3 right-3 z-20 h-9 w-9 rounded-full <%= isWishlisted ? 'bg-red-500 text-white' : 'bg-black/50 text-white' %> backdrop-blur-sm flex items-center justify-center hover:bg-red-500 transition-all duration-300"
+                        data-product-id="<%= product.productId %>" data-variant-id="<%= product.variantId %>"
+                        data-wishlisted="<%= isWishlisted ? 'true' : 'false' %>">
+                        <span class="material-symbols-outlined text-[18px]">
+                          favorite
+                        </span>
+                      </button>
+                  </form>
+                  <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    src="<%= product.images?.[0] %>" alt="<%= product.name %>" />
+                  <!-- Quick Add (Desktop Hover) -->
+                  <div
+                    class="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden lg:block">
+                    <button
+                      class="quick-add-btn w-full bg-white text-background-dark font-bold py-2 rounded-lg hover:bg-primary hover:text-white transition-colors shadow-lg"
+                      data-product-id="<%= product.productId %>" data-variant-id="<%= product.variantId %>">
+                      Quick Add
+                    </button>
+                  </div>
+                </div>
+                <div class="p-4 flex flex-col flex-grow">
+                  <a href="/product/<%= product.productId %>?variant=<%= product.variantId %>">
+                    <h3
+                      class="text-white text-base font-medium leading-snug mb-2 line-clamp-2 hover:text-primary cursor-pointer">
+                      <%=product.name%>
+                    </h3>
+                  </a>
+
+                  <!-- Variant Details -->
+                  <div class="flex items-center gap-2 mb-3 flex-wrap">
+
+                    <!-- Color -->
+                    <span class="px-2 py-1 text-xs rounded-md bg-[#283039] text-[#d1d5db] border border-border-dark">
+                      Color: <%= product.color %>
+                    </span>
+
+                    <!-- Size -->
+                    <span class="px-2 py-1 text-xs rounded-md bg-[#283039] text-[#d1d5db] border border-border-dark">
+                      Size: <%= product.size %>
+                    </span>
+
+                  </div>
+
+                  <div class="mt-auto flex items-center justify-between">
+                    <span class="text-white text-lg font-bold">
+                      ₹<%= product.price %>
+                    </span>
+                    <button
+                      class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center">
+                      <span class="material-symbols-outlined text-[18px]">add</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <%})%>
+                <% } else { %>
+
+                  <!-- ❌ No Products Found UI -->
+                  <div class="col-span-full flex flex-col items-center justify-center py-20 text-center">
+
+                    <span class="material-symbols-outlined text-6xl text-[#9dabb9] mb-4">
+                      search_off
+                    </span>
+
+                    <h2 class="text-xl font-bold text-white mb-2">
+                      No products found
+                    </h2>
+
+                    <p class="text-[#9dabb9] text-sm">
+                      Try adjusting your filters or search terms.
+                    </p>
+
+                    <a href="/product"
+                      class="mt-4 px-5 py-2 bg-primary text-white rounded-lg text-sm hover:opacity-90 transition">
+                      Reset Filters
+                    </a>
+
+                  </div>
+
+                  <% } %>
+
+
+
+        </div>
+        <!-- Pagination -->
+        <div class="flex items-center justify-center gap-2 mt-12">
+
+          <% const params=new URLSearchParams(query); %>
+
+
+            <% if (currentPage> 1) {
+              params.set("page", currentPage - 1);
+              %>
+              <a href="?<%= params.toString() %>"
+                class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">
+                <span class="material-symbols-outlined">chevron_left</span>
+              </a>
+              <% } %>
+
+
+                <% for (let i=1; i <=totalPages; i++) { params.set("page", i); %>
+
+                  <% if (i===currentPage) { %>
+                    <span class="size-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold">
+                      <%= i %>
+                    </span>
+                    <% } else { %>
+                      <a href="?<%= params.toString() %>"
+                        class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">
+                        <%= i %>
+                      </a>
+                      <% } %>
+
+                        <% } %>
+
+
+                          <% if (currentPage < totalPages) { params.set("page", currentPage + 1); %>
+                            <a href="?<%= params.toString() %>"
+                              class="size-10 flex items-center justify-center rounded-lg bg-surface-dark text-[#9dabb9] hover:bg-[#3b4754] hover:text-white transition-colors">
+                              <span class="material-symbols-outlined">chevron_right</span>
+                            </a>
+                            <% } %>
+
+        </div>
+      </main>
+    </div>
+  </div>
+  <!-- Footer Simple -->
+  <footer class="mt-auto border-t border-border-dark bg-background-dark py-8 px-4 lg:px-10">
+    <div class="max-w-[1440px] mx-auto text-center text-[#9dabb9] text-sm">
+      <p>© 2026 Urban Football. All rights reserved.</p>
+    </div>
+  </footer>
+</body>
+<script>
+  const input = document.getElementById("searchInput");
+  const clearBtn = document.getElementById("clearSearch");
+
+  // Show/hide logic
+  function toggleClear() {
+    if (input.value.trim() !== "" && document.activeElement === input) {
+      clearBtn.classList.remove("hidden");
+    } else {
+      clearBtn.classList.add("hidden");
+    }
+  }
+
+  input.addEventListener("focus", toggleClear);
+  input.addEventListener("input", toggleClear);
+  input.addEventListener("blur", () => {
+    setTimeout(toggleClear, 150);
   });
 
-});
+  // Clear action
+  clearBtn.addEventListener("click", () => {
+    input.value = "";
+    input.focus();
+
+    const url = new URL(window.location.href);
+    url.searchParams.delete("search");
+    url.searchParams.set("page", 1);
+
+    window.location.href = url.toString();
+  });
+</script>
+<script>
+  document.querySelectorAll(".quick-add-btn").forEach(button => {
+
+    button.addEventListener("click", async () => {
+
+      const productId = button.dataset.productId;
+      const variantId = button.dataset.variantId;
+
+      try {
+
+        const response = await fetch("/cart/add", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            productId,
+            variantId,
+            quantity: 1
+          })
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          Swal.fire({
+            icon: "success",
+            title: "Added to Cart",
+            text: "Product added successfully",
+            toast: true,
+            position: "top-end",
+            showConfirmButton: false,
+            timer: 1500,
+            background: "#1c2127",
+            color: "#fff"
+          });
+
+          const cartCount = document.getElementById("cart-count");
+
+          if (cartCount) {
+
+            cartCount.textContent = data.cartCount;
+
+          } else {
+
+            const badge = document.createElement("span");
+
+            badge.id = "cart-count";
+
+            badge.className =
+              "absolute -top-1 -right-1 bg-primary text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full";
+
+            badge.textContent = data.cartCount;
+
+            document
+              .querySelector('a[href="/cart"] button')
+              .appendChild(badge);
+          }
+
+          button.textContent = "Added";
+          button.disabled = true;
+
+          setTimeout(() => {
+            button.textContent = "Quick Add";
+            button.disabled = false;
+          }, 1500);
+
+        } else {
+
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: data.message || "Failed to add to cart",
+            background: "#1c2127",
+            color: "#fff",
+            confirmButtonColor: "#137fec"
+          });
+
+        }
+
+      } catch (error) {
+
+        console.log(error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: "Something went wrong",
+          background: "#1c2127",
+          color: "#fff",
+          confirmButtonColor: "#137fec"
+        });
+
+      }
+
+    });
+
+  });
 </script>
 
 
 <script>
 
-document.querySelectorAll(".wishlist-form").forEach(form => {
+  document.querySelectorAll(".wishlist-form").forEach(form => {
 
-  form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", async (e) => {
 
-    e.preventDefault();
+      e.preventDefault();
 
-    const button = form.querySelector(".wishlist-btn");
+      const button = form.querySelector(".wishlist-btn");
 
-    const productId = button.dataset.productId;
-    const variantId = button.dataset.variantId;
-    const isWishlisted = button.getAttribute("data-wishlisted") === "true";
-    const endpoint = isWishlisted ? "/removeWishlist" : "/wishlist/add";
+      const productId = button.dataset.productId;
+      const variantId = button.dataset.variantId;
+      const isWishlisted = button.getAttribute("data-wishlisted") === "true";
+      const endpoint = isWishlisted ? "/removeWishlist" : "/wishlist/add";
 
-    try {
+      try {
 
-      const response = await fetch(endpoint, {
+        const response = await fetch(endpoint, {
 
-        method: "POST",
+          method: "POST",
 
-        headers: {
-          "Content-Type": "application/json"
-        },
-        credentials:'same-origin',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          credentials: 'same-origin',
 
-        body: JSON.stringify({
-          productId,
-          variantId
-        })
+          body: JSON.stringify({
+            productId,
+            variantId
+          })
 
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-
-        if (isWishlisted) {
-          button.setAttribute("data-wishlisted", "false");
-          button.classList.remove("bg-red-500");
-          button.classList.add("bg-black/50");
-        } else {
-          button.setAttribute("data-wishlisted", "true");
-          button.classList.add("bg-red-500");
-          button.classList.remove("bg-black/50");
-        }
-
-        Swal.fire({
-          icon: "success",
-          text: data.message,
-          toast:true,
-          position: "top-end",
-          timer: 1500,
-          showConfirmButton: false
         });
 
-      } else {
+        const data = await response.json();
+
+        if (data.success) {
+
+          if (isWishlisted) {
+            button.setAttribute("data-wishlisted", "false");
+            button.classList.remove("bg-red-500");
+            button.classList.add("bg-black/50");
+          } else {
+            button.setAttribute("data-wishlisted", "true");
+            button.classList.add("bg-red-500");
+            button.classList.remove("bg-black/50");
+          }
+
+          Swal.fire({
+            icon: "success",
+            text: data.message,
+            toast: true,
+            position: "top-end",
+            timer: 1500,
+            showConfirmButton: false
+          });
+
+        } else {
+
+          Swal.fire({
+            icon: "error",
+            text: data.message
+          });
+
+        }
+
+      } catch (error) {
+
+        console.log(error);
 
         Swal.fire({
           icon: "error",
-          text: data.message
+          text: "Something went wrong"
         });
 
       }
 
-    } catch (error) {
-
-      console.log(error);
-
-      Swal.fire({
-        icon: "error",
-        text: "Something went wrong"
-      });
-
-    }
+    });
 
   });
-
-});
 
 </script>
 
