@@ -3,6 +3,7 @@ import { getRelatedProducts, productDetailsService } from "../service/userProduc
 import Product from "../models/productModel.js";
 import { addToCartService } from "../service/userCartService.js";
 import Wishlist from "../models/userWishlistModel.js";
+import { getVariantOfferPricing } from "../service/offerhelper.js";
 
 // export const productListRender = async (req, res) => {
 //   try {
@@ -48,19 +49,6 @@ export const productDetailsRender = async (req, res) => {
     const userId=req.session?.userId|| req.user?._id;
 
     const product = await productDetailsService(productId);
-    const now = new Date();
-    const isActiveOffer = (offer) => {
-      return offer &&
-        offer.isActive &&
-        new Date(offer.startDate) <= now &&
-        new Date(offer.endDate) >= now;
-    };
-
-    product.activeOffer = isActiveOffer(product.offer)
-      ? product.offer
-      : isActiveOffer(product.category?.offer)
-        ? product.category.offer
-        : null;
     
 
     let selectedVariant;
@@ -74,6 +62,17 @@ export const productDetailsRender = async (req, res) => {
     if (!selectedVariant) {
       selectedVariant = product.variants[0];
     }
+
+    product.variants = product.variants.map((variant) => ({
+      ...variant,
+      offerPricing: getVariantOfferPricing(variant, product),
+    }));
+
+    selectedVariant = product.variants.find(
+      (variant) => variant._id.toString() === selectedVariant._id.toString(),
+    );
+
+    product.activeOffer = selectedVariant?.offerPricing?.appliedOffer || null;
 
     const relatedProducts=await getRelatedProducts(product.category._id,product._id)
     console.log(relatedProducts)
@@ -179,12 +178,6 @@ if (search) {
     };
 
     products.forEach((product) => {
-      const activeOffer = isActiveOffer(product.offer)
-        ? product.offer
-        : isActiveOffer(product.category?.offer)
-          ? product.category.offer
-          : null;
-
       product.variants.forEach((variant) => {
 
         
@@ -196,6 +189,8 @@ if (search) {
           return;
         }
 
+        const pricing = getVariantOfferPricing(variant, product);
+
         sizesList.push(variant.size);
 
         productList.push({
@@ -204,14 +199,17 @@ if (search) {
           category: product.category,
           variantId: variant._id,
           size: variant.size,
-          price: variant.price,
+          price: pricing.finalPrice,
+          originalPrice: pricing.originalPrice,
+          basePrice: pricing.basePrice,
+          offerDiscount: pricing.offerDiscount,
           images: variant.images,
           stock: variant.stock,
           color:variant.color,
-          offer: activeOffer ? {
-            name: activeOffer.name,
-            offerMode: activeOffer.offerMode,
-            discountValue: activeOffer.discountValue
+          offer: pricing.appliedOffer ? {
+            name: pricing.appliedOffer.name,
+            offerMode: pricing.appliedOffer.offerMode,
+            discountValue: pricing.appliedOffer.discountValue
           } : null
         });
       });

@@ -6,6 +6,7 @@ import Wallet from "../models/walletModel.js";
 import Coupon from "../models/couponModel.js";
 import { applyCouponService } from "./userCouponService.js";
 import { processReferralReward } from "./userService.js";
+import { getVariantOfferPricing } from "./offerhelper.js";
 
 export const generateOrderNumber = () => {
   return `ORD-${Math.floor(10000 + Math.random() * 90000)}`;
@@ -19,9 +20,16 @@ export const placeOrderService = async (
 ) => {
   console.log(userId);
   //cart
-  const cart = await Cart.findOne({ userId: userId }).populate(
-    "items.productId",
-  );
+  const cart = await Cart.findOne({ userId: userId }).populate({
+    path: "items.productId",
+    populate: [
+      { path: "offer" },
+      {
+        path: "category",
+        populate: { path: "offer" },
+      },
+    ],
+  });
 
   console.log(cart);
 
@@ -68,9 +76,8 @@ export const placeOrderService = async (
       throw new Error(`${product.name} is out of stock`);
     }
 
-    //DB price
-
-    const price = variant.discountedPrice ?? variant.price;
+    const pricing = getVariantOfferPricing(variant, product);
+    const price = pricing.finalPrice;
 
     const totalPrice = price * item.quantity;
 

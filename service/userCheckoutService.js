@@ -3,13 +3,20 @@ import Cart from "../models/cartModel.js";
 import User from "../models/userModel.js";
 import Address from "../models/userAddressModel.js";
 import Coupon from "../models/couponModel.js";
+import { getVariantOfferPricing } from "./offerhelper.js";
 
 export const checkoutRenderService = async (userId) => {
   const cart = await Cart.findOne({ userId }).populate({
     path: "items.productId",
-    populate: {
-      path: "category",
-    },
+    populate: [
+      { path: "offer" },
+      {
+        path: "category",
+        populate: {
+          path: "offer",
+        },
+      },
+    ],
   });
 
   if (!cart || cart.items.length === 0) {
@@ -46,6 +53,8 @@ export const checkoutRenderService = async (userId) => {
       (v) => v._id.toString() === item.variantId.toString(),
     );
 
+    const pricing = getVariantOfferPricing(variant, product);
+
     return {
       productID: product._id,
       variantId: variant._id,
@@ -54,8 +63,13 @@ export const checkoutRenderService = async (userId) => {
       size: variant.size,
       color: variant.color,
       quantity: item.quantity,
-      price: variant.discountedPrice || variant.price,
-      total: (variant.discountedPrice || variant.price) * item.quantity,
+      originalPrice: pricing.originalPrice,
+      basePrice: pricing.basePrice,
+      price: pricing.finalPrice,
+      offerDiscount: pricing.offerDiscount,
+      offerName: pricing.appliedOffer?.name || "",
+      totalOfferDiscount: pricing.offerDiscount * item.quantity,
+      total: pricing.finalPrice * item.quantity,
     };
   });
 
@@ -66,7 +80,10 @@ export const checkoutRenderService = async (userId) => {
   const subtotal = cartItems.reduce((acc, item) => {
     return (acc += item.total);
   }, 0);
-  
+
+  const offerDiscount = cartItems.reduce((acc, item) => {
+    return (acc += item.totalOfferDiscount);
+  }, 0);
 
   const shippingCharge = subtotal > 3999 ? 0 : 50;
 
@@ -109,6 +126,7 @@ export const checkoutRenderService = async (userId) => {
     addresses,
     totalQuantity,
     subtotal,
+    offerDiscount,
     shippingCharge,
     discount,
     grandTotal,

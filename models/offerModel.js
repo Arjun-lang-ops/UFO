@@ -14,7 +14,6 @@ const offerSchema = new mongoose.Schema(
       required: true,
     },
 
-
     offerMode: {
       type: String,
       enum: ["PERCENTAGE", "FLAT"],
@@ -34,10 +33,10 @@ const offerSchema = new mongoose.Schema(
     },
 
     discountValue: {
-  type: Number,
-  required: true,
-  min: 1,
-},
+      type: Number,
+      required: true,
+      min: 1,
+    },
 
     startDate: {
       type: Date,
@@ -56,7 +55,7 @@ const offerSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const Offer = mongoose.model("Offer", offerSchema);

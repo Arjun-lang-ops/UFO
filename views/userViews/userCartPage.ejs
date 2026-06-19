@@ -121,7 +121,10 @@
                   );
                 }
                 const isOutOfStock = !variant || variant.stock <= 0 || !product || !product.isActive ||!product.category?.isListed;
-                const price = isOutOfStock ? 0 : (variant?.discountedPrice || variant?.price || 0);
+                const offerPricing = item.offerPricing || {};
+                const price = isOutOfStock ? 0 : (offerPricing.finalPrice || variant?.discountedPrice || variant?.price || 0);
+                const basePrice = isOutOfStock ? 0 : (offerPricing.basePrice || variant?.discountedPrice || variant?.price || 0);
+                const itemOfferDiscount = isOutOfStock ? 0 : (offerPricing.offerDiscount || 0);
                 const total = isOutOfStock ? 0 : price * item.quantity;
                 // Use last-known image/details even if OOS
                 const imgSrc = variant?.images?.[0] || '/images/default.jpg';
@@ -153,6 +156,12 @@
                   <div class="flex flex-col gap-1 min-w-0">
                     <h3 class="text-white text-base md:text-lg font-bold truncate"><%= product?.name || 'Unknown Product' %></h3>
                     <p class="text-[#9dabb9] text-sm truncate">Size: <%= sizeLbl %> &bull; Color: <%= colorLbl %></p>
+                    <% if (!isOutOfStock && itemOfferDiscount > 0) { %>
+                    <span class="inline-flex items-center gap-1 text-[#4ade80] text-xs font-bold mt-1">
+                      <span class="material-symbols-outlined text-[14px]">sell</span>
+                      <%= offerPricing.appliedOffer?.name || 'Best offer' %> saved &#8377;<%= itemOfferDiscount %>
+                    </span>
+                    <% } %>
                     <% if (isOutOfStock) { %>
                     <span class="inline-flex items-center gap-1 text-[#ef4444] text-xs font-bold mt-1">
                       <span class="material-symbols-outlined text-[14px]">block</span>
@@ -236,13 +245,14 @@
                   <span>Subtotal</span>
                   <span id="cart-total" class="text-white font-bold text-lg">&#8377;<%= typeof cartTotal !== 'undefined' ? cartTotal : 0 %></span>
                 </div>
+                <% if ((offerDiscount || 0) > 0) { %>
                 <div class="flex justify-between items-center text-[#4ade80]">
                   <div class="flex items-center gap-2">
-                    <span>Discount</span>
-                    <span class="text-xs bg-[#4ade80]/10 px-1.5 py-0.5 rounded border border-[#4ade80]/20">GOAL20</span>
+                    <span>Offer Savings</span>
                   </div>
-                  <span class="font-medium">-&#8377;20.00</span>
+                  <span class="font-medium">-&#8377;<%= offerDiscount %></span>
                 </div>
+                <% } %>
                 <div class="flex justify-between items-center text-[#9dabb9]">
                   <span>Shipping estimate</span>
                   <span class="text-[#4ade80] font-medium"><%=shippingCharge%></span>

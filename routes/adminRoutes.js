@@ -21,9 +21,11 @@ router.get('/product-edit/:id',adminLoggedIn,editProduct)
 router.post('/login', adminLogin);
 router.patch('/block-user/:id',adminLoggedIn, toggleBlockUser);
 router.patch('/product/toggle-status/:id',toggleProductStatusController)
+//offer apply in product
 router.patch('/product/:id/offer',adminLoggedIn,assignProductOfferController)
 router.post('/addCategory',addCategoryController);
 router.put('/editCategory/:id',editCategoryController);
+//offer apply in category
 router.patch('/category/:id/offer',adminLoggedIn,assignCategoryOfferController);
 router.post('/product-added',uploadVariantImages,addProductController)
 router.put('/product-edit/:id',uploadVariantImages, editProductController)

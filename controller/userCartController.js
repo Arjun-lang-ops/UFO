@@ -1,4 +1,5 @@
 import { addToCartService, getCartService,removeFromCartService,updateQuantity } from "../service/userCartService.js";
+import { getVariantOfferPricing } from "../service/offerhelper.js";
 
 export const cartRender = async (req, res) => {
   try {
@@ -45,6 +46,7 @@ export const getCartController = async (req, res) => {
     const cart = await getCartService(userId);
 
     let cartTotal = 0;
+    let offerDiscount = 0;
 
     if (cart && cart.items.length > 0) {
       cart.items.forEach(item => {
@@ -56,18 +58,30 @@ export const getCartController = async (req, res) => {
         );
 
         const isOutOfStock = !variant || variant.stock <= 0 || !product || !product.isActive;
-        const price = isOutOfStock ? 0 : (variant?.discountedPrice || variant?.price || 0);
+        const pricing = !isOutOfStock
+          ? getVariantOfferPricing(variant, product)
+          : { finalPrice: 0, offerDiscount: 0 };
+        item.offerPricing = pricing;
+        const price = pricing.finalPrice;
 
         cartTotal += price * item.quantity;
+        offerDiscount += (pricing.offerDiscount || 0) * item.quantity;
       });
     }
 
-    let shippingCharge=cartTotal>3999?0:50;
-     let subtotal=cartTotal+shippingCharge
+    const shippingCharge =
+  cartTotal > 0 && cartTotal < 4000
+    ? 50
+    : 0;
+
+const subtotal = cartTotal + shippingCharge;
 
     res.render("userViews/userCartPage", {
       cart,
-      cartTotal ,shippingCharge ,subtotal 
+      cartTotal,
+      offerDiscount,
+      shippingCharge,
+      subtotal,
     });
 
   } catch (error) {
@@ -110,6 +124,9 @@ export const updateCartQuantity = async (req, res) => {
     });
 
   } catch (error) {
-    res.json({ success: false });
+    res.status(400).json({
+      success: false,
+      message: error.message || "Failed to update cart",
+    });
   }
 };

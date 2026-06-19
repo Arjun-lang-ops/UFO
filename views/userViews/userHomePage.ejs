@@ -296,11 +296,15 @@
 
           <div class="flex items-center gap-2 mt-1">
             <p class="text-primary font-bold">
-              ₹<%= variant.discountedPrice || variant.price %>
+              ₹<%= variant.offerPricing ? variant.offerPricing.finalPrice : (variant.discountedPrice || variant.price) %>
             </p>
-            <% if (variant.price > (variant.discountedPrice || variant.price)) { %>
+            <% 
+              const baseDisplayPrice = variant.offerPricing ? variant.offerPricing.finalPrice : (variant.discountedPrice || variant.price);
+              const crossedPrice = variant.offerPricing ? (variant.offerPricing.basePrice > variant.offerPricing.finalPrice ? variant.offerPricing.basePrice : (variant.price > variant.offerPricing.finalPrice ? variant.price : null)) : (variant.price > variant.discountedPrice ? variant.price : null);
+              if (crossedPrice && crossedPrice > baseDisplayPrice) { 
+            %>
               <span class="text-slate-500 text-xs line-through">
-                ₹<%= variant.price %>
+                ₹<%= crossedPrice %>
               </span>
             <% } %>
           </div>
@@ -315,7 +319,6 @@
 
     </a>
 
-    <!-- Action Buttons -->
     <div class="flex justify-end gap-2 mt-2">
 
       <!-- Wishlist -->

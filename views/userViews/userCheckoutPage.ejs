@@ -263,6 +263,11 @@
                                                 <p class="text-sm text-gray-500 dark:text-gray-400">
                                                     Size: <%= item.size %>
                                                 </p>
+                                                <% if (item.offerDiscount > 0) { %>
+                                                    <p class="mt-1 text-xs font-bold text-green-600 dark:text-green-400">
+                                                        <%= item.offerName || "Best offer" %> saved Rs. <%= item.totalOfferDiscount %>
+                                                    </p>
+                                                <% } %>
 
                                             </div>
 
@@ -306,6 +311,12 @@
                                                     checkoutData?.shippingCharge %>
                                             </dd>
                                         </div>
+                                        <% if ((checkoutData?.offerDiscount || 0) > 0) { %>
+                                            <div class="flex items-center justify-between py-4">
+                                                <dt class="text-gray-500 dark:text-gray-400">Offer Savings</dt>
+                                                <dd class="font-medium text-green-600 dark:text-green-400">- Rs. <%= checkoutData.offerDiscount %></dd>
+                                            </div>
+                                        <% } %>
                                         <div id="discountSummaryRow"
                                             class="hidden items-center justify-between py-4">
                                             <dt class="text-gray-500 dark:text-gray-400">Coupon Discount</dt>

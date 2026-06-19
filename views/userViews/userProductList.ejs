@@ -373,8 +373,11 @@
                   </div>
 
                   <div class="mt-auto flex items-center justify-between">
-                    <span class="text-white text-lg font-bold">
-                      ₹<%= product.price %>
+                    <span class="flex flex-col">
+                      <span class="text-white text-lg font-bold">₹<%= product.price %></span>
+                      <% if (product.basePrice && product.basePrice > product.price) { %>
+                        <span class="text-xs text-[#9dabb9] line-through">₹<%= product.basePrice %></span>
+                      <% } %>
                     </span>
                     <button
                       class="lg:hidden size-8 rounded-full bg-primary text-white flex items-center justify-center">
