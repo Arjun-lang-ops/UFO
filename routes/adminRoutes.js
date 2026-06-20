@@ -1,4 +1,4 @@
-import { adminLoginRender, adminHomeRender, adminLogin, logoutAdmin, adminUserManagement, toggleBlockUser } from "../controller/adminController.js";
+import { adminLoginRender, adminHomeRender, adminLogin, logoutAdmin, adminUserManagement, toggleBlockUser, adminDashboardChartData } from "../controller/adminController.js";
 
 import express from 'express';
 import { adminLoggedIn, adminLoggedOut } from "../middlewares/adminAuth.js";
@@ -11,6 +11,7 @@ const router = express.Router();
 
 router.get('/', adminLoggedOut, adminLoginRender)
 router.get('/dashboard',adminLoggedIn, adminHomeRender)
+router.get('/dashboard/chart-data', adminLoggedIn, adminDashboardChartData)
 router.get('/userManagement',adminLoggedIn, adminUserManagement)
 router.get('/logout', logoutAdmin)
 router.get('/categories',adminLoggedIn,categoryRender);
