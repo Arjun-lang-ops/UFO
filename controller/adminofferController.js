@@ -4,7 +4,7 @@ import { offerAddService, offerEditService } from "../service/adminOfferService.
 export const adminOfferRender=async(req,res)=>{
     try {
 
-        const offers=await Offer.find().populate("product").populate("category");
+        const offers= await Offer.find().populate("product").populate("category").sort({createdAt:-1});
         return res.render('adminViews/adminOfferManagement',{offers})
         
     } catch (error) {
@@ -29,6 +29,7 @@ export const adminOfferEditRender=async(req,res)=>{
     try {
         const {id}=req.params;
         const offer=await Offer.findById(id).populate("product").populate("category");
+        console.log("===OFFER FETCHED FOR EDIT PAGE===", offer);
         return res.render('adminViews/adminOfferEdit',{offer})
         
     } catch (error) {
@@ -65,6 +66,7 @@ export const offerEdit=async(req,res)=>{
     try {
         const { id } = req.params;
         const data = req.body;
+        console.log("===REQ BODY===", data)
         const offer = await offerEditService(id, data);
 
         res.status(200).json({

@@ -41,7 +41,10 @@ export const downloadInvoice = async (req, res) => {
         return 0;
       }
 
-      if (order.orderStatus === "Cancelled" || order.orderStatus === "Returned") {
+      if (
+        order.orderStatus === "Cancelled" ||
+        order.orderStatus === "Returned"
+      ) {
         return Number(item.quantity || 0);
       }
 
@@ -109,11 +112,11 @@ export const downloadInvoice = async (req, res) => {
 
       doc.text(item, 45, y, { width: 210 });
       doc.text(qty, 270, y, { width: 45, align: "center" });
-      doc.text(currency(price), 325, y, {
+      doc.text(bold ? price : currency(price), 325, y, {
         width: 70,
         align: "right",
       });
-      doc.text(currency(total), 405, y, {
+      doc.text(bold ? total : currency(total), 405, y, {
         width: 70,
         align: "right",
       });
@@ -132,7 +135,11 @@ export const downloadInvoice = async (req, res) => {
           .lineWidth(1);
       }
 
-      doc.moveTo(40, y + 20).lineTo(555, y + 20).strokeColor("#ddd").stroke();
+      doc
+        .moveTo(40, y + 20)
+        .lineTo(555, y + 20)
+        .strokeColor("#ddd")
+        .stroke();
       doc.fillColor("black");
     };
 
@@ -146,7 +153,9 @@ export const downloadInvoice = async (req, res) => {
 
     order.items.forEach((item) => {
       const itemStatus = getItemStatus(item);
-      const lineTotal = Number(item.totalPrice || item.quantity * item.price || 0);
+      const lineTotal = Number(
+        item.totalPrice || item.quantity * item.price || 0,
+      );
       const excludedQuantity = getExcludedQuantity(item, itemStatus);
 
       if (["Cancelled", "Returned"].includes(itemStatus)) {
@@ -216,7 +225,10 @@ export const downloadInvoice = async (req, res) => {
 
     rowY += 28;
 
-    doc.moveTo(390, rowY - 8).lineTo(555, rowY - 8).stroke();
+    doc
+      .moveTo(390, rowY - 8)
+      .lineTo(555, rowY - 8)
+      .stroke();
 
     doc
       .font("Helvetica-Bold")

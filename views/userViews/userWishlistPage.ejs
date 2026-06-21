@@ -85,12 +85,21 @@
                 <!-- Actions -->
                 <div class="flex items-center gap-3">
                     <a href="/cart">
-                        <button
-                        class="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-[#283039] transition-colors relative group">
-                        <span class="material-symbols-outlined text-slate-900 dark:text-white">shopping_cart</span>
-                        <span class="absolute top-1.5 right-1.5 size-2 rounded-full bg-primary"></span>
-                    </button>
-                    </a>
+  <button
+    class="flex items-center justify-center rounded-lg h-10 w-10 hover:bg-slate-200 dark:hover:bg-[#283039] transition-colors relative"
+  >
+    <span class="material-symbols-outlined">shopping_cart</span>
+
+    <% if (cartCount > 0) { %>
+      <span
+        id="cart-count"
+        class="absolute -top-1 -right-1 bg-primary text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full">
+        <%= cartCount %>
+      </span>
+    <% } %>
+
+  </button>
+</a>
                     <a href="/profile">
                         <button
                         class="flex size-10 items-center justify-center rounded-lg hover:bg-gray-200 dark:hover:bg-[#283039] transition-colors">

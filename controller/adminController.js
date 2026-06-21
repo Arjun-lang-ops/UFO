@@ -101,6 +101,9 @@ const getChartData = async (filter) => {
   return { labels, revenue };
 };
 
+
+//admin dashboard data
+
 export const adminDashboardChartData = async (req, res) => {
   try {
     const filter = req.query.filter || "weekly";
@@ -122,7 +125,7 @@ export const adminHomeRender = async(req, res,next) => {
 
     const totalOrders = await Order.countDocuments({ orderStatus: { $ne: "Cancelled" } });
     const activeUsers = await User.countDocuments({ isBlocked: false });
-    const conversionRate = activeUsers > 0 ? ((totalOrders / activeUsers) * 100).toFixed(2) : 0;
+    
 
     const bestSellingProducts = await Order.aggregate([
       { $match: { orderStatus: { $ne: "Cancelled" } } },
@@ -187,7 +190,6 @@ export const adminHomeRender = async(req, res,next) => {
       totalSales,
       totalOrders,
       activeUsers,
-      conversionRate,
       bestSellingProducts,
       bestSellingCategories
     });

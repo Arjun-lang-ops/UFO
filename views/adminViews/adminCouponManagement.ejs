@@ -45,485 +45,511 @@
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased">
     <div class="flex min-h-screen">
         <!-- SideNavBar -->
-        <aside
-            class="w-72 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark flex flex-col shrink-0">
-            <div class="p-6 flex flex-col h-full">
-                <div class="flex items-center gap-3 mb-10">
-                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 border-2 border-primary"
-                        data-alt="Football store professional brand logo"
-                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCk3wqgFU9wWwRMWzUs480IpZlOBTjl_Els-wMkVB0gVBclDEl-octXQBJRSl8oLKjSBuDnB5b1Yni42xYvCWy5uOdji9YS9bTw96Bwow1KrhS613OKtYgqfdU34HL9DLTg-652U_mM4_4jllHip8HMi22H8m7MBe1OyNjUKU_DfHI9TE9Eur7VwvceJuLfU_Nk2G-lIJnFJpkZ0HqPi_LgvdlaGwuUF2bkKSTzSnD0n7Z--jHB2Hu3MpaOZhpQXJigX2vXIYOp6Rc");'>
+        <%- include('partials/sidebar', { activePage: 'coupons' }) %>
+            <!-- Main Content Area -->
+            <main class="ml-64 flex-1 overflow-y-auto">
+                <div class="max-w-6xl mx-auto p-8">
+                    <!-- Breadcrumbs -->
+                    <div class="flex flex-wrap items-center gap-2 mb-4">
+                        <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors"
+                            href="#">Admin</a>
+                        <span
+                            class="text-slate-400 dark:text-[#9dabb9] material-symbols-outlined text-sm">chevron_right</span>
+                        <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors"
+                            href="#">Marketing</a>
+                        <span
+                            class="text-slate-400 dark:text-[#9dabb9] material-symbols-outlined text-sm">chevron_right</span>
+                        <span class="text-slate-900 dark:text-white text-sm font-bold">Coupons</span>
                     </div>
-                    <div class="flex flex-col">
-                        <h1 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Admin Panel</h1>
-                        <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-normal">Football Accessories</p>
+                    <!-- PageHeading -->
+                    <div class="flex flex-wrap justify-between items-center gap-4 mb-8">
+                        <div>
+                            <h2 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">
+                                Coupon Management</h2>
+                            <p class="text-slate-500 dark:text-[#9dabb9] mt-1">Create and manage promotional offers for
+                                your
+                                store.</p>
+                        </div>
+                        <a href="/admin/add-coupon">
+                            <button
+                                class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold transition-all shadow-lg shadow-primary/20">
+                                <span class="material-symbols-outlined">add_circle</span>
+                                <span>Add New Coupon</span>
+                            </button>
+                        </a>
                     </div>
-                </div>
-                <nav class="flex flex-col gap-2 flex-1">
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        href="/admin/dashboard">
-                        <span class="material-symbols-outlined">dashboard</span>
-                        <p class="text-sm font-medium">Dashboard</p>
-                    </a>
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        href="#">
-                        <span class="material-symbols-outlined">inventory_2</span>
-                        <p class="text-sm font-medium">Products</p>
-                    </a>
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        href="#">
-                        <span class="material-symbols-outlined">shopping_cart</span>
-                        <p class="text-sm font-medium">Orders</p>
-                    </a>
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-white shadow-lg shadow-primary/20"
-                        href="#">
-                        <span class="material-symbols-outlined material-symbols-fill">confirmation_number</span>
-                        <p class="text-sm font-medium">Coupons</p>
-                    </a>
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        href="#">
-                        <span class="material-symbols-outlined">analytics</span>
-                        <p class="text-sm font-medium">Analytics</p>
-                    </a>
-                </nav>
-                <div class="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800">
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        href="#">
-                        <span class="material-symbols-outlined">settings</span>
-                        <p class="text-sm font-medium">Settings</p>
-                    </a>
-                    <div class="flex items-center gap-3 px-4 py-4 mt-2">
+                    <!-- Stats Overview -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         <div
-                            class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-bold">
-                            JD</div>
-                        <div class="flex flex-col">
-                            <p class="text-xs font-bold">John Doe</p>
-                            <p class="text-[10px] text-slate-500">Store Manager</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-        <!-- Main Content Area -->
-        <main class="flex-1 overflow-y-auto">
-            <div class="max-w-6xl mx-auto p-8">
-                <!-- Breadcrumbs -->
-                <div class="flex flex-wrap items-center gap-2 mb-4">
-                    <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors"
-                        href="#">Admin</a>
-                    <span
-                        class="text-slate-400 dark:text-[#9dabb9] material-symbols-outlined text-sm">chevron_right</span>
-                    <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors"
-                        href="#">Marketing</a>
-                    <span
-                        class="text-slate-400 dark:text-[#9dabb9] material-symbols-outlined text-sm">chevron_right</span>
-                    <span class="text-slate-900 dark:text-white text-sm font-bold">Coupons</span>
-                </div>
-                <!-- PageHeading -->
-                <div class="flex flex-wrap justify-between items-center gap-4 mb-8">
-                    <div>
-                        <h2 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">
-                            Coupon Management</h2>
-                        <p class="text-slate-500 dark:text-[#9dabb9] mt-1">Create and manage promotional offers for your
-                            store.</p>
-                    </div>
-                    <a href="/admin/add-coupon">
-                        <button
-                        class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold transition-all shadow-lg shadow-primary/20">
-                        <span class="material-symbols-outlined">add_circle</span>
-                        <span>Add New Coupon</span>
-                    </button>
-                    </a>
-                </div>
-                <!-- Stats Overview -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                    <div
-                        class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="p-2 bg-blue-100 dark:bg-primary/20 rounded-lg">
-                                <span class="material-symbols-outlined text-primary">sell</span>
-                            </div>
-                            <span
-                                class="text-green-500 dark:text-[#0bda5b] text-xs font-bold bg-green-500/10 px-2 py-1 rounded">+2.4%</span>
-                        </div>
-                        <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Total Active Coupons</p>
-                        <p class="text-slate-900 dark:text-white text-3xl font-bold mt-1"><%= typeof totalActiveCoupons !== 'undefined' ? totalActiveCoupons : 0 %></p>
-                    </div>
-                    <div
-                        class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="p-2 bg-green-100 dark:bg-green-500/20 rounded-lg">
+                            class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="p-2 bg-blue-100 dark:bg-primary/20 rounded-lg">
+                                    <span class="material-symbols-outlined text-primary">sell</span>
+                                </div>
                                 <span
-                                    class="material-symbols-outlined text-green-600 dark:text-green-400">group_work</span>
+                                    class="text-green-500 dark:text-[#0bda5b] text-xs font-bold bg-green-500/10 px-2 py-1 rounded">+2.4%</span>
                             </div>
-                            <span
-                                class="text-green-500 dark:text-[#0bda5b] text-xs font-bold bg-green-500/10 px-2 py-1 rounded">+15%</span>
+                            <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Total Active Coupons</p>
+                            <p class="text-slate-900 dark:text-white text-3xl font-bold mt-1">
+                                <%= typeof totalActiveCoupons !=='undefined' ? totalActiveCoupons : 0 %>
+                            </p>
                         </div>
-                        <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Total Redeemed</p>
-                        <p class="text-slate-900 dark:text-white text-3xl font-bold mt-1"><%= typeof totalRedeemed !== 'undefined' ? totalRedeemed : 0 %></p>
-                    </div>
-                    <div
-                        class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-                        <div class="flex justify-between items-start mb-4">
-                            <div class="p-2 bg-amber-100 dark:bg-amber-500/20 rounded-lg">
+                        <div
+                            class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="p-2 bg-green-100 dark:bg-green-500/20 rounded-lg">
+                                    <span
+                                        class="material-symbols-outlined text-green-600 dark:text-green-400">group_work</span>
+                                </div>
                                 <span
-                                    class="material-symbols-outlined text-amber-600 dark:text-amber-400">payments</span>
+                                    class="text-green-500 dark:text-[#0bda5b] text-xs font-bold bg-green-500/10 px-2 py-1 rounded">+15%</span>
                             </div>
-                            <span
-                                class="text-green-500 dark:text-[#0bda5b] text-xs font-bold bg-green-500/10 px-2 py-1 rounded">+8%</span>
+                            <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Total Redeemed</p>
+                            <p class="text-slate-900 dark:text-white text-3xl font-bold mt-1">
+                                <%= typeof totalRedeemed !=='undefined' ? totalRedeemed : 0 %>
+                            </p>
                         </div>
-                        <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Total Coupons</p>
-                        <p class="text-slate-900 dark:text-white text-3xl font-bold mt-1"><%= typeof totalCouponsGlobal !== 'undefined' ? totalCouponsGlobal : 0 %></p>
-                    </div>
-                </div>
-                <!-- Search and Filters -->
-                <div
-                    class="bg-white dark:bg-[#1a232e] rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 p-4">
-                    <div class="flex flex-col md:flex-row gap-4 items-center w-full">
-                        <form action="/admin/coupon" method="GET" class="flex-1 w-full flex items-center gap-2">
-                            <div class="relative flex-1">
+                        <div
+                            class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="p-2 bg-amber-100 dark:bg-amber-500/20 rounded-lg">
+                                    <span
+                                        class="material-symbols-outlined text-amber-600 dark:text-amber-400">payments</span>
+                                </div>
                                 <span
-                                    class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 dark:text-[#9dabb9]">search</span>
-                                <input
-                                    type="text"
-                                    name="search"
-                                    id="searchInput"
-                                    value="<%= typeof search !== 'undefined' ? search : '' %>"
-                                    class="w-full pl-12 pr-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm focus:ring-2 focus:ring-primary/50 transition-all"
-                                    placeholder="Search promo codes (e.g. KICKOFF20)..." />
+                                    class="text-green-500 dark:text-[#0bda5b] text-xs font-bold bg-green-500/10 px-2 py-1 rounded">+8%</span>
                             </div>
-                            <button type="submit"
-                                class="bg-primary hover:bg-primary/90 text-white rounded-lg py-3 px-6 text-sm font-bold transition-all shadow-md shadow-primary/10">Search</button>
-                            <% if (typeof search !== 'undefined' && search) { %>
-                                <a href="/admin/coupon"
-                                    class="bg-red-500 hover:bg-red-600 text-white rounded-lg py-3 px-6 text-sm font-bold flex items-center transition-all shadow-md shadow-red-500/10">Clear</a>
-                            <% } %>
-                        </form>
-                        <div class="flex items-center gap-2 w-full md:w-auto">
-                            <button
-                                class="flex items-center gap-2 px-4 py-3 bg-slate-100 dark:bg-[#283039] text-slate-700 dark:text-white rounded-lg text-sm font-medium border-none hover:bg-slate-200 dark:hover:bg-[#323b46] transition-all">
-                                <span class="material-symbols-outlined text-lg">filter_list</span>
-                                <span>Filter</span>
-                            </button>
-                            <button
-                                class="flex items-center gap-2 px-4 py-3 bg-slate-100 dark:bg-[#283039] text-slate-700 dark:text-white rounded-lg text-sm font-medium border-none hover:bg-slate-200 dark:hover:bg-[#323b46] transition-all">
-                                <span class="material-symbols-outlined text-lg">export_notes</span>
-                                <span>Export</span>
-                            </button>
+                            <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Total Coupons</p>
+                            <p class="text-slate-900 dark:text-white text-3xl font-bold mt-1">
+                                <%= typeof totalCouponsGlobal !=='undefined' ? totalCouponsGlobal : 0 %>
+                            </p>
                         </div>
                     </div>
-                </div>
-                <!-- Coupon Table -->
-                <div
-                    class="bg-white dark:bg-[#1a232e] border border-slate-200 dark:border-slate-800 rounded-b-xl overflow-hidden shadow-sm">
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr
-                                    class="bg-slate-50 dark:bg-[#283039]/30 text-slate-500 dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">
-                                    <th class="px-6 py-4">Code &amp; Description</th>
-                                    <th class="px-6 py-4">Type</th>
-                                    <th class="px-6 py-4">Usage</th>
-                                    <th class="px-6 py-4">Status</th>
-                                    <th class="px-6 py-4">Expiry Date</th>
-                                    <th class="px-6 py-4 text-right">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-                                <% if (coupons && coupons.length) { %>
-                                    <% coupons.forEach((coupon) => {
-                                        const isExpired = coupon.expiryDate && coupon.expiryDate < new Date();
-                                        const isActive = coupon.isActive && !isExpired;
-                                        const statusText = isExpired ? "Expired" : (coupon.isActive ? "Active" : "Inactive");
-                                        const usageLimit = coupon.usageLimit || 0;
-                                        const usedCount = coupon.usedCount || 0;
-                                        const usagePercent = usageLimit > 0 ? Math.min(Math.round((usedCount / usageLimit) * 100), 100) : 0;
-                                        const discountText = coupon.discountType === "PERCENTAGE" ? `${coupon.discountValue}% Off` : `Rs. ${coupon.discountValue} Off`;
-                                        const expiryText = coupon.expiryDate ? coupon.expiryDate.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) : "No Expiry";
-                                    %>
-                                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors <%= isExpired ? 'opacity-70' : '' %>">
-                                            <td class="px-6 py-4">
-                                                <div class="flex flex-col">
-                                                    <span class="<%= isExpired ? 'text-slate-400 dark:text-slate-500 line-through' : 'text-slate-900 dark:text-white' %> font-bold text-sm tracking-wide"><%= coupon.code %></span>
-                                                    <span class="text-slate-500 dark:text-slate-400 text-xs"><%= coupon.description || "No description added" %></span>
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4 text-sm"><%= discountText %></td>
-                                            <td class="px-6 py-4">
-                                                <div class="flex flex-col gap-1 w-32">
-                                                    <div class="flex justify-between text-[10px] font-bold">
-                                                        <span><%= usagePercent %>%</span>
-                                                        <span class="text-slate-400"><%= usedCount %>/<%= usageLimit %></span>
-                                                    </div>
-                                                    <div
-                                                        class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
-                                                        <div class="<%= isActive ? 'bg-primary' : 'bg-slate-400' %> h-full rounded-full" style="width: <%= usagePercent %>%"></div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td class="px-6 py-4">
-                                                <% if (isActive) { %>
-                                                    <span
-                                                        class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-[#0bda5b]">
-                                                        <span class="size-1.5 rounded-full bg-green-500"></span>
-                                                        <%= statusText %>
-                                                    </span>
-                                                <% } else { %>
-                                                    <span
-                                                        class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
-                                                        <span class="size-1.5 rounded-full bg-slate-400"></span>
-                                                        <%= statusText %>
-                                                    </span>
-                                                <% } %>
-                                            </td>
-                                            <td class="px-6 py-4 text-sm <%= isExpired ? 'text-slate-400 dark:text-slate-600' : 'text-slate-600 dark:text-[#9dabb9]' %>"><%= expiryText %></td>
-                                            <td class="px-6 py-4 text-right">
-                                                <div class="flex justify-end gap-2">
-                                                    <a href="/admin/edit-coupon/<%= coupon._id %>"
-                                                        class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
-                                                            class="material-symbols-outlined text-lg">edit</span></a>
-                                                    <button
-                                                        class="p-1.5 text-slate-400 hover:text-red-500 transition-colors"><span
-                                                            class="material-symbols-outlined text-lg">delete</span></button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    <% }) %>
-                                <% } else { %>
-                                    <tr>
-                                        <td colspan="6" class="px-6 py-12 text-center text-sm text-slate-500 dark:text-slate-400">
-                                            No coupons found.
-                                        </td>
-                                    </tr>
-                                <% } %>
-                                <% if (false) { %>
-                                <!-- Row 1 Active -->
-                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-col">
-                                            <span
-                                                class="text-slate-900 dark:text-white font-bold text-sm tracking-wide">GOAL2024</span>
-                                            <span class="text-slate-500 dark:text-slate-400 text-xs">Summer kickoff sale
-                                                offer</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">20% Off</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-col gap-1 w-32">
-                                            <div class="flex justify-between text-[10px] font-bold">
-                                                <span>84%</span>
-                                                <span class="text-slate-400">420/500</span>
-                                            </div>
-                                            <div
-                                                class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
-                                                <div class="bg-primary h-full rounded-full" style="width: 84%"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-[#0bda5b]">
-                                            <span class="size-1.5 rounded-full bg-green-500"></span>
-                                            Active
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-[#9dabb9]">Aug 30, 2024</td>
-                                    <td class="px-6 py-4 text-right">
-                                        <div class="flex justify-end gap-2">
-                                            <button
-                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
-                                                    class="material-symbols-outlined text-lg">edit</span></button>
-                                            <button
-                                                class="p-1.5 text-slate-400 hover:text-red-500 transition-colors"><span
-                                                    class="material-symbols-outlined text-lg">delete</span></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!-- Row 2 Active -->
-                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-col">
-                                            <span
-                                                class="text-slate-900 dark:text-white font-bold text-sm tracking-wide">FREESHIP</span>
-                                            <span class="text-slate-500 dark:text-slate-400 text-xs">Free shipping on
-                                                orders &gt; $50</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">Fixed Amt</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-col gap-1 w-32">
-                                            <div class="flex justify-between text-[10px] font-bold">
-                                                <span>12%</span>
-                                                <span class="text-slate-400">122/∞</span>
-                                            </div>
-                                            <div
-                                                class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
-                                                <div class="bg-primary h-full rounded-full" style="width: 12%"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-[#0bda5b]">
-                                            <span class="size-1.5 rounded-full bg-green-500"></span>
-                                            Active
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-[#9dabb9]">No Expiry</td>
-                                    <td class="px-6 py-4 text-right">
-                                        <div class="flex justify-end gap-2">
-                                            <button
-                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
-                                                    class="material-symbols-outlined text-lg">edit</span></button>
-                                            <button
-                                                class="p-1.5 text-slate-400 hover:text-red-500 transition-colors"><span
-                                                    class="material-symbols-outlined text-lg">delete</span></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!-- Row 3 Expired -->
-                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors opacity-70">
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-col">
-                                            <span
-                                                class="text-slate-400 dark:text-slate-500 font-bold text-sm tracking-wide line-through">WINTER23</span>
-                                            <span class="text-slate-500 dark:text-slate-500 text-xs">Holiday season
-                                                special</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">15% Off</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-col gap-1 w-32">
-                                            <div class="flex justify-between text-[10px] font-bold">
-                                                <span>100%</span>
-                                                <span class="text-slate-400">1000/1000</span>
-                                            </div>
-                                            <div
-                                                class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
-                                                <div class="bg-slate-400 h-full rounded-full" style="width: 100%"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
-                                            <span class="size-1.5 rounded-full bg-slate-400"></span>
-                                            Expired
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-slate-400 dark:text-slate-600">Jan 01, 2024</td>
-                                    <td class="px-6 py-4 text-right">
-                                        <div class="flex justify-end gap-2">
-                                            <button
-                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
-                                                    class="material-symbols-outlined text-lg">history</span></button>
-                                            <button
-                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
-                                                    class="material-symbols-outlined text-lg">content_copy</span></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!-- Row 4 Scheduled -->
-                                <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-col">
-                                            <span
-                                                class="text-slate-900 dark:text-white font-bold text-sm tracking-wide">BLACKFRIDAY</span>
-                                            <span class="text-slate-500 dark:text-slate-400 text-xs">Upcoming massive
-                                                sale event</span>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm">40% Off</td>
-                                    <td class="px-6 py-4">
-                                        <div class="flex flex-col gap-1 w-32">
-                                            <div class="flex justify-between text-[10px] font-bold">
-                                                <span>0%</span>
-                                                <span class="text-slate-400">0/5000</span>
-                                            </div>
-                                            <div
-                                                class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
-                                                <div class="bg-primary h-full rounded-full" style="width: 0%"></div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 dark:bg-primary/10 text-primary">
-                                            <span class="size-1.5 rounded-full bg-primary"></span>
-                                            Scheduled
-                                        </span>
-                                    </td>
-                                    <td class="px-6 py-4 text-sm text-slate-600 dark:text-[#9dabb9]">Nov 24, 2024</td>
-                                    <td class="px-6 py-4 text-right">
-                                        <div class="flex justify-end gap-2">
-                                            <button
-                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
-                                                    class="material-symbols-outlined text-lg">edit</span></button>
-                                            <button
-                                                class="p-1.5 text-slate-400 hover:text-red-500 transition-colors"><span
-                                                    class="material-symbols-outlined text-lg">delete</span></button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <% } %>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- Pagination Footer -->
+                    <!-- Search and Filters -->
                     <div
-                        class="px-6 py-4 bg-slate-50 dark:bg-[#283039]/30 flex flex-wrap justify-between items-center border-t border-slate-200 dark:border-slate-800">
-                        <p class="text-xs text-slate-500 dark:text-[#9dabb9]">
-                            Showing <span class="font-bold"><%= coupons.length ? ((currentPage - 1) * limit + 1) : "0" %>-<%= (currentPage - 1) * limit + coupons.length %></span>
-                            of <span class="font-bold"><%= totalCoupons %></span> coupons
-                        </p>
-                        <div class="flex items-center gap-2">
-                            <% if (currentPage > 1) { %>
-                                <a href="/admin/coupon?page=<%= currentPage - 1 %><%= typeof search !== 'undefined' && search ? '&search=' + encodeURIComponent(search) : '' %>"
-                                    class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">Previous</a>
-                            <% } else { %>
-                                <button
-                                    class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold disabled:opacity-50"
-                                    disabled="">Previous</button>
-                            <% } %>
-                            
-                            <div class="flex gap-1">
-                                <% let pagesToShow = [];
-                                   if (totalPages <= 7) {
-                                       for (let i = 1; i <= totalPages; i++) pagesToShow.push(i);
-                                   } else {
-                                       pagesToShow.push(1);
-                                       if (currentPage > 3) pagesToShow.push('...');
-                                       let start = Math.max(2, currentPage - 1);
-                                       let end = Math.min(totalPages - 1, currentPage + 1);
-                                       for (let i = start; i <= end; i++) pagesToShow.push(i);
-                                       if (currentPage < totalPages - 2) pagesToShow.push('...');
-                                       pagesToShow.push(totalPages);
-                                   }
-                                %>
-                                <% pagesToShow.forEach(p => { %>
-                                    <% if (p === '...') { %>
-                                        <span class="px-1 text-slate-400 dark:text-slate-500 text-sm self-center">…</span>
-                                    <% } else if (p === currentPage) { %>
-                                        <button class="size-8 rounded bg-primary text-white text-xs font-bold"><%= p %></button>
-                                    <% } else { %>
-                                        <a href="/admin/coupon?page=<%= p %><%= typeof search !== 'undefined' && search ? '&search=' + encodeURIComponent(search) : '' %>"
-                                            class="size-8 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold transition-colors flex items-center justify-center"><%= p %></a>
+                        class="bg-white dark:bg-[#1a232e] rounded-t-xl border-x border-t border-slate-200 dark:border-slate-800 p-4">
+                        <div class="flex flex-col md:flex-row gap-4 items-center w-full">
+                            <form action="/admin/coupon" method="GET" class="flex-1 w-full flex items-center gap-2">
+                                <div class="relative flex-1">
+                                    <span
+                                        class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-400 dark:text-[#9dabb9]">search</span>
+                                    <input type="text" name="search" id="searchInput"
+                                        value="<%= typeof search !== 'undefined' ? search : '' %>"
+                                        class="w-full pl-12 pr-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm focus:ring-2 focus:ring-primary/50 transition-all"
+                                        placeholder="Search promo codes (e.g. KICKOFF20)..." />
+                                </div>
+                                <button type="submit"
+                                    class="bg-primary hover:bg-primary/90 text-white rounded-lg py-3 px-6 text-sm font-bold transition-all shadow-md shadow-primary/10">Search</button>
+                                <% if (typeof search !=='undefined' && search) { %>
+                                    <a href="/admin/coupon"
+                                        class="bg-red-500 hover:bg-red-600 text-white rounded-lg py-3 px-6 text-sm font-bold flex items-center transition-all shadow-md shadow-red-500/10">Clear</a>
                                     <% } %>
-                                <% }) %>
+                            </form>
+                            <div class="flex items-center gap-2 w-full md:w-auto">
+                                <form action="/admin/coupon" method="GET" id="statusFilterForm"
+                                    class="flex items-center gap-2 w-full md:w-auto">
+                                    <% if (typeof search !=='undefined' && search) { %>
+                                        <input type="hidden" name="search" value="<%= search %>" />
+                                        <% } %>
+                                            <div class="relative">
+                                                <span
+                                                    class="material-symbols-outlined text-lg absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none">filter_list</span>
+                                                <select name="status" id="statusFilter"
+                                                    onchange="document.getElementById('statusFilterForm').submit()"
+                                                    class="appearance-none pl-10 pr-8 py-3 bg-slate-100 dark:bg-[#283039] text-slate-700 dark:text-white rounded-lg text-sm font-medium border-none hover:bg-slate-200 dark:hover:bg-[#323b46] transition-all cursor-pointer focus:ring-2 focus:ring-primary/50">
+                                                    <option value="" <%=!status ? 'selected' : '' %>>All Status</option>
+                                                    <option value="active" <%=status==='active' ? 'selected' : '' %>
+                                                        >Active</option>
+                                                    <option value="inactive" <%=status==='inactive' ? 'selected' : '' %>
+                                                        >Inactive</option>
+                                                    <option value="expired" <%=status==='expired' ? 'selected' : '' %>
+                                                        >Expired</option>
+                                                </select>
+                                            </div>
+                                            <% if (status) { %>
+                                                <a href="/admin/coupon<%= typeof search !== 'undefined' && search ? '?search=' + encodeURIComponent(search) : '' %>"
+                                                    class="text-xs font-bold text-slate-500 hover:text-primary transition-colors whitespace-nowrap">Clear
+                                                    filter</a>
+                                                <% } %>
+                                </form>
                             </div>
+                        </div>
+                    </div>
+                    <!-- Coupon Table -->
+                    <div
+                        class="bg-white dark:bg-[#1a232e] border border-slate-200 dark:border-slate-800 rounded-b-xl overflow-hidden shadow-sm">
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr
+                                        class="bg-slate-50 dark:bg-[#283039]/30 text-slate-500 dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">
+                                        <th class="px-6 py-4">Code &amp; Description</th>
+                                        <th class="px-6 py-4">Type</th>
+                                        <th class="px-6 py-4">Usage</th>
+                                        <th class="px-6 py-4">Status</th>
+                                        <th class="px-6 py-4">Expiry Date</th>
+                                        <th class="px-6 py-4 text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                                    <% if (coupons && coupons.length) { %>
+                                        <% coupons.forEach((coupon)=> {
+                                            const isExpired = coupon.expiryDate && coupon.expiryDate < new Date(); const
+                                                isActive=coupon.isActive && !isExpired; const statusText=isExpired
+                                                ? "Expired" : (coupon.isActive ? "Active" : "Inactive" ); const
+                                                usageLimit=coupon.usageLimit || 0; const usedCount=coupon.usedCount ||
+                                                0; const usagePercent=usageLimit> 0 ? Math.min(Math.round((usedCount /
+                                                usageLimit) * 100), 100) : 0;
+                                                const discountText = coupon.discountType === "PERCENTAGE" ?
+                                                `${coupon.discountValue}% Off` : `Rs. ${coupon.discountValue} Off`;
+                                                const expiryText = coupon.expiryDate ?
+                                                coupon.expiryDate.toLocaleDateString("en-IN", { day: "2-digit", month:
+                                                "short", year: "numeric" }) : "No Expiry";
+                                                %>
+                                                <tr
+                                                    class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors <%= isExpired ? 'opacity-70' : '' %>">
+                                                    <td class="px-6 py-4">
+                                                        <div class="flex flex-col">
+                                                            <span
+                                                                class="<%= isExpired ? 'text-slate-400 dark:text-slate-500 line-through' : 'text-slate-900 dark:text-white' %> font-bold text-sm tracking-wide">
+                                                                <%= coupon.code %>
+                                                            </span>
+                                                            <span class="text-slate-500 dark:text-slate-400 text-xs">
+                                                                <%= coupon.description || "No description added" %>
+                                                            </span>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 text-sm">
+                                                        <%= discountText %>
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <div class="flex flex-col gap-1 w-32">
+                                                            <div class="flex justify-between text-[10px] font-bold">
+                                                                <span>
+                                                                    <%= usagePercent %>%
+                                                                </span>
+                                                                <span class="text-slate-400">
+                                                                    <%= usedCount %>/<%= usageLimit %>
+                                                                </span>
+                                                            </div>
+                                                            <div
+                                                                class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                                                <div class="<%= isActive ? 'bg-primary' : 'bg-slate-400' %> h-full rounded-full"
+                                                                    style="width: <%= usagePercent %>%"></div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <% if (isActive) { %>
+                                                            <span
+                                                                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-[#0bda5b]">
+                                                                <span class="size-1.5 rounded-full bg-green-500"></span>
+                                                                <%= statusText %>
+                                                            </span>
+                                                            <% } else { %>
+                                                                <span
+                                                                    class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+                                                                    <span
+                                                                        class="size-1.5 rounded-full bg-slate-400"></span>
+                                                                    <%= statusText %>
+                                                                </span>
+                                                                <% } %>
+                                                    </td>
+                                                    <td
+                                                        class="px-6 py-4 text-sm <%= isExpired ? 'text-slate-400 dark:text-slate-600' : 'text-slate-600 dark:text-[#9dabb9]' %>">
+                                                        <%= expiryText %>
+                                                    </td>
+                                                    <td class="px-6 py-4 text-right">
+                                                        <div class="flex justify-end gap-2">
+                                                            <a href="/admin/edit-coupon/<%= coupon._id %>"
+                                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
+                                                                    class="material-symbols-outlined text-lg">edit</span></a>
+                                                            <button
+                                                                class="p-1.5 text-slate-400 hover:text-red-500 transition-colors"><span
+                                                                    class="material-symbols-outlined text-lg">delete</span></button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                                    <% } else { %>
+                                                        <tr>
+                                                            <td colspan="6"
+                                                                class="px-6 py-12 text-center text-sm text-slate-500 dark:text-slate-400">
+                                                                No coupons found.
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                            <% if (false) { %>
+                                                                <!-- Row 1 Active -->
+                                                                <tr
+                                                                    class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                                                    <td class="px-6 py-4">
+                                                                        <div class="flex flex-col">
+                                                                            <span
+                                                                                class="text-slate-900 dark:text-white font-bold text-sm tracking-wide">GOAL2024</span>
+                                                                            <span
+                                                                                class="text-slate-500 dark:text-slate-400 text-xs">Summer
+                                                                                kickoff sale
+                                                                                offer</span>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 text-sm">20% Off</td>
+                                                                    <td class="px-6 py-4">
+                                                                        <div class="flex flex-col gap-1 w-32">
+                                                                            <div
+                                                                                class="flex justify-between text-[10px] font-bold">
+                                                                                <span>84%</span>
+                                                                                <span
+                                                                                    class="text-slate-400">420/500</span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                                                                <div class="bg-primary h-full rounded-full"
+                                                                                    style="width: 84%"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4">
+                                                                        <span
+                                                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-[#0bda5b]">
+                                                                            <span
+                                                                                class="size-1.5 rounded-full bg-green-500"></span>
+                                                                            Active
+                                                                        </span>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-slate-600 dark:text-[#9dabb9]">
+                                                                        Aug 30, 2024</td>
+                                                                    <td class="px-6 py-4 text-right">
+                                                                        <div class="flex justify-end gap-2">
+                                                                            <button
+                                                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
+                                                                                    class="material-symbols-outlined text-lg">edit</span></button>
+                                                                            <button
+                                                                                class="p-1.5 text-slate-400 hover:text-red-500 transition-colors"><span
+                                                                                    class="material-symbols-outlined text-lg">delete</span></button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <!-- Row 2 Active -->
+                                                                <tr
+                                                                    class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                                                    <td class="px-6 py-4">
+                                                                        <div class="flex flex-col">
+                                                                            <span
+                                                                                class="text-slate-900 dark:text-white font-bold text-sm tracking-wide">FREESHIP</span>
+                                                                            <span
+                                                                                class="text-slate-500 dark:text-slate-400 text-xs">Free
+                                                                                shipping on
+                                                                                orders &gt; $50</span>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 text-sm">Fixed Amt</td>
+                                                                    <td class="px-6 py-4">
+                                                                        <div class="flex flex-col gap-1 w-32">
+                                                                            <div
+                                                                                class="flex justify-between text-[10px] font-bold">
+                                                                                <span>12%</span>
+                                                                                <span
+                                                                                    class="text-slate-400">122/∞</span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                                                                <div class="bg-primary h-full rounded-full"
+                                                                                    style="width: 12%"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4">
+                                                                        <span
+                                                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 dark:bg-green-500/10 text-green-600 dark:text-[#0bda5b]">
+                                                                            <span
+                                                                                class="size-1.5 rounded-full bg-green-500"></span>
+                                                                            Active
+                                                                        </span>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-slate-600 dark:text-[#9dabb9]">
+                                                                        No Expiry</td>
+                                                                    <td class="px-6 py-4 text-right">
+                                                                        <div class="flex justify-end gap-2">
+                                                                            <button
+                                                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
+                                                                                    class="material-symbols-outlined text-lg">edit</span></button>
+                                                                            <button
+                                                                                class="p-1.5 text-slate-400 hover:text-red-500 transition-colors"><span
+                                                                                    class="material-symbols-outlined text-lg">delete</span></button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <!-- Row 3 Expired -->
+                                                                <tr
+                                                                    class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors opacity-70">
+                                                                    <td class="px-6 py-4">
+                                                                        <div class="flex flex-col">
+                                                                            <span
+                                                                                class="text-slate-400 dark:text-slate-500 font-bold text-sm tracking-wide line-through">WINTER23</span>
+                                                                            <span
+                                                                                class="text-slate-500 dark:text-slate-500 text-xs">Holiday
+                                                                                season
+                                                                                special</span>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 text-sm">15% Off</td>
+                                                                    <td class="px-6 py-4">
+                                                                        <div class="flex flex-col gap-1 w-32">
+                                                                            <div
+                                                                                class="flex justify-between text-[10px] font-bold">
+                                                                                <span>100%</span>
+                                                                                <span
+                                                                                    class="text-slate-400">1000/1000</span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                                                                <div class="bg-slate-400 h-full rounded-full"
+                                                                                    style="width: 100%"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4">
+                                                                        <span
+                                                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
+                                                                            <span
+                                                                                class="size-1.5 rounded-full bg-slate-400"></span>
+                                                                            Expired
+                                                                        </span>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-slate-400 dark:text-slate-600">
+                                                                        Jan 01, 2024</td>
+                                                                    <td class="px-6 py-4 text-right">
+                                                                        <div class="flex justify-end gap-2">
+                                                                            <button
+                                                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
+                                                                                    class="material-symbols-outlined text-lg">history</span></button>
+                                                                            <button
+                                                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
+                                                                                    class="material-symbols-outlined text-lg">content_copy</span></button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <!-- Row 4 Scheduled -->
+                                                                <tr
+                                                                    class="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
+                                                                    <td class="px-6 py-4">
+                                                                        <div class="flex flex-col">
+                                                                            <span
+                                                                                class="text-slate-900 dark:text-white font-bold text-sm tracking-wide">BLACKFRIDAY</span>
+                                                                            <span
+                                                                                class="text-slate-500 dark:text-slate-400 text-xs">Upcoming
+                                                                                massive
+                                                                                sale event</span>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4 text-sm">40% Off</td>
+                                                                    <td class="px-6 py-4">
+                                                                        <div class="flex flex-col gap-1 w-32">
+                                                                            <div
+                                                                                class="flex justify-between text-[10px] font-bold">
+                                                                                <span>0%</span>
+                                                                                <span
+                                                                                    class="text-slate-400">0/5000</span>
+                                                                            </div>
+                                                                            <div
+                                                                                class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                                                                <div class="bg-primary h-full rounded-full"
+                                                                                    style="width: 0%"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td class="px-6 py-4">
+                                                                        <span
+                                                                            class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-100 dark:bg-primary/10 text-primary">
+                                                                            <span
+                                                                                class="size-1.5 rounded-full bg-primary"></span>
+                                                                            Scheduled
+                                                                        </span>
+                                                                    </td>
+                                                                    <td
+                                                                        class="px-6 py-4 text-sm text-slate-600 dark:text-[#9dabb9]">
+                                                                        Nov 24, 2024</td>
+                                                                    <td class="px-6 py-4 text-right">
+                                                                        <div class="flex justify-end gap-2">
+                                                                            <button
+                                                                                class="p-1.5 text-slate-400 hover:text-primary transition-colors"><span
+                                                                                    class="material-symbols-outlined text-lg">edit</span></button>
+                                                                            <button
+                                                                                class="p-1.5 text-slate-400 hover:text-red-500 transition-colors"><span
+                                                                                    class="material-symbols-outlined text-lg">delete</span></button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Pagination Footer -->
+                        <div
+                            class="px-6 py-4 bg-slate-50 dark:bg-[#283039]/30 flex flex-wrap justify-between items-center border-t border-slate-200 dark:border-slate-800">
+                            <p class="text-xs text-slate-500 dark:text-[#9dabb9]">
+                                Showing <span class="font-bold">
+                                    <%= coupons.length ? ((currentPage - 1) * limit + 1) : "0" %>-<%= (currentPage - 1)
+                                            * limit + coupons.length %>
+                                </span>
+                                of <span class="font-bold">
+                                    <%= totalCoupons %>
+                                </span> coupons
+                            </p>
+                            <div class="flex items-center gap-2">
+                                <% if (currentPage> 1) { %>
+                                    <a href="/admin/coupon?page=<%= currentPage - 1 %><%= typeof search !== 'undefined' && search ? '&search=' + encodeURIComponent(search) : '' %>"
+                                        class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">Previous</a>
+                                    <% } else { %>
+                                        <button
+                                            class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold disabled:opacity-50"
+                                            disabled="">Previous</button>
+                                        <% } %>
 
-                            <% if (currentPage < totalPages) { %>
-                                <a href="/admin/coupon?page=<%= currentPage + 1 %><%= typeof search !== 'undefined' && search ? '&search=' + encodeURIComponent(search) : '' %>"
-                                    class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">Next</a>
-                            <% } else { %>
-                                <button
-                                    class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold disabled:opacity-50"
-                                    disabled="">Next</button>
-                            <% } %>
+                                            <div class="flex gap-1">
+                                                <% let pagesToShow=[]; if (totalPages <=7) { for (let i=1; i
+                                                    <=totalPages; i++) pagesToShow.push(i); } else {
+                                                    pagesToShow.push(1); if (currentPage> 3) pagesToShow.push('...');
+                                                    let start = Math.max(2, currentPage - 1);
+                                                    let end = Math.min(totalPages - 1, currentPage + 1);
+                                                    for (let i = start; i <= end; i++) pagesToShow.push(i); if
+                                                        (currentPage < totalPages - 2) pagesToShow.push('...');
+                                                        pagesToShow.push(totalPages); } %>
+                                                        <% pagesToShow.forEach(p=> { %>
+                                                            <% if (p==='...' ) { %>
+                                                                <span
+                                                                    class="px-1 text-slate-400 dark:text-slate-500 text-sm self-center">…</span>
+                                                                <% } else if (p===currentPage) { %>
+                                                                    <button
+                                                                        class="size-8 rounded bg-primary text-white text-xs font-bold">
+                                                                        <%= p %>
+                                                                    </button>
+                                                                    <% } else { %>
+                                                                        <a href="/admin/coupon?page=<%= p %><%= typeof search !== 'undefined' && search ? '&search=' + encodeURIComponent(search) : '' %>"
+                                                                            class="size-8 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold transition-colors flex items-center justify-center">
+                                                                            <%= p %>
+                                                                        </a>
+                                                                        <% } %>
+                                                                            <% }) %>
+                                            </div>
+
+                                            <% if (currentPage < totalPages) { %>
+                                                <a href="/admin/coupon?page=<%= currentPage + 1 %><%= typeof search !== 'undefined' && search ? '&search=' + encodeURIComponent(search) : '' %>"
+                                                    class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">Next</a>
+                                                <% } else { %>
+                                                    <button
+                                                        class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold disabled:opacity-50"
+                                                        disabled="">Next</button>
+                                                    <% } %>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </main>
+            </main>
     </div>
 </body>
 

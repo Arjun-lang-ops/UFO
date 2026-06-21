@@ -50,52 +50,7 @@
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
     <div class="flex min-h-screen">
         <!-- Sidebar Navigation -->
-        <aside
-            class="w-64 border-r border-slate-200 dark:border-slate-800 flex flex-col bg-white dark:bg-background-dark fixed h-full">
-            <div class="p-6 flex items-center gap-3">
-                <div class="bg-primary rounded-lg p-1">
-                    <span class="material-symbols-outlined text-white text-3xl">sports_soccer</span>
-                </div>
-                <div class="flex flex-col">
-                    <h1 class="text-slate-900 dark:text-white text-base font-bold leading-none">Urban Football</h1>
-                    <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-normal mt-1">Football Accessories</p>
-                </div>
-            </div>
-            <nav class="flex-1 px-4 space-y-1 mt-4">
-                <a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="/admin/dashboard">
-                    <span class="material-symbols-outlined">dashboard</span>
-                    <span class="text-sm font-medium">Dashboard</span>
-                </a>
-                <a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined">shopping_bag</span>
-                    <span class="text-sm font-medium">Orders</span>
-                </a>
-                <a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined">package_2</span>
-                    <span class="text-sm font-medium">Products</span>
-                </a>
-                <a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined">category</span>
-                    <span class="text-sm font-medium">Categories</span>
-                </a>
-                <a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined filled-icon">sell</span>
-                    <span class="text-sm font-bold">Offers</span>
-                </a>
-                <a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-[#9dabb9] hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="#">
-                    <span class="material-symbols-outlined">group</span>
-                    <span class="text-sm font-medium">Customers</span>
-                </a>
-
-            </nav>
-
-        </aside>
+        <%- include('partials/sidebar', { activePage: 'offers' }) %>
         <!-- Main Content Area -->
         <main class="flex-1 ml-64 p-8">
             <!-- Page Header -->

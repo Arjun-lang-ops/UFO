@@ -84,53 +84,10 @@
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
   <div class="flex">
     <!-- Sidebar Navigation -->
-    <aside
-      class="fixed left-0 top-0 h-full w-64 bg-[#101922] border-r border-[#1c2632]/50 flex flex-col py-6 px-4 hidden lg:flex z-50">
-      <div class="flex flex-col gap-8 flex-1">
-        <div class="flex gap-3 items-center px-2">
-          <div class="text-2xl font-black text-white tracking-tighter flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary">sports_soccer</span>
-            Urban Football
-          </div>
-        </div>
-        <nav class="flex flex-col gap-1">
-          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2632] transition-all duration-200"
-            href="/admin/dashboard">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="text-sm font-medium">Dashboard</span>
-          </a>
-          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-[#137fec] font-bold border-r-4 border-[#137fec] bg-[#1c2632] transition-all duration-200"
-            href="/admin/products">
-            <span class="material-symbols-outlined"
-              style="font-variation-settings: &quot;FILL&quot; 1">inventory_2</span>
-            <span class="text-sm">Products</span>
-          </a>
-          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2632] transition-all duration-200"
-            href="#">
-            <span class="material-symbols-outlined">shopping_cart</span>
-            <span class="text-sm font-medium">Orders</span>
-          </a>
-          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2632] transition-all duration-200"
-            href="#">
-            <span class="material-symbols-outlined">group</span>
-            <span class="text-sm font-medium">Users</span>
-          </a>
-          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2632] transition-all duration-200"
-            href="#">
-            <span class="material-symbols-outlined">analytics</span>
-            <span class="text-sm font-medium">Analytics</span>
-          </a>
-          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-[#1c2632] transition-all duration-200"
-            href="/admin/categories">
-            <span class="material-symbols-outlined">category</span>
-            <span class="text-sm font-medium">Categories</span>
-          </a>
-        </nav>
-      </div>
-    </aside>
+    <%- include('partials/sidebar', { activePage: 'products' }) %>
 
     <!-- Main Content -->
-    <main class="flex-1 lg:ml-64 min-h-screen bg-background-dark flex flex-col">
+    <main class="ml-64 flex-1 min-h-screen bg-background-dark flex flex-col">
       <!-- Top Bar -->
       <header
         class="sticky top-0 z-40 bg-[#101922]/95 backdrop-blur-md border-b border-white/5 flex items-center justify-between px-8 h-16 w-full">

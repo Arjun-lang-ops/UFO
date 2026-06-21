@@ -292,7 +292,7 @@
                                                                                     class="inline-flex items-center gap-1 rounded-full <%= item.cancelStatus === 'Rejected' ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300' : item.cancelStatus === 'Approved' || item.cancelStatus === 'Cancelled' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300' %> px-3 py-1 text-xs font-bold">
                                                                                     <span
                                                                                         class="material-symbols-outlined text-base">pending_actions</span>
-                                                                                    Cancellation <%= item.cancelStatus
+                                                                                     <%= item.cancelStatus
                                                                                         || "Pending" %>
                                                                                 </span>
                                                                                 <% if (item.cancelReason) { %>
@@ -425,12 +425,7 @@
                                                 formatCurrency(order.deliveryCharge) %>
                                         </span>
                                     </div>
-                                    <div class="flex justify-between text-sm">
-                                        <span class="text-text-secondary">Discount</span>
-                                        <span>
-                                            <%= formatCurrency(order.discount) %>
-                                        </span>
-                                    </div>
+                                    
                                     <div class="h-px bg-gray-100 dark:bg-border-dark my-2"></div>
                                     <div class="flex justify-between items-center">
                                         <span class="font-bold text-lg">Total</span>

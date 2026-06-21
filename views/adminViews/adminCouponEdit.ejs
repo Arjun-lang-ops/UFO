@@ -42,65 +42,8 @@
 
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased">
     <div class="flex min-h-screen">
-        <aside
-            class="w-72 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark flex flex-col shrink-0">
-            <div class="p-6 flex flex-col h-full">
-                <div class="flex items-center gap-3 mb-10">
-                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 border-2 border-primary"
-                        data-alt="Football store professional brand logo"
-                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCk3wqgFU9wWwRMWzUs480IpZlOBTjl_Els-wMkVB0gVBclDEl-octXQBJRSl8oLKjSBuDnB5b1Yni42xYvCWy5uOdji9YS9bTw96Bwow1KrhS613OKtYgqfdU34HL9DLTg-652U_mM4_4jllHip8HMi22H8m7MBe1OyNjUKU_DfHI9TE9Eur7VwvceJuLfU_Nk2G-lIJnFJpkZ0HqPi_LgvdlaGwuUF2bkKSTzSnD0n7Z--jHB2Hu3MpaOZhpQXJigX2vXIYOp6Rc");'>
-                    </div>
-                    <div class="flex flex-col">
-                        <h1 class="text-slate-900 dark:text-white text-base font-bold leading-tight">Admin Panel</h1>
-                        <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-normal">Football Accessories</p>
-                    </div>
-                </div>
-                <nav class="flex flex-col gap-2 flex-1">
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        href="#">
-                        <span class="material-symbols-outlined">dashboard</span>
-                        <p class="text-sm font-medium">Dashboard</p>
-                    </a>
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        href="#">
-                        <span class="material-symbols-outlined">inventory_2</span>
-                        <p class="text-sm font-medium">Products</p>
-                    </a>
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        href="#">
-                        <span class="material-symbols-outlined">shopping_cart</span>
-                        <p class="text-sm font-medium">Orders</p>
-                    </a>
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary text-white shadow-lg shadow-primary/20"
-                        href="#">
-                        <span class="material-symbols-outlined material-symbols-fill">confirmation_number</span>
-                        <p class="text-sm font-medium">Coupons</p>
-                    </a>
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        href="#">
-                        <span class="material-symbols-outlined">analytics</span>
-                        <p class="text-sm font-medium">Analytics</p>
-                    </a>
-                </nav>
-                <div class="mt-auto pt-6 border-t border-slate-200 dark:border-slate-800">
-                    <a class="flex items-center gap-3 px-4 py-3 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                        href="#">
-                        <span class="material-symbols-outlined">settings</span>
-                        <p class="text-sm font-medium">Settings</p>
-                    </a>
-                    <div class="flex items-center gap-3 px-4 py-4 mt-2">
-                        <div
-                            class="size-8 rounded-full bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-xs font-bold">
-                            JD</div>
-                        <div class="flex flex-col">
-                            <p class="text-xs font-bold">John Doe</p>
-                            <p class="text-[10px] text-slate-500">Store Manager</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-        <main class="flex-1 overflow-y-auto">
+        <%- include('partials/sidebar', { activePage: 'coupons' }) %>
+        <main class="ml-64 flex-1 overflow-y-auto">
             <div class="max-w-4xl mx-auto p-8">
                 <div class="flex flex-wrap items-center gap-2 mb-4">
                     <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors"

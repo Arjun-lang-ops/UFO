@@ -99,45 +99,7 @@
 
 <body class="bg-background text-on-surface font-body min-h-screen flex">
     <!-- SideNavBar Component (JSON Anchor) -->
-    <aside
-        class="h-screen w-64 fixed left-0 top-0 bg-surface-container dark:bg-surface-container flex flex-col py-6 px-4 z-50">
-        <div class="mb-10 px-2">
-            <h1 class="font-headline font-bold text-2xl tracking-tighter text-on-surface">Urban Football</h1>
-            <p class="text-xs text-on-surface-variant font-medium opacity-70">Admin Console</p>
-        </div>
-        <nav class="flex-1 space-y-2">
-            <!-- Dashboard Tab -->
-            <a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-medium hover:bg-surface-bright transition-colors duration-200 active:scale-95 transition-transform"
-                href="/admin/dashboard">
-                <span class="material-symbols-outlined">dashboard</span>
-                <span class="font-body text-label tracking-normal">Dashboard</span>
-            </a>
-            <!-- Products Tab -->
-            <a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-medium hover:bg-surface-bright transition-colors duration-200 active:scale-95 transition-transform"
-                href="#">
-                <span class="material-symbols-outlined">inventory_2</span>
-                <span class="font-body text-label tracking-normal">Products</span>
-            </a>
-            <!-- Promotions Tab (ACTIVE) -->
-            <a class="flex items-center gap-3 px-3 py-2 text-primary font-bold border-r-2 border-primary hover:bg-surface-bright transition-colors duration-200 active:scale-95 transition-transform"
-                href="#"><span class="material-symbols-outlined"
-                    style="font-variation-settings: &quot;FILL&quot; 1;">local_offer</span><span
-                    class="font-body text-label tracking-normal">Offers</span></a>
-            <!-- Categories Tab -->
-            <a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-medium hover:bg-surface-bright transition-colors duration-200 active:scale-95 transition-transform"
-                href="#">
-                <span class="material-symbols-outlined">category</span>
-                <span class="font-body text-label tracking-normal">Categories</span>
-            </a>
-            <!-- Settings Tab -->
-            <a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant font-medium hover:bg-surface-bright transition-colors duration-200 active:scale-95 transition-transform"
-                href="#">
-                <span class="material-symbols-outlined">settings</span>
-                <span class="font-body text-label tracking-normal">Settings</span>
-            </a>
-        </nav>
-
-    </aside>
+    <%- include('partials/sidebar', { activePage: 'offers' }) %>
     <!-- Main Content Canvas -->
     <main class="ml-64 flex-1 min-h-screen relative overflow-hidden">
         <!-- Header Shell -->

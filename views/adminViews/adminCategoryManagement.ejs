@@ -61,55 +61,9 @@
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
   <div class="flex h-screen overflow-hidden">
     <!-- Side Navigation Sidebar -->
-    <aside
-      class="w-64 flex-shrink-0 bg-white dark:bg-[#111418] border-r border-slate-200 dark:border-slate-800 flex flex-col h-full">
-      <div class="p-6">
-        <div class="flex items-center gap-3">
-          <div class="bg-primary rounded-lg p-1.5">
-            <span class="material-symbols-outlined text-white text-2xl">sports_soccer</span>
-          </div>
-          <div class="flex flex-col">
-            <h1 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">
-              Urban Football
-            </h1>
-            <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-medium">
-              Football Admin
-            </p>
-          </div>
-        </div>
-      </div>
-      <nav class="flex-1 px-4 space-y-1">
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-          href="/admin/dashboard">
-          <span class="material-symbols-outlined">dashboard</span>
-          <span class="text-sm font-medium">Dashboard</span>
-        </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-          href="#">
-          <span class="material-symbols-outlined">shopping_bag</span>
-          <span class="text-sm font-medium">Orders</span>
-        </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-          href="/admin/products">
-          <span class="material-symbols-outlined">inventory_2</span>
-          <span class="text-sm font-medium">Products</span>
-        </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-          href="/admin/userManagement">
-          <span class="material-symbols-outlined">group</span>
-          <span class="text-sm font-medium">Users</span>
-        </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg active-link shadow-sm" href="/admin/categories">
-          <span class="material-symbols-outlined">category</span>
-          <span class="text-sm font-medium">Categories</span>
-        </a>
-
-
-      </nav>
-
-    </aside>
+    <%- include('partials/sidebar', { activePage: 'categories' }) %>
     <!-- Main Content Area -->
-    <main class="flex-1 overflow-y-auto flex flex-col">
+    <main class="ml-64 flex-1 overflow-y-auto flex flex-col">
       <!-- Page Heading Section -->
       <header class="p-8 pb-4">
         <div class="flex flex-wrap items-center justify-between gap-4">

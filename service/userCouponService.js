@@ -2,8 +2,6 @@ import Coupon from "../models/couponModel.js";
 import { checkoutRenderService } from "./userCheckoutService.js";
 
 export const applyCouponService = async (userId, couponCode) => {
-
-    
   if (!couponCode || !couponCode.trim()) {
     const error = new Error("Coupon code is required");
     error.statusCode = 400;

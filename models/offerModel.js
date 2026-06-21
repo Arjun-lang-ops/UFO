@@ -38,6 +38,11 @@ const offerSchema = new mongoose.Schema(
       min: 1,
     },
 
+    maxDiscount: {
+      type: Number,
+      default: null,
+    },
+
     startDate: {
       type: Date,
       required: true,

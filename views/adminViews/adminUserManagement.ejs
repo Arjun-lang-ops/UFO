@@ -57,72 +57,9 @@
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
   <div class="flex h-screen overflow-hidden">
     <!-- Side Navigation Sidebar -->
-    <aside
-      class="w-64 flex-shrink-0 bg-white dark:bg-[#111418] border-r border-slate-200 dark:border-slate-800 flex flex-col h-full">
-      <div class="p-6">
-        <div class="flex items-center gap-3">
-          <div class="bg-primary rounded-lg p-1.5">
-            <span class="material-symbols-outlined text-white text-2xl">sports_soccer</span>
-          </div>
-          <div class="flex flex-col">
-            <h1 class="text-slate-900 dark:text-white text-lg font-bold leading-tight">
-              Urban Football
-            </h1>
-            <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-medium">
-              Football Admin
-            </p>
-          </div>
-        </div>
-      </div>
-      <nav class="flex-1 px-4 space-y-1">
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-          href="/admin/dashboard">
-          <span class="material-symbols-outlined">dashboard</span>
-          <span class="text-sm font-medium">Dashboard</span>
-        </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-          href="#">
-          <span class="material-symbols-outlined">shopping_bag</span>
-          <span class="text-sm font-medium">Orders</span>
-        </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-          href="/admin/products">
-          <span class="material-symbols-outlined">inventory_2</span>
-          <span class="text-sm font-medium">Products</span>
-        </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg active-link shadow-sm" href="#">
-          <span class="material-symbols-outlined">group</span>
-          <span class="text-sm font-medium">Users</span>
-        </a>
-        <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-          href="/admin/categories">
-          <span class="material-symbols-outlined">category</span>
-          <span class="text-sm font-medium">Categories</span>
-        </a>
-
-        <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800">
-          <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#283039] transition-colors"
-            href="#">
-            <span class="material-symbols-outlined">settings</span>
-            <span class="text-sm font-medium">Settings</span>
-          </a>
-        </div>
-      </nav>
-      <div class="p-4 border-t border-slate-200 dark:border-slate-800">
-        <div class="flex items-center gap-3 p-2">
-          <div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 bg-cover bg-center"
-            data-alt="Admin user profile picture" style="
-                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuDO6my1XVaQw5_cf-J5iDETNNqDVQG9km6csDjoh7EnJVhTpSxfwCNq8uzIY9tJq6LJZgaFvKJY8VPGFLqlCNxa8XkEgYlzN3YsPP6MnXfhDxOOMbFpxa0dEQ9LrMwtcrqf8kHT1XJTdQnw2ZW4aRk06ORywG2V2e2MqDDq6NLplKKAyRP4oeWFNeRtQKpvV-ZeSLi0CI_juqRifm8u0sCc7cmubM_EyMxRosHHLdUpcp2tsGVj-2Xnth0YWSnCHpAywUr6TyJAQhM&quot;);
-              "></div>
-          <div class="flex flex-col">
-            <span class="text-sm font-semibold text-slate-900 dark:text-white">Alex Smith</span>
-            <span class="text-xs text-slate-500 dark:text-slate-400 leading-none">Store Manager</span>
-          </div>
-        </div>
-      </div>
-    </aside>
+    <%- include('partials/sidebar',{activePage:'customers'}) %>
     <!-- Main Content Area -->
-    <main class="flex-1 overflow-y-auto flex flex-col">
+    <main class="flex-1 overflow-y-auto flex flex-col ml-64">
       <!-- Page Heading Section -->
       <header class="p-8 pb-4">
         <div class="flex flex-wrap items-center justify-between gap-4">

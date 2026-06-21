@@ -10,6 +10,7 @@ export const couponPageRender = async (req, res) => {
     const page = Math.max(Number(req.query.page) || 1, 1);
     const limit = 5;
     const skip = (page - 1) * limit;
+    const status = (req.query.status || "").trim();
 
     const filter = {};
 
@@ -20,6 +21,19 @@ export const couponPageRender = async (req, res) => {
         $options: "i",
       };
     }
+
+    const now = new Date();
+
+    if (status === "active") {
+      filter.isActive = true;
+      filter.$or = [{ expiryDate: null }, { expiryDate: { $gte: now } }];
+    } else if (status === "inactive") {
+      filter.isActive = false;
+    } else if (status === "expired") {
+      filter.expiryDate = { $lt: now };
+    }
+
+
     const coupons = await Coupon.find(filter)
       .sort({ createdAt: -1 })
       .skip(skip)
@@ -38,6 +52,7 @@ export const couponPageRender = async (req, res) => {
     res.render("adminViews/adminCouponManagement", {
       coupons,
       search,
+      status,
       currentPage: page,
       totalPages,
       totalCoupons,
