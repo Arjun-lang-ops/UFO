@@ -240,7 +240,14 @@ export const approveReturnService = async (orderId, itemId, status) => {
   item.returnedAt = new Date();
 
   if (status === "Approved" && !alreadyApproved) {
-    const refundAmount = item.price * item.returnQuantity;
+    // Subtract proportional coupon discount from the refund amount.
+    // The coupon discount is spread across all items proportionally by their value.
+    const grossRefund = item.price * item.returnQuantity;
+    let couponShare = 0;
+    if (order.discount > 0 && order.subTotal > 0) {
+      couponShare = (item.price * item.returnQuantity / order.subTotal) * order.discount;
+    }
+    const refundAmount = Math.max(0, grossRefund - couponShare);
 
     let wallet = await Wallet.findOne({ user: customerId });
 

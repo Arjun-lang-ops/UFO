@@ -58,6 +58,7 @@ async function fetchAllBuckets(filter, startDate, endDate) {
                 netRevenue: { $sum: "$totalAmount" },
                 minDate: { $min: "$orderedAt" },
                 maxDate: { $max: "$orderedAt" },
+                paymentMethod: { $addToSet: "$paymentMethod" },
             },
         },
         { $sort: { "_id.year": -1, "_id.month": -1, "_id.day": -1, "_id.week": -1 } },
@@ -83,6 +84,7 @@ async function fetchAllBuckets(filter, startDate, endDate) {
         return {
             label,
             salesCount: bucket.salesCount,
+            paymentMethod: bucket.paymentMethod,
             grossAmount: bucket.grossAmount,
             totalDiscount: bucket.totalDiscount,
             netRevenue: bucket.netRevenue,
@@ -137,7 +139,7 @@ export const analyticsPdfExport = async (req, res) => {
         // ── Header ──
         const PRIMARY = "#137fec";
         doc.rect(0, 0, doc.page.width, 70).fill(PRIMARY);
-        doc.fillColor("white").fontSize(22).font("Helvetica-Bold").text("FootyGear — Sales Analytics Report", 40, 18);
+        doc.fillColor("white").fontSize(22).font("Helvetica-Bold").text("Urban Football — Sales Analytics Report", 40, 18);
         doc.fontSize(10).font("Helvetica").text(
             `Filter: ${filterLabel}${rangeLabel ? ` (${rangeLabel})` : ""}   ·   Generated: ${generatedAt}`,
             40, 46
@@ -165,12 +167,13 @@ export const analyticsPdfExport = async (req, res) => {
         // ── Table ──
         const tableTop = kpiY + kpiH + 20;
         const cols = [
-            { header: filter === "custom" ? "Date" : "Period", key: "label", width: 160, align: "left" },
-            { header: "Sales Count", key: "salesCount", width: 80, align: "right" },
-            { header: "Gross Amount", key: "grossAmount", width: 120, align: "right" },
-            { header: "Discounts", key: "totalDiscount", width: 110, align: "right" },
-            { header: "Net Revenue", key: "netRevenue", width: 120, align: "right" },
-            { header: "Growth", key: "growth", width: 70, align: "right" },
+            { header: filter === "custom" ? "Date" : "Period", key: "label", width: 130, align: "left" },
+            { header: "Sales Count", key: "salesCount", width: 70, align: "right" },
+            { header: "Payment Method", key: "paymentMethod", width: 110, align: "center" },
+            { header: "Gross Amount", key: "grossAmount", width: 110, align: "right" },
+            { header: "Discounts", key: "totalDiscount", width: 100, align: "right" },
+            { header: "Net Revenue", key: "netRevenue", width: 110, align: "right" },
+            { header: "Growth", key: "growth", width: 60, align: "right" },
         ];
 
         // Table header row
@@ -198,6 +201,7 @@ export const analyticsPdfExport = async (req, res) => {
             const values = [
                 row.label,
                 row.salesCount.toString(),
+                row.paymentMethod && row.paymentMethod.length > 0 ? row.paymentMethod.join(", ") : "—",
                 `Rs. ${row.grossAmount.toFixed(2)}`,
                 `-Rs. ${row.totalDiscount.toFixed(2)}`,
                 `Rs. ${row.netRevenue.toFixed(2)}`,
@@ -205,7 +209,7 @@ export const analyticsPdfExport = async (req, res) => {
             ];
             values.forEach((val, ci) => {
                 const col = cols[ci];
-                const isRevenue = ci === 4;
+                const isRevenue = col.key === "netRevenue";
                 doc.fillColor(isRevenue ? PRIMARY : "#1e293b")
                     .fontSize(8).font(isRevenue ? "Helvetica-Bold" : "Helvetica")
                     .text(val, x + 6, rowY + 7, { width: col.width - 12, align: col.align });
@@ -221,6 +225,7 @@ export const analyticsPdfExport = async (req, res) => {
         const totValues = [
             filter === "custom" ? "RANGE TOTAL" : "GRAND TOTAL (ALL TIME)",
             tableTotal.salesCount.toString(),
+            "",
             `Rs. ${tableTotal.grossAmount.toFixed(2)}`,
             `-Rs. ${tableTotal.totalDiscount.toFixed(2)}`,
             `Rs. ${tableTotal.netRevenue.toFixed(2)}`,
@@ -229,7 +234,7 @@ export const analyticsPdfExport = async (req, res) => {
         x = 40;
         totValues.forEach((val, ci) => {
             const col = cols[ci];
-            doc.fillColor(ci === 4 ? "#60a5fa" : "white")
+            doc.fillColor(col.key === "netRevenue" ? "#60a5fa" : "white")
                 .fontSize(9).font("Helvetica-Bold")
                 .text(val, x + 6, rowY + 7, { width: col.width - 12, align: col.align });
             x += col.width;
@@ -237,7 +242,7 @@ export const analyticsPdfExport = async (req, res) => {
 
         // Footer
         doc.moveDown(3).fillColor("#94a3b8").fontSize(8).font("Helvetica")
-            .text(`FootyGear Admin — Confidential · ${generatedAt}`, { align: "center" });
+            .text(`Urban Football Admin — Confidential · ${generatedAt}`, { align: "center" });
 
         doc.end();
     } catch (error) {
@@ -273,7 +278,7 @@ export const analyticsExcelExport = async (req, res) => {
         );
 
         const workbook = new ExcelJS.Workbook();
-        workbook.creator = "FootyGear Admin";
+        workbook.creator = "Urban Football Admin";
         workbook.created = new Date();
 
         const ws = workbook.addWorksheet("Sales Analytics", {
@@ -284,6 +289,7 @@ export const analyticsExcelExport = async (req, res) => {
         ws.columns = [
             { key: "label",         width: 28 },
             { key: "salesCount",    width: 14 },
+            { key: "paymentMethod", width: 22 },
             { key: "grossAmount",   width: 20 },
             { key: "totalDiscount", width: 20 },
             { key: "netRevenue",    width: 20 },
@@ -291,15 +297,15 @@ export const analyticsExcelExport = async (req, res) => {
         ];
 
         // ── Title block ──
-        ws.mergeCells("A1:F1");
+        ws.mergeCells("A1:G1");
         const titleCell = ws.getCell("A1");
-        titleCell.value = "FootyGear — Sales Analytics Report";
+        titleCell.value = "Urban Football — Sales Analytics Report";
         titleCell.font = { bold: true, size: 16, color: { argb: "FFFFFFFF" } };
         titleCell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF137fec" } };
         titleCell.alignment = { vertical: "middle", horizontal: "center" };
         ws.getRow(1).height = 32;
 
-        ws.mergeCells("A2:F2");
+        ws.mergeCells("A2:G2");
         const subCell = ws.getCell("A2");
         const filterLabel = filter === "daily" ? "Daily"
             : filter === "weekly" ? "Weekly"
@@ -342,7 +348,7 @@ export const analyticsExcelExport = async (req, res) => {
         ws.addRow([]);
 
         // ── Table header ──
-        const headers = [filter === "custom" ? "Date" : "Period", "Sales Count", "Gross Amount (Rs.)", "Discounts (Rs.)", "Net Revenue (Rs.)", "Growth %"];
+        const headers = [filter === "custom" ? "Date" : "Period", "Sales Count", "Payment Method", "Gross Amount (Rs.)", "Discounts (Rs.)", "Net Revenue (Rs.)", "Growth %"];
         const headerRow = ws.addRow(headers);
         headerRow.eachCell(cell => {
             cell.font = { bold: true, size: 9, color: { argb: "FFFFFFFF" } };
@@ -358,6 +364,7 @@ export const analyticsExcelExport = async (req, res) => {
             const dataRow = ws.addRow([
                 row.label,
                 row.salesCount,
+                row.paymentMethod && row.paymentMethod.length > 0 ? row.paymentMethod.join(", ") : "—",
                 row.grossAmount,
                 row.totalDiscount,
                 row.netRevenue,
@@ -367,15 +374,27 @@ export const analyticsExcelExport = async (req, res) => {
             const bg = ri % 2 === 0 ? "FFF8FAFC" : "FFFFFFFF";
             dataRow.eachCell({ includeEmpty: true }, (cell, colNum) => {
                 cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: bg } };
-                if (colNum === 1) { cell.alignment = { horizontal: "left" }; }
-                else { cell.alignment = { horizontal: "right" }; }
-                if (colNum >= 3 && colNum <= 5) { cell.numFmt = '"Rs." #,##0.00'; }
-                if (colNum === 6 && cell.value !== null) {
+                if (colNum === 1) { 
+                    cell.alignment = { horizontal: "left" }; 
+                } else if (colNum === 2 || colNum === 3) {
+                    cell.alignment = { horizontal: "center" };
+                } else { 
+                    cell.alignment = { horizontal: "right" }; 
+                }
+                
+                if (colNum >= 4 && colNum <= 6) { 
+                    cell.numFmt = '"Rs." #,##0.00'; 
+                }
+                if (colNum === 7 && cell.value !== null) {
                     cell.numFmt = '+0.0%;-0.0%;0%';
                     cell.font = { color: { argb: cell.value >= 0 ? "FF0bda5b" : "FFfa6238" } };
                 }
-                if (colNum === 5) { cell.font = { bold: true, color: { argb: "FF137fec" } }; }
-                if (colNum === 4) { cell.font = { color: { argb: "FFef4444" } }; }
+                if (colNum === 6) { 
+                    cell.font = { bold: true, color: { argb: "FF137fec" } }; 
+                }
+                if (colNum === 5) { 
+                    cell.font = { color: { argb: "FFef4444" } }; 
+                }
             });
         });
 
@@ -383,6 +402,7 @@ export const analyticsExcelExport = async (req, res) => {
         const totalRow = ws.addRow([
             filter === "custom" ? "RANGE TOTAL" : "GRAND TOTAL (ALL TIME)",
             tableTotal.salesCount,
+            null,
             tableTotal.grossAmount,
             tableTotal.totalDiscount,
             tableTotal.netRevenue,
@@ -391,10 +411,16 @@ export const analyticsExcelExport = async (req, res) => {
         totalRow.eachCell({ includeEmpty: true }, (cell, colNum) => {
             cell.font = { bold: true, size: 10, color: { argb: "FFFFFFFF" } };
             cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FF0f172a" } };
-            cell.alignment = { horizontal: colNum === 1 ? "left" : "right" };
-            if (colNum >= 3 && colNum <= 5) {
+            if (colNum === 1) {
+                cell.alignment = { horizontal: "left" };
+            } else if (colNum === 2 || colNum === 3) {
+                cell.alignment = { horizontal: "center" };
+            } else {
+                cell.alignment = { horizontal: "right" };
+            }
+            if (colNum >= 4 && colNum <= 6) {
                 cell.numFmt = '"Rs." #,##0.00';
-                if (colNum === 5) cell.font = { bold: true, size: 10, color: { argb: "FF60a5fa" } };
+                if (colNum === 6) cell.font = { bold: true, size: 10, color: { argb: "FF60a5fa" } };
             }
         });
         totalRow.height = 22;

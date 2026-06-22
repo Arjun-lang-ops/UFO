@@ -334,7 +334,16 @@ export const requestCancelService = async ({
   item.cancelDescription = description || "";
   item.cancelStatus = "Cancelled";
   item.cancelledAt = new Date();
-  item.refundAmount = (item.price || 0) * quantity;
+
+  // Subtract proportional coupon discount from the refund amount.
+  // The coupon discount is spread across all items proportionally by their value.
+  const grossItemAmount = (item.price || 0) * quantity;
+  let couponShare = 0;
+  if (order.discount > 0 && order.subTotal > 0) {
+    // Share of coupon that belongs to this specific item's cancelled quantity
+    couponShare = (item.price * quantity / order.subTotal) * order.discount;
+  }
+  item.refundAmount = Math.max(0, grossItemAmount - couponShare);
 
   const refundAmount = item.refundAmount;
 

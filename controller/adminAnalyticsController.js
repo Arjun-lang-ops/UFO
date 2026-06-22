@@ -83,6 +83,7 @@ async function aggregateAll(filter, startDate, endDate) {
         netRevenue: { $sum: "$totalAmount" },
         minDate: { $min: "$orderedAt" },
         maxDate: { $max: "$orderedAt" },
+        paymentMethod: { $addToSet: "$paymentMethod" },
       },
     },
     { $sort: buildSort(filter) },
@@ -97,6 +98,7 @@ async function aggregateAll(filter, startDate, endDate) {
     return {
       label: bucketLabel(filter, bucket.minDate, bucket.maxDate),
       salesCount: bucket.salesCount,
+      paymentMethod: bucket.paymentMethod,
       grossAmount: bucket.grossAmount,
       totalDiscount: bucket.totalDiscount,
       netRevenue: bucket.netRevenue,
@@ -285,6 +287,16 @@ export const analyticsRender = async (req, res) => {
     // Format startDate/endDate as YYYY-MM-DD for <input type="date">
     const toInputDate = (d) => (d ? d.toISOString().slice(0, 10) : "");
 
+    const baseQ = new URLSearchParams({
+  filter,
+  ...(filter === "custom" && startDate
+    ? { startDate: toInputDate(startDate) }
+    : {}),
+  ...(filter === "custom" && endDate
+    ? { endDate: toInputDate(endDate) }
+    : {}),
+}).toString();
+
     return res.render("adminViews/adminAnalyticsPage", {
       totalRevenue: kpi.totalRevenue,
       totalOrders: kpi.totalOrders,
@@ -301,6 +313,7 @@ export const analyticsRender = async (req, res) => {
       tableTotal,
       currentPage: clampedPage,
       totalPages,
+      baseQ
     });
   } catch (error) {
     console.error(error);

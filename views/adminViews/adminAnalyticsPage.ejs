@@ -4,10 +4,12 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Sales Analytics | FootyGear Admin</title>
+    <title>Sales Analytics | Urban Football Admin</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -25,335 +27,496 @@
         }
     </script>
     <style>
-        body { font-family: 'Lexend', sans-serif; }
-        .material-symbols-outlined { font-size: 24px; }
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        .filter-btn.active { background-color: #137fec; color: white; box-shadow: 0 1px 3px rgba(0,0,0,.15); }
-        input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(0.5); cursor: pointer; }
+        body {
+            font-family: 'Lexend', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-size: 24px;
+        }
+
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .filter-btn.active {
+            background-color: #137fec;
+            color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .15);
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(0.5);
+            cursor: pointer;
+        }
 
         /* Custom date picker panel */
         #customPanel {
             display: none;
             animation: fadeSlideDown 0.2s ease;
         }
-        #customPanel.open { display: flex; }
+
+        #customPanel.open {
+            display: flex;
+        }
+
         @keyframes fadeSlideDown {
-            from { opacity: 0; transform: translateY(-6px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-300">
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white transition-colors duration-300">
     <div class="flex min-h-screen overflow-hidden">
 
         <!-- Sidebar -->
         <%- include('partials/sidebar', { activePage: 'analytics' }) %>
 
-        <!-- Main Content -->
-        <main class="ml-64 flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
+            <!-- Main Content -->
+            <main class="ml-64 flex-1 overflow-y-auto bg-background-light dark:bg-background-dark">
 
-            <!-- Page Header -->
-            <header class="sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-8 py-5 border-b border-slate-200 dark:border-slate-800">
-                <div class="flex flex-wrap items-start justify-between gap-4">
-                    <div class="flex flex-col gap-1">
-                        <h2 class="text-3xl font-black tracking-tight uppercase">Sales Analytics</h2>
-                        <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Detailed revenue performance and comprehensive sales reporting.</p>
-                    </div>
-
-                    <!-- Filter controls -->
-                    <div class="flex flex-col items-end gap-2">
-                        <!-- Tab switcher -->
-                        <div class="flex bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-700 p-1 rounded-lg" id="filterGroup">
-                            <button onclick="setFilter('daily')"
-                                class="filter-btn px-4 py-1.5 text-xs font-bold rounded-md transition-all <%= filter === 'daily' ? 'active' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300' %>">Daily</button>
-                            <button onclick="setFilter('weekly')"
-                                class="filter-btn px-4 py-1.5 text-xs font-medium rounded-md transition-all <%= filter === 'weekly' ? 'active' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300' %>">Weekly</button>
-                            <button onclick="setFilter('yearly')"
-                                class="filter-btn px-4 py-1.5 text-xs font-medium rounded-md transition-all <%= filter === 'yearly' ? 'active' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300' %>">Yearly</button>
-                            <button onclick="toggleCustomPanel()"
-                                class="filter-btn px-4 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1 <%= filter === 'custom' ? 'active' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300' %>">
-                                <span class="material-symbols-outlined text-[14px]">calendar_month</span>Custom
-                            </button>
+                <!-- Page Header -->
+                <header
+                    class="sticky top-0 z-20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-8 py-5 border-b border-slate-200 dark:border-slate-800">
+                    <div class="flex flex-wrap items-start justify-between gap-4">
+                        <div class="flex flex-col gap-1">
+                            <h2 class="text-3xl font-black tracking-tight uppercase">Sales Analytics</h2>
+                            <p class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium">Detailed revenue
+                                performance and comprehensive sales reporting.</p>
                         </div>
 
-                        <!-- Custom date range panel -->
-                        <div id="customPanel" class="<%= filter === 'custom' ? 'open' : '' %> items-center gap-3 bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 shadow-lg">
-                            <div class="flex flex-col gap-1">
-                                <label class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">From</label>
-                                <input type="date" id="startDate" value="<%= startDateStr %>"
-                                    class="bg-slate-50 dark:bg-[#1a1f26] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                        <!-- Filter controls -->
+                        <div class="flex flex-col items-end gap-2">
+                            <!-- Tab switcher -->
+                            <div class="flex bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-700 p-1 rounded-lg"
+                                id="filterGroup">
+                                <button onclick="setFilter('daily')"
+                                    class="filter-btn px-4 py-1.5 text-xs font-bold rounded-md transition-all <%= filter === 'daily' ? 'active' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300' %>">Daily</button>
+                                <button onclick="setFilter('weekly')"
+                                    class="filter-btn px-4 py-1.5 text-xs font-medium rounded-md transition-all <%= filter === 'weekly' ? 'active' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300' %>">Weekly</button>
+                                <button onclick="setFilter('yearly')"
+                                    class="filter-btn px-4 py-1.5 text-xs font-medium rounded-md transition-all <%= filter === 'yearly' ? 'active' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300' %>">Yearly</button>
+                                <button onclick="toggleCustomPanel()"
+                                    class="filter-btn px-4 py-1.5 text-xs font-medium rounded-md transition-all flex items-center gap-1 <%= filter === 'custom' ? 'active' : 'text-slate-500 hover:text-slate-700 dark:hover:text-slate-300' %>">
+                                    <span class="material-symbols-outlined text-[14px]">calendar_month</span>Custom
+                                </button>
                             </div>
-                            <div class="flex flex-col gap-1">
-                                <label class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">To</label>
-                                <input type="date" id="endDate" value="<%= endDateStr %>"
-                                    class="bg-slate-50 dark:bg-[#1a1f26] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary">
+
+                            <!-- Custom date range panel -->
+                            <div id="customPanel"
+                                class="<%= filter === 'custom' ? 'open' : '' %> items-center gap-3 bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-700 rounded-xl px-4 py-3 shadow-lg">
+                                <div class="flex flex-col gap-1">
+                                    <label
+                                        class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">From</label>
+                                    <input type="date" id="startDate" value="<%= startDateStr %>"
+                                        class="bg-slate-50 dark:bg-[#1a1f26] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <div class="flex flex-col gap-1">
+                                    <label
+                                        class="text-[10px] font-bold uppercase text-slate-400 tracking-wider">To</label>
+                                    <input type="date" id="endDate" value="<%= endDateStr %>"
+                                        class="bg-slate-50 dark:bg-[#1a1f26] border border-slate-200 dark:border-slate-700 rounded-lg px-3 py-1.5 text-sm font-medium text-slate-700 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary">
+                                </div>
+                                <button onclick="applyCustomRange()"
+                                    class="mt-4 flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
+                                    <span class="material-symbols-outlined text-[16px]">check</span>Apply
+                                </button>
+                                <% if (filter==='custom' && customRangeLabel) { %>
+                                    <div
+                                        class="mt-4 flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 text-primary rounded-lg text-xs font-bold border border-primary/20">
+                                        <span class="material-symbols-outlined text-[14px]">event</span>
+                                        <%= customRangeLabel %>
+                                    </div>
+                                    <% } %>
                             </div>
-                            <button onclick="applyCustomRange()"
-                                class="mt-4 flex items-center gap-1.5 px-4 py-2 bg-primary text-white text-xs font-bold rounded-lg hover:bg-blue-600 transition-colors shadow-sm">
-                                <span class="material-symbols-outlined text-[16px]">check</span>Apply
-                            </button>
-                            <% if (filter === 'custom' && customRangeLabel) { %>
-                            <div class="mt-4 flex items-center gap-1.5 px-3 py-1.5 bg-primary/10 text-primary rounded-lg text-xs font-bold border border-primary/20">
-                                <span class="material-symbols-outlined text-[14px]">event</span>
-                                <%= customRangeLabel %>
-                            </div>
-                            <% } %>
                         </div>
                     </div>
-                </div>
-            </header>
+                </header>
 
-            <div class="px-8 py-8 space-y-8">
+                <div class="px-8 py-8 space-y-8">
 
-                <!-- Toolbar: current view label + export buttons -->
-                <div class="flex flex-wrap items-center justify-between gap-6 bg-white dark:bg-[#111418] p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-                    <div class="flex flex-col gap-1">
-                        <p class="text-xs font-bold uppercase text-slate-400 tracking-wider">Current View</p>
-                        <p class="text-sm font-semibold">
-                            <% if (filter === 'custom' && customRangeLabel) { %>
-                                Custom Range: <span class="text-primary"><%= customRangeLabel %></span>
-                            <% } else { %>
-                                <span class="capitalize"><%= filter %></span> Breakdown — All Time
-                            <% } %>
-                        </p>
-                    </div>
-                    <div class="flex items-center gap-3 self-end">
-                        <a id="exportPdfLink"
-                            href="/admin/analytics/export/pdf?filter=<%= filter %><%= startDateStr ? '&startDate=' + startDateStr : '' %><%= endDateStr ? '&endDate=' + endDateStr : '' %>"
-                            class="flex items-center gap-2 rounded-lg h-10 px-4 bg-white dark:bg-[#283039] border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-[#323c48] transition-colors no-underline text-inherit">
-                            <span class="material-symbols-outlined text-[18px] text-red-500">picture_as_pdf</span>
-                            <span>Export PDF</span>
-                        </a>
-                        <a id="exportExcelLink"
-                            href="/admin/analytics/export/excel?filter=<%= filter %><%= startDateStr ? '&startDate=' + startDateStr : '' %><%= endDateStr ? '&endDate=' + endDateStr : '' %>"
-                            class="flex items-center gap-2 rounded-lg h-10 px-4 bg-white dark:bg-[#283039] border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-[#323c48] transition-colors no-underline text-inherit">
-                            <span class="material-symbols-outlined text-[18px] text-green-500">table_view</span>
-                            <span>Export Excel</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- KPI Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-
-                    <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform"></div>
-                        <div class="flex justify-between items-start relative">
-                            <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">Total Revenue</p>
-                            <span class="material-symbols-outlined text-primary text-[20px]">payments</span>
-                        </div>
-                        <p class="text-2xl font-black mt-1">₹<%= totalRevenue.toFixed(2) %></p>
-                        <% const revUp = parseFloat(revenueGrowth) >= 0; %>
-                        <div class="flex items-center gap-1 <%= revUp ? 'text-[#0bda5b]' : 'text-[#fa6238]' %>">
-                            <span class="material-symbols-outlined text-[16px]"><%= revUp ? 'trending_up' : 'trending_down' %></span>
-                            <span class="text-sm font-bold"><%= revUp ? '+' : '' %><%= revenueGrowth %>%</span>
-                            <span class="text-[11px] text-slate-400 font-normal ml-1">vs prev. period</span>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform"></div>
-                        <div class="flex justify-between items-start relative">
-                            <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">Total Orders</p>
-                            <span class="material-symbols-outlined text-orange-500 text-[20px]">shopping_cart</span>
-                        </div>
-                        <p class="text-2xl font-black mt-1"><%= totalOrders.toLocaleString('en-IN') %></p>
-                        <% const ordUp = parseFloat(ordersGrowth) >= 0; %>
-                        <div class="flex items-center gap-1 <%= ordUp ? 'text-[#0bda5b]' : 'text-[#fa6238]' %>">
-                            <span class="material-symbols-outlined text-[16px]"><%= ordUp ? 'trending_up' : 'trending_down' %></span>
-                            <span class="text-sm font-bold"><%= ordUp ? '+' : '' %><%= ordersGrowth %>%</span>
-                            <span class="text-[11px] text-slate-400 font-normal ml-1">vs prev. period</span>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform"></div>
-                        <div class="flex justify-between items-start relative">
-                            <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">Avg. Order Value</p>
-                            <span class="material-symbols-outlined text-purple-500 text-[20px]">analytics</span>
-                        </div>
-                        <p class="text-2xl font-black mt-1">₹<%= avgOrderValue.toFixed(2) %></p>
-                        <% const aovUp = parseFloat(aovGrowth) >= 0; %>
-                        <div class="flex items-center gap-1 <%= aovUp ? 'text-[#0bda5b]' : 'text-[#fa6238]' %>">
-                            <span class="material-symbols-outlined text-[16px]"><%= aovUp ? 'trending_up' : 'trending_down' %></span>
-                            <span class="text-sm font-bold"><%= aovUp ? '+' : '' %><%= aovGrowth %>%</span>
-                            <span class="text-[11px] text-slate-400 font-normal ml-1">vs prev. period</span>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
-                        <div class="absolute top-0 right-0 w-24 h-24 bg-green-500/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform"></div>
-                        <div class="flex justify-between items-start relative">
-                            <p class="text-slate-500 dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">Active Coupons</p>
-                            <span class="material-symbols-outlined text-green-500 text-[20px]">confirmation_number</span>
-                        </div>
-                        <p class="text-2xl font-black mt-1"><%= activeCoupons %></p>
-                        <div class="flex items-center gap-1 text-primary">
-                            <span class="material-symbols-outlined text-[16px]">sell</span>
-                            <span class="text-sm font-bold">Live now</span>
-                            <span class="text-[11px] text-slate-400 font-normal ml-1">available in store</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sales Breakdown Table -->
-                <div class="rounded-xl bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
-                    <div class="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
-                        <div>
-                            <h3 class="font-black text-lg uppercase tracking-tight">Comprehensive Sales Breakdown</h3>
-                            <p class="text-xs text-slate-500 font-medium">
-                                <% if (filter === 'custom' && customRangeLabel) { %>
-                                    Custom range: <%= customRangeLabel %>
-                                <% } else { %>
-                                    <span class="capitalize"><%= filter %></span> performance — all recorded periods
-                                <% } %>
+                    <!-- Toolbar: current view label + export buttons -->
+                    <div
+                        class="flex flex-wrap items-center justify-between gap-6 bg-white dark:bg-[#111418] p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                        <div class="flex flex-col gap-1">
+                            <p class="text-xs font-bold uppercase text-slate-400 tracking-wider">Current View</p>
+                            <p class="text-sm font-semibold">
+                                <% if (filter==='custom' && customRangeLabel) { %>
+                                    Custom Range: <span class="text-primary">
+                                        <%= customRangeLabel %>
+                                    </span>
+                                    <% } else { %>
+                                        <span class="capitalize">
+                                            <%= filter %>
+                                        </span> Breakdown — All Time
+                                        <% } %>
                             </p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Live Data</span>
-                            <div class="size-2 rounded-full bg-primary animate-pulse"></div>
+                        <div class="flex items-center gap-3 self-end">
+                            <a id="exportPdfLink"
+                                href="/admin/analytics/export/pdf?filter=<%= filter %><%= startDateStr ? '&startDate=' + startDateStr : '' %><%= endDateStr ? '&endDate=' + endDateStr : '' %>"
+                                class="flex items-center gap-2 rounded-lg h-10 px-4 bg-white dark:bg-[#283039] border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-[#323c48] transition-colors no-underline text-inherit">
+                                <span class="material-symbols-outlined text-[18px] text-red-500">picture_as_pdf</span>
+                                <span>Export PDF</span>
+                            </a>
+                            <a id="exportExcelLink"
+                                href="/admin/analytics/export/excel?filter=<%= filter %><%= startDateStr ? '&startDate=' + startDateStr : '' %><%= endDateStr ? '&endDate=' + endDateStr : '' %>"
+                                class="flex items-center gap-2 rounded-lg h-10 px-4 bg-white dark:bg-[#283039] border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-[#323c48] transition-colors no-underline text-inherit">
+                                <span class="material-symbols-outlined text-[18px] text-green-500">table_view</span>
+                                <span>Export Excel</span>
+                            </a>
                         </div>
                     </div>
 
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left">
-                            <thead class="bg-slate-50 dark:bg-slate-900/50 text-[10px] font-bold uppercase text-slate-500 tracking-wider">
-                                <tr>
-                                    <th class="px-6 py-4">
-                                        <% if (filter === 'daily' || filter === 'custom') { %>Date
-                                        <% } else if (filter === 'weekly') { %>Week
-                                        <% } else { %>Month<% } %>
-                                    </th>
-                                    <th class="px-6 py-4 text-center">Sales Count</th>
-                                    <th class="px-6 py-4 text-right">Order Amount (Gross)</th>
-                                    <th class="px-6 py-4 text-right">Deductions (Discounts)</th>
-                                    <th class="px-6 py-4 text-right text-primary">Net Revenue</th>
-                                    <th class="px-6 py-4">Growth</th>
-                                </tr>
-                            </thead>
-                            <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-                                <% if (tableRows.length === 0) { %>
-                                    <tr>
-                                        <td colspan="6" class="px-6 py-12 text-center text-sm text-slate-400">
-                                            <span class="material-symbols-outlined text-4xl block mb-2 opacity-30">bar_chart</span>
-                                            No sales data found for this filter.
-                                        </td>
-                                    </tr>
-                                <% } else { %>
-                                    <% tableRows.forEach(function(row) { %>
-                                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-900/40 transition-colors">
-                                            <td class="px-6 py-4 text-sm font-bold"><%= row.label %></td>
-                                            <td class="px-6 py-4 text-sm text-center"><%= row.salesCount.toLocaleString('en-IN') %></td>
-                                            <td class="px-6 py-4 text-sm text-right font-medium">₹<%= row.grossAmount.toFixed(2) %></td>
-                                            <td class="px-6 py-4 text-sm text-right text-red-500 font-medium">-₹<%= row.totalDiscount.toFixed(2) %></td>
-                                            <td class="px-6 py-4 text-sm text-right font-black text-primary">₹<%= row.netRevenue.toFixed(2) %></td>
-                                            <td class="px-6 py-4">
-                                                <% if (row.growth !== null) { %>
-                                                    <% const gUp = parseFloat(row.growth) >= 0; %>
-                                                    <span class="flex items-center gap-1 text-[11px] font-bold <%= gUp ? 'text-[#0bda5b]' : 'text-[#fa6238]' %>">
-                                                        <span class="material-symbols-outlined text-[14px]"><%= gUp ? 'arrow_upward' : 'arrow_downward' %></span>
-                                                        <%= gUp ? '+' : '' %><%= row.growth %>%
-                                                    </span>
-                                                <% } else { %>
-                                                    <span class="text-[11px] text-slate-400">—</span>
+                    <!-- KPI Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                        <div
+                            class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                            <div
+                                class="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex justify-between items-start relative">
+                                <p
+                                    class="text-slate-500 dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">
+                                    Total Revenue</p>
+                                <span class="material-symbols-outlined text-primary text-[20px]">payments</span>
+                            </div>
+                            <p class="text-2xl font-black mt-1">₹<%= totalRevenue.toFixed(2) %>
+                            </p>
+                            <% const revUp=parseFloat(revenueGrowth)>= 0; %>
+                                <div class="flex items-center gap-1 <%= revUp ? 'text-[#0bda5b]' : 'text-[#fa6238]' %>">
+                                    <span class="material-symbols-outlined text-[16px]">
+                                        <%= revUp ? 'trending_up' : 'trending_down' %>
+                                    </span>
+                                    <span class="text-sm font-bold">
+                                        <%= revUp ? '+' : '' %>
+                                            <%= revenueGrowth %>%
+                                    </span>
+                                    <span class="text-[11px] text-slate-400 font-normal ml-1">vs prev. period</span>
+                                </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                            <div
+                                class="absolute top-0 right-0 w-24 h-24 bg-orange-500/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex justify-between items-start relative">
+                                <p
+                                    class="text-slate-500 dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">
+                                    Total Orders</p>
+                                <span class="material-symbols-outlined text-orange-500 text-[20px]">shopping_cart</span>
+                            </div>
+                            <p class="text-2xl font-black mt-1">
+                                <%= totalOrders.toLocaleString('en-IN') %>
+                            </p>
+                            <% const ordUp=parseFloat(ordersGrowth)>= 0; %>
+                                <div class="flex items-center gap-1 <%= ordUp ? 'text-[#0bda5b]' : 'text-[#fa6238]' %>">
+                                    <span class="material-symbols-outlined text-[16px]">
+                                        <%= ordUp ? 'trending_up' : 'trending_down' %>
+                                    </span>
+                                    <span class="text-sm font-bold">
+                                        <%= ordUp ? '+' : '' %>
+                                            <%= ordersGrowth %>%
+                                    </span>
+                                    <span class="text-[11px] text-slate-400 font-normal ml-1">vs prev. period</span>
+                                </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                            <div
+                                class="absolute top-0 right-0 w-24 h-24 bg-purple-500/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex justify-between items-start relative">
+                                <p
+                                    class="text-slate-500 dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">
+                                    Avg. Order Value</p>
+                                <span class="material-symbols-outlined text-purple-500 text-[20px]">analytics</span>
+                            </div>
+                            <p class="text-2xl font-black mt-1">₹<%= avgOrderValue.toFixed(2) %>
+                            </p>
+                            <% const aovUp=parseFloat(aovGrowth)>= 0; %>
+                                <div class="flex items-center gap-1 <%= aovUp ? 'text-[#0bda5b]' : 'text-[#fa6238]' %>">
+                                    <span class="material-symbols-outlined text-[16px]">
+                                        <%= aovUp ? 'trending_up' : 'trending_down' %>
+                                    </span>
+                                    <span class="text-sm font-bold">
+                                        <%= aovUp ? '+' : '' %>
+                                            <%= aovGrowth %>%
+                                    </span>
+                                    <span class="text-[11px] text-slate-400 font-normal ml-1">vs prev. period</span>
+                                </div>
+                        </div>
+
+                        <div
+                            class="flex flex-col gap-2 rounded-xl p-6 bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 shadow-sm relative overflow-hidden group">
+                            <div
+                                class="absolute top-0 right-0 w-24 h-24 bg-green-500/5 rounded-full -mr-8 -mt-8 group-hover:scale-110 transition-transform">
+                            </div>
+                            <div class="flex justify-between items-start relative">
+                                <p
+                                    class="text-slate-500 dark:text-[#9dabb9] text-xs font-bold uppercase tracking-wider">
+                                    Active Coupons</p>
+                                <span
+                                    class="material-symbols-outlined text-green-500 text-[20px]">confirmation_number</span>
+                            </div>
+                            <p class="text-2xl font-black mt-1">
+                                <%= activeCoupons %>
+                            </p>
+                            <div class="flex items-center gap-1 text-primary">
+                                <span class="material-symbols-outlined text-[16px]">sell</span>
+                                <span class="text-sm font-bold">Live now</span>
+                                <span class="text-[11px] text-slate-400 font-normal ml-1">available in store</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sales Breakdown Table -->
+                    <div
+                        class="rounded-xl bg-white dark:bg-[#111418] border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+                        <div
+                            class="px-6 py-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                            <div>
+                                <h3 class="font-black text-lg uppercase tracking-tight">Comprehensive Sales Breakdown
+                                </h3>
+                                <p class="text-xs text-slate-500 font-medium">
+                                    <% if (filter==='custom' && customRangeLabel) { %>
+                                        Custom range: <%= customRangeLabel %>
+                                            <% } else { %>
+                                                <span class="capitalize">
+                                                    <%= filter %>
+                                                </span> performance — all recorded periods
                                                 <% } %>
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">Live
+                                    Data</span>
+                                <div class="size-2 rounded-full bg-primary animate-pulse"></div>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left">
+                                <thead
+                                    class="bg-slate-50 dark:bg-slate-900/50 text-[10px] font-bold uppercase text-slate-500 tracking-wider">
+                                    <tr>
+                                        <th class="px-6 py-4">
+                                            <% if (filter==='daily' || filter==='custom' ) { %>Date
+                                                <% } else if (filter==='weekly' ) { %>Week
+                                                    <% } else { %>Month<% } %>
+                                        </th>
+                                        <th class="px-6 py-4 text-center">Sales Count</th>
+                                        <th class="px-6 py-4 text-center">Payment Method</th>
+                                        <th class="px-6 py-4 text-right">Order Amount (Gross)</th>
+                                        <th class="px-6 py-4 text-right">Deductions (Discounts)</th>
+                                        <th class="px-6 py-4 text-right text-primary">Net Revenue</th>
+                                        <th class="px-6 py-4">Growth</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                                    <% if (tableRows.length===0) { %>
+                                        <tr>
+                                            <td colspan="7" class="px-6 py-12 text-center text-sm text-slate-400">
+                                                <span
+                                                    class="material-symbols-outlined text-4xl block mb-2 opacity-30">bar_chart</span>
+                                                No sales data found for this filter.
                                             </td>
                                         </tr>
-                                    <% }) %>
-                                <% } %>
-                            </tbody>
-                            <% if (tableRows.length > 0) { %>
-                            <tfoot class="bg-slate-50/50 dark:bg-slate-900/30 border-t-2 border-slate-200 dark:border-slate-700">
-                                <tr>
-                                    <td class="px-6 py-5 text-sm font-black uppercase">
-                                        <%= filter === 'custom' && customRangeLabel ? 'Range Total' : 'Grand Total (All Time)' %>
-                                    </td>
-                                    <td class="px-6 py-5 text-sm font-black text-center"><%= tableTotal.salesCount.toLocaleString('en-IN') %></td>
-                                    <td class="px-6 py-5 text-sm font-black text-right">₹<%= tableTotal.grossAmount.toFixed(2) %></td>
-                                    <td class="px-6 py-5 text-sm font-black text-right text-red-500">-₹<%= tableTotal.totalDiscount.toFixed(2) %></td>
-                                    <td class="px-6 py-5 text-lg font-black text-right text-primary">₹<%= tableTotal.netRevenue.toFixed(2) %></td>
-                                    <td class="px-6 py-5"></td>
-                                </tr>
-                            </tfoot>
-                            <% } %>
-                        </table>
-                    </div>
-
-                    <!-- Pagination -->
-                    <% if (totalPages > 1) { %>
-                    <%
-                        // Build a base query string that preserves filter + custom dates
-                        let baseQ = 'filter=' + filter;
-                        if (startDateStr) baseQ += '&startDate=' + startDateStr;
-                        if (endDateStr)   baseQ += '&endDate='   + endDateStr;
-                    %>
-                    <div class="px-6 py-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between flex-wrap gap-4">
-                        <p class="text-xs text-slate-500 font-medium">
-                            Page <span class="font-bold text-slate-700 dark:text-white"><%= currentPage %></span> of
-                            <span class="font-bold text-slate-700 dark:text-white"><%= totalPages %></span>
-                            &nbsp;·&nbsp; 10 rows per page
-                        </p>
-                        <div class="flex items-center gap-1">
-                            <% if (currentPage > 1) { %>
-                                <a href="/admin/analytics?<%= baseQ %>&page=1" title="First"
-                                    class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] hover:bg-primary hover:text-white transition-colors text-slate-600 dark:text-[#9dabb9]">
-                                    <span class="material-symbols-outlined text-[16px]">first_page</span>
-                                </a>
-                                <a href="/admin/analytics?<%= baseQ %>&page=<%= currentPage - 1 %>" title="Previous"
-                                    class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] hover:bg-primary hover:text-white transition-colors text-slate-600 dark:text-[#9dabb9]">
-                                    <span class="material-symbols-outlined text-[16px]">chevron_left</span>
-                                </a>
-                            <% } else { %>
-                                <span class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] opacity-40 text-slate-400 cursor-not-allowed"><span class="material-symbols-outlined text-[16px]">first_page</span></span>
-                                <span class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] opacity-40 text-slate-400 cursor-not-allowed"><span class="material-symbols-outlined text-[16px]">chevron_left</span></span>
-                            <% } %>
-
-                            <%
-                                const maxVisible = 5;
-                                let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
-                                let endPage   = Math.min(totalPages, startPage + maxVisible - 1);
-                                if (endPage - startPage + 1 < maxVisible) startPage = Math.max(1, endPage - maxVisible + 1);
-                                for (let p = startPage; p <= endPage; p++) {
-                            %>
-                                <a href="/admin/analytics?<%= baseQ %>&page=<%= p %>"
-                                    class="flex items-center justify-center size-8 rounded-lg text-xs font-bold transition-colors
-                                        <%= p === currentPage ? 'bg-primary text-white shadow-sm' : 'bg-slate-100 dark:bg-[#283039] text-slate-600 dark:text-[#9dabb9] hover:bg-primary hover:text-white' %>">
-                                    <%= p %>
-                                </a>
-                            <% } %>
-
-                            <% if (currentPage < totalPages) { %>
-                                <a href="/admin/analytics?<%= baseQ %>&page=<%= currentPage + 1 %>" title="Next"
-                                    class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] hover:bg-primary hover:text-white transition-colors text-slate-600 dark:text-[#9dabb9]">
-                                    <span class="material-symbols-outlined text-[16px]">chevron_right</span>
-                                </a>
-                                <a href="/admin/analytics?<%= baseQ %>&page=<%= totalPages %>" title="Last"
-                                    class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] hover:bg-primary hover:text-white transition-colors text-slate-600 dark:text-[#9dabb9]">
-                                    <span class="material-symbols-outlined text-[16px]">last_page</span>
-                                </a>
-                            <% } else { %>
-                                <span class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] opacity-40 text-slate-400 cursor-not-allowed"><span class="material-symbols-outlined text-[16px]">chevron_right</span></span>
-                                <span class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] opacity-40 text-slate-400 cursor-not-allowed"><span class="material-symbols-outlined text-[16px]">last_page</span></span>
-                            <% } %>
+                                        <% } else { %>
+                                            <% tableRows.forEach(function(row) { %>
+                                                <tr
+                                                    class="hover:bg-slate-50 dark:hover:bg-slate-900/40 transition-colors">
+                                                    <td class="px-6 py-4 text-sm font-bold">
+                                                        <%= row.label %>
+                                                    </td>
+                                                    <td class="px-6 py-4 text-sm text-center">
+                                                        <%= row.salesCount.toLocaleString('en-IN') %>
+                                                    </td>
+                                                    <td class="px-6 py-4 text-sm text-center">
+                                                        <div class="flex flex-wrap gap-1 justify-center">
+                                                            <% if (row.paymentMethod && row.paymentMethod.length > 0) { %>
+                                                                <% row.paymentMethod.forEach(function(method) { %>
+                                                                    <% 
+                                                                    let badgeClass = '';
+                                                                    if (method === 'COD') {
+                                                                        badgeClass = 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+                                                                    } else if (method === 'RAZORPAY') {
+                                                                        badgeClass = 'bg-indigo-500/10 text-indigo-500 border-indigo-500/20';
+                                                                    } else if (method === 'WALLET') {
+                                                                        badgeClass = 'bg-[#0bda5b]/10 text-[#0bda5b] border-[#0bda5b]/20';
+                                                                    } else {
+                                                                        badgeClass = 'bg-slate-500/10 text-slate-500 border-slate-500/20';
+                                                                    }
+                                                                    %>
+                                                                    <span class="px-2 py-0.5 rounded text-[10px] font-bold border uppercase tracking-wider <%= badgeClass %>">
+                                                                        <%= method %>
+                                                                    </span>
+                                                                <% }) %>
+                                                            <% } else { %>
+                                                                <span class="text-[11px] text-slate-400">—</span>
+                                                            <% } %>
+                                                        </div>
+                                                    </td>
+                                                    <td class="px-6 py-4 text-sm text-right font-medium">₹<%=
+                                                            row.grossAmount.toFixed(2) %>
+                                                    </td>
+                                                    <td class="px-6 py-4 text-sm text-right text-red-500 font-medium">-₹
+                                                        <%= row.totalDiscount.toFixed(2) %>
+                                                    </td>
+                                                    <td class="px-6 py-4 text-sm text-right font-black text-primary">₹
+                                                        <%= row.netRevenue.toFixed(2) %>
+                                                    </td>
+                                                    <td class="px-6 py-4">
+                                                        <% if (row.growth !==null) { %>
+                                                            <% const gUp=parseFloat(row.growth)>= 0; %>
+                                                                <span
+                                                                    class="flex items-center gap-1 text-[11px] font-bold <%= gUp ? 'text-[#0bda5b]' : 'text-[#fa6238]' %>">
+                                                                    <span class="material-symbols-outlined text-[14px]">
+                                                                        <%= gUp ? 'arrow_upward' : 'arrow_downward' %>
+                                                                    </span>
+                                                                    <%= gUp ? '+' : '' %>
+                                                                        <%= row.growth %>%
+                                                                </span>
+                                                                <% } else { %>
+                                                                    <span class="text-[11px] text-slate-400">—</span>
+                                                                    <% } %>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                                    <% } %>
+                                </tbody>
+                                <% if (tableRows.length> 0) { %>
+                                    <tfoot
+                                        class="bg-slate-50/50 dark:bg-slate-900/30 border-t-2 border-slate-200 dark:border-slate-700">
+                                        <tr>
+                                            <td class="px-6 py-5 text-sm font-black uppercase">
+                                                <%= filter==='custom' && customRangeLabel ? 'Range Total'
+                                                    : 'Grand Total (All Time)' %>
+                                            </td>
+                                            <td class="px-6 py-5 text-sm font-black text-center">
+                                                <%= tableTotal.salesCount.toLocaleString('en-IN') %>
+                                            </td>
+                                            <!-- Empty cell for Payment Method -->
+                                            <td class="px-6 py-5"></td>
+                                            <td class="px-6 py-5 text-sm font-black text-right">₹<%=
+                                                    tableTotal.grossAmount.toFixed(2) %>
+                                            </td>
+                                            <td class="px-6 py-5 text-sm font-black text-right text-red-500">-₹<%=
+                                                    tableTotal.totalDiscount.toFixed(2) %>
+                                            </td>
+                                            <td class="px-6 py-5 text-lg font-black text-right text-primary">₹<%=
+                                                    tableTotal.netRevenue.toFixed(2) %>
+                                            </td>
+                                            <td class="px-6 py-5"></td>
+                                        </tr>
+                                    </tfoot>
+                                    <% } %>
+                            </table>
                         </div>
-                    </div>
-                    <% } %>
-                </div>
 
-            </div>
-        </main>
+                        <!-- Pagination -->
+                        <% if (totalPages> 1) { %>
+                            <% // Build a base query string that preserves filter + custom dates let baseQ='filter=' +
+                                filter; if (startDateStr) baseQ +='&startDate=' + startDateStr; if (endDateStr) baseQ
+                                +='&endDate=' + endDateStr; %>
+                                <div
+                                    class="px-6 py-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between flex-wrap gap-4">
+                                    <p class="text-xs text-slate-500 font-medium">
+                                        Page <span class="font-bold text-slate-700 dark:text-white">
+                                            <%= currentPage %>
+                                        </span> of
+                                        <span class="font-bold text-slate-700 dark:text-white">
+                                            <%= totalPages %>
+                                        </span>
+                                        &nbsp;·&nbsp; 10 rows per page
+                                    </p>
+                                    <div class="flex items-center gap-1">
+                                        <% if (currentPage> 1) { %>
+                                            <a href="/admin/analytics?<%= baseQ %>&page=1" title="First"
+                                                class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] hover:bg-primary hover:text-white transition-colors text-slate-600 dark:text-[#9dabb9]">
+                                                <span class="material-symbols-outlined text-[16px]">first_page</span>
+                                            </a>
+                                            <a href="/admin/analytics?<%= baseQ %>&page=<%= currentPage - 1 %>"
+                                                title="Previous"
+                                                class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] hover:bg-primary hover:text-white transition-colors text-slate-600 dark:text-[#9dabb9]">
+                                                <span class="material-symbols-outlined text-[16px]">chevron_left</span>
+                                            </a>
+                                            <% } else { %>
+                                                <span
+                                                    class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] opacity-40 text-slate-400 cursor-not-allowed"><span
+                                                        class="material-symbols-outlined text-[16px]">first_page</span></span>
+                                                <span
+                                                    class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] opacity-40 text-slate-400 cursor-not-allowed"><span
+                                                        class="material-symbols-outlined text-[16px]">chevron_left</span></span>
+                                                <% } %>
+
+                                                    <% const maxVisible=5; let startPage=Math.max(1, currentPage -
+                                                        Math.floor(maxVisible / 2)); let endPage=Math.min(totalPages,
+                                                        startPage + maxVisible - 1); if (endPage - startPage + 1 <
+                                                        maxVisible) startPage=Math.max(1, endPage - maxVisible + 1); for
+                                                        (let p=startPage; p <=endPage; p++) { %>
+                                                        <a href="/admin/analytics?<%= baseQ %>&page=<%= p %>"
+                                                            class="flex items-center justify-center size-8 rounded-lg text-xs font-bold transition-colors
+                                        <%= p === currentPage ? 'bg-primary text-white shadow-sm' : 'bg-slate-100 dark:bg-[#283039] text-slate-600 dark:text-[#9dabb9] hover:bg-primary hover:text-white' %>">
+                                                            <%= p %>
+                                                        </a>
+                                                        <% } %>
+
+                                                            <% if (currentPage < totalPages) { %>
+                                                                <a href="/admin/analytics?<%= baseQ %>&page=<%= currentPage + 1 %>"
+                                                                    title="Next"
+                                                                    class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] hover:bg-primary hover:text-white transition-colors text-slate-600 dark:text-[#9dabb9]">
+                                                                    <span
+                                                                        class="material-symbols-outlined text-[16px]">chevron_right</span>
+                                                                </a>
+                                                                <a href="/admin/analytics?<%= baseQ %>&page=<%= totalPages %>"
+                                                                    title="Last"
+                                                                    class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] hover:bg-primary hover:text-white transition-colors text-slate-600 dark:text-[#9dabb9]">
+                                                                    <span
+                                                                        class="material-symbols-outlined text-[16px]">last_page</span>
+                                                                </a>
+                                                                <% } else { %>
+                                                                    <span
+                                                                        class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] opacity-40 text-slate-400 cursor-not-allowed"><span
+                                                                            class="material-symbols-outlined text-[16px]">chevron_right</span></span>
+                                                                    <span
+                                                                        class="flex items-center justify-center size-8 rounded-lg bg-slate-100 dark:bg-[#283039] opacity-40 text-slate-400 cursor-not-allowed"><span
+                                                                            class="material-symbols-outlined text-[16px]">last_page</span></span>
+                                                                    <% } %>
+                                    </div>
+                                </div>
+                                <% } %>
+                    </div>
+
+                </div>
+            </main>
     </div>
 
     <script>
         // Pre-populate date inputs with server values
         const serverStart = '<%= startDateStr %>';
-        const serverEnd   = '<%= endDateStr %>';
+        const serverEnd = '<%= endDateStr %>';
         const serverFilter = '<%= filter %>';
 
         if (serverStart) document.getElementById('startDate').value = serverStart;
-        if (serverEnd)   document.getElementById('endDate').value   = serverEnd;
+        if (serverEnd) document.getElementById('endDate').value = serverEnd;
 
         function setFilter(f) {
             window.location.href = `/admin/analytics?filter=${f}&page=1`;
@@ -366,7 +529,7 @@
 
         function applyCustomRange() {
             const start = document.getElementById('startDate').value;
-            const end   = document.getElementById('endDate').value;
+            const end = document.getElementById('endDate').value;
 
             if (!start || !end) {
                 alert('Please select both start and end dates.');
