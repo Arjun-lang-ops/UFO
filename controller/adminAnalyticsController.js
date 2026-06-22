@@ -3,7 +3,7 @@ import Coupon from "../models/couponModel.js";
 import PDFDocument from "pdfkit";
 import ExcelJS from "exceljs";
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
+// ─── Helpers 
 
 function growthPct(cur, prev) {
   if (prev === 0) return cur > 0 ? "100.0" : "0.0";

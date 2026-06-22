@@ -1,17 +1,64 @@
 import Offer from "../models/offerModel.js";
 import { offerAddService, offerEditService } from "../service/adminOfferService.js";
 
-export const adminOfferRender=async(req,res)=>{
-    try {
+export const adminOfferRender = async (req, res) => {
+  try {
+    const search = (req.query.search || "").trim();
+    const status = (req.query.status || "").trim(); // 'active' | 'inactive' | 'expired' | ''
+    const page = Math.max(Number(req.query.page) || 1, 1);
+    const limit = 3;
+    const skip = (page - 1) * limit;
 
-        const offers= await Offer.find().populate("product").populate("category").sort({createdAt:-1});
-        return res.render('adminViews/adminOfferManagement',{offers})
-        
-    } catch (error) {
-        console.log(error)
-        return res.render('adminViews/adminOfferManagement',{offers: []})
+    const filter = {};
+
+    if (search) {
+      const escapedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      filter.name = { $regex: escapedSearch, $options: "i" };
     }
-}
+
+    const now = new Date();
+
+    if (status === "active") {
+      filter.isActive = true;
+      filter.endDate = { $gte: now };
+    } else if (status === "inactive") {
+      filter.isActive = false;
+    } else if (status === "expired") {
+      filter.endDate = { $lt: now };
+    }
+
+    const offers = await Offer.find(filter)
+      .populate("product")
+      .populate("category")
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit);
+
+    const totalOffers = await Offer.countDocuments(filter);
+    const totalPages = Math.ceil(totalOffers / limit) || 1;
+
+    return res.render("adminViews/adminOfferManagement", {
+      offers,
+      search,
+      status,
+      currentPage: page,
+      totalPages,
+      totalOffers,
+      limit,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.render("adminViews/adminOfferManagement", {
+      offers: [],
+      search: "",
+      status: "",
+      currentPage: 1,
+      totalPages: 1,
+      totalOffers: 0,
+      limit: 5,
+    });
+  }
+};
 
 
 export const adminOfferAddRender=async(req,res)=>{

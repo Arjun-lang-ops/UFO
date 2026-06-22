@@ -7,10 +7,8 @@
     <title>Add New Coupon - Admin Panel</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -21,9 +19,7 @@
                         "background-light": "#f6f7f8",
                         "background-dark": "#101922",
                     },
-                    fontFamily: {
-                        "display": ["Lexend"]
-                    },
+                    fontFamily: { "display": ["Lexend"] },
                     borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
                 },
             },
@@ -33,18 +29,8 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
-
         .material-symbols-fill {
             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        .toggle-checkbox:checked {
-            right: 0;
-            border-color: #137fec;
-        }
-
-        .toggle-checkbox:checked+.toggle-label {
-            background-color: #137fec;
         }
     </style>
 </head>
@@ -54,156 +40,182 @@
         <%- include('partials/sidebar', { activePage: 'coupons' }) %>
         <main class="ml-64 flex-1 overflow-y-auto">
             <div class="max-w-4xl mx-auto p-8">
+
+                <!-- Breadcrumb -->
                 <div class="flex flex-wrap items-center gap-2 mb-4">
-                    <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors"
-                        href="#">Admin</a>
-                    <span
-                        class="text-slate-400 dark:text-[#9dabb9] material-symbols-outlined text-sm">chevron_right</span>
-                    <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors"
-                        href="#">Marketing</a>
-                    <span
-                        class="text-slate-400 dark:text-[#9dabb9] material-symbols-outlined text-sm">chevron_right</span>
-                    <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors"
-                        href="#">Coupons</a>
-                    <span
-                        class="text-slate-400 dark:text-[#9dabb9] material-symbols-outlined text-sm">chevron_right</span>
+                    <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors" href="#">Admin</a>
+                    <span class="text-slate-400 dark:text-[#9dabb9] material-symbols-outlined text-sm">chevron_right</span>
+                    <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors" href="#">Marketing</a>
+                    <span class="text-slate-400 dark:text-[#9dabb9] material-symbols-outlined text-sm">chevron_right</span>
+                    <a class="text-slate-500 dark:text-[#9dabb9] text-sm font-medium hover:text-primary transition-colors" href="#">Coupons</a>
+                    <span class="text-slate-400 dark:text-[#9dabb9] material-symbols-outlined text-sm">chevron_right</span>
                     <span class="text-slate-900 dark:text-white text-sm font-bold">Add New Coupon</span>
                 </div>
+
+                <!-- Page Header -->
                 <div class="mb-8">
-                    <h2 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">Add New
-                        Coupon</h2>
-                    <p class="text-slate-500 dark:text-[#9dabb9] mt-1">Configure a new promotional discount for your
-                        customers.</p>
+                    <h2 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">Add New Coupon</h2>
+                    <p class="text-slate-500 dark:text-[#9dabb9] mt-1">Configure a new promotional discount for your customers.</p>
                 </div>
-                <form class="space-y-6" id="couponForm">
+
+                <form class="space-y-6" id="couponForm" novalidate>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                        <!-- Left Column -->
                         <div class="md:col-span-2 space-y-6">
-                            <div
-                                class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-                                <h3
-                                    class="text-lg font-bold mb-6 flex items-center gap-2 text-slate-900 dark:text-white">
+
+                            <!-- General Information -->
+                            <div class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+                                <h3 class="text-lg font-bold mb-6 flex items-center gap-2 text-slate-900 dark:text-white">
                                     <span class="material-symbols-outlined text-primary">info</span>
                                     General Information
                                 </h3>
                                 <div class="space-y-4">
+
+                                    <!-- Coupon Code -->
                                     <div>
-                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2"
-                                            for="coupon_code">Coupon Code</label>
+                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2" for="coupon_code">
+                                            Coupon Code <span class="text-red-500">*</span>
+                                        </label>
                                         <input
                                             class="w-full px-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm focus:ring-2 focus:ring-primary/50 transition-all uppercase font-mono tracking-widest"
-                                            id="coupon_code" name="coupon_code" placeholder="e.g. SUMMER24"
-                                            type="text" />
+                                            id="coupon_code" name="coupon_code" placeholder="e.g. SUMMER24" type="text" />
+                                        <span id="coupon_code_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                                     </div>
+
+                                    <!-- Description -->
                                     <div>
-                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2"
-                                            for="description">Description</label>
+                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2" for="description">Description</label>
                                         <textarea
                                             class="w-full px-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm focus:ring-2 focus:ring-primary/50 transition-all"
-                                            id="description" name="description"
-                                            placeholder="Describe the purpose of this coupon..." rows="3"></textarea>
+                                            id="description" name="description" placeholder="Describe the purpose of this coupon..." rows="3"></textarea>
                                     </div>
+
                                 </div>
                             </div>
-                            <div
-                                class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-                                <h3
-                                    class="text-lg font-bold mb-6 flex items-center gap-2 text-slate-900 dark:text-white">
+
+                            <!-- Discount Configuration -->
+                            <div class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+                                <h3 class="text-lg font-bold mb-6 flex items-center gap-2 text-slate-900 dark:text-white">
                                     <span class="material-symbols-outlined text-primary">sell</span>
                                     Discount Configuration
                                 </h3>
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                                    <!-- Discount Type -->
                                     <div>
-                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2"
-                                            for="discount_type">Discount Type</label>
+                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2" for="discount_type">
+                                            Discount Type <span class="text-red-500">*</span>
+                                        </label>
                                         <select
                                             class="w-full px-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-primary/50 transition-all"
                                             id="discount_type" name="discount_type">
                                             <option value="PERCENTAGE">Percentage (%)</option>
-                                            <option value="FLAT">Flat Discount ($)</option>
+                                            <option value="FLAT">Flat Discount (₹)</option>
                                         </select>
                                     </div>
+
+                                    <!-- Discount Value -->
                                     <div>
-                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2"
-                                            for="discount_value">Discount Value</label>
-                                        <div class="relative">
-                                            <input
-                                                class="w-full px-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm focus:ring-2 focus:ring-primary/50 transition-all"
-                                                id="discount_value" name="discount_value" placeholder="0"
-                                                type="number" />
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2"
-                                            for="min_purchase">Minimum Purchase Amount ($)</label>
+                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2" for="discount_value">
+                                            Discount Value <span class="text-red-500">*</span>
+                                        </label>
                                         <input
                                             class="w-full px-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm focus:ring-2 focus:ring-primary/50 transition-all"
-                                            id="min_purchase" name="min_purchase" placeholder="0.00" type="number" />
+                                            id="discount_value" name="discount_value" placeholder="0" type="number" min="0" />
+                                        <span id="discount_value_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                                     </div>
+
+                                    <!-- Minimum Purchase -->
                                     <div>
-                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2"
-                                            for="max_discount">Maximum Discount Value ($)</label>
+                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2" for="min_purchase">
+                                            Minimum Purchase Amount (₹) <span class="text-red-500">*</span>
+                                        </label>
                                         <input
                                             class="w-full px-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm focus:ring-2 focus:ring-primary/50 transition-all"
-                                            id="max_discount" name="maximum_discount" placeholder="0.00" type="number" />
+                                            id="min_purchase" name="min_purchase" placeholder="0.00" type="number" min="0" />
+                                        <span id="min_purchase_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                                     </div>
+
+                                    <!-- Max Discount (PERCENTAGE only) -->
+                                    <div id="max_discount_row">
+                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2" for="max_discount">
+                                            Maximum Discount Cap (₹) <span class="text-red-500">*</span>
+                                        </label>
+                                        <input
+                                            class="w-full px-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm focus:ring-2 focus:ring-primary/50 transition-all"
+                                            id="max_discount" name="maximum_discount" placeholder="0.00" type="number" min="0" />
+                                        <p class="mt-1 text-[10px] text-slate-500 italic">Maximum rupee value the discount can reach</p>
+                                        <span id="max_discount_err" class="hidden text-xs text-red-500 mt-1 block"></span>
+                                    </div>
+
+                                    <!-- Expiry Date -->
                                     <div>
-                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2"
-                                            for="expiry_date">Expiry Date</label>
+                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2" for="expiry_date">
+                                            Expiry Date <span class="text-red-500">*</span>
+                                        </label>
                                         <input
                                             class="w-full px-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-primary/50 transition-all"
                                             id="expiry_date" name="expiry_date" type="date" />
+                                        <span id="expiry_date_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Right Column -->
                         <div class="space-y-6">
-                            <div
-                                class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-                                <h3
-                                    class="text-lg font-bold mb-6 flex items-center gap-2 text-slate-900 dark:text-white">
+
+                            <!-- Usage Limits -->
+                            <div class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+                                <h3 class="text-lg font-bold mb-6 flex items-center gap-2 text-slate-900 dark:text-white">
                                     <span class="material-symbols-outlined text-primary">settings_suggest</span>
                                     Usage Limits
                                 </h3>
                                 <div class="space-y-4">
+
+                                    <!-- Total Limit -->
                                     <div>
-                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2"
-                                            for="total_limit">Total Usage Limit</label>
+                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2" for="total_limit">Total Usage Limit</label>
                                         <input
                                             class="w-full px-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#9dabb9] text-sm focus:ring-2 focus:ring-primary/50 transition-all"
-                                            id="total_limit" name="total_limit" placeholder="Unlimited" type="number" />
+                                            id="total_limit" name="total_limit" placeholder="Unlimited" type="number" min="1" />
                                         <p class="mt-1 text-[10px] text-slate-500 italic">Leave empty for no limit</p>
+                                        <span id="total_limit_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                                     </div>
+
+                                    <!-- Per User Limit -->
                                     <div>
-                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2"
-                                            for="user_limit">Usage Limit Per User</label>
+                                        <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2" for="user_limit">Usage Limit Per User</label>
                                         <input
                                             class="w-full px-4 py-3 rounded-lg border-none bg-slate-100 dark:bg-[#283039] text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-primary/50 transition-all"
-                                            id="user_limit" name="user_limit" type="number" value="1" />
+                                            id="user_limit" name="user_limit" type="number" value="1" min="1" />
+                                        <span id="user_limit_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                                     </div>
+
                                 </div>
                             </div>
-                            <div
-                                class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
-                                <h3
-                                    class="text-lg font-bold mb-6 flex items-center gap-2 text-slate-900 dark:text-white">
+
+                            <!-- Status -->
+                            <div class="bg-white dark:bg-[#1a232e] rounded-xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+                                <h3 class="text-lg font-bold mb-6 flex items-center gap-2 text-slate-900 dark:text-white">
                                     <span class="material-symbols-outlined text-primary">toggle_on</span>
                                     Status
                                 </h3>
-                                <div
-                                    class="flex items-center justify-between p-3 bg-slate-50 dark:bg-[#283039]/30 rounded-lg">
+                                <div class="flex items-center justify-between p-3 bg-slate-50 dark:bg-[#283039]/30 rounded-lg">
                                     <div>
                                         <p class="text-sm font-bold text-slate-900 dark:text-white">Coupon Status</p>
-                                        <p class="text-xs text-slate-500 dark:text-slate-400">Enable or disable coupon
-                                        </p>
+                                        <p class="text-xs text-slate-500 dark:text-slate-400">Enable or disable coupon</p>
                                     </div>
                                     <label class="relative inline-flex items-center cursor-pointer">
-                                        <input checked="" name="is_active" class="sr-only peer" type="checkbox" />
-                                        <div
-                                            class="w-11 h-6 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
-                                        </div>
+                                        <input checked name="is_active" class="sr-only peer" type="checkbox" />
+                                        <div class="w-11 h-6 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
                                     </label>
                                 </div>
                             </div>
+
+                            <!-- Actions -->
                             <div class="pt-4 flex flex-col gap-3">
                                 <button
                                     class="w-full px-6 py-4 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold transition-all shadow-lg shadow-primary/20 flex items-center justify-center gap-2"
@@ -219,77 +231,211 @@
                                     </button>
                                 </a>
                             </div>
+
                         </div>
                     </div>
                 </form>
             </div>
         </main>
     </div>
-
 </body>
+
 <script>
-    document
-        .getElementById("couponForm")
-        .addEventListener("submit", async (e) => {
+    // ─── Error helpers ────────────────────────────────────────────────────────
+    function showError(id, msg) {
+        const el = document.getElementById(id + "_err");
+        if (el) {
+            el.textContent = msg;
+            el.classList.remove("hidden");
+        }
+    }
 
-            e.preventDefault();
+    function clearError(id) {
+        const el = document.getElementById(id + "_err");
+        if (el) {
+            el.textContent = "";
+            el.classList.add("hidden");
+        }
+    }
 
-            const formData = {
-                coupon_code: document.getElementById("coupon_code").value,
-                description: document.getElementById("description").value,
-                discount_type: document.getElementById("discount_type").value,
-                discount_value: document.getElementById("discount_value").value,
-                min_purchase: document.getElementById("min_purchase").value,
-                expiry_date: document.getElementById("expiry_date").value,
-                total_limit: document.getElementById("total_limit").value,
-                maximum_discount:
-                    document.getElementById("max_discount")?.value || "",
-                is_active: document.querySelector(
-                    'input[name="is_active"]'
-                )?.checked,
-            };
-
-            try {
-
-                const response = await fetch(
-                    "/admin/coupons/add",
-                    {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(formData),
-                    }
-                );
-
-                const result = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(
-                        result.message || "Failed to create coupon"
-                    );
-                }
-
-                await Swal.fire({
-                    icon: "success",
-                    title: "Success!",
-                    text: result.message,
-                    confirmButtonColor: "#137fec",
-                });
-
-                window.location.href = "/admin/coupon";
-
-            } catch (error) {
-                Swal.fire({
-                    icon: "error",
-                    title: "Oops...",
-                    text: error.message,
-                    confirmButtonColor: "#d33",
-                });
-                console.error(error);
-            }
+    function clearAllErrors() {
+        document.querySelectorAll("[id$='_err']").forEach(el => {
+            el.textContent = "";
+            el.classList.add("hidden");
         });
-</script>
+    }
 
+    // ─── Show / hide max_discount row based on discount type ─────────────────
+    function toggleMaxDiscount() {
+        const isPercent = document.getElementById("discount_type").value === "PERCENTAGE";
+        const row = document.getElementById("max_discount_row");
+        row.style.display = isPercent ? "" : "none";
+        if (!isPercent) {
+            document.getElementById("max_discount").value = "";
+            clearError("max_discount");
+        }
+    }
+
+    // Run once on page load
+    toggleMaxDiscount();
+
+    document.getElementById("discount_type").addEventListener("change", () => {
+        toggleMaxDiscount();
+        // Re-validate related fields live when type switches
+        clearError("discount_value");
+        clearError("min_purchase");
+    });
+
+    // ─── Live error clearing on input ─────────────────────────────────────────
+    [
+        "coupon_code",
+        "discount_value",
+        "min_purchase",
+        "max_discount",
+        "expiry_date",
+        "total_limit",
+        "user_limit"
+    ].forEach(id => {
+        document.getElementById(id)?.addEventListener("input", () => clearError(id));
+    });
+
+    // ─── Validation ───────────────────────────────────────────────────────────
+    function validate() {
+        clearAllErrors();
+        let valid = true;
+
+        // Coupon code
+        const code = document.getElementById("coupon_code").value.trim();
+        if (!code) {
+            showError("coupon_code", "Coupon code is required.");
+            valid = false;
+        } else if (!/^[A-Z0-9]+$/i.test(code)) {
+            showError("coupon_code", "Only letters and numbers are allowed — no spaces or symbols.");
+            valid = false;
+        }
+
+        // Discount type + value
+        const discountType  = document.getElementById("discount_type").value;
+        const discountValue = parseFloat(document.getElementById("discount_value").value);
+
+        if (isNaN(discountValue) || discountValue <= 0) {
+            showError("discount_value", "Enter a discount value greater than 0.");
+            valid = false;
+        } else if (discountType === "PERCENTAGE" && discountValue > 100) {
+            showError("discount_value", "Percentage discount cannot exceed 100%.");
+            valid = false;
+        }
+
+        // Minimum purchase
+        const minPurchaseRaw = document.getElementById("min_purchase").value;
+        const minPurchase    = parseFloat(minPurchaseRaw);
+
+        if (minPurchaseRaw === "" || isNaN(minPurchase) || minPurchase < 0) {
+            showError("min_purchase", "Enter a valid minimum purchase amount (0 or more).");
+            valid = false;
+        } else if (discountType === "FLAT" && !isNaN(discountValue) && discountValue > 0) {
+            // For FLAT coupons: cart value must exceed the discount, otherwise the
+            // customer pays zero or negative — business rule enforced here.
+            if (minPurchase <= discountValue) {
+                showError(
+                    "min_purchase",
+                    `Minimum purchase (₹${minPurchase}) must be greater than the flat discount amount (₹${discountValue}).`
+                );
+                valid = false;
+            }
+        }
+
+        // Max discount cap (only relevant for PERCENTAGE)
+        if (discountType === "PERCENTAGE") {
+            const maxDiscount = parseFloat(document.getElementById("max_discount").value);
+            if (isNaN(maxDiscount) || maxDiscount <= 0) {
+                showError("max_discount", "Enter a maximum discount cap for percentage coupons.");
+                valid = false;
+            } else if (!isNaN(minPurchase) && minPurchase > 0 && maxDiscount >= minPurchase) {
+                showError("max_discount", "Max discount cap must be less than the minimum purchase amount.");
+                valid = false;
+            }
+        }
+
+        // Expiry date
+        const expiry = document.getElementById("expiry_date").value;
+        if (!expiry) {
+            showError("expiry_date", "Expiry date is required.");
+            valid = false;
+        } else {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            if (new Date(expiry) <= today) {
+                showError("expiry_date", "Expiry date must be a future date.");
+                valid = false;
+            }
+        }
+
+        // Total usage limit (optional field)
+        const totalLimit = document.getElementById("total_limit").value;
+        if (totalLimit !== "" && (isNaN(Number(totalLimit)) || Number(totalLimit) < 1)) {
+            showError("total_limit", "Usage limit must be at least 1, or leave empty for unlimited.");
+            valid = false;
+        }
+
+        // Per-user limit
+        const userLimit = Number(document.getElementById("user_limit").value);
+        if (!userLimit || userLimit < 1) {
+            showError("user_limit", "Per-user limit must be at least 1.");
+            valid = false;
+        }
+
+        return valid;
+    }
+
+    // ─── Submit ───────────────────────────────────────────────────────────────
+    document.getElementById("couponForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        if (!validate()) return;
+
+        const formData = {
+            coupon_code:      document.getElementById("coupon_code").value.trim(),
+            description:      document.getElementById("description").value.trim(),
+            discount_type:    document.getElementById("discount_type").value,
+            discount_value:   document.getElementById("discount_value").value,
+            min_purchase:     document.getElementById("min_purchase").value,
+            expiry_date:      document.getElementById("expiry_date").value,
+            total_limit:      document.getElementById("total_limit").value,
+            maximum_discount: document.getElementById("max_discount")?.value || "",
+            is_active:        document.querySelector('input[name="is_active"]')?.checked,
+        };
+
+        try {
+            const response = await fetch("/admin/coupons/add", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) throw new Error(result.message || "Failed to create coupon");
+
+            await Swal.fire({
+                icon: "success",
+                title: "Success!",
+                text: result.message,
+                confirmButtonColor: "#137fec",
+            });
+
+            window.location.href = "/admin/coupon";
+
+        } catch (error) {
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: error.message,
+                confirmButtonColor: "#d33",
+            });
+            console.error(error);
+        }
+    });
+</script>
 
 </html>

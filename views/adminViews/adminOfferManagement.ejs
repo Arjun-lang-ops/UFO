@@ -51,164 +51,195 @@
     <div class="flex min-h-screen">
         <!-- Sidebar Navigation -->
         <%- include('partials/sidebar', { activePage: 'offers' }) %>
-        <!-- Main Content Area -->
-        <main class="flex-1 ml-64 p-8">
-            <!-- Page Header -->
-            <div class="flex flex-wrap justify-between items-end gap-6 mb-8">
-                <div class="max-w-2xl">
-                    <h2 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">Offers
-                        Management</h2>
-                    <p class="text-slate-500 dark:text-[#9dabb9] text-base font-normal mt-2 leading-relaxed">Manage
-                        active, scheduled, and expired promotions for your store. Link offers to specific categories and
-                        track their status.</p>
-                </div>
-                <a href="/admin/offers/add">
-                    <button
-                        class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
-                        <span class="material-symbols-outlined text-xl">add</span>
-                        <span>Add New Offer</span>
-                    </button>
-                </a>
-            </div>
-            <!-- Search and Filter Bar -->
-            <div
-                class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800 mb-8 space-y-4">
-                <div class="flex flex-col md:flex-row gap-4 items-center">
-                    <div class="relative flex-1 group">
-                        <span
-                            class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
-                        <input
-                            class="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-none rounded-lg focus:ring-2 focus:ring-primary text-sm transition-all"
-                            placeholder="Search offers by name or category..." type="text" />
+            <!-- Main Content Area -->
+            <main class="flex-1 ml-64 p-8">
+                <!-- Page Header -->
+                <div class="flex flex-wrap justify-between items-end gap-6 mb-8">
+                    <div class="max-w-2xl">
+                        <h2 class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tight">
+                            Offers
+                            Management</h2>
+                        <p class="text-slate-500 dark:text-[#9dabb9] text-base font-normal mt-2 leading-relaxed">Manage
+                            active, scheduled, and expired promotions for your store. Link offers to specific categories
+                            and
+                            track their status.</p>
                     </div>
-                    <div class="flex gap-2 overflow-x-auto pb-1 md:pb-0">
+                    <a href="/admin/offers/add">
                         <button
-                            class="px-4 py-2 bg-primary text-white rounded-lg text-xs font-bold whitespace-nowrap">All
-                            Offers</button>
-                        <button
-                            class="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-xs font-bold whitespace-nowrap">Active</button>
-                        <button
-                            class="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-xs font-bold whitespace-nowrap">Upcoming</button>
-                        <button
-                            class="px-4 py-2 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-lg text-xs font-bold whitespace-nowrap">Expired</button>
-                    </div>
+                            class="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-bold transition-all shadow-lg shadow-primary/20">
+                            <span class="material-symbols-outlined text-xl">add</span>
+                            <span>Add New Offer</span>
+                        </button>
+                    </a>
                 </div>
-            </div>
-            <!-- Offers Grid -->
-            <div class="flex flex-col gap-4">
-                <% if (offers && offers.length> 0) { %>
-                    <% offers.forEach(function(offer) { %>
-                        <div
-                            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between group hover:border-primary/50 transition-all shadow-sm">
-                            <div class="flex flex-col md:flex-row md:items-center gap-4 flex-1">
-                                <div class="flex flex-col">
-                                    <div class="flex items-center gap-3">
-                                        <h3 class="text-lg font-bold text-slate-900 dark:text-white">
-                                            <%= offer.name %>
-                                        </h3>
-                                        <% if (offer.isActive && new Date(offer.endDate)>= new Date()) { %>
-                                            <span
-                                                class="px-3 py-0.5 bg-green-500/90 text-white text-[10px] font-bold rounded-full uppercase tracking-wider">Active</span>
-                                            <% } else if (!offer.isActive) { %>
-                                                <span
-                                                    class="px-3 py-0.5 bg-red-500/90 text-white text-[10px] font-bold rounded-full uppercase tracking-wider">Inactive</span>
-                                                <% } else { %>
-                                                    <span
-                                                        class="px-3 py-0.5 bg-amber-500/90 text-white text-[10px] font-bold rounded-full uppercase tracking-wider">Expired</span>
-                                                    <% } %>
-                                    </div>
-                                    <div class="flex items-center text-xs text-slate-500 dark:text-[#9dabb9] mt-1">
-                                        <span class="material-symbols-outlined text-sm mr-2">calendar_today</span>
-                                        Valid: <%= new Date(offer.startDate).toLocaleDateString('en-US', {
-                                            month: 'short' , day: 'numeric' , year: 'numeric' }) %> - <%= new
-                                                Date(offer.endDate).toLocaleDateString('en-US', { month: 'short' ,
-                                                day: 'numeric' , year: 'numeric' }) %>
-                                    </div>
-                                </div>
-                                <div class="flex flex-wrap gap-1.5">
-                                    <span
-                                        class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-wider">
-                                        <%= offer.offerMode==='PERCENTAGE' ? offer.discountValue + '%' : '$' +
-                                            offer.discountValue %> Off
-                                    </span>
-                                    
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-4 mt-4 md:mt-0">
-                                <div class="flex gap-2">
-                                    <a href="/admin/offers/edit/<%= offer._id %>">
-                                        <button
-                                            class="px-4 py-2 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-bold rounded-lg transition-colors border border-slate-200 dark:border-slate-700">Edit</button>
-                                    </a>
-                                </div>
-                            </div>
+                <!-- Search and Filter Bar -->
+                <!-- Search and Filter Bar -->
+                <div
+                    class="bg-white dark:bg-slate-900/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800 mb-8 space-y-4">
+                    <form action="/admin/offers" method="GET" class="flex flex-col md:flex-row gap-4 items-center">
+                        <input type="hidden" name="status" id="statusInput"
+                            value="<%= typeof status !== 'undefined' ? status : '' %>" />
+                        <div class="relative flex-1 group w-full">
+                            <span
+                                class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+                            <input name="search" value="<%= typeof search !== 'undefined' ? search : '' %>"
+                                class="w-full pl-12 pr-4 py-3 bg-slate-50 dark:bg-slate-800 border-none rounded-lg focus:ring-2 focus:ring-primary text-sm transition-all"
+                                placeholder="Search offers by name..." type="text" />
                         </div>
-                        <% }); %>
-                            <% } else { %>
-                                <div
-                                    class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl flex flex-col items-center justify-center p-8 bg-slate-50/50 dark:bg-slate-900/20">
-                                    <span class="material-symbols-outlined text-4xl text-slate-400 mb-2">sell</span>
-                                    <p class="text-sm font-bold text-slate-600 dark:text-slate-400">No Offers Found</p>
-                                    <p class="text-xs text-slate-400 mt-1">Add a new offer to get started.</p>
-                                </div>
+                        <div class="flex gap-2 overflow-x-auto pb-1 md:pb-0">
+                            <button type="submit" onclick="document.getElementById('statusInput').value=''"
+                                class="px-4 py-2 <%= !status ? 'bg-primary text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700' %> rounded-lg text-xs font-bold whitespace-nowrap">All
+                                Offers</button>
+                            <button type="submit" onclick="document.getElementById('statusInput').value='active'"
+                                class="px-4 py-2 <%= status === 'active' ? 'bg-primary text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700' %> rounded-lg text-xs font-bold whitespace-nowrap">Active</button>
+                            <button type="submit" onclick="document.getElementById('statusInput').value='inactive'"
+                                class="px-4 py-2 <%= status === 'inactive' ? 'bg-primary text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700' %> rounded-lg text-xs font-bold whitespace-nowrap">Inactive</button>
+                            <button type="submit" onclick="document.getElementById('statusInput').value='expired'"
+                                class="px-4 py-2 <%= status === 'expired' ? 'bg-primary text-white' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700' %> rounded-lg text-xs font-bold whitespace-nowrap">Expired</button>
+                            <% if ((typeof search !=='undefined' && search) || (typeof status !=='undefined' && status))
+                                { %>
+                                <a href="/admin/offers"
+                                    class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg text-xs font-bold whitespace-nowrap flex items-center transition-all">Clear</a>
                                 <% } %>
-                                    <!-- Add New Row Placeholder -->
-                                    <a href="/admin/offers/add"
-                                        class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center p-4 bg-slate-50/50 dark:bg-slate-900/20 hover:bg-primary/5 hover:border-primary/50 transition-all group cursor-pointer">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
-                                                <span class="material-symbols-outlined text-lg">add</span>
-                                            </div>
-                                            <p
-                                                class="text-sm font-bold text-slate-600 dark:text-slate-400 group-hover:text-primary transition-colors">
-                                                Create New Promotion</p>
-                                        </div>
-                                    </a>
-            </div>
-            <!-- Recently Modified Category Linking Footer section -->
-            <div class="mt-12">
-                <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Promotional Categories Summary</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-                    <div
-                        class="p-4 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800">
-                        <p class="text-xs font-medium text-slate-500 dark:text-[#9dabb9] uppercase tracking-wider">
-                            Cleats</p>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-2xl font-bold">4 Offers</span>
-                            <span class="text-green-500 text-xs font-bold">Active</span>
                         </div>
-                    </div>
-                    <div
-                        class="p-4 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800">
-                        <p class="text-xs font-medium text-slate-500 dark:text-[#9dabb9] uppercase tracking-wider">
-                            Jerseys</p>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-2xl font-bold">2 Offers</span>
-                            <span class="text-green-500 text-xs font-bold">Active</span>
-                        </div>
-                    </div>
-                    <div
-                        class="p-4 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800">
-                        <p class="text-xs font-medium text-slate-500 dark:text-[#9dabb9] uppercase tracking-wider">
-                            Accessories</p>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-2xl font-bold">0 Offers</span>
-                            <span class="text-slate-400 text-xs font-bold">None</span>
-                        </div>
-                    </div>
-                    <div
-                        class="p-4 bg-white dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-800">
-                        <p class="text-xs font-medium text-slate-500 dark:text-[#9dabb9] uppercase tracking-wider">
-                            Training Gear</p>
-                        <div class="flex items-center justify-between mt-2">
-                            <span class="text-2xl font-bold">1 Offer</span>
-                            <span class="text-amber-500 text-xs font-bold">Scheduled</span>
-                        </div>
-                    </div>
+                    </form>
                 </div>
-            </div>
-        </main>
+                <!-- Offers Grid -->
+                <div class="flex flex-col gap-4">
+                    <% if (offers && offers.length> 0) { %>
+                        <% offers.forEach(function(offer) { %>
+                            <div
+                                class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex flex-col md:flex-row md:items-center justify-between group hover:border-primary/50 transition-all shadow-sm">
+                                <div class="flex flex-col md:flex-row md:items-center gap-4 flex-1">
+                                    <div class="flex flex-col">
+                                        <div class="flex items-center gap-3">
+                                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+                                                <%= offer.name %>
+                                            </h3>
+                                            <% if (offer.isActive && new Date(offer.endDate)>= new Date()) { %>
+                                                <span
+                                                    class="px-3 py-0.5 bg-green-500/90 text-white text-[10px] font-bold rounded-full uppercase tracking-wider">Active</span>
+                                                <% } else if (!offer.isActive) { %>
+                                                    <span
+                                                        class="px-3 py-0.5 bg-red-500/90 text-white text-[10px] font-bold rounded-full uppercase tracking-wider">Inactive</span>
+                                                    <% } else { %>
+                                                        <span
+                                                            class="px-3 py-0.5 bg-amber-500/90 text-white text-[10px] font-bold rounded-full uppercase tracking-wider">Expired</span>
+                                                        <% } %>
+                                        </div>
+                                        <div class="flex items-center text-xs text-slate-500 dark:text-[#9dabb9] mt-1">
+                                            <span class="material-symbols-outlined text-sm mr-2">calendar_today</span>
+                                            Valid: <%= new Date(offer.startDate).toLocaleDateString('en-US', {
+                                                month: 'short' , day: 'numeric' , year: 'numeric' }) %> - <%= new
+                                                    Date(offer.endDate).toLocaleDateString('en-US', { month: 'short' ,
+                                                    day: 'numeric' , year: 'numeric' }) %>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-wrap gap-1.5">
+                                        <span
+                                            class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded-full uppercase tracking-wider">
+                                            <%= offer.offerMode==='PERCENTAGE' ? offer.discountValue + '%' : '$' +
+                                                offer.discountValue %> Off
+                                        </span>
+
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4 mt-4 md:mt-0">
+                                    <div class="flex gap-2">
+                                        <a href="/admin/offers/edit/<%= offer._id %>">
+                                            <button
+                                                class="px-4 py-2 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-bold rounded-lg transition-colors border border-slate-200 dark:border-slate-700">Edit</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <% }); %>
+                                <% } else { %>
+                                    <div
+                                        class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl flex flex-col items-center justify-center p-8 bg-slate-50/50 dark:bg-slate-900/20">
+                                        <span class="material-symbols-outlined text-4xl text-slate-400 mb-2">sell</span>
+                                        <p class="text-sm font-bold text-slate-600 dark:text-slate-400">No Offers Found
+                                        </p>
+                                        <p class="text-xs text-slate-400 mt-1">Add a new offer to get started.</p>
+                                    </div>
+                                    <% } %>
+                                        <!-- Add New Row Placeholder -->
+                                        <a href="/admin/offers/add"
+                                            class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center p-4 bg-slate-50/50 dark:bg-slate-900/20 hover:bg-primary/5 hover:border-primary/50 transition-all group cursor-pointer">
+                                            <div class="flex items-center gap-3">
+                                                <div
+                                                    class="w-8 h-8 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-all">
+                                                    <span class="material-symbols-outlined text-lg">add</span>
+                                                </div>
+                                                <p
+                                                    class="text-sm font-bold text-slate-600 dark:text-slate-400 group-hover:text-primary transition-colors">
+                                                    Create New Promotion</p>
+                                            </div>
+                                        </a>
+                </div>
+                <!-- Pagination Footer -->
+                <% if (typeof totalOffers !=='undefined' && totalOffers> 0) { %>
+                    <div class="flex flex-wrap justify-between items-center mt-6 px-1">
+                        <p class="text-xs text-slate-500 dark:text-[#9dabb9]">
+                            Showing <span class="font-bold">
+                                <%= offers.length ? ((currentPage - 1) * limit + 1) : "0" %>-<%= (currentPage - 1) *
+                                        limit + offers.length %>
+                            </span>
+                            of <span class="font-bold">
+                                <%= totalOffers %>
+                            </span> offers
+                        </p>
+                        <div class="flex items-center gap-2">
+                            <% if (currentPage> 1) { %>
+                                <a href="/admin/offers?page=<%= currentPage - 1 %><%= search ? '&search=' + encodeURIComponent(search) : '' %><%= status ? '&status=' + status : '' %>"
+                                    class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">Previous</a>
+                                <% } else { %>
+                                    <button
+                                        class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold opacity-50"
+                                        disabled>Previous</button>
+                                    <% } %>
+
+                                        <div class="flex gap-1">
+                                            <% let pagesToShow=[]; if (totalPages <=7) { for (let i=1; i <=totalPages;
+                                                i++) pagesToShow.push(i); } else { pagesToShow.push(1); if (currentPage>
+                                                3) pagesToShow.push('...');
+                                                let start = Math.max(2, currentPage - 1);
+                                                let end = Math.min(totalPages - 1, currentPage + 1);
+                                                for (let i = start; i <= end; i++) pagesToShow.push(i); if (currentPage
+                                                    < totalPages - 2) pagesToShow.push('...');
+                                                    pagesToShow.push(totalPages); } %>
+                                                    <% pagesToShow.forEach(p=> { %>
+                                                        <% if (p==='...' ) { %>
+                                                            <span
+                                                                class="px-1 text-slate-400 dark:text-slate-500 text-sm self-center">…</span>
+                                                            <% } else if (p===currentPage) { %>
+                                                                <button
+                                                                    class="size-8 rounded bg-primary text-white text-xs font-bold">
+                                                                    <%= p %>
+                                                                </button>
+                                                                <% } else { %>
+                                                                    <a href="/admin/offers?page=<%= p %><%= search ? '&search=' + encodeURIComponent(search) : '' %><%= status ? '&status=' + status : '' %>"
+                                                                        class="size-8 rounded hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold transition-colors flex items-center justify-center">
+                                                                        <%= p %>
+                                                                    </a>
+                                                                    <% } %>
+                                                                        <% }) %>
+                                        </div>
+
+                                        <% if (currentPage < totalPages) { %>
+                                            <a href="/admin/offers?page=<%= currentPage + 1 %><%= search ? '&search=' + encodeURIComponent(search) : '' %><%= status ? '&status=' + status : '' %>"
+                                                class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors flex items-center justify-center">Next</a>
+                                            <% } else { %>
+                                                <button
+                                                    class="px-3 py-1.5 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold opacity-50"
+                                                    disabled>Next</button>
+                                                <% } %>
+                        </div>
+                    </div>
+                    <% } %>
+                        <!-- Recently Modified Category Linking Footer section -->
+                        
+            </main>
     </div>
 </body>
 

@@ -238,13 +238,14 @@ export const orderDetailsRender=async(req,res)=>{
 export const orderReturnRender=async(req,res)=>{
     try {
         const orderId=req.params.id;
+        const user=req.session.user || req.session.userId || req.user?._id
 
         const returnItem=await returnService(orderId);
 
         if(!returnItem){
          return res.redirect('/orderHistory/:id')
         }
-        return res.render('userViews/userOrderReturn',{returnItem})
+        return res.render('userViews/userOrderReturn',{returnItem,user})
     } catch (error) {
         console.log(error)
     }

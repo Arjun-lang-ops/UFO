@@ -6,6 +6,7 @@ console.log("ENV CHECK:", {
   EMAIL_PASS: process.env.EMAIL_PASS ? "LOADED" : "MISSING",
 });
 
+
 import express from "express";
 import session from "express-session";
 import nocache from "nocache";
@@ -76,6 +77,14 @@ app.use('/admin',adminCouponRoutes)
 app.use('/admin',adminOfferRoutes)
 app.use('/admin',adminAnalyticsRoutes)
 
+
+
+// 404 Handler
+app.use((req, res) => {
+  res.status(404).render("userViews/404page", {
+    message: "Page Not Found",
+  });
+});
 
 //error handling middleware
 app.use((err, req, res, next) => {

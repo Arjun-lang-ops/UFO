@@ -78,7 +78,7 @@ export const checkoutRenderService = async (userId) => {
   }, 0);
 
   const subtotal = cartItems.reduce((acc, item) => {
-    return (acc += item.total);
+     return acc + (item.basePrice * item.quantity);
   }, 0);
 
   const offerDiscount = cartItems.reduce((acc, item) => {

@@ -93,10 +93,10 @@ export const addProductService = async (data, files) => {
       }
 
 
-      const duplicateVariant=variants.find(v=>v.color.toLowerCase()===data[`color_${i}`].toLowerCase() && v.size.toLowerCase()===data[`size${i}`].toLowerCase());
+      const duplicateVariant=variants.find(v=>v.color.toLowerCase()===data[`color_${i}`].toLowerCase() && v.size.toLowerCase()===data[`size_${i}`].toLowerCase());
 
       if(duplicateVariant){
-        throw new Error('`Duplicate variant found: ${data[`color_${i}`]} / ${data[`size_${i}`]}`')
+        throw new Error(`Duplicate variant found: ${data[`color_${i}`]} / ${data[`size_${i}`]}`)
       }
 
       variants.push({

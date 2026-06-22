@@ -47,6 +47,7 @@ export const getCartController = async (req, res) => {
 
     let cartTotal = 0;
     let offerDiscount = 0;
+    let originalTotal=0
 
     if (cart && cart.items.length > 0) {
       cart.items.forEach(item => {
@@ -63,9 +64,10 @@ export const getCartController = async (req, res) => {
           : { finalPrice: 0, offerDiscount: 0 };
         item.offerPricing = pricing;
         const price = pricing.finalPrice;
-
+        
         cartTotal += price * item.quantity;
         offerDiscount += (pricing.offerDiscount || 0) * item.quantity;
+        originalTotal+=variant.discountedPrice *item.quantity
       });
     }
 
@@ -82,6 +84,7 @@ const subtotal = cartTotal + shippingCharge;
       offerDiscount,
       shippingCharge,
       subtotal,
+      originalTotal
     });
 
   } catch (error) {

@@ -66,14 +66,12 @@
           </nav>
         </div>
         <div class="flex flex-1 justify-end gap-4 md:gap-6">
-          
           <div class="flex items-center gap-3">
             <a href="/wishlist">
               <button class="relative flex items-center justify-center size-10 rounded-lg hover:bg-[#283039] text-white transition-colors">
-              <span class="material-symbols-outlined">favorite</span>
-            </button>
+                <span class="material-symbols-outlined">favorite</span>
+              </button>
             </a>
-            
           </div>
         </div>
       </div>
@@ -120,13 +118,13 @@
                     v._id.toString() === item.variantId.toString()
                   );
                 }
-                const isOutOfStock = !variant || variant.stock <= 0 || !product || !product.isActive ||!product.category?.isListed;
+                const stock=variant.stock
+                const isOutOfStock = !variant || variant.stock <= 0 || !product || !product.isActive || !product.category?.isListed;
                 const offerPricing = item.offerPricing || {};
                 const price = isOutOfStock ? 0 : (offerPricing.finalPrice || variant?.discountedPrice || variant?.price || 0);
                 const basePrice = isOutOfStock ? 0 : (offerPricing.basePrice || variant?.discountedPrice || variant?.price || 0);
                 const itemOfferDiscount = isOutOfStock ? 0 : (offerPricing.offerDiscount || 0);
                 const total = isOutOfStock ? 0 : price * item.quantity;
-                // Use last-known image/details even if OOS
                 const imgSrc = variant?.images?.[0] || '/images/default.jpg';
                 const sizeLbl = variant?.size || 'N/A';
                 const colorLbl = variant?.color || 'N/A';
@@ -136,26 +134,26 @@
               <div class="cart-item group relative flex flex-col md:grid md:grid-cols-12 gap-4 md:items-center bg-[#1a222d] md:bg-transparent p-4 md:p-0 rounded-xl md:rounded-none md:border-b border-[#283039] md:pb-6
                 <%= isOutOfStock ? 'oos-item opacity-75' : '' %>"
                 data-variant="<%= item.variantId %>"
-                data-stock="<%=variant?.stock||0%>"
-                data-out-of-stock="<%= isOutOfStock %>">
+                data-stock="<%= variant?.stock || 0 %>"
+                data-out-of-stock="<%= isOutOfStock %>"
+                data-base-price="<%= basePrice %>"
+                data-offer-saving="<%= itemOfferDiscount %>">
 
                 <!-- Product Info -->
                 <div class="col-span-6 flex items-center gap-4 min-w-0">
                   <div class="relative shrink-0 overflow-hidden rounded-lg size-24 md:size-28 bg-[#283039] border border-[#283039] flex items-center justify-center">
-  
-  <% if (!isOutOfStock && variant?.images?.length) { %>
-    <img src="<%= variant.images[0] %>" 
-         class="h-full w-full object-cover" 
-         alt="<%= product?.name || 'Unknown Product' %>" />
-  <% } else { %>
-    <!-- Empty / placeholder -->
-    <span class="text-[#9dabb9] text-xs ">OUT OF STOCK</span>
-  <% } %>
-
-</div>
+                    <% if (!isOutOfStock && variant?.images?.length) { %>
+                      <img src="<%= variant.images[0] %>"
+                           class="h-full w-full object-cover"
+                           alt="<%= product?.name || 'Unknown Product' %>" />
+                    <% } else { %>
+                      <span class="text-[#9dabb9] text-xs">OUT OF STOCK</span>
+                    <% } %>
+                  </div>
                   <div class="flex flex-col gap-1 min-w-0">
                     <h3 class="text-white text-base md:text-lg font-bold truncate"><%= product?.name || 'Unknown Product' %></h3>
                     <p class="text-[#9dabb9] text-sm truncate">Size: <%= sizeLbl %> &bull; Color: <%= colorLbl %></p>
+                    
                     <% if (!isOutOfStock && itemOfferDiscount > 0) { %>
                     <span class="inline-flex items-center gap-1 text-[#4ade80] text-xs font-bold mt-1">
                       <span class="material-symbols-outlined text-[14px]">sell</span>
@@ -243,25 +241,17 @@
               <div class="flex flex-col gap-3 mb-6">
                 <div class="flex justify-between items-center text-[#9dabb9]">
                   <span>Subtotal</span>
-                  <span id="cart-total" class="text-white font-bold text-lg">&#8377;<%= typeof cartTotal !== 'undefined' ? cartTotal : 0 %></span>
+                  <span id="cart-total" class="text-white font-bold text-lg">&#8377;<%= typeof originalTotal !== 'undefined' ? originalTotal : 0 %></span>
                 </div>
-                <% if ((offerDiscount || 0) > 0) { %>
-                <div class="flex justify-between items-center text-[#4ade80]">
-                  <div class="flex items-center gap-2">
-                    <span>Offer Savings</span>
-                  </div>
-                  <span class="font-medium">-&#8377;<%= offerDiscount %></span>
+                <div id="offer-discount-row" class="flex justify-between items-center text-[#4ade80] <%= (offerDiscount || 0) > 0 ? '' : 'hidden' %>">
+                  <span>Offer Savings</span>
+                  <span id="offer-discount-val" class="font-medium">-&#8377;<%= offerDiscount || 0 %></span>
                 </div>
-                <% } %>
                 <div class="flex justify-between items-center text-[#9dabb9]">
                   <span>Shipping estimate</span>
-                  <span class="text-[#4ade80] font-medium"><%=shippingCharge%></span>
+                  <span id="shipping-val" class="text-[#4ade80] font-medium"><%= shippingCharge %></span>
                 </div>
               </div>
-
-              
-
-              
 
               <div class="h-px bg-[#283039] mb-6"></div>
 
@@ -272,9 +262,10 @@
 
               <a href="/checkout">
                 <button id="proceed-btn" class="w-full h-12 bg-primary hover:bg-blue-600 text-white font-bold rounded-lg shadow-lg shadow-primary/20 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
-                Proceed to Checkout
-                <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
-              </button></a>
+                  Proceed to Checkout
+                  <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                </button>
+              </a>
 
               <div class="mt-4 flex items-center justify-center gap-2 text-[#9dabb9] text-sm">
                 <span class="material-symbols-outlined text-[16px]">lock</span>
@@ -288,126 +279,152 @@
     </main>
 
   </body>
+
   <script>
-   document.querySelectorAll(".cart-item").forEach(item => {
-  const variantId = item.dataset.variant;
-  const isOOS = item.dataset.outOfStock === 'true';
-  const increaseBtn = item.querySelector(".increase-btn");
-  const decreaseBtn = item.querySelector(".decrease-btn");
-  const qtyInput   = item.querySelector(".qty-input");
-  const priceEl    = item.querySelector(".price");
-  const totalEl    = item.querySelector(".item-total");
+    document.querySelectorAll(".cart-item").forEach(item => {
+      const variantId = item.dataset.variant;
+      const isOOS = item.dataset.outOfStock === 'true';
+      const increaseBtn = item.querySelector(".increase-btn");
+      const decreaseBtn = item.querySelector(".decrease-btn");
+      const qtyInput    = item.querySelector(".qty-input");
+      const priceEl     = item.querySelector(".price");
+      const totalEl     = item.querySelector(".item-total");
 
-  
+      if (isOOS) return;
 
-  // Skip wiring events for out-of-stock items (buttons are already disabled via HTML)
-  if (isOOS) return;
+      const getPrice = () => Number(priceEl.innerText.replace("₹", "").trim());
 
-  const getPrice = () => Number(priceEl.innerText.replace("₹", "").trim());
+      const updateItemUI = (newQty) => {
+        qtyInput.value = newQty;
+        totalEl.innerText = `₹${getPrice() * newQty}`;
+        updateCartTotal();
+      };
 
-  const updateItemUI = (newQty) => {
-    qtyInput.value = newQty;
-    totalEl.innerText = `₹${getPrice() * newQty}`;
-    updateCartTotal();
-  };
+      increaseBtn.addEventListener("click", async () => {
+        const qty   = Number(qtyInput.value);
+        const stock = Number(item.dataset.stock);
 
-  increaseBtn.addEventListener("click", async () => {
-  const qty = Number(qtyInput.value);
-  const stock = Number(item.dataset.stock);
+        if (qty >= 10) {
+          Swal.fire({
+            icon: "warning",
+            title: "Maximum limit reached",
+            text: "You can only add up to 10 items of this product.",
+            confirmButtonColor: "#137fec"
+          });
+          return;
+        }
 
-  // stop at max 10
-  if (qty >= 10) {
-    Swal.fire({
-      icon: "warning",
-      title: "Maximum limit reached",
-      text: "You can only add up to 10 items of this product.",
-      confirmButtonColor: "#137fec"
+        if (qty >= stock) {
+          Swal.fire({
+            icon: "warning",
+            title: "Stock limit reached",
+            text: `Only ${stock} item(s) available in stock.`,
+            confirmButtonColor: "#137fec"
+          });
+          return;
+        }
+
+        const res  = await fetch("/update-cart", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ variantId, action: "increase" })
+        });
+        const data = await res.json();
+        if (data.success) {
+          updateItemUI(data.quantity);
+        } else if (data.message) {
+          Swal.fire("Error", data.message, "error");
+        }
+      });
+
+      decreaseBtn.addEventListener("click", async () => {
+        const res  = await fetch("/update-cart", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ variantId, action: "decrease" })
+        });
+        const data = await res.json();
+        if (data.success) updateItemUI(data.quantity);
+      });
     });
-    return;
-  }
 
-  // stop at available stock
-  if (qty >= stock) {
-    Swal.fire({
-      icon: "warning",
-      title: "Stock limit reached",
-      text: `Only ${stock} item(s) available in stock.`,
-      confirmButtonColor: "#137fec"
-    });
-    return;
-  }
+    function updateCartTotal() {
+      let originalTotal     = 0;
+      let offerDiscountTotal = 0;
 
-  // continue updating cart
-  const res = await fetch("/update-cart", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      variantId,
-      action: "increase"
-    })
-  });
+      document.querySelectorAll(".cart-item").forEach(item => {
+        if (item.dataset.outOfStock === 'true') return;
 
-  const data = await res.json();
+        const qtyInput    = item.querySelector(".qty-input");
+        const priceEl     = item.querySelector(".price");
+        const totalEl     = item.querySelector(".item-total");
 
-  if (data.success) {
-    updateItemUI(data.quantity);
-  } else if (data.message) {
-    Swal.fire("Error", data.message, "error");
-  }
-});
+        const qty        = Number(qtyInput.value);
+        const finalPrice = Number(priceEl.innerText.replace("₹", "").trim());
+        const basePrice  = Number(item.dataset.basePrice);
+        const offerSaving = Number(item.dataset.offerSaving);
 
-  decreaseBtn.addEventListener("click", async () => {
-    const res = await fetch("/update-cart", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ variantId, action: "decrease" })
-    });
-    const data = await res.json();
-    if (data.success) updateItemUI(data.quantity);
-  });
-});
+        originalTotal      += basePrice * qty;
+        offerDiscountTotal += offerSaving * qty;
 
-function updateCartTotal() {
-  let total = 0;
-  document.querySelectorAll(".cart-item").forEach(item => {
-    // Skip out-of-stock items when summing up the total
-    if (item.dataset.outOfStock === 'true') return;
-    const totalEl = item.querySelector(".item-total");
-    if (totalEl) total += Number(totalEl.innerText.replace("₹", "").trim());
-  });
-  const cartTotalEl = document.getElementById("cart-total");
-  if (cartTotalEl) cartTotalEl.innerText = `₹${total}`;
-  const grandTotalEl = document.getElementById("cart-grand-total");
-  if (grandTotalEl) grandTotalEl.innerText = `₹${total}`;
-}
-  </script>
-  <script>
-document.querySelectorAll(".delete-btn").forEach(btn => {
-  btn.addEventListener("click", async () => {
-    const variantId = btn.dataset.variant;
-    const result = await Swal.fire({
-      title: "Remove item?",
-      text: "This product will be removed from your cart",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#ef4444",
-      confirmButtonText: "Yes, remove it"
-    });
-    if (!result.isConfirmed) return;
-    const res = await fetch("/remove-from-cart", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ variantId })
-    });
-    const data = await res.json();
-    if (data.success) {
-      Swal.fire("Removed!", "Item removed from cart", "success").then(() => location.reload());
-    } else {
-      Swal.fire("Error", data.message, "error");
+        if (totalEl) totalEl.innerText = `₹${finalPrice * qty}`;
+      });
+
+      const cartTotal  = originalTotal - offerDiscountTotal;
+      const shipping   = cartTotal > 0 && cartTotal < 4000 ? 50 : 0;
+      const subtotal   = cartTotal + shipping;
+
+      // Subtotal row
+      const cartTotalEl = document.getElementById("cart-total");
+      if (cartTotalEl) cartTotalEl.innerText = `₹${originalTotal}`;
+
+      // Offer discount row — show/hide dynamically
+      const offerRow = document.getElementById("offer-discount-row");
+      const offerVal = document.getElementById("offer-discount-val");
+      if (offerRow && offerVal) {
+        if (offerDiscountTotal > 0) {
+          offerRow.classList.remove("hidden");
+          offerVal.innerText = `-₹${offerDiscountTotal}`;
+        } else {
+          offerRow.classList.add("hidden");
+        }
+      }
+
+      // Shipping row
+      const shippingEl = document.getElementById("shipping-val");
+      if (shippingEl) shippingEl.innerText = shipping === 0 ? "Free" : `₹${shipping}`;
+
+      // Grand total
+      const grandTotalEl = document.getElementById("cart-grand-total");
+      if (grandTotalEl) grandTotalEl.innerText = `₹${subtotal}`;
     }
-  });
-});
-</script>
+  </script>
+
+  <script>
+    document.querySelectorAll(".delete-btn").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const variantId = btn.dataset.variant;
+        const result = await Swal.fire({
+          title: "Remove item?",
+          text: "This product will be removed from your cart",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#ef4444",
+          confirmButtonText: "Yes, remove it"
+        });
+        if (!result.isConfirmed) return;
+        const res  = await fetch("/remove-from-cart", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ variantId })
+        });
+        const data = await res.json();
+        if (data.success) {
+          Swal.fire("Removed!", "Item removed from cart", "success").then(() => location.reload());
+        } else {
+          Swal.fire("Error", data.message, "error");
+        }
+      });
+    });
+  </script>
 </html>

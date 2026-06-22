@@ -18,11 +18,20 @@ const getOfferDiscount = (sellingPrice, offer) => {
   const price = Number(sellingPrice) || 0;
   const discountValue = Number(offer.discountValue) || 0;
 
+  let discount = 0;
+
   if (offer.offerMode === "PERCENTAGE") {
-    return roundAmount((price * discountValue) / 100);
+    discount = (price * discountValue) / 100;
+
+    // Cap at maxDiscount if set
+    if (offer.maxDiscount != null && offer.maxDiscount > 0) {
+      discount = Math.min(discount, Number(offer.maxDiscount));
+    }
+  } else {
+    discount = discountValue;
   }
 
-  return roundAmount(discountValue);
+  return roundAmount(discount);
 };
 
 export const calculateBestOfferPrice = (
