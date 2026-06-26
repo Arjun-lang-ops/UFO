@@ -12,6 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -709,7 +710,7 @@
 
             if (mode === "edit") {
                 if (!openEditAddressModal.dataset.id) {
-                    alert("Please select an address first");
+                    Swal.fire({ icon: "warning", title: "Address Required", text: "Please select an address first." })
                     return;
                 }
 
@@ -801,14 +802,19 @@
                 const result = await response.json();
 
                 if (!result.success) {
-                    alert(result.message || "Failed to select address");
+                    Swal.fire({
+    icon: "error",
+    title: "Failed",
+    text: result.message || "Failed to Select Address",
+    confirmButtonText: "OK"
+});
                     return;
                 }
 
                 updateSelectedAddress(result.address);
             } catch (error) {
                 console.log(error);
-                alert("Something went wrong");
+                Swal.fire({ icon: "error", title: "Oops!", text: "Something went wrong." });
             }
         });
 
@@ -892,7 +898,12 @@
 
                     } else {
 
-                        alert(result.message || "Failed to update address");
+                        Swal.fire({
+    icon: "error",
+    title: "Failed",
+    text: result.message || "Failed to Update Address",
+    confirmButtonText: "OK"
+});
 
                     }
 
@@ -921,7 +932,12 @@
 
                     } else {
 
-                        alert(result.message || "Failed to add address");
+                      Swal.fire({
+    icon: "error",
+    title: "Add Address Failed",
+    text: result.message || "Failed to add address",
+    confirmButtonText: "OK"
+});
 
                     }
 
@@ -931,7 +947,7 @@
 
                 console.log(error);
 
-                alert("Something went wrong");
+                Swal.fire({ icon: "error", title: "Oops!", text: "Something went wrong." });
 
             }
 
@@ -1205,22 +1221,24 @@
                 //--------------------------------
 
                 if (!addressId) {
+    Swal.fire({
+        icon: "warning",
+        title: "Address Required",
+        text: "Please select an address.",
+        confirmButtonText: "OK"
+    });
+    return;
+}
 
-                    alert(
-                        "Please select address"
-                    );
-
-                    return;
-                }
-
-                if (!paymentMethod) {
-
-                    alert(
-                        "Please choose payment method"
-                    );
-
-                    return;
-                }
+if (!paymentMethod) {
+    Swal.fire({
+        icon: "warning",
+        title: "Payment Method Required",
+        text: "Please choose a payment method.",
+        confirmButtonText: "OK"
+    });
+    return;
+}
 
                 showOrderLoading();
 
@@ -1316,7 +1334,12 @@
                         }
                     } else {
                         hideOrderLoading();
-                        alert(result.message || "Failed to place order");
+                        Swal.fire({
+    icon: "error",
+    title: "Order Failed",
+    text: result.message || "Failed to place order",
+    confirmButtonText: "OK"
+});
                     }
 
                 } catch (error) {
@@ -1324,9 +1347,7 @@
                     console.log(error);
                     hideOrderLoading();
 
-                    alert(
-                        "Something went wrong"
-                    );
+                    Swal.fire({ icon: "error", title: "Oops!", text: "Something went wrong." });
                 }
             }
         );
