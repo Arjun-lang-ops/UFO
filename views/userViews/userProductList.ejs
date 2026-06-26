@@ -111,12 +111,7 @@
     <div class="flex flex-1 justify-end gap-4 lg:gap-8 items-center">
 
       <div class="flex gap-2">
-        <a href="/profile">
-          <button
-            class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
-            <span class="material-symbols-outlined text-[20px]">account_circle</span>
-          </button>
-        </a>
+        
         <a href="/cart">
           <button
             class="flex items-center justify-center rounded-lg h-10 w-10 hover:bg-slate-200 dark:hover:bg-[#283039] transition-colors relative">
@@ -131,10 +126,18 @@
 
           </button>
         </a>
-        <button
+        <a href="/wishlist">
+          <button
           class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
           <span class="material-symbols-outlined text-[20px]">favorite</span>
         </button>
+        </a>
+        <a href="/profile">
+          <button
+            class="flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-[20px]">account_circle</span>
+          </button>
+        </a>
         <!-- Mobile Menu Toggle -->
         <button
           class="lg:hidden flex items-center justify-center rounded-lg size-10 bg-surface-dark text-white hover:bg-primary/20 hover:text-primary transition-colors">
@@ -189,7 +192,7 @@
 
                 <select name="sort" onchange="this.form.submit()"
                   class="appearance-none w-full bg-surface-dark text-white text-sm border border-border-dark rounded-lg px-4 py-2.5 pr-8 focus:outline-none focus:border-primary cursor-pointer">
-
+                  <option value="sort">Sort Items</option>
                   <option <%=selectedValue==="priceLow" ?'selected':''%> value="priceLow">
                     Price: Low to High</option>
                   <option <%=selectedValue==="priceHigh" ?'selected':''%> value="priceHigh">Price: High to Low</option>
