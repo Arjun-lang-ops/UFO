@@ -1,16 +1,22 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Welcome to Football Accessories</title>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<script id="tailwind-config">
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Welcome to Football Accessories</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -23,257 +29,353 @@
                     fontFamily: {
                         "display": ["Lexend", "sans-serif"]
                     },
-                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
                 },
             },
         }
     </script>
-<style>
+    <style>
         /* Custom scrollbar for better integration in dark mode */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
             background: #101922;
         }
+
         ::-webkit-scrollbar-thumb {
             background: #283039;
             border-radius: 4px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: #3b4754;
         }
     </style>
 </head>
+
 <body class="bg-background-light dark:bg-background-dark text-[#111418] dark:text-white font-display overflow-x-hidden">
-<div class="relative flex min-h-screen w-full flex-col group/design-root">
-<!-- Top Navigation -->
-<header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e5e7eb] dark:border-b-[#283039] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-10 py-3">
-<div class="flex items-center gap-8">
-<div class="flex items-center gap-4 text-[#111418] dark:text-white">
-<div class="size-8 flex items-center justify-center rounded bg-primary/20 text-primary">
-<span class="material-symbols-outlined" style="font-size: 24px;">sports_soccer</span>
-</div>
-<h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
-</div>
-<nav class="hidden md:flex items-center gap-9">
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Home</a>
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Shop</a>
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Teams</a>
-<a class="text-sm font-medium leading-normal hover:text-primary transition-colors" href="#">Sale</a>
-</nav>
-</div>
-<div class="flex flex-1 justify-end gap-4 md:gap-8">
-<label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64 group">
-<div class="flex w-full flex-1 items-stretch rounded-lg h-full ring-1 ring-[#d1d5db] dark:ring-[#3b4754] focus-within:ring-primary overflow-hidden">
-<div class="text-[#6b7280] dark:text-[#9dabb9] flex border-none bg-white dark:bg-[#1c2127] items-center justify-center pl-4">
-<span class="material-symbols-outlined" style="font-size: 20px;">search</span>
-</div>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-none text-[#111418] dark:text-white focus:outline-0 focus:ring-0 border-none bg-white dark:bg-[#1c2127] placeholder:text-[#6b7280] dark:placeholder:text-[#9dabb9] px-4 pl-2 text-sm font-normal leading-normal" placeholder="Search gear..." value=""/>
-</div>
-</label>
-<div class="flex gap-2">
-<a href="/login">
-    <button class="flex items-center justify-center rounded-lg size-10 bg-[#e5e7eb] dark:bg-[#283039] hover:bg-primary/20 hover:text-primary transition-colors text-[#111418] dark:text-white">
-<span class="material-symbols-outlined" style="font-size: 20px;">shopping_cart</span>
-</button>
-</a>
-<a href="/login">
-    <button class="flex items-center justify-center rounded-lg size-10 bg-[#e5e7eb] dark:bg-[#283039] hover:bg-primary/20 hover:text-primary transition-colors text-[#111418] dark:text-white">
-<span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span>
-</button>
-</a>
-</div>
-</div>
-</header>
-<main class="flex-1 flex flex-col items-center w-full">
-<div class="w-full max-w-[1200px] px-4 md:px-10 flex flex-col gap-10 py-5">
-<!-- Hero Section -->
-<section class="@container">
-<div class="flex min-h-[560px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-start justify-center p-8 md:p-16 relative overflow-hidden group" data-alt="Dynamic action shot of a soccer player striking a ball in a stadium at night" style='background-image: linear-gradient(90deg, rgba(16, 25, 34, 0.9) 0%, rgba(16, 25, 34, 0.4) 60%, rgba(16, 25, 34, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCpv-uvc1t2le1nqYy2dqBH6KCm8HzRYki065UMfGtxW3o-fTE9nah1UoFZJkozqrDKdWsv4p2ed57__YJxPkuqxAcruZav4Ljz8JRbWw9RLTgHOk5XP0WlC14kXVOFFNh4CDuG3c1MeHxrBcRZA58OzylujwbpgS1G1SoURM8kHi9ADIFkftyx9jBUEm60-Zvrmatyq9MM_sEshOxufrFxZwfvtBPiZRl4qY-GMAwhNkkxm0QsZhFUiV9tkwRnB5Lm2ylscwyCD54");'>
-<div class="flex flex-col gap-4 text-left max-w-[600px] z-10 animate-fade-in-up">
-<span class="text-primary font-bold tracking-wider uppercase text-sm">New Season Collection</span>
-<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-6xl @[480px]:leading-[1.1]">
+    <div class="relative flex min-h-screen w-full flex-col group/design-root">
+        <!-- Top Navigation -->
+        <header
+            class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#e5e7eb] dark:border-b-[#283039] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md px-10 py-3">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-4 text-[#111418] dark:text-white">
+                    <div class="size-8 flex items-center justify-center rounded bg-primary/20 text-primary">
+                        <span class="material-symbols-outlined" style="font-size: 24px;">sports_soccer</span>
+                    </div>
+                    <h2 class="text-lg font-bold leading-tight tracking-[-0.015em]">Urban Football</h2>
+                </div>
+                <nav class="hidden md:flex items-center gap-9">
+                    <a class="text-sm font-medium leading-normal hover:text-primary transition-colors"
+                        href="/login">Home</a>
+                    <a class="text-sm font-medium leading-normal hover:text-primary transition-colors"
+                        href="/login">Shop</a>
+                    <a class="text-sm font-medium leading-normal hover:text-primary transition-colors"
+                        href="/login">Teams</a>
+                    <a class="text-sm font-medium leading-normal hover:text-primary transition-colors"
+                        href="/login">Sale</a>
+                </nav>
+            </div>
+            <div class="flex flex-1 justify-end gap-4 md:gap-8">
+                <label class="hidden md:flex flex-col min-w-40 !h-10 max-w-64 group">
+                    <div
+                        class="flex w-full flex-1 items-stretch rounded-lg h-full ring-1 ring-[#d1d5db] dark:ring-[#3b4754] focus-within:ring-primary overflow-hidden">
+                        <div
+                            class="text-[#6b7280] dark:text-[#9dabb9] flex border-none bg-white dark:bg-[#1c2127] items-center justify-center pl-4">
+                            <span class="material-symbols-outlined" style="font-size: 20px;">search</span>
+                        </div>
+                        <input
+                            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-none text-[#111418] dark:text-white focus:outline-0 focus:ring-0 border-none bg-white dark:bg-[#1c2127] placeholder:text-[#6b7280] dark:placeholder:text-[#9dabb9] px-4 pl-2 text-sm font-normal leading-normal"
+                            placeholder="Search gear..." value="" />
+                    </div>
+                </label>
+                <div class="flex gap-2">
+                    <a href="/login">
+                        <button
+                            class="flex items-center justify-center rounded-lg size-10 bg-[#e5e7eb] dark:bg-[#283039] hover:bg-primary/20 hover:text-primary transition-colors text-[#111418] dark:text-white">
+                            <span class="material-symbols-outlined" style="font-size: 20px;">shopping_cart</span>
+                        </button>
+                    </a>
+                    <a href="/login">
+                        <button
+                            class="flex items-center justify-center rounded-lg size-10 bg-[#e5e7eb] dark:bg-[#283039] hover:bg-primary/20 hover:text-primary transition-colors text-[#111418] dark:text-white">
+                            <span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </header>
+        <main class="flex-1 flex flex-col items-center w-full">
+            <div class="w-full max-w-[1200px] px-4 md:px-10 flex flex-col gap-10 py-5">
+                <!-- Hero Section -->
+                <section class="@container">
+                    <div class="flex min-h-[560px] flex-col gap-6 bg-cover bg-center bg-no-repeat rounded-xl items-start justify-center p-8 md:p-16 relative overflow-hidden group"
+                        data-alt="Dynamic action shot of a soccer player striking a ball in a stadium at night"
+                        style='background-image: linear-gradient(90deg, rgba(16, 25, 34, 0.9) 0%, rgba(16, 25, 34, 0.4) 60%, rgba(16, 25, 34, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCpv-uvc1t2le1nqYy2dqBH6KCm8HzRYki065UMfGtxW3o-fTE9nah1UoFZJkozqrDKdWsv4p2ed57__YJxPkuqxAcruZav4Ljz8JRbWw9RLTgHOk5XP0WlC14kXVOFFNh4CDuG3c1MeHxrBcRZA58OzylujwbpgS1G1SoURM8kHi9ADIFkftyx9jBUEm60-Zvrmatyq9MM_sEshOxufrFxZwfvtBPiZRl4qY-GMAwhNkkxm0QsZhFUiV9tkwRnB5Lm2ylscwyCD54");'>
+                        <div class="flex flex-col gap-4 text-left max-w-[600px] z-10 animate-fade-in-up">
+                            <span class="text-primary font-bold tracking-wider uppercase text-sm">New Season
+                                Collection</span>
+                            <h1
+                                class="text-white text-4xl font-black leading-tight tracking-[-0.033em] @[480px]:text-6xl @[480px]:leading-[1.1]">
                                 Elevate Your Game
                             </h1>
-<h2 class="text-gray-200 text-base font-normal leading-relaxed @[480px]:text-lg max-w-[480px]">
-                                Premium boots, authentic kits, and pro-level training gear for the modern footballer. Gear up like the pros.
+                            <h2
+                                class="text-gray-200 text-base font-normal leading-relaxed @[480px]:text-lg max-w-[480px]">
+                                Premium boots, authentic kits, and pro-level training gear for the modern footballer.
+                                Gear up like the pros.
                             </h2>
-<div class="flex gap-4 pt-4">
-<a href="/login">
-    <button class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-primary/90 transition-all text-white text-base font-bold shadow-lg shadow-primary/25">
-<span class="truncate">Shop Now</span>
-</button>
-</a>
-<button class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all text-white text-base font-bold">
-<span class="truncate">View Teams</span>
-</button>
-</div>
-</div>
-</div>
-</section>
-<!-- Featured Categories Grid -->
-<section>
-<div class="flex items-center justify-between px-2 pb-6 pt-2">
-<h2 class="text-[#111418] dark:text-white text-[24px] font-bold leading-tight tracking-[-0.015em]">Shop by Category</h2>
-<a class="text-primary text-sm font-medium hover:underline flex items-center gap-1" href="#">View All <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span></a>
-</div>
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-<!-- Card 1: Boots -->
-<div class="group relative overflow-hidden rounded-xl aspect-[4/5] sm:aspect-square lg:aspect-[3/4] cursor-pointer">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Close up of bright neon soccer cleats on green grass" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA4yzTHGa1ajekEQQSkdzOddkug7DWKN3QiSjFmvJ5q9gsyR1-bUgYqsmx-XEjPTCfDLZSLdEXSs4dsmrlYadkHqCTPgtpQvNWeO1N2TJDPqiqZ0OxGyrq4Zm9j18mcXTuIJkR0p1HF721qfwItDxFvKGOKh0kWrKRLcxSnG2m9vovaEm8PnCrGrNfdj_iV2jHFX7Q-EgIZEKJLoAjcXMkHqx_qryu0SzwMhwrD6l30ZmKOuu-Uue_fpWxRcD9U_5F8F3CEnb0Dzug");'></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6 w-full">
-<h3 class="text-white text-xl font-bold mb-1">Boots</h3>
-<p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">Speed, Control &amp; Precision</p>
-</div>
-</div>
-<!-- Card 2: Kits -->
-<div class="group relative overflow-hidden rounded-xl aspect-[4/5] sm:aspect-square lg:aspect-[3/4] cursor-pointer">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Collection of colorful football team jerseys folded neatly" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCOGR214M73I-421AX-Ao82Robfp6NXfwjzAxYMrMaGlj0FW_HEqcabu7cYWhOG1crNd1ePo62zjMjwJWCCEQ_UzmEm95ibM8MGsKUmwGlo01I_JbDSg73C3ITcBmIhtcleTlel8HjThjYO1m5HTiPeV92-WWrreYTBa2E5vi93Oh0rrSKXEjlb2tDLT2eoxPSaITqJ3WD4yzd5EWSoJF-13fGgJN_KmEYVGlOY09DB4Y8D9P8jifdux6krqJeCdRMubWj-zBjCJPE");'></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6 w-full">
-<h3 class="text-white text-xl font-bold mb-1">Kits</h3>
-<p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">Official Home &amp; Away</p>
-</div>
-</div>
-<!-- Card 3: Training -->
-<div class="group relative overflow-hidden rounded-xl aspect-[4/5] sm:aspect-square lg:aspect-[3/4] cursor-pointer">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Soccer training equipment including cones and balls on a pitch" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9BwxngRAmXlmoDOESn8GW7e8JIpog0XFzQC7Gty6QBtT-GxV0zgZ66pyk6ki61Ww5pocroww7PYUh2rmUq_cSZvwY-rDrgjOOSGGrOrMyuNciUze5QXGiYp4RDtJGDNI590fQ9_6jY2nO5hi87Paey97qRosACoqk0nJNPc_AqdqjTN0SRMKsJt_QjGrJFTGvzcOcqgaNIlGYNwNvfl2y04Fg-GCwnFUC_cQOSaQUYMPVZFVD5Ih5_zYEuvj7h82yrqfkALD9q74");'></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6 w-full">
-<h3 class="text-white text-xl font-bold mb-1">Training</h3>
-<p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">Cones, Bibs &amp; Goals</p>
-</div>
-</div>
-<!-- Card 4: Accessories -->
-<div class="group relative overflow-hidden rounded-xl aspect-[4/5] sm:aspect-square lg:aspect-[3/4] cursor-pointer">
-<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Soccer goalkeeper gloves and shin guards on a bench" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAa3DUCmRiEuRRa2t0JYnGOCDHC-HGAsttVMiWKYBNGvKF1aPiV3EPxiWRbkDO-K4J3ZmZlQKwpsaM_JVLbM2dkZxwuQPclA_b_FHRK18yzCP03qqACpkQk5Lki-AL5nJR9U2-8LCMYJm1Ct1Jg7Ekww6Nty0jn_exKp2HUBxAqI9k35BoGuTf4_5RHRd0zsS-IFvIH9zhDTA942eb7fRhrosHInoOYY5zKEAcAo2DfHFvdeNE2a9tAW2N1Veu6G-neyNn7cMXg6KM");'></div>
-<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-<div class="absolute bottom-0 left-0 p-6 w-full">
-<h3 class="text-white text-xl font-bold mb-1">Accessories</h3>
-<p class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">Gloves, Shin Guards &amp; Socks</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Why Choose Us Feature Section -->
-<section class="rounded-xl bg-white dark:bg-[#1c2127] border border-[#e5e7eb] dark:border-[#283039] p-8 md:p-12 mt-4">
-<div class="flex flex-col gap-10">
-<div class="flex flex-col gap-4 text-center items-center">
-<h2 class="text-[#111418] dark:text-white text-3xl font-black leading-tight tracking-[-0.033em] md:text-4xl">
+                            <div class="flex gap-4 pt-4">
+                                <a href="/login">
+                                    <button
+                                        class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary hover:bg-primary/90 transition-all text-white text-base font-bold shadow-lg shadow-primary/25">
+                                        <span class="truncate">Shop Now</span>
+                                    </button>
+                                </a>
+                                <a href="/login">
+                                    <button
+                                        class="flex min-w-[140px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 transition-all text-white text-base font-bold">
+                                        <span class="truncate">View Teams</span>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Featured Categories Grid -->
+                <section>
+                    <div class="flex items-center justify-between px-2 pb-6 pt-2">
+                        <h2
+                            class="text-[#111418] dark:text-white text-[24px] font-bold leading-tight tracking-[-0.015em]">
+                            Shop by Category</h2>
+                        <a class="text-primary text-sm font-medium hover:underline flex items-center gap-1"
+                            href="#">View All <span class="material-symbols-outlined"
+                                style="font-size: 16px;">arrow_forward</span></a>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Card 1: Boots -->
+                        <div
+                            class="group relative overflow-hidden rounded-xl aspect-[4/5] sm:aspect-square lg:aspect-[3/4] cursor-pointer">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                                data-alt="Close up of bright neon soccer cleats on green grass"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA4yzTHGa1ajekEQQSkdzOddkug7DWKN3QiSjFmvJ5q9gsyR1-bUgYqsmx-XEjPTCfDLZSLdEXSs4dsmrlYadkHqCTPgtpQvNWeO1N2TJDPqiqZ0OxGyrq4Zm9j18mcXTuIJkR0p1HF721qfwItDxFvKGOKh0kWrKRLcxSnG2m9vovaEm8PnCrGrNfdj_iV2jHFX7Q-EgIZEKJLoAjcXMkHqx_qryu0SzwMhwrD6l30ZmKOuu-Uue_fpWxRcD9U_5F8F3CEnb0Dzug");'>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <div class="absolute bottom-0 left-0 p-6 w-full">
+                                <h3 class="text-white text-xl font-bold mb-1">Boots</h3>
+                                <p
+                                    class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
+                                    Speed, Control &amp; Precision</p>
+                            </div>
+                        </div>
+                        <!-- Card 2: Kits -->
+                        <div
+                            class="group relative overflow-hidden rounded-xl aspect-[4/5] sm:aspect-square lg:aspect-[3/4] cursor-pointer">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                                data-alt="Collection of colorful football team jerseys folded neatly"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCOGR214M73I-421AX-Ao82Robfp6NXfwjzAxYMrMaGlj0FW_HEqcabu7cYWhOG1crNd1ePo62zjMjwJWCCEQ_UzmEm95ibM8MGsKUmwGlo01I_JbDSg73C3ITcBmIhtcleTlel8HjThjYO1m5HTiPeV92-WWrreYTBa2E5vi93Oh0rrSKXEjlb2tDLT2eoxPSaITqJ3WD4yzd5EWSoJF-13fGgJN_KmEYVGlOY09DB4Y8D9P8jifdux6krqJeCdRMubWj-zBjCJPE");'>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <div class="absolute bottom-0 left-0 p-6 w-full">
+                                <h3 class="text-white text-xl font-bold mb-1">Kits</h3>
+                                <p
+                                    class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
+                                    Official Home &amp; Away</p>
+                            </div>
+                        </div>
+                        <!-- Card 3: Training -->
+                        <div
+                            class="group relative overflow-hidden rounded-xl aspect-[4/5] sm:aspect-square lg:aspect-[3/4] cursor-pointer">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                                data-alt="Soccer training equipment including cones and balls on a pitch"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9BwxngRAmXlmoDOESn8GW7e8JIpog0XFzQC7Gty6QBtT-GxV0zgZ66pyk6ki61Ww5pocroww7PYUh2rmUq_cSZvwY-rDrgjOOSGGrOrMyuNciUze5QXGiYp4RDtJGDNI590fQ9_6jY2nO5hi87Paey97qRosACoqk0nJNPc_AqdqjTN0SRMKsJt_QjGrJFTGvzcOcqgaNIlGYNwNvfl2y04Fg-GCwnFUC_cQOSaQUYMPVZFVD5Ih5_zYEuvj7h82yrqfkALD9q74");'>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <div class="absolute bottom-0 left-0 p-6 w-full">
+                                <h3 class="text-white text-xl font-bold mb-1">Training</h3>
+                                <p
+                                    class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
+                                    Cones, Bibs &amp; Goals</p>
+                            </div>
+                        </div>
+                        <!-- Card 4: Accessories -->
+                        <div
+                            class="group relative overflow-hidden rounded-xl aspect-[4/5] sm:aspect-square lg:aspect-[3/4] cursor-pointer">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+                                data-alt="Soccer goalkeeper gloves and shin guards on a bench"
+                                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAa3DUCmRiEuRRa2t0JYnGOCDHC-HGAsttVMiWKYBNGvKF1aPiV3EPxiWRbkDO-K4J3ZmZlQKwpsaM_JVLbM2dkZxwuQPclA_b_FHRK18yzCP03qqACpkQk5Lki-AL5nJR9U2-8LCMYJm1Ct1Jg7Ekww6Nty0jn_exKp2HUBxAqI9k35BoGuTf4_5RHRd0zsS-IFvIH9zhDTA942eb7fRhrosHInoOYY5zKEAcAo2DfHFvdeNE2a9tAW2N1Veu6G-neyNn7cMXg6KM");'>
+                            </div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+                            </div>
+                            <div class="absolute bottom-0 left-0 p-6 w-full">
+                                <h3 class="text-white text-xl font-bold mb-1">Accessories</h3>
+                                <p
+                                    class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
+                                    Gloves, Shin Guards &amp; Socks</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Why Choose Us Feature Section -->
+                <section
+                    class="rounded-xl bg-white dark:bg-[#1c2127] border border-[#e5e7eb] dark:border-[#283039] p-8 md:p-12 mt-4">
+                    <div class="flex flex-col gap-10">
+                        <div class="flex flex-col gap-4 text-center items-center">
+                            <h2
+                                class="text-[#111418] dark:text-white text-3xl font-black leading-tight tracking-[-0.033em] md:text-4xl">
                                 Why Choose Urban Football?
                             </h2>
-<p class="text-[#6b7280] dark:text-[#9dabb9] text-base font-normal leading-normal max-w-[720px]">
-                                We are the ultimate destination for football enthusiasts. From Sunday league to the pros, we equip you with the best tools to perform on the pitch.
+                            <p
+                                class="text-[#6b7280] dark:text-[#9dabb9] text-base font-normal leading-normal max-w-[720px]">
+                                We are the ultimate destination for football enthusiasts. From Sunday league to the
+                                pros, we equip you with the best tools to perform on the pitch.
                             </p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-<!-- Feature 1 -->
-<div class="flex flex-col gap-4 p-6 rounded-lg bg-[#f9fafb] dark:bg-[#151a21] hover:bg-white dark:hover:bg-[#1c2127] hover:shadow-lg transition-all border border-transparent hover:border-[#e5e7eb] dark:hover:border-[#3b4754]">
-<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" style="font-size: 28px;">local_shipping</span>
-</div>
-<div class="flex flex-col gap-2">
-<h3 class="text-[#111418] dark:text-white text-lg font-bold">Fast Global Shipping</h3>
-<p class="text-[#6b7280] dark:text-[#9dabb9] text-sm leading-relaxed">Get your gear before the next match. We offer express delivery options to over 100 countries.</p>
-</div>
-</div>
-<!-- Feature 2 -->
-<div class="flex flex-col gap-4 p-6 rounded-lg bg-[#f9fafb] dark:bg-[#151a21] hover:bg-white dark:hover:bg-[#1c2127] hover:shadow-lg transition-all border border-transparent hover:border-[#e5e7eb] dark:hover:border-[#3b4754]">
-<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" style="font-size: 28px;">verified</span>
-</div>
-<div class="flex flex-col gap-2">
-<h3 class="text-[#111418] dark:text-white text-lg font-bold">100% Authentic Gear</h3>
-<p class="text-[#6b7280] dark:text-[#9dabb9] text-sm leading-relaxed">No fakes, just performance. We source directly from top brands like Nike, Adidas, and Puma.</p>
-</div>
-</div>
-<!-- Feature 3 -->
-<div class="flex flex-col gap-4 p-6 rounded-lg bg-[#f9fafb] dark:bg-[#151a21] hover:bg-white dark:hover:bg-[#1c2127] hover:shadow-lg transition-all border border-transparent hover:border-[#e5e7eb] dark:hover:border-[#3b4754]">
-<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" style="font-size: 28px;">military_tech</span>
-</div>
-<div class="flex flex-col gap-2">
-<h3 class="text-[#111418] dark:text-white text-lg font-bold">Pro Quality Standard</h3>
-<p class="text-[#6b7280] dark:text-[#9dabb9] text-sm leading-relaxed">Equipment tailored for performance, used by professionals in the Champions League worldwide.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Newsletter / CTA -->
-<section class="w-full relative overflow-hidden rounded-xl bg-primary">
-<div class="absolute inset-0 opacity-10" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBAuD2PpJkKi4HEVyvf7LgaEKkek9vY1E0r0LTpJE3GdO_aeybZsqN9DcOthzsyoJNFS80pyegKfm9dOAyMIfPiP5acAe7s5kL36CG_lceQp_AJPr_iO6C7FMm4A-5woKBP2TtVodSnjUE61S8NRG9xT4ii3XqJR8tPqytM-zhB8adknCJCQE6nbJiYdPOI9QhSZPwlCnB4imewbfMR-TQbUK57wHnKWW_RgS17d2CTlX3OAq4jr2R8JZh9aE286W55TFgEQYqXUUM");'></div>
-<div class="relative z-10 flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-6">
-<div class="flex flex-col gap-2 text-white max-w-lg">
-<h3 class="text-2xl font-bold">Join the Squad</h3>
-<p class="text-white/80">Subscribe to get exclusive access to new drops, limited editions, and pro tips.</p>
-</div>
-<div class="flex w-full max-w-md gap-2">
-<input class="flex-1 rounded-lg border-0 bg-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:ring-2 focus:ring-white/50 backdrop-blur-sm" placeholder="Enter your email" type="email"/>
-<button class="bg-white text-primary font-bold rounded-lg px-6 py-3 hover:bg-gray-100 transition-colors">
-                                Subscribe
-                            </button>
-</div>
-</div>
-</section>
-</div>
-</main>
-<!-- Footer -->
-<footer class="w-full border-t border-solid border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#101922] py-12 px-10">
-<div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-10">
-<div class="flex flex-col gap-4 max-w-xs">
-<div class="flex items-center gap-2 text-[#111418] dark:text-white">
-<div class="size-6 flex items-center justify-center rounded bg-primary text-white">
-<span class="material-symbols-outlined" style="font-size: 16px;">sports_soccer</span>
-</div>
-<h3 class="text-lg font-bold">Urban Football</h3>
-</div>
-<p class="text-[#6b7280] dark:text-[#9dabb9] text-sm">Empowering footballers everywhere with the best equipment since 2010.</p>
-</div>
-<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-<div class="flex flex-col gap-3">
-<h4 class="text-[#111418] dark:text-white font-bold text-sm uppercase tracking-wide">Shop</h4>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Boots</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Jerseys</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Training</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Sale</a>
-</div>
-<div class="flex flex-col gap-3">
-<h4 class="text-[#111418] dark:text-white font-bold text-sm uppercase tracking-wide">Support</h4>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Help Center</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Returns</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Shipping</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Contact Us</a>
-</div>
-<div class="flex flex-col gap-3">
-<h4 class="text-[#111418] dark:text-white font-bold text-sm uppercase tracking-wide">Company</h4>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">About Us</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Careers</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Blog</a>
-</div>
-<div class="flex flex-col gap-3">
-<h4 class="text-[#111418] dark:text-white font-bold text-sm uppercase tracking-wide">Follow Us</h4>
-<div class="flex gap-4">
-<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary" href="#">
-<!-- Facebook icon placeholder via text or svg could go here, using symbol for generic social -->
-<span class="material-symbols-outlined">public</span>
-</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary" href="#">
-<span class="material-symbols-outlined">alternate_email</span>
-</a>
-</div>
-</div>
-</div>
-</div>
-<div class="max-w-[1200px] mx-auto mt-12 pt-8 border-t border-[#e5e7eb] dark:border-[#283039] flex flex-col md:flex-row justify-between items-center gap-4">
-<p class="text-[#6b7280] dark:text-[#9dabb9] text-sm text-center md:text-left">© 2026 Urban Football. All rights reserved.</p>
-<div class="flex gap-6">
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Privacy Policy</a>
-<a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Terms of Service</a>
-</div>
-</div>
-</footer>
-</div>
-</body></html>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Feature 1 -->
+                            <div
+                                class="flex flex-col gap-4 p-6 rounded-lg bg-[#f9fafb] dark:bg-[#151a21] hover:bg-white dark:hover:bg-[#1c2127] hover:shadow-lg transition-all border border-transparent hover:border-[#e5e7eb] dark:hover:border-[#3b4754]">
+                                <div
+                                    class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined"
+                                        style="font-size: 28px;">local_shipping</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h3 class="text-[#111418] dark:text-white text-lg font-bold">Fast Global Shipping
+                                    </h3>
+                                    <p class="text-[#6b7280] dark:text-[#9dabb9] text-sm leading-relaxed">Get your gear
+                                        before the next match. We offer express delivery options to over 100 countries.
+                                    </p>
+                                </div>
+                            </div>
+                            <!-- Feature 2 -->
+                            <div
+                                class="flex flex-col gap-4 p-6 rounded-lg bg-[#f9fafb] dark:bg-[#151a21] hover:bg-white dark:hover:bg-[#1c2127] hover:shadow-lg transition-all border border-transparent hover:border-[#e5e7eb] dark:hover:border-[#3b4754]">
+                                <div
+                                    class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined" style="font-size: 28px;">verified</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h3 class="text-[#111418] dark:text-white text-lg font-bold">100% Authentic Gear
+                                    </h3>
+                                    <p class="text-[#6b7280] dark:text-[#9dabb9] text-sm leading-relaxed">No fakes, just
+                                        performance. We source directly from top brands like Nike, Adidas, and Puma.</p>
+                                </div>
+                            </div>
+                            <!-- Feature 3 -->
+                            <div
+                                class="flex flex-col gap-4 p-6 rounded-lg bg-[#f9fafb] dark:bg-[#151a21] hover:bg-white dark:hover:bg-[#1c2127] hover:shadow-lg transition-all border border-transparent hover:border-[#e5e7eb] dark:hover:border-[#3b4754]">
+                                <div
+                                    class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined"
+                                        style="font-size: 28px;">military_tech</span>
+                                </div>
+                                <div class="flex flex-col gap-2">
+                                    <h3 class="text-[#111418] dark:text-white text-lg font-bold">Pro Quality Standard
+                                    </h3>
+                                    <p class="text-[#6b7280] dark:text-[#9dabb9] text-sm leading-relaxed">Equipment
+                                        tailored for performance, used by professionals in the Champions League
+                                        worldwide.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Newsletter / CTA -->
+                <section class="w-full relative overflow-hidden rounded-xl bg-primary">
+                    <div class="absolute inset-0 opacity-10"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBAuD2PpJkKi4HEVyvf7LgaEKkek9vY1E0r0LTpJE3GdO_aeybZsqN9DcOthzsyoJNFS80pyegKfm9dOAyMIfPiP5acAe7s5kL36CG_lceQp_AJPr_iO6C7FMm4A-5woKBP2TtVodSnjUE61S8NRG9xT4ii3XqJR8tPqytM-zhB8adknCJCQE6nbJiYdPOI9QhSZPwlCnB4imewbfMR-TQbUK57wHnKWW_RgS17d2CTlX3OAq4jr2R8JZh9aE286W55TFgEQYqXUUM");'>
+                    </div>
+                    <div class="relative z-10 flex flex-col md:flex-row items-center justify-between p-8 md:p-12 gap-6">
+                        <div class="flex flex-col gap-2 text-white max-w-lg">
+                            <h3 class="text-2xl font-bold">Join the Squad</h3>
+                            <p class="text-white/80">Subscribe to get exclusive access to new drops, limited editions,
+                                and pro tips.</p>
+                        </div>
+                        <div class="flex w-full max-w-md gap-2">
+                            <input
+                                class="flex-1 rounded-lg border-0 bg-white/10 px-4 py-3 text-white placeholder:text-white/60 focus:ring-2 focus:ring-white/50 backdrop-blur-sm"
+                                placeholder="Enter your email" type="email" />
+                            <a href="/login">
+                                <button
+                                    class="bg-white text-primary font-bold rounded-lg px-6 py-3 hover:bg-gray-100 transition-colors">
+                                    Subscribe
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer
+            class="w-full border-t border-solid border-[#e5e7eb] dark:border-[#283039] bg-white dark:bg-[#101922] py-12 px-10">
+            <div class="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between gap-10">
+                <div class="flex flex-col gap-4 max-w-xs">
+                    <div class="flex items-center gap-2 text-[#111418] dark:text-white">
+                        <div class="size-6 flex items-center justify-center rounded bg-primary text-white">
+                            <span class="material-symbols-outlined" style="font-size: 16px;">sports_soccer</span>
+                        </div>
+                        <h3 class="text-lg font-bold">Urban Football</h3>
+                    </div>
+                    <p class="text-[#6b7280] dark:text-[#9dabb9] text-sm">Empowering footballers everywhere with the
+                        best equipment since 2010.</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="flex flex-col gap-3">
+                        <h4 class="text-[#111418] dark:text-white font-bold text-sm uppercase tracking-wide">Shop</h4>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Boots</a>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Jerseys</a>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Training</a>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Sale</a>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h4 class="text-[#111418] dark:text-white font-bold text-sm uppercase tracking-wide">Support
+                        </h4>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Help
+                            Center</a>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Returns</a>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Shipping</a>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Contact Us</a>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h4 class="text-[#111418] dark:text-white font-bold text-sm uppercase tracking-wide">Company
+                        </h4>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">About Us</a>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Careers</a>
+                        <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Blog</a>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h4 class="text-[#111418] dark:text-white font-bold text-sm uppercase tracking-wide">Follow Us
+                        </h4>
+                        <div class="flex gap-4">
+                            <a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary" href="#">
+                                <!-- Facebook icon placeholder via text or svg could go here, using symbol for generic social -->
+                                <span class="material-symbols-outlined">public</span>
+                            </a>
+                            <a class="text-[#6b7280] dark:text-[#9dabb9] hover:text-primary" href="#">
+                                <span class="material-symbols-outlined">alternate_email</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="max-w-[1200px] mx-auto mt-12 pt-8 border-t border-[#e5e7eb] dark:border-[#283039] flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[#6b7280] dark:text-[#9dabb9] text-sm text-center md:text-left">© 2026 Urban Football.
+                    All rights reserved.</p>
+                <div class="flex gap-6">
+                    <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Privacy Policy</a>
+                    <a class="text-[#6b7280] dark:text-[#9dabb9] text-sm hover:text-primary" href="#">Terms of
+                        Service</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
