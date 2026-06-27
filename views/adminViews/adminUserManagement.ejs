@@ -128,9 +128,7 @@
                 <tr class="bg-slate-50 dark:bg-[#1c2127] border-b border-slate-200 dark:border-[#3b4754]">
                   <th
                     class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 w-12 text-center">
-                    <input
-                      class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary"
-                      type="checkbox" />
+                    No.
                   </th>
                   <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     User
@@ -141,9 +139,7 @@
                   <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     Status
                   </th>
-                  <th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
-                    Total Orders
-                  </th>
+                  
                   <th
                     class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 text-right">
                     Actions
@@ -152,13 +148,11 @@
               </thead>
               <tbody class="divide-y divide-slate-100 dark:divide-[#3b4754]">
 
-                <% data.forEach(user=> { %>
+                <% data.forEach((user, index) => { %>
                   <tr class="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors group"
                     data-user-id="<%= user._id %>">
-                    <td class="px-6 py-5 text-center">
-                      <input
-                        class="rounded border-slate-300 dark:border-slate-600 bg-transparent text-primary focus:ring-primary"
-                        type="checkbox" />
+                    <td class="px-6 py-5 text-center text-sm font-medium text-slate-500 dark:text-slate-400">
+                      <%= (currentPage - 1) * limit + index + 1 %>
                     </td>
                     <td class="px-6 py-5">
                       <div class="flex items-center gap-3">
@@ -181,7 +175,7 @@
                         <%= user.isBlocked ? "Blocked" : "Active" %>
                       </span>
                     </td>
-                    <td class="px-6 py-5 text-sm font-medium text-slate-900 dark:text-white">4 Orders</td>
+                    
                     <td class="px-6 py-5 text-right">
                       <button class="p-2 text-slate-400 hover:text-primary">
                         <span class="material-symbols-outlined text-[20px]">more_vert</span>
