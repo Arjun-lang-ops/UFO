@@ -30,6 +30,7 @@ import { cartCountMiddleware } from "./middlewares/cartMiddleware.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+app.set("trust proxy", 1);
 
 // Database connection
 connectDB();
