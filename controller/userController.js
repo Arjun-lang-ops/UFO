@@ -6,6 +6,8 @@ import Category from "../models/categoryModel.js";
 import Product from "../models/productModel.js";
 import Otp from "../models/otpModel.js";
 import Address from "../models/userAddressModel.js";
+import Order from "../models/orderModel.js";
+import Wishlist from "../models/userWishlistModel.js";
 
 
 
@@ -164,7 +166,14 @@ if (!defaultAddress) {
 }
 
     const user = await User.findById(userId);
-    res.render('userViews/userProfile', { user,defaultAddress })
+
+    const order=await Order.countDocuments({user:userId});
+
+    const wishlist =await Wishlist.findOne({userId:userId});
+
+    const wishlistCount = wishlist?wishlist.products.length:0
+
+    res.render('userViews/userProfile', { user,defaultAddress,order ,wishlistCount})
     console.log(req.session.user);
 
   } catch (error) {
