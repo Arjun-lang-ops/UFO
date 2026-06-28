@@ -83,6 +83,8 @@ async function handleEmailSubmit(e) {
 
     const data = await response.json();
 
+  
+
     if (response.ok && data.success) {
       window.location.href = data.redirectUrl || "/profile/email-otp";
     } else {
@@ -113,13 +115,28 @@ async function uploadProfileImage(event) {
   });
 
   const data = await res.json();
+    console.log(data)
 
   if (data.success) {
-    const preview = document.getElementById("profileImagePreview");
+  const preview = document.getElementById("profileImagePreview");
 
-    preview.style.backgroundImage = `url('${data.imageUrl}?t=${new Date().getTime()}')`;
-  } else {
-    alert(data.message);
+  preview.style.backgroundImage = `url('${data.imageUrl}?t=${Date.now()}')`;
+
+  Swal.fire({
+    icon: "success",
+    title: "Success!",
+    text: "Profile picture updated successfully.",
+    timer: 1800,
+    showConfirmButton: false,
+  });
+} else {
+  Swal.fire({
+    icon: "error",
+    title: "Upload Failed",
+    text: data.message || "Something went wrong.",
+    confirmButtonColor: "#137fec",
+  }).then(() => {
     window.location.reload();
-  }
+  });
+}
 }
