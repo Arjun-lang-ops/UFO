@@ -128,6 +128,8 @@ async function uploadProfileImage(event) {
     text: "Profile picture updated successfully.",
     timer: 1800,
     showConfirmButton: false,
+  }).then(() => {
+    window.location.reload();
   });
 } else {
   Swal.fire({
