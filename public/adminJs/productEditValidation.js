@@ -202,8 +202,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <!-- Size -->
                 <div class="space-y-1">
-                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Size</label>
-                    <input id="size_${idx}" name="size_${idx}" class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" placeholder="e.g. 9" type="text" />
+                    <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Size <span class="text-red-400">*</span></label>
+                    <select id="size_${idx}" name="size_${idx}" class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2">
+                        <option value="">Select Size</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                    </select>
                     <p id="sizeError_${idx}" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                 </div>
                 <!-- Price -->
@@ -553,12 +559,15 @@ document.addEventListener("input", (e) => {
   }
 });
 
-// Clear image errors when selecting files
+// Clear image errors when selecting files or size dropdown changes
 document.addEventListener("change", (e) => {
   const id = e.target.id;
 
   if (id && id.startsWith("variantImages_")) {
     clearError(`imagesError_${id.split("_")[1]}`);
+  }
+  if (id && id.startsWith("size_")) {
+    clearError(`sizeError_${id.split("_")[1]}`);
   }
 });
  

@@ -239,8 +239,14 @@
                         <!-- Size -->
                         <div class="space-y-1">
                           <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Size <span class="text-red-400">*</span></label>
-                          <input id="size_<%= idx %>" name="size_<%= idx %>" value="<%= variant.size %>"
-                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2" type="text" />
+                          <select id="size_<%= idx %>" name="size_<%= idx %>"
+                            class="w-full bg-[#101922] border border-[#1c2632] rounded-lg focus:ring-primary focus:border-primary text-white text-sm px-3 py-2">
+                            <option value="">Select Size</option>
+                            <option value="S" <%= variant.size === 'S' ? 'selected' : '' %>>S</option>
+                            <option value="M" <%= variant.size === 'M' ? 'selected' : '' %>>M</option>
+                            <option value="L" <%= variant.size === 'L' ? 'selected' : '' %>>L</option>
+                            <option value="XL" <%= variant.size === 'XL' ? 'selected' : '' %>>XL</option>
+                          </select>
                           <p id="sizeError_<%= idx %>" class="error-msg hidden text-red-400 text-xs mt-1"></p>
                         </div>
                         <!-- Price -->
