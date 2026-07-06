@@ -46,6 +46,12 @@ export const createCouponService = async (data) => {
     throw error;
   }
 
+  if (discount_type === "FLAT" && Number(min_purchase) <= Number(discount_value)) {
+    const error = new Error("Minimum purchase must be greater than the flat discount value");
+    error.statusCode = 400;
+    throw error;
+  }
+
  
   if (!expiry_date) {
     const error = new Error("Expiry date is required");
@@ -145,6 +151,12 @@ export const editCouponService=async(couponId, updateData)=>{
 
   if (discount_type === "PERCENTAGE" && Number(discount_value) > 100) {
     const error = new Error("Percentage discount cannot exceed 100%");
+    error.statusCode = 400;
+    throw error;
+  }
+
+  if (discount_type === "FLAT" && Number(min_purchase) <= Number(discount_value)) {
+    const error = new Error("Minimum purchase must be greater than the flat discount value");
     error.statusCode = 400;
     throw error;
   }

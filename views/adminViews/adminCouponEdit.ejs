@@ -81,6 +81,7 @@
                                 <input
                                     class="w-full px-4 py-3 rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-[#283039] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all font-mono uppercase"
                                     id="coupon_code" name="coupon_code" placeholder="e.g. SUMMER20" type="text" value="<%= coupon.code %>" />
+                                <span id="coupon_code_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label class="text-sm font-bold text-slate-700 dark:text-slate-300">Coupon
@@ -124,9 +125,10 @@
                                     <input
                                         class="w-full px-4 py-3 rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-[#283039] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all pr-12"
                                         id="discount_value" name="discount_value" type="number" value="<%= coupon.discountValue %>" />
-                                    <span
+                                    <span id="discount_symbol"
                                         class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold"><%= coupon.discountType === "PERCENTAGE" ? "%" : "Rs" %></span>
                                 </div>
+                                <span id="discount_value_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label class="text-sm font-bold text-slate-700 dark:text-slate-300">Minimum Spend
@@ -134,6 +136,7 @@
                                 <input
                                     class="w-full px-4 py-3 rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-[#283039] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all"
                                     id="min_purchase" name="min_purchase" type="number" value="<%= coupon.minimumPurchase || 0 %>" />
+                                <span id="min_purchase_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label class="text-sm font-bold text-slate-700 dark:text-slate-300">Maximum Discount
@@ -141,6 +144,7 @@
                                 <input
                                     class="w-full px-4 py-3 rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-[#283039] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all"
                                     id="maximum_discount" name="maximum_discount" placeholder="No limit" type="number" value="<%= coupon.maximumDiscount || "" %>" />
+                                <span id="maximum_discount_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                             </div>
                         </div>
                     </div>
@@ -157,6 +161,7 @@
                                     class="w-full px-4 py-3 rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-[#283039] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all"
                                     id="total_limit" name="total_limit" placeholder="Unlimited" type="number" value="<%= coupon.usageLimit || "" %>" />
                                 <p class="text-xs text-slate-500 mt-1"><%= coupon.usedCount || 0 %>/<%= coupon.usageLimit || 0 %> uses redeemed so far.</p>
+                                <span id="total_limit_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                             </div>
                             <div class="flex flex-col gap-2">
                                 <label class="text-sm font-bold text-slate-700 dark:text-slate-300">Limit Per
@@ -176,6 +181,7 @@
                                 <input
                                     class="w-full px-4 py-3 rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-[#283039] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all"
                                     id="expiry_date" name="expiry_date" type="date" value="<%= coupon.expiryDate ? coupon.expiryDate.toISOString().split('T')[0] : "" %>" />
+                                <span id="expiry_date_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                             </div>
                         </div>
                     </div>
@@ -198,10 +204,141 @@
 
 </body>
 <script>
+    // ─── Error helpers ────────────────────────────────────────────────────────
+    function showError(id, msg) {
+        const el = document.getElementById(id + "_err");
+        if (el) {
+            el.textContent = msg;
+            el.classList.remove("hidden");
+        }
+    }
+
+    function clearError(id) {
+        const el = document.getElementById(id + "_err");
+        if (el) {
+            el.textContent = "";
+            el.classList.add("hidden");
+        }
+    }
+
+    function clearAllErrors() {
+        document.querySelectorAll("[id$='_err']").forEach(el => {
+            el.textContent = "";
+            el.classList.add("hidden");
+        });
+    }
+
+    // ─── Live error clearing and symbol updates ──────────────────────────────
+    [
+        "coupon_code",
+        "discount_value",
+        "min_purchase",
+        "maximum_discount",
+        "expiry_date",
+        "total_limit"
+    ].forEach(id => {
+        document.getElementById(id)?.addEventListener("input", () => clearError(id));
+    });
+
+    document.getElementById("discount_type")?.addEventListener("change", (e) => {
+        const symbol = e.target.value === "PERCENTAGE" ? "%" : "Rs";
+        const symbolEl = document.getElementById("discount_symbol");
+        if (symbolEl) symbolEl.textContent = symbol;
+        clearError("discount_value");
+        clearError("min_purchase");
+    });
+
+    // ─── Validation ───────────────────────────────────────────────────────────
+    function validate() {
+        clearAllErrors();
+        let valid = true;
+
+        // Coupon code
+        const code = document.getElementById("coupon_code").value.trim();
+        if (!code) {
+            showError("coupon_code", "Coupon code is required.");
+            valid = false;
+        } else if (!/^[A-Z0-9]+$/i.test(code)) {
+            showError("coupon_code", "Only letters and numbers are allowed — no spaces or symbols.");
+            valid = false;
+        }
+
+        // Discount type + value
+        const discountType  = document.getElementById("discount_type").value;
+        const discountValue = parseFloat(document.getElementById("discount_value").value);
+
+        if (isNaN(discountValue) || discountValue <= 0) {
+            showError("discount_value", "Enter a discount value greater than 0.");
+            valid = false;
+        } else if (discountType === "PERCENTAGE" && discountValue > 100) {
+            showError("discount_value", "Percentage discount cannot exceed 100%.");
+            valid = false;
+        }
+
+        // Minimum purchase
+        const minPurchaseRaw = document.getElementById("min_purchase").value;
+        const minPurchase    = parseFloat(minPurchaseRaw);
+
+        if (minPurchaseRaw === "" || isNaN(minPurchase) || minPurchase < 0) {
+            showError("min_purchase", "Enter a valid minimum purchase amount (0 or more).");
+            valid = false;
+        } else if (discountType === "FLAT" && !isNaN(discountValue) && discountValue > 0) {
+            // For FLAT coupons: cart value must exceed the discount, otherwise the
+            // customer pays zero or negative — business rule enforced here.
+            if (minPurchase <= discountValue) {
+                showError(
+                    "min_purchase",
+                    `Minimum purchase (Rs.${minPurchase}) must be greater than the flat discount amount (Rs.${discountValue}).`
+                );
+                valid = false;
+            }
+        }
+
+        // Max discount cap (only relevant for PERCENTAGE)
+        if (discountType === "PERCENTAGE") {
+            const maxDiscount = parseFloat(document.getElementById("maximum_discount").value);
+            const maxDiscountRaw = document.getElementById("maximum_discount").value.trim();
+            if (maxDiscountRaw !== "") {
+                if (isNaN(maxDiscount) || maxDiscount <= 0) {
+                    showError("maximum_discount", "Enter a valid maximum discount cap (greater than 0).");
+                    valid = false;
+                } else if (!isNaN(minPurchase) && minPurchase > 0 && maxDiscount >= minPurchase) {
+                    showError("maximum_discount", "Max discount cap must be less than the minimum purchase amount.");
+                    valid = false;
+                }
+            }
+        }
+
+        // Expiry date
+        const expiry = document.getElementById("expiry_date").value;
+        if (!expiry) {
+            showError("expiry_date", "Expiry date is required.");
+            valid = false;
+        } else {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            if (new Date(expiry) <= today) {
+                showError("expiry_date", "Expiry date must be a future date.");
+                valid = false;
+            }
+        }
+
+        // Total usage limit (optional field)
+        const totalLimit = document.getElementById("total_limit").value;
+        if (totalLimit !== "" && (isNaN(Number(totalLimit)) || Number(totalLimit) < 1)) {
+            showError("total_limit", "Usage limit must be at least 1, or leave empty for unlimited.");
+            valid = false;
+        }
+
+        return valid;
+    }
+
     document
         .getElementById("couponEditForm")
         .addEventListener("submit", async (e) => {
             e.preventDefault();
+
+            if (!validate()) return;
 
             const submitButton = e.target.querySelector('button[type="submit"]');
             const couponStatus = document.getElementById("coupon_status").value;
