@@ -305,6 +305,10 @@ export const requestCancelService = async ({
     user: userId,
   });
 
+  
+
+  }
+
   if (!order) {
     throw new Error("Order not found");
   }
@@ -327,6 +331,8 @@ export const requestCancelService = async ({
   if (!quantity || quantity < 1 || quantity > item.quantity) {
     throw new Error("Invalid quantity");
   }
+
+  
 
   item.cancelRequest = true;
   item.cancelQuantity = quantity;
@@ -353,6 +359,18 @@ if (
   ["RAZORPAY", "WALLET"].includes(order.paymentMethod)
 ) {
   let wallet = await Wallet.findOne({ user: userId });
+
+
+  const products= await Order.find({user:userId}).populate('items.product');
+
+  if(products.offer && products.couponCode && products.stock<5 ){
+    wallet.transactions.push({
+    type: "credit",
+    amount: refundAmount/25,
+    description: `Refund for cancelled item in Order #${order.orderNumber}`,
+    orderId: order._id,
+    balanceAfterTransaction: wallet.balance,
+  });
 
   if (!wallet) {
     wallet = await Wallet.create({
