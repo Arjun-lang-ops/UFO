@@ -138,12 +138,13 @@
                                     id="min_purchase" name="min_purchase" type="number" value="<%= coupon.minimumPurchase || 0 %>" />
                                 <span id="min_purchase_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                             </div>
-                            <div class="flex flex-col gap-2">
+                            <div class="flex flex-col gap-2 hidden" id="maximum_discount_container">
                                 <label class="text-sm font-bold text-slate-700 dark:text-slate-300">Maximum Discount
-                                    (Rs.)</label>
+                                    (Rs.) <span class="text-red-500">*</span></label>
                                 <input
                                     class="w-full px-4 py-3 rounded-lg border-slate-200 dark:border-slate-800 bg-white dark:bg-[#283039] text-slate-900 dark:text-white focus:ring-2 focus:ring-primary/50 transition-all"
-                                    id="maximum_discount" name="maximum_discount" placeholder="No limit" type="number" value="<%= coupon.maximumDiscount || "" %>" />
+                                    id="maximum_discount" name="maximum_discount" placeholder="e.g. 500" type="number" min="1" value="<%= coupon.maximumDiscount || "" %>" />
+                                <p class="text-[10px] text-slate-500 italic mt-1">Maximum rupee value the percentage discount can reach</p>
                                 <span id="maximum_discount_err" class="hidden text-xs text-red-500 mt-1 block"></span>
                             </div>
                         </div>
@@ -240,10 +241,29 @@
         document.getElementById(id)?.addEventListener("input", () => clearError(id));
     });
 
+    function toggleMaxDiscount() {
+        const isPercent = document.getElementById("discount_type").value === "PERCENTAGE";
+        const container = document.getElementById("maximum_discount_container");
+        if (container) {
+            if (isPercent) {
+                container.classList.remove("hidden");
+            } else {
+                container.classList.add("hidden");
+                const input = document.getElementById("maximum_discount");
+                if (input) input.value = "";
+                clearError("maximum_discount");
+            }
+        }
+    }
+
+    // Run once on page load
+    toggleMaxDiscount();
+
     document.getElementById("discount_type")?.addEventListener("change", (e) => {
         const symbol = e.target.value === "PERCENTAGE" ? "%" : "Rs";
         const symbolEl = document.getElementById("discount_symbol");
         if (symbolEl) symbolEl.textContent = symbol;
+        toggleMaxDiscount();
         clearError("discount_value");
         clearError("min_purchase");
     });
@@ -296,16 +316,14 @@
 
         // Max discount cap (only relevant for PERCENTAGE)
         if (discountType === "PERCENTAGE") {
-            const maxDiscount = parseFloat(document.getElementById("maximum_discount").value);
             const maxDiscountRaw = document.getElementById("maximum_discount").value.trim();
-            if (maxDiscountRaw !== "") {
-                if (isNaN(maxDiscount) || maxDiscount <= 0) {
-                    showError("maximum_discount", "Enter a valid maximum discount cap (greater than 0).");
-                    valid = false;
-                } else if (!isNaN(minPurchase) && minPurchase > 0 && maxDiscount >= minPurchase) {
-                    showError("maximum_discount", "Max discount cap must be less than the minimum purchase amount.");
-                    valid = false;
-                }
+            const maxDiscount = parseFloat(maxDiscountRaw);
+            if (maxDiscountRaw === "" || isNaN(maxDiscount) || maxDiscount <= 0) {
+                showError("maximum_discount", "Maximum discount cap is required for percentage coupons (must be > 0).");
+                valid = false;
+            } else if (!isNaN(minPurchase) && minPurchase > 0 && maxDiscount >= minPurchase) {
+                showError("maximum_discount", "Max discount cap must be less than the minimum purchase amount (Rs." + minPurchase + ").");
+                valid = false;
             }
         }
 

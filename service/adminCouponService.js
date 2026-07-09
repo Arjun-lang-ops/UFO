@@ -46,6 +46,19 @@ export const createCouponService = async (data) => {
     throw error;
   }
 
+  if (discount_type === "PERCENTAGE") {
+    if (!maximum_discount || isNaN(Number(maximum_discount)) || Number(maximum_discount) <= 0) {
+      const error = new Error("Valid maximum discount cap is required for percentage discount");
+      error.statusCode = 400;
+      throw error;
+    }
+    if (min_purchase && Number(min_purchase) > 0 && Number(maximum_discount) >= Number(min_purchase)) {
+      const error = new Error("Maximum discount cap must be less than the minimum purchase amount");
+      error.statusCode = 400;
+      throw error;
+    }
+  }
+
   if (discount_type === "FLAT" && Number(min_purchase) <= Number(discount_value)) {
     const error = new Error("Minimum purchase must be greater than the flat discount value");
     error.statusCode = 400;
@@ -153,6 +166,19 @@ export const editCouponService=async(couponId, updateData)=>{
     const error = new Error("Percentage discount cannot exceed 100%");
     error.statusCode = 400;
     throw error;
+  }
+
+  if (discount_type === "PERCENTAGE") {
+    if (!maximum_discount || isNaN(Number(maximum_discount)) || Number(maximum_discount) <= 0) {
+      const error = new Error("Valid maximum discount cap is required for percentage discount");
+      error.statusCode = 400;
+      throw error;
+    }
+    if (min_purchase && Number(min_purchase) > 0 && Number(maximum_discount) >= Number(min_purchase)) {
+      const error = new Error("Maximum discount cap must be less than the minimum purchase amount");
+      error.statusCode = 400;
+      throw error;
+    }
   }
 
   if (discount_type === "FLAT" && Number(min_purchase) <= Number(discount_value)) {

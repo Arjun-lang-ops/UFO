@@ -115,16 +115,16 @@
                     <div class="flex gap-2">
                         <a href="/cart">
                             <button
-                            class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
-                            <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
-                        </button>
+                                class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                            </button>
                         </a>
-                        
+
                         <a href="/profile">
                             <button
-                            class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
-                            <span class="material-symbols-outlined text-[20px]">account_circle</span>
-                        </button>
+                                class="flex items-center justify-center rounded-lg h-10 w-10 bg-gray-50 dark:bg-border-dark text-slate-900 dark:text-white hover:bg-gray-100 dark:hover:bg-[#323b46] transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">account_circle</span>
+                            </button>
                         </a>
                     </div>
                 </div>
@@ -166,7 +166,7 @@
 
                                     Invoice
                                 </a>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -248,7 +248,8 @@
                                                                             <span
                                                                                 class="text-slate-900 dark:text-white">
                                                                                 <%= selectedVariant.color %>
-                                                                            </span></p>
+                                                                            </span>
+                                                                        </p>
                                                                         <% } %>
                                                                             <% if (selectedVariant?.size) { %>
                                                                                 <p class="text-sm text-text-secondary">
@@ -266,10 +267,17 @@
                                                                 </div>
                                                                 <div
                                                                     class="flex flex-col md:items-end justify-between gap-3">
-                                                                    <span class="text-lg font-bold">
-                                                                        <%= formatCurrency(item.totalPrice ||
-                                                                            (item.price * item.quantity)) %>
-                                                                    </span>
+                                                                    <div class="flex items-center gap-2">
+                                                                        <% if (selectedVariant && selectedVariant.price > item.price) { %>
+                                                                            <span class="text-sm text-text-secondary line-through">
+                                                                                <%= formatCurrency(selectedVariant.price * item.quantity) %>
+                                                                            </span>
+                                                                        <% } %>
+                                                                        <span class="text-lg font-bold">
+                                                                            <%= formatCurrency(item.totalPrice ||
+                                                                                (item.price * item.quantity)) %>
+                                                                        </span>
+                                                                    </div>
                                                                     <% if (canCancelItem) { %>
                                                                         <button type="button" data-cancel-item-button
                                                                             data-order-id="<%= order._id %>"
@@ -288,13 +296,14 @@
                                                                                     class="inline-flex items-center gap-1 rounded-full <%= item.cancelStatus === 'Rejected' ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300' : item.cancelStatus === 'Approved' || item.cancelStatus === 'Cancelled' ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300' : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300' %> px-3 py-1 text-xs font-bold">
                                                                                     <span
                                                                                         class="material-symbols-outlined text-base">pending_actions</span>
-                                                                                     <%= item.cancelStatus
-                                                                                        || "Pending" %>
+                                                                                    <%= item.cancelStatus || "Pending"
+                                                                                        %>
                                                                                 </span>
                                                                                 <% if (item.cancelReason) { %>
                                                                                     <span
                                                                                         class="text-xs text-text-secondary">Reason:
-                                                                                        <%= item.cancelReason %></span>
+                                                                                        <%= item.cancelReason %>
+                                                                                    </span>
                                                                                     <% } %>
                                                                             </div>
                                                                             <% } else if (currentStatus==="Delivered" )
@@ -391,12 +400,14 @@
                                             <p class="text-text-secondary text-xs">
                                                 <%= order.paymentStatus %>
                                             </p>
-                                            <% if (order.paymentMethod === 'RAZORPAY' && order.paymentStatus === 'Pending') { %>
-                                                <button id="payNowBtn" data-order-id="<%= order._id %>" class="mt-3 inline-flex items-center gap-2 h-9 px-4 rounded-lg bg-primary text-white text-xs font-bold hover:bg-blue-600 transition-colors shadow-md">
+                                            <% if (order.paymentMethod==='RAZORPAY' && order.paymentStatus==='Pending' )
+                                                { %>
+                                                <button id="payNowBtn" data-order-id="<%= order._id %>"
+                                                    class="mt-3 inline-flex items-center gap-2 h-9 px-4 rounded-lg bg-primary text-white text-xs font-bold hover:bg-blue-600 transition-colors shadow-md">
                                                     <span class="material-symbols-outlined text-sm">payment</span>
                                                     Pay Now
                                                 </button>
-                                            <% } %>
+                                                <% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -406,13 +417,52 @@
                                 <h3 class="text-xs uppercase font-bold text-text-secondary tracking-widest mb-4">Order
                                     Summary
                                 </h3>
+                                <% 
+                                let totalNormalDiscount = 0;
+                                let totalOfferDiscount = 0;
+
+                                items.forEach(item => {
+                                    const product = item.product;
+                                    const selectedVariant = product?.variants?.find(v => String(v._id) === String(item.variant));
+                                    
+                                    const originalPrice = selectedVariant ? selectedVariant.price : item.price;
+                                    const basePrice = selectedVariant ? (selectedVariant.discountedPrice !== undefined && selectedVariant.discountedPrice !== null ? selectedVariant.discountedPrice : selectedVariant.price) : item.price;
+                                    const finalPrice = item.price;
+                                    
+                                    const itemNormalDiscount = Math.max(0, originalPrice - basePrice);
+                                    const itemOfferDiscount = Math.max(0, basePrice - finalPrice);
+                                    
+                                    totalNormalDiscount += itemNormalDiscount * item.quantity;
+                                    totalOfferDiscount += itemOfferDiscount * item.quantity;
+                                });
+
+                                const finalOriginalSubtotal = order.subTotal + totalNormalDiscount + totalOfferDiscount;
+                                %>
                                 <div class="flex flex-col gap-3">
                                     <div class="flex justify-between text-sm">
                                         <span class="text-text-secondary">Subtotal</span>
                                         <span>
-                                            <%= formatCurrency(order.subTotal) %>
+                                            <%= formatCurrency(finalOriginalSubtotal) %>
                                         </span>
                                     </div>
+                                    <% if (totalNormalDiscount > 0) { %>
+                                        <div class="flex justify-between text-sm text-green-600 dark:text-green-400 font-medium">
+                                            <span>Discount</span>
+                                            <span>- <%= formatCurrency(totalNormalDiscount) %></span>
+                                        </div>
+                                    <% } %>
+                                    <% if (totalOfferDiscount > 0) { %>
+                                        <div class="flex justify-between text-sm text-green-600 dark:text-green-400 font-medium">
+                                            <span>Offer Discount</span>
+                                            <span>- <%= formatCurrency(totalOfferDiscount) %></span>
+                                        </div>
+                                    <% } %>
+                                    <% if (order.discount > 0) { %>
+                                        <div class="flex justify-between text-sm text-green-600 dark:text-green-400 font-medium">
+                                            <span>Coupon Discount <%= order.couponCode ? `(${order.couponCode})` : "" %></span>
+                                            <span>- <%= formatCurrency(order.discount) %></span>
+                                        </div>
+                                    <% } %>
                                     <div class="flex justify-between text-sm">
                                         <span class="text-text-secondary">Shipping</span>
                                         <span
@@ -421,7 +471,7 @@
                                                 formatCurrency(order.deliveryCharge) %>
                                         </span>
                                     </div>
-                                    
+
                                     <div class="h-px bg-gray-100 dark:bg-border-dark my-2"></div>
                                     <div class="flex justify-between items-center">
                                         <span class="font-bold text-lg">Total</span>
