@@ -89,7 +89,7 @@ export const checkoutRenderService = async (userId) => {
 
   const discount = 0;
 
-  const grandTotal = subtotal + shippingCharge - discount;
+  const grandTotal = subtotal + shippingCharge - discount-offerDiscount;
 
   let defaultAddress = await Address.findOne({ user: userId, isDefault: true });
 
