@@ -57,13 +57,15 @@ export const applyCouponService = async (userId, couponCode) => {
   }
 
   const shippingCharge = checkoutData.shippingCharge;
-  const grandTotal = subtotal + shippingCharge - discount;
+  const offerDiscount = checkoutData.offerDiscount || 0;
+  const grandTotal = subtotal + shippingCharge - offerDiscount - discount;
 
   return {
     couponCode: coupon.code,
     discount,
     shippingCharge,
     subtotal,
+    offerDiscount,
     grandTotal,
   };
 };
