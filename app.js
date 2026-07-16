@@ -11,6 +11,7 @@ import express from "express";
 import session from "express-session";
 import nocache from "nocache";
 import connectDB from "./config/db.js";
+import MongoStore from "connect-mongo";
 import userRoutes from "./routes/userRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import adminOrderRoutes from './routes/adminOrderRoutes.js'
@@ -54,6 +55,12 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
+
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGO_URI,
+      collectionName: "sessions"
+    }),
+    
     cookie: {
       httpOnly: true,
       maxAge: 1000 * 60 * 60,
