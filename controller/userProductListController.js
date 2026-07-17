@@ -4,6 +4,7 @@ import Product from "../models/productModel.js";
 import { addToCartService } from "../service/userCartService.js";
 import Wishlist from "../models/userWishlistModel.js";
 import { getVariantOfferPricing } from "../service/offerhelper.js";
+import Order from "../models/orderModel.js";
 
 // export const productListRender = async (req, res) => {
 //   try {
@@ -95,12 +96,19 @@ console.log("Products:", sameCategoryProducts.map(p => ({
   category: p.category
 })));
 
+const productCount=await Order.countDocuments({
+  paymentStatus:"Paid",
+  orderStatus:{$ne: "Cancelled"},
+  'items.product':productId
+})
+
     res.render("userViews/userProductDetails", {
       product,
       selectedVariant,
       query:req.query,
       relatedProducts,
-      wishlistItems
+      wishlistItems,
+      productCount
     });
   } catch (error) {
     console.log(error);
