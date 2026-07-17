@@ -90,16 +90,26 @@ app.use('/admin',adminAnalyticsRoutes)
 // 404 Handler
 app.use((req, res) => {
   res.status(404).render("userViews/404page", {
-    message: "Page Not Found",
+    statusCode: 404,
+    title: "Page Not Found",
+    message: "Looks like this page has gone offside. The URL you entered doesn't exist or may have been moved."
   });
 });
 
 //error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res.status(500).json({
-    success: false,
-    message: err.message || "Internal Server Error",
+  const isAjax = req.xhr || (req.headers.accept && req.headers.accept.includes("json"));
+  if (isAjax) {
+    return res.status(500).json({
+      success: false,
+      message: err.message || "Internal Server Error",
+    });
+  }
+  res.status(500).render("userViews/404page", {
+    statusCode: 500,
+    title: "Something Went Wrong",
+    message: "An unexpected error occurred on our server. Our team has been notified. Please try again later."
   });
 });
 

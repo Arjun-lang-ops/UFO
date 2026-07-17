@@ -402,7 +402,23 @@ document.querySelectorAll(".add-to-cart")
             const cartResult = await cartResponse.json();
 
             if (!cartResult.success) {
-
+                if (cartResult.redirectUrl) {
+                    Swal.fire({
+                        icon: "warning",
+                        title: "Login Required",
+                        text: "Please login to add items to your cart.",
+                        confirmButtonColor: "#137fec",
+                        confirmButtonText: "Login",
+                        showCancelButton: true,
+                        cancelButtonText: "Cancel",
+                        cancelButtonColor: "#374151"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = cartResult.redirectUrl;
+                        }
+                    });
+                    return;
+                }
                 return Swal.fire({
                     icon: "error",
                     title: cartResult.message
@@ -426,6 +442,20 @@ document.querySelectorAll(".add-to-cart")
             const wishlistResult = await wishlistResponse.json();
 
             if (wishlistResult.success) {
+                // Update cart count badge
+                if (cartResult.cartCount !== undefined) {
+                    const cartCountBadge = document.getElementById("cart-count");
+                    if (cartCountBadge) {
+                        cartCountBadge.textContent = cartResult.cartCount;
+                    } else {
+                        const badge = document.createElement("span");
+                        badge.id = "cart-count";
+                        badge.className = "absolute -top-1 -right-1 bg-primary text-white text-[10px] h-4 w-4 flex items-center justify-center rounded-full";
+                        badge.textContent = cartResult.cartCount;
+                        const cartBtn = document.querySelector('a[href="/cart"] button');
+                        if (cartBtn) cartBtn.appendChild(badge);
+                    }
+                }
 
                 Swal.fire({
                     icon: "success",

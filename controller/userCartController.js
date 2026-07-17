@@ -22,12 +22,19 @@ export const addToCart = async (req, res) => {
 
     const cart=await addToCartService(userId,{productId, variantId, quantity:Number(quantity)});
 
+    let cartCount = 0;
+    if (cart && cart.items) {
+      cart.items.forEach(item => {
+        cartCount += item.quantity;
+      });
+    }
+
     return res.status(200).json({
         success:true,
         message:'Product added to cart',
-        cart
-        
-    })
+        cart,
+        cartCount
+    });
 
 
   } catch (error) {

@@ -101,19 +101,23 @@ export const loginUser = async (req, res) => {
 
     const user = await userLoginLogic(req.body);
     req.session.userId = user._id;
-    req.session.user = user._id
+    req.session.user = user._id;
+
+    const redirectUrl = req.session.returnTo || "/home";
+    delete req.session.returnTo;
+
     res.status(200).json({
       success: true,
       message: "login successfully",
-      redirectUrl: "/home"
-    })
+      redirectUrl
+    });
   } catch (error) {
     res.status(400).json({
       success: false,
       message: error.message
-    })
+    });
   }
-}
+};
 
 
 

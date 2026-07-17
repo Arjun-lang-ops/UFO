@@ -1,10 +1,25 @@
 import User from "../models/userModel.js";
 
 export const isLoggedIn = (req, res, next) => {
-  if (req.session.user||req.user) {
-    return next()
+  if (req.session.user || req.user) {
+    return next();
   }
-  res.redirect('/login')
+
+  const isAjax = req.xhr || 
+                 (req.headers.accept && req.headers.accept.includes("json")) || 
+                 req.get("Content-Type") === "application/json";
+
+  if (isAjax) {
+    req.session.returnTo = req.get("Referrer") || "/home";
+    return res.status(200).json({
+      success: false,
+      redirectUrl: "/login",
+      message: "Please login to continue"
+    });
+  }
+
+  req.session.returnTo = req.originalUrl;
+  res.redirect("/login");
 };
 
 export const isLoggedOut=(req,res,next)=>{

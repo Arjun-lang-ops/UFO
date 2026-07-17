@@ -9,6 +9,6 @@ import { isLoggedIn } from '../middlewares/userAuth.js';
 
 //router.get('/product',isLoggedIn,productListRender);
 router.get('/product',getProducts)
-router.get('/product/:id',isLoggedIn,productDetailsRender)
+router.get('/product/:id',productDetailsRender)
 
 export default router;

@@ -1,5 +1,6 @@
 import { placeOrderService,orderHistoryService, returnService, requestReturnService, requestCancelService } from "../service/userOrderService.js";
 import Order from "../models/orderModel.js";
+import Cart from "../models/cartModel.js";
 import { processReferralReward } from "../service/userService.js";
 import { orderDetailsService } from "../service/adminOrderService.js";
 import Razorpay from "razorpay";
@@ -138,6 +139,17 @@ export const verifyPaymentController = async (req, res) => {
       order.paymentStatus = "Paid";
       order.orderStatus = "Confirmed";
       await order.save();
+
+      // Clear the user's cart on payment success
+      try {
+        const cart = await Cart.findOne({ userId: order.user });
+        if (cart) {
+          cart.items = [];
+          await cart.save();
+        }
+      } catch (cartErr) {
+        console.error("Cart clearing error during verify payment:", cartErr);
+      }
       
       try {
         await processReferralReward(order.user);

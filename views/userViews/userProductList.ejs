@@ -559,6 +559,25 @@
           }, 1500);
 
         } else {
+          if (data.redirectUrl) {
+            Swal.fire({
+              icon: "warning",
+              title: "Login Required",
+              text: "Please login to add items to your cart.",
+              background: "#1c2127",
+              color: "#fff",
+              confirmButtonColor: "#137fec",
+              confirmButtonText: "Login",
+              showCancelButton: true,
+              cancelButtonText: "Cancel",
+              cancelButtonColor: "#374151"
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = data.redirectUrl;
+              }
+            });
+            return;
+          }
 
           Swal.fire({
             icon: "error",

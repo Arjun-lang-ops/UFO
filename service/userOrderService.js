@@ -198,9 +198,11 @@ if (paymentMethod === "WALLET") {
 
   //clear cart
 
-  cart.items = [];
+  if (paymentMethod !== "RAZORPAY") {
+    cart.items = [];
 
-  await cart.save();
+    await cart.save();
+  }
 
   if (appliedCouponCode) {
     await Coupon.updateOne(
