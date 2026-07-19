@@ -1,6 +1,7 @@
 import { placeOrderService,orderHistoryService, returnService, requestReturnService, requestCancelService } from "../service/userOrderService.js";
 import Order from "../models/orderModel.js";
 import Cart from "../models/cartModel.js";
+import Product from "../models/productModel.js";
 import { processReferralReward } from "../service/userService.js";
 import { orderDetailsService } from "../service/adminOrderService.js";
 import Razorpay from "razorpay";
@@ -41,7 +42,7 @@ export const orderConfirmRender = async (req, res) => {
 export const orderFailureRender=async(req,res,next)=>{
   try {
 
-        const { id } = req.params;
+    const { id } = req.params;
 
     const order = await Order.findById(id).populate('items.product');
 
@@ -49,15 +50,38 @@ export const orderFailureRender=async(req,res,next)=>{
       return res.status(404).render("userViews/404");
     }
 
+    // Auto-cancel a pending Razorpay order when the failure page is visited,
+    // so the user never has to manually cancel before ordering again.
+    if (
+      order.paymentMethod === "RAZORPAY" &&
+      order.orderStatus === "Pending" &&
+      order.paymentStatus !== "Paid"
+    ) {
+      order.orderStatus = "Cancelled";
+      order.paymentStatus = "Failed";
+
+      // Restore stock for every item in the order
+      for (const item of order.items) {
+        try {
+          await Product.updateOne(
+            { _id: item.product, "variants._id": item.variant },
+            { $inc: { "variants.$.stock": item.quantity } }
+          );
+        } catch (stockErr) {
+          console.error("Stock restoration error on failure render:", stockErr);
+        }
+      }
+
+      await order.save();
+    }
+
     res.render("userViews/userOrderFailurePage", {
       order,
     });
 
-
-    
   } catch (error) {
-    console.log(error)
-    next(error)
+    console.log(error);
+    next(error);
   }
 }
 
@@ -159,9 +183,23 @@ export const verifyPaymentController = async (req, res) => {
 
       return res.json({ success: true });
     } else {
-      const order = await Order.findById(orderId);
+      // Signature mismatch – cancel the order and restore stock immediately
+      const order = await Order.findById(orderId).populate("items.product");
       if (order) {
         order.paymentStatus = "Failed";
+        order.orderStatus = "Cancelled";
+
+        for (const item of order.items) {
+          try {
+            await Product.updateOne(
+              { _id: item.product, "variants._id": item.variant },
+              { $inc: { "variants.$.stock": item.quantity } }
+            );
+          } catch (stockErr) {
+            console.error("Stock restoration error on verify failure:", stockErr);
+          }
+        }
+
         await order.save();
       }
       return res.status(400).json({ success: false, message: "Invalid signature, verification failed" });
@@ -175,14 +213,51 @@ export const verifyPaymentController = async (req, res) => {
 export const retryPaymentController = async (req, res) => {
   try {
     const { orderId } = req.params;
-    const order = await Order.findById(orderId);
+    const order = await Order.findById(orderId).populate({
+      path: "items.product",
+      populate: [
+        { path: "offer" },
+        { path: "category", populate: { path: "offer" } }
+      ]
+    });
 
     if (!order) {
       return res.status(404).json({ success: false, message: "Order not found" });
     }
 
-    if (order.paymentMethod !== "RAZORPAY" || order.paymentStatus !== "Pending") {
-      return res.status(400).json({ success: false, message: "Only pending Razorpay orders can be retried" });
+    // Allow retry only for Razorpay orders that are not yet paid
+    if (order.paymentMethod !== "RAZORPAY" || order.paymentStatus === "Paid") {
+      return res.status(400).json({ success: false, message: "Only unpaid Razorpay orders can be retried" });
+    }
+
+    // If the order was auto-cancelled due to a previous failure, we need to
+    // verify stock is still available and re-reduce it before reopening payment.
+    if (order.orderStatus === "Cancelled") {
+      // Check stock availability for every item
+      for (const item of order.items) {
+        const product = item.product;
+        if (!product) {
+          return res.status(400).json({ success: false, message: "One or more products are no longer available." });
+        }
+        const variant = product.variants?.id?.(item.variant);
+        if (!variant || variant.stock < item.quantity) {
+          return res.status(400).json({
+            success: false,
+            message: `Sorry, "${product.name}" is out of stock or has insufficient quantity. Please start a new order.`
+          });
+        }
+      }
+
+      // Re-reduce stock and reset order status to Pending
+      for (const item of order.items) {
+        await Product.updateOne(
+          { _id: item.product, "variants._id": item.variant },
+          { $inc: { "variants.$.stock": -item.quantity } }
+        );
+      }
+
+      order.orderStatus = "Pending";
+      order.paymentStatus = "Pending";
     }
 
     const options = {
