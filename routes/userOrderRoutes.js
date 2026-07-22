@@ -12,16 +12,16 @@ import {
   orderFailureRender
 } from "../controller/userOrderController.js";
 import { downloadInvoice } from "../config/pdf.js";
-import { isLoggedIn } from "../middlewares/userAuth.js";
+import { isLoggedIn,checkUserBlocked } from "../middlewares/userAuth.js";
 
 const router = express.Router();
 
-router.get("/orderConfirm/:orderId", isLoggedIn, orderConfirmRender);
-router.get('/orderFailure/:id',isLoggedIn,orderFailureRender)
-router.get("/orderHistory", isLoggedIn, orderHistoryRender);
-router.get("/orderHistory/:id", isLoggedIn, orderDetailsRender);
-router.get("/orderReturn/:id", isLoggedIn, orderReturnRender);
-router.post("/checkout/confirm",isLoggedIn, placeOrderController);
+router.get("/orderConfirm/:orderId", isLoggedIn,checkUserBlocked, orderConfirmRender);
+router.get('/orderFailure/:id',isLoggedIn,checkUserBlocked,orderFailureRender)
+router.get("/orderHistory", isLoggedIn, checkUserBlocked,orderHistoryRender);
+router.get("/orderHistory/:id", isLoggedIn, checkUserBlocked,orderDetailsRender);
+router.get("/orderReturn/:id", isLoggedIn, checkUserBlocked,orderReturnRender);
+router.post("/checkout/confirm",isLoggedIn,checkUserBlocked, placeOrderController);
 router.get("/invoice/:id/download", isLoggedIn, downloadInvoice);
 router.post("/order/returnRequest",isLoggedIn, requestReturn);
 router.post("/order/cancel",isLoggedIn, requestCancel);
