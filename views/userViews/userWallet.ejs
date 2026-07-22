@@ -118,7 +118,7 @@
                                                     Balance</p>
                                                 <div class="flex items-baseline gap-1">
                                                     <span class="text-slate-900 dark:text-white text-4xl font-bold">Rs.
-                                                        <%=wallet.balance%>
+                                                        <%= (wallet && wallet.balance !== undefined) ? wallet.balance : 0 %>
                                                     </span>
 
                                                 </div>
@@ -137,7 +137,7 @@
                                                 </h3>
                                             </div>
 
-                                            <% if(wallet.transactions && wallet.transactions.length> 0) { %>
+                                            <% if(wallet && wallet.transactions && wallet.transactions.length > 0) { %>
 
                                                 <div class="divide-y divide-slate-100 dark:divide-[#283039]"
                                                     id="transactionList">

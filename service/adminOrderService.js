@@ -198,7 +198,6 @@ export const approveReturnService = async (orderId, itemId, status) => {
 
   console.log(order.user);
   console.log(
-    "asdffijgbalkfdsjbhaliudfshvbaludfsvbnalysdgfbvlauhsdbfvl",
     typeof order.user,
   );
   const customerId = order.user;

@@ -78,6 +78,30 @@ document.addEventListener("DOMContentLoaded", () => {
         const tr = button.closest("tr");
         const userId = tr.dataset.userId;
 
+        // Close dropdown before showing modal
+        dropdown.remove();
+        activeDropdown = null;
+
+        const actionTitle = isBlocked ? "Unblock User?" : "Block User?";
+        const actionMessage = isBlocked
+          ? "Are you sure you want to unblock this user?"
+          : "Are you sure you want to block this user?";
+        const confirmBtnColor = isBlocked ? "#10b981" : "#ef4444";
+        const confirmBtnText = isBlocked ? "Yes, unblock" : "Yes, block";
+
+        const result = await Swal.fire({
+          title: actionTitle,
+          text: actionMessage,
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: confirmBtnColor,
+          cancelButtonColor: "#6b7280",
+          confirmButtonText: confirmBtnText,
+          cancelButtonText: "Cancel",
+        });
+
+        if (!result.isConfirmed) return;
+
         try {
           const response = await fetch(`/admin/block-user/${userId}`, {
             method: "PATCH",
@@ -99,22 +123,43 @@ document.addEventListener("DOMContentLoaded", () => {
               badge.textContent = "Active";
               badge.classList.remove("bg-amber-100", "text-amber-700");
               badge.classList.add("bg-emerald-100", "text-emerald-700");
+
+              Swal.fire({
+                title: "Unblocked!",
+                text: "User has been unblocked successfully.",
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false,
+              });
             } else {
               // User was active, now blocked
               badge.textContent = "Blocked";
               badge.classList.remove("bg-emerald-100", "text-emerald-700");
               badge.classList.add("bg-amber-100", "text-amber-700");
-            }
 
-            dropdown.remove();
-            activeDropdown = null;
+              Swal.fire({
+                title: "Blocked!",
+                text: "User has been blocked successfully.",
+                icon: "success",
+                timer: 1500,
+                showConfirmButton: false,
+              });
+            }
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: data.message || "Failed to update user status.",
+              icon: "error",
+            });
           }
         } catch (error) {
           console.error("Error:", error);
+          Swal.fire({
+            title: "Error!",
+            text: "Something went wrong. Please try again.",
+            icon: "error",
+          });
         }
-
-        dropdown.remove();
-        activeDropdown = null;
       });
 
       td.appendChild(dropdown);

@@ -5,19 +5,29 @@ import { generateReferralcode } from "./userReferralController.js";
 
 export const walletRender = async (req, res) => {
   try {
-    const userId = req.session.user || req.session.userId || req.user?._id;
+    const userId = req.session.user?._id || req.session.user || req.session.userId || req.user?._id;
 
-    const wallet = await Wallet.findOne({ user: req.session.user._id })
+    if (!userId) {
+      return res.redirect("/login");
+    }
+
+    let wallet = await Wallet.findOne({ user: userId })
       .populate("transactions.orderId")
       .lean();
 
+    if (!wallet) {
+      try {
+        const createdWallet = await Wallet.create({ user: userId, balance: 0, transactions: [] });
+        wallet = createdWallet.toObject ? createdWallet.toObject() : createdWallet;
+      } catch (createErr) {
+        wallet = { balance: 0, transactions: [] };
+      }
+    }
 
-
-    console.log(wallet);
-
-    return res.render("userViews/userWallet", { wallet,user:userId });
+    return res.render("userViews/userWallet", { wallet, user: userId });
   } catch (error) {
     console.log(error);
+    res.status(500).send("Server Error");
   }
 };
 
@@ -26,7 +36,7 @@ export const walletRender = async (req, res) => {
 
 export const referAndEarnController = async (req, res) => {
   try {
-    const userId = req.session.user || req.session.userId || req.user?._id;
+    const userId = req.session.user?._id || req.session.user || req.session.userId || req.user?._id;
     const user = await User.findById(userId);
 
     let referral = await Refer.findOne({
@@ -52,6 +62,7 @@ export const referAndEarnController = async (req, res) => {
 
   } catch (error) {
     console.log(error);
+    res.status(500).send("Server Error");
   }
 
 };

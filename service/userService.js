@@ -156,7 +156,7 @@ export const forgotUserService = async (data) => {
   const existingUser = await User.findOne({ email });
 
   if (!existingUser) {
-    throw new Error("Invalid Email Address");
+    throw new Error("Email Address not found");
   }
 
   return existingUser;
