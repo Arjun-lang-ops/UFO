@@ -97,8 +97,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Show loading state
         const originalBtnContent = submitButton.innerHTML;
         submitButton.disabled = true;
-        submitButton.innerHTML = '<span class="truncate">Logging in...</span>';
-        submitButton.classList.add('opacity-75', 'cursor-not-allowed');
+        submitButton.innerHTML = `
+            <div class="flex items-center justify-center gap-2">
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Logging in...</span>
+            </div>
+        `;
+        submitButton.classList.add('opacity-80', 'cursor-not-allowed');
 
         try {
             const response = await fetch('/login', {
@@ -106,28 +114,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                 credentials: 'include',
+                credentials: 'include',
                 body: JSON.stringify({ email, password })
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                // Success: Show message and redirect
+                // Success: Show animated card with login icon & spinner, and redirect
                 const successDiv = document.createElement('div');
-                successDiv.className = 'form-global-message w-full p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 font-medium text-center';
-                successDiv.textContent = 'Login successful! Redirecting...';
+                successDiv.className = 'form-global-message flex items-center justify-center gap-3 w-full p-4 mb-4 text-sm rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 font-medium shadow-sm transition-all duration-300';
+                successDiv.innerHTML = `
+                    <span class="material-symbols-outlined text-emerald-500 text-2xl">check_circle</span>
+                    <div class="flex items-center gap-2">
+                        <span class="font-semibold text-base">Login Successful!</span>
+                        <span class="text-xs opacity-80">Redirecting...</span>
+                        <svg class="animate-spin h-4 w-4 text-emerald-500 ml-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                `;
                 form.prepend(successDiv);
 
-                // Optional: Redirect after a short delay
+                submitButton.innerHTML = `
+                    <div class="flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-xl">sports_soccer</span>
+                        <span>Redirecting...</span>
+                        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                `;
+
+                // Redirect after a short delay
                 setTimeout(() => {
                     window.location.href = data.redirectUrl || '/';
                 }, 1000);
             } else {
                 // Server Error
                 const errorDiv = document.createElement('div');
-                errorDiv.className = 'form-global-message w-full p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 font-medium text-center';
-                errorDiv.textContent = data.message || 'Login failed. Please check your credentials.';
+                errorDiv.className = 'form-global-message flex items-center justify-center gap-2 w-full p-4 mb-4 text-sm rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 font-medium shadow-sm';
+                errorDiv.innerHTML = `
+                    <span class="material-symbols-outlined text-red-500 text-xl">error</span>
+                    <span>${data.message || 'Login failed. Please check your credentials.'}</span>
+                `;
                 form.prepend(errorDiv);
 
                 // Re-enable button
@@ -139,8 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Login Error:', error);
             const errorDiv = document.createElement('div');
-            errorDiv.className = 'form-global-message w-full p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 font-medium text-center';
-            errorDiv.textContent = 'Network error. Please try again later.';
+            errorDiv.className = 'form-global-message flex items-center justify-center gap-2 w-full p-4 mb-4 text-sm rounded-xl bg-red-500/10 border border-red-500/30 text-red-600 dark:text-red-400 font-medium shadow-sm';
+            errorDiv.innerHTML = `
+                <span class="material-symbols-outlined text-red-500 text-xl">wifi_off</span>
+                <span>Network error. Please try again later.</span>
+            `;
             form.prepend(errorDiv);
 
             // Re-enable button

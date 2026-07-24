@@ -3,12 +3,8 @@ const router=express.Router();
 
 
 import {  getProducts, productDetailsRender } from '../controller/userProductListController.js';
-//import { productListRender } from '../controller/userProductListController.js';
-import { isLoggedIn,checkUserBlocked } from '../middlewares/userAuth.js';
 
+router.get('/product', getProducts);
+router.get('/product/:id', productDetailsRender);
 
-//router.get('/product',isLoggedIn,productListRender);
-router.get('/product',isLoggedIn,checkUserBlocked ,getProducts)
-router.get('/product/:id',isLoggedIn,checkUserBlocked,productDetailsRender)
-
-export default router;
+export default router;

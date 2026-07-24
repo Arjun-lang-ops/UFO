@@ -47,7 +47,7 @@ export const productDetailsRender = async (req, res) => {
   try {
     const productId = req.params.id;
     const variantId = req.query.variant;
-    const userId=req.session?.userId|| req.user?._id;
+    const userId = req.session?.user || req.session?.userId || req.user?._id;
 
     const product = await productDetailsService(productId);
     
@@ -82,7 +82,7 @@ export const productDetailsRender = async (req, res) => {
   category: product.category._id
 });
 
-const wishlist = await Wishlist.findOne({ userId });
+const wishlist = userId ? await Wishlist.findOne({ userId }) : null;
 
 const wishlistItems = wishlist?.products.map(item => ({
         productId: item.product.toString(),
@@ -130,7 +130,7 @@ export const getProducts = async (req, res) => {
 
     let filter = {isActive:true};
 
-    const userId=req.session?.userId|| req.user?._id;
+    const userId = req.session?.user || req.session?.userId || req.user?._id;
     
     if (categories.length && !categories.includes("all")) {
       filter.category = { $in: categories };
@@ -257,7 +257,7 @@ console.log(productList)
 
     console.log("FINAL COUNT:", productList.length);
 
-  const wishlist = await Wishlist.findOne({ userId });
+  const wishlist = userId ? await Wishlist.findOne({ userId }) : null;
     const wishlistItems = wishlist?.products.map(item => ({
         productId: item.product.toString(),
         variantId: item.variant.toString()
